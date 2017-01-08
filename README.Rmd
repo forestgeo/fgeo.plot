@@ -1,3 +1,6 @@
+[![DOI](https://zenodo.org/badge/78309322.svg)](https://zenodo.org/badge/latestdoi/78309322)
+
+
 # try
 
 try is to try new things.
