@@ -1,6 +1,6 @@
 Package: try
 Title: What the Package Does (one line, title case)
-Version: 0.0.0.9000
+Version: 0.0.1
 Authors@R: person("Mauro", "Lepore", email = "maurolepore@gmail.com", role = c("aut", "cre"))
 Description: What the package does (one paragraph).
 Depends:
