@@ -1,6 +1,6 @@
 [![DOI](https://zenodo.org/badge/78309322.svg)](https://zenodo.org/badge/latestdoi/78309322)
 
-![Travis-CI Build Status](https://travis-ci.org/maurolepore/try.svg?branch=master)](https://travis-ci.org/maurolepore/try)
+[![Travis-CI Build Status](https://travis-ci.org/maurolepore/try.svg?branch=master)](https://travis-ci.org/maurolepore/try)
 
 # try
 
