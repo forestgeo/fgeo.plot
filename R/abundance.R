@@ -2,21 +2,22 @@
 # <name>
 # abundance
 # </name>
+#' @export
 # <description>
-# Calculates total abundance or basal area, dividing data with 1 or 2 categorical variables. 
+# Calculates total abundance or basal area, dividing data with 1 or 2 categorical variables.
 # The categorical variables must be submitted as vectors whose length
-# matches exactly as the number of rows in the plot data submitted (so one per tree or stem). 
+# matches exactly as the number of rows in the plot data submitted (so one per tree or stem).
 # The first vector should be the one with the most categories
 # (for instances, split1=species, split2=dbhcategory). <br><br>
 # The mean measurement date for all individuals in each category is
 # also calculated. <br><br>
 
 # For abundance, set type='abund' (the default), for basal area, set type='ba'. Be sure to use the R Analytical
-# Stem Table for basal area. For abundance, either the stem table or full table can be used, the former to count stems, the latter trees.<br><br> 
+# Stem Table for basal area. For abundance, either the stem table or full table can be used, the former to count stems, the latter trees.<br><br>
 
-# The object returned is a list, the first element named either abund or ba, the second named meandate. Each is an array of 
+# The object returned is a list, the first element named either abund or ba, the second named meandate. Each is an array of
 # one or two dimensions, depending on how many split variables were submitted:
-# each of the dimensions of the array handles one of the categorical variables.  
+# each of the dimensions of the array handles one of the categorical variables.
 # </description>
 # <arguments>
 # <ul>
@@ -48,28 +49,28 @@ abundance=function(censdata,type='abund',alivecode=c("A"),mindbh=NULL,dbhunit='m
 
  if(!is.null(mindbh)) inc=censdata$dbh>=mindbh
  else inc=rep(TRUE,length(censdata$dbh))
- 
+
  alive=rep(FALSE,length(censdata$dbh))
  for(i in 1:length(alivecode)) alive[censdata$status==alivecode[i]]=TRUE
 
  class1=sort(unique(split1))
  class2=sort(unique(split2))
  groupvar=list(split1[alive&inc],split2[alive&inc])
- 
+
  if(type=='abund') abund=tapply(censdata$dbh[alive&inc],groupvar,length)
  else if(type=='ba') abund=tapply(censdata$dbh[alive&inc],groupvar,basum,mindbh=mindbh,dbhunit=dbhunit)
  else if(type=='agb') abund=tapply(censdata$agb[alive&inc],groupvar,sum,na.rm=TRUE)
  # browser()
- 
+
  meandate=tapply(censdata$date[alive&inc],groupvar,mean,na.rm=TRUE)
- 
+
  abund=fill.dimension(abund,class1,class2)
  meandate=fill.dimension(meandate,class1,class2,fill=NA)
 
  result=list(abund=abund,meandate=meandate)
  if(type=='ba') names(result)[1]='ba'
  else if(type=='agb') names(result)[1]='agb'
- 
+
  return(result)
 }
 # </source>
@@ -112,7 +113,7 @@ abundanceperquad=function(censdata,mindbh=10,plotdim=c(1000,500),gridsize=100,ty
 
  if(dim(result[[type]])[1]<length(allspp) | dim(result[[type]])[2]<length(allquad))
      result[[type]]=fill.dimension(result[[type]],class1=allspp,class2=allquad,fill=0)
-  
+
  return(result)
 }
 # </source>
@@ -153,15 +154,15 @@ abundance.spp=function(censdata,type='abund',dbhunit='mm',alivecode=c("A"),dbhbr
 # pop.change
 # </name>
 # <description>
-# Finds abundance, basal area, or agb in two censuses and the rate of change between them. 
+# Finds abundance, basal area, or agb in two censuses and the rate of change between them.
 # Accepts two dataframes, each an R Analytical Table for one census, the earlier census first. <br><br>
 
-# Do not use this function with diameter categories as a split variable! The results won't make sense. 
+# Do not use this function with diameter categories as a split variable! The results won't make sense.
 # The categories need to be permanent attributes, such as species, genus, quadrat. Use instead pop.change.dbh to
 # find population change of dbh categories. <br><br>
 
-# Mean census date for a species is not the mean 
-# census date for all living individuals in that census, but the mean census 
+# Mean census date for a species is not the mean
+# census date for all living individuals in that census, but the mean census
 # date for all individuals alive in either census. Plants recruited between the two censuses get a first census date equal to
 # the date on which the quadrat they later appear in was censused in the first
 # census. Plants dead in the second census get a census date equal to the date on which their quadrat was censused <br><br>
@@ -195,11 +196,11 @@ pop.change=function(census1,census2,type='abund',dbhunit='mm',alivecode=c("A"),m
 
  if(!is.null(mindbh))
   {
-   inc1=census1$dbh>=mindbh 
-   inc2=census2$dbh>=mindbh  
+   inc1=census1$dbh>=mindbh
+   inc2=census2$dbh>=mindbh
    incboth=census1$dbh>=mindbh | census2$dbh>=mindbh
   }
- else inc1=inc2=incboth=rep(TRUE,length(census1$dbh)) 
+ else inc1=inc2=incboth=rep(TRUE,length(census1$dbh))
 
  alive1=alive2=rep(FALSE,dim(census1)[1])
  for(i in 1:length(alivecode))
@@ -227,7 +228,7 @@ pop.change=function(census1,census2,type='abund',dbhunit='mm',alivecode=c("A"),m
    ab1=tapply(census1$agb[inc1&alive1],groupvar1,sum,na.rm=TRUE)
    ab2=tapply(census2$agb[inc2&alive2],groupvar2,sum,na.rm=TRUE)
   }
-  
+
  dt1=tapply(census1$date[incboth&aliveboth],groupvarboth,mean,na.rm=T)
  dt2=tapply(census2$date[incboth&aliveboth],groupvarboth,mean,na.rm=T)
  startdate=tapply(census1$date[incboth&aliveboth],groupvarboth,mean,na.rm=T)
@@ -235,39 +236,39 @@ pop.change=function(census1,census2,type='abund',dbhunit='mm',alivecode=c("A"),m
 
  class1=sort(unique(split1))
  class2=sort(unique(split2))
- 
+
  ab1=fill.dimension(ab1,class1,class2)
  ab2=fill.dimension(ab2,class1,class2)
  dt1=fill.dimension(dt1,class1,class2,fill=NA)
  dt2=fill.dimension(dt2,class1,class2,fill=NA)
  startdate=fill.dimension(startdate,class1,class2,fill=NA)
  enddate=fill.dimension(enddate,class1,class2,fill=NA)
- 
+
  interval=(dt2-dt1)/365.25
  little.r=(log(ab2)-log(ab1))/interval
 
  result=list(N.1=ab1,N.2=ab2,date1=startdate,date2=enddate,interval=interval,little.r=little.r)
  if(type=='ba') names(result)[1:2]=paste('BA',1:2,sep='.')
  else if(type=='agb') names(result)[1:2]=paste('AGB',1:2,sep='.')
- 
+
  return(result)
 }
 # </source>
 # </function>
 #
-#  
+#
 # <function>
 # <name>
 # pop.change.dbh
 # </name>
 # <description>
-# Finds abundance or basal area in two censuses and the rate of change between them, in several dbh categories. 
-# Accepts two dataframes, each an R Analytical Table for one census, the earlier census first. 
+# Finds abundance or basal area in two censuses and the rate of change between them, in several dbh categories.
+# Accepts two dataframes, each an R Analytical Table for one census, the earlier census first.
 # Only one additional splitting variable (other than dbh category) is allowed. Typically, this is species, but genus or quadrat are other examples.<br><br>
-# The return value is a list of two elements, one name abund (or ba) and the other meandate, just as other abundance results. 
+# The return value is a list of two elements, one name abund (or ba) and the other meandate, just as other abundance results.
 # Each is a table having
 # one pair of columns for every dbh category: the first for census 1, the second for census 2. So if
-# there are 3 dbh categories, the table has 6 columns. The rows of the table are the splitting variable (eg, species). 
+# there are 3 dbh categories, the table has 6 columns. The rows of the table are the splitting variable (eg, species).
 # </description>
 # <arguments>
 # See abundance()
@@ -283,29 +284,29 @@ pop.change.dbh=function(census1,census2,type='abund',dbhunit='mm',alivecode=c("A
 {
  if(is.null(split)) split=rep("all",dim(census1)[1])
  allsplit=sort(unique(split))
- 
+
  allbreak=c(classbreak,10000)
  alldbhcat=paste(allbreak[-length(allbreak)],allbreak[-1],sep=".")
  nocats=length(alldbhcat)
- 
+
  dbhclass1=as.numeric(as.character(cut(census1$dbh,breaks=allbreak,right=FALSE,labels=classbreak)))
  dbhclass2=as.numeric(as.character(cut(census2$dbh,breaks=allbreak,right=FALSE,labels=classbreak)))
 
- part1=abundance(census1,type=type,dbhunit=dbhunit,alivecode=alivecode,split1=split,split2=dbhclass1) 
+ part1=abundance(census1,type=type,dbhunit=dbhunit,alivecode=alivecode,split1=split,split2=dbhclass1)
  part2=abundance(census2,type=type,dbhunit=dbhunit,alivecode=alivecode,split1=split,split2=dbhclass2)
- 
+
  abund1=fill.dimension(part1[[1]],class1=allsplit,class2=classbreak)
  abund2=fill.dimension(part2[[1]],class1=allsplit,class2=classbreak)
  date1=fill.dimension(part1$meandate,class1=allsplit,class2=classbreak,fill=NA)
  date2=fill.dimension(part2$meandate,class1=allsplit,class2=classbreak,fill=NA)
- 
- if(!is.null(split)) 
+
+ if(!is.null(split))
    cols=as.vector(t(outer(classbreak,1:2,paste,sep="_")))
  else cols=paste("all",1:2,sep="_")
 
  abund=data.frame(abund1[,1],abund2[,1])
  meandate=data.frame(date1[,1],date2[,1])
- 
+
  if(nocats>1)
    for(j in 2:nocats)
     {
@@ -319,7 +320,7 @@ pop.change.dbh=function(census1,census2,type='abund',dbhunit='mm',alivecode=c("A
  result=list(abund=abund,meandate=meandate)
  if(type=='ba') names(result)[1]='ba'
  else if(type=='agb') names(result)[1]='agb'
- 
+
  return(result)
 }
 # </source>
@@ -339,7 +340,7 @@ pop.change.dbh=function(census1,census2,type='abund',dbhunit='mm',alivecode=c("A
 # <sample>
 # </sample>
 # <source>
-ba=function(dbh,dbhunit='mm') 
+ba=function(dbh,dbhunit='mm')
  {
   if(dbhunit=='mm') return(pi*(dbh/2000)^2)
   if(dbhunit=='cm') return(pi*(dbh/200)^2)
@@ -379,7 +380,7 @@ basum=function(dbh,mindbh=10,dbhunit='mm')
 # argument type can be used to choose basal area or agb, or the default for number of individuals. The mindbh to include must be given
 # as an argument, but it can be NULL. If the latter, trees are counted if they have no dbh, as long as status=A. By default, any tree
 # ever given code M is not counted in any census, but set excludestatus=NULL to include them.<br><br>
-# A character vector of species codes can be submitted as excludespp, for instance those for unidentified trees. 
+# A character vector of species codes can be submitted as excludespp, for instance those for unidentified trees.
 # </description>
 # <arguments>
 # </arguments>
@@ -395,36 +396,36 @@ abund.manycensus=function(allcns=list(bci.full1,bci.full2,bci.full3),mindbh,dbhu
 {
  nocns=length(allcns)
  exclude=numeric()
- if(!is.null(excludestatus)) 
+ if(!is.null(excludestatus))
      {
       for(j in 1:nocns) for(i in 1:length(excludestatus)) exclude=c(exclude,which(allcns[[j]]$status==excludestatus[i]))
       exclude=unique(exclude)
       if(length(exclude)>0) for(j in 1:nocns) allcns[[j]]=allcns[[j]][-exclude,]
      }
-   
+
  if(type=='abund') innertype='a'
  else innertype=type
- 
+
  if(type=='abund') symb='N'
  else if(type=='agb') symb='AGB'
  else symb='BA'
  getcol=pst(symb,'.',as.character(1:2))
- 
+
  result=assemble.demography(pop.change(allcns[[1]],allcns[[2]],split1=allcns[[1]]$sp,mindbh=mindbh,dbhunit=dbhunit,type=type),type=innertype)
  final=subset(result,select=getcol)
  colnames(final)=getcol
- 
+
  if(nocns>2) for(j in 2:(nocns-1))
    final[,pst(symb,as.character(j+1))]=
      assemble.demography(pop.change(allcns[[j]],allcns[[j+1]],split1=allcns[[1]]$sp,mindbh=mindbh,dbhunit=dbhunit,type=type),type=innertype)[,pst(symb,'.2')]
-   
- if(!is.null(excludespp)) 
+
+ if(!is.null(excludespp))
   {
    exclude=unidentified.species(rownames(final),exactstr=excludespp)
    final=subset(final,!exclude)
   }
-  
+
  return(final)
-}  
+}
 # </source>
 # </function>
