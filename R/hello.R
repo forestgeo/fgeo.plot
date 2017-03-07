@@ -1,6 +1,5 @@
 #' Hello
 #'
-#' @return
 #' @export
 #'
 #' @examples

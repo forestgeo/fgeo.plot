@@ -5,7 +5,7 @@ Authors@R: person("Mauro", "Lepore", email = "maurolepore@gmail.com", role = c("
 Description: What the package does (one paragraph).
 Depends:
     R (>= 3.3.1)
-License: What license is it under?
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.0.1
