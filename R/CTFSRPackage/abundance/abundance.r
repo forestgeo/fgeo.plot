@@ -82,6 +82,7 @@ abundance=function(censdata,type='abund',alivecode=c("A"),mindbh=NULL,dbhunit='m
 # <name>
 # abundanceperquad
 # </name>
+#' @export
 # <description>
 # Finds abundance, basal area, or agb of every species per square quadrat of any size; plotdim is the x dimension then y dimension of the plot and
 # must be set correctly; gridsize is the quadrat dimension. The plot is divided into a checkerboard of non-overlapping, space-filling squares.
@@ -123,6 +124,7 @@ abundanceperquad=function(censdata,mindbh=10,plotdim=c(1000,500),gridsize=100,ty
 # <name>
 # abundance.spp
 # </name>
+#' @export
 # <description>
 # A wrapper to calculate total abundance (or ba or agb) for each species in given dbh categories. The dbh categories
 # are set with dbhbreaks. See abundance() for description of the other arguments and return value.
@@ -153,6 +155,7 @@ abundance.spp=function(censdata,type='abund',dbhunit='mm',alivecode=c("A"),dbhbr
 # <name>
 # pop.change
 # </name>
+#' @export
 # <description>
 # Finds abundance, basal area, or agb in two censuses and the rate of change between them.
 # Accepts two dataframes, each an R Analytical Table for one census, the earlier census first. <br><br>
@@ -261,6 +264,7 @@ pop.change=function(census1,census2,type='abund',dbhunit='mm',alivecode=c("A"),m
 # <name>
 # pop.change.dbh
 # </name>
+#' @export
 # <description>
 # Finds abundance or basal area in two censuses and the rate of change between them, in several dbh categories.
 # Accepts two dataframes, each an R Analytical Table for one census, the earlier census first.
@@ -331,6 +335,7 @@ pop.change.dbh=function(census1,census2,type='abund',dbhunit='mm',alivecode=c("A
 # <name>
 # ba
 # </name>
+#' @export
 # <description>
 # Calculates the individual basal areas (in square meters) for all submitted dbhs. The dbh units must be submitted, either
 # 'cm' or 'millimeters'. The return value is a vector of basal area values of same length as the submitted vector of dbhs.
@@ -353,6 +358,7 @@ ba=function(dbh,dbhunit='mm')
 # <name>
 # basum
 # </name>
+#' @export
 # <description>
 # Returns the basal area summed over all submitted dbhs. NAs can be included, as sum will be completed with na.rm=TRUE.
 # </description>
@@ -375,6 +381,7 @@ basum=function(dbh,mindbh=10,dbhunit='mm')
 # <name>
 # abund.manycensus
 # </name>
+#' @export
 # <description>
 # Collect abundances of all species across several censuses. The full R census tables are submitted as a list, as many as desired. The
 # argument type can be used to choose basal area or agb, or the default for number of individuals. The mindbh to include must be given
