@@ -1,3 +1,17 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, echo = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "README-"
+)
+```
+
 [![DOI](https://zenodo.org/badge/78309322.svg)](https://zenodo.org/badge/latestdoi/78309322)
 [![Travis-CI Build Status](https://travis-ci.org/maurolepore/try.svg?branch=master)](https://travis-ci.org/maurolepore/try)
 
