@@ -4,3 +4,11 @@
 # try
 
 To try new things.
+
+# Installation
+
+```r
+# install.packages("devtools")
+devtools::install_github("maurolepore/try")  # install branch master
+# devtools::install_github("maurolepore/try", ref = "dev")  # install branch dev
+```

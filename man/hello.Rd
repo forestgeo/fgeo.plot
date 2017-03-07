@@ -12,4 +12,3 @@ Hello
 \examples{
 hello()
 }
-
