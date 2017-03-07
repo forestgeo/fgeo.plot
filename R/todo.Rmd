@@ -1,0 +1,12 @@
+```{r}
+library(knitr)
+library(tibble)
+library(dplyr)
+
+tribble(
+  ~tm, ~x, ~what,
+  "00:00", "x", "xxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+  ) %>% 
+  kable(caption = "todo")
+```
+

@@ -3,4 +3,4 @@
 
 # try
 
-try is to try new things.
+To try new things.
