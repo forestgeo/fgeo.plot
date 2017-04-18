@@ -15,3 +15,5 @@ Installation
 devtools::install_github("maurolepore/try")  # install branch master
 # devtools::install_github("maurolepore/try", ref = "dev")  # install branch dev
 ```
+
+Explain branch model.
