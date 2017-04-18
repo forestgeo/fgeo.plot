@@ -2,10 +2,6 @@
 #'
 #' all data sets
 #'
+#' @aliases one two three
 #' @name trydata
 NULL
-
-#' @rdname trydata
-#'
-#' @aliases two three
-"one"
