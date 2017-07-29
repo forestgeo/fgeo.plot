@@ -6,3 +6,4 @@
 ^README-.*\.png$
 ^tmp.R$
 ^data-raw$
+^issues$
