@@ -2,7 +2,7 @@
 output: github_document
 ---
 
-<!-- README.md is generated from README.Rmd. Please edit that file -->
+<!-- Don't edit README.md; instead, edit README.Rmd -->
 
 ```{r, echo = FALSE}
 knitr::opts_chunk$set(
@@ -17,12 +17,11 @@ knitr::opts_chunk$set(
 
 # try
 
-To try new things.
+The goal of __try__ is to try new things, and share the code easily with people whose feedback can hep me refine my code.
 
 # Installation
 
 ```r
 # install.packages("devtools")
-devtools::install_github("maurolepore/try")  # install branch master
-# devtools::install_github("maurolepore/try", ref = "dev")  # install branch dev
+devtools::install_github("maurolepore/try")
 ```

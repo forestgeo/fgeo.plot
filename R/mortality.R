@@ -1,5 +1,0 @@
-#' mortality
-#'
-#'
-'mortality'
-
