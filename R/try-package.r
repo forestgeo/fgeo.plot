@@ -1,4 +1,4 @@
-#' try.
+#' Try new things.
 #'
 #' @name try
 #' @docType package
