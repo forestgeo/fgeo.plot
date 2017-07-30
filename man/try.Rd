@@ -4,7 +4,7 @@
 \name{try}
 \alias{try}
 \alias{try-package}
-\title{try.}
+\title{Try new things.}
 \description{
-try.
+Try new things.
 }
