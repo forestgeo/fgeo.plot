@@ -1,8 +1,10 @@
 Package: try
-Title: What the Package Does (one line, title case)
+Title: Try New Things
 Version: 0.0.11.9001
-Authors@R: person("Mauro", "Lepore", email = "maurolepore@gmail.com", role = c("aut", "cre"))
-Description: What the package does (one paragraph).
+Authors@R: person("Mauro", "Lepore", email = "maurolepore@gmail.com", 
+    role = c("aut", "cre"))
+Description: Try new things. Share code quickly, to get feedback that helps
+    further improve the code.
 Depends:
     R (>= 3.3.1)
 License: MIT + file LICENSE
@@ -11,4 +13,4 @@ LazyData: true
 Suggests: testthat
 RoxygenNote: 6.0.1
 Roxygen: list(markdown = TRUE)
-Imports: forestr
+Imports: tidyverse
