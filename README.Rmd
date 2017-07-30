@@ -25,6 +25,7 @@ knitr::opts_chunk$set(
 Try makes if  easy to share code to try new things. It aims to draft a solution to address a very specific issue, maybe the issue of one user only. That user  can access the code by installing the issue-specific snapshot of __try__ (GitHub Flow: https://goo.gl/vzrfgy), which may be associated to one pull request. This should avoids sharing code, from developer to user, by email.
 
 
+
 # Installation
 
 Example installing branch with reference \@some-issue:
