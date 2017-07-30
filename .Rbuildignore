@@ -7,3 +7,4 @@
 ^tmp.R$
 ^data-raw$
 ^issues$
+^codecov\.yml$
