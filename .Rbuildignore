@@ -6,7 +6,6 @@
 ^README-.*\.png$
 ^tmp\.R$
 ^data-raw$
-^issues/$
 ^codecov\.yml$
 ^issues$
-^docs/$
+^docs$
