@@ -4,3 +4,7 @@
 ^\.travis\.yml$
 ^README\.Rmd$
 ^README-.*\.png$
+^tmp.R$
+^data-raw$
+^issues$
+^codecov\.yml$
