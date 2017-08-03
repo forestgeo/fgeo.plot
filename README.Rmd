@@ -28,10 +28,11 @@ Try makes if  easy to share code to try new things. It aims to draft a solution 
 
 # Installation
 
-Example installing branch with reference \@some-issue:
+Install from GitHub with:
 
 ```
 # install.packages("devtools")
 devtools::install_github(repo = "forestgeo/try@some-issue")
 ```
 
+The argument `repo` of `devtools::install_github()` can be in the format username/repo[@ref|#pull], where `ref` could be a commit, tag, or branch name, or a call to `github_pull()`.

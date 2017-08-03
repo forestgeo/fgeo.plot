@@ -4,7 +4,8 @@
 ^\.travis\.yml$
 ^README\.Rmd$
 ^README-.*\.png$
-^tmp.R$
+^tmp\.R$
 ^data-raw$
-^issues$
+^issues/$
 ^codecov\.yml$
+^issues$

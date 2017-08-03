@@ -2,9 +2,12 @@
 
 # General plot of gx by gy faceted by species.
 plot_xy <- function(cns_data, xlim, ylim, ...) {
-  ggplot2::ggplot(data = cns_data, aes(x = gx, y = gy)) +
+  ggplot2::ggplot(
+    data = cns_data,
+    ggplot2::aes(x = cns_data$gx, y = cns_data$gy)
+  ) +
     ggplot2::geom_point(...) +
-    ggplot2::facet_grid(. ~ sp) +
+    ggplot2::facet_grid(. ~ cns_data$sp) +
     ggplot2::coord_fixed(xlim = xlim, ylim = ylim) +
     ggplot2::theme_bw()
 }

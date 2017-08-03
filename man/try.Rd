@@ -6,5 +6,5 @@
 \alias{try-package}
 \title{Try new things.}
 \description{
-Try new things.
+For more info see README.
 }
