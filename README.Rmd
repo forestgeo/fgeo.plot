@@ -34,14 +34,4 @@ Example installing branch with reference \@some-issue:
 # install.packages("devtools")
 devtools::install_github(repo = "forestgeo/try@some-issue")
 ```
-<<<<<<< HEAD
 
-Explain branch model.
-||||||| merged common ancestors
-=======
-
-The argument `repo` of `devtools::install_github()` can be in the format username/repo[@ref|#pull], where `ref` could be a commit, tag, or branch name, or a call to `github_pull()`.
-
-
-
->>>>>>> #142
