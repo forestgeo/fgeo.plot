@@ -11,12 +11,15 @@ Description: Try makes if  easy to share code to try new things. It
     one pull request. This should avoids sharing code, from developer
     to user, by email.
 Depends:
-    R (>= 3.3.1)
+    R (>= 3.1.2)
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
-Suggests: testthat,
-    covr
+Suggests: bci,
+    covr,
+    dplyr,
+    ggplot2,
+    testthat
 RoxygenNote: 6.0.1
 Roxygen: list(markdown = TRUE)
-Imports: tidyverse
+
