@@ -20,9 +20,9 @@ e.g. a .pdf, .png, etc.)
 \description{
 Plot species from a list or vector.
 }
-\section{Acknowledgements}{
+\section{Acknowledgement}{
 
-Thanks to Gabriel Arellano and "Kenfack, David" for ideas and feedback.
+Thanks to Gabriel Arellano and David Kenfack for ideas and feedback.
 }
 
 \examples{

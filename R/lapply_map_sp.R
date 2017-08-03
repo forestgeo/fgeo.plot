@@ -30,8 +30,8 @@ plot_sp <- function(one_sp, cns_data, ...) {
 #'
 #' @seealso [ggplot2::geom_point()], [grDevices::pdf()], [grDevices::png()].
 #'
-#' @section Acknowledgements:
-#' Thanks to Gabriel Arellano and "Kenfack, David" for ideas and feedback.
+#' @section Acknowledgement:
+#' Thanks to Gabriel Arellano and David Kenfack for ideas and feedback.
 #'
 #' @return A list of plots. Usually you will want to save the list on a file (
 #'     e.g. a .pdf, .png, etc.)

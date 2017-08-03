@@ -9,3 +9,4 @@
 ^issues/$
 ^codecov\.yml$
 ^issues$
+^docs/$
