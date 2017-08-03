@@ -15,8 +15,7 @@ Depends:
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
-Suggests: bci,
-    covr,
+Suggests: covr,
     dplyr,
     ggplot2,
     testthat
