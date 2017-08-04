@@ -16,10 +16,11 @@ knitr::opts_chunk$set(
 
 ```{r note-zenodo, include=FALSE}
 # [![DOI](https://zenodo.org/badge/78309322.svg)](https://zenodo.org/badge/latestdoi/78309322)
+
+# [![Coverage Status](https://img.shields.io/codecov/c/github/maurolepore/try/master.svg)](https://codecov.io/github/maurolepore/try?branch=master)
 ```
 
 [![Travis-CI Build Status](https://travis-ci.org/maurolepore/try.svg?branch=master)](https://travis-ci.org/maurolepore/try)
-[![Coverage Status](https://img.shields.io/codecov/c/github/maurolepore/try/master.svg)](https://codecov.io/github/maurolepore/try?branch=master)
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/try)](https://cran.r-project.org/package=try)
 
 # Overview
