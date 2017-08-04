@@ -3,9 +3,7 @@
 try
 ===
 
-[![DOI](https://zenodo.org/badge/78309322.svg)](https://zenodo.org/badge/latestdoi/78309322)
-
-[![Travis-CI Build Status](https://travis-ci.org/maurolepore/try.svg?branch=master)](https://travis-ci.org/maurolepore/try)
+[![Travis-CI Build Status](https://travis-ci.org/maurolepore/try.svg?branch=master)](https://travis-ci.org/maurolepore/try) [![Coverage Status](https://img.shields.io/codecov/c/github/maurolepore/try/master.svg)](https://codecov.io/github/maurolepore/try?branch=master) [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/try)](https://cran.r-project.org/package=try)
 
 Overview
 ========
