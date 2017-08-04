@@ -15,10 +15,13 @@ Depends:
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
-Suggests: covr,
+Suggests: assertive,
+    covr,
     dplyr,
     ggplot2,
-    testthat
+    testthat,
+    knitr,
+    rmarkdown
 RoxygenNote: 6.0.1
 Roxygen: list(markdown = TRUE)
-
+VignetteBuilder: knitr
