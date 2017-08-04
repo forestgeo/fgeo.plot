@@ -2,6 +2,4 @@
 #'
 #' For more info see README.
 #'
-#' @name try
-#' @docType package
-NULL
+"_PACKAGE"
