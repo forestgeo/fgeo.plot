@@ -69,5 +69,12 @@ plot_sp <- function(one_sp, cns_data, ...) {
 #'
 #' }
 lapply_plot_sp <- function(species, cns_data, ...) {
+  assertive::assert_is_character(unlist(species))
+  assertive::assert_is_non_empty(species)
+
+  required_names <- c("gx", "gy", "sp")
+  data_has_required_names <- all(required_names %in% names(cns_data))
+  stopifnot(data_has_required_names)
+
   lapply(X = species, FUN = plot_sp, cns_data, ...)
 }
