@@ -1,0 +1,10 @@
+name: Publish Document
+title:
+username:
+account: rpubs
+server: rpubs.com
+hostUrl: rpubs.com
+appId: https://api.rpubs.com/api/v1/document/296529/8c02420d1b3c437aad792d91dba4b5b9
+bundleId: https://api.rpubs.com/api/v1/document/296529/8c02420d1b3c437aad792d91dba4b5b9
+url: http://rpubs.com/forestgeo/296529
+when: 1501851243.12152

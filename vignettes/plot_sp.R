@@ -62,6 +62,7 @@ plot_list
 
 ## ----show-quick-default, fig.align="default", out.width="30%", fig.widh=(6 * 0.3 / 0.9)----
 # The package try is where I try new things that I may or may not develop.
+# https://github.com/forestgeo/try
 library(try)
 
 # Selecting all species in the example dataset
