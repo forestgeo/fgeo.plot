@@ -14,8 +14,9 @@ plot_xy <- function(cns_data, xlim, ylim, ...) {
 
 # Standarized plot for each species (fixed ratio and limits).
 plot_sp <- function(one_sp, cns_data, ...) {
-  xlim <- c(0, max(cns_data$gx))
-  ylim <- c(0, max(cns_data$gy))
+  xlim <- c(0, max(cns_data$gx, na.rm = TRUE))
+  ylim <- c(0, max(cns_data$gy, na.rm = TRUE))
+  assertive::assert_all_are_not_na(c(xlim, ylim))
 
   filtered_cns_data <- cns_data[cns_data$sp %in% one_sp, ]
   plot_xy(filtered_cns_data, xlim, ylim, ...)
