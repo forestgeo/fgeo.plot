@@ -16,12 +16,15 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Suggests: assertive,
+    bci,
     covr,
     dplyr,
-    ggplot2,
     testthat,
     knitr,
     rmarkdown
 RoxygenNote: 6.0.1
 Roxygen: list(markdown = TRUE)
 VignetteBuilder: knitr
+Imports: ggplot2
+URL: https://github.com/forestgeo/try
+BugReports: https://github.com/forestgeo/try/issues
