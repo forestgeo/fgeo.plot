@@ -152,6 +152,9 @@ first_df
 Lets filter the lower left quarter of one quadrat and plot it. Later I can apply the same approach to all other quarters of each quadrat, and to all other quadrats. 
 
 ```{r}
+
+# install.packages("ggthemes")
+
 # Size of points, text and labels
 point_size <- 1
 id_size <- 2
@@ -173,7 +176,10 @@ ggplot(first_ll, aes(x = lx, y = ly, shape = as.factor(symbol))) +
   geom_point(size = point_size) +
   geom_text_repel(aes(label = tag), size = id_size) +
   theme(legend.position = "top") +
+  scale_x_continuous(minor_breaks = seq(1, 20, 1), breaks = seq(0, 20, 5)) +
+  scale_y_continuous(minor_breaks = seq(1, 20, 1), breaks = seq(0, 20, 5)) +
   theme
+  # ggthemes::theme_base()
 ```
 
 __Please let me know how to make this more fit to your needs. once happy, I'll apply the same style to all plots.__
