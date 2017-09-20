@@ -181,7 +181,7 @@ unique(lapply(sin_q20, names))
 <p>Now let’s overview the data set, paying special attention to the type of each variable.</p>
 <pre class="r"><code># Show only part of the entire data set to save space
 n_cols_per_df &lt;- unlist(unique(lapply(sin_q20, ncol)))
-str(sin_q20[1:3], list.len = n_cols_per_df)
+str(sin_q20[1:3])
 #&gt; List of 3
 #&gt;  $ 15:'data.frame':  323 obs. of  6 variables:
 #&gt;   ..$ tag   : int [1:323] 4193 4194 4195 4196 4197 4198 4199 4200 4201 4202 ...
@@ -245,7 +245,7 @@ sin_q20 &lt;- lapply(sin_q20, convert_status_to_character)
 sin_q20 &lt;- lapply(sin_q20, convert_symbol_to_factor)
 
 # Showing only a few data frames to save space
-str(sin_q20[1:3], list.len = n_cols_per_df)
+str(sin_q20[1:3])
 #&gt; List of 3
 #&gt;  $ 15:'data.frame':  323 obs. of  6 variables:
 #&gt;   ..$ tag   : int [1:323] 4193 4194 4195 4196 4197 4198 4199 4200 4201 4202 ...
@@ -280,10 +280,9 @@ str(sin_q20[1:3], list.len = n_cols_per_df)
 <li>0: open squares indicate trees that were alive in census 1 but did not live to census 2.</li>
 </ul>
 <p>To make this easier to interpret, I’ll use more explicit values.</p>
-<p>From the entire data set, pull out only one data frame and overview it.</p>
-<pre class="r"><code>first_df &lt;- as.tibble(sin_q20[[1]])
-first_df &lt;- first_df %&gt;%
-  mutate(
+<pre class="r"><code># Add alternatives to symbol, that are easier to understand
+codify_explicitely &lt;- function(x) {
+  mutate(x, 
     sym1 = case_when(
       symbol == 16 ~ &quot;Alive in 4&quot;,
       symbol ==  1 ~ &quot;Alive in 3, Dead in 4&quot;,
@@ -296,11 +295,17 @@ first_df &lt;- first_df %&gt;%
       symbol == 15 ~ &quot;(2.3)&quot;,
       symbol ==  0 ~ &quot;(1.2)&quot;
     )
-  )</code></pre>
+  )
+}
+sin_q20 &lt;- map(sin_q20, codify_explicitely)</code></pre>
 </div>
 <div id="plot" class="section level1">
 <h1>Plot</h1>
 <p>Lets filter the lower left quarter of one quadrat and plot it. Later I can apply the same approach to all other quarters of each quadrat, and to all other quadrats.</p>
+<p>From the entire data set, pull out only one data frame and overview it.</p>
+<pre class="r"><code># Filter lower left subsection
+first_df &lt;- as.tibble(sin_q20[[1]])
+first_ll &lt;- filter(first_df, lx &lt;= 10, ly &lt;= 10)</code></pre>
 <pre class="r"><code># Tweak plot
 point_size &lt;- 1.5
 id_size &lt;- 2.5
@@ -311,10 +316,6 @@ theme &lt;- theme(
   legend.position = &quot;top&quot;,
   legend.title = element_blank()
   )
-
-# Filter lower left subsection
-
-first_ll &lt;- filter(first_df, lx &lt;= 10, ly &lt;= 10)
 
 df &lt;- first_ll
 

@@ -154,31 +154,6 @@ This is what they mean (after email by Shameema , https://goo.gl/S8KfWf):
 
 To make this easier to interpret, I'll use more explicit values.
 
-
-From the entire data set, pull out only one data frame and overview it.
-
-```{r}
-first_df <- as.tibble(sin_q20[[1]])
-first_df <- first_df %>%
-  mutate(
-    sym1 = case_when(
-      symbol == 16 ~ "Alive in 4",
-      symbol ==  1 ~ "Alive in 3, Dead in 4",
-      symbol == 15 ~ "Alive in 2, Dead in 3",
-      symbol ==  0 ~ "Alive in 1, Dead in 2"
-    ),
-    sym2 = case_when(
-      symbol == 16 ~ "(4. )",
-      symbol ==  1 ~ "(3.4)",
-      symbol == 15 ~ "(2.3)",
-      symbol ==  0 ~ "(1.2)"
-    )
-  )
-```
-
-
-
-
 ```{r}
 # Add alternatives to symbol, that are easier to understand
 codify_explicitely <- function(x) {
@@ -197,22 +172,22 @@ codify_explicitely <- function(x) {
     )
   )
 }
-
 sin_q20 <- map(sin_q20, codify_explicitely)
 ```
-
-
-
-
-
-
-
 
 
 
 # Plot
 
 Lets filter the lower left quarter of one quadrat and plot it. Later I can apply the same approach to all other quarters of each quadrat, and to all other quadrats.
+
+From the entire data set, pull out only one data frame and overview it.
+
+```{r}
+# Filter lower left subsection
+first_df <- as.tibble(sin_q20[[1]])
+first_ll <- filter(first_df, lx <= 10, ly <= 10)
+```
 
 ```{r}
 # Tweak plot
@@ -226,28 +201,25 @@ theme <- theme(
   legend.title = element_blank()
   )
 
-# Filter lower left subsection
-
-first_ll <- filter(first_df, lx <= 10, ly <= 10)
-
 df <- first_ll
 
-ggplot(df, aes(x = lx, y = ly, shape = sym1)) +
+p <- ggplot(df, aes(x = lx, y = ly, shape = sym1)) +
   geom_point(size = point_size) +
   geom_text_repel(aes(label = tag), size = id_size) +
   scale_x_continuous(minor_breaks = seq(1, 20, 1), breaks = seq(0, 20, 5)) +
   scale_y_continuous(minor_breaks = seq(1, 20, 1), breaks = seq(0, 20, 5)) +
-  theme +
-  labs(title = "Meaning encoded as shapes, to be decoded in legend")
+  coord_fixed() +
+  theme
+ggsave(p, "./issues/iss001_02.png")
 
-ggplot(df, aes(x = lx, y = ly)) +
-  # geom_point(size = point_size * 2, fill = "white", shape = 1) +
-  geom_text(aes(label = sym2), size = point_size * 1.5) +
-  geom_text_repel(aes(label = tag), size = id_size) +
-  scale_x_continuous(minor_breaks = seq(1, 20, 1), breaks = seq(0, 20, 5)) +
-  scale_y_continuous(minor_breaks = seq(1, 20, 1), breaks = seq(0, 20, 5)) +
-  theme +
-  labs(title = "Meaning encoded as (censusAlive.censusDead)")
+# ggplot(df, aes(x = lx, y = ly)) +
+#   # geom_point(size = point_size * 2, fill = "white", shape = 1) +
+#   geom_text(aes(label = sym2), size = point_size * 1.5) +
+#   geom_text_repel(aes(label = tag), size = id_size) +
+#   scale_x_continuous(minor_breaks = seq(1, 20, 1), breaks = seq(0, 20, 5)) +
+#   scale_y_continuous(minor_breaks = seq(1, 20, 1), breaks = seq(0, 20, 5)) +
+#   theme +
+#   labs(title = "Meaning encoded as (censusAlive.censusDead)")
 ```
 
 Check that the values of `symbol` make sense:
