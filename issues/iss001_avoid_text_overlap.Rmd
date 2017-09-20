@@ -1,0 +1,182 @@
+---
+title: "Avoid text overlap"
+subtitle: "Example using data from Sinharaja"
+author: "maurolepore@gmail.com"
+date: "2017-09-20"
+output:
+  rmarkdown::html_document:
+    toc: true
+    toc_depth: 6
+---
+
+```{r setup, include=FALSE}
+# > There is one chunk name that imbues special behaviour: setup. When you're in
+# a notebook mode, the chunk named setup will be run automatically once, before
+# any other code is run.
+# --http://r4ds.had.co.nz/r-markdown.html#chunk-options
+
+
+
+# Load packages (including data-packages) ----
+
+library(tidyverse)
+library(ggrepel)
+library(try)
+
+
+
+# Load un-packaged dependencies ----
+
+
+
+
+
+# Figures ----
+
+# > If you want to make sure the font size is consistent across all your
+# figures, whenever you set out.width, you'll also need to adjust fig.width to
+# maintain the same ratio with your default out.width. For example, if your
+# default fig.width is 6 and out.width is 0.7, when you set out.width = "50%"
+# you'll need to set fig.width to 4.3 (6 * 0.5 / 0.7).
+# --http://r4ds.had.co.nz/
+
+set.seed(1014)
+options(digits = 3)
+
+knitr::opts_chunk$set(
+  echo = TRUE,
+  comment = "#>",
+  collapse = TRUE,
+  cache = TRUE,
+  out.width = "90%",
+  fig.align = "center",
+  fig.width = 6,
+  fig.asp = 1,  # 1 / phi
+  fig.show = "hold"
+)
+
+options(dplyr.print_min = 6, dplyr.print_max = 6)
+
+# customize ggplot
+
+update_geom_defaults("point",
+  list(shape = 21, colour = "black", size = 2, stroke = 1)
+)
+update_geom_defaults("text", list(size = 2))
+```
+
+# Goal
+
+To clearly plot information that help workers to identify specific trees on the field. Previous drafts were too crowded, with labels that overlapped and impaired reading the information clearly.
+
+For each quadrat we want to output 4 plots, each showing 1/4 of the quadrat's area. Each of those sub-quadrat we want to plot in one separate page.
+
+# Approach
+
+* Overview the entire data to understand it.
+* Pull one data frame.
+    * Overview it.
+    * Draft a plot quickly to see it we are heading in the right direction.
+    * Divide it in 4 subplots.
+    * Plot avoiding labels overploting.
+        * aesthetics: 
+            * `x`, `y` map to position in the quadrat, i.e. `lx`, `ly`.
+            * text maps to `tag` id
+            * shape or colour map to symbol
+
+
+
+# Explore entire data set
+
+> (To Stuart) Since there are 67 quadrats in your check list there will be 268 pages (4 per quad)
+--Shameema
+
+The name of each data frame, and their number (67) confirm they correspond to the name (or ID) of each quadrat.
+
+```{r}
+names(sin_q20)
+```
+
+Let's confirm that all 67 data frames in the list have the same variable names.
+
+```{r}
+# Yes. All data frames have exactly the same name.
+unique(lapply(sin_q20, names))
+```
+
+Now let's overview the data set, paying special attention to the type of each variable.
+
+```{r}
+# Show only part of the entire data set to save space
+n_cols_per_df <- unlist(unique(lapply(sin_q20, ncol)))
+str(sin_q20[1:3], list.len = n_cols_per_df)
+```
+
+`status` should probabbly be a character variable (data dictionary https://goo.gl/i6kHiQ) but here it is a factor.
+
+```{r}
+# map() is like lapply with some handy shortcuts
+map(sin_q20, "status") %>% 
+  map(unique) %>% 
+  head()
+```
+
+The reason why `status` is a factor is probably because the data frames where built using the default `stringsAsFactors = TRUE`. Because it may cause problems, let's fix this now.
+
+```{r}
+convert_status_to_character <- function(x) {
+  x$status <- as.character(x$status)
+  x
+}
+sin_q20 <- lapply(sin_q20, convert_status_to_character)
+
+# Showing only a few data frames to save space
+str(sin_q20[1:3], list.len = n_cols_per_df)
+```
+
+
+
+# Explore each data set
+
+From the entire data set, pull out only one data frame and overview it
+
+```{r}
+first_df <- as.tibble(sin_q20[[1]])
+first_df
+```
+
+
+
+# Plot
+
+Lets filter the lower left quarter of one quadrat and plot it. Later I can apply the same approach to all other quarters of each quadrat, and to all other quadrats. 
+
+```{r}
+# Size of points, text and labels
+point_size <- 1
+id_size <- 2
+theme <- theme(
+  panel.grid.major = element_line(colour = "black"),
+  panel.grid.minor = element_line(linetype = "dotted", colour = "black"),
+  panel.background = element_rect(fill = 'white')
+  )
+
+
+
+
+
+
+# lower left subsection
+first_ll <- filter(first_df, lx <= 10, ly <= 10)
+
+ggplot(first_ll, aes(x = lx, y = ly, shape = as.factor(symbol))) +
+  geom_point(size = point_size) +
+  geom_text_repel(aes(label = tag), size = id_size) +
+  theme(legend.position = "top") +
+  theme
+```
+
+__Please let me know how to make this more fit to your needs. once happy, I'll apply the same style to all plots.__
+
+__Mauro__
+
