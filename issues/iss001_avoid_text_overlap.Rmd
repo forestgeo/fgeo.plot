@@ -109,7 +109,7 @@ Now let's overview the data set, paying special attention to the type of each va
 ```{r}
 # Show only part of the entire data set to save space
 n_cols_per_df <- unlist(unique(lapply(sin_q20, ncol)))
-str(sin_q20[1:3], list.len = n_cols_per_df)
+str(sin_q20[1:3])
 ```
 
 `status` should probabbly be a character variable (data dictionary https://goo.gl/i6kHiQ) but here it is a factor.
@@ -121,68 +121,151 @@ map(sin_q20, "status") %>%
   head()
 ```
 
-The reason why `status` is a factor is probably because the data frames where built using the default `stringsAsFactors = TRUE`. Because it may cause problems, let's fix this now.
+The reason why `status` is a factor is probably because the data frames where built using the default `stringsAsFactors = TRUE`. Because it may cause problems, let's fix this now. We'll also take the chance to convert the variable `symbol` to a factor. This will later make plotting easier.
 
 ```{r}
 convert_status_to_character <- function(x) {
   x$status <- as.character(x$status)
   x
 }
+convert_symbol_to_factor <- function(x) {
+  x$symbol <- as.factor(x$symbol)
+  x
+}
 sin_q20 <- lapply(sin_q20, convert_status_to_character)
+sin_q20 <- lapply(sin_q20, convert_symbol_to_factor)
 
 # Showing only a few data frames to save space
-str(sin_q20[1:3], list.len = n_cols_per_df)
+str(sin_q20[1:3])
 ```
 
+These are the values of the variable `symbol`:
+
+```{r}
+sin_q20[[1]]$symbol %>% unique()
+```
+
+This is what they mean (after email by Shameema , https://goo.gl/S8KfWf):
+
+* 16: filled circles on a map indicate trees that are alive in census4.
+* 1: open circles indicate trees that were alive in census 3 but were found dead in census 4.
+* 15: filled squares indicate trees that were alive in census 2 but did not survive to census 3.
+* 0: open squares indicate trees that were alive in census 1 but did not live to census 2.
+
+To make this easier to interpret, I'll use more explicit values.
 
 
-# Explore each data set
-
-From the entire data set, pull out only one data frame and overview it
+From the entire data set, pull out only one data frame and overview it.
 
 ```{r}
 first_df <- as.tibble(sin_q20[[1]])
-first_df
+first_df <- first_df %>%
+  mutate(
+    sym1 = case_when(
+      symbol == 16 ~ "Alive in 4",
+      symbol ==  1 ~ "Alive in 3, Dead in 4",
+      symbol == 15 ~ "Alive in 2, Dead in 3",
+      symbol ==  0 ~ "Alive in 1, Dead in 2"
+    ),
+    sym2 = case_when(
+      symbol == 16 ~ "(4. )",
+      symbol ==  1 ~ "(3.4)",
+      symbol == 15 ~ "(2.3)",
+      symbol ==  0 ~ "(1.2)"
+    )
+  )
 ```
+
+
+
+
+```{r}
+# Add alternatives to symbol, that are easier to understand
+codify_explicitely <- function(x) {
+  mutate(x, 
+    sym1 = case_when(
+      symbol == 16 ~ "Alive in 4",
+      symbol ==  1 ~ "Alive in 3, Dead in 4",
+      symbol == 15 ~ "Alive in 2, Dead in 3",
+      symbol ==  0 ~ "Alive in 1, Dead in 2"
+    ),
+    sym2 = case_when(
+      symbol == 16 ~ "(4. )",
+      symbol ==  1 ~ "(3.4)",
+      symbol == 15 ~ "(2.3)",
+      symbol ==  0 ~ "(1.2)"
+    )
+  )
+}
+
+sin_q20 <- map(sin_q20, codify_explicitely)
+```
+
+
+
+
+
+
+
 
 
 
 # Plot
 
-Lets filter the lower left quarter of one quadrat and plot it. Later I can apply the same approach to all other quarters of each quadrat, and to all other quadrats. 
+Lets filter the lower left quarter of one quadrat and plot it. Later I can apply the same approach to all other quarters of each quadrat, and to all other quadrats.
 
 ```{r}
-
-# install.packages("ggthemes")
-
-# Size of points, text and labels
-point_size <- 1
-id_size <- 2
+# Tweak plot
+point_size <- 1.5
+id_size <- 2.5
 theme <- theme(
   panel.grid.major = element_line(colour = "black"),
   panel.grid.minor = element_line(linetype = "dotted", colour = "black"),
-  panel.background = element_rect(fill = 'white')
+  panel.background = element_rect(fill = 'white'),
+  legend.position = "top",
+  legend.title = element_blank()
   )
 
+# Filter lower left subsection
 
-
-
-
-
-# lower left subsection
 first_ll <- filter(first_df, lx <= 10, ly <= 10)
 
-ggplot(first_ll, aes(x = lx, y = ly, shape = as.factor(symbol))) +
+df <- first_ll
+
+ggplot(df, aes(x = lx, y = ly, shape = sym1)) +
   geom_point(size = point_size) +
   geom_text_repel(aes(label = tag), size = id_size) +
-  theme(legend.position = "top") +
   scale_x_continuous(minor_breaks = seq(1, 20, 1), breaks = seq(0, 20, 5)) +
   scale_y_continuous(minor_breaks = seq(1, 20, 1), breaks = seq(0, 20, 5)) +
-  theme
-  # ggthemes::theme_base()
+  theme +
+  labs(title = "Meaning encoded as shapes, to be decoded in legend")
+
+ggplot(df, aes(x = lx, y = ly)) +
+  # geom_point(size = point_size * 2, fill = "white", shape = 1) +
+  geom_text(aes(label = sym2), size = point_size * 1.5) +
+  geom_text_repel(aes(label = tag), size = id_size) +
+  scale_x_continuous(minor_breaks = seq(1, 20, 1), breaks = seq(0, 20, 5)) +
+  scale_y_continuous(minor_breaks = seq(1, 20, 1), breaks = seq(0, 20, 5)) +
+  theme +
+  labs(title = "Meaning encoded as (censusAlive.censusDead)")
 ```
 
-__Please let me know how to make this more fit to your needs. once happy, I'll apply the same style to all plots.__
+Check that the values of `symbol` make sense:
 
-__Mauro__
+```{r}
+first_df %>% 
+  select(status, symbol, sym1, sym2) %>% 
+  unique()
+
+# symbol means:
+# * 16: filled circles on a map indicate trees that are alive in census4.
+# *  1: open circles indicate trees that were alive in census 3 but were found
+#       dead in census 4.
+# * 15: filled squares indicate trees that were alive in census 2 but did not
+#       survive to census 3.
+# *  0: open squares indicate trees that were alive in census 1 but did not
+#       live to census 2.
+# (after email by Shameema , https://goo.gl/S8KfWf)
+```
+
 
