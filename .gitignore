@@ -8,3 +8,6 @@ data-raw/from_shameema
 data
 issues/001_avoid_text_overlap.R
 
+iss001_recensusmaps.r
+iss001_fieldmaps.r
+
