@@ -201,17 +201,28 @@ theme <- theme(
   legend.title = element_blank()
   )
 
-df <- first_ll
+plot_repel <- function(df) {
+  ggplot(df, aes(x = lx, y = ly, shape = sym1)) +
+    geom_point(size = point_size) +
+    geom_text_repel(aes(label = tag), size = id_size) +
+    scale_x_continuous(minor_breaks = seq(1, 20, 1), breaks = seq(0, 20, 5)) +
+    scale_y_continuous(minor_breaks = seq(1, 20, 1), breaks = seq(0, 20, 5)) +
+    coord_fixed() +
+    theme
+}
+p <- plot_repel(first_ll)
+p
+```
 
-p <- ggplot(df, aes(x = lx, y = ly, shape = sym1)) +
-  geom_point(size = point_size) +
-  geom_text_repel(aes(label = tag), size = id_size) +
-  scale_x_continuous(minor_breaks = seq(1, 20, 1), breaks = seq(0, 20, 5)) +
-  scale_y_continuous(minor_breaks = seq(1, 20, 1), breaks = seq(0, 20, 5)) +
-  coord_fixed() +
-  theme
-ggsave(p, "./issues/iss001_02.png")
+```{r, echo=FALSE}
+# a4 = 8.27, 11.69
+pdf(paper = "a4", width = 8.2, height = 8.2)
+p
+dev.off()
+```
 
+```{r, include=FALSE}
+# This is an alternative version that Stuart chosed not to use.
 # ggplot(df, aes(x = lx, y = ly)) +
 #   # geom_point(size = point_size * 2, fill = "white", shape = 1) +
 #   geom_text(aes(label = sym2), size = point_size * 1.5) +
@@ -221,6 +232,8 @@ ggsave(p, "./issues/iss001_02.png")
 #   theme +
 #   labs(title = "Meaning encoded as (censusAlive.censusDead)")
 ```
+
+
 
 Check that the values of `symbol` make sense:
 
