@@ -192,48 +192,39 @@ first_ll <- filter(first_df, lx <= 10, ly <= 10)
 ```{r}
 # Tweak plot
 point_size <- 1.5
-id_size <- 2.5
+id_size <- 3
+
 theme <- theme(
   panel.grid.major = element_line(colour = "black"),
   panel.grid.minor = element_line(linetype = "dotted", colour = "black"),
   panel.background = element_rect(fill = 'white'),
   legend.position = "top",
-  legend.title = element_blank()
+  axis.ticks = element_blank(),
+  legend.title = element_blank(),
+  # panel.border = element_rect(linetype = "dashed", fill = NA)
   )
 
 plot_repel <- function(df) {
   ggplot(df, aes(x = lx, y = ly, shape = sym1)) +
     geom_point(size = point_size) +
     geom_text_repel(aes(label = tag), size = id_size) +
-    scale_x_continuous(minor_breaks = seq(1, 20, 1), breaks = seq(0, 20, 5)) +
-    scale_y_continuous(minor_breaks = seq(1, 20, 1), breaks = seq(0, 20, 5)) +
+    # dissablind scale_*_continuous() because it's called later
+    # scale_x_continuous(minor_breaks = seq(1, 20, 1), breaks = seq(0, 20, 5)) +
+    # scale_y_continuous(minor_breaks = seq(1, 20, 1), breaks = seq(0, 20, 5)) +
     coord_fixed() +
+    labs(x = NULL, y = NULL) +
     theme
 }
 p <- plot_repel(first_ll)
 p
 ```
 
-```{r, echo=FALSE}
+```{r plot-repel, include=FALSE}
 # a4 = 8.27, 11.69
 pdf(paper = "a4", width = 8.2, height = 8.2)
 p
 dev.off()
 ```
-
-```{r, include=FALSE}
-# This is an alternative version that Stuart chosed not to use.
-# ggplot(df, aes(x = lx, y = ly)) +
-#   # geom_point(size = point_size * 2, fill = "white", shape = 1) +
-#   geom_text(aes(label = sym2), size = point_size * 1.5) +
-#   geom_text_repel(aes(label = tag), size = id_size) +
-#   scale_x_continuous(minor_breaks = seq(1, 20, 1), breaks = seq(0, 20, 5)) +
-#   scale_y_continuous(minor_breaks = seq(1, 20, 1), breaks = seq(0, 20, 5)) +
-#   theme +
-#   labs(title = "Meaning encoded as (censusAlive.censusDead)")
-```
-
-
 
 Check that the values of `symbol` make sense:
 
@@ -253,4 +244,42 @@ first_df %>%
 # (after email by Shameema , https://goo.gl/S8KfWf)
 ```
 
+
+
+# Iterate
+
+See `?try::lapply_plot_sp()` for inspiration about how to iterate over multiple plots and save each of them in one page of a single pdf file.
+
+From the list I have, here is a prototype of the data I need to create:
+```{r}
+tribble(
+      ~id,  ~site, ~quadrat, ~quarter, ~df,
+  "sin11",  "sin",        1,        1,  "dfs11",
+  "sin12",  "sin",        1,        2,  "dfs12",
+  "sin13",  "sin",        1,        3,  "dfs13",
+  "sin14",  "sin",        1,        4,  "dfs14"
+)
+```
+
+Then the job is to plot the df of each id. So the plot may be faceted by id so that all the useful info appears in each plot.
+
+* I need a function that filters df by id
+* Then, I need a function that plots the df filtered before.
+* I need a function that wraps the two steps above.
+* Finally, I need to wrap all of this in `pdf()`.
+
+```
+pdf(onefile = TRUE)
+unique(data$id) %>% 
+  map(filter_df_by_id) %>%  ## These two may be wrapped in a function
+  map(plot_df)              ##   plot_filtered_id()` as shown below
+dev.off()
+```
+Same:
+
+```
+pdf(onefile = TRUE)
+map(unique(data$id), plot_filtered_id)
+dev.off()
+```
 
