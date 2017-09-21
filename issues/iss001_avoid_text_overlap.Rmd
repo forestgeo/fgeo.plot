@@ -155,54 +155,16 @@ This is what they mean (after email by Shameema , https://goo.gl/S8KfWf):
 To make this easier to interpret, I'll use more explicit values.
 
 ```{r}
-# Add alternatives to symbol, that are easier to understand
-codify_explicitely <- function(x) {
-  mutate(x, 
-    sym1 = case_when(
-      symbol == 16 ~ "Alive in 4",
-      symbol ==  1 ~ "Alive in 3, Dead in 4",
-      symbol == 15 ~ "Alive in 2, Dead in 3",
-      symbol ==  0 ~ "Alive in 1, Dead in 2"
-    ),
-    sym2 = case_when(
-      symbol == 16 ~ "Alive",
-      symbol ==  1 ~ "Dead",
-      symbol == 15 ~ "Dead",
-      symbol ==  0 ~ "Dead"
-    )
-  )
-}
-sin_q20 <- map(sin_q20, codify_explicitely)
+explicit <- map(sin_q20, codify_explicitely)
 ```
 
 
 
 # Plot
 
-Lets filter the lower left quarter of one quadrat and plot it. Later I can apply the same approach to all other quarters of each quadrat, and to all other quadrats.
-
-From the entire data set, pull out only one data frame and overview it.
-
-```{r}
-# Filter lower left subsection
-first_df <- as.tibble(sin_q20[[1]])
-first_ll <- filter(first_df, lx <= 10, ly <= 10)
-```
-
 
 
 ```{r}
-ided <- identify_subquadrat(sin_q20)
-head(ided)
-tail(ided)
-```
-
-
-
-
-```{r}
-
-
 # Tweak plot
 point_size <- 1.5
 id_size <- 3
@@ -214,11 +176,11 @@ subtitle_string <- paste0(
   site_string,
   "\n",
   "\n",
-  "Measuring: __________________ Measurement date: __________________\n",
+  "Measuring: ___________ Measurement date: __________\n",
   "\n",
-  "Recording: __________________ Checking: __________________________\n",
+  "Recording: ___________ Checking: __________________\n",
   "\n",
-  "Checked date: _______________",
+  "Checked date: ________",
   "\n"
 )
 
@@ -226,6 +188,7 @@ theme <- theme(
   panel.grid.major = element_line(colour = "black"),
   panel.grid.minor = element_line(linetype = "dotted", colour = "black"),
   panel.background = element_rect(fill = 'white'),
+  # panel.border = element_rect(linetype = "dashed"),
   legend.position = "top",
   axis.ticks = element_blank(),
   legend.title = element_blank(),
@@ -233,21 +196,51 @@ theme <- theme(
   )
 
 plot_repel <- function(df) {
+  title_string <- unique(df$id)
   ggplot(df, aes(x = lx, y = ly, shape = sym2)) +
     scale_shape_manual(values = c(19, 1)) +
     geom_point(size = point_size) +
     geom_text_repel(aes(label = tag), size = id_size) +
     scale_x_continuous(minor_breaks = seq(1, 20, 1), breaks = seq(0, 20, 5)) +
     scale_y_continuous(minor_breaks = seq(1, 20, 1), breaks = seq(0, 20, 5)) +
-    coord_fixed(xlim = shrink, ylim = shrink) +
+    coord_fixed(xlim = c(unique(df$x1), unique(df$x2)), ylim = c(unique(df$y1), unique(df$y2))) +
+    # coord_fixed() +
     labs(x = NULL, y = NULL) +
     theme + 
     labs(
-      title = unique(df$details), 
+      title = paste("Quadrat:", title_string), 
       subtitle = subtitle_string
     )
 }
+
+
+
+# df <- with_limits %>% filter(subquadrat == 1)
 ```
+
+
+
+```{r}
+ided <- identify_subquadrat(explicit) %>% as_tibble()
+
+
+
+fifteen <- ided %>% filter(quadrat == 15) %>% as.tibble()
+with_limits <- add_limits_shrinked(fifteen)
+
+
+
+
+pdf(onefile = TRUE, paper = "a4", width = 8.2, height = 8.2)
+
+
+with_limits %>% split(fifteen$id) %>% map(plot_repel)
+
+
+
+dev.off()
+```
+
 
 
 
@@ -315,6 +308,16 @@ first_df %>%
 
 
 
+
+
+
+
+
+
+
+
+
+
 # xxx continue here: Iterate
 
 
@@ -361,4 +364,23 @@ pdf(onefile = TRUE)
 map(unique(data$id), plot_filtered_id)
 dev.off()
 ```
+
+
+
+
+
+
+# leftovers
+
+Lets filter the lower left quarter of one quadrat and plot it. Later I can apply the same approach to all other quarters of each quadrat, and to all other quadrats.
+
+From the entire data set, pull out only one data frame and overview it.
+
+```{r}
+# Filter lower left subsection
+first_df <- as.tibble(sin_q20[[1]])
+first_ll <- filter(first_df, lx <= 10, ly <= 10)
+```
+
+
 
