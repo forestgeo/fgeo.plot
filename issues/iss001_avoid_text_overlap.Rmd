@@ -165,10 +165,10 @@ codify_explicitely <- function(x) {
       symbol ==  0 ~ "Alive in 1, Dead in 2"
     ),
     sym2 = case_when(
-      symbol == 16 ~ "(4. )",
-      symbol ==  1 ~ "(3.4)",
-      symbol == 15 ~ "(2.3)",
-      symbol ==  0 ~ "(1.2)"
+      symbol == 16 ~ "Alive",
+      symbol ==  1 ~ "Dead",
+      symbol == 15 ~ "Dead",
+      symbol ==  0 ~ "Dead"
     )
   )
 }
@@ -193,6 +193,7 @@ first_ll <- filter(first_df, lx <= 10, ly <= 10)
 # Tweak plot
 point_size <- 1.5
 id_size <- 3
+shrink <- c(0.4, 9.6)
 
 theme <- theme(
   panel.grid.major = element_line(colour = "black"),
@@ -205,13 +206,13 @@ theme <- theme(
   )
 
 plot_repel <- function(df) {
-  ggplot(df, aes(x = lx, y = ly, shape = sym1)) +
+  ggplot(df, aes(x = lx, y = ly, shape = sym2)) +
+    scale_shape_manual(values = c(19, 1)) +
     geom_point(size = point_size) +
     geom_text_repel(aes(label = tag), size = id_size) +
-    # dissablind scale_*_continuous() because it's called later
-    # scale_x_continuous(minor_breaks = seq(1, 20, 1), breaks = seq(0, 20, 5)) +
-    # scale_y_continuous(minor_breaks = seq(1, 20, 1), breaks = seq(0, 20, 5)) +
-    coord_fixed() +
+    scale_x_continuous(minor_breaks = seq(1, 20, 1), breaks = seq(0, 20, 5)) +
+    scale_y_continuous(minor_breaks = seq(1, 20, 1), breaks = seq(0, 20, 5)) +
+    coord_fixed(xlim = shrink, ylim = shrink) +
     labs(x = NULL, y = NULL) +
     theme
 }
@@ -246,11 +247,61 @@ first_df %>%
 
 
 
-# Iterate
+# xxx continue here: Iterate
+
+
+
+
+```{r}
+# xxx cont
+
+
+sin_q20[7:8] %>% str()
+
+
+
+  mutate(df = mutate(value, quadrat = name))
+  
+  
+  reduce(full_join)
+
+
+
+
+
+id_df <- function(list_df) {
+  nms <- names(list_df)
+  named_df_nested <- tibble::enframe(list_df)
+  named_df <- tidyr::unnest(named_df)
+}
+
+list_df %>% map(id_df)
+
+
+# Take a list of data frames and subset only one
+filter_df_by_id <- function(df, id) {
+}
+
+
+
+
+
+
+```
+
+
+
+```
+unique(data$id) %>% 
+  map(filter_df_by_id) %>%  ## These two may be wrapped in a function
+  map(plot_df)              ##   plot_filtered_id()` as shown below
+```
+
 
 See `?try::lapply_plot_sp()` for inspiration about how to iterate over multiple plots and save each of them in one page of a single pdf file.
 
 From the list I have, here is a prototype of the data I need to create:
+
 ```{r}
 tribble(
       ~id,  ~site, ~quadrat, ~quarter, ~df,

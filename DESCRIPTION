@@ -25,6 +25,9 @@ Suggests: assertive,
 RoxygenNote: 6.0.1
 Roxygen: list(markdown = TRUE)
 VignetteBuilder: knitr
-Imports: ggplot2
+Imports: ggplot2,
+    purrr,
+    tibble,
+    dplyr
 URL: https://github.com/forestgeo/try
 BugReports: https://github.com/forestgeo/try/issues
