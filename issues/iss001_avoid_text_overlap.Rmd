@@ -193,7 +193,21 @@ first_ll <- filter(first_df, lx <= 10, ly <= 10)
 # Tweak plot
 point_size <- 1.5
 id_size <- 3
+text_size <- 15
 shrink <- c(0.4, 9.6)
+site_string <- "(Sinharaja)"
+
+subtitle_string <- paste0(
+  site_string,
+  "\n",
+  "\n",
+  "Measuring: __________________ Measurement date: __________________\n",
+  "\n",
+  "Recording: __________________ Checking: __________________________\n",
+  "\n",
+  "Checked date: _______________",
+  "\n"
+)
 
 theme <- theme(
   panel.grid.major = element_line(colour = "black"),
@@ -202,7 +216,7 @@ theme <- theme(
   legend.position = "top",
   axis.ticks = element_blank(),
   legend.title = element_blank(),
-  # panel.border = element_rect(linetype = "dashed", fill = NA)
+  text = element_text(size = text_size) 
   )
 
 plot_repel <- function(df) {
@@ -214,9 +228,24 @@ plot_repel <- function(df) {
     scale_y_continuous(minor_breaks = seq(1, 20, 1), breaks = seq(0, 20, 5)) +
     coord_fixed(xlim = shrink, ylim = shrink) +
     labs(x = NULL, y = NULL) +
-    theme
+    theme + 
+    labs(
+      title = unique(df$details), 
+      subtitle = subtitle_string
+    )
 }
-p <- plot_repel(first_ll)
+
+
+df_list1 <- sin_q20[1]
+df_list1 <- add_quadrat_to_df_list(df_list1)
+df11 <- df_list1[[1]] %>% 
+  filter(lx < 10, ly < 10) %>% 
+  mutate(
+    quadrat = paste0("Quadrat ", quadrat),
+    quarter = paste0("-1"),
+    details = paste(quadrat, quarter)
+  )
+p <- plot_repel(df11)
 p
 ```
 
@@ -248,46 +277,6 @@ first_df %>%
 
 
 # xxx continue here: Iterate
-
-
-
-
-```{r}
-# xxx cont
-
-
-sin_q20[7:8] %>% str()
-
-
-
-  mutate(df = mutate(value, quadrat = name))
-  
-  
-  reduce(full_join)
-
-
-
-
-
-id_df <- function(list_df) {
-  nms <- names(list_df)
-  named_df_nested <- tibble::enframe(list_df)
-  named_df <- tidyr::unnest(named_df)
-}
-
-list_df %>% map(id_df)
-
-
-# Take a list of data frames and subset only one
-filter_df_by_id <- function(df, id) {
-}
-
-
-
-
-
-
-```
 
 
 

@@ -4,8 +4,15 @@ add_quadrat_to_one_df <- function(x, y) {
   quadrat_first <- dplyr::select(with_quadrat, quadrat, dplyr::everything())
   quadrat_first
 }
-# Add the name of each element of a list as a value in the variable quadrat
-#
+#' Add the name of each element of a list as a value in the variable quadrat
+#'
+#' @param df A list of data frames
+#'
+#' @return A list
+#' @export
+#'
+#' @examples
+#' # xxx add example
 # @examples
 # df <- sin_q20[7:8]
 # df_list <- add_quadrat_to_df_list(df)
