@@ -189,7 +189,20 @@ first_df <- as.tibble(sin_q20[[1]])
 first_ll <- filter(first_df, lx <= 10, ly <= 10)
 ```
 
+
+
 ```{r}
+ided <- identify_subquadrat(sin_q20)
+head(ided)
+tail(ided)
+```
+
+
+
+
+```{r}
+
+
 # Tweak plot
 point_size <- 1.5
 id_size <- 3
@@ -234,9 +247,17 @@ plot_repel <- function(df) {
       subtitle = subtitle_string
     )
 }
+```
 
 
-df_list1 <- sin_q20[1]
+
+```{r}
+
+
+# xxx cont
+
+
+
 df_list1 <- add_quadrat_to_df_list(df_list1)
 df11 <- df_list1[[1]] %>% 
   filter(lx < 10, ly < 10) %>% 
@@ -247,7 +268,25 @@ df11 <- df_list1[[1]] %>%
   )
 p <- plot_repel(df11)
 p
+
+
+
 ```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ```{r plot-repel, include=FALSE}
 # a4 = 8.27, 11.69
