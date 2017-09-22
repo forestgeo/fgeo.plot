@@ -22,16 +22,18 @@ prepare_for_plot_repel <- function(df_list) {
 #' @export
 #'
 #' @examples
-#' sin_q20 <- map(sin_q20, add_latest_tree_status)
+#' library(purrr)
+#' library(try)
+#' sin_q20 <- purrr::map(sin_q20, add_latest_tree_status)
 add_latest_tree_status <- function(x) {
-  mutate(x,
-    sym1 = case_when(
+  dplyr::mutate(x,
+    sym1 = dplyr::case_when(
       symbol == 16 ~ "Alive in 4",
       symbol ==  1 ~ "Alive in 3, Dead in 4",
       symbol == 15 ~ "Alive in 2, Dead in 3",
       symbol ==  0 ~ "Alive in 1, Dead in 2"
     ),
-    latest_tree_status = case_when(
+    latest_tree_status = dplyr::case_when(
       symbol == 16 ~ "Alive",
       symbol ==  1 ~ "Dead",
       symbol == 15 ~ "Dead",
@@ -93,7 +95,9 @@ identify_subquadrat <- function(df_list) {
   reduced_shallow <- suppressMessages(
     purrr::reduce(reduced_deep, dplyr::full_join)
   )
-  ided <- mutate(reduced_shallow, id = paste(quadrat, subquadrat, sep = "-"))
+  ided <- dplyr::mutate(
+    reduced_shallow, id = paste(quadrat, subquadrat, sep = "-")
+  )
   ordered <- dplyr::select(ided, id, quadrat, subquadrat, dplyr::everything())
   ordered
 }
@@ -107,26 +111,26 @@ identify_subquadrat <- function(df_list) {
 #'
 #' @examples
 add_limits <- function(df) {
-  mutate(df,
-    x1 = case_when(
+  dplyr::mutate(df,
+    x1 = dplyr::case_when(
       subquadrat == 1 ~ 0,
       subquadrat == 2 ~ 10,
       subquadrat == 3 ~ 10,
       subquadrat == 4 ~ 0
     ),
-    x2 = case_when(
+    x2 = dplyr::case_when(
       subquadrat == 1 ~ 10,
       subquadrat == 2 ~ 20,
       subquadrat == 3 ~ 20,
       subquadrat == 4 ~ 10
     ),
-    y1 = case_when(
+    y1 = dplyr::case_when(
       subquadrat == 1 ~ 0,
       subquadrat == 2 ~ 0,
       subquadrat == 3 ~ 10,
       subquadrat == 4 ~ 10
     ),
-    y2 = case_when(
+    y2 = dplyr::case_when(
       subquadrat == 1 ~ 10,
       subquadrat == 2 ~ 10,
       subquadrat == 3 ~ 20,
@@ -144,26 +148,26 @@ add_limits <- function(df) {
 #'
 #' @examples
 add_limits_shrinked <- function(df) {
-  mutate(df,
-    x1 = case_when(
+  dplyr::mutate(df,
+    x1 = dplyr::case_when(
       subquadrat == 1 ~ 0.4,
       subquadrat == 2 ~ 10.4,
       subquadrat == 3 ~ 10.4,
       subquadrat == 4 ~ 0.4
     ),
-    x2 = case_when(
+    x2 = dplyr::case_when(
       subquadrat == 1 ~ 9.6,
       subquadrat == 2 ~ 19.6,
       subquadrat == 3 ~ 19.6,
       subquadrat == 4 ~ 9.6
     ),
-    y1 = case_when(
+    y1 = dplyr::case_when(
       subquadrat == 1 ~ 0.4,
       subquadrat == 2 ~ 0.4,
       subquadrat == 3 ~ 10.4,
       subquadrat == 4 ~ 10.4
     ),
-    y2 = case_when(
+    y2 = dplyr::case_when(
       subquadrat == 1 ~ 9.6,
       subquadrat == 2 ~ 9.6,
       subquadrat == 3 ~ 19.6,
@@ -187,15 +191,13 @@ add_quadrat_to_one_df <- function(x, y) {
 #' @export
 #'
 #' @examples
-#' # xxx add example
-# @examples
-# df <- sin_q20[7:8]
-# df_list <- add_quadrat_to_df_list(df)
-# str(df_list)
-# # Demonstrate on only two quadrats
-# list_of_dfs <- sin_q20[c("109", "15")]
-# str(list_of_dfs)
-# add_quadrat_to_df_list(list_of_dfs)
+#' df <- sin_q20[7:8]
+#' df_list <- add_quadrat_to_df_list(df)
+#' str(df_list)
+#' # Demonstrate on only two quadrats
+#' list_of_dfs <- sin_q20[c("109", "15")]
+#' str(list_of_dfs)
+#' add_quadrat_to_df_list(list_of_dfs)
 add_quadrat_to_df_list <- function(df) {
   enframed_df <- tibble::enframe(df)
   purrr::map2(enframed_df$name, enframed_df$value, add_quadrat_to_one_df)

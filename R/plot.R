@@ -37,10 +37,3 @@ plot_repel <- function(df, site_name) {
       subtitle = get_subtitle()
     )
 }
-
-
-
-
-
-
-

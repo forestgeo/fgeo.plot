@@ -3,31 +3,23 @@ Title: Try New Things
 Version: 0.0.00.9000
 Authors@R: person("Mauro", "Lepore", email = "maurolepore@gmail.com", 
     role = c("aut", "cre"))
-Description: Try makes if  easy to share code to try new things. It 
-    aims to draft a solution to address a very specific issue, maybe
-    the issue of one user only. That user  can access the code by
-    installing the issue-specific snapshot of __try__ 
-    (GitHub Flow: https://goo.gl/vzrfgy), which may be associated to
-    one pull request. This should avoids sharing code, from developer
-    to user, by email.
+Description: Try makes if  easy to share code to try new things. It aims to
+    draft a solution to address a very specific issue.
 Depends:
     R (>= 3.1.2)
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
-Suggests: assertive,
-    bci,
-    covr,
-    dplyr,
+Suggests: covr,
     testthat,
     knitr,
     rmarkdown
 RoxygenNote: 6.0.1
 Roxygen: list(markdown = TRUE)
 VignetteBuilder: knitr
-Imports: ggplot2,
-    purrr,
-    tibble,
-    dplyr
 URL: https://github.com/forestgeo/try
 BugReports: https://github.com/forestgeo/try/issues
+Imports: tidyverse,
+    ggplot2,
+    dplyr,
+    purrr

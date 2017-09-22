@@ -16,5 +16,11 @@ A list
 Add the name of each element of a list as a value in the variable quadrat
 }
 \examples{
-# xxx add example
+df <- sin_q20[7:8]
+df_list <- add_quadrat_to_df_list(df)
+str(df_list)
+# Demonstrate on only two quadrats
+list_of_dfs <- sin_q20[c("109", "15")]
+str(list_of_dfs)
+add_quadrat_to_df_list(list_of_dfs)
 }
