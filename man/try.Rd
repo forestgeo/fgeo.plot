@@ -4,7 +4,24 @@
 \name{try}
 \alias{try}
 \alias{try-package}
-\title{Try new things.}
+\alias{try-package}
+\title{Try new things.
+Try makes if  easy to share code to try new things. It aims to draft a
+solution to address a very specific issue.}
 \description{
-For more info see README.
+Try new things.
+Try makes if  easy to share code to try new things. It aims to draft a
+solution to address a very specific issue.
+}
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://github.com/forestgeo/try}
+  \item Report bugs at \url{https://github.com/forestgeo/try/issues}
+}
+
+}
+\author{
+\strong{Maintainer}: Mauro Lepore \email{maurolepore@gmail.com}
+
 }
