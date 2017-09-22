@@ -1,3 +1,5 @@
+# Plot data ----
+
 #' Plot trees in subquadrats, avoiding tree tags to overlap.
 #'
 #' @param df_list A list of data frames.
@@ -34,48 +36,6 @@ plot_repel <- function(df, site_name) {
       title = paste0(site_name, ". Quadrat ", id_quadrat_subquadrat),
       subtitle = get_subtitle()
     )
-}
-
-#' Wrap a number of functions that prepare a list of data frames for plotting.
-#'
-#' @export
-#' @keywords internal
-#'
-#' @examples
-prepare_for_plot_repel <- function(df_list) {
-  explicit <- purrr::map(df_list, add_latest_tree_status)
-  identified <- identify_subquadrat(explicit)
-  add_limits_shrinked(identified)
-}
-
-
-
-
-
-#' Add alternatives to symbol, that are easier to understand.
-#'
-#' @param x A data frame.
-#'
-#' @return The modified data frame.
-#' @export
-#'
-#' @examples
-#' sin_q20 <- map(sin_q20, add_latest_tree_status)
-add_latest_tree_status <- function(x) {
-  mutate(x,
-    sym1 = case_when(
-      symbol == 16 ~ "Alive in 4",
-      symbol ==  1 ~ "Alive in 3, Dead in 4",
-      symbol == 15 ~ "Alive in 2, Dead in 3",
-      symbol ==  0 ~ "Alive in 1, Dead in 2"
-    ),
-    latest_tree_status = case_when(
-      symbol == 16 ~ "Alive",
-      symbol ==  1 ~ "Dead",
-      symbol == 15 ~ "Dead",
-      symbol ==  0 ~ "Dead"
-    )
-  )
 }
 
 
