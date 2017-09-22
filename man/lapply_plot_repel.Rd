@@ -5,22 +5,14 @@
 \alias{plot_repel}
 \title{Plot trees in subquadrats, avoiding tree tags to overlap.}
 \usage{
-lapply_plot_repel(df_list, site, point_size = 1.5)
+lapply_plot_repel(df_list, site_name = get_site_name())
 
-plot_repel(df, site, point_size, subtitle = get_subtitle())
+plot_repel(df, site_name)
 }
 \arguments{
 \item{df_list}{A list of data frames.}
 
-\item{point_size}{Point size passed to \code{\link[ggplot2:geom_point]{ggplot2::geom_point()}}.}
-
 \item{df}{A data frame as wranglec by \code{lapply_plot_repel()}.}
-
-\item{...}{Arguments passed to \code{plot_repel()}.}
-
-\item{id_size}{Size of tree tags, passed to \code{\link[=geom_text_repel]{geom_text_repel()}}.}
-
-\item{text_size}{Text size passed to \code{\link[ggplot2:element_text]{ggplot2::element_text()}}.}
 }
 \value{
 A list of plots that can be wrapped around pdf(onefile = TRUE).

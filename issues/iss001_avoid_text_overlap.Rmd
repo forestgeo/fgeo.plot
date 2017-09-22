@@ -184,10 +184,8 @@ names(selected_quadrats)
 Now that the data is ready, let's plot it:
 
 ```{r}
-this_site <- "Sinharaja 2017"
-
 pdf(onefile = TRUE, paper = "a4", width = 11, height = 11)
-lapply_plot_repel(selected_quadrats, site = this_site)
+lapply_plot_repel(selected_quadrats[1])
 dev.off()
 ```
 

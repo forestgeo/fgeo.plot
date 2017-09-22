@@ -136,4 +136,26 @@ get_subtitle <- function(
   )
 }
 ```
-    
+
+> Mauro, let’s print a few quadrats of different densities and finalize on Monday. {using tree tag size 3}
+
+--Stuart
+
+```{r}
+# Filter quadrates with low, midd and high density (two of each)
+increasing_tag_n <- tag_n[order(tag_n)]
+density_low <- head(increasing_tag_n, 2)
+middle <- round(length(increasing_tag_n) / 2)
+density_middle <- increasing_tag_n[middle:(middle + 1)]
+density_high <- tail(increasing_tag_n, 2)
+density_diverse_n <- c(density_low, density_middle, density_high)
+name_of_density_diverse <- names(density_diverse_n)
+density_diverse <- sin_q20[name_of_density_diverse]
+```
+
+```{r}
+pdf(onefile = TRUE, paper = "a4", width = 11, height = 11)
+lapply_plot_repel(density_diverse, site = this_site)
+dev.off()
+```
+

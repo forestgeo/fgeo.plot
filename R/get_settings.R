@@ -26,16 +26,20 @@ get_subtitle <- function(
 
 
 
+# Accesor functions ----
 
+get_site_name <- function(x = "Sinharaja 2017") {x}
 
-
-
-
-# Size
 get_size_plot_title <- function(x = 20) {x}
 get_size_plot_subtitle <- function(x = 12) {x}
 get_size_axis_text <- function(x = 12) {x}
-get_size_tag <- function(x = 2.5) {x}
+get_size_tag <- function(x = 3) {x}
+get_size_point <- function(x = 1.5) {x}
+
+get_shape_point <- function(x = c(19, 4)) {x}
+
+# Other stuff ----
+
 
 
 #' Get the theme of plot_repel().
