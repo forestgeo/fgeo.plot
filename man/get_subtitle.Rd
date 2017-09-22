@@ -4,7 +4,10 @@
 \alias{get_subtitle}
 \title{Get settings for plot_repel().}
 \usage{
-get_subtitle(site_string = "(Sinharaja)")
+
+  get_subtitle(line1 = "Measuring: _______________________ Measurement date: _______________________",
+  line2 = "Recording: _______________________",
+  line3 = "Checking: ________________________ Checked date: ___________________________")
 }
 \arguments{
 \item{site_string}{A string giving the name of the site. E.g. "Sinharaja".}

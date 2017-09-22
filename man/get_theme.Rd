@@ -4,7 +4,7 @@
 \alias{get_theme}
 \title{Get the theme of plot_repel().}
 \usage{
-get_theme(text_size)
+get_theme()
 }
 \description{
 Get the theme of plot_repel().

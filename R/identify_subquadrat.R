@@ -2,6 +2,8 @@
 #'
 #' @param df A data frame.
 #'
+#' @author Shameema Jafferjee Esufali <shameemaesufali@gmail.com>.
+#'
 #' @return A list of 4 data frames.
 #' @export
 #'

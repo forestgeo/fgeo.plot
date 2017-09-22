@@ -19,3 +19,6 @@ Adds subquadrat variable to a data frame, using Shameema's code.
 df <- sin_q20[[15]]
 lapply(add_subquadrat(df), head)
 }
+\author{
+Shameema Jafferjee Esufali \href{mailto:shameemaesufali@gmail.com}{shameemaesufali@gmail.com}.
+}

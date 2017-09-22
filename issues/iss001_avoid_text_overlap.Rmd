@@ -154,9 +154,45 @@ This is what they mean (after email by Shameema , https://goo.gl/S8KfWf):
 
 # Plot
 
+> I'm curious to see how it looks for subquadrats with more trees, i.e. quadrats 408 or 2208.
+
+Filter and plot data of two quadrats: 
+
+1. to show crowded points.
+2. to show padding quadrat names with cero to the left.
+
 ```{r}
+# Choose the quadrat with highest number of trees (n)
+tag_n <- sin_q20 %>% 
+  map(~summarize(., n())) %>% 
+  map(pull) %>% 
+  unlist()
+name_of_quad_with_max_n <- names(tag_n[which.max(tag_n)])
+
+# Also choose a quadrat 15 and pad its name with "0" to the left.
+name_of_quad_to_pad <- "15"
+name_of_selected_quad <- c(name_of_quad_with_max_n, name_of_quad_to_pad)
+name_of_selected_quad
+
+# Filter the data and pad quadrat names
+selected_quadrats <- sin_q20[name_of_selected_quad]
+paded_names <- str_pad(name_of_selected_quad, 4, pad = "0")
+names(selected_quadrats) <- paded_names
+names(selected_quadrats)
+```
+
+Now that the data is ready, let's plot it:
+
+```{r}
+this_site <- "Sinharaja 2017"
+
 pdf(onefile = TRUE, paper = "a4", width = 11, height = 11)
-lapply_plot_repel(df_list = sin_q20[1:2])
+lapply_plot_repel(selected_quadrats, site = this_site)
 dev.off()
 ```
+
+
+
+
+
 
