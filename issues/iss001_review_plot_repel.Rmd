@@ -155,7 +155,7 @@ density_diverse <- sin_q20[name_of_density_diverse]
 
 ```{r}
 pdf(onefile = TRUE, paper = "a4", width = 11, height = 11)
-lapply_plot_repel(density_diverse, site = this_site)
+lapply_plot_repel(density_diverse["16"], site = this_site)
 dev.off()
 ```
 

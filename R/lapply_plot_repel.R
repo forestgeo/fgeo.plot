@@ -18,7 +18,7 @@ lapply_plot_repel <- function(df_list, site_name = get_site_name()) {
 #' @rdname lapply_plot_repel
 plot_repel <- function(df, site_name) {
   id_quadrat_subquadrat <- unique(df$id)
-  ggplot(df, aes(x = lx, y = ly, shape = sym2)) +
+  ggplot(df, aes(x = lx, y = ly, shape = latest_tree_status)) +
     scale_shape_manual(values = get_shape_point()) +
     geom_point(size = get_size_point()) +
     geom_text_repel(aes(label = tag), size = get_size_tag()) +
@@ -43,7 +43,44 @@ plot_repel <- function(df, site_name) {
 #'
 #' @examples
 prepare_for_plot_repel <- function(df_list) {
-  explicit <- purrr::map(df_list, codify_explicitely)
+  explicit <- purrr::map(df_list, add_latest_tree_status)
   identified <- identify_subquadrat(explicit)
   add_limits_shrinked(identified)
 }
+
+
+
+
+
+#' Add alternatives to symbol, that are easier to understand.
+#'
+#' @param x A data frame.
+#'
+#' @return The modified data frame.
+#' @export
+#'
+#' @examples
+#' sin_q20 <- map(sin_q20, add_latest_tree_status)
+add_latest_tree_status <- function(x) {
+  mutate(x,
+    sym1 = case_when(
+      symbol == 16 ~ "Alive in 4",
+      symbol ==  1 ~ "Alive in 3, Dead in 4",
+      symbol == 15 ~ "Alive in 2, Dead in 3",
+      symbol ==  0 ~ "Alive in 1, Dead in 2"
+    ),
+    latest_tree_status = case_when(
+      symbol == 16 ~ "Alive",
+      symbol ==  1 ~ "Dead",
+      symbol == 15 ~ "Dead",
+      symbol ==  0 ~ "Dead"
+    )
+  )
+}
+
+
+
+
+
+
+
