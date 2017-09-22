@@ -5,10 +5,16 @@
 #' @export
 #' @keywords internal
 get_subtitle <- function(
-  line1 = "Measuring: _______________________ Measurement date: _______________________",
-  line2 = "Recording: _______________________",
-  line3 = "Checking: ________________________ Checked date: ___________________________") {
-
+  line1 = paste0(
+    "Measuring: _________________________ ",
+    "Measurement date: _________________________"
+  ),
+  line2 = "Recording: _________________________",
+  line3 = paste0(
+    "Checking: __________________________ ",
+    "Checked date: _____________________________"
+  )
+  ){
   paste0(
     "\n",
     paste0(line1, "\n"),
@@ -16,6 +22,12 @@ get_subtitle <- function(
     line3
   )
 }
+
+
+
+
+
+
 
 
 
@@ -32,7 +44,7 @@ get_size_tag <- function(x = 2) {x}
 #' @keywords internal
 get_theme <- function() {
   theme(
-    panel.grid.major = element_line(colour = "black"),
+    panel.grid.major = element_line(colour = "grey"),
     panel.grid.minor = element_line(linetype = "dotted", colour = "black"),
     panel.background = element_rect(fill = 'white'),
     plot.title = element_text(size = get_size_plot_title()),
