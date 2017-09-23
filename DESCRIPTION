@@ -21,9 +21,8 @@ Roxygen: list(markdown = TRUE)
 VignetteBuilder: knitr
 URL: https://github.com/forestgeo/try
 BugReports: https://github.com/forestgeo/try/issues
-Imports: tidyverse,
+Imports: dplyr,
     ggplot2,
-    dplyr,
+    ggrepel,
     purrr,
-    rlang,
-    ggrepel
+    rlang

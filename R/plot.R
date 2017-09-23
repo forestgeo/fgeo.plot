@@ -22,11 +22,11 @@ plot_repel <- function(df, site_name) {
   id_quadrat_subquadrat <- unique(df$id)
   ggplot(
     df,
-    aes(x = .data$lx, y = .data$ly, shape = .data$latest_tree_status)
+    aes(x = lx, y = ly, shape = latest_tree_status)
   ) +
     scale_shape_manual(values = get_shape_point()) +
     geom_point(size = get_size_point()) +
-    ggrepel::geom_text_repel(aes(label = .data$tag), size = get_size_tag()) +
+    ggrepel::geom_text_repel(aes(label = tag), size = get_size_tag()) +
     scale_x_continuous(minor_breaks = seq(1, 20, 1), breaks = seq(0, 20, 5)) +
     scale_y_continuous(minor_breaks = seq(1, 20, 1), breaks = seq(0, 20, 5)) +
     coord_fixed(
