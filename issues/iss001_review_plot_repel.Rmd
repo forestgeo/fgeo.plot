@@ -78,11 +78,12 @@ Filter and plot data of two quadrats:
 library(tidyverse)
 library(ggrepel)
 library(try)
+library(sinharaja)
 ```
 
 ```{r}
 # Choose the quadrat with highest number of trees (n)
-tag_n <- sin_q20 %>%
+tag_n <- sinh_q20 %>%
   map(~summarize(., n())) %>%
   map(pull) %>%
   unlist()
@@ -94,7 +95,7 @@ name_of_selected_quad <- c(name_of_quad_with_max_n, name_of_quad_to_pad)
 name_of_selected_quad
 
 # Filter the data and pad quadrat names
-selected_quadrats <- sin_q20[name_of_selected_quad]
+selected_quadrats <- sinh_q20[name_of_selected_quad]
 paded_names <- str_pad(name_of_selected_quad, 4, pad = "0")
 names(selected_quadrats) <- paded_names
 names(selected_quadrats)
@@ -150,7 +151,7 @@ density_middle <- increasing_tag_n[middle:(middle + 1)]
 density_high <- tail(increasing_tag_n, 2)
 density_diverse_n <- c(density_low, density_middle, density_high)
 name_of_density_diverse <- names(density_diverse_n)
-density_diverse <- sin_q20[name_of_density_diverse]
+density_diverse <- sinh_q20[name_of_density_diverse]
 ```
 
 ```{r}

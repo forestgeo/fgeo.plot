@@ -22,9 +22,11 @@ prepare_for_plot_repel <- function(df_list) {
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' library(purrr)
 #' library(try)
 #' sin_q20 <- purrr::map(sin_q20, add_latest_tree_status)
+#' }
 add_latest_tree_status <- function(x) {
   dplyr::mutate(x,
     sym1 = dplyr::case_when(
@@ -52,8 +54,10 @@ add_latest_tree_status <- function(x) {
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' df <- sin_q20[[15]]
 #' lapply(add_subquadrat(df), head)
+#' }
 add_subquadrat <- function(df) {
   x1 <- c(0, 10, 10, 0)
   x2 <- c(10, 20, 20, 10)
@@ -84,9 +88,11 @@ add_quadrat_and_subquadrat_from_list <- function(df_list) {
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' df_list1 <- sin_q20[1:2]
 #' names(df_list1)
 #' identify_subquadrat(df_list1)
+#' }
 identify_subquadrat <- function(df_list) {
   with_quad_subquad_list <- add_quadrat_and_subquadrat_from_list(df_list)
   reduced_deep <- suppressMessages(
@@ -96,9 +102,11 @@ identify_subquadrat <- function(df_list) {
     purrr::reduce(reduced_deep, dplyr::full_join)
   )
   ided <- dplyr::mutate(
-    reduced_shallow, id = paste(quadrat, subquadrat, sep = "-")
+    reduced_shallow, id = paste(.data$quadrat, .data$subquadrat, sep = "-")
   )
-  ordered <- dplyr::select(ided, id, quadrat, subquadrat, dplyr::everything())
+  ordered <- dplyr::select(
+    ided, .data$id, .data$quadrat, .data$subquadrat, dplyr::everything()
+  )
   ordered
 }
 
@@ -179,7 +187,9 @@ add_limits_shrinked <- function(df) {
 # help add_quadrat_to_df_list()
 add_quadrat_to_one_df <- function(x, y) {
   with_quadrat <- dplyr::mutate(y, quadrat = x)
-  quadrat_first <- dplyr::select(with_quadrat, quadrat, dplyr::everything())
+  quadrat_first <- dplyr::select(
+    with_quadrat, .data$quadrat, dplyr::everything()
+  )
   quadrat_first
 }
 
@@ -191,6 +201,7 @@ add_quadrat_to_one_df <- function(x, y) {
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' df <- sin_q20[7:8]
 #' df_list <- add_quadrat_to_df_list(df)
 #' str(df_list)
@@ -198,6 +209,7 @@ add_quadrat_to_one_df <- function(x, y) {
 #' list_of_dfs <- sin_q20[c("109", "15")]
 #' str(list_of_dfs)
 #' add_quadrat_to_df_list(list_of_dfs)
+#' }
 add_quadrat_to_df_list <- function(df) {
   enframed_df <- tibble::enframe(df)
   purrr::map2(enframed_df$name, enframed_df$value, add_quadrat_to_one_df)

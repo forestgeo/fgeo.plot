@@ -22,6 +22,7 @@ output:
 library(tidyverse)
 library(ggrepel)
 library(try)
+library(sinharaja)
 
 
 
@@ -94,29 +95,29 @@ For each quadrat we want to output 4 plots, each showing 1/4 of the quadrat's ar
 The name of each data frame, and their number (67) confirm they correspond to the name (or ID) of each quadrat.
 
 ```{r}
-names(sin_q20)
+names(sinh_q20)
 ```
 
 Let's confirm that all 67 data frames in the list have the same variable names.
 
 ```{r}
 # Yes. All data frames have exactly the same name.
-unique(lapply(sin_q20, names))
+unique(lapply(sinh_q20, names))
 ```
 
 Now let's overview the data set, paying special attention to the type of each variable.
 
 ```{r}
 # Show only part of the entire data set to save space
-n_cols_per_df <- unlist(unique(lapply(sin_q20, ncol)))
-str(sin_q20[1:3])
+n_cols_per_df <- unlist(unique(lapply(sinh_q20, ncol)))
+str(sinh_q20[1:3])
 ```
 
 `status` should probabbly be a character variable (data dictionary https://goo.gl/i6kHiQ) but here it is a factor.
 
 ```{r}
 # map() is like lapply with some handy shortcuts
-map(sin_q20, "status") %>% 
+map(sinh_q20, "status") %>% 
   map(unique) %>% 
   head()
 ```
@@ -132,17 +133,17 @@ convert_symbol_to_factor <- function(x) {
   x$symbol <- as.factor(x$symbol)
   x
 }
-sin_q20 <- lapply(sin_q20, convert_status_to_character)
-sin_q20 <- lapply(sin_q20, convert_symbol_to_factor)
+sinh_q20 <- lapply(sinh_q20, convert_status_to_character)
+sinh_q20 <- lapply(sinh_q20, convert_symbol_to_factor)
 
 # Showing only a few data frames to save space
-str(sin_q20[1:3])
+str(sinh_q20[1:3])
 ```
 
 These are the values of the variable `symbol`:
 
 ```{r}
-sin_q20[[1]]$symbol %>% unique()
+sinh_q20[[1]]$symbol %>% unique()
 ```
 
 This is what they mean (after email by Shameema , https://goo.gl/S8KfWf):
@@ -163,7 +164,7 @@ Filter and plot data of two quadrats:
 
 ```{r}
 # Choose the quadrat with highest number of trees (n)
-tag_n <- sin_q20 %>% 
+tag_n <- sinh_q20 %>% 
   map(~summarize(., n())) %>% 
   map(pull) %>% 
   unlist()
@@ -175,7 +176,7 @@ name_of_selected_quad <- c(name_of_quad_with_max_n, name_of_quad_to_pad)
 name_of_selected_quad
 
 # Filter the data and pad quadrat names
-selected_quadrats <- sin_q20[name_of_selected_quad]
+selected_quadrats <- sinh_q20[name_of_selected_quad]
 paded_names <- str_pad(name_of_selected_quad, 4, pad = "0")
 names(selected_quadrats) <- paded_names
 names(selected_quadrats)

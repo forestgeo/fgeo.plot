@@ -16,7 +16,9 @@ The modified data frame.
 Add alternatives to symbol, that are easier to understand.
 }
 \examples{
+\dontrun{
 library(purrr)
 library(try)
 sin_q20 <- purrr::map(sin_q20, add_latest_tree_status)
+}
 }

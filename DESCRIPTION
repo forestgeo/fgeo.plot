@@ -13,7 +13,9 @@ LazyData: true
 Suggests: covr,
     testthat,
     knitr,
-    rmarkdown
+    rmarkdown,
+    sinharaja,
+    tibble
 RoxygenNote: 6.0.1
 Roxygen: list(markdown = TRUE)
 VignetteBuilder: knitr
@@ -22,4 +24,6 @@ BugReports: https://github.com/forestgeo/try/issues
 Imports: tidyverse,
     ggplot2,
     dplyr,
-    purrr
+    purrr,
+    rlang,
+    ggrepel

@@ -2,8 +2,8 @@
 
 #' Plot trees in subquadrats, avoiding tree tags to overlap.
 #'
-#' @param df_list A list of data frames.
-#' @param df A data frame as wranglec by `lapply_plot_repel()`.
+#' @param site_name A sting of the site name to be used in the title.
+#' @param df_list,df A data frame and list of data frames.
 #'
 #' @return A list of plots that can be wrapped around pdf(onefile = TRUE).
 #' @export
@@ -20,10 +20,13 @@ lapply_plot_repel <- function(df_list, site_name = get_site_name()) {
 #' @rdname lapply_plot_repel
 plot_repel <- function(df, site_name) {
   id_quadrat_subquadrat <- unique(df$id)
-  ggplot(df, aes(x = lx, y = ly, shape = latest_tree_status)) +
+  ggplot(
+    df,
+    aes(x = .data$lx, y = .data$ly, shape = .data$latest_tree_status)
+  ) +
     scale_shape_manual(values = get_shape_point()) +
     geom_point(size = get_size_point()) +
-    geom_text_repel(aes(label = tag), size = get_size_tag()) +
+    ggrepel::geom_text_repel(aes(label = .data$tag), size = get_size_tag()) +
     scale_x_continuous(minor_breaks = seq(1, 20, 1), breaks = seq(0, 20, 5)) +
     scale_y_continuous(minor_breaks = seq(1, 20, 1), breaks = seq(0, 20, 5)) +
     coord_fixed(

@@ -12,5 +12,7 @@ change the looks of a plot. To change the looks of a plot, change the
 relevant \code{get_*()} function.
 }
 \seealso{
-\code{\link[ggplot2:theme]{ggplot2::theme()}}.
+\code{\link[ggplot2:theme]{ggplot2::theme()}} \code{\link[graphics:points]{graphics::points()}}.
+
+Other functions to change plot layout.: \code{\link{get_settings}}
 }

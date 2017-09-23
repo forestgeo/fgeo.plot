@@ -10,9 +10,9 @@ lapply_plot_repel(df_list, site_name = get_site_name())
 plot_repel(df, site_name)
 }
 \arguments{
-\item{df_list}{A list of data frames.}
+\item{df_list, df}{A data frame and list of data frames.}
 
-\item{df}{A data frame as wranglec by \code{lapply_plot_repel()}.}
+\item{site_name}{A sting of the site name to be used in the title.}
 }
 \value{
 A list of plots that can be wrapped around pdf(onefile = TRUE).

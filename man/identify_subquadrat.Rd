@@ -16,7 +16,9 @@ A data frames with new variables identifying quadrat, and subquadrat.
 Identify quadrat and subquadrat, from list to data frame.
 }
 \examples{
+\dontrun{
 df_list1 <- sin_q20[1:2]
 names(df_list1)
 identify_subquadrat(df_list1)
+}
 }
