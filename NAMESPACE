@@ -3,6 +3,7 @@
 export(add_latest_tree_status)
 export(add_limits)
 export(add_limits_shrinked)
+export(add_quadrat_and_subquadrat_from_list)
 export(add_quadrat_to_df_list)
 export(add_subquadrat)
 export(get_axis_ticks)

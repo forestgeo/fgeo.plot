@@ -4,9 +4,9 @@
 
 #' Wrap a number of functions that prepare a list of data frames for plotting.
 #'
-#' @export
-#' @keywords internal
+#' @param df_list A list of data frames.
 #'
+#' @export
 #' @examples
 prepare_for_plot_repel <- function(df_list) {
   explicit <- purrr::map(df_list, add_latest_tree_status)
@@ -20,6 +20,7 @@ prepare_for_plot_repel <- function(df_list) {
 #'
 #' @return The modified data frame.
 #' @export
+#' @keywords internal
 #'
 #' @examples
 #' \dontrun{
@@ -52,6 +53,7 @@ add_latest_tree_status <- function(x) {
 #'
 #' @return A list of 4 data frames.
 #' @export
+#' @keywords internal
 #'
 #' @examples
 #' \dontrun{
@@ -74,7 +76,9 @@ add_subquadrat <- function(df) {
   df_list
 }
 
-# help identify_subquadrat()
+#' Help identify_subquadrat().
+#' @export
+#' @keywords internal
 add_quadrat_and_subquadrat_from_list <- function(df_list) {
   with_quadrat <- add_quadrat_to_df_list(df_list)
   lapply(with_quadrat, add_subquadrat)
@@ -86,6 +90,7 @@ add_quadrat_and_subquadrat_from_list <- function(df_list) {
 #'
 #' @return A data frames with new variables identifying quadrat, and subquadrat.
 #' @export
+#' @keywords internal
 #'
 #' @examples
 #' \dontrun{
@@ -116,6 +121,7 @@ identify_subquadrat <- function(df_list) {
 #'
 #' @return A modified data frame.
 #' @export
+#' @keywords internal
 #'
 #' @examples
 add_limits <- function(df) {
@@ -153,6 +159,7 @@ add_limits <- function(df) {
 #'
 #' @return A modified data frame.
 #' @export
+#' @keywords internal
 #'
 #' @examples
 add_limits_shrinked <- function(df) {
@@ -199,6 +206,7 @@ add_quadrat_to_one_df <- function(x, y) {
 #'
 #' @return A list
 #' @export
+#' @keywords internal
 #'
 #' @examples
 #' \dontrun{

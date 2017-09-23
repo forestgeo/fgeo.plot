@@ -22,3 +22,4 @@ library(try)
 sin_q20 <- purrr::map(sin_q20, add_latest_tree_status)
 }
 }
+\keyword{internal}

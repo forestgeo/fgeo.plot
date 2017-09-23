@@ -22,3 +22,4 @@ names(df_list1)
 identify_subquadrat(df_list1)
 }
 }
+\keyword{internal}

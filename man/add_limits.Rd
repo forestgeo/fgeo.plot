@@ -15,3 +15,4 @@ A modified data frame.
 \description{
 Add plot limits for quadrats 1-4.
 }
+\keyword{internal}

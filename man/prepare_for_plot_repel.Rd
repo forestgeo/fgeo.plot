@@ -6,7 +6,9 @@
 \usage{
 prepare_for_plot_repel(df_list)
 }
+\arguments{
+\item{df_list}{A list of data frames.}
+}
 \description{
 Wrap a number of functions that prepare a list of data frames for plotting.
 }
-\keyword{internal}
