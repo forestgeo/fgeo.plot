@@ -2,16 +2,29 @@
 
 
 
-#' Wrap a number of functions that prepare a list of data frames for plotting.
+#' Prepare a list of data frames to plot repulsive tags.
+#'
+#' This function may be rarely necessary. Its input is a rare data structure. It
+#' is a list of dataframes, each corresponding to a 20x20 quadrat and with the
+#' variables: "tag", "lx", "ly", "subtag", "status", "symbol".
 #'
 #' @param df_list A list of data frames.
+#' @return A list of dataframes, prepared for [plot_repulsive_tags()].
 #'
 #' @export
 #' @examples
-prepare_for_plot_repel <- function(df_list) {
-  explicit <- purrr::map(df_list, add_latest_tree_status)
-  identified <- identify_subquadrat(explicit)
-  add_limits_shrinked(identified)
+#' # The sinharaja package is local and the data set sinh_q20 is private.
+#' # Choosing only two 20x20 quadrats
+#' list_of_dataframes <- sinharaja::sinh_q20[1:2]
+#' str(list_of_dataframes)
+#'
+#' prepared <- prep_repulsive_tags(list_of_dataframes)
+#' str(prepared)
+prep_repulsive_tags <- function(df_list) {
+  explicit_status <- purrr::map(df_list, add_latest_tree_status)
+  identified <- identify_subquadrat(explicit_status)
+  with_limits <- add_limits_shrinked(identified)
+  split(with_limits, with_limits$id)
 }
 
 #' Add alternatives to symbol, that are easier to understand.
@@ -122,8 +135,6 @@ identify_subquadrat <- function(df_list) {
 #' @return A modified data frame.
 #' @export
 #' @keywords internal
-#'
-#' @examples
 add_limits <- function(df) {
   dplyr::mutate(df,
     x1 = dplyr::case_when(
@@ -160,8 +171,6 @@ add_limits <- function(df) {
 #' @return A modified data frame.
 #' @export
 #' @keywords internal
-#'
-#' @examples
 add_limits_shrinked <- function(df) {
   dplyr::mutate(df,
     x1 = dplyr::case_when(

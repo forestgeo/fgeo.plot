@@ -2,41 +2,81 @@
 
 #' Plot trees in subquadrats, avoiding tree tags to overlap.
 #'
-#' @param site_name A sting of the site name to be used in the title.
-#' @param df_list,df A data frame and list of data frames.
+#' @param prep_df_list A list of data frames, each prapared specifically for
+#'   [plot_repulsive_tags].
+#' @param prep_df A data frames prapared specifically for [plot_repulsive_tags].
+#' @param site_name A sting of the site name for the plot title.
+#' @param point_shape Point shape. Passed to `value` in
+#'   [ggplot2::scale_shape_manual()]. See `pch` values in [graphics::points()].
+#' @param point_size Point size. Passed to `size` in [ggplot2::geom_point()].
+#' @param tag_size Tag size. Passed to `size` in [ggrepel::geom_text_repel()].
+#' @param header A string giving the plot header. An easy way to make a
+#'   three-line header is with [get_header()].
+#' @param ... Arguments passed to [get_theme()].
 #'
 #' @return A list of plots that can be wrapped around pdf(onefile = TRUE).
 #' @export
 #'
 #' @examples
-lapply_plot_repel <- function(df_list, site_name = get_site_name()) {
-  prepared <- prepare_for_plot_repel(df_list)
-  splitted <- split(prepared, prepared$id)
+#' # The sinharaja package is local and the data set sinh_q20 is private.
+#' list_of_dataframes <- sinharaja::sinh_q20[1:2]
+#' prepared <- prep_repulsive_tags(list_of_dataframes)
+#' plot_list <- lapply_plot_repulsive_tags(prepared, site_name = "Sinharaja")
+#' plot_list[[1]]
+#'
+#' # Print each plot on a plage of a single .pdf file
+#' \dontrun{
+#' pdf(onefile = TRUE, paper = "a4", width = 11, height = 11)
+#' plot_list
+#' dev.off()
+#' }
+#' @name plot_repulsive_tags
 
-  lapply(X = splitted, FUN = plot_repel, site_name = site_name)
+#' @rdname plot_repulsive_tags
+#' @export
+lapply_plot_repulsive_tags <- function(prep_df_list,
+                                       site_name = site_name,
+                                       point_shape = c(19, 4),
+                                       point_size = 1.5,
+                                       tag_size = 3,
+                                       header = get_header(),
+                                       theme = get_theme()) {
+  lapply(
+    X = prep_df_list,
+    FUN = plot_repulsive_tags,
+    site_name = site_name,
+    point_shape = point_shape,
+    point_size = point_size,
+    tag_size = tag_size,
+    header = header,
+    theme = theme
+  )
 }
 
+#' @rdname plot_repulsive_tags
 #' @export
-#' @rdname lapply_plot_repel
-plot_repel <- function(df, site_name) {
-  id_quadrat_subquadrat <- unique(df$id)
-  ggplot(
-    df,
-    aes(x = lx, y = ly, shape = latest_tree_status)
-  ) +
-    scale_shape_manual(values = get_shape_point()) +
-    geom_point(size = get_size_point()) +
-    ggrepel::geom_text_repel(aes(label = tag), size = get_size_tag()) +
+plot_repulsive_tags <- function(prep_df,
+                                site_name,
+                                point_shape,
+                                point_size,
+                                tag_size,
+                                header,
+                                theme) {
+  id_quadrat_subquadrat <- unique(prep_df$id)
+  ggplot(prep_df, aes(x = lx, y = ly, shape = latest_tree_status)) +
+    scale_shape_manual(values = point_shape) +
+    geom_point(size = point_size) +
+    ggrepel::geom_text_repel(aes(label = tag), size = tag_size) +
     scale_x_continuous(minor_breaks = seq(1, 20, 1), breaks = seq(0, 20, 5)) +
     scale_y_continuous(minor_breaks = seq(1, 20, 1), breaks = seq(0, 20, 5)) +
     coord_fixed(
-      xlim = c(unique(df$x1), unique(df$x2)),
-      ylim = c(unique(df$y1), unique(df$y2))
+      xlim = c(unique(prep_df$x1), unique(prep_df$x2)),
+      ylim = c(unique(prep_df$y1), unique(prep_df$y2))
     ) +
     labs(x = NULL, y = NULL) +
-    get_theme() +
     labs(
       title = paste0(site_name, ". Quadrat ", id_quadrat_subquadrat),
-      subtitle = get_subtitle()
-    )
+      subtitle = header
+    ) +
+    theme
 }
