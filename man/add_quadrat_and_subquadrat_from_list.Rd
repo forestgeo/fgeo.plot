@@ -4,10 +4,21 @@
 \alias{add_quadrat_and_subquadrat_from_list}
 \title{Help identify_subquadrat().}
 \usage{
-add_quadrat_and_subquadrat_from_list(df_list)
+add_quadrat_and_subquadrat_from_list(df_list, ...)
+}
+\arguments{
+\item{df_list}{A list of dataframes}
+
+\item{...}{Arguments passed to \code{\link[=add_subquadrat]{add_subquadrat()}}. Importantly, this allows
+changing the size of the subquadrats.}
 }
 \description{
 Help identify_subquadrat().
+}
+\examples{
+df_list <- sinharaja::sinh_q20[1:2]
+# Extracting first quadrat and showing the head of each subquadrat
+add_quadrat_and_subquadrat_from_list(df_list)[[1]] \%>\% lapply(head)
 }
 \seealso{
 Other functions to prepare data to plot repulsive tags.: \code{\link{add_latest_tree_status}},

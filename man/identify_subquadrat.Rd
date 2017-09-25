@@ -2,25 +2,44 @@
 % Please edit documentation in R/prepare.R
 \name{identify_subquadrat}
 \alias{identify_subquadrat}
-\title{Identify quadrat and subquadrat, from list to data frame.}
+\title{From a list of dataframes output a dataframe with a useful id variable.}
 \usage{
-identify_subquadrat(df_list)
+identify_subquadrat(df_list, ...)
 }
 \arguments{
 \item{df_list}{A list of data frames.}
+
+\item{...}{Arguments passed to \code{\link[=add_quadrat_and_subquadrat_from_list]{add_quadrat_and_subquadrat_from_list()}}.
+This is lets users change the size of subquadrat via \code{\link[=add_subquadrat]{add_subquadrat()}}.}
 }
 \value{
-A data frames with new variables identifying quadrat, and subquadrat.
+A data frames with new variables quadrat, subquadrat and id, which
+combines the other two.
 }
 \description{
-Identify quadrat and subquadrat, from list to data frame.
+This function with quadrat and subquadrat variables add id.
+}
+\details{
+The name of each element of the input list becomes a value of a new variable
+\code{quadrat}; and the variable \code{subquadrat} is also added, based on the values
+of the variables \code{lx} and \code{ly} that each dataframe should have.
 }
 \examples{
-\dontrun{
-df_list1 <- sin_q20[1:2]
-names(df_list1)
-identify_subquadrat(df_list1)
-}
+df_list <- sinharaja::sinh_q20[1:2]
+identify_subquadrat(df_list)
+
+df_list <- sinharaja::sinh_q20[1:2]
+
+# Passing arguments to add_subquadrat(), to make subquadrats half the size
+id <- identify_subquadrat(
+ df_list,
+ x1 = c(0, 10, 10, 0) / 2,
+ x2 = c(10, 20, 20, 10) / 2,
+ y1 = c(0, 0, 10, 10) / 2,
+ y2 = c(10, 10, 20, 20) / 2
+)
+id \%>\% filter(id == "16-3") \%>\%
+  ggplot(aes(lx, ly)) + geom_point()
 }
 \seealso{
 Other functions to prepare data to plot repulsive tags.: \code{\link{add_latest_tree_status}},

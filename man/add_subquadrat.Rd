@@ -4,7 +4,8 @@
 \alias{add_subquadrat}
 \title{Adds subquadrat variable to a data frame, using Shameema's code.}
 \usage{
-add_subquadrat(df)
+add_subquadrat(df, x1 = c(0, 10, 10, 0), x2 = c(10, 20, 20, 10), y1 = c(0,
+  0, 10, 10), y2 = c(10, 10, 20, 20))
 }
 \arguments{
 \item{df}{A data frame.}
@@ -16,10 +17,26 @@ A list of 4 data frames.
 Adds subquadrat variable to a data frame, using Shameema's code.
 }
 \examples{
-\dontrun{
-df <- sin_q20[[15]]
-lapply(add_subquadrat(df), head)
-}
+# From a dataframe of one quadrat, get a list of 4 subquadrats.
+one_quadrat <- sinharaja::sinh_q20[[15]]
+head(one_quadrat)
+lapply(add_subquadrat(one_quadrat), head)
+
+# Show one subquadrat of the default size
+subquadrats_of_default_size <- add_subquadrat(one_quadrat)[[1]]
+one_default_subquad <- filter(subquadrats_of_default_size, subquadrat == 1)
+ggplot(one_default_subquad, aes(lx, ly)) + geom_point()
+
+# Show one subquadrat of half the default size
+subquadrats_half_size <- add_subquadrat(
+  one_quadrat,
+  x1 = (c(0, 10, 10, 0) / 2),
+  x2 = (c(10, 20, 20, 10) / 2),
+  y1 = (c(0, 0, 10, 10) / 2),
+  y2 = (c(10, 10, 20, 20) / 2)
+)[[1]]
+one_half_sized_subquad <- filter(subquadrats_half_size, subquadrat == 1)
+ggplot(one_half_sized_subquad, aes(lx, ly)) + geom_point()
 }
 \seealso{
 Other functions to prepare data to plot repulsive tags.: \code{\link{add_latest_tree_status}},
@@ -33,4 +50,3 @@ Other functions to prepare data to plot repulsive tags.: \code{\link{add_latest_
 \author{
 Shameema Jafferjee Esufali \href{mailto:shameemaesufali@gmail.com}{shameemaesufali@gmail.com}.
 }
-\keyword{internal}
