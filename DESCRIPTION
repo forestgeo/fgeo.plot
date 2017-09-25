@@ -25,4 +25,6 @@ Imports: dplyr,
     ggplot2,
     ggrepel,
     purrr,
-    rlang
+    rlang,
+    stringr,
+    assertive

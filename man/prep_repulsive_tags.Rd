@@ -26,3 +26,12 @@ str(list_of_dataframes)
 prepared <- prep_repulsive_tags(list_of_dataframes)
 str(prepared)
 }
+\seealso{
+Other functions to prepare data to plot repulsive tags.: \code{\link{add_latest_tree_status}},
+  \code{\link{add_limits_shrinked}},
+  \code{\link{add_limits}},
+  \code{\link{add_quadrat_and_subquadrat_from_list}},
+  \code{\link{add_quadrat_to_df_list}},
+  \code{\link{add_subquadrat}},
+  \code{\link{identify_subquadrat}}
+}

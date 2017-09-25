@@ -8,6 +8,7 @@
 #' is a list of dataframes, each corresponding to a 20x20 quadrat and with the
 #' variables: "tag", "lx", "ly", "subtag", "status", "symbol".
 #'
+#' @family functions to prepare data to plot repulsive tags.
 #' @param df_list A list of data frames.
 #' @return A list of dataframes, prepared for [plot_repulsive_tags()].
 #'
@@ -29,6 +30,7 @@ prep_repulsive_tags <- function(df_list) {
 
 #' Add alternatives to symbol, that are easier to understand.
 #'
+#' @family functions to prepare data to plot repulsive tags.
 #' @param x A data frame.
 #'
 #' @return The modified data frame.
@@ -60,8 +62,8 @@ add_latest_tree_status <- function(x) {
 
 #' Adds subquadrat variable to a data frame, using Shameema's code.
 #'
+#' @family functions to prepare data to plot repulsive tags.
 #' @param df A data frame.
-#'
 #' @author Shameema Jafferjee Esufali <shameemaesufali@gmail.com>.
 #'
 #' @return A list of 4 data frames.
@@ -90,6 +92,8 @@ add_subquadrat <- function(df) {
 }
 
 #' Help identify_subquadrat().
+#'
+#' @family functions to prepare data to plot repulsive tags.
 #' @export
 #' @keywords internal
 add_quadrat_and_subquadrat_from_list <- function(df_list) {
@@ -99,8 +103,8 @@ add_quadrat_and_subquadrat_from_list <- function(df_list) {
 
 #' Identify quadrat and subquadrat, from list to data frame.
 #'
+#' @family functions to prepare data to plot repulsive tags.
 #' @param df_list A list of data frames.
-#'
 #' @return A data frames with new variables identifying quadrat, and subquadrat.
 #' @export
 #' @keywords internal
@@ -130,6 +134,7 @@ identify_subquadrat <- function(df_list) {
 
 #' Add plot limits for quadrats 1-4.
 #'
+#' @family functions to prepare data to plot repulsive tags.
 #' @param df A data frame.
 #'
 #' @return A modified data frame.
@@ -166,6 +171,7 @@ add_limits <- function(df) {
 
 #' Add plot limits for quadrats 1-4.
 #'
+#' @family functions to prepare data to plot repulsive tags.
 #' @param df A data frame.
 #'
 #' @return A modified data frame.
@@ -200,34 +206,28 @@ add_limits_shrinked <- function(df) {
   )
 }
 
-# help add_quadrat_to_df_list()
-add_quadrat_to_one_df <- function(x, y) {
-  with_quadrat <- dplyr::mutate(y, quadrat = x)
-  quadrat_first <- dplyr::select(
-    with_quadrat, .data$quadrat, dplyr::everything()
-  )
-  quadrat_first
-}
-
 #' Add the name of each element of a list as a value in the variable quadrat
 #'
-#' @param df A list of data frames
+#' @family functions to prepare data to plot repulsive tags.
+#' @param df_list A list of data frames.
 #'
-#' @return A list
+#' @return A list of dataframes with the variable quadrat.
 #' @export
 #' @keywords internal
 #'
 #' @examples
 #' \dontrun{
-#' df <- sin_q20[7:8]
-#' df_list <- add_quadrat_to_df_list(df)
-#' str(df_list)
-#' # Demonstrate on only two quadrats
-#' list_of_dfs <- sin_q20[c("109", "15")]
-#' str(list_of_dfs)
-#' add_quadrat_to_df_list(list_of_dfs)
+#' df_list <- sinharaja::sinh_q20[1:2]
+#' with_quadrat <- add_quadrat_to_df_list(df_list)
+#' str(with_quadrat)
 #' }
-add_quadrat_to_df_list <- function(df) {
-  enframed_df <- tibble::enframe(df)
+add_quadrat_to_df_list <- function(df_list) {
+  enframed_df <- tibble::enframe(df_list)
   purrr::map2(enframed_df$name, enframed_df$value, add_quadrat_to_one_df)
 }
+# Helper of add_quadrat_to_df_list()
+add_quadrat_to_one_df <- function(x, y) {
+  # Use mutate because it works with list columns
+  dplyr::mutate(y, quadrat = x)
+}
+

@@ -1,16 +1,28 @@
 #' A theme that is customized for plot_repulsive_tags().
 #'
-#' Theme customized for [plot_repel()]. You further customize passing more
-#' arguments to [ggplot2::theme()] via `...` or replace this theme by a
-#' completely new [ggplot2::theme()].
+#' Theme customized for [plot_repulsive_tags()]. You can further customize the
+#' theme by passing more arguments to [ggplot2::theme()] (via `...`) or by
+#' replacing this theme completely with a new [ggplot2::theme()].
 #'
-#' @param panel_grid_major_colour,panel_grid_minor_colour,panel_grid_minor_linetype,panel_background_fill,plot_title_size,plot_subtitle_size,legend_position,axis_ticks,axis_text_size,legend_title,... Arguments passedto
-#'   [ggplot2::theme()].
+#' @param panel_grid_major_colour,panel_grid_minor_colour Colour of major grid
+#'   lines.
+#' @param panel_grid_minor_colour,panel_grid_minor_linetype Colour and line type
+#'   of minor grid lines.
+#' @param panel_background_fill Fill colour of the background of plotting area,
+#'   drawn underneath plot.
+#' @param plot_title_size,plot_subtitle_size Size of the plot title and
+#'   subtitle.
+#' @param legend_position The position of legends ("none", "left", "right",
+#'   "bottom", "top", or two-element numeric vector).
+#' @param axis_ticks Tick marks along axes.
+#' @param axis_text_size Size of tick labels along axes.
+#' @param legend_title title of legend.
+#' @param ... Other arguments passed to [ggplot2::theme()].
 #'
 #' @seealso [ggplot2::theme()].
-#' @family functions to fine tune the [plot_repulsive_tags()].
+#' @family functions to fine tune a plot of repulsive tags.
 #'
-#' @return A customized [ggplot2::theme()].
+#' @return A [ggplot2::theme()] customized for [plot_repulsive_tags()].
 #'
 #' @export
 #' @examples
@@ -56,10 +68,14 @@ get_theme <- function(panel_grid_major_colour = "grey",
 #' @export
 #'
 #' @examples
+#' # Use common defaults
 #' get_header()
-#' get_header(line1 = "Hello")
+#'
+#' # Or make your own strings.
+#' get_header(line1 = "This is", line2 = "a customized", line3 = "header")
+#' get_header(line1 = "Only", line2 = "two lines", line3 = NULL)
 get_header <- function(line1 = pad(c("Checking: ", "Checked date: ")),
-                       line2 = pad(c("Recording: "), 24),
+                       line2 = pad(c("Recording: "), total_width = 24),
                        line3 = pad(c("Measuring: ", "Measurement date: "))) {
   paste0(
     "\n",
@@ -69,23 +85,38 @@ get_header <- function(line1 = pad(c("Checking: ", "Checked date: ")),
   )
 }
 
-#' Right-pad strings.
+#' Pad strings.
+#'
+#' `pad` provides a convenient way to create each line of the headers produced
+#' with [get_header()].
+#'
+#' This function may output strings a little shorter or a little longer than
+#' expected based on `total_width`. This is a bug, and appears sometimes when
+#' the strings contain spaces. Because  this bug is not too serious, and I leave
+#' it for now.
 #'
 #' @param total_width Total width of the string after pasting each string in the
 #'   vector of strings.
-#' @param pad,string,side, ... Arguments passed to [stringr::str_pad()].
+#' @param string A character vector.
+#' @param width Minimum width of padded strings.
+#' @param side Side on which padding character is added (left, right or both).
+#' @param pad Single padding character (default is a space).
+#' @family functions to fine tune a plot of repulsive tags.
 #'
-#' @return A string which total number of characters is `total_width`.
+#' @return A padded string that is convenient to produce each line of
+#'   [get_header()]
 #' @export
+#'
 #'
 #' @examples
 #' pad(c("Hello", "world"))
-#' pad(c("Hello", "world"), total_width = 70, pad = ".")
-#' pad(c("Hello", "world"), total_width = 70, pad = ".", side = "left")
+#' pad(c("Different pad", "and shorter"), total_width = 50, pad = ".")
+#' pad(c("Padding", "to the left"), total_width = 70, pad = ".", side = "left")
 pad <- function(string, total_width = 55, side = "right", pad = "_") {
   string_length <- length(string)
   max_characters_n <- total_width
   string_characters_n <- sum(nchar(string))
+
   space_to_fill <- (max_characters_n - string_characters_n) / string_length
 
   filler <- stringr::str_pad(
@@ -94,9 +125,10 @@ pad <- function(string, total_width = 55, side = "right", pad = "_") {
     side = side,
     pad = pad
   )
+
   if (side == "right") {
     paste0(string, filler, collapse = " ")
   } else {
-    paste0(filler, " ", string, collapse = " ")
+    paste0(filler, string, collapse = " ")
   }
 }

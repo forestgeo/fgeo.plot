@@ -12,16 +12,36 @@ get_theme(panel_grid_major_colour = "grey",
   legend_title = element_blank(), ...)
 }
 \arguments{
-\item{panel_grid_major_colour, panel_grid_minor_colour, panel_grid_minor_linetype, panel_background_fill, plot_title_size, plot_subtitle_size, legend_position, axis_ticks, axis_text_size, legend_title, ...}{Arguments passedto
-\code{\link[ggplot2:theme]{ggplot2::theme()}}.}
+\item{panel_grid_major_colour, panel_grid_minor_colour}{Colour of major grid
+lines.}
+
+\item{panel_grid_minor_colour, panel_grid_minor_linetype}{Colour and line type
+of minor grid lines.}
+
+\item{panel_background_fill}{Fill colour of the background of plotting area,
+drawn underneath plot.}
+
+\item{plot_title_size, plot_subtitle_size}{Size of the plot title and
+subtitle.}
+
+\item{legend_position}{The position of legends ("none", "left", "right",
+"bottom", "top", or two-element numeric vector).}
+
+\item{axis_ticks}{Tick marks along axes.}
+
+\item{axis_text_size}{Size of tick labels along axes.}
+
+\item{legend_title}{title of legend.}
+
+\item{...}{Other arguments passed to \code{\link[ggplot2:theme]{ggplot2::theme()}}.}
 }
 \value{
-A customized \code{\link[ggplot2:theme]{ggplot2::theme()}}.
+A \code{\link[ggplot2:theme]{ggplot2::theme()}} customized for \code{\link[=plot_repulsive_tags]{plot_repulsive_tags()}}.
 }
 \description{
-Theme customized for \code{\link[=plot_repel]{plot_repel()}}. You further customize passing more
-arguments to \code{\link[ggplot2:theme]{ggplot2::theme()}} via \code{...} or replace this theme by a
-completely new \code{\link[ggplot2:theme]{ggplot2::theme()}}.
+Theme customized for \code{\link[=plot_repulsive_tags]{plot_repulsive_tags()}}. You can further customize the
+theme by passing more arguments to \code{\link[ggplot2:theme]{ggplot2::theme()}} (via \code{...}) or by
+replacing this theme completely with a new \code{\link[ggplot2:theme]{ggplot2::theme()}}.
 }
 \examples{
 ggplot2::theme()
@@ -29,4 +49,7 @@ get_theme()
 }
 \seealso{
 \code{\link[ggplot2:theme]{ggplot2::theme()}}.
+
+Other functions to fine tune a plot of repulsive tags.: \code{\link{get_header}},
+  \code{\link{pad}}
 }

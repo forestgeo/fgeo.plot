@@ -4,26 +4,31 @@
 \alias{add_quadrat_to_df_list}
 \title{Add the name of each element of a list as a value in the variable quadrat}
 \usage{
-add_quadrat_to_df_list(df)
+add_quadrat_to_df_list(df_list)
 }
 \arguments{
-\item{df}{A list of data frames}
+\item{df_list}{A list of data frames.}
 }
 \value{
-A list
+A list of dataframes with the variable quadrat.
 }
 \description{
 Add the name of each element of a list as a value in the variable quadrat
 }
 \examples{
 \dontrun{
-df <- sin_q20[7:8]
-df_list <- add_quadrat_to_df_list(df)
-str(df_list)
-# Demonstrate on only two quadrats
-list_of_dfs <- sin_q20[c("109", "15")]
-str(list_of_dfs)
-add_quadrat_to_df_list(list_of_dfs)
+df_list <- sinharaja::sinh_q20[1:2]
+with_quadrat <- add_quadrat_to_df_list(df_list)
+str(with_quadrat)
 }
+}
+\seealso{
+Other functions to prepare data to plot repulsive tags.: \code{\link{add_latest_tree_status}},
+  \code{\link{add_limits_shrinked}},
+  \code{\link{add_limits}},
+  \code{\link{add_quadrat_and_subquadrat_from_list}},
+  \code{\link{add_subquadrat}},
+  \code{\link{identify_subquadrat}},
+  \code{\link{prep_repulsive_tags}}
 }
 \keyword{internal}

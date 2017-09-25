@@ -29,9 +29,12 @@ plot_repulsive_tags(prep_df, site_name, point_shape, point_size, tag_size,
 \item{header}{A string giving the plot header. An easy way to make a
 three-line header is with \code{\link[=get_header]{get_header()}}.}
 
-\item{prep_df}{A data frames prapared specifically for \link{plot_repulsive_tags}.}
+\item{theme}{A \code{\link[ggplot2:theme]{ggplot2::theme()}}. A theme customized for
+\code{\link[=plot_repulsive_tags]{plot_repulsive_tags()}} is available via \code{\link[=get_theme]{get_theme()}}, which you can
+further customize or you can create a complete new theme with
+\code{\link[ggplot2:theme]{ggplot2::theme()}}.}
 
-\item{...}{Arguments passed to \code{\link[=get_theme]{get_theme()}}.}
+\item{prep_df}{A data frames prapared specifically for \link{plot_repulsive_tags}.}
 }
 \value{
 A list of plots that can be wrapped around pdf(onefile = TRUE).

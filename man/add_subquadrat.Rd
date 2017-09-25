@@ -21,6 +21,15 @@ df <- sin_q20[[15]]
 lapply(add_subquadrat(df), head)
 }
 }
+\seealso{
+Other functions to prepare data to plot repulsive tags.: \code{\link{add_latest_tree_status}},
+  \code{\link{add_limits_shrinked}},
+  \code{\link{add_limits}},
+  \code{\link{add_quadrat_and_subquadrat_from_list}},
+  \code{\link{add_quadrat_to_df_list}},
+  \code{\link{identify_subquadrat}},
+  \code{\link{prep_repulsive_tags}}
+}
 \author{
 Shameema Jafferjee Esufali \href{mailto:shameemaesufali@gmail.com}{shameemaesufali@gmail.com}.
 }

@@ -9,4 +9,13 @@ add_quadrat_and_subquadrat_from_list(df_list)
 \description{
 Help identify_subquadrat().
 }
+\seealso{
+Other functions to prepare data to plot repulsive tags.: \code{\link{add_latest_tree_status}},
+  \code{\link{add_limits_shrinked}},
+  \code{\link{add_limits}},
+  \code{\link{add_quadrat_to_df_list}},
+  \code{\link{add_subquadrat}},
+  \code{\link{identify_subquadrat}},
+  \code{\link{prep_repulsive_tags}}
+}
 \keyword{internal}

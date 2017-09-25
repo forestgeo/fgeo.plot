@@ -2,24 +2,42 @@
 % Please edit documentation in R/get_settings.R
 \name{pad}
 \alias{pad}
-\title{Right-pad strings.}
+\title{Pad strings.}
 \usage{
 pad(string, total_width = 55, side = "right", pad = "_")
 }
 \arguments{
+\item{string}{A character vector.}
+
 \item{total_width}{Total width of the string after pasting each string in the
 vector of strings.}
 
-\item{pad, string, side, }{... Arguments passed to \code{\link[stringr:str_pad]{stringr::str_pad()}}.}
+\item{side}{Side on which padding character is added (left, right or both).}
+
+\item{pad}{Single padding character (default is a space).}
+
+\item{width}{Minimum width of padded strings.}
 }
 \value{
-A string which total number of characters is \code{total_width}.
+A padded string that is convenient to produce each line of
+\code{\link[=get_header]{get_header()}}
 }
 \description{
-Right-pad strings.
+\code{pad} provides a convenient way to create each line of the headers produced
+with \code{\link[=get_header]{get_header()}}.
+}
+\details{
+This function may output strings a little shorter or a little longer than
+expected based on \code{total_width}. This is a bug, and appears sometimes when
+the strings contain spaces. Because  this bug is not too serious, and I leave
+it for now.
 }
 \examples{
 pad(c("Hello", "world"))
-pad(c("Hello", "world"), total_width = 70, pad = ".")
-pad(c("Hello", "world"), total_width = 70, pad = ".", side = "left")
+pad(c("Different pad", "and shorter"), total_width = 50, pad = ".")
+pad(c("Padding", "to the left"), total_width = 70, pad = ".", side = "left")
+}
+\seealso{
+Other functions to fine tune a plot of repulsive tags.: \code{\link{get_header}},
+  \code{\link{get_theme}}
 }

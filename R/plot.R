@@ -12,7 +12,10 @@
 #' @param tag_size Tag size. Passed to `size` in [ggrepel::geom_text_repel()].
 #' @param header A string giving the plot header. An easy way to make a
 #'   three-line header is with [get_header()].
-#' @param ... Arguments passed to [get_theme()].
+#' @param theme A [ggplot2::theme()]. A theme customized for
+#'   [plot_repulsive_tags()] is available via [get_theme()], which you can
+#'   further customize or you can create a complete new theme with
+#'   [ggplot2::theme()].
 #'
 #' @return A list of plots that can be wrapped around pdf(onefile = TRUE).
 #' @export
@@ -41,6 +44,11 @@ lapply_plot_repulsive_tags <- function(prep_df_list,
                                        tag_size = 3,
                                        header = get_header(),
                                        theme = get_theme()) {
+  # Check that the data frame is in a list.
+  assertive.types::assert_is_data.frame(prep_df_list[[1]])
+
+  assertive.types::assert_is_character(site_name)
+
   lapply(
     X = prep_df_list,
     FUN = plot_repulsive_tags,
@@ -62,6 +70,9 @@ plot_repulsive_tags <- function(prep_df,
                                 tag_size,
                                 header,
                                 theme) {
+  assertive.types::assert_is_data.frame(prep_df)
+  assertive.types::assert_is_character(site_name)
+
   id_quadrat_subquadrat <- unique(prep_df$id)
   ggplot(prep_df, aes(x = lx, y = ly, shape = latest_tree_status)) +
     scale_shape_manual(values = point_shape) +
