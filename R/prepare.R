@@ -158,9 +158,23 @@ add_limits_shrinked <- function(df) {
 
 # Functions ordered by increasing cummulative change. ---------------------
 
-
-
-# Quadrat
+#' Help identify_subquadrat().
+#'
+#' @param df_list A list of dataframes
+#' @param ... Arguments passed to [add_subquadrat()]. Importantly, this allows
+#'   changing the size of the subquadrats.
+#'
+#' @family functions to prepare data to plot repulsive tags.
+#' @export
+#' @keywords internal
+#' @examples
+#' df_list <- sinharaja::sinh_q20[1:2]
+#' # Extracting first quadrat and showing the head of each subquadrat
+#' add_quadrat_and_subquadrat_from_list(df_list)[[1]] %>% lapply(head)
+add_quadrat_and_subquadrat_from_list <- function(df_list, ...) {
+  with_quadrat <- add_quadrat_to_df_list(df_list)
+  lapply(with_quadrat, add_subquadrat, ...)
+}
 
 #' Add the name of each element of a list as a value in the variable quadrat
 #'
@@ -186,10 +200,6 @@ add_quadrat_to_one_df <- function(x, y) {
   # Use mutate because it works with list columns
   dplyr::mutate(y, quadrat = x)
 }
-
-
-
-# Subquadrat
 
 #' Adds subquadrat variable to a data frame, using Shameema's code.
 #'
@@ -238,32 +248,43 @@ add_subquadrat <- function(df,
   df_list
 }
 
-#' Help identify_subquadrat().
+#' From a list of dataframes output a dataframe with a useful id variable.
+#'
+#' This function with quadrat and subquadrat variables add id.
+#'
+#' The name of each element of the input list becomes a value of a new variable
+#' `quadrat`; and the variable `subquadrat` is also added, based on the values
+#' of the variables `lx` and `ly` that each dataframe should have.
 #'
 #' @family functions to prepare data to plot repulsive tags.
-#' @export
-#' @keywords internal
-add_quadrat_and_subquadrat_from_list <- function(df_list) {
-  with_quadrat <- add_quadrat_to_df_list(df_list)
-  lapply(with_quadrat, add_subquadrat)
-}
-
-#' Identify quadrat and subquadrat, from list to data frame.
 #'
-#' @family functions to prepare data to plot repulsive tags.
 #' @param df_list A list of data frames.
-#' @return A data frames with new variables identifying quadrat, and subquadrat.
+#' @param ... Arguments passed to [add_quadrat_and_subquadrat_from_list()].
+#'   This is lets users change the size of subquadrat via [add_subquadrat()].
+#'
+#' @return A data frames with new variables quadrat, subquadrat and id, which
+#'   combines the other two.
 #' @export
 #' @keywords internal
 #'
 #' @examples
-#' \dontrun{
-#' df_list1 <- sin_q20[1:2]
-#' names(df_list1)
-#' identify_subquadrat(df_list1)
-#' }
-identify_subquadrat <- function(df_list) {
-  with_quad_subquad_list <- add_quadrat_and_subquadrat_from_list(df_list)
+#' df_list <- sinharaja::sinh_q20[1:2]
+#' identify_subquadrat(df_list)
+#'
+#' df_list <- sinharaja::sinh_q20[1:2]
+#'
+#' # Passing arguments to add_subquadrat(), to make subquadrats half the size
+#' id <- identify_subquadrat(
+#'  df_list,
+#'  x1 = c(0, 10, 10, 0) / 2,
+#'  x2 = c(10, 20, 20, 10) / 2,
+#'  y1 = c(0, 0, 10, 10) / 2,
+#'  y2 = c(10, 10, 20, 20) / 2
+#' )
+#' id %>% filter(id == "16-3") %>%
+#'   ggplot(aes(lx, ly)) + geom_point()
+identify_subquadrat <- function(df_list, ...) {
+  with_quad_subquad_list <- add_quadrat_and_subquadrat_from_list(df_list, ...)
   reduced_deep <- suppressMessages(
     purrr::map(with_quad_subquad_list, purrr::reduce, dplyr::full_join)
   )
