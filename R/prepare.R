@@ -1,13 +1,12 @@
 # Prepare data that will be passed to plot_repel and friends.
 
-
-# xxx test this section ---------------------------------------------------
-
 #' Prepare a list of data frames to plot repulsive tags.
 #'
-#' This function may be rarely necessary. Its input is a rare data structure. It
-#' is a list of dataframes, each corresponding to a 20x20 quadrat and with the
-#' variables: "tag", "lx", "ly", "subtag", "status", "symbol".
+#' This function may be rarely necessary. It wraps other functions that you will
+#' likely want to use directly, so you have more flexibility. The input of this
+#' function may also be a rare data structure. It is a list of dataframes, each
+#' corresponding to a 20x20 quadrat and with the variables: "tag", "lx", "ly",
+#' "subtag", "status", "symbol".
 #'
 #' @family functions to prepare data to plot repulsive tags.
 #' @param df_list A list of data frames.

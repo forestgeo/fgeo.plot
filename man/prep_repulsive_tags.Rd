@@ -13,9 +13,11 @@ prep_repulsive_tags(df_list)
 A list of dataframes, prepared for \code{\link[=plot_repulsive_tags]{plot_repulsive_tags()}}.
 }
 \description{
-This function may be rarely necessary. Its input is a rare data structure. It
-is a list of dataframes, each corresponding to a 20x20 quadrat and with the
-variables: "tag", "lx", "ly", "subtag", "status", "symbol".
+This function may be rarely necessary. It wraps other functions that you will
+likely want to use directly, so you have more flexibility. The input of this
+function may also be a rare data structure. It is a list of dataframes, each
+corresponding to a 20x20 quadrat and with the variables: "tag", "lx", "ly",
+"subtag", "status", "symbol".
 }
 \examples{
 # The sinharaja package is local and the data set sinh_q20 is private.
