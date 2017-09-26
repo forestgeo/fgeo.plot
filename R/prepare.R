@@ -244,7 +244,7 @@ add_quadrat_and_subquadrat_from_list <- function(df_list, ...) {
 #' library(ggplot2)
 #'
 #' # From a dataframe of one quadrat, get a list of 4 subquadrats.
-#' one_quadrat <- toy_list[[15]]
+#' one_quadrat <- toy_list[[1]]
 #' head(one_quadrat)
 #' lapply(add_subquadrat(one_quadrat), head)
 #'
