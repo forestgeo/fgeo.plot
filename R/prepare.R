@@ -46,7 +46,6 @@ prep_repulsive_tags <- function(df_list) {
 #'
 #' @return The modified data frame.
 #' @export
-#' @keywords internal
 #'
 #' @examples
 #'  # Add to a single dataframe
@@ -168,7 +167,6 @@ add_subquad_limits <- function(df_with_subquad, quad_size = 20, shrink = 0.4) {
 #' @return A data frames with new variables quadrat, subquadrat and id, which
 #'   combines the other two.
 #' @export
-#' @keywords internal
 #'
 #' @examples
 #' library(dplyr)
@@ -216,7 +214,6 @@ identify_subquadrat <- function(df_list, ...) {
 #'
 #' @family functions to prepare data to plot repulsive tags.
 #' @export
-#' @keywords internal
 #' @examples
 #' df_list <- toy_list[1:2]
 #' # Extracting first quadrat and showing the head of each subquadrat
@@ -291,7 +288,6 @@ add_subquadrat <- function(df,
 #'
 #' @return A list of dataframes with the variable quadrat.
 #' @export
-#' @keywords internal
 #'
 #' @examples
 #' \dontrun{
