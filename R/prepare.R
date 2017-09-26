@@ -37,9 +37,10 @@ prep_repulsive_tags <- function(df_list) {
 #' Add alternatives to the variable `symbol` that are easier to understand.
 #'
 #' The variable `symbol` codes the status of a tree in a very succint way. This
-#' function unpacks the meaning of `symbol`. Be careful. This function is
-#' specifically designed for one particular dataset and should not be used
-#' in other data sets.
+#' function unpacks the meaning of `symbol`. Be careful: this function is
+#' specifically designed for one particular dataset (from Sinharaja) and if you
+#' use it on other data sets it will likely produce wrong results (and the
+#' function may not throw an error).
 #'
 #' @family functions to prepare data to plot repulsive tags.
 #' @param df A data frame with a variable named `symbol`.
@@ -206,7 +207,7 @@ identify_subquadrat <- function(df_list, ...) {
   ordered
 }
 
-#' Help identify_subquadrat().
+#' Help `identify_subquadrat()`.
 #'
 #' @param df_list A list of dataframes
 #' @param ... Arguments passed to [add_subquadrat()]. Importantly, this allows
@@ -224,7 +225,7 @@ add_quadrat_and_subquadrat_from_list <- function(df_list, ...) {
   lapply(with_quadrat, add_subquadrat, ...)
 }
 
-#' Adds subquadrat variable to a data frame, using Shameema's code.
+#' Adds the `subquadrat` variable to a data frame, using Shameema's code.
 #'
 #' @family functions to prepare data to plot repulsive tags.
 #'

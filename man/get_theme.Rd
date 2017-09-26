@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_settings.R
 \name{get_theme}
 \alias{get_theme}
-\title{A theme that is customized for plot_repulsive_tags().}
+\title{A theme that is customized for \code{plot_repulsive_tags()}.}
 \usage{
 get_theme(panel_grid_major_colour = "grey",
   panel_grid_minor_colour = "black", panel_grid_minor_linetype = "dotted",
@@ -39,7 +39,7 @@ subtitle.}
 A \code{\link[ggplot2:theme]{ggplot2::theme()}} customized for \code{\link[=plot_repulsive_tags]{plot_repulsive_tags()}}.
 }
 \description{
-Theme customized for \code{\link[=plot_repulsive_tags]{plot_repulsive_tags()}}. You can further customize the
+Theme customized for \code{plot_repulsive_tags()}. You can further customize the
 theme by passing more arguments to \code{\link[ggplot2:theme]{ggplot2::theme()}} (via \code{...}) or by
 replacing this theme completely with a new \code{\link[ggplot2:theme]{ggplot2::theme()}}.
 }

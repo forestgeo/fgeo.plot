@@ -2,7 +2,7 @@
 % Please edit documentation in R/prepare.R
 \name{add_subquadrat}
 \alias{add_subquadrat}
-\title{Adds subquadrat variable to a data frame, using Shameema's code.}
+\title{Adds the \code{subquadrat} variable to a data frame, using Shameema's code.}
 \usage{
 add_subquadrat(df, x1 = c(0, 10, 10, 0), x2 = c(10, 20, 20, 10), y1 = c(0,
   0, 10, 10), y2 = c(10, 10, 20, 20))
@@ -16,7 +16,7 @@ add_subquadrat(df, x1 = c(0, 10, 10, 0), x2 = c(10, 20, 20, 10), y1 = c(0,
 A list of 4 data frames.
 }
 \description{
-Adds subquadrat variable to a data frame, using Shameema's code.
+Adds the \code{subquadrat} variable to a data frame, using Shameema's code.
 }
 \examples{
 library(dplyr)

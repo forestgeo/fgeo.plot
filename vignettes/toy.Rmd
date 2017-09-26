@@ -55,7 +55,6 @@ lapply(toy_list, head)
 Before we plot it, we need to prepare the data. The function `prep_repulsive_tags()` does the job for this specific data set, which is based on the data from Sinharaja.
 
 ```{r}
-library(dplyr)
 prepared <- prep_repulsive_tags(toy_list)
 
 # Showing only the one quadrat to save space
@@ -69,12 +68,14 @@ To prepare the data from other data sets you may want to see the help file and s
 prep_repulsive_tags
 ```
 
+Once the data is prepared, this is all we need to produce the default plots:
+
 ```{r}
 plot_list <- lapply_plot_repulsive_tags(prepared, site_name = "Toy data")
 plot_list[[1]]
 ```
 
-This pronts each subquadrat on one page of a pdf file. The output is one single .pdf file for all plots.
+This prints each subquadrat on one page of a pdf file. The output is one single .pdf file for all plots.
 
 ```
 pdf(onefile = TRUE, paper = "a4", width = 11, height = 11)
@@ -86,9 +87,9 @@ dev.off()
 
 You can tweak the plots in multiple ways.
 
-## Basic: Most common settings via `lapply_plot_repulsive_tags()`
+## Common tweaks via `lapply_plot_repulsive_tags()`
 
-The arguments of `lapply_plot_repulsive_tags()` give you a some common options. See `?lapply_plot_repulsive_tags()`.
+The arguments of `lapply_plot_repulsive_tags()` give you common options (See `?lapply_plot_repulsive_tags()`).
 
 ```{r}
 lapply_plot_repulsive_tags(
@@ -102,9 +103,9 @@ lapply_plot_repulsive_tags(
 )[[1]]
 ```
 
-## Advanced settings via `get_header()`
+## Detailed tweaks via `get_header()`
 
-`get_header()` helps you tweak the header. See `get_header()`. To make header lines in a succing way you can use `pad()` (see `?pad()`).
+`get_header()` helps you tweak the header (see `?get_header()`). To make header lines in a succing way you can use `pad()` (see `?pad()`).
 
 ```{r}
 l1 <- pad(c("Checked by", "Date"))
@@ -119,9 +120,9 @@ lapply_plot_repulsive_tags(
 )[[1]]
 ```
 
-## Advanced settings via `get_theme()`
+## Detailed tweaks via `get_theme()`
 
-`get_theme()` lets you fine tune the looks of your plot. See `?get_theme()`. Or you can use any of the pre-made __ggplot2__ themes or make your own (see `ggplot2::theme()`).
+`get_theme()` lets you fine tune the looks of your plot (see `?get_theme()`). Or you can use any of the pre-made __ggplot2__ themes or make your own (see `ggplot2::theme()`).
 
 ```{r}
 my_theme <- get_theme(

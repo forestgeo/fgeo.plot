@@ -14,9 +14,10 @@ The modified data frame.
 }
 \description{
 The variable \code{symbol} codes the status of a tree in a very succint way. This
-function unpacks the meaning of \code{symbol}. Be careful. This function is
-specifically designed for one particular dataset and should not be used
-in other data sets.
+function unpacks the meaning of \code{symbol}. Be careful: this function is
+specifically designed for one particular dataset (from Sinharaja) and if you
+use it on other data sets it will likely produce wrong results (and the
+function may not throw an error).
 }
 \examples{
  # Add to a single dataframe

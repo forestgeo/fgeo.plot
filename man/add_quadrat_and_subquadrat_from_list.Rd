@@ -2,7 +2,7 @@
 % Please edit documentation in R/prepare.R
 \name{add_quadrat_and_subquadrat_from_list}
 \alias{add_quadrat_and_subquadrat_from_list}
-\title{Help identify_subquadrat().}
+\title{Help \code{identify_subquadrat()}.}
 \usage{
 add_quadrat_and_subquadrat_from_list(df_list, ...)
 }
@@ -13,7 +13,7 @@ add_quadrat_and_subquadrat_from_list(df_list, ...)
 changing the size of the subquadrats.}
 }
 \description{
-Help identify_subquadrat().
+Help \code{identify_subquadrat()}.
 }
 \examples{
 df_list <- toy_list[1:2]
