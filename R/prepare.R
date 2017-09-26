@@ -68,7 +68,13 @@ add_latest_tree_status <- function(x) {
 
 
 
-#' Add plot limits for quadrats 1-4.
+#' To a dataframe with `subquadrat` variable, add plot limits.
+#'
+#' This function needs a dataframe with the `subquadrat` variable that defines
+#' the 1-4 subquadrats within each quadrat.
+#'
+#' As the name suggests, this function is fixed to work with quadrats of 20x20 m.
+#' But it can be generalized by adding parameters.
 #'
 #' @family functions to prepare data to plot repulsive tags.
 #' @param df A data frame.
@@ -76,71 +82,80 @@ add_latest_tree_status <- function(x) {
 #' @return A modified data frame.
 #' @export
 #' @keywords internal
-add_limits <- function(df) {
-  dplyr::mutate(df,
+#' @examples
+#' # Showing only 1 quadrat to save space
+#' with_subquad_list <- sinharaja::sinh_q20[1] %>%
+#'   add_quadrat_and_subquadrat_from_list()
+#' str(with_subquad_list)
+#'
+#' # Pulling only one dataframe
+#' with_subquad_df <- with_subquad_list[[1]][[1]]
+#' head(with_subquad_df)
+#'
+#' with_subquad_df %>%
+#'   # The only "must be" is the variable `subquadrat`; we could remove `quadrat`
+#'   select(-quadrat) %>%
+#'   add_subquad_limits(quad_size = 20) %>%
+#'   head()
+add_subquad_limits <- function(df_with_subquad, quad_size = 20, shrink = 0.4) {
+  dplyr::mutate(df_with_subquad,
     x1 = dplyr::case_when(
-      subquadrat == 1 ~ 0,
-      subquadrat == 2 ~ 10,
-      subquadrat == 3 ~ 10,
-      subquadrat == 4 ~ 0
+      subquadrat == 1 ~ 0 + shrink,
+      subquadrat == 2 ~ (quad_size / 2) + shrink,
+      subquadrat == 3 ~ (quad_size / 2) + shrink,
+      subquadrat == 4 ~ 0 + shrink
     ),
     x2 = dplyr::case_when(
-      subquadrat == 1 ~ 10,
-      subquadrat == 2 ~ 20,
-      subquadrat == 3 ~ 20,
-      subquadrat == 4 ~ 10
+      subquadrat == 1 ~ (quad_size / 2) - shrink,
+      subquadrat == 2 ~ quad_size - shrink,
+      subquadrat == 3 ~ quad_size - shrink,
+      subquadrat == 4 ~ (quad_size / 2) - shrink
     ),
     y1 = dplyr::case_when(
-      subquadrat == 1 ~ 0,
-      subquadrat == 2 ~ 0,
-      subquadrat == 3 ~ 10,
-      subquadrat == 4 ~ 10
+      subquadrat == 1 ~ 0 + shrink,
+      subquadrat == 2 ~ 0 + shrink,
+      subquadrat == 3 ~ (quad_size / 2) + shrink,
+      subquadrat == 4 ~ (quad_size / 2) + shrink
     ),
     y2 = dplyr::case_when(
-      subquadrat == 1 ~ 10,
-      subquadrat == 2 ~ 10,
-      subquadrat == 3 ~ 20,
-      subquadrat == 4 ~ 20
+      subquadrat == 1 ~ (quad_size / 2) - shrink,
+      subquadrat == 2 ~ (quad_size / 2) - shrink,
+      subquadrat == 3 ~ quad_size  - shrink,
+      subquadrat == 4 ~ quad_size - shrink
     )
   )
 }
 
-#' Add plot limits for quadrats 1-4.
-#'
-#' @family functions to prepare data to plot repulsive tags.
-#' @param df A data frame.
-#'
-#' @return A modified data frame.
-#' @export
-#' @keywords internal
-add_limits_shrinked <- function(df) {
-  dplyr::mutate(df,
-    x1 = dplyr::case_when(
-      subquadrat == 1 ~ 0.4,
-      subquadrat == 2 ~ 10.4,
-      subquadrat == 3 ~ 10.4,
-      subquadrat == 4 ~ 0.4
-    ),
-    x2 = dplyr::case_when(
-      subquadrat == 1 ~ 9.6,
-      subquadrat == 2 ~ 19.6,
-      subquadrat == 3 ~ 19.6,
-      subquadrat == 4 ~ 9.6
-    ),
-    y1 = dplyr::case_when(
-      subquadrat == 1 ~ 0.4,
-      subquadrat == 2 ~ 0.4,
-      subquadrat == 3 ~ 10.4,
-      subquadrat == 4 ~ 10.4
-    ),
-    y2 = dplyr::case_when(
-      subquadrat == 1 ~ 9.6,
-      subquadrat == 2 ~ 9.6,
-      subquadrat == 3 ~ 19.6,
-      subquadrat == 4 ~ 19.6
-    )
-  )
-}
+# xxxxxxxxx continue here. Can remove add_subquad_limits and must test add_limits_shrinked
+
+# add_limits_shrinked <- function(df) {
+#   dplyr::mutate(df,
+#     x1 = dplyr::case_when(
+#       subquadrat == 1 ~ 0.4,
+#       subquadrat == 2 ~ 10.4,
+#       subquadrat == 3 ~ 10.4,
+#       subquadrat == 4 ~ 0.4
+#     ),
+#     x2 = dplyr::case_when(
+#       subquadrat == 1 ~ 9.6,
+#       subquadrat == 2 ~ 19.6,
+#       subquadrat == 3 ~ 19.6,
+#       subquadrat == 4 ~ 9.6
+#     ),
+#     y1 = dplyr::case_when(
+#       subquadrat == 1 ~ 0.4,
+#       subquadrat == 2 ~ 0.4,
+#       subquadrat == 3 ~ 10.4,
+#       subquadrat == 4 ~ 10.4
+#     ),
+#     y2 = dplyr::case_when(
+#       subquadrat == 1 ~ 9.6,
+#       subquadrat == 2 ~ 9.6,
+#       subquadrat == 3 ~ 19.6,
+#       subquadrat == 4 ~ 19.6
+#     )
+#   )
+# }
 
 
 
