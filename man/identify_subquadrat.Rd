@@ -54,4 +54,3 @@ Other functions to prepare data to plot repulsive tags.: \code{\link{add_latest_
   \code{\link{add_subquadrat}},
   \code{\link{prep_repulsive_tags}}
 }
-\keyword{internal}

@@ -37,4 +37,3 @@ Other functions to prepare data to plot repulsive tags.: \code{\link{add_quadrat
   \code{\link{identify_subquadrat}},
   \code{\link{prep_repulsive_tags}}
 }
-\keyword{internal}
