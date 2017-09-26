@@ -61,27 +61,32 @@ add_latest_tree_status <- function(x) {
   )
 }
 
-
-
-
-
-
-
-
 #' To a dataframe with `subquadrat` variable, add plot limits.
 #'
-#' This function needs a dataframe with the `subquadrat` variable that defines
-#' the 1-4 subquadrats within each quadrat.
+#' This function helps fine tune the limits of your plots. You can live withouth
+#' it, but this function gives you some extra control. The output is a modified
+#' dataframe that includes the limits that, via [plot_repulsive_tags()], will be
+#' passed to the arguments `xlim` and `ylim` of [ggplot2::coord_fixed()].
 #'
-#' As the name suggests, this function is fixed to work with quadrats of 20x20 m.
-#' But it can be generalized by adding parameters.
+#' Plots produced with __ggplot__ by default print with a margin around the
+#' limits set by the user. To remove that extra margin and maximize space, this
+#' function shrinks the limits a little. Be sure not to shrink so much that
+#' you loose data; The numbers on the x and y axes should include the limits
+#' that you expect. For example, if your plot is 20x20 meters, each subplot
+#' will be 10x10 meters, so your plot axes should show either the 0 to 10, or
+#' 10 to 20. If you do not read 0 and/or 10, or 10 and/or 20, your plot may not
+#' show the data you expect.
 #'
 #' @family functions to prepare data to plot repulsive tags.
-#' @param df A data frame.
+#'
+#' @param df_with_subquad A dataframe with the variable `subquadrat` that
+#'   defines the 1-4 subquadrats within each quadrat.
+#' @param quad_size Size of each quadrat.
+#' @param shrink A number, generally smaller than one, giving how much to
+#'   shrink the plot.
 #'
 #' @return A modified data frame.
 #' @export
-#' @keywords internal
 #' @examples
 #' # Showing only 1 quadrat to save space
 #' with_subquad_list <- sinharaja::sinh_q20[1] %>%
