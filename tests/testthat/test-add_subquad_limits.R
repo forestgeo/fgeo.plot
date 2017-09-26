@@ -5,7 +5,7 @@ library(dplyr)
 # Just a shortcut to try different `qudrat_size`s (qs)
 add_and_extract_lims <- function(quad_size, ...) {
 
-with_subquad_df <- sinharaja::sinh_q20[1] %>%
+with_subquad_df <- toy_list[1] %>%
  add_quadrat_and_subquadrat_from_list() %>%
   .[[1]] %>%
   .[[1]] %>%

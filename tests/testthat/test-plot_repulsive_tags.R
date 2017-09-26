@@ -3,7 +3,7 @@ context("plot_repulsive_tags")
 library(dplyr)
 library(ggplot2)
 
-list_of_one_quadrat <- sinharaja::sinh_q20[1]
+list_of_one_quadrat <- toy_list[1]
 
 one_dataframe <- list_of_one_quadrat %>%
   prep_repulsive_tags() %>%
@@ -14,7 +14,7 @@ test_that("errs with wrong input passed to the first few arguments", {
     # should pass
     p <- one_dataframe %>%
       plot_repulsive_tags(
-        site_name = "Sinharaja 2017",
+        site_name = "Toy",
         point_shape = c(19, 4),
         point_size = 1.5,
         tag_size = 3,
@@ -27,7 +27,7 @@ test_that("errs with wrong input passed to the first few arguments", {
     expect_error({
       list_of_one_quadrat %>%
         plot_repulsive_tags(
-          site_name = "Sinharaja 2017",
+          site_name = "Toy",
           point_shape = c(19, 4),
           point_size = 1.5,
           tag_size = 3,
@@ -39,7 +39,7 @@ test_that("errs with wrong input passed to the first few arguments", {
     expect_error({
       p <- one_dataframe %>%
         plot_repulsive_tags(
-          site_name = as.factor("Sinharaja 2017"),  # factors should fail
+          site_name = as.factor("Toy"),  # factors should fail
           point_shape = c(19, 4),
           point_size = 1.5,
           tag_size = 3,

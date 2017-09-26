@@ -1,0 +1,61 @@
+---
+title: "Plot Repulsive Tags from Sinharaha"
+author: "Mauro Lepore"
+date: "2017-09-26"
+output: 
+  rmarkdown::html_vignette:
+    toc: true
+    toc_depth: 6
+vignette: >
+  %\VignetteIndexEntry{Plot repulsive tags from Sinharaha}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, echo = FALSE, message=FALSE, warning=FALSE}
+# hadley's settings
+set.seed(1014)
+options(digits = 3)
+
+knitr::opts_chunk$set(
+  echo = TRUE,  # {mine}
+  comment = "#>",
+  collapse = TRUE,
+  # cache = TRUE,
+  out.width = "70%",
+  fig.align = "center",
+  fig.width = 6,
+  fig.asp = 0.618,  # 1 / phi
+  fig.show = "hold"
+)
+
+options(dplyr.print_min = 6, dplyr.print_max = 6)
+```
+
+This code outputs the maps that were printed.
+
+```
+# The sinharaja package is local and the data set sinh_q20 is private.
+list_of_dataframes <- sinharaja::sinh_q20
+
+# Filder selected quadrats
+path <- "../sinharaja/data-raw/from_shameema/"
+file_nm <- "Quadrat abundances 2017.to_check.xlsx"
+selected_quads <- readxl::read_xlsx(paste0(path, file_nm)) %>%
+  select(Quad_Name, QuadCheck) %>%
+  filter(QuadCheck %in% c(1.5, 2)) %>%
+  unique() %>%
+  pull(Quad_Name)
+selected_list_of_dataframes <- list_of_dataframes[selected_quads]
+# Confirm
+identical(selected_quads, names(selected_list_of_dataframes))
+
+# Prepare and pdf
+prepared <- prep_repulsive_tags(selected_list_of_dataframes)
+plot_list <- lapply_plot_repulsive_tags(prepared, site_name = "Sinharaja 2017")
+
+pdf(onefile = TRUE, paper = "a4", width = 11, height = 11)
+plot_list
+dev.off()
+```
+

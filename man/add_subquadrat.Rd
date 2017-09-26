@@ -23,7 +23,7 @@ library(dplyr)
 library(ggplot2)
 
 # From a dataframe of one quadrat, get a list of 4 subquadrats.
-one_quadrat <- sinharaja::sinh_q20[[15]]
+one_quadrat <- toy_list[[15]]
 head(one_quadrat)
 lapply(add_subquadrat(one_quadrat), head)
 

@@ -1,7 +1,7 @@
 context("identify_subquadrat")
 
 
-df_list <- sinharaja::sinh_q20[1:2]
+df_list <- toy_list[1:2]
 
 test_that("outputs the expected dataframe", {
   result <- identify_subquadrat(df_list)

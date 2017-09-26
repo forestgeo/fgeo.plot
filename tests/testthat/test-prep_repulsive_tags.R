@@ -1,12 +1,12 @@
 context("prep_repulsive_tags")
 
-list_of_dataframes <- sinharaja::sinh_q20["16"]
+list_of_dataframes <- toy_list[1]
 prepared <- prep_repulsive_tags(list_of_dataframes)[1:2]
 
 test_that("output is as expected", {
 
   nms <- names(prepared)
-  is_padded <- all(c("0016-1", "0016-2") %in% nms)
+  is_padded <- all(c("0001-1", "0001-2") %in% nms)
   expect_true(is_padded)
   nms <- NULL
 

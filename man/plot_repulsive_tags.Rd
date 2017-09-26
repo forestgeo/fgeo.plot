@@ -43,10 +43,9 @@ A list of plots that can be wrapped around pdf(onefile = TRUE).
 Plot trees in subquadrats, avoiding tree tags to overlap.
 }
 \examples{
-# The sinharaja package is local and the data set sinh_q20 is private.
-list_of_dataframes <- sinharaja::sinh_q20[1:2]
+list_of_dataframes <- toy_list
 prepared <- prep_repulsive_tags(list_of_dataframes)
-plot_list <- lapply_plot_repulsive_tags(prepared, site_name = "Sinharaja")
+plot_list <- lapply_plot_repulsive_tags(prepared, site_name = "Toy")
 \dontrun{
 plot_list[[1]]
 }

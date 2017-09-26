@@ -38,7 +38,7 @@ show the data you expect.
 library(dplyr)
 
 # Showing only 1 quadrat to save space
-with_subquad_list <- sinharaja::sinh_q20[1] \%>\%
+with_subquad_list <- toy_list[1] \%>\%
   add_quadrat_and_subquadrat_from_list()
 str(with_subquad_list)
 

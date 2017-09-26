@@ -1,0 +1,152 @@
+---
+title: "Plot Repulsive Tags"
+subtitle: "An Example with Toy Data"
+author: "Mauro Lepore"
+date: "2017-09-26"
+output: 
+  rmarkdown::html_vignette:
+    toc: true
+    toc_depth: 6
+vignette: >
+  %\VignetteIndexEntry{Plot Repulsive Tags}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, echo = FALSE, message=FALSE, warning=FALSE}
+# hadley's settings
+set.seed(1014)
+options(digits = 3)
+
+knitr::opts_chunk$set(
+  echo = TRUE,  # {mine}
+  comment = "#>",
+  collapse = TRUE,
+  # cache = TRUE,
+  out.width = "100%",
+  fig.align = "center",
+  fig.width = 11,
+  fig.asp = 0.618,  # 1 / phi
+  fig.show = "hold"
+)
+
+options(dplyr.print_min = 6, dplyr.print_max = 6)
+```
+
+# Overview
+
+The code temporarily lives in the __try__ package
+
+```{r}
+# install.packages("devtools")
+# devtools::install_github(repo = "forestgeo/try@iss1")
+library(try)
+```
+
+The data I received from Shameema looks like the one below (this is a toy data set).
+
+```{r}
+str(toy_list)
+lapply(toy_list, head)
+```
+
+# Preparing and plotting
+
+Before we plot it, we need to prepare the data. The function `prep_repulsive_tags()` does the job for this specific data set, which is based on the data from Sinharaja.
+
+```{r}
+library(dplyr)
+prepared <- prep_repulsive_tags(toy_list)
+
+# Showing only the one quadrat to save space
+str(prepared[1])
+lapply(prepared[1], head)
+```
+
+To prepare the data from other data sets you may want to see the help file and source code of each of the functions that `prep_repulsive_tags()` wraps.
+
+```{r}
+prep_repulsive_tags
+```
+
+```{r}
+plot_list <- lapply_plot_repulsive_tags(prepared, site_name = "Toy data")
+plot_list[[1]]
+```
+
+This pronts each subquadrat on one page of a pdf file. The output is one single .pdf file for all plots.
+
+```
+pdf(onefile = TRUE, paper = "a4", width = 11, height = 11)
+plot_list
+dev.off()
+```
+
+# Tweaking
+
+You can tweak the plots in multiple ways.
+
+## Basic: Most common settings via `lapply_plot_repulsive_tags()`
+
+The arguments of `lapply_plot_repulsive_tags()` give you a some common options. See `?lapply_plot_repulsive_tags()`.
+
+```{r}
+lapply_plot_repulsive_tags(
+  prepared, 
+  site_name = "Common tweaks",
+  point_shape = c(19, 1),
+  point_size = 3,
+  tag_size = 6,
+  header = "My cool header, line 1: ......\nMy cool header line 2: ____",
+  theme = ggplot2::theme_grey()
+)[[1]]
+```
+
+## Advanced settings via `get_header()`
+
+`get_header()` helps you tweak the header. See `get_header()`. To make header lines in a succing way you can use `pad()` (see `?pad()`).
+
+```{r}
+l1 <- pad(c("Checked by", "Date"))
+l2 <- pad(c("Measured by", "Date"))
+l3 <- pad("Notes", total_width = 40, pad = ".")
+my_header <- get_header(l1, l2, l3)
+
+lapply_plot_repulsive_tags(
+  prepared, 
+  site_name = "Tweaking header",
+  header = my_header
+)[[1]]
+```
+
+## Advanced settings via `get_theme()`
+
+`get_theme()` lets you fine tune the looks of your plot. See `?get_theme()`. Or you can use any of the pre-made __ggplot2__ themes or make your own (see `ggplot2::theme()`).
+
+```{r}
+my_theme <- get_theme(
+  panel_grid_major_colour = "red",
+  panel_grid_minor_colour = "blue", 
+  panel_grid_minor_linetype = "dotted",
+  panel_background_fill = "yellow", 
+  plot_title_size = 40,
+  plot_subtitle_size = 20, 
+  legend_position = "bottom",
+  axis_ticks = NULL, 
+  axis_text_size = 10,
+  legend_title = NULL
+)
+
+lapply_plot_repulsive_tags(
+  prepared, 
+  site_name = "Tweaking theme",
+  theme = my_theme
+)[[1]]
+```
+
+# To do
+
+See Suzanne's with list here: https://goo.gl/NbKApk.
+
+* Write functions to transform the r-tables to the format that this functions require.
+* Amend this functions to allow ploting subquadrats of different sizes. Some work along this lines is already done in `?add_subquad_limits()` but `lapply_plot_repulsive_tags()` has now  no way to "talk" to `add_subquad_limits()`.

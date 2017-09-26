@@ -20,9 +20,7 @@ corresponding to a 20x20 quadrat and with the variables: "tag", "lx", "ly",
 "subtag", "status", "symbol".
 }
 \examples{
-# The sinharaja package is local and the data set sinh_q20 is private.
-# Choosing only two 20x20 quadrats
-list_of_dataframes <- sinharaja::sinh_q20[1:2]
+list_of_dataframes <- toy_list
 str(list_of_dataframes)
 
 prepared <- prep_repulsive_tags(list_of_dataframes)

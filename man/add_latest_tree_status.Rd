@@ -19,15 +19,15 @@ specifically designed for one particular dataset and should not be used
 in other data sets.
 }
 \examples{
-# Add to a single dataframe
-df <- sinharaja::sinh_q20[[1]]
-head(add_latest_tree_status(df))
+ # Add to a single dataframe
+ df <- toy_list[[1]]
+ head(add_latest_tree_status(df))
 
-# Add to each dataframe in a list
-df_list <- sinharaja::sinh_q20[1:2]
-result <- lapply(df_list, add_latest_tree_status)
-# Just show a few rows of each dataframe
-lapply(result, head)
+ # Add to each dataframe in a list
+ df_list <- toy_list
+ result <- lapply(df_list, add_latest_tree_status)
+ # Just show a few rows of each dataframe
+ lapply(result, head)
 }
 \seealso{
 Other functions to prepare data to plot repulsive tags.: \code{\link{add_quadrat_and_subquadrat_from_list}},

@@ -3,7 +3,7 @@ context("lapply_plot_repulsive_tags")
 library(dplyr)
 library(ggplot2)
 
-list_of_one_quadrat <- sinharaja::sinh_q20[1]
+list_of_one_quadrat <- toy_list[1]
 
 ond_dataframe <- list_of_one_quadrat %>%
   prep_repulsive_tags() %>%

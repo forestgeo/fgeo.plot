@@ -16,7 +16,7 @@ changing the size of the subquadrats.}
 Help identify_subquadrat().
 }
 \examples{
-df_list <- sinharaja::sinh_q20[1:2]
+df_list <- toy_list[1:2]
 # Extracting first quadrat and showing the head of each subquadrat
 added <- add_quadrat_and_subquadrat_from_list(df_list)[[1]]
 lapply(added, head)

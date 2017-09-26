@@ -28,10 +28,10 @@ of the variables \code{lx} and \code{ly} that each dataframe should have.
 library(dplyr)
 library(ggplot2)
 
-df_list <- sinharaja::sinh_q20[1:2]
+df_list <- toy_list[1:2]
 head(identify_subquadrat(df_list))
 
-df_list <- sinharaja::sinh_q20[1:2]
+df_list <- toy_list[1:2]
 
 # Passing arguments to add_subquadrat(), to make subquadrats half the size
 id <- identify_subquadrat(

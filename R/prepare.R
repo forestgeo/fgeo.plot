@@ -14,9 +14,7 @@
 #'
 #' @export
 #' @examples
-#' # The sinharaja package is local and the data set sinh_q20 is private.
-#' # Choosing only two 20x20 quadrats
-#' list_of_dataframes <- sinharaja::sinh_q20[1:2]
+#' list_of_dataframes <- toy_list
 #' str(list_of_dataframes)
 #'
 #' prepared <- prep_repulsive_tags(list_of_dataframes)
@@ -29,7 +27,11 @@ prep_repulsive_tags <- function(df_list) {
   explicit_status <- purrr::map(df_list, add_latest_tree_status)
   identified <- identify_subquadrat(explicit_status)
   with_limits <- add_subquad_limits(identified)
-  split(with_limits, with_limits$id)
+  useful_vars <- dplyr::select(
+    with_limits,
+    id, tag, lx, ly, latest_tree_status, x1, x2, y1, y2
+  )
+  split(useful_vars, with_limits$id)
 }
 
 #' Add alternatives to the variable `symbol` that are easier to understand.
@@ -47,15 +49,15 @@ prep_repulsive_tags <- function(df_list) {
 #' @keywords internal
 #'
 #' @examples
-#' # Add to a single dataframe
-#' df <- sinharaja::sinh_q20[[1]]
-#' head(add_latest_tree_status(df))
+#'  # Add to a single dataframe
+#'  df <- toy_list[[1]]
+#'  head(add_latest_tree_status(df))
 #'
-#' # Add to each dataframe in a list
-#' df_list <- sinharaja::sinh_q20[1:2]
-#' result <- lapply(df_list, add_latest_tree_status)
-#' # Just show a few rows of each dataframe
-#' lapply(result, head)
+#'  # Add to each dataframe in a list
+#'  df_list <- toy_list
+#'  result <- lapply(df_list, add_latest_tree_status)
+#'  # Just show a few rows of each dataframe
+#'  lapply(result, head)
 add_latest_tree_status <- function(df) {
   dplyr::mutate(df,
     sym1 = dplyr::case_when(
@@ -103,7 +105,7 @@ add_latest_tree_status <- function(df) {
 #' library(dplyr)
 #'
 #' # Showing only 1 quadrat to save space
-#' with_subquad_list <- sinharaja::sinh_q20[1] %>%
+#' with_subquad_list <- toy_list[1] %>%
 #'   add_quadrat_and_subquadrat_from_list()
 #' str(with_subquad_list)
 #'
@@ -172,10 +174,10 @@ add_subquad_limits <- function(df_with_subquad, quad_size = 20, shrink = 0.4) {
 #' library(dplyr)
 #' library(ggplot2)
 #'
-#' df_list <- sinharaja::sinh_q20[1:2]
+#' df_list <- toy_list[1:2]
 #' head(identify_subquadrat(df_list))
 #'
-#' df_list <- sinharaja::sinh_q20[1:2]
+#' df_list <- toy_list[1:2]
 #'
 #' # Passing arguments to add_subquadrat(), to make subquadrats half the size
 #' id <- identify_subquadrat(
@@ -216,7 +218,7 @@ identify_subquadrat <- function(df_list, ...) {
 #' @export
 #' @keywords internal
 #' @examples
-#' df_list <- sinharaja::sinh_q20[1:2]
+#' df_list <- toy_list[1:2]
 #' # Extracting first quadrat and showing the head of each subquadrat
 #' added <- add_quadrat_and_subquadrat_from_list(df_list)[[1]]
 #' lapply(added, head)
@@ -242,7 +244,7 @@ add_quadrat_and_subquadrat_from_list <- function(df_list, ...) {
 #' library(ggplot2)
 #'
 #' # From a dataframe of one quadrat, get a list of 4 subquadrats.
-#' one_quadrat <- sinharaja::sinh_q20[[15]]
+#' one_quadrat <- toy_list[[15]]
 #' head(one_quadrat)
 #' lapply(add_subquadrat(one_quadrat), head)
 #'
@@ -293,7 +295,7 @@ add_subquadrat <- function(df,
 #'
 #' @examples
 #' \dontrun{
-#' df_list <- sinharaja::sinh_q20[1:2]
+#' df_list <- toy_list[1:2]
 #' with_quadrat <- add_quadrat_to_df_list(df_list)
 #' str(with_quadrat)
 #' }
