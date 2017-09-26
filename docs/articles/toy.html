@@ -107,16 +107,7 @@
 <h1 class="hasAnchor">
 <a href="#preparing-and-plotting" class="anchor"></a>Preparing and plotting</h1>
 <p>Before we plot it, we need to prepare the data. The function <code><a href="../reference/prep_repulsive_tags.html">prep_repulsive_tags()</a></code> does the job for this specific data set, which is based on the data from Sinharaja.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Attaching package: 'dplyr'</span>
-<span class="co">#&gt; The following objects are masked from 'package:stats':</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;     filter, lag</span>
-<span class="co">#&gt; The following objects are masked from 'package:base':</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;     intersect, setdiff, setequal, union</span>
-prepared &lt;-<span class="st"> </span><span class="kw"><a href="../reference/prep_repulsive_tags.html">prep_repulsive_tags</a></span>(toy_list)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">prepared &lt;-<span class="st"> </span><span class="kw"><a href="../reference/prep_repulsive_tags.html">prep_repulsive_tags</a></span>(toy_list)
 
 <span class="co"># Showing only the one quadrat to save space</span>
 <span class="kw">str</span>(prepared[<span class="dv">1</span>])
@@ -157,10 +148,11 @@ prepared &lt;-<span class="st"> </span><span class="kw"><a href="../reference/pr
 <span class="co">#&gt;   split(useful_vars, with_limits$id)</span>
 <span class="co">#&gt; }</span>
 <span class="co">#&gt; &lt;environment: namespace:try&gt;</span></code></pre></div>
+<p>Once the data is prepared, this is all we need to produce the default plots:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">plot_list &lt;-<span class="st"> </span><span class="kw"><a href="../reference/plot_repulsive_tags.html">lapply_plot_repulsive_tags</a></span>(prepared, <span class="dt">site_name =</span> <span class="st">"Toy data"</span>)
 plot_list[[<span class="dv">1</span>]]</code></pre></div>
 <p><img src="toy_files/figure-html/unnamed-chunk-5-1.png" width="100%" style="display: block; margin: auto;"></p>
-<p>This pronts each subquadrat on one page of a pdf file. The output is one single .pdf file for all plots.</p>
+<p>This prints each subquadrat on one page of a pdf file. The output is one single .pdf file for all plots.</p>
 <pre><code>pdf(onefile = TRUE, paper = "a4", width = 11, height = 11)
 plot_list
 dev.off()</code></pre>
@@ -169,11 +161,11 @@ dev.off()</code></pre>
 <h1 class="hasAnchor">
 <a href="#tweaking" class="anchor"></a>Tweaking</h1>
 <p>You can tweak the plots in multiple ways.</p>
-<div id="basic-most-common-settings-via-lapply_plot_repulsive_tags" class="section level2">
+<div id="common-tweaks-via-lapply_plot_repulsive_tags" class="section level2">
 <h2 class="hasAnchor">
-<a href="#basic-most-common-settings-via-lapply_plot_repulsive_tags" class="anchor"></a>Basic: Most common settings via <code><a href="../reference/plot_repulsive_tags.html">lapply_plot_repulsive_tags()</a></code>
+<a href="#common-tweaks-via-lapply_plot_repulsive_tags" class="anchor"></a>Common tweaks via <code><a href="../reference/plot_repulsive_tags.html">lapply_plot_repulsive_tags()</a></code>
 </h2>
-<p>The arguments of <code><a href="../reference/plot_repulsive_tags.html">lapply_plot_repulsive_tags()</a></code> give you a some common options. See <code><a href="../reference/plot_repulsive_tags.html">?lapply_plot_repulsive_tags()</a></code>.</p>
+<p>The arguments of <code><a href="../reference/plot_repulsive_tags.html">lapply_plot_repulsive_tags()</a></code> give you common options (See <code><a href="../reference/plot_repulsive_tags.html">?lapply_plot_repulsive_tags()</a></code>).</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/plot_repulsive_tags.html">lapply_plot_repulsive_tags</a></span>(
   prepared, 
   <span class="dt">site_name =</span> <span class="st">"Common tweaks"</span>,
@@ -185,11 +177,11 @@ dev.off()</code></pre>
 )[[<span class="dv">1</span>]]</code></pre></div>
 <p><img src="toy_files/figure-html/unnamed-chunk-6-1.png" width="100%" style="display: block; margin: auto;"></p>
 </div>
-<div id="advanced-settings-via-get_header" class="section level2">
+<div id="detailed-tweaks-via-get_header" class="section level2">
 <h2 class="hasAnchor">
-<a href="#advanced-settings-via-get_header" class="anchor"></a>Advanced settings via <code><a href="../reference/get_header.html">get_header()</a></code>
+<a href="#detailed-tweaks-via-get_header" class="anchor"></a>Detailed tweaks via <code><a href="../reference/get_header.html">get_header()</a></code>
 </h2>
-<p><code><a href="../reference/get_header.html">get_header()</a></code> helps you tweak the header. See <code><a href="../reference/get_header.html">get_header()</a></code>. To make header lines in a succing way you can use <code><a href="../reference/pad.html">pad()</a></code> (see <code><a href="../reference/pad.html">?pad()</a></code>).</p>
+<p><code><a href="../reference/get_header.html">get_header()</a></code> helps you tweak the header (see <code><a href="../reference/get_header.html">?get_header()</a></code>). To make header lines in a succing way you can use <code><a href="../reference/pad.html">pad()</a></code> (see <code><a href="../reference/pad.html">?pad()</a></code>).</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">l1 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/pad.html">pad</a></span>(<span class="kw">c</span>(<span class="st">"Checked by"</span>, <span class="st">"Date"</span>))
 l2 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/pad.html">pad</a></span>(<span class="kw">c</span>(<span class="st">"Measured by"</span>, <span class="st">"Date"</span>))
 l3 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/pad.html">pad</a></span>(<span class="st">"Notes"</span>, <span class="dt">total_width =</span> <span class="dv">40</span>, <span class="dt">pad =</span> <span class="st">"."</span>)
@@ -202,11 +194,11 @@ my_header &lt;-<span class="st"> </span><span class="kw"><a href="../reference/g
 )[[<span class="dv">1</span>]]</code></pre></div>
 <p><img src="toy_files/figure-html/unnamed-chunk-7-1.png" width="100%" style="display: block; margin: auto;"></p>
 </div>
-<div id="advanced-settings-via-get_theme" class="section level2">
+<div id="detailed-tweaks-via-get_theme" class="section level2">
 <h2 class="hasAnchor">
-<a href="#advanced-settings-via-get_theme" class="anchor"></a>Advanced settings via <code><a href="../reference/get_theme.html">get_theme()</a></code>
+<a href="#detailed-tweaks-via-get_theme" class="anchor"></a>Detailed tweaks via <code><a href="../reference/get_theme.html">get_theme()</a></code>
 </h2>
-<p><code><a href="../reference/get_theme.html">get_theme()</a></code> lets you fine tune the looks of your plot. See <code><a href="../reference/get_theme.html">?get_theme()</a></code>. Or you can use any of the pre-made <strong>ggplot2</strong> themes or make your own (see <code>ggplot2::theme()</code>).</p>
+<p><code><a href="../reference/get_theme.html">get_theme()</a></code> lets you fine tune the looks of your plot (see <code><a href="../reference/get_theme.html">?get_theme()</a></code>). Or you can use any of the pre-made <strong>ggplot2</strong> themes or make your own (see <code>ggplot2::theme()</code>).</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">my_theme &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_theme.html">get_theme</a></span>(
   <span class="dt">panel_grid_major_colour =</span> <span class="st">"red"</span>,
   <span class="dt">panel_grid_minor_colour =</span> <span class="st">"blue"</span>, 
@@ -248,9 +240,9 @@ my_header &lt;-<span class="st"> </span><span class="kw"><a href="../reference/g
       <li><a href="#preparing-and-plotting">Preparing and plotting</a></li>
       <li>
 <a href="#tweaking">Tweaking</a><ul class="nav nav-pills nav-stacked">
-<li><a href="#basic-most-common-settings-via-lapply_plot_repulsive_tags">Basic: Most common settings via <code><a href="../reference/plot_repulsive_tags.html">lapply_plot_repulsive_tags()</a></code></a></li>
-      <li><a href="#advanced-settings-via-get_header">Advanced settings via <code><a href="../reference/get_header.html">get_header()</a></code></a></li>
-      <li><a href="#advanced-settings-via-get_theme">Advanced settings via <code><a href="../reference/get_theme.html">get_theme()</a></code></a></li>
+<li><a href="#common-tweaks-via-lapply_plot_repulsive_tags">Common tweaks via <code><a href="../reference/plot_repulsive_tags.html">lapply_plot_repulsive_tags()</a></code></a></li>
+      <li><a href="#detailed-tweaks-via-get_header">Detailed tweaks via <code><a href="../reference/get_header.html">get_header()</a></code></a></li>
+      <li><a href="#detailed-tweaks-via-get_theme">Detailed tweaks via <code><a href="../reference/get_theme.html">get_theme()</a></code></a></li>
       </ul>
 </li>
       <li><a href="#to-do">To do</a></li>

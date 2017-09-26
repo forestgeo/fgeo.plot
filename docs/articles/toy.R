@@ -27,7 +27,6 @@ str(toy_list)
 lapply(toy_list, head)
 
 ## ------------------------------------------------------------------------
-library(dplyr)
 prepared <- prep_repulsive_tags(toy_list)
 
 # Showing only the one quadrat to save space
