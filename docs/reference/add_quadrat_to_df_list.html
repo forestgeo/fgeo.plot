@@ -53,6 +53,9 @@
         <li>
   <a href="../reference/index.html">Reference</a>
 </li>
+<li>
+  <a href="../articles/index.html">Articles</a>
+</li>
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
@@ -80,31 +83,36 @@
     <p>Add the name of each element of a list as a value in the variable quadrat</p>
     
 
-    <pre class="usage"><span class='fu'>add_quadrat_to_df_list</span>(<span class='no'>df</span>)</pre>
+    <pre class="usage"><span class='fu'>add_quadrat_to_df_list</span>(<span class='no'>df_list</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>df</th>
-      <td><p>A list of data frames</p></td>
+      <th>df_list</th>
+      <td><p>A list of data frames.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A list</p>
+    <p>A list of dataframes with the variable quadrat.</p>
+    
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <p>Other functions to prepare data to plot repulsive tags.: <code><a href='add_latest_tree_status.html'>add_latest_tree_status</a></code>,
+  <code><a href='add_quadrat_and_subquadrat_from_list.html'>add_quadrat_and_subquadrat_from_list</a></code>,
+  <code><a href='add_subquad_limits.html'>add_subquad_limits</a></code>,
+  <code><a href='add_subquadrat.html'>add_subquadrat</a></code>,
+  <code><a href='identify_subquadrat.html'>identify_subquadrat</a></code>,
+  <code><a href='prep_repulsive_tags.html'>prep_repulsive_tags</a></code></p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'>not_run</span>({
-  <span class='no'>df</span> <span class='kw'>&lt;-</span> <span class='no'>sin_q20</span>[<span class='fl'>7</span>:<span class='fl'>8</span>]
-  <span class='no'>df_list</span> <span class='kw'>&lt;-</span> <span class='fu'>add_quadrat_to_df_list</span>(<span class='no'>df</span>)
-  <span class='fu'>str</span>(<span class='no'>df_list</span>)
-  <span class='co'># Demonstrate on only two quadrats</span>
-  <span class='no'>list_of_dfs</span> <span class='kw'>&lt;-</span> <span class='no'>sin_q20</span>[<span class='fu'>c</span>(<span class='st'>"109"</span>, <span class='st'>"15"</span>)]
-  <span class='fu'>str</span>(<span class='no'>list_of_dfs</span>)
-  <span class='fu'>add_quadrat_to_df_list</span>(<span class='no'>list_of_dfs</span>)
+  <span class='no'>df_list</span> <span class='kw'>&lt;-</span> <span class='no'>toy_list</span>[<span class='fl'>1</span>:<span class='fl'>2</span>]
+  <span class='no'>with_quadrat</span> <span class='kw'>&lt;-</span> <span class='fu'>add_quadrat_to_df_list</span>(<span class='no'>df_list</span>)
+  <span class='fu'>str</span>(<span class='no'>with_quadrat</span>)
 })</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -113,6 +121,8 @@
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
+
+      <li><a href="#see-also">See also</a></li>
       
       <li><a href="#examples">Examples</a></li>
     </ul>

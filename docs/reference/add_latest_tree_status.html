@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Add alternatives to symbol, that are easier to understand. — add_latest_tree_status â€¢ try</title>
+<title>Add alternatives to the variable <code>symbol</code> that are easier to understand. — add_latest_tree_status â€¢ try</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -53,6 +53,9 @@
         <li>
   <a href="../reference/index.html">Reference</a>
 </li>
+<li>
+  <a href="../articles/index.html">Articles</a>
+</li>
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
@@ -73,21 +76,24 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Add alternatives to symbol, that are easier to understand.</h1>
+    <h1>Add alternatives to the variable <code>symbol</code> that are easier to understand.</h1>
     </div>
 
     
-    <p>Add alternatives to symbol, that are easier to understand.</p>
+    <p>The variable <code>symbol</code> codes the status of a tree in a very succint way. This
+function unpacks the meaning of <code>symbol</code>. Be careful. This function is
+specifically designed for one particular dataset and should not be used
+in other data sets.</p>
     
 
-    <pre class="usage"><span class='fu'>add_latest_tree_status</span>(<span class='no'>x</span>)</pre>
+    <pre class="usage"><span class='fu'>add_latest_tree_status</span>(<span class='no'>df</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>x</th>
-      <td><p>A data frame.</p></td>
+      <th>df</th>
+      <td><p>A data frame with a variable named <code>symbol</code>.</p></td>
     </tr>
     </table>
     
@@ -95,13 +101,48 @@
 
     <p>The modified data frame.</p>
     
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <p>Other functions to prepare data to plot repulsive tags.: <code><a href='add_quadrat_and_subquadrat_from_list.html'>add_quadrat_and_subquadrat_from_list</a></code>,
+  <code><a href='add_quadrat_to_df_list.html'>add_quadrat_to_df_list</a></code>,
+  <code><a href='add_subquad_limits.html'>add_subquad_limits</a></code>,
+  <code><a href='add_subquadrat.html'>add_subquadrat</a></code>,
+  <code><a href='identify_subquadrat.html'>identify_subquadrat</a></code>,
+  <code><a href='prep_repulsive_tags.html'>prep_repulsive_tags</a></code></p>
+    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>not_run</span>({
-  <span class='fu'>library</span>(<span class='no'>purrr</span>)
-  <span class='fu'>library</span>(<span class='no'>try</span>)
-  <span class='no'>sin_q20</span> <span class='kw'>&lt;-</span> <span class='kw'>purrr</span><span class='kw'>::</span><span class='fu'>map</span>(<span class='no'>sin_q20</span>, <span class='no'>add_latest_tree_status</span>)
-})</div></pre>
+    <pre class="examples"><div class='input'> <span class='co'># Add to a single dataframe</span>
+ <span class='no'>df</span> <span class='kw'>&lt;-</span> <span class='no'>toy_list</span><span class='kw'>[[</span><span class='fl'>1</span>]]
+ <span class='fu'>head</span>(<span class='fu'>add_latest_tree_status</span>(<span class='no'>df</span>))</div><div class='output co'>#&gt;   tag     lx     ly symbol                  sym1 latest_tree_status
+#&gt; 1 150  0.817 13.239      1 Alive in 3, Dead in 4               Dead
+#&gt; 2 455 11.895 18.574     16            Alive in 4              Alive
+#&gt; 3  29 19.832  4.899     16            Alive in 4              Alive
+#&gt; 4 178  9.460  7.077     15 Alive in 2, Dead in 3               Dead
+#&gt; 5 111  6.869 11.231      0 Alive in 1, Dead in 2               Dead
+#&gt; 6 154 19.928  4.078     16            Alive in 4              Alive</div><div class='input'>
+ <span class='co'># Add to each dataframe in a list</span>
+ <span class='no'>df_list</span> <span class='kw'>&lt;-</span> <span class='no'>toy_list</span>
+ <span class='no'>result</span> <span class='kw'>&lt;-</span> <span class='fu'>lapply</span>(<span class='no'>df_list</span>, <span class='no'>add_latest_tree_status</span>)
+ <span class='co'># Just show a few rows of each dataframe</span>
+ <span class='fu'>lapply</span>(<span class='no'>result</span>, <span class='no'>head</span>)</div><div class='output co'>#&gt; $`1`
+#&gt;   tag     lx     ly symbol                  sym1 latest_tree_status
+#&gt; 1 150  0.817 13.239      1 Alive in 3, Dead in 4               Dead
+#&gt; 2 455 11.895 18.574     16            Alive in 4              Alive
+#&gt; 3  29 19.832  4.899     16            Alive in 4              Alive
+#&gt; 4 178  9.460  7.077     15 Alive in 2, Dead in 3               Dead
+#&gt; 5 111  6.869 11.231      0 Alive in 1, Dead in 2               Dead
+#&gt; 6 154 19.928  4.078     16            Alive in 4              Alive
+#&gt; 
+#&gt; $`2`
+#&gt;   tag     lx     ly symbol                  sym1 latest_tree_status
+#&gt; 1 774  2.669 17.931      1 Alive in 3, Dead in 4               Dead
+#&gt; 2 768  7.405  4.224      0 Alive in 1, Dead in 2               Dead
+#&gt; 3  31  5.370  9.601     16            Alive in 4              Alive
+#&gt; 4 265 10.344 12.736     15 Alive in 2, Dead in 3               Dead
+#&gt; 5 170 17.390 12.635     15 Alive in 2, Dead in 3               Dead
+#&gt; 6 440  3.158 14.877      1 Alive in 3, Dead in 4               Dead
+#&gt; </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -109,6 +150,8 @@
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
+
+      <li><a href="#see-also">See also</a></li>
       
       <li><a href="#examples">Examples</a></li>
     </ul>

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Identify quadrat and subquadrat, from list to data frame. — identify_subquadrat â€¢ try</title>
+<title>From a list of dataframes output a dataframe with a useful id variable. — identify_subquadrat â€¢ try</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -53,6 +53,9 @@
         <li>
   <a href="../reference/index.html">Reference</a>
 </li>
+<li>
+  <a href="../articles/index.html">Articles</a>
+</li>
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
@@ -73,14 +76,14 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Identify quadrat and subquadrat, from list to data frame.</h1>
+    <h1>From a list of dataframes output a dataframe with a useful id variable.</h1>
     </div>
 
     
-    <p>Identify quadrat and subquadrat, from list to data frame.</p>
+    <p>This function with quadrat and subquadrat variables add id.</p>
     
 
-    <pre class="usage"><span class='fu'>identify_subquadrat</span>(<span class='no'>df_list</span>)</pre>
+    <pre class="usage"><span class='fu'>identify_subquadrat</span>(<span class='no'>df_list</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -89,18 +92,59 @@
       <th>df_list</th>
       <td><p>A list of data frames.</p></td>
     </tr>
+    <tr>
+      <th>...</th>
+      <td><p>Arguments passed to <code><a href='add_quadrat_and_subquadrat_from_list.html'>add_quadrat_and_subquadrat_from_list()</a></code>.
+This is lets users change the size of subquadrat via <code><a href='add_subquadrat.html'>add_subquadrat()</a></code>.</p></td>
+    </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A data frames with new variables identifying quadrat, and subquadrat.</p>
+    <p>A data frames with new variables quadrat, subquadrat and id, which
+combines the other two.</p>
+    
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>The name of each element of the input list becomes a value of a new variable
+<code>quadrat</code>; and the variable <code>subquadrat</code> is also added, based on the values
+of the variables <code>lx</code> and <code>ly</code> that each dataframe should have.</p>
+    
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <p>Other functions to prepare data to plot repulsive tags.: <code><a href='add_latest_tree_status.html'>add_latest_tree_status</a></code>,
+  <code><a href='add_quadrat_and_subquadrat_from_list.html'>add_quadrat_and_subquadrat_from_list</a></code>,
+  <code><a href='add_quadrat_to_df_list.html'>add_quadrat_to_df_list</a></code>,
+  <code><a href='add_subquad_limits.html'>add_subquad_limits</a></code>,
+  <code><a href='add_subquadrat.html'>add_subquadrat</a></code>,
+  <code><a href='prep_repulsive_tags.html'>prep_repulsive_tags</a></code></p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>not_run</span>({
-  <span class='no'>df_list1</span> <span class='kw'>&lt;-</span> <span class='no'>sin_q20</span>[<span class='fl'>1</span>:<span class='fl'>2</span>]
-  <span class='fu'>names</span>(<span class='no'>df_list1</span>)
-  <span class='fu'>identify_subquadrat</span>(<span class='no'>df_list1</span>)
+    <pre class="examples"><div class='input'><span class='fu'>library</span>(<span class='no'>dplyr</span>)
+<span class='fu'>library</span>(<span class='no'>ggplot2</span>)
+
+<span class='no'>df_list</span> <span class='kw'>&lt;-</span> <span class='no'>toy_list</span>[<span class='fl'>1</span>:<span class='fl'>2</span>]
+<span class='fu'>head</span>(<span class='fu'>identify_subquadrat</span>(<span class='no'>df_list</span>))</div><div class='output co'>#&gt;    id quadrat subquadrat tag    lx    ly symbol
+#&gt; 1 1-1       1          1 178 9.460 7.077     15
+#&gt; 2 1-1       1          1 920 5.341 2.272      1
+#&gt; 3 1-1       1          1 272 7.020 7.402     16
+#&gt; 4 1-1       1          1 266 2.614 5.359     15
+#&gt; 5 1-1       1          1 934 2.122 9.934      0
+#&gt; 6 1-1       1          1 977 0.564 0.756     15</div><div class='input'>
+<span class='no'>df_list</span> <span class='kw'>&lt;-</span> <span class='no'>toy_list</span>[<span class='fl'>1</span>:<span class='fl'>2</span>]
+
+<span class='co'># Passing arguments to add_subquadrat(), to make subquadrats half the size</span>
+<span class='no'>id</span> <span class='kw'>&lt;-</span> <span class='fu'>identify_subquadrat</span>(
+ <span class='no'>df_list</span>,
+ <span class='kw'>x1</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>0</span>, <span class='fl'>10</span>, <span class='fl'>10</span>, <span class='fl'>0</span>) / <span class='fl'>2</span>,
+ <span class='kw'>x2</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>10</span>, <span class='fl'>20</span>, <span class='fl'>20</span>, <span class='fl'>10</span>) / <span class='fl'>2</span>,
+ <span class='kw'>y1</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>10</span>, <span class='fl'>10</span>) / <span class='fl'>2</span>,
+ <span class='kw'>y2</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>10</span>, <span class='fl'>10</span>, <span class='fl'>20</span>, <span class='fl'>20</span>) / <span class='fl'>2</span>
+)
+<span class='fu'>not_run</span>({
+  <span class='no'>one_subquad</span> <span class='kw'>&lt;-</span> <span class='fu'>filter</span>(<span class='no'>id</span>, <span class='no'>id</span> <span class='kw'>==</span> <span class='st'>"16-3"</span>)
+  <span class='fu'>ggplot</span>(<span class='no'>one_subquad</span>, <span class='fu'>aes</span>(<span class='no'>lx</span>, <span class='no'>ly</span>)) + <span class='fu'>geom_point</span>()
 })</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -109,6 +153,10 @@
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
+
+      <li><a href="#details">Details</a></li>
+
+      <li><a href="#see-also">See also</a></li>
       
       <li><a href="#examples">Examples</a></li>
     </ul>

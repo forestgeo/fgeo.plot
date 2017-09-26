@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Help identify_subquadrat(). — add_quadrat_and_subquadrat_from_list â€¢ try</title>
+<title>A simple way to produce a three-lines header for a plot of repulsive tags. — get_header â€¢ try</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -76,85 +76,51 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Help identify_subquadrat().</h1>
+    <h1>A simple way to produce a three-lines header for a plot of repulsive tags.</h1>
     </div>
 
     
-    <p>Help identify_subquadrat().</p>
+    <p>A simple way to produce a three-lines header for a plot of repulsive tags.</p>
     
 
-    <pre class="usage"><span class='fu'>add_quadrat_and_subquadrat_from_list</span>(<span class='no'>df_list</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>get_header</span>(<span class='kw'>line1</span> <span class='kw'>=</span> <span class='fu'><a href='pad.html'>pad</a></span>(<span class='fu'>c</span>(<span class='st'>"Checking: "</span>, <span class='st'>"Checked date: "</span>)),
+  <span class='kw'>line2</span> <span class='kw'>=</span> <span class='fu'><a href='pad.html'>pad</a></span>(<span class='fu'>c</span>(<span class='st'>"Recording: "</span>), <span class='kw'>total_width</span> <span class='kw'>=</span> <span class='fl'>24</span>),
+  <span class='kw'>line3</span> <span class='kw'>=</span> <span class='fu'><a href='pad.html'>pad</a></span>(<span class='fu'>c</span>(<span class='st'>"Measuring: "</span>, <span class='st'>"Measurement date: "</span>)))</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>df_list</th>
-      <td><p>A list of dataframes</p></td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td><p>Arguments passed to <code><a href='add_subquadrat.html'>add_subquadrat()</a></code>. Importantly, this allows
-changing the size of the subquadrats.</p></td>
+      <th>line1, line2, line3</th>
+      <td><p>Strings to use on the first, second and third line
+of the header.</p></td>
     </tr>
     </table>
     
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>A three-lines string to be used as the header on a plot of repulsive
+tags.</p>
+    
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p>Other functions to prepare data to plot repulsive tags.: <code><a href='add_latest_tree_status.html'>add_latest_tree_status</a></code>,
-  <code><a href='add_quadrat_to_df_list.html'>add_quadrat_to_df_list</a></code>,
-  <code><a href='add_subquad_limits.html'>add_subquad_limits</a></code>,
-  <code><a href='add_subquadrat.html'>add_subquadrat</a></code>,
-  <code><a href='identify_subquadrat.html'>identify_subquadrat</a></code>,
-  <code><a href='prep_repulsive_tags.html'>prep_repulsive_tags</a></code></p>
+    <p>Other functions to fine tune a plot of repulsive tags.: <code><a href='get_theme.html'>get_theme</a></code>,
+  <code><a href='pad.html'>pad</a></code></p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>df_list</span> <span class='kw'>&lt;-</span> <span class='no'>toy_list</span>[<span class='fl'>1</span>:<span class='fl'>2</span>]
-<span class='co'># Extracting first quadrat and showing the head of each subquadrat</span>
-<span class='no'>added</span> <span class='kw'>&lt;-</span> <span class='fu'>add_quadrat_and_subquadrat_from_list</span>(<span class='no'>df_list</span>)<span class='kw'>[[</span><span class='fl'>1</span>]]
-<span class='fu'>lapply</span>(<span class='no'>added</span>, <span class='no'>head</span>)</div><div class='output co'>#&gt; [[1]]
-#&gt;    tag    lx    ly symbol quadrat subquadrat
-#&gt; 4  178 9.460 7.077     15       1          1
-#&gt; 7  920 5.341 2.272      1       1          1
-#&gt; 8  272 7.020 7.402     16       1          1
-#&gt; 9  266 2.614 5.359     15       1          1
-#&gt; 13 934 2.122 9.934      0       1          1
-#&gt; 21 977 0.564 0.756     15       1          1
-#&gt; 
-#&gt; [[2]]
-#&gt;    tag     lx    ly symbol quadrat subquadrat
-#&gt; 3   29 19.832 4.899     16       1          2
-#&gt; 6  154 19.928 4.078     16       1          2
-#&gt; 10 833 11.969 3.488     15       1          2
-#&gt; 15 567 16.864 6.511      0       1          2
-#&gt; 28 303 12.801 7.981      0       1          2
-#&gt; 29 780 13.023 7.048      0       1          2
-#&gt; 
-#&gt; [[3]]
-#&gt;    tag     lx     ly symbol quadrat subquadrat
-#&gt; 2  455 11.895 18.574     16       1          3
-#&gt; 11 213 11.720 14.437     15       1          3
-#&gt; 12 518 19.832 14.337     15       1          3
-#&gt; 16 113 14.726 14.222     16       1          3
-#&gt; 17 402 17.607 14.880      1       1          3
-#&gt; 18 887 16.363 11.231      1       1          3
-#&gt; 
-#&gt; [[4]]
-#&gt;    tag    lx     ly symbol quadrat subquadrat
-#&gt; 1  150 0.817 13.239      1       1          4
-#&gt; 5  111 6.869 11.231      0       1          4
-#&gt; 14  37 7.763 17.276     16       1          4
-#&gt; 31 762 5.266 19.573      1       1          4
-#&gt; 32 506 3.857 14.853     16       1          4
-#&gt; 33 913 6.562 12.056     15       1          4
-#&gt; </div></pre>
+    <pre class="examples"><div class='input'><span class='co'># Use common defaults</span>
+<span class='fu'>get_header</span>()</div><div class='output co'>#&gt; [1] "\nChecking: _______________ Checked date: _______________\nRecording: _____________\nMeasuring: _____________ Measurement date: _____________"</div><div class='input'>
+<span class='co'># Or make your own strings.</span>
+<span class='fu'>get_header</span>(<span class='kw'>line1</span> <span class='kw'>=</span> <span class='st'>"This is"</span>, <span class='kw'>line2</span> <span class='kw'>=</span> <span class='st'>"a customized"</span>, <span class='kw'>line3</span> <span class='kw'>=</span> <span class='st'>"header"</span>)</div><div class='output co'>#&gt; [1] "\nThis is\na customized\nheader"</div><div class='input'><span class='fu'>get_header</span>(<span class='kw'>line1</span> <span class='kw'>=</span> <span class='st'>"Only"</span>, <span class='kw'>line2</span> <span class='kw'>=</span> <span class='st'>"two lines"</span>, <span class='kw'>line3</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</div><div class='output co'>#&gt; [1] "\nOnly\ntwo lines\n"</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       
+      <li><a href="#value">Value</a></li>
+
       <li><a href="#see-also">See also</a></li>
       
       <li><a href="#examples">Examples</a></li>
