@@ -45,9 +45,9 @@ lapply_plot_repulsive_tags <- function(prep_df_list,
                                        header = get_header(),
                                        theme = get_theme()) {
   # Check that the data frame is in a list.
-  assertive.types::assert_is_data.frame(prep_df_list[[1]])
+  assertive::assert_is_data.frame(prep_df_list[[1]])
 
-  assertive.types::assert_is_character(site_name)
+  assertive::assert_is_character(site_name)
 
   lapply(
     X = prep_df_list,
@@ -70,8 +70,8 @@ plot_repulsive_tags <- function(prep_df,
                                 tag_size,
                                 header,
                                 theme) {
-  assertive.types::assert_is_data.frame(prep_df)
-  assertive.types::assert_is_character(site_name)
+  assertive::assert_is_data.frame(prep_df)
+  assertive::assert_is_character(site_name)
 
   id_quadrat_subquadrat <- unique(prep_df$id)
   ggplot(prep_df, aes(x = lx, y = ly, shape = latest_tree_status)) +

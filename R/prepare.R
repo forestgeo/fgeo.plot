@@ -32,20 +32,25 @@ prep_repulsive_tags <- function(df_list) {
 #' Add alternatives to symbol, that are easier to understand.
 #'
 #' @family functions to prepare data to plot repulsive tags.
-#' @param x A data frame.
+#' @param df A data frame with a variable named `symbol`.
 #'
 #' @return The modified data frame.
 #' @export
 #' @keywords internal
 #'
 #' @examples
-#' \dontrun{
-#' library(purrr)
-#' library(try)
-#' sin_q20 <- purrr::map(sin_q20, add_latest_tree_status)
-#' }
-add_latest_tree_status <- function(x) {
-  dplyr::mutate(x,
+#' # Add to a single dataframe
+#' df <- sinharaja::sinh_q20[[1]]
+#' head(add_latest_tree_status(df))
+#'
+#' # Add to each dataframe in a list
+#' df_list <- sinharaja::sinh_q20[1:2]
+#' result <- lapply(df_list, add_latest_tree_status)
+#' # Just show a few rows of each dataframe
+#' lapply(result, head)
+
+add_latest_tree_status <- function(df) {
+  dplyr::mutate(df,
     sym1 = dplyr::case_when(
       symbol == 16 ~ "Alive in 4",
       symbol ==  1 ~ "Alive in 3, Dead in 4",
@@ -60,6 +65,13 @@ add_latest_tree_status <- function(x) {
     )
   )
 }
+
+
+
+
+
+
+
 
 #' To a dataframe with `subquadrat` variable, add plot limits.
 #'
@@ -130,43 +142,6 @@ add_subquad_limits <- function(df_with_subquad, quad_size = 20, shrink = 0.4) {
     )
   )
 }
-
-# xxxxxxxxx continue here. Can remove add_subquad_limits and must test add_limits_shrinked
-
-# add_limits_shrinked <- function(df) {
-#   dplyr::mutate(df,
-#     x1 = dplyr::case_when(
-#       subquadrat == 1 ~ 0.4,
-#       subquadrat == 2 ~ 10.4,
-#       subquadrat == 3 ~ 10.4,
-#       subquadrat == 4 ~ 0.4
-#     ),
-#     x2 = dplyr::case_when(
-#       subquadrat == 1 ~ 9.6,
-#       subquadrat == 2 ~ 19.6,
-#       subquadrat == 3 ~ 19.6,
-#       subquadrat == 4 ~ 9.6
-#     ),
-#     y1 = dplyr::case_when(
-#       subquadrat == 1 ~ 0.4,
-#       subquadrat == 2 ~ 0.4,
-#       subquadrat == 3 ~ 10.4,
-#       subquadrat == 4 ~ 10.4
-#     ),
-#     y2 = dplyr::case_when(
-#       subquadrat == 1 ~ 9.6,
-#       subquadrat == 2 ~ 9.6,
-#       subquadrat == 3 ~ 19.6,
-#       subquadrat == 4 ~ 19.6
-#     )
-#   )
-# }
-
-
-
-
-
-
 
 
 
@@ -279,7 +254,7 @@ add_subquadrat <- function(df,
                            x2 = c(10, 20, 20, 10),
                            y1 = c(0, 0, 10, 10),
                            y2 = c(10, 10, 20, 20)) {
-  assertive.types::assert_is_data.frame(df)
+  assertive::assert_is_data.frame(df)
 
   df_list <- replicate(4, data.frame(NULL, stringsAsFactors = FALSE))
 
