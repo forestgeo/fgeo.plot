@@ -25,8 +25,11 @@ The name of each element of the input list becomes a value of a new variable
 of the variables \code{lx} and \code{ly} that each dataframe should have.
 }
 \examples{
+library(dplyr)
+library(ggplot2)
+
 df_list <- sinharaja::sinh_q20[1:2]
-identify_subquadrat(df_list)
+head(identify_subquadrat(df_list))
 
 df_list <- sinharaja::sinh_q20[1:2]
 
@@ -38,15 +41,16 @@ id <- identify_subquadrat(
  y1 = c(0, 0, 10, 10) / 2,
  y2 = c(10, 10, 20, 20) / 2
 )
-id \%>\% filter(id == "16-3") \%>\%
-  ggplot(aes(lx, ly)) + geom_point()
+\dontrun{
+one_subquad <- filter(id, id == "16-3")
+ggplot(one_subquad, aes(lx, ly)) + geom_point()
+}
 }
 \seealso{
 Other functions to prepare data to plot repulsive tags.: \code{\link{add_latest_tree_status}},
-  \code{\link{add_limits_shrinked}},
-  \code{\link{add_limits}},
   \code{\link{add_quadrat_and_subquadrat_from_list}},
   \code{\link{add_quadrat_to_df_list}},
+  \code{\link{add_subquad_limits}},
   \code{\link{add_subquadrat}},
   \code{\link{prep_repulsive_tags}}
 }

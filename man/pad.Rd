@@ -15,8 +15,6 @@ vector of strings.}
 \item{side}{Side on which padding character is added (left, right or both).}
 
 \item{pad}{Single padding character (default is a space).}
-
-\item{width}{Minimum width of padded strings.}
 }
 \value{
 A padded string that is convenient to produce each line of

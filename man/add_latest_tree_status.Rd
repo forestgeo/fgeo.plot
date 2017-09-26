@@ -2,31 +2,37 @@
 % Please edit documentation in R/prepare.R
 \name{add_latest_tree_status}
 \alias{add_latest_tree_status}
-\title{Add alternatives to symbol, that are easier to understand.}
+\title{Add alternatives to the variable \code{symbol} that are easier to understand.}
 \usage{
-add_latest_tree_status(x)
+add_latest_tree_status(df)
 }
 \arguments{
-\item{x}{A data frame.}
+\item{df}{A data frame with a variable named \code{symbol}.}
 }
 \value{
 The modified data frame.
 }
 \description{
-Add alternatives to symbol, that are easier to understand.
+The variable \code{symbol} codes the status of a tree in a very succint way. This
+function unpacks the meaning of \code{symbol}. Be careful. This function is
+specifically designed for one particular dataset and should not be used
+in other data sets.
 }
 \examples{
-\dontrun{
-library(purrr)
-library(try)
-sin_q20 <- purrr::map(sin_q20, add_latest_tree_status)
-}
+# Add to a single dataframe
+df <- sinharaja::sinh_q20[[1]]
+head(add_latest_tree_status(df))
+
+# Add to each dataframe in a list
+df_list <- sinharaja::sinh_q20[1:2]
+result <- lapply(df_list, add_latest_tree_status)
+# Just show a few rows of each dataframe
+lapply(result, head)
 }
 \seealso{
-Other functions to prepare data to plot repulsive tags.: \code{\link{add_limits_shrinked}},
-  \code{\link{add_limits}},
-  \code{\link{add_quadrat_and_subquadrat_from_list}},
+Other functions to prepare data to plot repulsive tags.: \code{\link{add_quadrat_and_subquadrat_from_list}},
   \code{\link{add_quadrat_to_df_list}},
+  \code{\link{add_subquad_limits}},
   \code{\link{add_subquadrat}},
   \code{\link{identify_subquadrat}},
   \code{\link{prep_repulsive_tags}}

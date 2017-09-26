@@ -18,13 +18,13 @@ Help identify_subquadrat().
 \examples{
 df_list <- sinharaja::sinh_q20[1:2]
 # Extracting first quadrat and showing the head of each subquadrat
-add_quadrat_and_subquadrat_from_list(df_list)[[1]] \%>\% lapply(head)
+added <- add_quadrat_and_subquadrat_from_list(df_list)[[1]]
+lapply(added, head)
 }
 \seealso{
 Other functions to prepare data to plot repulsive tags.: \code{\link{add_latest_tree_status}},
-  \code{\link{add_limits_shrinked}},
-  \code{\link{add_limits}},
   \code{\link{add_quadrat_to_df_list}},
+  \code{\link{add_subquad_limits}},
   \code{\link{add_subquadrat}},
   \code{\link{identify_subquadrat}},
   \code{\link{prep_repulsive_tags}}

@@ -11,20 +11,20 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Suggests: covr,
-    testthat,
     knitr,
     rmarkdown,
     sinharaja,
-    tibble
+    testthat
 RoxygenNote: 6.0.1
 Roxygen: list(markdown = TRUE)
 VignetteBuilder: knitr
 URL: https://github.com/forestgeo/try
 BugReports: https://github.com/forestgeo/try/issues
-Imports: dplyr,
+Imports: assertive,
+    dplyr,
     ggplot2,
     ggrepel,
     purrr,
     rlang,
     stringr,
-    assertive
+    tibble

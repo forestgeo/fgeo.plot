@@ -21,15 +21,24 @@
 #' str(list_of_dataframes)
 #'
 #' prepared <- prep_repulsive_tags(list_of_dataframes)
-#' str(prepared)
+#' str(prepared[1:2])
 prep_repulsive_tags <- function(df_list) {
+  # Pad quadrat names with 0 to the left.
+  names(df_list) <- stringr::str_pad(
+    names(df_list), width = 4, pad = "0", side = "left"
+  )
   explicit_status <- purrr::map(df_list, add_latest_tree_status)
   identified <- identify_subquadrat(explicit_status)
-  with_limits <- add_limits_shrinked(identified)
+  with_limits <- add_subquad_limits(identified)
   split(with_limits, with_limits$id)
 }
 
-#' Add alternatives to symbol, that are easier to understand.
+#' Add alternatives to the variable `symbol` that are easier to understand.
+#'
+#' The variable `symbol` codes the status of a tree in a very succint way. This
+#' function unpacks the meaning of `symbol`. Be careful. This function is
+#' specifically designed for one particular dataset and should not be used
+#' in other data sets.
 #'
 #' @family functions to prepare data to plot repulsive tags.
 #' @param df A data frame with a variable named `symbol`.
@@ -48,7 +57,6 @@ prep_repulsive_tags <- function(df_list) {
 #' result <- lapply(df_list, add_latest_tree_status)
 #' # Just show a few rows of each dataframe
 #' lapply(result, head)
-
 add_latest_tree_status <- function(df) {
   dplyr::mutate(df,
     sym1 = dplyr::case_when(
@@ -65,13 +73,6 @@ add_latest_tree_status <- function(df) {
     )
   )
 }
-
-
-
-
-
-
-
 
 #' To a dataframe with `subquadrat` variable, add plot limits.
 #'
@@ -100,6 +101,8 @@ add_latest_tree_status <- function(df) {
 #' @return A modified data frame.
 #' @export
 #' @examples
+#' library(dplyr)
+#'
 #' # Showing only 1 quadrat to save space
 #' with_subquad_list <- sinharaja::sinh_q20[1] %>%
 #'   add_quadrat_and_subquadrat_from_list()
@@ -167,8 +170,11 @@ add_subquad_limits <- function(df_with_subquad, quad_size = 20, shrink = 0.4) {
 #' @keywords internal
 #'
 #' @examples
+#' library(dplyr)
+#' library(ggplot2)
+#'
 #' df_list <- sinharaja::sinh_q20[1:2]
-#' identify_subquadrat(df_list)
+#' head(identify_subquadrat(df_list))
 #'
 #' df_list <- sinharaja::sinh_q20[1:2]
 #'
@@ -180,8 +186,10 @@ add_subquad_limits <- function(df_with_subquad, quad_size = 20, shrink = 0.4) {
 #'  y1 = c(0, 0, 10, 10) / 2,
 #'  y2 = c(10, 10, 20, 20) / 2
 #' )
-#' id %>% filter(id == "16-3") %>%
-#'   ggplot(aes(lx, ly)) + geom_point()
+#' \dontrun{
+#' one_subquad <- filter(id, id == "16-3")
+#' ggplot(one_subquad, aes(lx, ly)) + geom_point()
+#' }
 identify_subquadrat <- function(df_list, ...) {
   with_quad_subquad_list <- add_quadrat_and_subquadrat_from_list(df_list, ...)
   reduced_deep <- suppressMessages(
@@ -211,24 +219,29 @@ identify_subquadrat <- function(df_list, ...) {
 #' @examples
 #' df_list <- sinharaja::sinh_q20[1:2]
 #' # Extracting first quadrat and showing the head of each subquadrat
-#' add_quadrat_and_subquadrat_from_list(df_list)[[1]] %>% lapply(head)
+#' added <- add_quadrat_and_subquadrat_from_list(df_list)[[1]]
+#' lapply(added, head)
 add_quadrat_and_subquadrat_from_list <- function(df_list, ...) {
   with_quadrat <- add_quadrat_to_df_list(df_list)
   lapply(with_quadrat, add_subquadrat, ...)
 }
 
-
-
 #' Adds subquadrat variable to a data frame, using Shameema's code.
 #'
 #' @family functions to prepare data to plot repulsive tags.
+#'
+#' @param x1,x2,y1,y2 Parameters to set x and y limits of each subquadrat.
 #' @param df A data frame.
+#'
 #' @author Shameema Jafferjee Esufali <shameemaesufali@gmail.com>.
 #'
 #' @return A list of 4 data frames.
 #' @export
 #'
 #' @examples
+#' library(dplyr)
+#' library(ggplot2)
+#'
 #' # From a dataframe of one quadrat, get a list of 4 subquadrats.
 #' one_quadrat <- sinharaja::sinh_q20[[15]]
 #' head(one_quadrat)
@@ -237,7 +250,9 @@ add_quadrat_and_subquadrat_from_list <- function(df_list, ...) {
 #' # Show one subquadrat of the default size
 #' subquadrats_of_default_size <- add_subquadrat(one_quadrat)[[1]]
 #' one_default_subquad <- filter(subquadrats_of_default_size, subquadrat == 1)
+#' \dontrun{
 #' ggplot(one_default_subquad, aes(lx, ly)) + geom_point()
+#' }
 #'
 #' # Show one subquadrat of half the default size
 #' subquadrats_half_size <- add_subquadrat(
@@ -248,7 +263,9 @@ add_quadrat_and_subquadrat_from_list <- function(df_list, ...) {
 #'   y2 = (c(10, 10, 20, 20) / 2)
 #' )[[1]]
 #' one_half_sized_subquad <- filter(subquadrats_half_size, subquadrat == 1)
+#' \dontrun{
 #' ggplot(one_half_sized_subquad, aes(lx, ly)) + geom_point()
+#' }
 add_subquadrat <- function(df,
                            x1 = c(0, 10, 10, 0),
                            x2 = c(10, 20, 20, 10),

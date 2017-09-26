@@ -12,7 +12,7 @@ get_theme(panel_grid_major_colour = "grey",
   legend_title = element_blank(), ...)
 }
 \arguments{
-\item{panel_grid_major_colour, panel_grid_minor_colour}{Colour of major grid
+\item{panel_grid_major_colour}{Colour of major grid
 lines.}
 
 \item{panel_grid_minor_colour, panel_grid_minor_linetype}{Colour and line type

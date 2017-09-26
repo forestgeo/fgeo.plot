@@ -25,7 +25,9 @@
 #' list_of_dataframes <- sinharaja::sinh_q20[1:2]
 #' prepared <- prep_repulsive_tags(list_of_dataframes)
 #' plot_list <- lapply_plot_repulsive_tags(prepared, site_name = "Sinharaja")
+#' \dontrun{
 #' plot_list[[1]]
+#' }
 #'
 #' # Print each plot on a plage of a single .pdf file
 #' \dontrun{

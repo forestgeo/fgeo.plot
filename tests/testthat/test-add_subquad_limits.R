@@ -1,5 +1,7 @@
 context("add_subquad_limits")
 
+library(dplyr)
+
 # Just a shortcut to try different `qudrat_size`s (qs)
 add_and_extract_lims <- function(quad_size, ...) {
 
@@ -20,7 +22,7 @@ with_subquad_df %>%
 
 
 
-test_that("multiplication works", {
+test_that("outputs the expected limits", {
   expect_equal(add_and_extract_lims(20, shrink = 0.4), "0.4 9.6 0.4 9.6")
   expect_equal(add_and_extract_lims(10, shrink = 0.5), "0.5 4.5 0.5 4.5")
 })

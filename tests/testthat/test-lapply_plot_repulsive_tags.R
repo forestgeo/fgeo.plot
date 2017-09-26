@@ -1,13 +1,13 @@
 context("lapply_plot_repulsive_tags")
 
-library(tidyverse)
+library(dplyr)
+library(ggplot2)
 
 list_of_one_quadrat <- sinharaja::sinh_q20[1]
 
 ond_dataframe <- list_of_one_quadrat %>%
   prep_repulsive_tags() %>%
-  .[[1]] %>%
-  as.tibble()
+  .[[1]]
 
 test_that("errs with wrong input passed to the first few arguments", {
   p <- list_of_one_quadrat %>%
@@ -29,6 +29,5 @@ test_that("errs with wrong input passed to the first few arguments", {
       prep_repulsive_tags() %>%
       lapply_plot_repulsive_tags(site_name = as.factor("site"))
   })
-
 })
 

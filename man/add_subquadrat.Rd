@@ -9,6 +9,8 @@ add_subquadrat(df, x1 = c(0, 10, 10, 0), x2 = c(10, 20, 20, 10), y1 = c(0,
 }
 \arguments{
 \item{df}{A data frame.}
+
+\item{x1, x2, y1, y2}{Parameters to set x and y limits of each subquadrat.}
 }
 \value{
 A list of 4 data frames.
@@ -17,6 +19,9 @@ A list of 4 data frames.
 Adds subquadrat variable to a data frame, using Shameema's code.
 }
 \examples{
+library(dplyr)
+library(ggplot2)
+
 # From a dataframe of one quadrat, get a list of 4 subquadrats.
 one_quadrat <- sinharaja::sinh_q20[[15]]
 head(one_quadrat)
@@ -25,7 +30,9 @@ lapply(add_subquadrat(one_quadrat), head)
 # Show one subquadrat of the default size
 subquadrats_of_default_size <- add_subquadrat(one_quadrat)[[1]]
 one_default_subquad <- filter(subquadrats_of_default_size, subquadrat == 1)
+\dontrun{
 ggplot(one_default_subquad, aes(lx, ly)) + geom_point()
+}
 
 # Show one subquadrat of half the default size
 subquadrats_half_size <- add_subquadrat(
@@ -36,14 +43,15 @@ subquadrats_half_size <- add_subquadrat(
   y2 = (c(10, 10, 20, 20) / 2)
 )[[1]]
 one_half_sized_subquad <- filter(subquadrats_half_size, subquadrat == 1)
+\dontrun{
 ggplot(one_half_sized_subquad, aes(lx, ly)) + geom_point()
+}
 }
 \seealso{
 Other functions to prepare data to plot repulsive tags.: \code{\link{add_latest_tree_status}},
-  \code{\link{add_limits_shrinked}},
-  \code{\link{add_limits}},
   \code{\link{add_quadrat_and_subquadrat_from_list}},
   \code{\link{add_quadrat_to_df_list}},
+  \code{\link{add_subquad_limits}},
   \code{\link{identify_subquadrat}},
   \code{\link{prep_repulsive_tags}}
 }

@@ -4,7 +4,7 @@
 #' theme by passing more arguments to [ggplot2::theme()] (via `...`) or by
 #' replacing this theme completely with a new [ggplot2::theme()].
 #'
-#' @param panel_grid_major_colour,panel_grid_minor_colour Colour of major grid
+#' @param panel_grid_major_colour Colour of major grid
 #'   lines.
 #' @param panel_grid_minor_colour,panel_grid_minor_linetype Colour and line type
 #'   of minor grid lines.
@@ -98,15 +98,14 @@ get_header <- function(line1 = pad(c("Checking: ", "Checked date: ")),
 #' @param total_width Total width of the string after pasting each string in the
 #'   vector of strings.
 #' @param string A character vector.
-#' @param width Minimum width of padded strings.
 #' @param side Side on which padding character is added (left, right or both).
 #' @param pad Single padding character (default is a space).
+#'
 #' @family functions to fine tune a plot of repulsive tags.
 #'
 #' @return A padded string that is convenient to produce each line of
 #'   [get_header()]
 #' @export
-#'
 #'
 #' @examples
 #' pad(c("Hello", "world"))
