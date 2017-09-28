@@ -85,9 +85,10 @@ plot_repulsive_tags <- function(prep_df,
       xlim = c(unique(prep_df$x1), unique(prep_df$x2)),
       ylim = c(unique(prep_df$y1), unique(prep_df$y2))
     ) +
+    # coord_fixed() +
     labs(x = NULL, y = NULL) +
     labs(
-      title = paste0(site_name, ". Quadrat ", id_quadrat_subquadrat),
+      title = paste0(site_name, ". ", id_quadrat_subquadrat),
       subtitle = header
     ) +
     theme

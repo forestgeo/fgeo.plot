@@ -149,6 +149,32 @@ splitted %>%
 ```{r}
 # Prepare and pdf
 
+# funs ----
+paginate <- function(x) {
+  dplyr::mutate(x, subquadrat =
+      case_when(
+        subquadrat_vftbl == 11 ~ 1,
+        subquadrat_vftbl == 12 ~ 1,
+        subquadrat_vftbl == 21 ~ 1,
+        subquadrat_vftbl == 22 ~ 1,
+
+        subquadrat_vftbl == 31 ~ 2,
+        subquadrat_vftbl == 32 ~ 2,
+        subquadrat_vftbl == 41 ~ 2,
+        subquadrat_vftbl == 42 ~ 2,
+
+        subquadrat_vftbl == 34 ~ 3,
+        subquadrat_vftbl == 33 ~ 3,
+        subquadrat_vftbl == 44 ~ 3,
+        subquadrat_vftbl == 43 ~ 3,
+
+        subquadrat_vftbl == 14 ~ 4,
+        subquadrat_vftbl == 13 ~ 4,
+        subquadrat_vftbl == 24 ~ 4,
+        subquadrat_vftbl == 23 ~ 4,
+      )
+    )
+}
 
 add_sqds <- function(df) {
   paginate(df) %>% 
@@ -158,24 +184,7 @@ add_sqds <- function(df) {
   dplyr::select(sqds, everything())
 }
 
-
-# prepared <- splitted %>% 
-#   purrr::map(add_sqds) %>% 
-#   purrr::map(add_latest_tree_status) %>% 
-#   purrr::map(paginate) %>% 
-#   purrr::map(rename, quadrat = quadrat_vftbl) %>% 
-#   purrr::map(add_subquad_limits) %>% 
-#   purrr::map(mutate, 
-#     id = paste0("Quad. ", quadrat, ". Subq. ", sqds, " (page ", subquadrat, ")")
-#   ) %>% 
-#   purrr::map(select, id, subquadrat, everything()) %>% 
-#   purrr::map(select, 
-#     id, tag, lx, ly, latest_tree_status, x1, x2, y1, y2
-#   ) %>% 
-#   map(function(x) {split(x, x$id)}) %>% .[[1]]
-
-
-
+# action ----
 prepared <- splitted %>%
   purrr::map(add_sqds) %>%
   purrr::map(add_latest_tree_status) %>%
@@ -183,21 +192,46 @@ prepared <- splitted %>%
   purrr::map(rename, quadrat = quadrat_vftbl) %>%
   purrr::map(add_subquad_limits) %>%
   purrr::map(mutate,
-    id = paste0("Quad. ", quadrat, ". Subq. ", sqds, " (page ", subquadrat, ")")
+    id = paste0("Q. ", quadrat, " SQ. ", sqds, " (p. ", subquadrat, ")")
   ) %>%
   purrr::map(select, id, subquadrat, everything()) %>%
   purrr::map(select,
     id, tag, lx, ly, latest_tree_status, x1, x2, y1, y2, everything()
   )
+
 prep_df <- prepared %>% reduce(full_join)
 prep_list <- split(prep_df, prep_df$id)
 plot_list <- lapply_plot_repulsive_tags(prep_list, site_name = "Sinharaja 2017")
-plot_list[[1]]
 
 pdf(onefile = TRUE, paper = "a4", width = 11, height = 11)
 plot_list
 dev.off()
 ```
+
+
+
+Just two extreeme quadrats.
+
+```{r}
+df <- splitted %>% reduce(full_join)
+df %>% filter(lx == max(lx) | ly == max(ly))
+
+prep_df <- prepared %>% reduce(full_join)
+prep_df <- prep_df %>% 
+  filter(quadrat %in% c("1115", "2105"))
+
+
+prep_list <- split(prep_df, prep_df$id)
+plot_list <- lapply_plot_repulsive_tags(prep_list, site_name = "Sinharaja 2017")
+
+pdf(onefile = TRUE, paper = "a4", width = 11, height = 11)
+plot_list
+dev.off()
+
+
+```
+
+
 
 
 
