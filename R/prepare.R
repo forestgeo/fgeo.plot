@@ -20,12 +20,12 @@
 #' prepared <- prep_repulsive_tags(list_of_dataframes)
 #' str(prepared[1:2])
 prep_repulsive_tags <- function(df_list) {
-  # Pad quadrat names with 0 to the left.
-  names(df_list) <- stringr::str_pad(
-    names(df_list), width = 4, pad = "0", side = "left"
-  )
+  # # Pad quadrat names with 0 to the left.
+  # names(df_list) <- stringr::str_pad(
+  #   names(df_list), width = 4, pad = "0", side = "left"
+  # )
   explicit_status <- purrr::map(df_list, add_latest_tree_status)
-  identified <- identify_subquadrat(explicit_status)
+  # identified <- identify_subquadrat(explicit_status)
   with_limits <- add_subquad_limits(identified)
   useful_vars <- dplyr::select(
     with_limits,
@@ -151,8 +151,54 @@ add_subquad_limits <- function(df_with_subquad, quad_size = 20, shrink = 0.4) {
 
 # Towards creating an id variable with info from quad and subquad ---------
 
-#' From a list of dataframes output a dataframe with a useful id variable.
+
+
+#' Add the variable `subquadrat` that really means the page the subquadrats will
+#' print
 #'
+#' @param x A dataframe
+#'
+#' @return
+#' @export
+#'
+#' @examples
+#' splitted[[1]] %>% paginate()
+paginate <- function(x) {
+  dplyr::mutate(x, subquadrat =
+      case_when(
+        subquadrat_vftbl == 11 ~ 1,
+        subquadrat_vftbl == 12 ~ 1,
+        subquadrat_vftbl == 21 ~ 1,
+        subquadrat_vftbl == 22 ~ 1,
+
+        subquadrat_vftbl == 31 ~ 2,
+        subquadrat_vftbl == 32 ~ 2,
+        subquadrat_vftbl == 41 ~ 2,
+        subquadrat_vftbl == 42 ~ 2,
+
+        subquadrat_vftbl == 34 ~ 3,
+        subquadrat_vftbl == 33 ~ 3,
+        subquadrat_vftbl == 44 ~ 3,
+        subquadrat_vftbl == 43 ~ 3,
+
+        subquadrat_vftbl == 14 ~ 4,
+        subquadrat_vftbl == 13 ~ 4,
+        subquadrat_vftbl == 24 ~ 4,
+        subquadrat_vftbl == 23 ~ 4,
+      )
+    )
+}
+
+
+
+
+
+
+
+
+
+#' From a list of dataframes output a dataframe with a useful id variable.
+
 #' This function with quadrat and subquadrat variables add id.
 #'
 #' The name of each element of the input list becomes a value of a new variable
@@ -170,42 +216,60 @@ add_subquad_limits <- function(df_with_subquad, quad_size = 20, shrink = 0.4) {
 #' @export
 #'
 #' @examples
-#' library(dplyr)
-#' library(ggplot2)
-#'
-#' df_list <- toy_list[1:2]
-#' head(identify_subquadrat(df_list))
-#'
-#' df_list <- toy_list[1:2]
-#'
-#' # Passing arguments to add_subquadrat(), to make subquadrats half the size
-#' id <- identify_subquadrat(
-#'  df_list,
-#'  x1 = c(0, 10, 10, 0) / 2,
-#'  x2 = c(10, 20, 20, 10) / 2,
-#'  y1 = c(0, 0, 10, 10) / 2,
-#'  y2 = c(10, 10, 20, 20) / 2
-#' )
-#' \dontrun{
-#' one_subquad <- filter(id, id == "16-3")
-#' ggplot(one_subquad, aes(lx, ly)) + geom_point()
+#' #' library(dplyr)
+#' #' library(ggplot2)
+#' #'
+#' #' df_list <- toy_list[1:2]
+#' #' head(identify_subquadrat(df_list))
+#' #'
+#' #' df_list <- toy_list[1:2]
+#' #'
+#' #' # Passing arguments to add_subquadrat(), to make subquadrats half the size
+#' #' id <- identify_subquadrat(
+#' #'  df_list,
+#' #'  x1 = c(0, 10, 10, 0) / 2,
+#' #'  x2 = c(10, 20, 20, 10) / 2,
+#' #'  y1 = c(0, 0, 10, 10) / 2,
+#' #'  y2 = c(10, 10, 20, 20) / 2
+#' #' )
+#' #' \dontrun{
+#' #' one_subquad <- filter(id, id == "16-3")
+#' #' ggplot(one_subquad, aes(lx, ly)) + geom_point()
+#' #' }
+#' identify_subquadrat <- function(df_list, ...) {
+#'   with_quad_subquad_list <- add_quadrat_and_subquadrat_from_list(df_list, ...)
+#'   reduced_deep <- suppressMessages(
+#'     purrr::map(with_quad_subquad_list, purrr::reduce, dplyr::full_join)
+#'   )
+#'   reduced_shallow <- suppressMessages(
+#'     purrr::reduce(reduced_deep, dplyr::full_join)
+#'   )
+#'   ided <- dplyr::mutate(
+#'     reduced_shallow, id = paste(.data$quadrat, .data$subquadrat, sep = "-")
+#'   )
+#'   ordered <- dplyr::select(
+#'     ided, .data$id, .data$quadrat, .data$subquadrat, dplyr::everything()
+#'   )
+#'   ordered
 #' }
-identify_subquadrat <- function(df_list, ...) {
-  with_quad_subquad_list <- add_quadrat_and_subquadrat_from_list(df_list, ...)
-  reduced_deep <- suppressMessages(
-    purrr::map(with_quad_subquad_list, purrr::reduce, dplyr::full_join)
-  )
-  reduced_shallow <- suppressMessages(
-    purrr::reduce(reduced_deep, dplyr::full_join)
-  )
-  ided <- dplyr::mutate(
-    reduced_shallow, id = paste(.data$quadrat, .data$subquadrat, sep = "-")
-  )
-  ordered <- dplyr::select(
-    ided, .data$id, .data$quadrat, .data$subquadrat, dplyr::everything()
-  )
-  ordered
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 #' Help `identify_subquadrat()`.
 #'

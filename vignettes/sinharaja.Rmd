@@ -130,15 +130,69 @@ Split the data
 
 ```{r}
 splitted <- sinh_df %>% split(.$quadrat_vftbl)
-splitted[[1]] %>% unique()
 ```
+
+Table problematic trees
+
+```{r}
+splitted %>% 
+  map(as.data.frame) %>% 
+  map(filter, lx >= 20 | ly >= 20) %>% 
+  map(arrange, tag) %>% 
+  map(select, tag, subquadrat_vftbl)
+```
+
+
 
 ## Prepare and plot
 
 ```{r}
 # Prepare and pdf
-prepared <- prep_repulsive_tags(splitted)[4]
-plot_list <- lapply_plot_repulsive_tags(prepared, site_name = "Sinharaja 2017")
+
+
+add_sqds <- function(df) {
+  paginate(df) %>% 
+  dplyr::group_by(subquadrat) %>% 
+  dplyr::mutate(sqds = paste0(unique(sort(subquadrat_vftbl)), collapse = "-")) %>% 
+  dplyr::ungroup() %>% 
+  dplyr::select(sqds, everything())
+}
+
+
+# prepared <- splitted %>% 
+#   purrr::map(add_sqds) %>% 
+#   purrr::map(add_latest_tree_status) %>% 
+#   purrr::map(paginate) %>% 
+#   purrr::map(rename, quadrat = quadrat_vftbl) %>% 
+#   purrr::map(add_subquad_limits) %>% 
+#   purrr::map(mutate, 
+#     id = paste0("Quad. ", quadrat, ". Subq. ", sqds, " (page ", subquadrat, ")")
+#   ) %>% 
+#   purrr::map(select, id, subquadrat, everything()) %>% 
+#   purrr::map(select, 
+#     id, tag, lx, ly, latest_tree_status, x1, x2, y1, y2
+#   ) %>% 
+#   map(function(x) {split(x, x$id)}) %>% .[[1]]
+
+
+
+prepared <- splitted %>%
+  purrr::map(add_sqds) %>%
+  purrr::map(add_latest_tree_status) %>%
+  purrr::map(paginate) %>%
+  purrr::map(rename, quadrat = quadrat_vftbl) %>%
+  purrr::map(add_subquad_limits) %>%
+  purrr::map(mutate,
+    id = paste0("Quad. ", quadrat, ". Subq. ", sqds, " (page ", subquadrat, ")")
+  ) %>%
+  purrr::map(select, id, subquadrat, everything()) %>%
+  purrr::map(select,
+    id, tag, lx, ly, latest_tree_status, x1, x2, y1, y2, everything()
+  )
+prep_df <- prepared %>% reduce(full_join)
+prep_list <- split(prep_df, prep_df$id)
+plot_list <- lapply_plot_repulsive_tags(prep_list, site_name = "Sinharaja 2017")
+plot_list[[1]]
 
 pdf(onefile = TRUE, paper = "a4", width = 11, height = 11)
 plot_list
