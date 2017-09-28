@@ -1,0 +1,272 @@
+---
+title: "Review by Stuart"
+subtitle: "Why are some trees on the data sheets but not on the maps?"
+author: "Mauro Lepore"
+date: "2017-09-26"
+output: 
+  rmarkdown::html_vignette:
+    toc: true
+    toc_depth: 6
+vignette: >
+  %\VignetteIndexEntry{Review by Stuart}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, echo = FALSE, message=FALSE, warning=FALSE}
+# hadley's settings
+set.seed(1014)
+options(digits = 3)
+
+knitr::opts_chunk$set(
+  echo = TRUE,  # {mine}
+  comment = "#>",
+  collapse = TRUE,
+  # cache = TRUE,
+  out.width = "100%",
+  fig.align = "center",
+  fig.width = 11,
+  fig.asp = 0.618,  # 1 / phi
+  fig.show = "hold"
+)
+
+options(dplyr.print_min = 6, dplyr.print_max = 6)
+```
+
+# Setup
+
+```{r}
+library(tidyverse)
+library(try)
+
+df_list <- sinharaja::sinh_q20
+```
+
+
+
+# Goal
+
+The goal is to find why some trees are not plotted, and plot them to match the field data-sheet.
+
+# Emails
+
+
+## Suzanne and Shameema
+
+Hi Mauro and Stuart,
+
+Shameema and I discussed this issue this afternoon. For some reason, some sites have local x and y coordinates that are equal or larger than 20. In theory, this shouldn't happen, because these trees should then be placed in the next quadrat. 
+
+Stuart, I think that there are one of 2 options:
+
+1. If the local x and y coordinates are >= 20, then these trees should be mapped in the next quadrat.
+2. Change the local x or y coordinates to 19.9 so that they fall within the "correct" quadrat and are then mapped.
+
+I suggest the 2nd option, which then fixes those trees in the border of the plots also, i.e. those that have either x=500 or y=500.
+
+If you do decide on the 2nd option, then your script should then change all x>=20 or y>=20 to x=19.9 and y=19.9 before mapping.
+
+Unfortunately, this means that the subquadrat is then wrong in the field sheets? They are probably placed in the 1st row instead of in the 4th row of the quadrat, since the calculation of the subquadrat is based on the lx and ly also.
+
+Best,
+Suzanne
+
+
+
+## Shameema
+
+
+Mauro, The dataset has all the trees. 
+
+However, line 73 in fieldmaps.r is
+
+```
+subset <- sinharaja.q20[[i]][sinharaja.q20[[i]]$lx >= x1[n] &
+    sinharaja.q20[[i]]$lx < x2[n] &
+    sinharaja.q20[[i]]$ly >= y1[n] & sinharaja.q20[[i]]$ly < y2[n], ]
+```
+
+This is the subset that is plotted. The condition excludes the outliers.  I am sorry.  I should have noticed that. 
+Instead, you need to find the max and min values for each quadrat to define the xlim and ylim.
+
+
+
+## Stuart
+
+Hi Mauro,
+ 
+I was just checking the maps and the datasheets on my computer. It seems that they do not exactly match. Some trees are missing from the maps.
+ 
+See attached map for Quadrat 0015. Attached is a map you made last week, but tree #300258 is on the datasheet in SubQuadrat 1,1 but is not on the map.  See also #4456 and #4463 and #4464 which are not in the SubQuad 2,1 map but are listed in the datasheet.   
+ 
+Shameema or Mauro, Any idea what is going on?
+ 
+It seems to me the issue is how you treat trees that are on the quadrat margins. This needs to be consistent between the maps and the datasheets.  You need to use the SubQuadrat number in the database to determine which trees are in which maps – if a tree is on a margin between two Quadrats, use the SubQuadrat to tell you in which map to put the tree.  You cannot use a rule based on GX, GY.
+ 
+I will check the hard copies tomorrow morning in the office.  But, please follow up as soon as possible. I will not have time in Singapore to print all these maps again.
+ 
+Thanks,
+ 
+Stuart
+
+
+# Overview
+
+## How are subquadrats defined in a quadrat?
+
+Starting from the lower left, subquadrates are defined anti-clockwise.
+
+```{r}
+# From the original data, maka a big data frame for convenience
+df <- df_list %>% reduce(full_join) %>% as_tibble()
+
+df %>% 
+  add_subquadrat() %>% 
+  reduce(full_join) %>% 
+  sample_n(100) %>% 
+  ggplot(aes(lx, ly)) + 
+    geom_text(aes(label = subquadrat))
+```
+
+## Where are we "loosing" the trees that don't get mapped?
+
+We are loosing trees in the step that adds subquadrats.
+
+```{r}
+df
+subq <- df %>% add_subquadrat() %>% reduce(full_join)
+
+# Count total trees we are loosing
+nrow(df) - nrow(subq)
+
+# Percent trees we are loosing
+100 - (nrow(subq) / nrow(df) * 100)
+```
+
+So I need to fix `add_subquadrat()`.
+
+The problem is that some trees get no subquadrat value. Those trees are the ones that fall outside these ranges:
+
+```
+x1 = c(0, 10, 10, 0)
+x2 = c(10, 20, 20, 10)
+y1 = c(0, 0, 10, 10)
+y2 = c(10, 10, 20, 20)
+```
+
+
+
+
+
+
+
+
+
+# Other stuff
+
+
+
+
+
+
+# Exploring quadrat 15
+
+## Are the missing trees in the data? 
+
+Yes.
+
+```{r}
+missing_trees <- c(300258, 4456, 4463, 4464)
+
+df_list %>% 
+  map_df(~dplyr::filter(., tag %in% missing_trees))
+```
+
+
+## How many trees are at or beyond 20 of lx or ly_
+
+```{r}
+over <- df_list %>% 
+  map_df(~dplyr::filter(., lx > 20 | ly > 20)) %>% 
+  nrow()
+
+all <- df_list %>% lapply(nrow) %>% reduce(sum)
+over / all * 100
+```
+
+
+
+
+## Does the process of preparing the data result  in the loss of any tree?
+
+Yes
+
+```{r}
+unprep_nrow <- nrow(df_list[["15"]])
+prep_nrow <- df_list["15"] %>% 
+  prep_repulsive_tags() %>% lapply(nrow) %>% reduce(sum)
+unprep_nrow > prep_nrow
+```
+
+## Which trees are we loosing?
+
+```{r}
+unprep_tag <- df_list[["15"]] %>%
+  pull(tag) %>% 
+  unique()
+
+prep_tag <- df_list["15"] %>% 
+  prep_repulsive_tags() %>% 
+  map(~select(., tag)) %>% 
+  reduce(full_join) %>% 
+  unique() %>% 
+  pull(tag)
+
+setdiff(unprep_tag, prep_tag)
+```
+
+
+
+
+# Explore if plot limits throw data away
+
+```{r}
+library(tidyverse)
+
+x <- round(c(seq(19.5, 20.5, 0.2), runif(10, 0, 20)), 1)
+y <- round(runif(length(x), 0, 20), 1)
+df <- data.frame(x, y)
+above <- df %>% 
+  filter(x > 19.5 | y > 19.5)
+nrow(above)
+```
+
+By default, limits adjust to plot all data. Red text shows position of points
+
+```{r}
+p <- ggplot(df, aes(x, y)) + 
+  geom_point() +
+  geom_text(aes(label = paste0("(", x, ", ", y, ")"))) +
+  geom_text(
+    data = above, 
+    aes(label = paste0("(", x, ", ", y, ")")),
+    colour = "red"
+)
+p
+```
+
+```{r}
+p + xlim(0, 20)
+```
+
+
+```{r}
+p + coord_fixed(xlim = c(0, 19.4))
+```
+
+
+
+
+
+
+

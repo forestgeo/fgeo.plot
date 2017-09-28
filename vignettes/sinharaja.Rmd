@@ -32,7 +32,9 @@ knitr::opts_chunk$set(
 options(dplyr.print_min = 6, dplyr.print_max = 6)
 ```
 
-This code outputs the maps that were printed.
+# First attempt
+
+This code was originally used to output the maps that were first printed.
 
 ```
 # The sinharaja package is local and the data set sinh_q20 is private.
@@ -58,4 +60,88 @@ pdf(onefile = TRUE, paper = "a4", width = 11, height = 11)
 plot_list
 dev.off()
 ```
+
+# Setup 
+
+```{r}
+library(tidyverse)
+library(try)
+```
+
+
+
+# Second attempt
+
+## Merge ViewFullTable with Shameema's list of dataframes
+
+* ViewFullTable has the correct information of the subquadrat where each tree should be.
+* Shameema's list of dataframes has the data on symbol and status
+
+Import data.
+
+```{r}
+vftbl <- sinharaja::sinh_vftbl_selected
+vftbl
+```
+
+Raname data to match the needs of existing functions.
+
+```{r}
+n_original <- nrow(vftbl)
+
+renamed <- vftbl %>% 
+  select(-id, -StemTag, -Status) %>% 
+  rename(
+    tag = Tag,
+    subquadrat_vftbl = Subquadrat,
+    quadrat_vftbl = QuadratName,
+    lx = QX,
+    ly = QY
+  )
+renamed
+```
+
+Get symbols from Shameema's list of dataframes
+
+```{r}
+sham_df <- sinharaja::sinh_q20 %>% 
+  reduce(full_join) %>% 
+  as_tibble()
+# allow merging by tag
+sham_df <- sham_df %>% 
+  mutate(
+    status = as.character(status),
+    tag = str_pad(tag, width = 6, side = "left", pad = "0")
+  ) %>% 
+  select(-lx, -ly, -subtag)
+sham_df
+```
+
+Merge selected data (quadrats chosen by Stuart) from ViewFullTable with status and symbols by Shameema
+
+```{r}
+sinh_df <- left_join(renamed, sham_df)
+sinh_df
+```
+
+Split the data
+
+```{r}
+splitted <- sinh_df %>% split(.$quadrat_vftbl)
+splitted[1:3]
+```
+
+## Prepare and plot
+
+```{r}
+# Prepare and pdf
+prepared <- prep_repulsive_tags(splitted)[4]
+plot_list <- lapply_plot_repulsive_tags(prepared, site_name = "Sinharaja 2017")
+
+pdf(onefile = TRUE, paper = "a4", width = 11, height = 11)
+plot_list
+dev.off()
+```
+
+
 
