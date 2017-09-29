@@ -199,7 +199,15 @@ prepared <- splitted %>%
     id, tag, lx, ly, latest_tree_status, x1, x2, y1, y2, everything()
   )
 
-prep_df <- prepared %>% reduce(full_join)
+prep_df <- prepared %>% 
+  reduce(full_join) %>% 
+  # Add status to tag because some points dissapear from plot but tags persist
+  mutate(
+    tag = case_when(
+      latest_tree_status == "Alive" ~ paste0(tag, "_"),
+      latest_tree_status == "Dead" ~ paste0(tag, ".")
+    )
+  )
 prep_list <- split(prep_df, prep_df$id)
 plot_list <- lapply_plot_repulsive_tags(prep_list, site_name = "Sinharaja 2017")
 
