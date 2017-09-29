@@ -20,19 +20,28 @@
 #' prepared <- prep_repulsive_tags(list_of_dataframes)
 #' str(prepared[1:2])
 prep_repulsive_tags <- function(df_list) {
-  # # Pad quadrat names with 0 to the left.
-  # names(df_list) <- stringr::str_pad(
-  #   names(df_list), width = 4, pad = "0", side = "left"
-  # )
-  explicit_status <- purrr::map(df_list, add_latest_tree_status)
-  # identified <- identify_subquadrat(explicit_status)
-  with_limits <- add_subquad_limits(identified)
-  useful_vars <- dplyr::select(
-    with_limits,
-    id, tag, lx, ly, latest_tree_status, x1, x2, y1, y2
-  )
-  split(useful_vars, with_limits$id)
+ # xxx add function and amend documentation
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 #' Add alternatives to the variable `symbol` that are easier to understand.
 #'
