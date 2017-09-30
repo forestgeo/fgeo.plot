@@ -72,6 +72,16 @@ library(try)
 
 # Second attempt
 
+Here I use subquadrat information 
+
+From ViewFullTable, here I get information for each tree including its subquadrat, and position. ViewFullTable  also has information on tree status, which I could use directly to plot the latest status of each tree. This seems to be exactly what a general function should do. For that, the code below should be adapted to use the ViewFullTable specifically.
+
+In this vignette, however, is a special case. Here, the tree status that I am plotting comes not from ViewFullTable but from data that Shameema provided. Those data from Shameema contain a particular status that Stuart wants to recheck. That status Shameema represented with some symbols. I am unsure how Shameema calculated that status because it seems to not match the ViewFullTable directly. This  is  something I need to ask Shameema, and before that I want to compare  the status by Shameema with that from ViewFullTable.
+
+
+
+Most generally, this  would be enough to plot different 
+
 ## Merge ViewFullTable with Shameema's list of dataframes
 
 * ViewFullTable has the correct information of the subquadrat where each tree should be.
