@@ -1,9 +1,9 @@
 #' Add a quadrat variable to a dataframe based based on QX and QY coordinates.
 #'
 #' @param df A dataframe.
-#' @param dimx,dimy Quadrat dimension for the plot. For example, in Sinharaja
+#' @param dim_x,dim_y Quadrat dimension for the plot. For example, in Sinharaja
 #'   both are 20.
-#' @param subqx_n,subqy_n Total number of divisions of each quadrat side. For
+#' @param divide_x,divide_y Total number of divisions of each quadrat side. For
 #'   example, For Sinharaja and most other plots, the value of these arguments
 #'   is 5, which results in a 4x4 grid of subquadrats within each quadrat.
 #' @return A dataframe with the additional variable `subquadrat`.
@@ -13,44 +13,44 @@
 #' df <- sinharaja::sinh_vftbl_selected
 #' with_subquadrat <- add_subquadrat(df, 20, 20, 5, 5)
 #' head(with_subquadrat)
-add_subquadrat <- function(df, dimx, dimy, subqx_n, subqy_n) {
+add_subquadrat <- function(df, dim_x, dim_y, divide_x, divide_y) {
   # Define conditions and actions for each case
   # (Each chunk answers: what coordinate is at or over the edge of the quadrat?)
 
   # Both x and y.
-  are_both_xy_at_or_over_quadrat_edge <- df$QX >= dimx & df$QY >= dimy
+  are_both_xy_at_or_over_quadrat_edge <- df$QX >= dim_x & df$QY >= dim_y
   col_both_xy_at_or_over_quadrat_edge <- floor(
-    (dimx - 0.1 - dimx * floor(dimx - 0.1 / dimx)) / subquadx_n
+    (dim_x - 0.1 - dim_x * floor(dim_x - 0.1 / dim_x)) / divide_x
   )
   row_both_xy_at_or_over_quadrat_edge <- floor(
-    (dimy - 0.1 - dimy * floor(dimy - 0.1 / dimy)) / subquady_n
+    (dim_y - 0.1 - dim_y * floor(dim_y - 0.1 / dim_y)) / divide_y
   )
 
   # Only x.
-  is_only_x_at_or_over_quadrat_edge <- df$QX >= dimx
+  is_only_x_at_or_over_quadrat_edge <- df$QX >= dim_x
   col_only_x_at_or_over_quadrat_edge <- floor(
-    (dimx - 0.1 - dimx * floor(dimx - 0.1 / dimx)) / subquadx_n
+    (  (dim_x - 0.1)  -  (dim_x * floor( (dim_x - 0.1) / dim_x ) ) ) / divide_x
   )
   row_only_x_at_or_over_quadrat_edge <- floor(
-    (df$QY - dimy * floor(df$QY / dimy)) / subquady_n
+    (df$QY - dim_y * floor(df$QY / dim_y)) / divide_y
   )
 
   # Only y
-  is_only_y_at_or_over_quadrat_edge <- df$QY >= dimy
+  is_only_y_at_or_over_quadrat_edge <- df$QY >= dim_y
   col_only_y_are_or_over_quadrat_edge <- floor(
-    (df$QX - dimx * floor(df$QX / dimx)) / subquadx_n
+    (df$QX - dim_x * floor(df$QX / dim_x)) / divide_x
   )
   row_only_y_are_or_over_quadrat_edge <- floor(
-    (dimy - 0.1 - dimy * floor(dimy - 0.1 / dimy)) / subquady_n
+    (dim_y - 0.1 - dim_y * floor(dim_y - 0.1 / dim_y)) / divide_y
   )
 
   # Neither x nor y
   is_within_quadrat_edges <- TRUE
   col_within_quadrat_edges <- floor(
-    (df$QX - dimx * floor(df$QX / dimx)) / subquadx_n
+    (df$QX - dim_x * floor(df$QX / dim_x)) / divide_x
   )
   row_within_quadrat_edges <- floor(
-    (df$QY - dimy * floor(df$QY / dimy)) / subquady_n
+    (df$QY - dim_y * floor(df$QY / dim_y)) / divide_y
   )
 
 

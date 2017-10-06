@@ -34,7 +34,5 @@ function may not throw an error).
 Other functions to prepare data to plot repulsive tags.: \code{\link{add_quadrat_and_subquadrat_from_list}},
   \code{\link{add_quadrat_to_df_list}},
   \code{\link{add_subquad_limits}},
-  \code{\link{add_subquadrat}},
-  \code{\link{identify_subquadrat}},
   \code{\link{prep_repulsive_tags}}
 }

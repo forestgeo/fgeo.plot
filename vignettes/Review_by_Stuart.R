@@ -1,0 +1,25 @@
+## ----setup, echo = FALSE, message=FALSE, warning=FALSE-------------------
+# hadley's settings
+set.seed(1014)
+options(digits = 3)
+
+knitr::opts_chunk$set(
+  echo = TRUE,  # {mine}
+  comment = "#>",
+  collapse = TRUE,
+  # cache = TRUE,
+  out.width = "100%",
+  fig.align = "center",
+  fig.width = 11,
+  fig.asp = 0.618,  # 1 / phi
+  fig.show = "hold"
+)
+
+options(dplyr.print_min = 6, dplyr.print_max = 6)
+
+## ------------------------------------------------------------------------
+library(tidyverse)
+library(try)
+
+df_list <- sinharaja::sinh_q20
+
