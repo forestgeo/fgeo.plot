@@ -298,63 +298,6 @@ add_quadrat_and_subquadrat_from_list <- function(df_list, ...) {
   lapply(with_quadrat, add_subquadrat, ...)
 }
 
-#' Adds the `subquadrat` variable to a data frame, using Shameema's code.
-#'
-#' @family functions to prepare data to plot repulsive tags.
-#'
-#' @param x1,x2,y1,y2 Parameters to set x and y limits of each subquadrat.
-#' @param df A data frame.
-#'
-#' @author Shameema Jafferjee Esufali <shameemaesufali@gmail.com>.
-#'
-#' @return A list of 4 data frames.
-#' @export
-#'
-#' @examples
-#' library(dplyr)
-#' library(ggplot2)
-#'
-#' # From a dataframe of one quadrat, get a list of 4 subquadrats.
-#' one_quadrat <- toy_list[[1]]
-#' head(one_quadrat)
-#' lapply(add_subquadrat(one_quadrat), head)
-#'
-#' # Show one subquadrat of the default size
-#' subquadrats_of_default_size <- add_subquadrat(one_quadrat)[[1]]
-#' one_default_subquad <- filter(subquadrats_of_default_size, subquadrat == 1)
-#' \dontrun{
-#' ggplot(one_default_subquad, aes(lx, ly)) + geom_point()
-#' }
-#'
-#' # Show one subquadrat of half the default size
-#' subquadrats_half_size <- add_subquadrat(
-#'   one_quadrat,
-#'   x1 = (c(0, 10, 10, 0) / 2),
-#'   x2 = (c(10, 20, 20, 10) / 2),
-#'   y1 = (c(0, 0, 10, 10) / 2),
-#'   y2 = (c(10, 10, 20, 20) / 2)
-#' )[[1]]
-#' one_half_sized_subquad <- filter(subquadrats_half_size, subquadrat == 1)
-#' \dontrun{
-#' ggplot(one_half_sized_subquad, aes(lx, ly)) + geom_point()
-#' }
-add_subquadrat <- function(df,
-                           x1 = c(0, 10, 10, 0),
-                           x2 = c(10, 20, 20, 10),
-                           y1 = c(0, 0, 10, 10),
-                           y2 = c(10, 10, 20, 20)) {
-  assertive::assert_is_data.frame(df)
-
-  df_list <- replicate(4, data.frame(NULL, stringsAsFactors = FALSE))
-
-  for (n in 1:4) {
-    condition <- df$lx >= x1[n] & df$lx < x2[n] & df$ly >= y1[n] & df$ly < y2[n]
-    df_list[[n]] <- df[condition, ]
-    df_list[[n]]$subquadrat <- n
-  }
-  df_list
-}
-
 #' Add the name of each element of a list as a value in the variable quadrat
 #'
 #' @family functions to prepare data to plot repulsive tags.
