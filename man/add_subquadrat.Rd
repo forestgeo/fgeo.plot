@@ -27,3 +27,6 @@ df <- sinharaja::sinh_vftbl_selected
 with_subquadrat <- add_subquadrat(df, 20, 20, 5, 5)
 head(with_subquadrat)
 }
+\author{
+Anudeep Singh.
+}
