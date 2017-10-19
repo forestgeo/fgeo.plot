@@ -15,7 +15,7 @@
 <![endif]-->
 </head>
 <body>
-    <div class="container template-vignette">
+    <div class="container template-home">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
@@ -29,10 +29,13 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li>
-  <a href="reference/index.html">Reference</a>
+  <a href="/index.html">
+    <span class="fa fa-home fa-lg"></span>
+     
+  </a>
 </li>
 <li>
-  <a href="articles/index.html">Articles</a>
+  <a href="reference/index.html">Reference</a>
 </li>
       </ul>
 <ul class="nav navbar-nav navbar-right">
@@ -52,13 +55,8 @@
 
       
       </header><div class="row">
-  <div class="col-md-9">
+  <div class="contents col-md-9">
     
-
-    
-    
-<div class="contents">
-<!-- Don't edit README.md; instead, edit README.Rmd -->
 <div id="try" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
 <a href="#try" class="anchor"></a>try</h1></div>
@@ -68,25 +66,19 @@
 <h1 class="hasAnchor">
 <a href="#overview" class="anchor"></a>Overview</h1>
 <p>Try makes if easy to share code to try new things. It aims to draft a solution to address a very specific issue.</p>
-<div id="iss1-plot-trees-avoiding-overlap-of-tree-tags" class="section level2">
-<h2 class="hasAnchor">
-<a href="#iss1-plot-trees-avoiding-overlap-of-tree-tags" class="anchor"></a><code>iss1</code>: Plot trees avoiding overlap of tree tags</h2>
-<p>To find out more about this issue see <a href="https://github.com/forestgeo/try/issues/1" class="uri">https://github.com/forestgeo/try/issues/1</a></p>
-<div id="installation" class="section level3">
-<h3 class="hasAnchor">
-<a href="#installation" class="anchor"></a>Installation</h3>
-<p>Install issue 1 of the <strong>try</strong> package from GitHub with:</p>
-<pre><code># install.packages("devtools")
-devtools::install_github(repo = "forestgeo/try@iss1")
-library(try)</code></pre>
-<p>After installing and loading try, get help about the main function of <code>iss1</code> with <code><a href="reference/plot_repulsive_tags.html">?plot_repulsive_tags()</a></code>.</p>
 </div>
+<div id="installation" class="section level1">
+<h1 class="hasAnchor">
+<a href="#installation" class="anchor"></a>Installation</h1>
+<p>Install a specific ISSUE from GitHub with:</p>
+<div class="sourceCode"><pre class="sourceCode R"><code class="sourceCode r"><span class="co"># install.packages("devtools")</span>
+devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="dt">repo =</span> <span class="st">"forestgeo/try@ISSUE"</span>)</code></pre></div>
+<p>The argument <code>repo</code> of <code><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">devtools::install_github()</a></code> can be in the format <code>username/repo#pull</code> or <code>username/repo@ref</code>, where <code>ref</code> could be a commit, tag, or branch name, or a call to <code>github_pull()</code>.</p>
 </div>
-</div>
-</div>
+
   </div>
 
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
+  <div class="col-md-3" id="sidebar">
     <h2>Links</h2>
 <ul class="list-unstyled">
 <li>Browse source code at <br><a href="https://github.com/forestgeo/try">https://​github.com/​forestgeo/​try</a>
@@ -95,7 +87,7 @@ library(try)</code></pre>
 </li>
 </ul>
 <h2>License</h2>
-<p><a href="https://opensource.org/licenses/mit-license.php">MIT</a> + file <a href="LICENSE">LICENSE</a></p>
+<p><a href="https://opensource.org/licenses/mit-license.php">MIT</a> + file <a href="LICENSE.html">LICENSE</a></p>
 <h2>Developers</h2>
 <ul class="list-unstyled">
 <li>Mauro Lepore <br><small class="roles"> Author, maintainer </small> </li>
@@ -106,7 +98,6 @@ library(try)</code></pre>
 <li><a href="https://cran.r-project.org/package=try"><img src="http://www.r-pkg.org/badges/version/try" alt="CRAN_Status_Badge"></a></li>
 </ul>
 </div>
-
 </div>
 
 

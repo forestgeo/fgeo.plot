@@ -3,7 +3,7 @@ Title: Try New Things
 Version: 0.0.00.9000
 Authors@R: person("Mauro", "Lepore", email = "maurolepore@gmail.com", 
     role = c("aut", "cre"))
-Description: Try makes if  easy to share code to try new things. It aims to
+Description: Try makes if easy to share code to try new things. It aims to
     draft a solution to address a very specific issue.
 Depends:
     R (>= 3.1.2)
