@@ -9,4 +9,4 @@
 ^codecov\.yml$
 ^issues$
 ^docs$
-^vignettes/rsconnect$
+^vignettes$
