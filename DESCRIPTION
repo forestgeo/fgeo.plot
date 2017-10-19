@@ -7,7 +7,7 @@ Description: Try makes if easy to share code to try new things. It aims to
     draft a solution to address a very specific issue.
 Depends:
     R (>= 3.1.2)
-License: MIT + file LICENSE
+License: GPL-3
 Encoding: UTF-8
 LazyData: true
 Suggests: covr,
