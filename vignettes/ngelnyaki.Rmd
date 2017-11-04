@@ -101,25 +101,33 @@ splitted[[1]]
 
 ## Prepare and plot
 
+Prepare
+
+xxx subsetting 3 quadrats
+
 ```{r prepare, message=FALSE}
-# xxx remove the [1] to allow all plots
 prep_list <- splitted %>% 
   prep_repulsive_tags()
-plot_list <- prep_list %>%
-  lapply_plot_repulsive_tags(site_name = "Ngel Nyaki 2017")
 ```
 
+Keep minimum data and remove duplicates
+
+```{r}
+unique_tags <- prep_list %>% 
+  map(select, tag, lx, ly, status, id, latest_tree_status, x1, x2, y1, y2) %>% 
+  map(unique)
+```
+
+Plot
+
 ```{r plot}
+plot_list <- unique_tags %>%
+  lapply_plot_repulsive_tags(site_name = "Ngel Nyaki 2017")
+
 # Avoid running unintentionally; it takes a few minutes to run
 pdf("Ngel_Nyaki.pdf", paper = "letter", width = 11, height = 11)
 plot_list
 dev.off()
 ```
 
-
-```{r, message=FALSE}
-plotted_df <- reduce(prep_list, left_join)
-
-plotted_df %>% select(matches("quad"))
-```
 
