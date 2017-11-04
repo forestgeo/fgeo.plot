@@ -55,6 +55,5 @@ with_subquad_df \%>\%
 \seealso{
 Other functions to prepare data to plot repulsive tags.: \code{\link{add_latest_tree_status}},
   \code{\link{add_quadrat_and_subquadrat_from_list}},
-  \code{\link{add_quadrat_to_df_list}},
-  \code{\link{prep_repulsive_tags}}
+  \code{\link{add_quadrat_to_df_list}}
 }

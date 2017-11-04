@@ -1,0 +1,125 @@
+---
+title: "Plot Repulsive Tags from Ngel Nyaki"
+author: "Mauro Lepore"
+date: "2017-09-26"
+output:
+  rmarkdown::html_vignette:
+    toc: true
+    toc_depth: 6
+vignette: >
+  %\VignetteIndexEntry{Plot Repulsive Tags from Ngel Nyaki}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, echo = FALSE, message=FALSE, warning=FALSE}
+# hadley's settings
+set.seed(1014)
+options(digits = 3)
+
+knitr::opts_chunk$set(
+  echo = TRUE,  # {mine}
+  comment = "#>",
+  collapse = TRUE,
+  # cache = TRUE,
+  out.width = "70%",
+  fig.align = "center",
+  fig.width = 6,
+  fig.asp = 0.618,  # 1 / phi
+  fig.show = "hold",
+  rows.print = 3  # {mine}
+)
+
+```
+
+```{r}
+library(try)
+library(tidyverse)
+options(dplyr.print_min = 3, dplyr.print_max = 3)
+```
+
+The goal of this vignette is to map stems from a ViewFullTable from the Ngel Nyaki site.
+
+It adapts previous code that is a little ackward. I aim to first get the job done ASAP adapting the data to the code; but then refactor to adapt the code to the data. Mapping from ViewFullTables seems a common task so the ultimate goal is to develop code that is general enough to map any site from ViewFullTables, and maybe generalize it even further to work with ForestGEO tables too.
+
+```{r import-data}
+vftbl <- ngelnyaki::ngelnyaki_vft_unid
+vftbl
+```
+
+Add subquadrat based on Anudeep's code.
+
+```{r}
+with_subquadrat <- add_subquadrat(
+  df = vftbl, dim_x = 20, dim_y = 20, divide_x = 5, divide_y = 5
+)
+with_subquadrat %>% select(subquadrat, everything())
+```
+
+Raname data to match the needs of existing functions.
+
+```{r}
+renamed <- with_subquadrat %>% 
+  rename(
+    subquadrat_vftbl = subquadrat,
+    quadrat_vftbl = QuadratName,
+    lx = QX,
+    ly = QY,
+  )
+names(renamed) <- tolower(names(renamed))
+# Check
+renamed %>% 
+  select(tag, subquadrat_vftbl, quadrat_vftbl, lx, ly, status, everything())
+```
+
+Add symbols.
+
+```{r, rows.print = 20}
+with_status <- renamed %>% 
+  group_by(tag) %>% 
+  dplyr::arrange(.by_group = TRUE) %>% 
+  # ensure that the status refers to the tree, not to the stem
+  mutate(status_tree = ifelse(any(status == "alive"), "alive", "dead")) %>% 
+  select(dbhid, tag, status, status_tree, everything())
+```
+
+Add symbols.
+
+```{r}
+with_symbol <- with_status %>% 
+  mutate(symbol = ifelse(status_tree == "alive", 19, 4)) %>% 
+  select(status_tree, symbol, everything())
+```
+
+Split the data
+
+```{r}
+splitted <- with_symbol %>% split(.$quadrat_vftbl)
+# example
+splitted[[1]]
+```
+
+## Prepare and plot
+
+```{r prepare, message=FALSE}
+# xxx remove the [1] to allow all plots
+prep_list <- splitted %>% 
+  prep_repulsive_tags()
+plot_list <- prep_list %>%
+  lapply_plot_repulsive_tags(site_name = "Ngel Nyaki 2017")
+```
+
+```{r plot}
+# Avoid running unintentionally; it takes a few minutes to run
+pdf("Ngel_Nyaki.pdf", paper = "letter", width = 11, height = 11)
+plot_list
+dev.off()
+```
+
+
+```{r, message=FALSE}
+plotted_df <- reduce(prep_list, left_join)
+
+plotted_df %>% select(matches("quad"))
+```
+

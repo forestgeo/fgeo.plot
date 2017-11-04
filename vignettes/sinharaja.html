@@ -18,6 +18,44 @@
 
 
 
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
 
 
 
@@ -35,8 +73,20 @@
 <h4 class="date"><em>2017-09-26</em></h4>
 
 
+<div id="TOC">
+<ul>
+<li><a href="#first-attempt">First attempt</a></li>
+<li><a href="#setup">Setup</a></li>
+<li><a href="#second-attempt">Second attempt</a><ul>
+<li><a href="#merge-viewfulltable-with-shameemas-list-of-dataframes">Merge ViewFullTable with Shameema’s list of dataframes</a></li>
+<li><a href="#prepare-and-plot">Prepare and plot</a></li>
+</ul></li>
+</ul>
+</div>
 
-<p>This code outputs the maps that were printed.</p>
+<div id="first-attempt" class="section level1">
+<h1>First attempt</h1>
+<p>This code was originally used to output the maps that were first printed.</p>
 <pre><code># The sinharaja package is local and the data set sinh_q20 is private.
 list_of_dataframes &lt;- sinharaja::sinh_q20
 
@@ -59,6 +109,178 @@ plot_list &lt;- lapply_plot_repulsive_tags(prepared, site_name = &quot;Sinharaja
 pdf(onefile = TRUE, paper = &quot;a4&quot;, width = 11, height = 11)
 plot_list
 dev.off()</code></pre>
+</div>
+<div id="setup" class="section level1">
+<h1>Setup</h1>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
+<span class="co">#&gt; + ggplot2 2.2.1        Date: 2017-11-04</span>
+<span class="co">#&gt; + tibble  1.3.4           R: 3.4.2</span>
+<span class="co">#&gt; + tidyr   0.7.2          OS: Windows 10 x64</span>
+<span class="co">#&gt; + readr   1.1.1         GUI: RTerm</span>
+<span class="co">#&gt; + purrr   0.2.4      Locale: C</span>
+<span class="co">#&gt; + dplyr   0.7.4          TZ: America/New_York</span>
+<span class="co">#&gt; + stringr 1.2.0      </span>
+<span class="co">#&gt; + forcats 0.2.0</span>
+<span class="co">#&gt; -- Conflicts ----------------------------------------------------</span>
+<span class="co">#&gt; * filter(),  from dplyr, masks stats::filter()</span>
+<span class="co">#&gt; * lag(),     from dplyr, masks stats::lag()</span>
+<span class="kw">library</span>(try)</code></pre></div>
+</div>
+<div id="second-attempt" class="section level1">
+<h1>Second attempt</h1>
+<p>Here I use subquadrat information</p>
+<p>From ViewFullTable, here I get information for each tree including its subquadrat, and position. ViewFullTable also has information on tree status, which I could use directly to plot the latest status of each tree. This seems to be exactly what a general function should do. For that, the code below should be adapted to use the ViewFullTable specifically.</p>
+<p>This vignette, however, shows a special case. Here, the tree status that I am plotting comes not from ViewFullTable but from data that Shameema provided. Those data from Shameema contain a particular status that Stuart wants to recheck. That status Shameema represented with some symbols. I am unsure how Shameema calculated that status because it does not match the ViewFullTable directly. This is something I asked Shameema (via <a href="https://goo.gl/NzoxqY" class="uri">https://goo.gl/NzoxqY</a>), but as per Nov 4th, 2017, she didn’t reply.</p>
+<div id="merge-viewfulltable-with-shameemas-list-of-dataframes" class="section level2">
+<h2>Merge ViewFullTable with Shameema’s list of dataframes</h2>
+<ul>
+<li>ViewFullTable has the correct information of the subquadrat where each tree should be.</li>
+</ul>
+<p>(The Subquadrat variable was calculated by Anudeep. This is what I am using here, but I translated Anudeep’s SQL-code to R-code (see <code>?add_subquadrat()</code> and <a href="https://goo.gl/J4KVU1" class="uri">https://goo.gl/J4KVU1</a>).)</p>
+<ul>
+<li>Shameema’s list of dataframes has the data on symbol and status</li>
+</ul>
+<p>Import data.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">vftbl &lt;-<span class="st"> </span>sinharaja<span class="op">::</span>sinh_vftbl_selected
+vftbl
+<span class="co">#&gt; # A tibble: 18,977 x 8</span>
+<span class="co">#&gt;         id    Tag Subquadrat QuadratName    QX    QY StemTag    Status</span>
+<span class="co">#&gt;      &lt;chr&gt;  &lt;chr&gt;      &lt;int&gt;       &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;int&gt;     &lt;chr&gt;</span>
+<span class="co">#&gt; 1 004193_1 004193         11        0015   2.1   0.5       1     alive</span>
+<span class="co">#&gt; 2 004194_1 004194         11        0015   1.0   1.6       1     alive</span>
+<span class="co">#&gt; 3 004194_1 004194         11        0015   1.0   1.6       1 stem dead</span>
+<span class="co">#&gt; # ... with 1.897e+04 more rows</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">nrow</span>(vftbl)
+<span class="co">#&gt; [1] 18977</span></code></pre></div>
+<p>Raname data to match the needs of existing functions.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">renamed &lt;-<span class="st"> </span>vftbl <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>id, <span class="op">-</span>StemTag, <span class="op">-</span>Status) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">rename</span>(
+    <span class="dt">tag =</span> Tag,
+    <span class="dt">subquadrat_vftbl =</span> Subquadrat,
+    <span class="dt">quadrat_vftbl =</span> QuadratName,
+    <span class="dt">lx =</span> QX,
+    <span class="dt">ly =</span> QY
+  ) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">unique</span>()
+renamed
+<span class="co">#&gt; # A tibble: 14,281 x 5</span>
+<span class="co">#&gt;      tag subquadrat_vftbl quadrat_vftbl    lx    ly</span>
+<span class="co">#&gt;    &lt;chr&gt;            &lt;int&gt;         &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;</span>
+<span class="co">#&gt; 1 004193               11          0015   2.1   0.5</span>
+<span class="co">#&gt; 2 004194               11          0015   1.0   1.6</span>
+<span class="co">#&gt; 3 004195               11          0015   1.1   1.8</span>
+<span class="co">#&gt; # ... with 1.428e+04 more rows</span></code></pre></div>
+<p>Get symbols from Shameema’s list of dataframes</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sham_df &lt;-<span class="st"> </span>sinharaja<span class="op">::</span>sinh_q20 <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">reduce</span>(full_join) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">as_tibble</span>()
+<span class="co"># allow merging by tag</span>
+sham_df &lt;-<span class="st"> </span>sham_df <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(
+    <span class="dt">status =</span> <span class="kw">as.character</span>(status),
+    <span class="dt">tag =</span> <span class="kw">str_pad</span>(tag, <span class="dt">width =</span> <span class="dv">6</span>, <span class="dt">side =</span> <span class="st">&quot;left&quot;</span>, <span class="dt">pad =</span> <span class="st">&quot;0&quot;</span>)
+  ) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>lx, <span class="op">-</span>ly, <span class="op">-</span>subtag) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">unique</span>()
+sham_df
+<span class="co">#&gt; # A tibble: 27,172 x 3</span>
+<span class="co">#&gt;      tag    status symbol</span>
+<span class="co">#&gt;    &lt;chr&gt;     &lt;chr&gt;  &lt;int&gt;</span>
+<span class="co">#&gt; 1 004193     alive     16</span>
+<span class="co">#&gt; 2 004194 stem dead     16</span>
+<span class="co">#&gt; 3 004195     alive     16</span>
+<span class="co">#&gt; # ... with 2.717e+04 more rows</span></code></pre></div>
+<p>Merge selected data (quadrats chosen by Stuart) from ViewFullTable with status and symbols by Shameema</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sinh_df &lt;-<span class="st"> </span><span class="kw">suppressMessages</span>(<span class="kw">left_join</span>(renamed, sham_df))
+sinh_df
+<span class="co">#&gt; # A tibble: 14,281 x 7</span>
+<span class="co">#&gt;      tag subquadrat_vftbl quadrat_vftbl    lx    ly    status symbol</span>
+<span class="co">#&gt;    &lt;chr&gt;            &lt;int&gt;         &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;     &lt;chr&gt;  &lt;int&gt;</span>
+<span class="co">#&gt; 1 004193               11          0015   2.1   0.5     alive     16</span>
+<span class="co">#&gt; 2 004194               11          0015   1.0   1.6 stem dead     16</span>
+<span class="co">#&gt; 3 004195               11          0015   1.1   1.8     alive     16</span>
+<span class="co">#&gt; # ... with 1.428e+04 more rows</span></code></pre></div>
+<p>Split the data</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">splitted &lt;-<span class="st"> </span>sinh_df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">split</span>(.<span class="op">$</span>quadrat_vftbl)
+<span class="co"># example</span>
+splitted[[<span class="st">&quot;0015&quot;</span>]]
+<span class="co">#&gt; # A tibble: 315 x 7</span>
+<span class="co">#&gt;      tag subquadrat_vftbl quadrat_vftbl    lx    ly    status symbol</span>
+<span class="co">#&gt;    &lt;chr&gt;            &lt;int&gt;         &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;     &lt;chr&gt;  &lt;int&gt;</span>
+<span class="co">#&gt; 1 004193               11          0015   2.1   0.5     alive     16</span>
+<span class="co">#&gt; 2 004194               11          0015   1.0   1.6 stem dead     16</span>
+<span class="co">#&gt; 3 004195               11          0015   1.1   1.8     alive     16</span>
+<span class="co">#&gt; # ... with 312 more rows</span></code></pre></div>
+<p>Table problematic trees</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">problematic &lt;-<span class="st"> </span>splitted <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">map</span>(as.data.frame) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">map</span>(filter, lx <span class="op">&gt;=</span><span class="st"> </span><span class="dv">20</span> <span class="op">|</span><span class="st"> </span>ly <span class="op">&gt;=</span><span class="st"> </span><span class="dv">20</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">map</span>(arrange, tag) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">map</span>(select, tag, subquadrat_vftbl)
+<span class="co"># e.g.</span>
+problematic[[<span class="st">&quot;0015&quot;</span>]]
+<span class="co">#&gt;      tag subquadrat_vftbl</span>
+<span class="co">#&gt; 1 004247               42</span>
+<span class="co">#&gt; 2 004390               44</span>
+<span class="co">#&gt; 3 004403               34</span>
+<span class="co">#&gt; 4 004428               34</span>
+<span class="co">#&gt; 5 004456               24</span>
+<span class="co">#&gt; 6 004463               24</span>
+<span class="co">#&gt; 7 004464               24</span>
+<span class="co">#&gt; 8 004476               14</span>
+<span class="co">#&gt; 9 300258               14</span></code></pre></div>
+</div>
+<div id="prepare-and-plot" class="section level2">
+<h2>Prepare and plot</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">prep_list &lt;-<span class="st"> </span>splitted <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">prep_repulsive_tags</span>()
+plot_list &lt;-<span class="st"> </span>prep_list <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">lapply_plot_repulsive_tags</span>(<span class="dt">site_name =</span> <span class="st">&quot;Sinharaja 2017&quot;</span>)
+
+<span class="co"># # Avoid running unintentionally; it takes a few minutes to run</span>
+<span class="co"># pdf(onefile = TRUE, paper = &quot;a4&quot;, width = 11, height = 11)</span>
+<span class="co"># plot_list</span>
+<span class="co"># dev.off()</span></code></pre></div>
+<p>Just two extreeme quadrats.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df &lt;-<span class="st"> </span>splitted <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">reduce</span>(full_join)
+extreeme_quadrats &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(lx <span class="op">==</span><span class="st"> </span><span class="kw">max</span>(lx) <span class="op">|</span><span class="st"> </span>ly <span class="op">==</span><span class="st"> </span><span class="kw">max</span>(ly)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">pull</span>(quadrat_vftbl)
+extreeme_quadrats
+<span class="co">#&gt; [1] &quot;1115&quot; &quot;2105&quot;</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># dataframe and filter easyly by quadrat</span>
+prep_df &lt;-<span class="st"> </span>prep_list <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">reduce</span>(full_join)
+prep_df_extreeme &lt;-<span class="st"> </span>prep_df <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(quadrat <span class="op">%in%</span><span class="st"> </span>extreeme_quadrats)
+
+<span class="co"># Split by id</span>
+prep_list_extreeme &lt;-<span class="st"> </span><span class="kw">split</span>(prep_df_extreeme, prep_df_extreeme<span class="op">$</span>id)
+plot_list_extreeme &lt;-<span class="st"> </span><span class="kw">lapply_plot_repulsive_tags</span>(
+  prep_list_extreeme, <span class="dt">site_name =</span> <span class="st">&quot;Sinharaja 2017&quot;</span>
+)
+
+<span class="kw">pdf</span>(<span class="st">&quot;extreeme.pdf&quot;</span>, <span class="dt">paper =</span> <span class="st">&quot;a4&quot;</span>, <span class="dt">width =</span> <span class="dv">11</span>, <span class="dt">height =</span> <span class="dv">11</span>)
+plot_list_extreeme
+<span class="co">#&gt; $`Q. 1115 SQ. 11-12-21-22 (p. 1)`</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $`Q. 1115 SQ. 13-14-23-24 (p. 4)`</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $`Q. 1115 SQ. 31-32-41-42 (p. 2)`</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $`Q. 1115 SQ. 33-34-43-44 (p. 3)`</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $`Q. 2105 SQ. 11-12-21-22 (p. 1)`</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $`Q. 2105 SQ. 13-14-23-24 (p. 4)`</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $`Q. 2105 SQ. 31-32-41-42 (p. 2)`</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $`Q. 2105 SQ. 33-34-43-44 (p. 3)`</span>
+<span class="kw">dev.off</span>()
+<span class="co">#&gt; png </span>
+<span class="co">#&gt;   2</span></code></pre></div>
+</div>
+</div>
 
 
 

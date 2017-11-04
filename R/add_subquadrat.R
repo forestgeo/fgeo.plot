@@ -48,3 +48,91 @@ add_subquadrat <- function(df, dim_x, dim_y, divide_x, divide_y) {
   )
   with_subquadrat
 }
+
+
+#' Paginate a ViewFullTable. Add a variable indicating page to map on.
+#'
+#' @param x A ViewFullTable dataframe.
+#'
+#' @return A modified ViewFullTable dataframe..
+#' @export
+#' @keywords internal
+#' @noRd
+paginate <- function(x) {
+  dplyr::mutate(x, subquadrat =
+      case_when(
+        subquadrat_vftbl == 11 ~ 1,
+        subquadrat_vftbl == 12 ~ 1,
+        subquadrat_vftbl == 21 ~ 1,
+        subquadrat_vftbl == 22 ~ 1,
+
+        subquadrat_vftbl == 31 ~ 2,
+        subquadrat_vftbl == 32 ~ 2,
+        subquadrat_vftbl == 41 ~ 2,
+        subquadrat_vftbl == 42 ~ 2,
+
+        subquadrat_vftbl == 34 ~ 3,
+        subquadrat_vftbl == 33 ~ 3,
+        subquadrat_vftbl == 44 ~ 3,
+        subquadrat_vftbl == 43 ~ 3,
+
+        subquadrat_vftbl == 14 ~ 4,
+        subquadrat_vftbl == 13 ~ 4,
+        subquadrat_vftbl == 24 ~ 4,
+        subquadrat_vftbl == 23 ~ 4,
+      )
+    )
+}
+
+
+#' Add variable sqds
+#'
+#' @param df A ViewFullTable dataframe with the variable subquadrat_vftbl.
+#'
+#' @return Modified version of input.
+#' @export
+#' @keywords internal
+#' @noRd
+add_sqds <- function(df) {
+  paginate(df) %>%
+  dplyr::group_by(subquadrat) %>%
+  dplyr::mutate(sqds = paste0(unique(sort(subquadrat_vftbl)), collapse = "-")) %>%
+  dplyr::ungroup() %>%
+  dplyr::select(sqds, everything())
+}
+
+
+#' Prepare a list of dataframes to later plot repulsive tags.
+#'
+#' @param df_list A list of dataframes
+#'
+#' @return A modified version of the input.
+#' @keywords internal
+#' @export
+#' @noRd
+prep_repulsive_tags <- function(df_list) {
+  df_list %>%
+    purrr::map(add_sqds) %>%
+    purrr::map(add_latest_tree_status) %>%  # fix this function
+    purrr::map(mutate, latest_tree_status = status_tree)  %>% # patch
+    purrr::map(paginate) %>%
+    purrr::map(dplyr::rename, quadrat = quadrat_vftbl) %>%
+    purrr::map(add_subquad_limits) %>%
+    purrr::map(dplyr::mutate,
+      id = paste0("Q. ", quadrat, " SQ. ", sqds, " (p. ", subquadrat, ")")
+    ) %>%
+    purrr::map(dplyr::select, id, subquadrat, dplyr::everything()) %>%
+    purrr::map(dplyr::select,
+      id, tag, lx, ly, latest_tree_status, x1, x2, y1, y2, everything()
+    ) %>%
+    reduce(full_join) %>%
+    # Add status to tag because some points dissapear from plot but tags
+    # persist
+    mutate(
+      tag = case_when(
+        latest_tree_status == "alive" ~ paste0(tag, "_"),
+        latest_tree_status == "dead" ~ paste0(tag, ".")
+      )
+    ) %>%
+    split(., .$id)
+}

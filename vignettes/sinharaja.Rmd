@@ -26,10 +26,11 @@ knitr::opts_chunk$set(
   fig.align = "center",
   fig.width = 6,
   fig.asp = 0.618,  # 1 / phi
-  fig.show = "hold"
+  fig.show = "hold",
+  rows.print = 3  # {mine}
 )
 
-options(dplyr.print_min = 6, dplyr.print_max = 6)
+options(dplyr.print_min = 3, dplyr.print_max = 3)
 ```
 
 # First attempt
@@ -80,7 +81,10 @@ This vignette, however, shows a special case. Here, the tree status that I am pl
 
 ## Merge ViewFullTable with Shameema's list of dataframes
 
-* ViewFullTable has the correct information of the subquadrat where each tree should be.
+* ViewFullTable has the correct information of the subquadrat where each tree should be. 
+
+(The Subquadrat variable was calculated by Anudeep. This is what I am using here, but I translated Anudeep's SQL-code to R-code (see `?add_subquadrat()` and https://goo.gl/J4KVU1).)
+
 * Shameema's list of dataframes has the data on symbol and status
 
 Import data.
@@ -90,11 +94,13 @@ vftbl <- sinharaja::sinh_vftbl_selected
 vftbl
 ```
 
+```{r}
+nrow(vftbl)
+```
+
 Raname data to match the needs of existing functions.
 
 ```{r}
-n_original <- nrow(vftbl)
-
 renamed <- vftbl %>% 
   select(-id, -StemTag, -Status) %>% 
   rename(
@@ -110,7 +116,7 @@ renamed
 
 Get symbols from Shameema's list of dataframes
 
-```{r}
+```{r, message=FALSE}
 sham_df <- sinharaja::sinh_q20 %>% 
   reduce(full_join) %>% 
   as_tibble()
@@ -128,7 +134,7 @@ sham_df
 Merge selected data (quadrats chosen by Stuart) from ViewFullTable with status and symbols by Shameema
 
 ```{r}
-sinh_df <- left_join(renamed, sham_df)
+sinh_df <- suppressMessages(left_join(renamed, sham_df))
 sinh_df
 ```
 
@@ -136,120 +142,66 @@ Split the data
 
 ```{r}
 splitted <- sinh_df %>% split(.$quadrat_vftbl)
+# example
+splitted[["0015"]]
 ```
 
 Table problematic trees
 
 ```{r}
-splitted %>% 
+problematic <- splitted %>% 
   map(as.data.frame) %>% 
   map(filter, lx >= 20 | ly >= 20) %>% 
   map(arrange, tag) %>% 
   map(select, tag, subquadrat_vftbl)
+# e.g.
+problematic[["0015"]]
 ```
 
 
 
 ## Prepare and plot
 
-```{r}
-# Prepare and pdf
 
-# funs ----
-paginate <- function(x) {
-  dplyr::mutate(x, subquadrat =
-      case_when(
-        subquadrat_vftbl == 11 ~ 1,
-        subquadrat_vftbl == 12 ~ 1,
-        subquadrat_vftbl == 21 ~ 1,
-        subquadrat_vftbl == 22 ~ 1,
-
-        subquadrat_vftbl == 31 ~ 2,
-        subquadrat_vftbl == 32 ~ 2,
-        subquadrat_vftbl == 41 ~ 2,
-        subquadrat_vftbl == 42 ~ 2,
-
-        subquadrat_vftbl == 34 ~ 3,
-        subquadrat_vftbl == 33 ~ 3,
-        subquadrat_vftbl == 44 ~ 3,
-        subquadrat_vftbl == 43 ~ 3,
-
-        subquadrat_vftbl == 14 ~ 4,
-        subquadrat_vftbl == 13 ~ 4,
-        subquadrat_vftbl == 24 ~ 4,
-        subquadrat_vftbl == 23 ~ 4,
-      )
-    )
-}
-
-add_sqds <- function(df) {
-  paginate(df) %>% 
-  dplyr::group_by(subquadrat) %>% 
-  dplyr::mutate(sqds = paste0(unique(sort(subquadrat_vftbl)), collapse = "-")) %>% 
-  dplyr::ungroup() %>% 
-  dplyr::select(sqds, everything())
-}
-
-prep_repulsive_tags <- function(df_list) {
-  df_list %>% 
-    purrr::map(add_sqds) %>%
-    purrr::map(add_latest_tree_status) %>%
-    purrr::map(paginate) %>%
-    purrr::map(dplyr::rename, quadrat = quadrat_vftbl) %>%
-    purrr::map(add_subquad_limits) %>%
-    purrr::map(dplyr::mutate,
-      id = paste0("Q. ", quadrat, " SQ. ", sqds, " (p. ", subquadrat, ")")
-    ) %>%
-    purrr::map(dplyr::select, id, subquadrat, dplyr::everything()) %>%
-    purrr::map(dplyr::select,
-      id, tag, lx, ly, latest_tree_status, x1, x2, y1, y2, everything()
-    ) %>% 
-    reduce(full_join) %>% 
-    # Add status to tag because some points dissapear from plot but tags  
-    # persist
-    mutate(
-      tag = case_when(
-        latest_tree_status == "Alive" ~ paste0(tag, "_"),
-        latest_tree_status == "Dead" ~ paste0(tag, ".")
-      )
-    ) %>% 
-    split(., .$id)
-}
-
-
-
-# action ----
-
+```{r, message=FALSE}
 prep_list <- splitted %>% prep_repulsive_tags()
 plot_list <- prep_list %>% 
   lapply_plot_repulsive_tags(site_name = "Sinharaja 2017")
 
-pdf(onefile = TRUE, paper = "a4", width = 11, height = 11)
-plot_list
-dev.off()
+# # Avoid running unintentionally; it takes a few minutes to run
+# pdf(onefile = TRUE, paper = "a4", width = 11, height = 11)
+# plot_list
+# dev.off()
 ```
 
 
 
 Just two extreeme quadrats.
 
-```{r}
+```{r, message=FALSE}
 df <- splitted %>% reduce(full_join)
-df %>% filter(lx == max(lx) | ly == max(ly))
+extreeme_quadrats <- df %>% 
+  filter(lx == max(lx) | ly == max(ly)) %>%
+  pull(quadrat_vftbl)
+extreeme_quadrats
+```
 
-prep_df <- prepared %>% reduce(full_join)
-prep_df <- prep_df %>% 
-  filter(quadrat %in% c("1115", "2105"))
 
+```{r, message=FALSE}
+# dataframe and filter easyly by quadrat
+prep_df <- prep_list %>% reduce(full_join)
+prep_df_extreeme <- prep_df %>% 
+  filter(quadrat %in% extreeme_quadrats)
 
-prep_list <- split(prep_df, prep_df$id)
-plot_list <- lapply_plot_repulsive_tags(prep_list, site_name = "Sinharaja 2017")
+# Split by id
+prep_list_extreeme <- split(prep_df_extreeme, prep_df_extreeme$id)
+plot_list_extreeme <- lapply_plot_repulsive_tags(
+  prep_list_extreeme, site_name = "Sinharaja 2017"
+)
 
-pdf(onefile = TRUE, paper = "a4", width = 11, height = 11)
-plot_list
+pdf("extreeme.pdf", paper = "a4", width = 11, height = 11)
+plot_list_extreeme
 dev.off()
-
-
 ```
 
 

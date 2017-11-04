@@ -1,27 +1,25 @@
-# Prepare data that will be passed to plot_repel and friends.
-
-#' Prepare a list of data frames to plot repulsive tags.
-#'
-#' This function may be rarely necessary. It wraps other functions that you will
-#' likely want to use directly, so you have more flexibility. The input of this
-#' function may also be a rare data structure. It is a list of dataframes, each
-#' corresponding to a 20x20 quadrat and with the variables: "tag", "lx", "ly",
-#' "subtag", "status", "symbol".
-#'
-#' @family functions to prepare data to plot repulsive tags.
-#' @param df_list A list of data frames.
-#' @return A list of dataframes, prepared for [plot_repulsive_tags()].
-#'
-#' @export
-#' @examples
-#' list_of_dataframes <- toy_list
-#' str(list_of_dataframes)
-#'
-#' prepared <- prep_repulsive_tags(list_of_dataframes)
-#' str(prepared[1:2])
-prep_repulsive_tags <- function(df_list) {
- # xxx add function and amend documentation
-}
+# #' Prepare a list of data frames to plot repulsive tags.
+# #'
+# #' This function may be rarely necessary. It wraps other functions that you will
+# #' likely want to use directly, so you have more flexibility. The input of this
+# #' function may also be a rare data structure. It is a list of dataframes, each
+# #' corresponding to a 20x20 quadrat and with the variables: "tag", "lx", "ly",
+# #' "subtag", "status", "symbol".
+# #'
+# #' @family functions to prepare data to plot repulsive tags.
+# #' @param df_list A list of data frames.
+# #' @return A list of dataframes, prepared for [plot_repulsive_tags()].
+# #'
+# #' @export
+# #' @examples
+# #' list_of_dataframes <- toy_list
+# #' str(list_of_dataframes)
+# #'
+# #' prepared <- prep_repulsive_tags(list_of_dataframes)
+# #' str(prepared[1:2])
+# prep_repulsive_tags <- function(df_list) {
+#  # xxx add function and amend documentation
+# }
 
 
 
