@@ -20,18 +20,9 @@ map_tag <- function(vft,
 
   renamed <- rename_with_subquadrat(with_subquadrat)
 
+  with_status_tree <- add_status_tree(renamed)
 
-
-
-
-  with_status <- renamed %>%
-    dplyr::group_by(tag) %>%
-    dplyr::arrange(.by_group = TRUE) %>%
-    # ensure that the status refers to the tree, not to the stem
-    dplyr::mutate(status_tree = ifelse(any(status == "alive"), "alive", "dead")) %>%
-    dplyr::select(dbhid, tag, status, status_tree, everything())
-
-  with_symbol <- with_status %>%
+  with_symbol <- with_status_tree %>%
     mutate(symbol = ifelse(status_tree == "alive", 19, 4)) %>%
     select(status_tree, symbol, everything())
 
@@ -136,6 +127,15 @@ rename_with_subquadrat <- function(with_subquadrat) {
     lx = qx,
     ly = qy,
   )
+}
+
+add_status_tree <- function(renamed) {
+  renamed %>%
+    dplyr::group_by(tag) %>%
+    dplyr::arrange(.by_group = TRUE) %>%
+    # ensure that the status refers to the tree, not to the stem
+    dplyr::mutate(status_tree = ifelse(any(status == "alive"), "alive", "dead")) %>%
+    dplyr::select(dbhid, tag, status, status_tree, everything())
 }
 
 

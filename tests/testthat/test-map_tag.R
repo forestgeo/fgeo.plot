@@ -36,7 +36,6 @@ lower_names_then_check <- function(x, nms) {
   x
 }
 
-
 # reusing
 vft2 <- lower_names_then_check(vft, nms = c("tag", "qx", "qy", "status"))
 with_sq <- add_subquadrat(df = vft2, 20, 20, 5, 5)
@@ -52,6 +51,7 @@ context("test-rename_with_subquadrat")
 
 # reusing
 rnm <- rename_with_subquadrat(with_sq)
+
 test_that("outputs a dataframe with new expected variables", {
   expect_true(
     vet(c("subquadrat_vftbl", "quadrat_vftbl", "lx", "ly") %in% ., names(rnm))
@@ -59,3 +59,28 @@ test_that("outputs a dataframe with new expected variables", {
 
   expect_is(rnm, "data.frame")
 })
+
+
+context("test-add_status_tree")
+
+# reusing
+with_status_tree <- add_status_tree(rnm)
+
+test_that("outputs a dataframe with new expected variable", {
+  expect_true(vet("status_tree" %in% ., names(with_status_tree)))
+  expect_is(with_status_tree, "data.frame")
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
