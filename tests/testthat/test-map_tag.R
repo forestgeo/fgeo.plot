@@ -73,6 +73,18 @@ test_that("outputs a dataframe with new expected variable", {
 
 
 
+context("test-add_symbol")
+
+# reusing
+with_symbol <- add_symbol(with_status_tree)
+
+test_that("outputs a dataframe with new expected variable", {
+  expect_true(vet("symbol" %in% ., names(with_symbol)))
+  expect_is(with_symbol, "data.frame")
+})
+
+
+
 
 
 

@@ -17,14 +17,9 @@ map_tag <- function(vft,
   with_subquadrat <- add_subquadrat(
     df = vft2, dim_x = dim_x, dim_y = dim_y, div_x = div_x, div_y = div_y
   )
-
   renamed <- rename_with_subquadrat(with_subquadrat)
-
   with_status_tree <- add_status_tree(renamed)
-
-  with_symbol <- with_status_tree %>%
-    mutate(symbol = ifelse(status_tree == "alive", 19, 4)) %>%
-    select(status_tree, symbol, everything())
+  with_symbol <- add_symbol(with_status_tree)
 
   # xxx maybe I can avoid splitting and work with df?
   splitted <- with_symbol %>% split(.$quadrat_vftbl)
@@ -129,6 +124,8 @@ rename_with_subquadrat <- function(with_subquadrat) {
   )
 }
 
+#' Help map_tag()
+#' @noRd
 add_status_tree <- function(renamed) {
   renamed %>%
     dplyr::group_by(tag) %>%
@@ -138,6 +135,13 @@ add_status_tree <- function(renamed) {
     dplyr::select(dbhid, tag, status, status_tree, everything())
 }
 
+#' Help map_tag()
+#' @noRd
+add_symbol <- function(with_status_tree){
+  with_status_tree %>%
+  mutate(symbol = ifelse(status_tree == "alive", 19, 4)) %>%
+  select(status_tree, symbol, everything())
+}
 
 
 
