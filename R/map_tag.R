@@ -12,25 +12,24 @@ map_tag <- function(vft,
                     dim_y = dim_x,
                     div_y = div_x,
                     site_name = "Site Name, YYYY") {
-  # check names
-  vft2 <- setNames(vft, tolower(names(vft)))
-  nms <- c("tag", "qx", "qy", "status")
-  check_crucial_names(vft2, nms)
+  vft2 <- lower_names_then_check(vft, nms = c("tag", "qx", "qy", "status"))
 
-  with_subquadrat <- add_subquadrat(df = vft2,
-    dim_x = dim_x, dim_y = dim_y, div_x = div_x, div_y = div_y
+  with_subquadrat <- add_subquadrat(
+    df = vft2, dim_x = dim_x, dim_y = dim_y, div_x = div_x, div_y = div_y
   )
 
 
   # xxx continue refactoring here
-
-  renamed <- dplyr::rename(
-    with_subquadrat,
-    subquadrat_vftbl = subquadrat,
-    quadrat_vftbl = quadratname,
-    lx = qx,
-    ly = qy,
-  )
+  rename_with_subquadrat <- function(with_subquadrat) {
+    dplyr::rename(
+      with_subquadrat,
+      subquadrat_vftbl = subquadrat,
+      quadrat_vftbl = quadratname,
+      lx = qx,
+      ly = qy,
+    )
+  }
+  renamed <- rename_with_subquadrat(with_subquadrat)
 
   with_status <- renamed %>%
     dplyr::group_by(tag) %>%
@@ -61,6 +60,15 @@ map_tag <- function(vft,
   plot_list
 }
 
+lower_names_then_check <- function(x, nms) {
+  # check names
+  x <- setNames(x, tolower(names(x)))
+  check_crucial_names(x, nms)
+  x
+}
+
+#' helps lower_names_then_check
+#' @noRd
 check_crucial_names <- function(x, nms) {
   are_names_expected <- all(nms %in% names(x))
   if (are_names_expected) {
@@ -70,8 +78,6 @@ check_crucial_names <- function(x, nms) {
       glue::collapse(nms, ", ", last = ", and "), call. = FALSE)
   }
 }
-
-# From add_subquadrat.R ---------------------------------------------------
 
 #' Add a quadrat variable to a dataframe based based on qx and qy coordinates.
 #'
@@ -126,6 +132,9 @@ add_subquadrat <- function(df, dim_x, dim_y, div_x, div_y) {
   )
   with_subquadrat
 }
+
+# From add_subquadrat.R ---------------------------------------------------
+
 
 
 #' Paginate a ViewFullTable. Add a variable indicating page to map on.
