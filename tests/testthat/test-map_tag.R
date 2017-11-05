@@ -98,7 +98,24 @@ test_that("outputs a dataframe with new expected variable", {
       names(prep_list[[1]])
     )
   )
-  expect_is(with_symbol, "data.frame")
+  expect_is(prep_list[[1]], "data.frame")
 })
+
+
+
+context("test-discard_duplicated_tags_and_useless_vars")
+
+# reusing
+unique_tags <- discard_duplicated_tags_and_useless_vars(prep_list)
+one_df_with_unique_tags <- unique_tags[[1]]
+
+test_that("outputs a dataframe with only the expected vars and unique tags", {
+  expect_length(names(one_df_with_unique_tags), 10)
+  expect_is(one_df_with_unique_tags, "data.frame")
+  expect_equal(
+    length(one_df_with_unique_tags$tag), length(unique(one_df_with_unique_tags$tag))
+  )
+})
+
 
 

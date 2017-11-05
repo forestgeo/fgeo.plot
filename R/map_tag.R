@@ -20,19 +20,13 @@ map_tag <- function(vft,
   renamed <- rename_with_subquadrat(with_subquadrat)
   with_status_tree <- add_status_tree(renamed)
   with_symbol <- add_symbol(with_status_tree)
-
   # xxx maybe I can avoid splitting and work with df?
   splitted <- with_symbol %>% split(.$quadrat_vftbl)
-
   # Prepare.
   # xxx maybe I can remove useless variables considering the next step
   # maybe I can remove duplicated tabs, considering the next step
   prep_list <- prep_repulsive_tags(splitted)
-
-  # Keep minimum data and remove duplicates
-  unique_tags <- prep_list %>%
-    purrr::map(select, tag, lx, ly, status, id, latest_tree_status, x1, x2, y1, y2) %>%
-    purrr::map(unique)
+  unique_tags <- discard_duplicated_tags_and_useless_vars(prep_list)
 
   plot_list <- unique_tags %>%
   lapply_plot_repulsive_tags(site_name = site_name)
@@ -143,6 +137,15 @@ add_symbol <- function(with_status_tree){
   select(status_tree, symbol, everything())
 }
 
+#' Help map_tag(); Keep minimum data and remove duplicates.
+#' @noRd
+discard_duplicated_tags_and_useless_vars <- function(prep_list) {
+  prep_list %>%
+    purrr::map(
+      select, tag, lx, ly, status, id, latest_tree_status, x1, x2, y1, y2
+    ) %>%
+    purrr::map(unique)
+}
 
 
 
