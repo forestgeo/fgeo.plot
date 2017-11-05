@@ -12,9 +12,8 @@ map_tag <- function(vft,
                     dim_y = dim_x,
                     div_y = div_x,
                     site_name = "Site Name, YYYY") {
-  # Lowercase names
+  # check names
   vft2 <- setNames(vft, tolower(names(vft)))
-  # Check names
   nms <- c("tag", "qx", "qy", "status")
   check_crucial_names(vft2, nms)
 
