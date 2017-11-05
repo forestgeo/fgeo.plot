@@ -85,14 +85,20 @@ test_that("outputs a dataframe with new expected variable", {
 
 
 
+context("test-prep_repulsive_tags")
 
+# reusing
+splitted <- with_symbol %>% split(.$quadrat_vftbl)
+prep_list <- prep_repulsive_tags(splitted)
 
-
-
-
-
-
-
-
+test_that("outputs a dataframe with new expected variable", {
+  expect_true(
+    vet(
+      c("id", "latest_tree_status", "x1", "x2", "y1", "y2") %in% .,
+      names(prep_list[[1]])
+    )
+  )
+  expect_is(with_symbol, "data.frame")
+})
 
 
