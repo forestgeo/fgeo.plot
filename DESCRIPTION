@@ -19,11 +19,13 @@ Roxygen: list(markdown = TRUE)
 VignetteBuilder: knitr
 URL: https://github.com/forestgeo/try
 BugReports: https://github.com/forestgeo/try/issues
-Imports: assertive,
+Imports: 
+    assertive,
     dplyr,
     ggplot2,
     ggrepel,
     purrr,
     rlang,
     stringr,
-    tibble
+    tibble,
+    glue

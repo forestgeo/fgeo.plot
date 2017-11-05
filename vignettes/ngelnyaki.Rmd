@@ -56,78 +56,31 @@ with_subquadrat <- add_subquadrat(
 with_subquadrat %>% select(subquadrat, everything())
 ```
 
-Raname data to match the needs of existing functions.
 
-```{r}
-renamed <- with_subquadrat %>% 
-  rename(
-    subquadrat_vftbl = subquadrat,
-    quadrat_vftbl = QuadratName,
-    lx = QX,
-    ly = QY,
-  )
-names(renamed) <- tolower(names(renamed))
-# Check
-renamed %>% 
-  select(tag, subquadrat_vftbl, quadrat_vftbl, lx, ly, status, everything())
-```
 
-Add symbols.
 
-```{r, rows.print = 20}
-with_status <- renamed %>% 
-  group_by(tag) %>% 
-  dplyr::arrange(.by_group = TRUE) %>% 
-  # ensure that the status refers to the tree, not to the stem
-  mutate(status_tree = ifelse(any(status == "alive"), "alive", "dead")) %>% 
-  select(dbhid, tag, status, status_tree, everything())
-```
 
-Add symbols.
 
-```{r}
-with_symbol <- with_status %>% 
-  mutate(symbol = ifelse(status_tree == "alive", 19, 4)) %>% 
-  select(status_tree, symbol, everything())
-```
-
-Split the data
-
-```{r}
-splitted <- with_symbol %>% split(.$quadrat_vftbl)
-# example
-splitted[[1]]
-```
 
 ## Prepare and plot
 
-Prepare
 
-xxx subsetting 3 quadrats
 
-```{r prepare, message=FALSE}
-prep_list <- splitted %>% 
-  prep_repulsive_tags()
-```
 
-Keep minimum data and remove duplicates
-
-```{r}
-unique_tags <- prep_list %>% 
-  map(select, tag, lx, ly, status, id, latest_tree_status, x1, x2, y1, y2) %>% 
-  map(unique)
-```
-
-Plot
+Print plot
 
 ```{r plot}
-plot_list <- unique_tags %>%
-  lapply_plot_repulsive_tags(site_name = "Ngel Nyaki 2017")
-
 # Avoid running unintentionally; it takes a few minutes to run
 pdf("Ngel_Nyaki.pdf", paper = "letter", width = 11, height = 11)
 plot_list
 dev.off()
 ```
+
+
+```{r, message=FALSE}
+unique_tags_df <- unique_tags %>% reduce(rbind)
+unique_tags_df
+```
+
 
 
