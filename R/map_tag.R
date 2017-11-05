@@ -18,18 +18,11 @@ map_tag <- function(vft,
     df = vft2, dim_x = dim_x, dim_y = dim_y, div_x = div_x, div_y = div_y
   )
 
-
-  # xxx continue refactoring here
-  rename_with_subquadrat <- function(with_subquadrat) {
-    dplyr::rename(
-      with_subquadrat,
-      subquadrat_vftbl = subquadrat,
-      quadrat_vftbl = quadratname,
-      lx = qx,
-      ly = qy,
-    )
-  }
   renamed <- rename_with_subquadrat(with_subquadrat)
+
+
+
+
 
   with_status <- renamed %>%
     dplyr::group_by(tag) %>%
@@ -132,6 +125,25 @@ add_subquadrat <- function(df, dim_x, dim_y, div_x, div_y) {
   )
   with_subquadrat
 }
+
+#' Help map_tag()
+#' @noRd
+rename_with_subquadrat <- function(with_subquadrat) {
+  dplyr::rename(
+    with_subquadrat,
+    subquadrat_vftbl = subquadrat,
+    quadrat_vftbl = quadratname,
+    lx = qx,
+    ly = qy,
+  )
+}
+
+
+
+
+
+
+
 
 # From add_subquadrat.R ---------------------------------------------------
 

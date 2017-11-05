@@ -36,9 +36,26 @@ lower_names_then_check <- function(x, nms) {
   x
 }
 
+
+# reusing
+vft2 <- lower_names_then_check(vft, nms = c("tag", "qx", "qy", "status"))
+with_sq <- add_subquadrat(df = vft2, 20, 20, 5, 5)
+
 test_that("outputs a dataframe with new expected variable", {
-  vft2 <- lower_names_then_check(vft, nms = c("tag", "qx", "qy", "status"))
-  result <- add_subquadrat(df = vft2, 20, 20, 5, 5)
-  expect_named(result, c(names(vft2), "subquadrat"))
-  expect_is(result, "data.frame")
+  expect_named(with_sq, c(names(vft2), "subquadrat"))
+  expect_is(with_sq, "data.frame")
+})
+
+
+
+context("test-rename_with_subquadrat")
+
+# reusing
+rnm <- rename_with_subquadrat(with_sq)
+test_that("outputs a dataframe with new expected variables", {
+  expect_true(
+    vet(c("subquadrat_vftbl", "quadrat_vftbl", "lx", "ly") %in% ., names(rnm))
+  )
+
+  expect_is(rnm, "data.frame")
 })

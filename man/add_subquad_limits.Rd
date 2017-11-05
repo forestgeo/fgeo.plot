@@ -35,6 +35,8 @@ will be 10x10 meters, so your plot axes should show either the 0 to 10, or
 show the data you expect.
 }
 \examples{
+\dontrun{
+# not running because this example may be obsolete
 library(dplyr)
 
 # Showing only 1 quadrat to save space
@@ -51,6 +53,7 @@ with_subquad_df \%>\%
   select(-quadrat) \%>\%
   add_subquad_limits(quad_size = 20) \%>\%
   head()
+}
 }
 \seealso{
 Other functions to prepare data to plot repulsive tags.: \code{\link{add_latest_tree_status}},
