@@ -2,20 +2,69 @@
 % Please edit documentation in R/prepare.R
 \name{add_quadrat_to_df_list}
 \alias{add_quadrat_to_df_list}
-\title{Add the name of each element of a list as a value in the variable quadrat}
+\title{From a list of dataframes output a dataframe with a useful id variable.
+This function with quadrat and subquadrat variables add id.}
 \usage{
 add_quadrat_to_df_list(df_list)
 }
 \arguments{
 \item{df_list}{A list of data frames.}
+
+\item{...}{Arguments passed to \code{\link[=add_quadrat_and_subquadrat_from_list]{add_quadrat_and_subquadrat_from_list()}}.
+This is lets users change the size of subquadrat via \code{\link[=add_subquadrat]{add_subquadrat()}}.}
+
+\item{df_list}{A list of data frames.}
 }
 \value{
+A data frames with new variables quadrat, subquadrat and id, which
+combines the other two.
+
 A list of dataframes with the variable quadrat.
 }
 \description{
-Add the name of each element of a list as a value in the variable quadrat
+The name of each element of the input list becomes a value of a new variable
+\code{quadrat}; and the variable \code{subquadrat} is also added, based on the values
+of the variables \code{lx} and \code{ly} that each dataframe should have.
 }
 \examples{
+#' library(dplyr)
+#' library(ggplot2)
+#'
+#' df_list <- toy_list[1:2]
+#' head(identify_subquadrat(df_list))
+#'
+#' df_list <- toy_list[1:2]
+#'
+#' # Passing arguments to add_subquadrat(), to make subquadrats half the size
+#' id <- identify_subquadrat(
+#'  df_list,
+#'  x1 = c(0, 10, 10, 0) / 2,
+#'  x2 = c(10, 20, 20, 10) / 2,
+#'  y1 = c(0, 0, 10, 10) / 2,
+#'  y2 = c(10, 10, 20, 20) / 2
+#' )
+#' \dontrun{
+#' one_subquad <- filter(id, id == "16-3")
+#' ggplot(one_subquad, aes(lx, ly)) + geom_point()
+#' }
+identify_subquadrat <- function(df_list, ...) {
+  with_quad_subquad_list <- add_quadrat_and_subquadrat_from_list(df_list, ...)
+  reduced_deep <- suppressMessages(
+    purrr::map(with_quad_subquad_list, purrr::reduce, dplyr::full_join)
+  )
+  reduced_shallow <- suppressMessages(
+    purrr::reduce(reduced_deep, dplyr::full_join)
+  )
+  ided <- dplyr::mutate(
+    reduced_shallow, id = paste(.data$quadrat, .data$subquadrat, sep = "-")
+  )
+  ordered <- dplyr::select(
+    ided, .data$id, .data$quadrat, .data$subquadrat, dplyr::everything()
+  )
+  ordered
+}
+Add the name of each element of a list as a value in the variable quadrat
+
 \dontrun{
 df_list <- toy_list[1:2]
 with_quadrat <- add_quadrat_to_df_list(df_list)
@@ -24,6 +73,8 @@ str(with_quadrat)
 }
 \seealso{
 Other functions to prepare data to plot repulsive tags.: \code{\link{add_latest_tree_status}},
-  \code{\link{add_quadrat_and_subquadrat_from_list}},
+  \code{\link{add_subquad_limits}}
+
+Other functions to prepare data to plot repulsive tags.: \code{\link{add_latest_tree_status}},
   \code{\link{add_subquad_limits}}
 }

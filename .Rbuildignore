@@ -11,3 +11,4 @@
 ^docs$
 ^vignettes/rsconnect$
 ^all_selected_quads_status_in_tag\.pdf$
+^quarentine\.R$
