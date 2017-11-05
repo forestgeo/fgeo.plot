@@ -113,9 +113,25 @@ test_that("outputs a dataframe with only the expected vars and unique tags", {
   expect_length(names(one_df_with_unique_tags), 10)
   expect_is(one_df_with_unique_tags, "data.frame")
   expect_equal(
-    length(one_df_with_unique_tags$tag), length(unique(one_df_with_unique_tags$tag))
+    length(one_df_with_unique_tags$tag),
+    length(unique(one_df_with_unique_tags$tag))
   )
 })
+
+
+
+context("test-lapply_plot_repulsive_tags")
+
+test_that("outputs a ggplot", {
+  plot_list <- unique_tags %>%
+      lapply_plot_repulsive_tags(site_name = "my site")
+  expect_true(
+    any(
+      grepl("ggplot", class(plot_list[[1]]))
+    )
+  )
+})
+
 
 
 

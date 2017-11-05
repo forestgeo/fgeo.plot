@@ -27,9 +27,8 @@ map_tag <- function(vft,
   # maybe I can remove duplicated tabs, considering the next step
   prep_list <- prep_repulsive_tags(splitted)
   unique_tags <- discard_duplicated_tags_and_useless_vars(prep_list)
-
   plot_list <- unique_tags %>%
-  lapply_plot_repulsive_tags(site_name = site_name)
+    lapply_plot_repulsive_tags(site_name = site_name)
   plot_list
 }
 
