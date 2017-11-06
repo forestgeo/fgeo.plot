@@ -9,6 +9,16 @@ vft <- ngelnyaki::ngelnyaki_vft_unid %>% filter(QuadratName %in% few_quads)
 
 context("test-map_tag.R")
 
+test_that("outputs same as satisfactory reference", {
+  # xxx
+  plots <- map_tag(vft)
+  expect_equal_to_reference(plots, "ref-map_tag.rds")
+})
+
+test_that("plots all unique tags in data", {
+  # xxx
+})
+
 test_that("errs with uppercase names", {
   vft_no_qx <- vft
   vft_no_qx$QX <- NULL
