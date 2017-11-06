@@ -225,21 +225,25 @@ prep_repulsive_tags <- function(df_list) {
     purrr::map(dplyr::rename, quadrat = quadrat_vftbl) %>%
     purrr::map(add_subquad_limits) %>%
     purrr::map(dplyr::mutate,
-      id = paste0("Q. ", quadrat, " SQ. ", sqds, " (p. ", subquadrat_vftbl, ")")
+      id = paste0(
+        "Q. ", quadrat,
+        # " SQ. ", sqds,
+        " (p. ", subquadrat_vftbl, ")"
+      )
     ) %>%
     purrr::map(dplyr::select, id, subquadrat_vftbl, dplyr::everything()) %>%
     purrr::map(dplyr::select,
       id, tag, lx, ly, latest_tree_status, x1, x2, y1, y2, dplyr::everything()
     ) %>%
     purrr::reduce(dplyr::full_join) %>%
-    # Add status to tag because some points dissapear from plot but tags
-    # persist
-    dplyr::mutate(
-      tag = case_when(
-        latest_tree_status == "alive" ~ paste0(tag, "_"),
-        latest_tree_status == "dead" ~ paste0(tag, ".")
-      )
-    ) %>%
+    # # Add status to tag because some points dissapear from plot but tags
+    # # persist
+    # dplyr::mutate(
+    #   tag = case_when(
+    #     latest_tree_status == "alive" ~ paste0(tag, "_"),
+    #     latest_tree_status == "dead" ~ paste0(tag, ".")
+    #   )
+    # ) %>%
     split(., .$id)
 }
 
