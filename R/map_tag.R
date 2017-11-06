@@ -320,6 +320,13 @@ plot_repulsive_tags <- function(prep_df,
   assertive::assert_is_data.frame(prep_df)
   assertive::assert_is_character(site_name)
 
+
+  dim_x <- 20
+  dim_y <- 20
+  div_x <- 5
+  div_y <- 5
+
+
   id_quadrat_subquadrat <- unique(prep_df$id)
   ggplot2::ggplot(
     prep_df, ggplot2::aes(x = lx, y = ly, shape = latest_tree_status)
@@ -328,10 +335,10 @@ plot_repulsive_tags <- function(prep_df,
     ggplot2::geom_point(size = point_size) +
     ggrepel::geom_text_repel(ggplot2::aes(label = tag), size = tag_size) +
     ggplot2::scale_x_continuous(
-      minor_breaks = seq(1, 20, 1), breaks = seq(0, 20, 5)
+      minor_breaks = seq(1, dim_x, 1), breaks = seq(0, dim_x, div_x)
     ) +
     ggplot2::scale_y_continuous(
-      minor_breaks = seq(1, 20, 1), breaks = seq(0, 20, 5)
+      minor_breaks = seq(1, dim_y, 1), breaks = seq(0, dim_y, div_y)
     ) +
     ggplot2::coord_fixed(
       xlim = c(unique(prep_df$x1), unique(prep_df$x2)),

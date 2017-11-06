@@ -42,15 +42,15 @@ test_that("plots the same with all or just the minimum needed vars in data", {
   expect_equal(all, min)
 
   # # Visual confirmation
-  # all_multipaged <- marrangeGrob(all, nrow = 1, ncol = 1)
-  # ggplot2::ggsave("all_multipaged.pdf", all_multipaged,
-  #   paper = "letter", width = 8, height = 10.5
-  # )
-  # min_multipaged <- marrangeGrob(min, nrow = 1, ncol = 1)
-  # ggplot2::ggsave(
-  #   "min_multipaged.pdf", min_multipaged,
-  #   paper = "letter", width = 8, height = 10.5
-  # )
+  all_multipaged <- marrangeGrob(all, nrow = 1, ncol = 1)
+  ggplot2::ggsave("all_multipaged.pdf", all_multipaged,
+    paper = "letter", width = 8, height = 10.5
+  )
+  min_multipaged <- marrangeGrob(min, nrow = 1, ncol = 1)
+  ggplot2::ggsave(
+    "min_multipaged.pdf", min_multipaged,
+    paper = "letter", width = 8, height = 10.5
+  )
 })
 
 
