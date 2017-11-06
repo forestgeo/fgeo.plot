@@ -15,7 +15,7 @@ test_that("outputs same as satisfactory reference", {
   plots <- map_tag(vft)
   expect_equal_to_reference(plots, "ref-map_tag.rds")
 
-  expect_equal_to_reference(plot_with_min_vars, "ref-map_tag.rds")
+  expect_equal_to_reference(plots, "ref-map_tag.rds")
 
 })
 
