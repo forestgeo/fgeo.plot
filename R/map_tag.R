@@ -316,22 +316,28 @@ plot_repulsive_tags <- function(prep_df,
                                 point_size,
                                 tag_size,
                                 header,
-                                theme) {
+                                theme,
+                                dim_x = 20,
+                                dim_y = 20,
+                                div_x = 5,
+                                div_y = 5) {
   assertive::assert_is_data.frame(prep_df)
   assertive::assert_is_character(site_name)
 
-
-  dim_x <- 20
-  dim_y <- 20
-  div_x <- 5
-  div_y <- 5
-
+  # Data to plot labels on map
+  lab_df <- df_labels(dim_x = dim_x, dim_y = dim_y, div_x = div_x, div_y= div_y)
+  lab_df <- dplyr::rename(lab_df, lx = qx, ly = qy)
+  # let lab_df be used on a ggplot mapping to shape = latest_tree_status
+  lab_df$latest_tree_status <- NA
 
   id_quadrat_subquadrat <- unique(prep_df$id)
   ggplot2::ggplot(
     prep_df, ggplot2::aes(x = lx, y = ly, shape = latest_tree_status)
   ) +
     ggplot2::scale_shape_manual(values = point_shape) +
+    ggplot2::geom_label(data = lab_df, aes(lx, ly, label = subquadrat),
+      colour = "white", fill = "grey", fontface = "bold"
+    ) +
     ggplot2::geom_point(size = point_size) +
     ggrepel::geom_text_repel(ggplot2::aes(label = tag), size = tag_size) +
     ggplot2::scale_x_continuous(
