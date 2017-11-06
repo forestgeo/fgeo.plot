@@ -1,51 +1,22 @@
 load_all()
 library(tidyverse)
 
-# Minimal data
-few_quads <- unique(ngelnyaki::ngelnyaki_vft_unid$QuadratName)[1:2]
-vft <- ngelnyaki::ngelnyaki_vft_unid %>% filter(QuadratName %in% few_quads)
+# Ngel Nyaki
+ngel_quads <- unique(ngelnyaki::ngelnyaki_vft_unid$QuadratName)[1:2]
+ngel <- ngelnyaki::ngelnyaki_vft_unid %>% filter(QuadratName %in% ngel_quads)
+n <- map_tag(ngel, site_name = "Ngel Nyaki 2017")
+pdf("Nge_Nyaki.pdf", paper = "letter", width = 8, height = 11)
+n
+dev.off()
 
 
+# Yosemite
+yose <- as_tibble(yosemite::ViewFullTable_yosemite)
+yose_quads <- unique(yose$QuadratName)[1:2]
+yose_to_map <- yose %>% filter(QuadratName %in% yose_quads)
 
-plots[["Q. 0101 SQ. 23 (p. 23)"]][["data"]][["tag"]]
-
-
-
-library("vetr")
-
-first_two <- unique(vft$QuadratName)[15]
-vftsub <- vft %>%
-  filter(QuadratName %in% first_two)
-
-x <- map_tag(vftsub, 20, 5, site_name = "my site 2017")
-x
-
-
-
-
-class(x)
-class(x[[1]])
-
-y <- suppressMessages(
-  map_tag(vftsub, 20, 5, site_name = "my site 2017")
-)
-vet(x, y)
-
-
-debugonce(add_subquad_limits)
-
-map_tag(vftsub, 20, 5, site_name = "my site 2017")
-
-
-# remove
-# add_subquadrat.R
-
-#
-# pdf()
-# x
-# dev.off()
-
-
-
-
+p <- map_tag(yose_to_map, site_name = "Yosemite 2017")
+pdf("Yose.pdf", paper = "letter", width = 8, height = 11)
+p
+dev.off()
 
