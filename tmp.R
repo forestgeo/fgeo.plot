@@ -1,8 +1,17 @@
 load_all()
-library("vetr")
-library(dplyr)
+library(tidyverse)
 
-vft <- ngelnyaki::ngelnyaki_vft_unid
+# Minimal data
+few_quads <- unique(ngelnyaki::ngelnyaki_vft_unid$QuadratName)[1:2]
+vft <- ngelnyaki::ngelnyaki_vft_unid %>% filter(QuadratName %in% few_quads)
+
+
+
+plots[["Q. 0101 SQ. 23 (p. 23)"]][["data"]][["tag"]]
+
+
+
+library("vetr")
 
 first_two <- unique(vft$QuadratName)[15]
 vftsub <- vft %>%
@@ -35,3 +44,8 @@ map_tag(vftsub, 20, 5, site_name = "my site 2017")
 # pdf()
 # x
 # dev.off()
+
+
+
+
+
