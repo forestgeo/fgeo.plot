@@ -345,3 +345,45 @@ plot_repulsive_tags <- function(prep_df,
     ) +
     theme
 }
+
+
+
+#' Create a data set to plot labels in each subquadrat
+#'
+#' Create a data set to plot labels in each subquadrat, using the quadrat and
+#' subquadrat size used to generate the subquadrats.
+#' @noRd
+
+# # Example
+# # dummy data
+# tags <- tibble(
+#   tag = sample(1:10000, 100),
+#   qx = sample(1:20, 100, replace = TRUE),
+#   qy = sample(1:20, 100, replace = TRUE)
+# )
+#
+# df_labs <- df_labels(dim_x = 20, dim_y = 20, div_x = 5, div_y = 5)
+#
+# ggplot(data = tags, aes(qx, qy)) +
+#   geom_label(data = df_labs, aes(qx, qy, label = subquadrat),
+#     colour = "white", fill = "grey", fontface = "bold") +
+#   ggrepel::geom_text_repel(aes(label = tag))
+df_labels <- function(...) {
+  pos <- position_labels(...)
+  add_subquadrat(df = pos, ...)
+}
+
+position_labels <- function(dim_x, dim_y, div_x, div_y) {
+  # Center labels in each subquadrat
+  # x
+  xoffset <- div_x / 2
+  xpushed <- seq(0, dim_x, div_x) + xoffset
+  xcentered <- xpushed[xpushed < dim_x]  # remove tags beyond the range
+  # y
+  yoffset <- div_y / 2
+  ypushed <- seq(0, dim_y, div_y) + yoffset
+  ycentered <- ypushed[ypushed < dim_y]  # remove tags beyond the range
+
+  df <- data.frame(qx = xcentered, qy = ycentered, stringsAsFactors = FALSE)
+  tidyr::expand(df, qx, qy)
+}
