@@ -6,6 +6,17 @@
 #' @export
 #'
 #' @examples
+#' \dontrun{
+#' # Yosemite
+#' yose <- as_tibble(yosemite::ViewFullTable_yosemite)
+#' yose_quads <- unique(yose$QuadratName)[1:2]
+#' yose_to_map <- yose %>% filter(QuadratName %in% yose_quads)
+#'
+#' p <- map_tag(yose_to_map, site_name = "Yosemite 2017")
+#' pdf("Yose.pdf", paper = "letter", width = 8, height = 11)
+#' p
+#' dev.off()
+#' }
 map_tag <- function(vft,
                     dim_x = 20,
                     div_x = 5,
