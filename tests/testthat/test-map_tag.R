@@ -1,5 +1,7 @@
 library(vetr)
 library(dplyr)
+library(purrr)
+library(gridExtra)
 
 # Minimal data
 few_quads <- unique(ngelnyaki::ngelnyaki_vft_unid$QuadratName)[1]
@@ -10,14 +12,48 @@ vft <- ngelnyaki::ngelnyaki_vft_unid %>% filter(QuadratName %in% few_quads)
 context("test-map_tag.R")
 
 test_that("outputs same as satisfactory reference", {
-  # xxx
   plots <- map_tag(vft)
   expect_equal_to_reference(plots, "ref-map_tag.rds")
+
+  expect_equal_to_reference(plot_with_min_vars, "ref-map_tag.rds")
+
 })
 
 test_that("plots all unique tags in data", {
-  # xxx
+  plots <- map_tag(vft)
+  unique_tags_in_plot_n <- plots %>%
+    map_df("data") %>%
+    select(tag) %>%
+    unique() %>%
+    pull() %>%
+    length()
+  unique_tags_in_plot_n
+  unique_tags_in_data_n <- unique(vft$Tag) %>% length()
+
+  expect_equal(unique_tags_in_plot_n, unique_tags_in_data_n)
 })
+
+
+test_that("plots the same with all or just the minimum needed vars in data", {
+  all <- map_tag(vft)
+  vft_with_min_vars <- vft %>% select(Tag, Status, QX, QY, QuadratName, DBHID)
+  min <- map_tag(vft_with_min_vars)
+
+  expect_equal(all, min)
+
+  # # Visual confirmation
+  # all_multipaged <- marrangeGrob(all, nrow = 1, ncol = 1)
+  # ggplot2::ggsave("all_multipaged.pdf", all_multipaged,
+  #   paper = "letter", width = 8, height = 10.5
+  # )
+  # min_multipaged <- marrangeGrob(min, nrow = 1, ncol = 1)
+  # ggplot2::ggsave(
+  #   "min_multipaged.pdf", min_multipaged,
+  #   paper = "letter", width = 8, height = 10.5
+  # )
+})
+
+
 
 test_that("errs with uppercase names", {
   vft_no_qx <- vft
