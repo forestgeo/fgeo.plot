@@ -28,7 +28,7 @@
 #' @examples
 #' ggplot2::theme()
 #' get_theme()
-get_theme <- function(panel_grid_major_colour = "grey",
+get_theme <- function(panel_grid_major_colour = "black",
                       panel_grid_minor_colour = "black",
                       panel_grid_minor_linetype = "dotted",
                       panel_background_fill = "white",
