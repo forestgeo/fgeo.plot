@@ -238,13 +238,7 @@ prep_repulsive_tags <- function(df_list) {
     purrr::map(dplyr::mutate,
       split = paste(quadrat, sqds, subquadrat_vftbl, sep = "_")
     ) %>%
-    purrr::map(dplyr::mutate,
-      id = paste0(
-        "Q. ", quadrat
-        # " SQ. ", sqds,
-        # " (p. ", subquadrat_vftbl, ")"
-      )
-    ) %>%
+    purrr::map(dplyr::mutate, id = paste0("Q. ", quadrat)) %>%
     purrr::map(dplyr::select, id, subquadrat_vftbl, dplyr::everything()) %>%
     purrr::map(dplyr::select,
       id, tag, lx, ly, latest_tree_status, x1, x2, y1, y2, dplyr::everything()
