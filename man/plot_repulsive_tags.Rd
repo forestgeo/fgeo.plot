@@ -11,7 +11,7 @@ lapply_plot_repulsive_tags(prep_df_list, site_name = site_name,
   header = get_header(), theme = get_theme())
 
 plot_repulsive_tags(prep_df, site_name, point_shape, point_size, tag_size,
-  header, theme)
+  header, theme, dim_x = 20, dim_y = 20, div_x = 5, div_y = 5)
 }
 \arguments{
 \item{prep_df_list}{A list of data frames, each prapared specifically for

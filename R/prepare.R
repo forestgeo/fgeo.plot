@@ -128,7 +128,7 @@ add_latest_tree_status <- function(df) {
 #'   add_subquad_limits(quad_size = 20) %>%
 #'   head()
 #' }
-add_subquad_limits <- function(df_with_subquad, quad_size = 20, shrink = 0) {
+add_subquad_limits <- function(df_with_subquad, quad_size = 20, shrink = 0.45) {
   dplyr::mutate(df_with_subquad,
     x1 = dplyr::case_when(
       subquadrat == 1 ~ 0 + shrink,

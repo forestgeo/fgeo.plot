@@ -4,7 +4,7 @@
 \alias{get_theme}
 \title{A theme that is customized for \code{plot_repulsive_tags()}.}
 \usage{
-get_theme(panel_grid_major_colour = "grey",
+get_theme(panel_grid_major_colour = "black",
   panel_grid_minor_colour = "black", panel_grid_minor_linetype = "dotted",
   panel_background_fill = "white", plot_title_size = 20,
   plot_subtitle_size = 12, legend_position = "top",

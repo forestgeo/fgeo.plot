@@ -340,7 +340,7 @@ plot_repulsive_tags <- function(prep_df,
   ) +
     ggplot2::scale_shape_manual(values = point_shape) +
     ggplot2::geom_label(data = lab_df, aes(lx, ly, label = subquadrat),
-      colour = "white", fill = "grey", fontface = "bold"
+      colour = "white", fill = "#f4f2f2", fontface = "bold", size = 12
     ) +
     ggplot2::geom_point(size = point_size) +
     ggrepel::geom_text_repel(ggplot2::aes(label = tag), size = tag_size) +
