@@ -244,14 +244,6 @@ prep_repulsive_tags <- function(df_list) {
       id, tag, lx, ly, latest_tree_status, x1, x2, y1, y2, dplyr::everything()
     ) %>%
     purrr::reduce(dplyr::full_join) %>%
-    # # Add status to tag because some points dissapear from plot but tags
-    # # persist
-    # dplyr::mutate(
-    #   tag = case_when(
-    #     latest_tree_status == "alive" ~ paste0(tag, "_"),
-    #     latest_tree_status == "dead" ~ paste0(tag, ".")
-    #   )
-    # ) %>%
     split(., .$split)
 }
 
