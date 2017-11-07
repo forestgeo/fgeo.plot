@@ -236,10 +236,13 @@ prep_repulsive_tags <- function(df_list) {
     purrr::map(dplyr::rename, quadrat = quadrat_vftbl) %>%
     purrr::map(add_subquad_limits) %>%
     purrr::map(dplyr::mutate,
+      split = paste(quadrat, sqds, subquadrat_vftbl, sep = "_")
+    ) %>%
+    purrr::map(dplyr::mutate,
       id = paste0(
-        "Q. ", quadrat,
+        "Q. ", quadrat
         # " SQ. ", sqds,
-        " (p. ", subquadrat_vftbl, ")"
+        # " (p. ", subquadrat_vftbl, ")"
       )
     ) %>%
     purrr::map(dplyr::select, id, subquadrat_vftbl, dplyr::everything()) %>%
@@ -255,7 +258,7 @@ prep_repulsive_tags <- function(df_list) {
     #     latest_tree_status == "dead" ~ paste0(tag, ".")
     #   )
     # ) %>%
-    split(., .$id)
+    split(., .$split)
 }
 
 # From plot.R -------------------------------------------------------------
