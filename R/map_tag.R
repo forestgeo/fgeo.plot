@@ -28,7 +28,10 @@ map_tag <- function(vft,
                     tag_size = 3,
                     header = get_header(),
                     theme = get_theme()) {
-  vft2 <- lower_names_then_check(vft, nms = c("tag", "qx", "qy", "status"))
+  crucial_vars_only <- c("tag", "qx", "qy", "status", "dbhid", "quadratname")
+  vft2 <- lower_names_then_check(vft, nms = crucial_vars_only)
+  # Save memmory by removing irrelevant variables
+  vft2 <- vft2[crucial_vars_only]
 
   with_subquadrat <- add_subquadrat(
     df = vft2, dim_x = dim_x, dim_y = dim_y, div_x = div_x, div_y = div_y
@@ -36,8 +39,7 @@ map_tag <- function(vft,
   with_status_tree <- add_status_tree(with_subquadrat)
   with_symbol <- add_symbol(with_status_tree)
   # Prepare.
-  # xxx maybe I can remove useless variables considering the next step
-  # maybe I can remove duplicated tabs, considering the next step
+  # maybe I can remove duplicated tags, considering the next step
   prep <- prep_repulsive_tags(with_symbol)
   unique_tags <- discard_duplicated_tags_and_useless_vars(prep)
   unique_tags_list <- split(unique_tags, unique_tags$split)
