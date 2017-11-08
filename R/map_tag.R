@@ -128,7 +128,6 @@ add_subquadrat <- function(df, dim_x, dim_y, div_x, div_y) {
 rename_with_subquadrat <- function(with_subquadrat) {
   dplyr::rename(
     with_subquadrat,
-    subquadrat_vftbl = subquadrat,
     quadrat_vftbl = quadratname
   )
 }
@@ -180,25 +179,25 @@ discard_duplicated_tags_and_useless_vars <- function(prep_df) {
 paginate <- function(x) {
   dplyr::mutate(x, page =
       case_when(
-        subquadrat_vftbl == 11 ~ 1,
-        subquadrat_vftbl == 12 ~ 1,
-        subquadrat_vftbl == 21 ~ 1,
-        subquadrat_vftbl == 22 ~ 1,
+        subquadrat == 11 ~ 1,
+        subquadrat == 12 ~ 1,
+        subquadrat == 21 ~ 1,
+        subquadrat == 22 ~ 1,
 
-        subquadrat_vftbl == 31 ~ 2,
-        subquadrat_vftbl == 32 ~ 2,
-        subquadrat_vftbl == 41 ~ 2,
-        subquadrat_vftbl == 42 ~ 2,
+        subquadrat == 31 ~ 2,
+        subquadrat == 32 ~ 2,
+        subquadrat == 41 ~ 2,
+        subquadrat == 42 ~ 2,
 
-        subquadrat_vftbl == 34 ~ 3,
-        subquadrat_vftbl == 33 ~ 3,
-        subquadrat_vftbl == 44 ~ 3,
-        subquadrat_vftbl == 43 ~ 3,
+        subquadrat == 34 ~ 3,
+        subquadrat == 33 ~ 3,
+        subquadrat == 44 ~ 3,
+        subquadrat == 43 ~ 3,
 
-        subquadrat_vftbl == 14 ~ 4,
-        subquadrat_vftbl == 13 ~ 4,
-        subquadrat_vftbl == 24 ~ 4,
-        subquadrat_vftbl == 23 ~ 4,
+        subquadrat == 14 ~ 4,
+        subquadrat == 13 ~ 4,
+        subquadrat == 24 ~ 4,
+        subquadrat == 23 ~ 4,
       )
     )
 }
@@ -214,8 +213,8 @@ paginate <- function(x) {
 #' @noRd
 add_sqds <- function(df) {
   paginate(df) %>%
-  dplyr::group_by(subquadrat_vftbl) %>%
-  dplyr::mutate(sqds = paste0(unique(sort(subquadrat_vftbl)), collapse = "-")) %>%
+  dplyr::group_by(subquadrat) %>%
+  dplyr::mutate(sqds = paste0(unique(sort(subquadrat)), collapse = "-")) %>%
   dplyr::ungroup() %>%
   dplyr::select(sqds, everything())
 }
@@ -241,7 +240,7 @@ prep_repulsive_tags <- function(df) {
       id = paste0("Q. ", quadrat)
     ) %>%
     dplyr::select(
-      id, tag, qx, qy, status_tree, x1, x2, y1, y2, subquadrat_vftbl,
+      id, tag, qx, qy, status_tree, x1, x2, y1, y2, subquadrat,
       dplyr::everything()
     )
 }
