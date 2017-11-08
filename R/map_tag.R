@@ -255,7 +255,7 @@ prep_repulsive_tags <- function(df_list) {
     split(., .$split)
 }
 
-# From plot.R -------------------------------------------------------------
+
 
 #' Plot trees in subquadrats, avoiding tree tags to overlap.
 #'
@@ -390,33 +390,32 @@ plot_repulsive_tags <- function(prep_df,
     theme
 }
 
-
-
-#' Create a data set to plot labels in each subquadrat
-#'
-#' Create a data set to plot labels in each subquadrat, using the quadrat and
-#' subquadrat size used to generate the subquadrats.
+#' Help plot_repulsive_tags().
+#' Create data to plot labels in each subquadrat.
 #' @noRd
-
-# # Example
-# # dummy data
-# tags <- tibble(
-#   tag = sample(1:10000, 100),
-#   qx = sample(1:20, 100, replace = TRUE),
-#   qy = sample(1:20, 100, replace = TRUE)
-# )
-#
-# df_labs <- df_labels(dim_x = 20, dim_y = 20, div_x = 5, div_y = 5)
-#
-# ggplot(data = tags, aes(qx, qy)) +
-#   geom_label(data = df_labs, aes(qx, qy, label = subquadrat),
-#     colour = "white", fill = "grey", fontface = "bold") +
-#   ggrepel::geom_text_repel(aes(label = tag))
+#'
+#' # Example
+#' # dummy data
+#' tags <- tibble(
+#'   tag = sample(1:10000, 100),
+#'   qx = sample(1:20, 100, replace = TRUE),
+#'   qy = sample(1:20, 100, replace = TRUE)
+#' )
+#'
+#' df_labs <- df_labels(dim_x = 20, dim_y = 20, div_x = 5, div_y = 5)
+#'
+#' ggplot(data = tags, aes(qx, qy)) +
+#'   geom_label(data = df_labs, aes(qx, qy, label = subquadrat),
+#'     colour = "white", fill = "grey", fontface = "bold") +
+#'   ggrepel::geom_text_repel(aes(label = tag))
 df_labels <- function(...) {
   pos <- position_labels(...)
   add_subquadrat(df = pos, ...)
 }
 
+#' Help df_labels()
+#' Create a data set of positoin to which later add subquadrats.
+#' @noRd
 position_labels <- function(dim_x, dim_y, div_x, div_y) {
   # Center labels in each subquadrat
   # x
