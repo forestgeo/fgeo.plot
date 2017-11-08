@@ -155,16 +155,13 @@ add_symbol <- function(with_status_tree){
 #' Help map_tag(); Keep minimum data and remove duplicates.
 #' @noRd
 discard_duplicated_tags_and_useless_vars <- function(prep_df) {
-    unique(
-      dplyr::select(
-        prep_df,
-        split, tag, status, id, status_tree, page, qx, qy, x1, x2, y1, y2
-      )
+  unique(
+    dplyr::select(
+      prep_df,
+      split, tag, status, id, status_tree, page, qx, qy, x1, x2, y1, y2
     )
+  )
 }
-
-
-
 
 
 
@@ -240,7 +237,6 @@ prep_repulsive_tags <- function(df) {
     dplyr::rename(quadrat = quadrat_vftbl) %>%
     add_subquad_limits() %>%
     dplyr::mutate(
-      # split = paste(quadrat, sqds, subquadrat_vftbl, sep = "_"),
       split = paste(quadrat, page, sep = "_"),
       id = paste0("Q. ", quadrat)
     ) %>%
