@@ -240,7 +240,8 @@ prep_repulsive_tags <- function(df) {
     dplyr::rename(quadrat = quadrat_vftbl) %>%
     add_subquad_limits() %>%
     dplyr::mutate(
-      split = paste(quadrat, sqds, subquadrat_vftbl, sep = "_"),
+      # split = paste(quadrat, sqds, subquadrat_vftbl, sep = "_"),
+      split = paste(quadrat, page, sep = "_"),
       id = paste0("Q. ", quadrat)
     ) %>%
     dplyr::select(
