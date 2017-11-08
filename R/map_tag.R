@@ -37,11 +37,11 @@ map_tag <- function(vft,
   with_status_tree <- add_status_tree(renamed)
   with_symbol <- add_symbol(with_status_tree)
   # xxx maybe I can avoid splitting and work with df?
-  splitted <- with_symbol %>% split(.$quadrat_vftbl)
+  # splitted <- with_symbol %>% split(.$quadrat_vftbl)
   # Prepare.
   # xxx maybe I can remove useless variables considering the next step
   # maybe I can remove duplicated tabs, considering the next step
-  prep_list <- prep_repulsive_tags(splitted)
+  prep_list <- prep_repulsive_tags(with_symbol)
   unique_tags <- discard_duplicated_tags_and_useless_vars(prep_list)
   plot_list <- lapply_plot_repulsive_tags(
     unique_tags, site_name = site_name, point_shape = point_shape,
@@ -228,34 +228,31 @@ add_sqds <- function(df) {
 
 #' Prepare a list of dataframes to later plot repulsive tags.
 #'
-#' @param df_list A list of dataframes
+#' @param df A dataframes
 #'
 #' @return A modified version of the input.
 #' @keywords internal
 #' @export
 #' @noRd
-prep_repulsive_tags <- function(df_list) {
-  x <- df_list %>%
-    purrr::map(add_sqds)
-  x %>%
-    purrr::map(add_latest_tree_status) %>%  # fix this function
-    purrr::map(dplyr::mutate, latest_tree_status = status_tree)  %>% # patch
-    purrr::map(paginate) %>%
-    purrr::map(dplyr::rename, quadrat = quadrat_vftbl) %>%
-    purrr::map(add_subquad_limits) %>%
-    purrr::map(dplyr::mutate,
-      split = paste(quadrat, sqds, subquadrat_vftbl, sep = "_")
+prep_repulsive_tags <- function(df) {
+  df %>%
+    dplyr::group_by(quadrat_vftbl) %>%
+    add_sqds() %>%
+    add_latest_tree_status() %>%
+    dplyr::mutate(latest_tree_status = status_tree) %>%
+    paginate() %>%
+    dplyr::rename(quadrat = quadrat_vftbl) %>%
+    add_subquad_limits() %>%
+    dplyr::mutate(
+      split = paste(quadrat, sqds, subquadrat_vftbl, sep = "_"),
+      id = paste0("Q. ", quadrat)
     ) %>%
-    purrr::map(dplyr::mutate, id = paste0("Q. ", quadrat)) %>%
-    purrr::map(dplyr::select, id, subquadrat_vftbl, dplyr::everything()) %>%
-    purrr::map(dplyr::select,
-      id, tag, lx, ly, latest_tree_status, x1, x2, y1, y2, dplyr::everything()
+    dplyr::select(
+      id, tag, lx, ly, latest_tree_status, x1, x2, y1, y2, subquadrat_vftbl,
+      dplyr::everything()
     ) %>%
-    purrr::reduce(dplyr::full_join) %>%
     split(., .$split)
 }
-
-
 
 #' Plot trees in subquadrats, avoiding tree tags to overlap.
 #'
