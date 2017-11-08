@@ -40,48 +40,6 @@
 
 
 
-
-#' Add alternatives to the variable `symbol` that are easier to understand.
-#'
-#' The variable `symbol` codes the status of a tree in a very succint way. This
-#' function unpacks the meaning of `symbol`. Be careful: this function is
-#' specifically designed for one particular dataset (from Sinharaja) and if you
-#' use it on other data sets it will likely produce wrong results (and the
-#' function may not throw an error).
-#'
-#' @family functions to prepare data to plot repulsive tags.
-#' @param df A data frame with a variable named `symbol`.
-#'
-#' @return The modified data frame.
-#' @export
-#'
-#' @examples
-#'  # Add to a single dataframe
-#'  df <- toy_list[[1]]
-#'  head(add_latest_tree_status(df))
-#'
-#'  # Add to each dataframe in a list
-#'  df_list <- toy_list
-#'  result <- lapply(df_list, add_latest_tree_status)
-#'  # Just show a few rows of each dataframe
-#'  lapply(result, head)
-add_latest_tree_status <- function(df) {
-  dplyr::mutate(df,
-    sym1 = dplyr::case_when(
-      symbol == 16 ~ "Alive in 4",
-      symbol ==  1 ~ "Alive in 3, Dead in 4",
-      symbol == 15 ~ "Alive in 2, Dead in 3",
-      symbol ==  0 ~ "Alive in 1, Dead in 2"
-    ),
-    latest_tree_status = dplyr::case_when(
-      symbol == 16 ~ "Alive",
-      symbol ==  1 ~ "Dead",
-      symbol == 15 ~ "Dead",
-      symbol ==  0 ~ "Dead"
-    )
-  )
-}
-
 #' To a dataframe with `subquadrat` variable, add plot limits.
 #'
 #' This function helps fine tune the limits of your plots. You can live withouth

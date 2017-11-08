@@ -129,9 +129,7 @@ rename_with_subquadrat <- function(with_subquadrat) {
   dplyr::rename(
     with_subquadrat,
     subquadrat_vftbl = subquadrat,
-    quadrat_vftbl = quadratname,
-    lx = qx,
-    ly = qy,
+    quadrat_vftbl = quadratname
   )
 }
 
@@ -160,7 +158,7 @@ discard_duplicated_tags_and_useless_vars <- function(prep_df) {
     unique(
       dplyr::select(
         prep_df,
-        split, tag, lx, ly, status, id, status_tree, x1, x2, y1, y2
+        split, tag, status, id, status_tree, qx, qy, x1, x2, y1, y2
       )
     )
 }
@@ -246,7 +244,7 @@ prep_repulsive_tags <- function(df) {
       id = paste0("Q. ", quadrat)
     ) %>%
     dplyr::select(
-      id, tag, lx, ly, status_tree, x1, x2, y1, y2, subquadrat_vftbl,
+      id, tag, qx, qy, status_tree, x1, x2, y1, y2, subquadrat_vftbl,
       dplyr::everything()
     )
 }
@@ -352,16 +350,15 @@ plot_repulsive_tags <- function(prep_df,
                                 div_y = 5) {
   # Data to plot labels on map
   lab_df <- df_labels(dim_x = dim_x, dim_y = dim_y, div_x = div_x, div_y= div_y)
-  lab_df <- dplyr::rename(lab_df, lx = qx, ly = qy)
   # Allow plotting labels on a ggplot mapping to shape = status_tree
   lab_df$status_tree <- NA
 
   id_quadrat_subquadrat <- unique(prep_df$id)
   ggplot2::ggplot(
-    prep_df, ggplot2::aes(x = lx, y = ly, shape = status_tree)
+    prep_df, ggplot2::aes(x = qx, y = qy, shape = status_tree)
   ) +
     ggplot2::scale_shape_manual(values = point_shape) +
-    ggplot2::geom_label(data = lab_df, aes(lx, ly, label = subquadrat),
+    ggplot2::geom_label(data = lab_df, aes(qx, qy, label = subquadrat),
       colour = "white", fill = "#f4f2f2", fontface = "bold", size = 12
     ) +
     ggplot2::geom_point(size = point_size) +

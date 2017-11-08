@@ -149,7 +149,7 @@ rnm <- rename_with_subquadrat(with_sq)
 
 test_that("outputs a dataframe with new expected variables", {
   expect_true(
-    vet(c("subquadrat_vftbl", "quadrat_vftbl", "lx", "ly") %in% ., names(rnm))
+    vet(c("subquadrat_vftbl", "quadrat_vftbl", "qx", "qy") %in% ., names(rnm))
   )
 
   expect_is(rnm, "data.frame")
@@ -183,17 +183,16 @@ test_that("outputs a dataframe with new expected variable", {
 context("test-prep_repulsive_tags")
 
 # reusing
-splitted <- with_symbol %>% split(.$quadrat_vftbl)
-prep_list <- prep_repulsive_tags(splitted)
+prep_df <- prep_repulsive_tags(with_symbol)
 
 test_that("outputs a dataframe with new expected variable", {
   expect_true(
     vet(
-      c("id", "latest_tree_status", "x1", "x2", "y1", "y2") %in% .,
-      names(prep_list[[1]])
+      c("id", "status_tree", "x1", "x2", "y1", "y2") %in% .,
+      names(prep_df)
     )
   )
-  expect_is(prep_list[[1]], "data.frame")
+  expect_is(prep_df, "data.frame")
 })
 
 
@@ -201,11 +200,12 @@ test_that("outputs a dataframe with new expected variable", {
 context("test-discard_duplicated_tags_and_useless_vars")
 
 # reusing
-unique_tags <- discard_duplicated_tags_and_useless_vars(prep_list)
-one_df_with_unique_tags <- unique_tags[[1]]
+unique_tags <- discard_duplicated_tags_and_useless_vars(prep_df)
+unique_tags_split <- split(unique_tags, unique_tags$split)
 
+one_df_with_unique_tags <- unique_tags_split[[1]]
 test_that("outputs a dataframe with only the expected vars and unique tags", {
-  expect_length(names(one_df_with_unique_tags), 10)
+  expect_length(names(one_df_with_unique_tags), 11)
   expect_is(one_df_with_unique_tags, "data.frame")
   expect_equal(
     length(one_df_with_unique_tags$tag),
@@ -218,7 +218,7 @@ test_that("outputs a dataframe with only the expected vars and unique tags", {
 context("test-lapply_plot_repulsive_tags")
 
 test_that("outputs a ggplot", {
-  plot_list <- unique_tags %>%
+  plot_list <- unique_tags_split %>%
       lapply_plot_repulsive_tags(site_name = "my site")
   expect_true(
     any(
