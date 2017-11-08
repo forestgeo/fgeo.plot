@@ -142,24 +142,10 @@ test_that("outputs a dataframe with new expected variable", {
 
 
 
-context("test-rename_with_subquadrat")
-
-# reusing
-rnm <- rename_with_subquadrat(with_sq)
-
-test_that("outputs a dataframe with new expected variables", {
-  expect_true(
-    vet(c("subquadrat_vftbl", "quadrat_vftbl", "qx", "qy") %in% ., names(rnm))
-  )
-
-  expect_is(rnm, "data.frame")
-})
-
-
 context("test-add_status_tree")
 
 # reusing
-with_status_tree <- add_status_tree(rnm)
+with_status_tree <- add_status_tree(with_sq)
 
 test_that("outputs a dataframe with new expected variable", {
   expect_true(vet("status_tree" %in% ., names(with_status_tree)))

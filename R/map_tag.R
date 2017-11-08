@@ -33,8 +33,7 @@ map_tag <- function(vft,
   with_subquadrat <- add_subquadrat(
     df = vft2, dim_x = dim_x, dim_y = dim_y, div_x = div_x, div_y = div_y
   )
-  renamed <- rename_with_subquadrat(with_subquadrat)
-  with_status_tree <- add_status_tree(renamed)
+  with_status_tree <- add_status_tree(with_subquadrat)
   with_symbol <- add_symbol(with_status_tree)
   # Prepare.
   # xxx maybe I can remove useless variables considering the next step
@@ -121,15 +120,6 @@ add_subquadrat <- function(df, dim_x, dim_y, div_x, div_y) {
     )
   )
   with_subquadrat
-}
-
-#' Help map_tag()
-#' @noRd
-rename_with_subquadrat <- function(with_subquadrat) {
-  dplyr::rename(
-    with_subquadrat,
-    quadratname = quadratname
-  )
 }
 
 #' Help map_tag()
