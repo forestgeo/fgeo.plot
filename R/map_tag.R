@@ -302,6 +302,16 @@ lapply_plot_repulsive_tags <- function(prep_df_list,
                                        tag_size = 3,
                                        header = get_header(),
                                        theme = get_theme()) {
+  check_lapply_plot_repulsive_tags(
+    prep_df_list = prep_df_list,
+    site_name = site_name,
+    point_shape = point_shape,
+    point_size = point_size,
+    tag_size = tag_size,
+    header = header,
+    theme = theme
+  )
+
   plot_list <- lapply(
     X = prep_df_list,
     FUN = plot_repulsive_tags,
@@ -315,6 +325,25 @@ lapply_plot_repulsive_tags <- function(prep_df_list,
   invisible(plot_list)
 }
 
+#' Help lapply_plot_repulsive_tags() by checking inputs.
+#' @noRd
+check_lapply_plot_repulsive_tags <- function(prep_df_list,
+                                             site_name,
+                                             point_shape,
+                                             point_size,
+                                             tag_size,
+                                             header,
+                                             theme) {
+  assertive::assert_is_data.frame(prep_df_list[[1]])
+  assertive::assert_is_character(site_name)
+  assertive::assert_is_numeric(point_shape)
+  assertive::assert_is_of_length(point_shape, 2)
+  assertive::assert_is_numeric(point_size)
+  assertive::assert_is_of_length(point_size, 1)
+  assertive::assert_is_numeric(tag_size)
+  assertive::assert_is_of_length(tag_size, 1)
+  assertive::assert_is_character(header)
+}
 #' @rdname plot_repulsive_tags
 #' @export
 plot_repulsive_tags <- function(prep_df,
