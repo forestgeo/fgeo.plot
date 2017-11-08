@@ -128,7 +128,7 @@ add_subquadrat <- function(df, dim_x, dim_y, div_x, div_y) {
 rename_with_subquadrat <- function(with_subquadrat) {
   dplyr::rename(
     with_subquadrat,
-    quadrat_vftbl = quadratname
+    quadratname = quadratname
   )
 }
 
@@ -230,10 +230,10 @@ add_sqds <- function(df) {
 #' @noRd
 prep_repulsive_tags <- function(df) {
   df %>%
-    dplyr::group_by(quadrat_vftbl) %>%
+    dplyr::group_by(quadratname) %>%
     add_sqds() %>%
     paginate() %>%
-    dplyr::rename(quadrat = quadrat_vftbl) %>%
+    dplyr::rename(quadrat = quadratname) %>%
     add_subquad_limits() %>%
     dplyr::mutate(
       split = paste(quadrat, page, sep = "_"),
