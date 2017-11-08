@@ -158,7 +158,7 @@ discard_duplicated_tags_and_useless_vars <- function(prep_df) {
     unique(
       dplyr::select(
         prep_df,
-        split, tag, status, id, status_tree, qx, qy, x1, x2, y1, y2
+        split, tag, status, id, status_tree, page, qx, qy, x1, x2, y1, y2
       )
     )
 }
@@ -181,7 +181,7 @@ discard_duplicated_tags_and_useless_vars <- function(prep_df) {
 #' @keywords internal
 #' @noRd
 paginate <- function(x) {
-  dplyr::mutate(x, subquadrat =
+  dplyr::mutate(x, page =
       case_when(
         subquadrat_vftbl == 11 ~ 1,
         subquadrat_vftbl == 12 ~ 1,
@@ -312,6 +312,7 @@ lapply_plot_repulsive_tags <- function(prep_df_list,
 
 #' Help lapply_plot_repulsive_tags() by checking inputs.
 #' @noRd
+
 check_lapply_plot_repulsive_tags <- function(prep_df_list,
                                              site_name,
                                              point_shape,
@@ -358,7 +359,7 @@ plot_repulsive_tags <- function(prep_df,
     prep_df, ggplot2::aes(x = qx, y = qy, shape = status_tree)
   ) +
     ggplot2::scale_shape_manual(values = point_shape) +
-    ggplot2::geom_label(data = lab_df, aes(qx, qy, label = subquadrat),
+    ggplot2::geom_label(data = lab_df, ggplot2::aes(qx, qy, label = subquadrat),
       colour = "white", fill = "#f4f2f2", fontface = "bold", size = 12
     ) +
     ggplot2::geom_point(size = point_size) +
@@ -375,7 +376,13 @@ plot_repulsive_tags <- function(prep_df,
     ) +
     ggplot2::labs(x = NULL, y = NULL) +
     ggplot2::labs(
-      title = paste0(site_name, ". ", id_quadrat_subquadrat),
+      # Title
+      title = paste0(
+        site_name, ". ",
+        id_quadrat_subquadrat,
+        " (page ", as.character(prep_df$page), ")"
+      ),
+      # Subtitle
       subtitle = header
     ) +
     theme
@@ -420,4 +427,106 @@ position_labels <- function(dim_x, dim_y, div_x, div_y) {
 
   df <- data.frame(qx = xcentered, qy = ycentered, stringsAsFactors = FALSE)
   tidyr::expand(df, qx, qy)
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#' To a dataframe with `subquadrat` variable, add plot limits.
+#'
+#' This function helps fine tune the limits of your plots. You can live withouth
+#' it, but this function gives you some extra control. The output is a modified
+#' dataframe that includes the limits that, via [plot_repulsive_tags()], will be
+#' passed to the arguments `xlim` and `ylim` of [ggplot2::coord_fixed()].
+#'
+#' Plots produced with __ggplot__ by default print with a margin around the
+#' limits set by the user. To remove that extra margin and maximize space, this
+#' function shrinks the limits a little. Be sure not to shrink so much that
+#' you loose data; The numbers on the x and y axes should include the limits
+#' that you expect. For example, if your plot is 20x20 meters, each subplot
+#' will be 10x10 meters, so your plot axes should show either the 0 to 10, or
+#' 10 to 20. If you do not read 0 and/or 10, or 10 and/or 20, your plot may not
+#' show the data you expect.
+#'
+#' @family functions to prepare data to plot repulsive tags.
+#'
+#' @param df_with_subquad A dataframe with the variable `subquadrat` that
+#'   defines the 1-4 subquadrats within each quadrat.
+#' @param quad_size Size of each quadrat.
+#' @param shrink A number, generally smaller than one, giving how much to
+#'   shrink the plot.
+#'
+#' @return A modified data frame.
+#' @export
+#' @examples
+#' \dontrun{
+#' # not running because this example may be obsolete
+#' library(dplyr)
+#'
+#' # Showing only 1 quadrat to save space
+#' with_subquad_list <- toy_list[1] %>%
+#'   add_quadrat_and_subquadrat_from_list()
+#' str(with_subquad_list)
+#'
+#' # Pulling only one dataframe
+#' with_subquad_df <- with_subquad_list[[1]][[1]]
+#' head(with_subquad_df)
+#'
+#' with_subquad_df %>%
+#'   # The only "must be" is the variable `subquadrat`; we could remove `quadrat`
+#'   select(-quadrat) %>%
+#'   add_subquad_limits(quad_size = 20) %>%
+#'   head()
+#' }
+add_subquad_limits <- function(df_with_subquad, quad_size = 20, shrink = 0.45) {
+  dplyr::mutate(df_with_subquad,
+    x1 = dplyr::case_when(
+      page == 1 ~ 0 + shrink,
+      page == 2 ~ (quad_size / 2) + shrink,
+      page == 3 ~ (quad_size / 2) + shrink,
+      page == 4 ~ 0 + shrink
+    ),
+    x2 = dplyr::case_when(
+      page == 1 ~ (quad_size / 2) - shrink,
+      page == 2 ~ quad_size - shrink,
+      page == 3 ~ quad_size - shrink,
+      page == 4 ~ (quad_size / 2) - shrink
+    ),
+    y1 = dplyr::case_when(
+      page == 1 ~ 0 + shrink,
+      page == 2 ~ 0 + shrink,
+      page == 3 ~ (quad_size / 2) + shrink,
+      page == 4 ~ (quad_size / 2) + shrink
+    ),
+    y2 = dplyr::case_when(
+      page == 1 ~ (quad_size / 2) - shrink,
+      page == 2 ~ (quad_size / 2) - shrink,
+      page == 3 ~ quad_size  - shrink,
+      page == 4 ~ quad_size - shrink
+    )
+  )
 }
