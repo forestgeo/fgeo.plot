@@ -160,7 +160,7 @@ discard_duplicated_tags_and_useless_vars <- function(prep_df) {
     unique(
       dplyr::select(
         prep_df,
-        split, tag, lx, ly, status, id, latest_tree_status, x1, x2, y1, y2
+        split, tag, lx, ly, status, id, status_tree, x1, x2, y1, y2
       )
     )
 }
@@ -238,8 +238,6 @@ prep_repulsive_tags <- function(df) {
   df %>%
     dplyr::group_by(quadrat_vftbl) %>%
     add_sqds() %>%
-    add_latest_tree_status() %>%
-    dplyr::mutate(latest_tree_status = status_tree) %>%
     paginate() %>%
     dplyr::rename(quadrat = quadrat_vftbl) %>%
     add_subquad_limits() %>%
@@ -248,7 +246,7 @@ prep_repulsive_tags <- function(df) {
       id = paste0("Q. ", quadrat)
     ) %>%
     dplyr::select(
-      id, tag, lx, ly, latest_tree_status, x1, x2, y1, y2, subquadrat_vftbl,
+      id, tag, lx, ly, status_tree, x1, x2, y1, y2, subquadrat_vftbl,
       dplyr::everything()
     )
 }
@@ -355,12 +353,12 @@ plot_repulsive_tags <- function(prep_df,
   # Data to plot labels on map
   lab_df <- df_labels(dim_x = dim_x, dim_y = dim_y, div_x = div_x, div_y= div_y)
   lab_df <- dplyr::rename(lab_df, lx = qx, ly = qy)
-  # Allow plotting labels on a ggplot mapping to shape = latest_tree_status
-  lab_df$latest_tree_status <- NA
+  # Allow plotting labels on a ggplot mapping to shape = status_tree
+  lab_df$status_tree <- NA
 
   id_quadrat_subquadrat <- unique(prep_df$id)
   ggplot2::ggplot(
-    prep_df, ggplot2::aes(x = lx, y = ly, shape = latest_tree_status)
+    prep_df, ggplot2::aes(x = lx, y = ly, shape = status_tree)
   ) +
     ggplot2::scale_shape_manual(values = point_shape) +
     ggplot2::geom_label(data = lab_df, aes(lx, ly, label = subquadrat),
