@@ -230,10 +230,6 @@ prep_repulsive_tags <- function(df) {
     dplyr::mutate(
       split = paste(quadrat, page, sep = "_"),
       id = paste0("Q. ", quadrat)
-    ) %>%
-    dplyr::select(
-      id, tag, qx, qy, status_tree, x1, x2, y1, y2, subquadrat,
-      dplyr::everything()
     )
 }
 
