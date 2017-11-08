@@ -20,6 +20,54 @@ context("test-map_tag.R")
 #
 # })
 
+
+
+test_that("wrong inputs passed to lapply_plot_repulsive_tags() get noticed", {
+
+  expect_error(
+    map_tag(
+      vft,
+      # next line is wrong input
+      site_name = 1,
+      point_shape = c(0, 2),
+      point_size = 6,
+      tag_size = 10
+    )
+  )
+  expect_error(
+    map_tag(
+      vft,
+      site_name = "my site",
+      # next line is wrong input
+      point_shape = c("a", "b"),
+      point_size = 6,
+      tag_size = 10
+    )
+  )
+  expect_error(
+    map_tag(
+      vft,
+      site_name = "my site",
+      point_shape = c(1, 2),
+      # next line is wrong input
+      point_size = "a",
+      tag_size = 10
+    )
+  )
+  expect_error(
+    map_tag(
+      vft,
+      site_name = "my site",
+      point_shape = c(1, 2),
+      point_size = 1,
+      # next line is wrong input
+      tag_size = "a"
+    )
+  )
+})
+
+
+
 test_that("plots all unique tags in data", {
   plots <- map_tag(vft)
   unique_tags_in_plot_n <- plots %>%
