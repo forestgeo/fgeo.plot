@@ -44,12 +44,8 @@ map_tag <- function(vft,
   prep_list <- prep_repulsive_tags(splitted)
   unique_tags <- discard_duplicated_tags_and_useless_vars(prep_list)
   plot_list <- lapply_plot_repulsive_tags(
-    unique_tags,
-    site_name = site_name,
-    point_shape = point_shape,
-    point_size = point_size,
-    tag_size = tag_size,
-    header = header,
+    unique_tags, site_name = site_name, point_shape = point_shape,
+    point_size = point_size, tag_size = tag_size, header = header,
     theme = theme
   )
   plot_list
@@ -306,11 +302,6 @@ lapply_plot_repulsive_tags <- function(prep_df_list,
                                        tag_size = 3,
                                        header = get_header(),
                                        theme = get_theme()) {
-  # Check that the data frame is in a list.
-  assertive::assert_is_data.frame(prep_df_list[[1]])
-
-  assertive::assert_is_character(site_name)
-
   plot_list <- lapply(
     X = prep_df_list,
     FUN = plot_repulsive_tags,
