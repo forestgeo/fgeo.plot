@@ -303,24 +303,16 @@ lapply_plot_repulsive_tags <- function(prep_df_list,
                                        header = get_header(),
                                        theme = get_theme()) {
   check_lapply_plot_repulsive_tags(
-    prep_df_list = prep_df_list,
-    site_name = site_name,
-    point_shape = point_shape,
-    point_size = point_size,
-    tag_size = tag_size,
-    header = header,
-    theme = theme
+    prep_df_list = prep_df_list, site_name = site_name,
+    point_shape = point_shape, point_size = point_size, tag_size = tag_size,
+    header = header, theme = theme
   )
 
   plot_list <- lapply(
     X = prep_df_list,
     FUN = plot_repulsive_tags,
-    site_name = site_name,
-    point_shape = point_shape,
-    point_size = point_size,
-    tag_size = tag_size,
-    header = header,
-    theme = theme
+    site_name = site_name, point_shape = point_shape, point_size = point_size,
+    tag_size = tag_size, header = header, theme = theme
   )
   invisible(plot_list)
 }
@@ -357,9 +349,6 @@ plot_repulsive_tags <- function(prep_df,
                                 dim_y = 20,
                                 div_x = 5,
                                 div_y = 5) {
-  assertive::assert_is_data.frame(prep_df)
-  assertive::assert_is_character(site_name)
-
   # Data to plot labels on map
   lab_df <- df_labels(dim_x = dim_x, dim_y = dim_y, div_x = div_x, div_y= div_y)
   lab_df <- dplyr::rename(lab_df, lx = qx, ly = qy)
