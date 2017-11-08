@@ -293,8 +293,9 @@ prep_repulsive_tags <- function(df_list) {
 #' }
 #' @name plot_repulsive_tags
 
-#' @rdname plot_repulsive_tags
-#' @export
+#' Help map_tag() by iterating over the list of data and passing each split
+#' to plot_repulsive_tags()
+#' @noRd
 lapply_plot_repulsive_tags <- function(prep_df_list,
                                        site_name = site_name,
                                        point_shape = c(19, 4),
