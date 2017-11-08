@@ -337,8 +337,14 @@ check_lapply_plot_repulsive_tags <- function(prep_df_list,
   assertive::assert_is_of_length(tag_size, 1)
   assertive::assert_is_character(header)
 }
-#' @rdname plot_repulsive_tags
-#' @export
+
+#' Help map_tag() by doing the actual mapping.
+#'
+#' Hide because the data to be passed must be first prepared. That preparation
+#' is made by other functions, also warpped in map_tag(). This means that users
+#' won't be able to plot with a data set that has not first been prepared by
+#' the functions composed inside map_tag().
+#' @noRd
 plot_repulsive_tags <- function(prep_df,
                                 site_name,
                                 point_shape,
@@ -353,7 +359,7 @@ plot_repulsive_tags <- function(prep_df,
   # Data to plot labels on map
   lab_df <- df_labels(dim_x = dim_x, dim_y = dim_y, div_x = div_x, div_y= div_y)
   lab_df <- dplyr::rename(lab_df, lx = qx, ly = qy)
-  # let lab_df be used on a ggplot mapping to shape = latest_tree_status
+  # Allow plotting labels on a ggplot mapping to shape = latest_tree_status
   lab_df$latest_tree_status <- NA
 
   id_quadrat_subquadrat <- unique(prep_df$id)
@@ -376,7 +382,6 @@ plot_repulsive_tags <- function(prep_df,
       xlim = c(unique(prep_df$x1), unique(prep_df$x2)),
       ylim = c(unique(prep_df$y1), unique(prep_df$y2))
     ) +
-    # coord_fixed() +
     ggplot2::labs(x = NULL, y = NULL) +
     ggplot2::labs(
       title = paste0(site_name, ". ", id_quadrat_subquadrat),
