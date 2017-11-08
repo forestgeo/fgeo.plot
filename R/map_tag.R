@@ -41,7 +41,7 @@ map_tag <- function(vft,
   # Prepare.
   # maybe I can remove duplicated tags, considering the next step
   prep <- prep_repulsive_tags(with_symbol)
-  unique_tags <- discard_duplicated_tags_and_useless_vars(prep)
+  unique_tags <- discard_duplicated_tags(prep)
   unique_tags_list <- split(unique_tags, unique_tags$split)
   plot_list <- lapply_plot_repulsive_tags(
     unique_tags_list,
@@ -145,7 +145,7 @@ add_symbol <- function(with_status_tree){
 
 #' Help map_tag(); Keep minimum data and remove duplicates.
 #' @noRd
-discard_duplicated_tags_and_useless_vars <- function(prep_df) {
+discard_duplicated_tags <- function(prep_df) {
   unique(
     dplyr::select(
       prep_df,
