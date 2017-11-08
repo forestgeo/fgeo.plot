@@ -2,11 +2,9 @@ load_all()
 library(tidyverse)
 
 # Ngel Nyaki
-ngel_quads <- unique(ngelnyaki::ngelnyaki_vft_unid$QuadratName)[1:2]
+ngel_quads <- unique(ngelnyaki::ngelnyaki_vft_unid$QuadratName)
 ngel <- ngelnyaki::ngelnyaki_vft_unid %>% filter(QuadratName %in% ngel_quads)
 n <- map_tag(ngel, site_name = "Ngel Nyaki 2017")
-n[[1]]
-
 pdf("Nge_Nyaki.pdf", paper = "letter", width = 8, height = 11)
 n
 dev.off()
