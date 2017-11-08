@@ -22,7 +22,12 @@ map_tag <- function(vft,
                     div_x = 5,
                     dim_y = dim_x,
                     div_y = div_x,
-                    site_name = "Site Name, YYYY") {
+                    site_name = "Site Name, YYYY",
+                    point_shape = c(19, 4),
+                    point_size = 1.5,
+                    tag_size = 3,
+                    header = get_header(),
+                    theme = get_theme()) {
   vft2 <- lower_names_then_check(vft, nms = c("tag", "qx", "qy", "status"))
 
   with_subquadrat <- add_subquadrat(
@@ -38,8 +43,15 @@ map_tag <- function(vft,
   # maybe I can remove duplicated tabs, considering the next step
   prep_list <- prep_repulsive_tags(splitted)
   unique_tags <- discard_duplicated_tags_and_useless_vars(prep_list)
-  plot_list <- unique_tags %>%
-    lapply_plot_repulsive_tags(site_name = site_name)
+  plot_list <- lapply_plot_repulsive_tags(
+    unique_tags,
+    site_name = site_name,
+    point_shape = point_shape,
+    point_size = point_size,
+    tag_size = tag_size,
+    header = header,
+    theme = theme
+  )
   plot_list
 }
 
