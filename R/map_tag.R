@@ -36,17 +36,16 @@ map_tag <- function(vft,
   renamed <- rename_with_subquadrat(with_subquadrat)
   with_status_tree <- add_status_tree(renamed)
   with_symbol <- add_symbol(with_status_tree)
-  # xxx maybe I can avoid splitting and work with df?
-  # splitted <- with_symbol %>% split(.$quadrat_vftbl)
   # Prepare.
   # xxx maybe I can remove useless variables considering the next step
   # maybe I can remove duplicated tabs, considering the next step
-  prep_list <- prep_repulsive_tags(with_symbol)
-  unique_tags <- discard_duplicated_tags_and_useless_vars(prep_list)
+  prep <- prep_repulsive_tags(with_symbol)
+  unique_tags <- discard_duplicated_tags_and_useless_vars(prep)
+  unique_tags_list <- split(unique_tags, unique_tags$split)
   plot_list <- lapply_plot_repulsive_tags(
-    unique_tags, site_name = site_name, point_shape = point_shape,
-    point_size = point_size, tag_size = tag_size, header = header,
-    theme = theme
+    unique_tags_list,
+    site_name = site_name, point_shape = point_shape, point_size = point_size,
+    tag_size = tag_size, header = header, theme = theme
   )
   plot_list
 }
@@ -157,12 +156,13 @@ add_symbol <- function(with_status_tree){
 
 #' Help map_tag(); Keep minimum data and remove duplicates.
 #' @noRd
-discard_duplicated_tags_and_useless_vars <- function(prep_list) {
-  prep_list %>%
-    purrr::map(
-      select, tag, lx, ly, status, id, latest_tree_status, x1, x2, y1, y2
-    ) %>%
-    purrr::map(unique)
+discard_duplicated_tags_and_useless_vars <- function(prep_df) {
+    unique(
+      dplyr::select(
+        prep_df,
+        split, tag, lx, ly, status, id, latest_tree_status, x1, x2, y1, y2
+      )
+    )
 }
 
 
@@ -250,8 +250,7 @@ prep_repulsive_tags <- function(df) {
     dplyr::select(
       id, tag, lx, ly, latest_tree_status, x1, x2, y1, y2, subquadrat_vftbl,
       dplyr::everything()
-    ) %>%
-    split(., .$split)
+    )
 }
 
 #' Plot trees in subquadrats, avoiding tree tags to overlap.
