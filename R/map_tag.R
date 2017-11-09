@@ -326,16 +326,10 @@ plot_repulsive_tags <- function(prep_df,
       xlim = c(unique(prep_df$x1), unique(prep_df$x2)),
       ylim = c(unique(prep_df$y1), unique(prep_df$y2))
     ) +
-    ggplot2::labs(x = NULL, y = NULL) +
     ggplot2::labs(
-      # Title
-      title = paste0(
-        site_name, ". ",
-        quad_id_label
-        # " (page ", as.character(prep_df$page), ")"
-      ),
-      # Subtitle
-      subtitle = header
+      title = paste0(site_name, ". ", quad_id_label),
+      subtitle = header,
+      x = NULL, y = NULL
     ) +
     theme
 }
