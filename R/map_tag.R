@@ -47,7 +47,12 @@ map_tag <- function(vft,
         split = paste(quadratname, page, sep = "_"),
         quad_id = paste0("Q. ", quadratname)
       )
-    ungroup(with_split_and_quad_id)
+      # Remove variable with redudndant information
+      with_split_and_quad_id <- dplyr::select(
+        # Can't remove a grouping variable. Also, best to restore df to flat
+        ungroup(with_split_and_quad_id),
+        -quadratname
+      )
     }
   with_crucial_vars <- add_status_tree_page_x1_x2_y1_y2_split_quad_id(
     with_subquadrat
