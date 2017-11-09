@@ -11,14 +11,11 @@ vft <- ngelnyaki::ngelnyaki_vft_unid %>% filter(QuadratName %in% few_quads)
 
 context("test-map_tag.R")
 
-## Redo once the plot is stable
-# test_that("outputs same as satisfactory reference", {
-#   plots <- map_tag(vft)
-#   expect_equal_to_reference(plots, "ref-map_tag.rds")
-#
-#   expect_equal_to_reference(plots, "ref-map_tag.rds")
-#
-# })
+# Redo once the plot is stable
+test_that("outputs same as satisfactory reference", {
+  plots <- map_tag(vft)
+  expect_equal_to_reference(plots, "ref-map_tag.rds")
+})
 
 
 
@@ -154,27 +151,15 @@ test_that("outputs a dataframe with new expected variable", {
 
 
 
-context("test-add_symbol")
-
-# reusing
-with_symbol <- add_symbol(with_status_tree)
-
-test_that("outputs a dataframe with new expected variable", {
-  expect_true(vet("symbol" %in% ., names(with_symbol)))
-  expect_is(with_symbol, "data.frame")
-})
-
-
-
 context("test-prep_repulsive_tags")
 
 # reusing
-prep_df <- prep_repulsive_tags(with_symbol)
+prep_df <- prep_repulsive_tags(with_status_tree)
 
 test_that("outputs a dataframe with new expected variable", {
   expect_true(
     vet(
-      c("id", "status_tree", "x1", "x2", "y1", "y2") %in% .,
+      c("quad_id", "status_tree", "x1", "x2", "y1", "y2") %in% .,
       names(prep_df)
     )
   )
@@ -183,10 +168,10 @@ test_that("outputs a dataframe with new expected variable", {
 
 
 
-context("test-discard_duplicated_tags_and_useless_vars")
+context("test-discard_duplicated_tags")
 
 # reusing
-unique_tags <- discard_duplicated_tags_and_useless_vars(prep_df)
+unique_tags <- discard_duplicated_tags(prep_df)
 unique_tags_split <- split(unique_tags, unique_tags$split)
 
 one_df_with_unique_tags <- unique_tags_split[[1]]
