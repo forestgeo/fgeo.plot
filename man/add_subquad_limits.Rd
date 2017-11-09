@@ -55,6 +55,3 @@ with_subquad_df \%>\%
   head()
 }
 }
-\seealso{
-Other functions to prepare data to plot repulsive tags.: \code{\link{add_quadrat_to_df_list}}
-}
