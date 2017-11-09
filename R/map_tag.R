@@ -29,28 +29,32 @@ map_tag <- function(vft,
                     header = get_header(),
                     theme = get_theme()) {
   crucial_vars_only <- c("tag", "qx", "qy", "status", "quadratname")
-  vft2 <- lower_names_then_check(vft, nms = crucial_vars_only)
+  lower_nms <- lower_names_then_check(vft, nms = crucial_vars_only)
   # Save memmory by removing irrelevant variables
-  vft2 <- vft2[crucial_vars_only]
+  subset_with_lower_nms <- lower_nms[crucial_vars_only]
 
-
-
-  # Prepare dataset for plotting.
-  # xxx extract this chunk into its own routine
   with_subquadrat <- add_subquadrat(
-    df = vft2, dim_x = dim_x, dim_y = dim_y, div_x = div_x, div_y = div_y
+    df = subset_with_lower_nms,
+    dim_x = dim_x, dim_y = dim_y, div_x = div_x, div_y = div_y
   )
-  with_status_tree <- add_status_tree(with_subquadrat)
-  paginated <- paginate(dplyr::group_by(with_status_tree, quadratname))
-  with_limits <- add_subquad_limits(paginated)
-  with_split_and_quad_id <- dplyr::mutate(
-    with_limits,
-    split = paste(quadratname, page, sep = "_"),
-    quad_id = paste0("Q. ", quadratname)
-  )
-  prep <- ungroup(with_split_and_quad_id)
+
+  add_status_tree_page_x1_x2_y1_y2_split_quad_id <- function(with_subquadrat) {
+      with_status_tree <- add_status_tree(df = with_subquadrat)
+      paginated <- paginate(dplyr::group_by(with_status_tree, quadratname))
+      with_limits <- add_subquad_limits(paginated)
+      with_split_and_quad_id <- dplyr::mutate(
+        with_limits,
+        split = paste(quadratname, page, sep = "_"),
+        quad_id = paste0("Q. ", quadratname)
+      )
+    ungroup(with_split_and_quad_id)
+    }
+  with_crucial_vars <- add_status_tree_page_x1_x2_y1_y2_split_quad_id(with_subquadrat)
+
+
+
   # this one needs cleaning. Check it it can be replaced by a simple call to unique
-  unique_tags <- discard_duplicated_tags(prep)
+  unique_tags <- discard_duplicated_tags(with_crucial_vars)
 
 
 
