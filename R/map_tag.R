@@ -49,11 +49,14 @@ map_tag <- function(vft,
       )
     ungroup(with_split_and_quad_id)
     }
-  with_crucial_vars <- add_status_tree_page_x1_x2_y1_y2_split_quad_id(with_subquadrat)
+  with_crucial_vars <- add_status_tree_page_x1_x2_y1_y2_split_quad_id(
+    with_subquadrat
+  )
 
-
-
-  # this one needs cleaning. Check it it can be replaced by a simple call to unique
+  # xxx cont here. try to remove the line below by checking that all variable in
+  # data are the crucial ones -- which makes unnecessary the selection part of
+  # the next step (see function body),
+  # Keep, however, the unique() bit, and maybe move it inside the function above
   unique_tags <- discard_duplicated_tags(with_crucial_vars)
 
 
