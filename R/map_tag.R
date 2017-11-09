@@ -225,11 +225,10 @@ prep_repulsive_tags <- function(df) {
     dplyr::group_by(quadratname) %>%
     add_sqds() %>%
     paginate() %>%
-    dplyr::rename(quadrat = quadratname) %>%
     add_subquad_limits() %>%
     dplyr::mutate(
-      split = paste(quadrat, page, sep = "_"),
-      id = paste0("Q. ", quadrat)
+      split = paste(quadratname, page, sep = "_"),
+      id = paste0("Q. ", quadratname)
     )
 }
 
@@ -481,8 +480,8 @@ position_labels <- function(dim_x, dim_y, div_x, div_y) {
 #' head(with_subquad_df)
 #'
 #' with_subquad_df %>%
-#'   # The only "must be" is the variable `subquadrat`; we could remove `quadrat`
-#'   select(-quadrat) %>%
+#'   # The only "must be" is the variable `subquadrat`; we could remove `quadratname`
+#'   select(-quadratname) %>%
 #'   add_subquad_limits(quad_size = 20) %>%
 #'   head()
 #' }
