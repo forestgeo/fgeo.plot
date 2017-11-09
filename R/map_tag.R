@@ -124,13 +124,11 @@ add_subquadrat <- function(df, dim_x, dim_y, div_x, div_y) {
 
 #' Help map_tag()
 #' @noRd
-add_status_tree <- function(renamed) {
-  renamed %>%
+add_status_tree <- function(df) {
+  df %>%
     dplyr::group_by(tag) %>%
     # ensure that the status refers to the tree, not to the stem
-    dplyr::mutate(
-      status_tree = ifelse(any(status == "alive"), "alive", "dead")
-    )
+    dplyr::mutate(status_tree = ifelse(any(status == "alive"), "alive", "dead"))
 }
 
 #' Help map_tag(); Keep minimum data and remove duplicates.
