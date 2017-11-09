@@ -89,7 +89,7 @@ add_subquadrat <- function(df, dim_x, dim_y, div_x, div_y) {
   dim_x_mns.1 <- dim_x - 0.1
   dim_y_mns.1 <- dim_y - 0.1
 
-  # Conditions
+  # Conditions (odd means that the coordinate goes beyond normal limits)
   is_odd_both <- df$qx >=  dim_x & df$qy >=  dim_y
   is_odd_x <- df$qx >=  dim_x
   is_odd_y <- df$qy >=  dim_y
@@ -165,10 +165,6 @@ add_status_tree_page_x1_x2_y1_y2_split_quad_id <- function(with_subquadrat) {
     )
   }
 
-# From add_subquadrat.R ---------------------------------------------------
-
-
-
 #' Paginate a ViewFullTable. Add a variable indicating page to map on.
 #' @noRd
 paginate <- function(df_with_subquadrat) {
@@ -197,8 +193,6 @@ paginate <- function(df_with_subquadrat) {
       )
     )
 }
-
-
 
 #' Help map_tag()
 #' @noRd
@@ -247,14 +241,8 @@ check_lapply_plot_repulsive_tags <- function(list_of_data_to_plot,
   assertive::assert_is_of_length(tag_size, 1)
 }
 
-
-
-#' Help map_tag() by doing the actual mapping.
-#'
-#' Hide because the data to be passed must be first prepared. That preparation
-#' is made by other functions, also warpped in map_tag(). This means that users
-#' won't be able to plot with a data set that has not first been prepared by
-#' the functions composed inside map_tag().
+#' Help map_tag()
+#' This funciton does the actual mapping.
 #' @noRd
 plot_repulsive_tags <- function(prep_df,
                                 site_name,
@@ -268,7 +256,7 @@ plot_repulsive_tags <- function(prep_df,
                                 div_x = 5,
                                 div_y = 5) {
   # Data to plot labels on map
-  lab_df <- df_labels(dim_x = dim_x, dim_y = dim_y, div_x = div_x, div_y= div_y)
+  lab_df <- df_labels(dim_x = dim_x, dim_y = dim_y, div_x = div_x, div_y = div_y)
   # Allow plotting labels on a ggplot mapping to shape = status_tree
   lab_df$status_tree <- NA
 
@@ -330,92 +318,29 @@ position_labels <- function(dim_x, dim_y, div_x, div_y) {
   # Center labels in each subquadrat
   # x
   xoffset <- div_x / 2
-  xpushed <- seq(0, dim_x, div_x) + xoffset
-  xcentered <- xpushed[xpushed < dim_x]  # remove tags beyond the range
+  xcentered <- seq(0, dim_x, div_x) + xoffset
+  xtrimed <- xcentered[xcentered < dim_x]  # remove tags beyond the range
   # y
   yoffset <- div_y / 2
-  ypushed <- seq(0, dim_y, div_y) + yoffset
-  ycentered <- ypushed[ypushed < dim_y]  # remove tags beyond the range
+  ycentered <- seq(0, dim_y, div_y) + yoffset
+  ytrimed <- ycentered[ycentered < dim_y]  # remove tags beyond the range
 
-  df <- data.frame(qx = xcentered, qy = ycentered, stringsAsFactors = FALSE)
+  df <- data.frame(qx = xtrimed, qy = ytrimed, stringsAsFactors = FALSE)
   tidyr::expand(df, qx, qy)
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#' To a dataframe with `subquadrat` variable, add plot limits.
-#'
-#' This function helps fine tune the limits of your plots. You can live withouth
-#' it, but this function gives you some extra control. The output is a modified
-#' dataframe that includes the limits that, via [plot_repulsive_tags()], will be
-#' passed to the arguments `xlim` and `ylim` of [ggplot2::coord_fixed()].
-#'
-#' Plots produced with __ggplot__ by default print with a margin around the
-#' limits set by the user. To remove that extra margin and maximize space, this
-#' function shrinks the limits a little. Be sure not to shrink so much that
-#' you loose data; The numbers on the x and y axes should include the limits
-#' that you expect. For example, if your plot is 20x20 meters, each subplot
-#' will be 10x10 meters, so your plot axes should show either the 0 to 10, or
-#' 10 to 20. If you do not read 0 and/or 10, or 10 and/or 20, your plot may not
-#' show the data you expect.
-#'
-#' @family functions to prepare data to plot repulsive tags.
-#'
-#' @param df_with_subquad A dataframe with the variable `subquadrat` that
-#'   defines the 1-4 subquadrats within each quadrat.
-#' @param quad_size Size of each quadrat.
-#' @param shrink A number, generally smaller than one, giving how much to
-#'   shrink the plot.
-#'
-#' @return A modified data frame.
-#' @export
-#' @examples
-#' \dontrun{
-#' # not running because this example may be obsolete
-#' library(dplyr)
-#'
-#' # Showing only 1 quadrat to save space
-#' with_subquad_list <- toy_list[1] %>%
-#'   add_quadrat_and_subquadrat_from_list()
-#' str(with_subquad_list)
-#'
-#' # Pulling only one dataframe
-#' with_subquad_df <- with_subquad_list[[1]][[1]]
-#' head(with_subquad_df)
-#'
-#' with_subquad_df %>%
-#'   # The only "must be" is the variable `subquadrat`; we could remove `quadratname`
-#'   select(-quadratname) %>%
-#'   add_subquad_limits(quad_size = 20) %>%
-#'   head()
-#' }
-add_subquad_limits <- function(df_with_subquad, quad_size = 20, shrink = 0.45) {
-  dplyr::mutate(df_with_subquad,
+#' Help map_tag()
+#' Add plot limits to a dataframe with `subquadrat` variable. Plots produced
+#' with __ggplot__ by default print with a margin around the limits set by the
+#' user. To remove that extra margin and maximize space, this function shrinks
+#' the limits a little.
+#' @param srink A number. By experience, `shrink = 0 ` maps default margins
+#'   beyond the limits; `shink = 0.45` chops the margins. Anything in between
+#'   should map a margin smaller than the default margin.
+#' @noRd
+add_subquad_limits <- function(df_with_page, quad_size = 20, shrink = 0.45) {
+  dplyr::mutate(df_with_page,
     x1 = dplyr::case_when(
       page == 1 ~ 0 + shrink,
       page == 2 ~ (quad_size / 2) + shrink,
