@@ -290,9 +290,8 @@ plot_repulsive_tags <- function(prep_df,
 
 #' Help plot_repulsive_tags().
 #' Create data to plot labels in each subquadrat.
-#' @noRd
 #'
-#' # Example
+#' @examples
 #' # dummy data
 #' tags <- tibble(
 #'   tag = sample(1:10000, 100),
@@ -306,6 +305,8 @@ plot_repulsive_tags <- function(prep_df,
 #'   geom_label(data = df_labs, aes(qx, qy, label = subquadrat),
 #'     colour = "white", fill = "grey", fontface = "bold") +
 #'   ggrepel::geom_text_repel(aes(label = tag))
+#'
+#' @noRd
 df_labels <- function(...) {
   pos <- position_labels(...)
   add_subquadrat(df = pos, ...)
