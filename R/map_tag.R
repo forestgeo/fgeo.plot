@@ -1,21 +1,12 @@
-#' Title
+#' Map tree tags
 #'
-#' @param vft A ViewFullTable -- a subclass of a dataframe.
+#' @param vft A ViewFullTable.
 #'
 #' @return
 #' @export
 #'
 #' @examples
 #' \dontrun{
-#' # Yosemite
-#' yose <- as_tibble(yosemite::ViewFullTable_yosemite)
-#' yose_quads <- unique(yose$QuadratName)[1:2]
-#' yose_to_map <- yose %>% filter(QuadratName %in% yose_quads)
-#'
-#' p <- map_tag(yose_to_map, site_name = "Yosemite 2017")
-#' pdf("Yose.pdf", paper = "letter", width = 8, height = 11)
-#' p
-#' dev.off()
 #' }
 map_tag <- function(vft,
                     dim_x = 20,
@@ -28,9 +19,11 @@ map_tag <- function(vft,
                     tag_size = 3,
                     header = get_header(),
                     theme = get_theme()) {
+  vft_lower_nms <- setNames(vft, tolower(names(vft)))
   crucial_vars_only <- c("tag", "qx", "qy", "status", "quadratname")
-  lower_nms <- lower_names_then_check(vft, nms = crucial_vars_only)
-  subset_with_lower_nms <- lower_nms[crucial_vars_only]
+  check_crucial_names(vft_lower_nms, crucial_vars_only)
+
+  subset_with_lower_nms <- vft_lower_nms[crucial_vars_only]
 
   with_subquadrat <- add_subquadrat(
     df = subset_with_lower_nms,
@@ -54,15 +47,6 @@ map_tag <- function(vft,
     tag_size = tag_size, header = header, theme = theme
   )
   plot_list
-}
-
-#' Help map_tag()
-#' @noRd
-lower_names_then_check <- function(x, nms) {
-  # check names
-  x <- setNames(x, tolower(names(x)))
-  check_crucial_names(x, nms)
-  x
 }
 
 #' Help lower_names_then_check()
