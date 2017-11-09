@@ -37,10 +37,8 @@ map_tag <- function(vft,
     df = vft2, dim_x = dim_x, dim_y = dim_y, div_x = div_x, div_y = div_y
   )
   with_status_tree <- add_status_tree(with_subquadrat)
-  with_symbol <- add_symbol(with_status_tree)
-  # Prepare.
   # maybe I can remove duplicated tags, considering the next step
-  prep <- prep_repulsive_tags(with_symbol)
+  prep <- prep_repulsive_tags(with_status_tree)
   unique_tags <- discard_duplicated_tags(prep)
   unique_tags_list <- split(unique_tags, unique_tags$split)
   plot_list <- lapply_plot_repulsive_tags(
@@ -135,21 +133,13 @@ add_status_tree <- function(renamed) {
     dplyr::select(dbhid, tag, status, status_tree, everything())
 }
 
-#' Help map_tag()
-#' @noRd
-add_symbol <- function(with_status_tree){
-  with_status_tree %>%
-  mutate(symbol = ifelse(status_tree == "alive", 19, 4)) %>%
-  select(status_tree, symbol, everything())
-}
-
 #' Help map_tag(); Keep minimum data and remove duplicates.
 #' @noRd
 discard_duplicated_tags <- function(prep_df) {
   unique(
     dplyr::select(
       prep_df,
-      split, tag, status, id, status_tree, page, qx, qy, x1, x2, y1, y2
+      split, tag, status, quad_id, status_tree, page, qx, qy, x1, x2, y1, y2
     )
   )
 }
@@ -228,7 +218,7 @@ prep_repulsive_tags <- function(df) {
     add_subquad_limits() %>%
     dplyr::mutate(
       split = paste(quadratname, page, sep = "_"),
-      id = paste0("Q. ", quadratname)
+      quad_id = paste0("Q. ", quadratname)
     )
 }
 
@@ -337,7 +327,7 @@ plot_repulsive_tags <- function(prep_df,
   # Allow plotting labels on a ggplot mapping to shape = status_tree
   lab_df$status_tree <- NA
 
-  id_quadrat_subquadrat <- unique(prep_df$id)
+  id_quadrat_subquadrat <- unique(prep_df$quad_id)
   ggplot2::ggplot(
     prep_df, ggplot2::aes(x = qx, y = qy, shape = status_tree)
   ) +
