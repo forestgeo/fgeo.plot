@@ -72,9 +72,7 @@ str(with_quadrat)
 }
 }
 \seealso{
-Other functions to prepare data to plot repulsive tags.: \code{\link{add_latest_tree_status}},
-  \code{\link{add_subquad_limits}}
+Other functions to prepare data to plot repulsive tags.: \code{\link{add_subquad_limits}}
 
-Other functions to prepare data to plot repulsive tags.: \code{\link{add_latest_tree_status}},
-  \code{\link{add_subquad_limits}}
+Other functions to prepare data to plot repulsive tags.: \code{\link{add_subquad_limits}}
 }

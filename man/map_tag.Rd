@@ -5,7 +5,8 @@
 \title{Title}
 \usage{
 map_tag(vft, dim_x = 20, div_x = 5, dim_y = dim_x, div_y = div_x,
-  site_name = "Site Name, YYYY")
+  site_name = "Site Name, YYYY", point_shape = c(19, 4), point_size = 1.5,
+  tag_size = 3, header = get_header(), theme = get_theme())
 }
 \arguments{
 \item{vft}{A ViewFullTable -- a subclass of a dataframe.}
