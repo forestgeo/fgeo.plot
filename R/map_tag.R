@@ -184,22 +184,6 @@ paginate <- function(x) {
 }
 
 
-#' Add variable sqds
-#'
-#' @param df A ViewFullTable dataframe with the variable subquadrat.
-#'
-#' @return Modified version of input.
-#' @export
-#' @keywords internal
-#' @noRd
-add_sqds <- function(df) {
-  paginate(df) %>%
-  dplyr::group_by(subquadrat) %>%
-  dplyr::mutate(sqds = paste0(unique(sort(subquadrat)), collapse = "-")) %>%
-  dplyr::ungroup() %>%
-  dplyr::select(sqds, everything())
-}
-
 
 #' Prepare a list of dataframes to later plot repulsive tags.
 #'
@@ -210,15 +194,14 @@ add_sqds <- function(df) {
 #' @export
 #' @noRd
 prep_repulsive_tags <- function(df) {
-  df %>%
-    dplyr::group_by(quadratname) %>%
-    add_sqds() %>%
-    paginate() %>%
-    add_subquad_limits() %>%
-    dplyr::mutate(
+    paginated <- paginate(dplyr::group_by(df, quadratname))
+    with_limits <- add_subquad_limits(paginated)
+    with_split_and_quad_id <- dplyr::mutate(
+      with_limits,
       split = paste(quadratname, page, sep = "_"),
       quad_id = paste0("Q. ", quadratname)
     )
+    ungroup(with_split_and_quad_id)
 }
 
 #' Plot trees in subquadrats, avoiding tree tags to overlap.
