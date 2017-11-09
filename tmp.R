@@ -5,7 +5,10 @@ library(tidyverse)
 ngel_quads <- unique(ngelnyaki::ngelnyaki_vft_unid$QuadratName)
 ngel <- ngelnyaki::ngelnyaki_vft_unid %>% filter(QuadratName %in% ngel_quads)
 n <- map_tag(ngel, site_name = "Ngel Nyaki 2017")
-pdf("Nge_Nyaki.pdf", paper = "letter", width = 8, height = 11)
+
+
+
+pdf("Ngel_Nyaki.pdf", paper = "a4", width = 8, height = 11)
 n
 dev.off()
 
