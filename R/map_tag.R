@@ -53,14 +53,8 @@ map_tag <- function(vft,
         ungroup(with_split_and_quad_id),
         -quadratname
       )
-
-      unique(
-        dplyr::select(
-          with_split_and_quad_id,
-          split, tag, status, subquadrat, quad_id, status_tree, page, qx, qy, x1, x2, y1, y2
-        )
-      )
-
+      # Remove duplicated tags of multi-stem trees
+      unique(with_split_and_quad_id)
     }
   with_crucial_vars <- add_status_tree_page_x1_x2_y1_y2_split_quad_id(
     with_subquadrat
