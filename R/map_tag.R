@@ -331,8 +331,8 @@ plot_repulsive_tags <- function(prep_df,
       # Title
       title = paste0(
         site_name, ". ",
-        id_quadrat_subquadrat,
-        " (page ", as.character(prep_df$page), ")"
+        id_quadrat_subquadrat
+        # " (page ", as.character(prep_df$page), ")"
       ),
       # Subtitle
       subtitle = header
