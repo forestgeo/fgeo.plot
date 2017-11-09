@@ -151,20 +151,21 @@ test_that("outputs a dataframe with new expected variable", {
 
 
 
-context("test-prep_repulsive_tags")
-
+# maybe I can remove duplicated tags, considering the next step
+paginated <- paginate(dplyr::group_by(with_status_tree, quadratname))
+with_limits <- add_subquad_limits(paginated)
+with_split_and_quad_id <- dplyr::mutate(
+  with_limits,
+  split = paste(quadratname, page, sep = "_"),
+  quad_id = paste0("Q. ", quadratname)
+)
 # reusing
-prep_df <- prep_repulsive_tags(with_status_tree)
+prep_df <- ungroup(with_split_and_quad_id)
 
-test_that("outputs a dataframe with new expected variable", {
-  expect_true(
-    vet(
-      c("quad_id", "status_tree", "x1", "x2", "y1", "y2") %in% .,
-      names(prep_df)
-    )
-  )
-  expect_is(prep_df, "data.frame")
-})
+
+
+
+
 
 
 

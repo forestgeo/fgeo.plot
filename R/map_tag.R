@@ -33,14 +33,29 @@ map_tag <- function(vft,
   # Save memmory by removing irrelevant variables
   vft2 <- vft2[crucial_vars_only]
 
+
+
+  # Prepare dataset for plotting.
+  # xxx extract this chunk into its own routine
   with_subquadrat <- add_subquadrat(
     df = vft2, dim_x = dim_x, dim_y = dim_y, div_x = div_x, div_y = div_y
   )
   with_status_tree <- add_status_tree(with_subquadrat)
-  # maybe I can remove duplicated tags, considering the next step
-  prep <- prep_repulsive_tags(with_status_tree)
+  paginated <- paginate(dplyr::group_by(with_status_tree, quadratname))
+  with_limits <- add_subquad_limits(paginated)
+  with_split_and_quad_id <- dplyr::mutate(
+    with_limits,
+    split = paste(quadratname, page, sep = "_"),
+    quad_id = paste0("Q. ", quadratname)
+  )
+  prep <- ungroup(with_split_and_quad_id)
+  # this one needs cleaning. Check it it can be replaced by a simple call to unique
   unique_tags <- discard_duplicated_tags(prep)
+
+
+
   unique_tags_list <- split(unique_tags, unique_tags$split)
+
   plot_list <- lapply_plot_repulsive_tags(
     unique_tags_list,
     site_name = site_name, point_shape = point_shape, point_size = point_size,
@@ -184,25 +199,6 @@ paginate <- function(x) {
 }
 
 
-
-#' Prepare a list of dataframes to later plot repulsive tags.
-#'
-#' @param df A dataframes
-#'
-#' @return A modified version of the input.
-#' @keywords internal
-#' @export
-#' @noRd
-prep_repulsive_tags <- function(df) {
-    paginated <- paginate(dplyr::group_by(df, quadratname))
-    with_limits <- add_subquad_limits(paginated)
-    with_split_and_quad_id <- dplyr::mutate(
-      with_limits,
-      split = paste(quadratname, page, sep = "_"),
-      quad_id = paste0("Q. ", quadratname)
-    )
-    ungroup(with_split_and_quad_id)
-}
 
 #' Plot trees in subquadrats, avoiding tree tags to overlap.
 #'
