@@ -19,34 +19,30 @@ map_tag <- function(vft,
                     tag_size = 3,
                     header = get_header(),
                     theme = get_theme()) {
+  # Lowercase names (easier to handle), check and keep important variables
   vft_lower_nms <- setNames(vft, tolower(names(vft)))
   crucial_vars_only <- c("tag", "qx", "qy", "status", "quadratname")
   check_crucial_names(vft_lower_nms, crucial_vars_only)
-
   subset_with_lower_nms <- vft_lower_nms[crucial_vars_only]
 
+  # Prepare data to plot: add important variables and remove duplicated tags
   with_subquadrat <- add_subquadrat(
     df = subset_with_lower_nms,
     dim_x = dim_x, dim_y = dim_y, div_x = div_x, div_y = div_y
   )
-
   with_crucial_vars <- add_status_tree_page_x1_x2_y1_y2_split_quad_id(
     with_subquadrat
   )
-  # Remove duplicated tags of multi-stem trees
-  unique_with_crucial_vars <- unique(with_crucial_vars)
+  data_to_plot <- unique(with_crucial_vars)
 
   # Iterate over each quadrat to produce one map per page (4 subquadrats/page)
-  with_crucial_vars_list <- split(
-    unique_with_crucial_vars,
-    unique_with_crucial_vars$split
-  )
-  plot_list <- lapply_plot_repulsive_tags(
-    with_crucial_vars_list,
+  list_of_data_to_plot <- split(data_to_plot, data_to_plot$split)
+  list_of_plots <- lapply_plot_repulsive_tags(
+    list_of_data_to_plot,
     site_name = site_name, point_shape = point_shape, point_size = point_size,
     tag_size = tag_size, header = header, theme = theme
   )
-  plot_list
+  list_of_plots
 }
 
 #' Help lower_names_then_check()
