@@ -30,7 +30,6 @@ map_tag <- function(vft,
                     theme = get_theme()) {
   crucial_vars_only <- c("tag", "qx", "qy", "status", "quadratname")
   lower_nms <- lower_names_then_check(vft, nms = crucial_vars_only)
-  # Save memmory by removing irrelevant variables
   subset_with_lower_nms <- lower_nms[crucial_vars_only]
 
   with_subquadrat <- add_subquadrat(
@@ -57,6 +56,8 @@ map_tag <- function(vft,
   plot_list
 }
 
+#' Help map_tag()
+#' @noRd
 lower_names_then_check <- function(x, nms) {
   # check names
   x <- setNames(x, tolower(names(x)))
@@ -64,7 +65,7 @@ lower_names_then_check <- function(x, nms) {
   x
 }
 
-#' helps lower_names_then_check
+#' Help lower_names_then_check()
 #' @noRd
 check_crucial_names <- function(x, nms) {
   are_names_expected <- all(nms %in% names(x))
