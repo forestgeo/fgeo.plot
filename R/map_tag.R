@@ -226,7 +226,6 @@ lapply_plot_repulsive_tags <- function(list_of_data_to_plot,
 
 #' Help lapply_plot_repulsive_tags() by checking inputs.
 #' @noRd
-
 check_lapply_plot_repulsive_tags <- function(list_of_data_to_plot,
                                              site_name,
                                              point_shape,
@@ -235,15 +234,20 @@ check_lapply_plot_repulsive_tags <- function(list_of_data_to_plot,
                                              header,
                                              theme) {
   assertive::assert_is_data.frame(list_of_data_to_plot[[1]])
-  assertive::assert_is_character(site_name)
-  assertive::assert_is_numeric(point_shape)
-  assertive::assert_is_of_length(point_shape, 2)
-  assertive::assert_is_numeric(point_size)
-  assertive::assert_is_of_length(point_size, 1)
-  assertive::assert_is_numeric(tag_size)
-  assertive::assert_is_of_length(tag_size, 1)
+
   assertive::assert_is_character(header)
+  assertive::assert_is_character(site_name)
+
+  assertive::assert_is_numeric(point_shape)
+  assertive::assert_is_numeric(point_size)
+  assertive::assert_is_numeric(tag_size)
+
+  assertive::assert_is_of_length(point_shape, 2)
+  assertive::assert_is_of_length(point_size, 1)
+  assertive::assert_is_of_length(tag_size, 1)
 }
+
+
 
 #' Help map_tag() by doing the actual mapping.
 #'
