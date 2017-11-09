@@ -38,22 +38,6 @@ map_tag <- function(vft,
     dim_x = dim_x, dim_y = dim_y, div_x = div_x, div_y = div_y
   )
 
-  add_status_tree_page_x1_x2_y1_y2_split_quad_id <- function(with_subquadrat) {
-      with_status_tree <- add_status_tree(df = with_subquadrat)
-      paginated <- paginate(dplyr::group_by(with_status_tree, quadratname))
-      with_limits <- add_subquad_limits(paginated)
-      with_split_and_quad_id <- dplyr::mutate(
-        with_limits,
-        split = paste(quadratname, page, sep = "_"),
-        quad_id = paste0("Q. ", quadratname)
-      )
-      # Remove variable with redudndant information
-      dplyr::select(
-        # Can't remove a grouping variable. Also, best to restore df to flat
-        ungroup(with_split_and_quad_id),
-        -quadratname
-      )
-    }
   with_crucial_vars <- add_status_tree_page_x1_x2_y1_y2_split_quad_id(
     with_subquadrat
   )
@@ -156,7 +140,25 @@ add_status_tree <- function(df) {
   )
 }
 
-
+#' Help map_tag()
+#' Prepare dataset for plotting, by adding a number of useful variables
+#' @noRd
+add_status_tree_page_x1_x2_y1_y2_split_quad_id <- function(with_subquadrat) {
+    with_status_tree <- add_status_tree(df = with_subquadrat)
+    paginated <- paginate(dplyr::group_by(with_status_tree, quadratname))
+    with_limits <- add_subquad_limits(paginated)
+    with_split_and_quad_id <- dplyr::mutate(
+      with_limits,
+      split = paste(quadratname, page, sep = "_"),
+      quad_id = paste0("Q. ", quadratname)
+    )
+    # Remove variable with redudndant information
+    dplyr::select(
+      # Can't remove a grouping variable. Also, best to restore df to flat
+      ungroup(with_split_and_quad_id),
+      -quadratname
+    )
+  }
 
 # From add_subquadrat.R ---------------------------------------------------
 

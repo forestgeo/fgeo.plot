@@ -151,46 +151,15 @@ test_that("outputs a dataframe with new expected variable", {
 
 
 
-# maybe I can remove duplicated tags, considering the next step
-paginated <- paginate(dplyr::group_by(with_status_tree, quadratname))
-with_limits <- add_subquad_limits(paginated)
-with_split_and_quad_id <- dplyr::mutate(
-  with_limits,
-  split = paste(quadratname, page, sep = "_"),
-  quad_id = paste0("Q. ", quadratname)
-)
-# reusing
-prep_df <- ungroup(with_split_and_quad_id)
-
-
-
-
-
-
-
-
-context("test-discard_duplicated_tags")
-
-# reusing
-unique_tags <- discard_duplicated_tags(prep_df)
-unique_tags_split <- split(unique_tags, unique_tags$split)
-
-one_df_with_unique_tags <- unique_tags_split[[1]]
-test_that("outputs a dataframe with only the expected vars and unique tags", {
-  expect_length(names(one_df_with_unique_tags), 12)
-  expect_is(one_df_with_unique_tags, "data.frame")
-  expect_equal(
-    length(one_df_with_unique_tags$tag),
-    length(unique(one_df_with_unique_tags$tag))
-  )
-})
-
-
-
 context("test-lapply_plot_repulsive_tags")
 
+prep_df <- unique(
+  add_status_tree_page_x1_x2_y1_y2_split_quad_id(with_status_tree)
+)
+prep_df_list <- split(prep_df, prep_df$split)
+
 test_that("outputs a ggplot", {
-  plot_list <- unique_tags_split %>%
+  plot_list <- prep_df_list %>%
       lapply_plot_repulsive_tags(site_name = "my site")
   expect_true(
     any(
