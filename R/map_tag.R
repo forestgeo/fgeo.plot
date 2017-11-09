@@ -48,29 +48,25 @@ map_tag <- function(vft,
         quad_id = paste0("Q. ", quadratname)
       )
       # Remove variable with redudndant information
-      with_split_and_quad_id <- dplyr::select(
+      dplyr::select(
         # Can't remove a grouping variable. Also, best to restore df to flat
         ungroup(with_split_and_quad_id),
         -quadratname
       )
-      # Remove duplicated tags of multi-stem trees
-      unique(with_split_and_quad_id)
     }
   with_crucial_vars <- add_status_tree_page_x1_x2_y1_y2_split_quad_id(
     with_subquadrat
   )
+  # Remove duplicated tags of multi-stem trees
+  unique_with_crucial_vars <- unique(with_crucial_vars)
 
-  # xxx cont here. try to remove the line below by checking that all variable in
-  # data are the crucial ones -- which makes unnecessary the selection part of
-  # the next step (see function body),
-  # Keep, however, the unique() bit, and maybe move it inside the function above
-
-
-
-  unique_tags_list <- split(with_crucial_vars, with_crucial_vars$split)
-
+  # Iterate over each quadrat to produce one map per page (4 subquadrats/page)
+  with_crucial_vars_list <- split(
+    unique_with_crucial_vars,
+    unique_with_crucial_vars$split
+  )
   plot_list <- lapply_plot_repulsive_tags(
-    unique_tags_list,
+    with_crucial_vars_list,
     site_name = site_name, point_shape = point_shape, point_size = point_size,
     tag_size = tag_size, header = header, theme = theme
   )
