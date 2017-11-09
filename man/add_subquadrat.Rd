@@ -7,14 +7,14 @@
 add_subquadrat(df, dim_x, dim_y, div_x, div_y)
 }
 \arguments{
-\item{df}{A dataframe.}
+\item{df}{A ViewFullTable dataframe.}
 
-\item{dim_x, dim_y}{Quadrat dimension for the plot. For example, in Sinharaja
-both are 20.}
+\item{dim_x, dim_y}{Quadrat dimension (side) for the plot. Commonly both are
+20.}
 
-\item{div_x, div_y}{Total number of divisions of each quadrat side. For
-example, For Sinharaja and most other plots, the value of these arguments
-is 5, which results in a 4x4 grid of subquadrats within each quadrat.}
+\item{div_x, div_y}{Total number of divisions of each quadrat dimension
+(side). For most plots, the value of these arguments is 5, which results in
+a 4x4 grid of subquadrats within each quadrat.}
 }
 \value{
 A dataframe with the additional variable \code{subquadrat}.
@@ -24,10 +24,10 @@ Add a quadrat variable to a dataframe based based on qx and qy coordinates.
 }
 \examples{
 \dontrun{
-# sinharaja is a private package
-df <- sinharaja::sinh_vftbl_selected
+# ngelnyaki is a private dataset
+df <- ngelnyaki::ngelnyaki_vft_unid
 with_subquadrat <- add_subquadrat(df, 20, 20, 5, 5)
-head(with_subquadrat)
+head(with_subquadrat[c("qx", "qy", "subquadrat")])
 }
 }
 \author{

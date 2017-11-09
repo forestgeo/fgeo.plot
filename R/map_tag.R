@@ -59,24 +59,32 @@ check_crucial_names <- function(x, nms) {
 
 #' Add a quadrat variable to a dataframe based based on qx and qy coordinates.
 #'
-#' @param df A dataframe.
-#' @param dim_x,dim_y Quadrat dimension for the plot. For example, in Sinharaja
-#'   both are 20.
-#' @param div_x,div_y Total number of divisions of each quadrat side. For
-#'   example, For Sinharaja and most other plots, the value of these arguments
-#'   is 5, which results in a 4x4 grid of subquadrats within each quadrat.
+#' @param df A ViewFullTable dataframe.
+#' @param dim_x,dim_y Quadrat dimension (side) for the plot. Commonly both are
+#'   20.
+#' @param div_x,div_y Total number of divisions of each quadrat dimension
+#'   (side). For most plots, the value of these arguments is 5, which results in
+#'   a 4x4 grid of subquadrats within each quadrat.
 #' @return A dataframe with the additional variable `subquadrat`.
 #' @author Anudeep Singh.
 #' @export
 #'
 #' @examples
 #' \dontrun{
-#' # sinharaja is a private package
-#' df <- sinharaja::sinh_vftbl_selected
+#' # ngelnyaki is a private dataset
+#' df <- ngelnyaki::ngelnyaki_vft_unid
 #' with_subquadrat <- add_subquadrat(df, 20, 20, 5, 5)
-#' head(with_subquadrat)
+#' head(with_subquadrat[c("qx", "qy", "subquadrat")])
 #' }
 add_subquadrat <- function(df, dim_x, dim_y, div_x, div_y) {
+  message("Lowering names case")
+  df <- setNames(df, tolower(names(df)))
+  check_crucial_names(df, c("qx", "qy"))
+
+  check_add_subquadrat(
+    df = df, dim_x = dim_x, dim_y = dim_y, div_x = div_x, div_y = div_y
+  )
+
   # Simplify nested parentheses
   dim_x_mns.1 <- dim_x - 0.1
   dim_y_mns.1 <- dim_y - 0.1
@@ -109,6 +117,22 @@ add_subquadrat <- function(df, dim_x, dim_y, div_x, div_y) {
     )
   )
   with_subquadrat
+}
+
+#' Help add_subquadrat()
+#' @noRd
+check_add_subquadrat <- function(df,
+                                 dim_x,
+                                 dim_y,
+                                 div_x,
+                                 div_y) {
+  assertive::assert_is_data.frame(df)
+  remaining_args <- list(dim_x, dim_y, div_x, div_y)
+
+lapply(remaining_args, assertive::assert_is_numeric)
+lapply(remaining_args, assertive::assert_is_of_length, 1)
+lapply(remaining_args, assertive::assert_all_are_positive)
+lapply(remaining_args, assertive::assert_all_are_finite)
 }
 
 #' Help map_tag()

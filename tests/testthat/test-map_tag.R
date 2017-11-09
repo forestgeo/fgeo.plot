@@ -139,6 +139,26 @@ test_that("outputs a dataframe with new expected variable", {
 
 
 
+context("test-check_add_subquadrat.R")
+
+test_that("throws error with wrong inputs to add_subquadrat", {
+  df <- ngelnyaki::ngelnyaki_vft_unid[1:5, c("QX", "QY")]
+  # check that works
+  expect_message(add_subquadrat(df, 20, 20, 5, 5))
+  expect_message(add_subquadrat(df, 40, 50, 5, 5))
+
+  # Fails
+  expect_error(suppressMessages(add_subquadrat(1, 20, 20, 5, 5)))
+  expect_error(suppressMessages(add_subquadrat(df, "a", 20, 5, 5)))
+  expect_error(suppressMessages(add_subquadrat(df, 20, c(20, 20), 5, 5)))
+  expect_error(suppressMessages(add_subquadrat(df, 20, 20, "a", 5)))
+  expect_error(suppressMessages(add_subquadrat(df, 20, 20, 5, c(5, 5))))
+  expect_error(suppressMessages(add_subquadrat(df, -1, 20, 5, 5)))
+  expect_error(suppressMessages(add_subquadrat(df, 20, Inf, 5, 5)))
+})
+
+
+
 context("test-add_status_tree")
 
 # reusing

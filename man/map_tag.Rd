@@ -2,28 +2,19 @@
 % Please edit documentation in R/map_tag.R
 \name{map_tag}
 \alias{map_tag}
-\title{Title}
+\title{Map tree tags}
 \usage{
 map_tag(vft, dim_x = 20, div_x = 5, dim_y = dim_x, div_y = div_x,
   site_name = "Site Name, YYYY", point_shape = c(19, 4), point_size = 1.5,
   tag_size = 3, header = get_header(), theme = get_theme())
 }
 \arguments{
-\item{vft}{A ViewFullTable -- a subclass of a dataframe.}
+\item{vft}{A ViewFullTable.}
 }
 \description{
-Title
+Map tree tags
 }
 \examples{
 \dontrun{
-# Yosemite
-yose <- as_tibble(yosemite::ViewFullTable_yosemite)
-yose_quads <- unique(yose$QuadratName)[1:2]
-yose_to_map <- yose \%>\% filter(QuadratName \%in\% yose_quads)
-
-p <- map_tag(yose_to_map, site_name = "Yosemite 2017")
-pdf("Yose.pdf", paper = "letter", width = 8, height = 11)
-p
-dev.off()
 }
 }
