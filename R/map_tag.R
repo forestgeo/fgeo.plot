@@ -170,16 +170,11 @@ add_status_tree_page_x1_x2_y1_y2_split_quad_id <- function(with_subquadrat) {
 
 
 #' Paginate a ViewFullTable. Add a variable indicating page to map on.
-#'
-#' @param x A ViewFullTable dataframe.
-#'
-#' @return A modified ViewFullTable dataframe..
-#' @export
-#' @keywords internal
 #' @noRd
-paginate <- function(x) {
-  dplyr::mutate(x, page =
-      case_when(
+paginate <- function(df_with_subquadrat) {
+  dplyr::mutate(
+    df_with_subquadrat,
+    page = dplyr::case_when(
         subquadrat == 11 ~ 1,
         subquadrat == 12 ~ 1,
         subquadrat == 21 ~ 1,
@@ -205,46 +200,9 @@ paginate <- function(x) {
 
 
 
-#' Plot trees in subquadrats, avoiding tree tags to overlap.
-#'
-#' @param prep_df_list A list of data frames, each prapared specifically for
-#'   [plot_repulsive_tags].
-#' @param prep_df A data frames prapared specifically for [plot_repulsive_tags].
-#' @param site_name A sting of the site name for the plot title.
-#' @param point_shape Point shape. Passed to `value` in
-#'   [ggplot2::scale_shape_manual()]. See `pch` values in [graphics::points()].
-#' @param point_size Point size. Passed to `size` in [ggplot2::geom_point()].
-#' @param tag_size Tag size. Passed to `size` in [ggrepel::geom_text_repel()].
-#' @param header A string giving the plot header. An easy way to make a
-#'   three-line header is with [get_header()].
-#' @param theme A [ggplot2::theme()]. A theme customized for
-#'   [plot_repulsive_tags()] is available via [get_theme()], which you can
-#'   further customize or you can create a complete new theme with
-#'   [ggplot2::theme()].
-#'
-#' @return A list of plots that can be wrapped around pdf(onefile = TRUE).
-#' @export
-#'
-#' @examples
-#' list_of_dataframes <- toy_list
-#' prepared <- prep_repulsive_tags(list_of_dataframes)
-#' plot_list <- lapply_plot_repulsive_tags(prepared, site_name = "Toy")
-#' \dontrun{
-#' plot_list[[1]]
-#' }
-#'
-#' # Print each plot on a plage of a single .pdf file
-#' \dontrun{
-#' pdf(onefile = TRUE, paper = "a4", width = 11, height = 11)
-#' plot_list
-#' dev.off()
-#' }
-#' @name plot_repulsive_tags
-
-#' Help map_tag() by iterating over the list of data and passing each split
-#' to plot_repulsive_tags()
+#' Help map_tag()
 #' @noRd
-lapply_plot_repulsive_tags <- function(prep_df_list,
+lapply_plot_repulsive_tags <- function(list_of_data_to_plot,
                                        site_name = site_name,
                                        point_shape = c(19, 4),
                                        point_size = 1.5,
@@ -252,13 +210,13 @@ lapply_plot_repulsive_tags <- function(prep_df_list,
                                        header = get_header(),
                                        theme = get_theme()) {
   check_lapply_plot_repulsive_tags(
-    prep_df_list = prep_df_list, site_name = site_name,
+    list_of_data_to_plot = list_of_data_to_plot, site_name = site_name,
     point_shape = point_shape, point_size = point_size, tag_size = tag_size,
     header = header, theme = theme
   )
 
   plot_list <- lapply(
-    X = prep_df_list,
+    X = list_of_data_to_plot,
     FUN = plot_repulsive_tags,
     site_name = site_name, point_shape = point_shape, point_size = point_size,
     tag_size = tag_size, header = header, theme = theme
@@ -269,14 +227,14 @@ lapply_plot_repulsive_tags <- function(prep_df_list,
 #' Help lapply_plot_repulsive_tags() by checking inputs.
 #' @noRd
 
-check_lapply_plot_repulsive_tags <- function(prep_df_list,
+check_lapply_plot_repulsive_tags <- function(list_of_data_to_plot,
                                              site_name,
                                              point_shape,
                                              point_size,
                                              tag_size,
                                              header,
                                              theme) {
-  assertive::assert_is_data.frame(prep_df_list[[1]])
+  assertive::assert_is_data.frame(list_of_data_to_plot[[1]])
   assertive::assert_is_character(site_name)
   assertive::assert_is_numeric(point_shape)
   assertive::assert_is_of_length(point_shape, 2)
