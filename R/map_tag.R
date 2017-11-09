@@ -28,7 +28,7 @@ map_tag <- function(vft,
                     tag_size = 3,
                     header = get_header(),
                     theme = get_theme()) {
-  crucial_vars_only <- c("tag", "qx", "qy", "status", "dbhid", "quadratname")
+  crucial_vars_only <- c("tag", "qx", "qy", "status", "quadratname")
   vft2 <- lower_names_then_check(vft, nms = crucial_vars_only)
   # Save memmory by removing irrelevant variables
   vft2 <- vft2[crucial_vars_only]
@@ -129,8 +129,10 @@ add_status_tree <- function(renamed) {
     dplyr::group_by(tag) %>%
     dplyr::arrange(.by_group = TRUE) %>%
     # ensure that the status refers to the tree, not to the stem
-    dplyr::mutate(status_tree = ifelse(any(status == "alive"), "alive", "dead")) %>%
-    dplyr::select(dbhid, tag, status, status_tree, everything())
+    dplyr::mutate(
+      status_tree = ifelse(any(status == "alive"), "alive", "dead")
+    ) %>%
+    dplyr::select(tag, status, status_tree, everything())
 }
 
 #' Help map_tag(); Keep minimum data and remove duplicates.
