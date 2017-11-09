@@ -306,7 +306,7 @@ plot_repulsive_tags <- function(prep_df,
   # Allow plotting labels on a ggplot mapping to shape = status_tree
   lab_df$status_tree <- NA
 
-  id_quadrat_subquadrat <- unique(prep_df$quad_id)
+  quad_id_label <- unique(prep_df$quad_id)
   ggplot2::ggplot(
     prep_df, ggplot2::aes(x = qx, y = qy, shape = status_tree)
   ) +
@@ -331,7 +331,7 @@ plot_repulsive_tags <- function(prep_df,
       # Title
       title = paste0(
         site_name, ". ",
-        id_quadrat_subquadrat
+        quad_id_label
         # " (page ", as.character(prep_df$page), ")"
       ),
       # Subtitle
