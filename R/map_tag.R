@@ -57,7 +57,7 @@ map_tag <- function(vft,
       unique(
         dplyr::select(
           with_split_and_quad_id,
-          split, tag, status, quad_id, status_tree, page, qx, qy, x1, x2, y1, y2
+          split, tag, status, subquadrat, quad_id, status_tree, page, qx, qy, x1, x2, y1, y2
         )
       )
 
