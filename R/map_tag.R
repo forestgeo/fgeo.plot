@@ -53,6 +53,14 @@ map_tag <- function(vft,
         ungroup(with_split_and_quad_id),
         -quadratname
       )
+
+      unique(
+        dplyr::select(
+          with_split_and_quad_id,
+          split, tag, status, quad_id, status_tree, page, qx, qy, x1, x2, y1, y2
+        )
+      )
+
     }
   with_crucial_vars <- add_status_tree_page_x1_x2_y1_y2_split_quad_id(
     with_subquadrat
@@ -62,11 +70,10 @@ map_tag <- function(vft,
   # data are the crucial ones -- which makes unnecessary the selection part of
   # the next step (see function body),
   # Keep, however, the unique() bit, and maybe move it inside the function above
-  unique_tags <- discard_duplicated_tags(with_crucial_vars)
 
 
 
-  unique_tags_list <- split(unique_tags, unique_tags$split)
+  unique_tags_list <- split(with_crucial_vars, with_crucial_vars$split)
 
   plot_list <- lapply_plot_repulsive_tags(
     unique_tags_list,
@@ -156,17 +163,6 @@ add_status_tree <- function(df) {
   dplyr::mutate(
     dplyr::group_by(df, tag),
     status_tree = ifelse(any(status == "alive"), "alive", "dead")
-  )
-}
-
-#' Help map_tag(); Keep minimum data and remove duplicates.
-#' @noRd
-discard_duplicated_tags <- function(prep_df) {
-  unique(
-    dplyr::select(
-      prep_df,
-      split, tag, status, quad_id, status_tree, page, qx, qy, x1, x2, y1, y2
-    )
   )
 }
 
