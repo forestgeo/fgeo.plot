@@ -39,7 +39,7 @@ map_tag <- function(vft,
                     header = get_header(),
                     theme = get_theme()) {
   # Lowercase names (easier to handle), check and keep important variables
-  vft_lower_nms <- setNames(vft, tolower(names(vft)))
+  vft_lower_nms <- stats::setNames(vft, tolower(names(vft)))
   crucial_vars_only <- c("tag", "qx", "qy", "status", "quadratname")
   check_crucial_names(vft_lower_nms, crucial_vars_only)
   subset_with_lower_nms <- vft_lower_nms[crucial_vars_only]
@@ -71,8 +71,7 @@ check_crucial_names <- function(x, nms) {
   if (are_names_expected) {
     return(invisible())
   } else {
-    stop("Ensure your data has names ",
-      glue::collapse(nms, ", ", last = ", and "), call. = FALSE)
+    stop("Ensure your data has names ", paste0(nms, collapse = ", "))
   }
 }
 
@@ -287,10 +286,15 @@ plot_repulsive_tags <- function(prep_df,
 
   quad_id_label <- unique(prep_df$quad_id)
   ggplot2::ggplot(
-    prep_df, ggplot2::aes(x = qx, y = qy, shape = status_tree)
+    data = prep_df,
+    ggplot2::aes(
+      x = prep_df$qx, y = prep_df$qy, shape = unique(prep_df$status_tree)
+    )
   ) +
     ggplot2::scale_shape_manual(values = point_shape) +
-    ggplot2::geom_label(data = lab_df, ggplot2::aes(qx, qy, label = subquadrat),
+    ggplot2::geom_label(
+      data = lab_df,
+      ggplot2::aes(lab_df$qx, lab_df$qy, label = lab_df$subquadrat),
       colour = "white", fill = "#f4f2f2", fontface = "bold", size = 12
     ) +
     ggplot2::geom_point(size = point_size) +
@@ -351,8 +355,7 @@ position_labels <- function(x_q, y_q, x_sq, y_sq) {
   ycentered <- seq(0, y_q, y_sq) + yoffset
   ytrimed <- ycentered[ycentered < y_q]  # remove tags beyond the range
 
-  df <- data.frame(qx = xtrimed, qy = ytrimed, stringsAsFactors = FALSE)
-  tidyr::expand(df, qx, qy)
+  expand.grid(qx = xtrimed, qy = ytrimed, stringsAsFactors = FALSE)
 }
 
 

@@ -5,32 +5,30 @@ Authors@R: person("Mauro", "Lepore", email = "maurolepore@gmail.com",
     role = c("aut", "cre"))
 Description: Try makes if  easy to share code to try new things. It aims to
     draft a solution to address a very specific issue.
-Depends:
-    R (>= 3.1.2)
 License: MIT + file LICENSE
-Encoding: UTF-8
-LazyData: true
-Suggests: 
-    covr,
-    knitr,
-    rmarkdown,
-    testthat,
-    vetr,
-    ngelnyaki
-RoxygenNote: 6.0.1
-Roxygen: list(markdown = TRUE)
-VignetteBuilder: knitr
 URL: https://github.com/forestgeo/try
 BugReports: https://github.com/forestgeo/try/issues
+Depends: 
+    R (>= 3.1.2)
 Imports: 
     assertive,
     dplyr,
     ggplot2,
     ggrepel,
-    purrr,
     rlang,
-    stringr,
-    tibble,
-    glue,
+    stats,
+    stringr
+Suggests: 
+    covr,
     gridExtra,
-    tidyr
+    knitr,
+    ngelnyaki,
+    rmarkdown,
+    testthat,
+    tibble,
+    vetr
+VignetteBuilder: knitr
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 6.0.1
