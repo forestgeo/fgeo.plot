@@ -1,18 +1,37 @@
-#' Map tree tags
+#' Map tree tags by status, showing four subquadrats per plot-page.
+#'
+#' This function maps tree tags by status. Each map shows four subquadrats
+#' within a quadrat.
 #'
 #' @param vft A ViewFullTable.
+#' @param site_name A string to use as a title.
+#' @param point_shape A vector of two numbers giving the shape of the points to
+#'   plot (see possible shapes in the documentation of ?[graphics::points()],
+#'   under the section entitled _'pch' values_).
+#' @param point_size A number giving points size. Passed to
+#'   [ggplot2::geom_point()].
+#' @param tag_size A number giving tag size. Passed to [ggplot2::geom_point()].
+#' @param header A string to use as a header (subtitle). To conveniently create
+#'   this header use [get_header()].
+#' @param theme A [ggplot2::theme()]. To conveniently create this theme
+#'   use [get_theme()].
+#' @inheritParams add_subquadrat
 #'
-#' @return
+#' @seealso [graphics::points()], [ggplot2::geom_point()], [ggplot2::theme()]
+#'   [get_header()], [get_theme()],
+#'
+#' @return A list of ggplots, where each element of the list is a map of tree
+#'   tags by status, showing four subquadrats.
 #' @export
 #'
 #' @examples
 #' \dontrun{
 #' }
 map_tag <- function(vft,
-                    dim_x = 20,
-                    div_x = 5,
-                    dim_y = dim_x,
-                    div_y = div_x,
+                    x_q = 20,
+                    x_sq = 5,
+                    y_q = x_q,
+                    y_sq = x_sq,
                     site_name = "Site Name, YYYY",
                     point_shape = c(19, 4),
                     point_size = 1.5,
@@ -28,7 +47,7 @@ map_tag <- function(vft,
   # Prepare data to plot: add important variables and remove duplicated tags
   with_subquadrat <- add_subquadrat(
     df = subset_with_lower_nms,
-    dim_x = dim_x, dim_y = dim_y, div_x = div_x, div_y = div_y
+    x_q = x_q, y_q = y_q, x_sq = x_sq, y_sq = y_sq
   )
   with_crucial_vars <- add_status_tree_page_x1_x2_y1_y2_split_quad_id(
     with_subquadrat
@@ -60,11 +79,10 @@ check_crucial_names <- function(x, nms) {
 #' Add a quadrat variable to a dataframe based based on qx and qy coordinates.
 #'
 #' @param df A ViewFullTable dataframe.
-#' @param dim_x,dim_y Quadrat dimension (side) for the plot. Commonly both are
-#'   20.
-#' @param div_x,div_y Total number of divisions of each quadrat dimension
-#'   (side). For most plots, the value of these arguments is 5, which results in
-#'   a 4x4 grid of subquadrats within each quadrat.
+#' @param x_q,y_q Size in meters of a quadrat's side. For ForestGEO sites, a
+#'   common value is 20.
+#' @param x_sq,y_sq Size in meters of a subquadrat's side. For ForestGEO-CTFS sites, a
+#'   common value is 5.
 #' @return A dataframe with the additional variable `subquadrat`.
 #' @author Anudeep Singh.
 #' @export
@@ -76,43 +94,43 @@ check_crucial_names <- function(x, nms) {
 #' with_subquadrat <- add_subquadrat(df, 20, 20, 5, 5)
 #' head(with_subquadrat[c("qx", "qy", "subquadrat")])
 #' }
-add_subquadrat <- function(df, dim_x, dim_y, div_x, div_y) {
+add_subquadrat <- function(df, x_q, y_q, x_sq, y_sq) {
   message("Lowering names case")
   df <- setNames(df, tolower(names(df)))
   check_crucial_names(df, c("qx", "qy"))
 
   check_add_subquadrat(
-    df = df, dim_x = dim_x, dim_y = dim_y, div_x = div_x, div_y = div_y
+    df = df, x_q = x_q, y_q = y_q, x_sq = x_sq, y_sq = y_sq
   )
 
   # Simplify nested parentheses
-  dim_x_mns.1 <- dim_x - 0.1
-  dim_y_mns.1 <- dim_y - 0.1
+  x_q_mns.1 <- x_q - 0.1
+  y_q_mns.1 <- y_q - 0.1
 
   # Conditions (odd means that the coordinate goes beyond normal limits)
-  is_odd_both <- df$qx >=  dim_x & df$qy >=  dim_y
-  is_odd_x <- df$qx >=  dim_x
-  is_odd_y <- df$qy >=  dim_y
+  is_odd_both <- df$qx >=  x_q & df$qy >=  y_q
+  is_odd_x <- df$qx >=  x_q
+  is_odd_y <- df$qy >=  y_q
   is_not_odd <- TRUE
 
   # Cases
   with_subquadrat <- dplyr::mutate(df,
     subquadrat = dplyr::case_when(
       is_odd_both ~ paste0(
-        (1 + floor((dim_x_mns.1 - dim_x * floor(dim_x_mns.1 / dim_x)) / div_x)),
-        (1 + floor((dim_y_mns.1- dim_y * floor(dim_y_mns.1/ dim_y)) / div_y))
+        (1 + floor((x_q_mns.1 - x_q * floor(x_q_mns.1 / x_q)) / x_sq)),
+        (1 + floor((y_q_mns.1- y_q * floor(y_q_mns.1/ y_q)) / y_sq))
       ),
       is_odd_x ~ paste0(
-        (1 + floor((dim_x_mns.1 - dim_x * floor(dim_x_mns.1 / dim_x)) / div_x)),
-        (1 + floor((df$qy - dim_y * floor(df$qy/ dim_y)) / div_y))
+        (1 + floor((x_q_mns.1 - x_q * floor(x_q_mns.1 / x_q)) / x_sq)),
+        (1 + floor((df$qy - y_q * floor(df$qy/ y_q)) / y_sq))
       ),
       is_odd_y ~ paste0(
-        (1 + floor((df$qx - dim_x * floor(df$qx/ dim_x)) / div_x)),
-        (1 + floor((dim_y_mns.1- dim_y * floor(dim_y_mns.1 / dim_y)) / div_y))
+        (1 + floor((df$qx - x_q * floor(df$qx/ x_q)) / x_sq)),
+        (1 + floor((y_q_mns.1- y_q * floor(y_q_mns.1 / y_q)) / y_sq))
       ),
       is_not_odd ~ paste0(
-        (1 + floor((df$qx - dim_x * floor(df$qx/ dim_x)) / div_x)),
-        (1 + floor((df$qy - dim_y * floor(df$qy/ dim_y)) / div_y))
+        (1 + floor((df$qx - x_q * floor(df$qx/ x_q)) / x_sq)),
+        (1 + floor((df$qy - y_q * floor(df$qy/ y_q)) / y_sq))
       )
     )
   )
@@ -122,12 +140,12 @@ add_subquadrat <- function(df, dim_x, dim_y, div_x, div_y) {
 #' Help add_subquadrat()
 #' @noRd
 check_add_subquadrat <- function(df,
-                                 dim_x,
-                                 dim_y,
-                                 div_x,
-                                 div_y) {
+                                 x_q,
+                                 y_q,
+                                 x_sq,
+                                 y_sq) {
   assertive::assert_is_data.frame(df)
-  remaining_args <- list(dim_x, dim_y, div_x, div_y)
+  remaining_args <- list(x_q, y_q, x_sq, y_sq)
 
 lapply(remaining_args, assertive::assert_is_numeric)
 lapply(remaining_args, assertive::assert_is_of_length, 1)
@@ -243,6 +261,9 @@ check_lapply_plot_repulsive_tags <- function(list_of_data_to_plot,
 
 #' Help map_tag()
 #' This funciton does the actual mapping.
+#'
+#' @param prep_df A data frame specifically prepared for this function.
+#' @inheritParams map_tag
 #' @noRd
 plot_repulsive_tags <- function(prep_df,
                                 site_name,
@@ -251,12 +272,12 @@ plot_repulsive_tags <- function(prep_df,
                                 tag_size,
                                 header,
                                 theme,
-                                dim_x = 20,
-                                dim_y = 20,
-                                div_x = 5,
-                                div_y = 5) {
+                                x_q = 20,
+                                y_q = 20,
+                                x_sq = 5,
+                                y_sq = 5) {
   # Data to plot labels on map
-  lab_df <- df_labels(dim_x = dim_x, dim_y = dim_y, div_x = div_x, div_y = div_y)
+  lab_df <- df_labels(x_q = x_q, y_q = y_q, x_sq = x_sq, y_sq = y_sq)
   # Allow plotting labels on a ggplot mapping to shape = status_tree
   lab_df$status_tree <- NA
 
@@ -271,10 +292,10 @@ plot_repulsive_tags <- function(prep_df,
     ggplot2::geom_point(size = point_size) +
     ggrepel::geom_text_repel(ggplot2::aes(label = tag), size = tag_size) +
     ggplot2::scale_x_continuous(
-      minor_breaks = seq(1, dim_x, 1), breaks = seq(0, dim_x, div_x)
+      minor_breaks = seq(1, x_q, 1), breaks = seq(0, x_q, x_sq)
     ) +
     ggplot2::scale_y_continuous(
-      minor_breaks = seq(1, dim_y, 1), breaks = seq(0, dim_y, div_y)
+      minor_breaks = seq(1, y_q, 1), breaks = seq(0, y_q, y_sq)
     ) +
     ggplot2::coord_fixed(
       xlim = c(unique(prep_df$x1), unique(prep_df$x2)),
@@ -299,7 +320,7 @@ plot_repulsive_tags <- function(prep_df,
 #'   qy = sample(1:20, 100, replace = TRUE)
 #' )
 #'
-#' df_labs <- df_labels(dim_x = 20, dim_y = 20, div_x = 5, div_y = 5)
+#' df_labs <- df_labels(x_q = 20, y_q = 20, x_sq = 5, y_sq = 5)
 #'
 #' ggplot(data = tags, aes(qx, qy)) +
 #'   geom_label(data = df_labs, aes(qx, qy, label = subquadrat),
@@ -315,16 +336,16 @@ df_labels <- function(...) {
 #' Help df_labels()
 #' Create a data set of positoin to which later add subquadrats.
 #' @noRd
-position_labels <- function(dim_x, dim_y, div_x, div_y) {
+position_labels <- function(x_q, y_q, x_sq, y_sq) {
   # Center labels in each subquadrat
   # x
-  xoffset <- div_x / 2
-  xcentered <- seq(0, dim_x, div_x) + xoffset
-  xtrimed <- xcentered[xcentered < dim_x]  # remove tags beyond the range
+  xoffset <- x_sq / 2
+  xcentered <- seq(0, x_q, x_sq) + xoffset
+  xtrimed <- xcentered[xcentered < x_q]  # remove tags beyond the range
   # y
-  yoffset <- div_y / 2
-  ycentered <- seq(0, dim_y, div_y) + yoffset
-  ytrimed <- ycentered[ycentered < dim_y]  # remove tags beyond the range
+  yoffset <- y_sq / 2
+  ycentered <- seq(0, y_q, y_sq) + yoffset
+  ytrimed <- ycentered[ycentered < y_q]  # remove tags beyond the range
 
   df <- data.frame(qx = xtrimed, qy = ytrimed, stringsAsFactors = FALSE)
   tidyr::expand(df, qx, qy)
