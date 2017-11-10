@@ -156,10 +156,13 @@ lapply(remaining_args, assertive::assert_all_are_finite)
 #' Help map_tag()
 #' @noRd
 add_status_tree <- function(df) {
-  # ensure that the status refers to the tree, not to the stem
-  dplyr::mutate(
-    dplyr::group_by(df, .data$tag),
-    status_tree = ifelse(any(.data$status == "alive"), "alive", "dead")
+  # At the end, restrore the flat structure of the data
+  dplyr::ungroup(
+    # Ensure that the status refers to the tree, not to the stem
+    dplyr::mutate(
+      dplyr::group_by(df, .data$tag),
+      status_tree = ifelse(any(.data$status == "alive"), "alive", "dead")
+    )
   )
 }
 
@@ -168,7 +171,9 @@ add_status_tree <- function(df) {
 #' @noRd
 add_status_tree_page_x1_x2_y1_y2_split_quad_id <- function(with_subquadrat) {
     with_status_tree <- add_status_tree(df = with_subquadrat)
-    paginated <- paginate(dplyr::group_by(with_status_tree, .data$quadratname))
+    paginated <- dplyr::ungroup(
+      paginate(dplyr::group_by(with_status_tree, .data$quadratname))
+    )
     with_limits <- add_subquad_limits(paginated)
     with_split_and_quad_id <- dplyr::mutate(
       with_limits,
