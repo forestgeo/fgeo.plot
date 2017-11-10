@@ -154,16 +154,15 @@ lapply(remaining_args, assertive::assert_all_are_finite)
 }
 
 #' Help map_tag()
+#' Ensure that the status refers to the tree, not to the stem.
 #' @noRd
 add_status_tree <- function(df) {
-  # At the end, restrore the flat structure of the data
-  dplyr::ungroup(
-    # Ensure that the status refers to the tree, not to the stem
-    dplyr::mutate(
-      dplyr::group_by(df, .data$tag),
-      status_tree = ifelse(any(.data$status == "alive"), "alive", "dead")
-    )
+  grouped <- dplyr::group_by(df, .data$tag)
+  mutated_grouped <- dplyr::mutate(
+    grouped,
+    status_tree = ifelse(any(.data$status == "alive"), "alive", "dead")
   )
+  dplyr::ungroup(mutated_grouped)
 }
 
 #' Help map_tag()
@@ -171,7 +170,7 @@ add_status_tree <- function(df) {
 #' @noRd
 add_status_tree_page_x1_x2_y1_y2_split_quad_id <- function(with_subquadrat) {
     with_status_tree <- add_status_tree(df = with_subquadrat)
-    paginated <- dplyr::ungroup(
+    paginated <- dplyr::ungroup(  # restore flat data
       paginate(dplyr::group_by(with_status_tree, .data$quadratname))
     )
     with_limits <- add_subquad_limits(paginated)
@@ -295,7 +294,7 @@ plot_repulsive_tags <- function(prep_df,
       colour = "white", fill = "#f4f2f2", fontface = "bold", size = 12
     ) +
     ggplot2::geom_point(size = point_size) +
-    ggrepel::geom_text_repel(ggplot2::aes(label = tag), size = tag_size) +
+    ggrepel::geom_text_repel(ggplot2::aes(label = prep_df$tag), size = tag_size) +
     ggplot2::scale_x_continuous(
       minor_breaks = seq(1, x_q, 1), breaks = seq(0, x_q, x_sq)
     ) +
