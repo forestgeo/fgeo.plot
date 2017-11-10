@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_settings.R
 \name{get_theme}
 \alias{get_theme}
-\title{A theme that is customized for \code{map_tags()}.}
+\title{A theme that is customized for \code{map_tag()}.}
 \usage{
 get_theme(panel_grid_major_colour = "black",
   panel_grid_minor_colour = "black", panel_grid_minor_linetype = "dotted",
@@ -36,16 +36,16 @@ subtitle.}
 \item{...}{Other arguments passed to \code{\link[ggplot2:theme]{ggplot2::theme()}}.}
 }
 \value{
-A \code{\link[ggplot2:theme]{ggplot2::theme()}} customized for \code{\link[=map_tags]{map_tags()}}.
+A \code{\link[ggplot2:theme]{ggplot2::theme()}} customized for \code{\link[=map_tag]{map_tag()}}.
 }
 \description{
-Theme customized for \code{\link[=map_tags]{map_tags()}}. You can further customize the
+Theme customized for \code{\link[=map_tag]{map_tag()}}. You can further customize the
 theme by passing more arguments to \code{\link[ggplot2:theme]{ggplot2::theme()}} (via \code{...}) or by
 replacing this theme completely with a new \code{\link[ggplot2:theme]{ggplot2::theme()}}.
 }
 \examples{
 ggplot2::theme()
-get_theme()
+try::get_theme()
 }
 \seealso{
 \code{\link[ggplot2:theme]{ggplot2::theme()}}.

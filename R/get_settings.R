@@ -1,6 +1,6 @@
-#' A theme that is customized for `map_tags()`.
+#' A theme that is customized for `map_tag()`.
 #'
-#' Theme customized for [map_tags()]. You can further customize the
+#' Theme customized for [map_tag()]. You can further customize the
 #' theme by passing more arguments to [ggplot2::theme()] (via `...`) or by
 #' replacing this theme completely with a new [ggplot2::theme()].
 #'
@@ -22,12 +22,12 @@
 #' @seealso [ggplot2::theme()].
 #' @family functions to fine tune a plot of repulsive tags.
 #'
-#' @return A [ggplot2::theme()] customized for [map_tags()].
+#' @return A [ggplot2::theme()] customized for [map_tag()].
 #'
 #' @export
 #' @examples
 #' ggplot2::theme()
-#' get_theme()
+#' try::get_theme()
 get_theme <- function(panel_grid_major_colour = "black",
                       panel_grid_minor_colour = "black",
                       panel_grid_minor_linetype = "dotted",
