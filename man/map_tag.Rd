@@ -2,19 +2,57 @@
 % Please edit documentation in R/map_tag.R
 \name{map_tag}
 \alias{map_tag}
-\title{Map tree tags}
+\title{Map tree tags by status, showing four subquadrats per plot-page.}
 \usage{
-map_tag(vft, dim_x = 20, div_x = 5, dim_y = dim_x, div_y = div_x,
+map_tag(vft, x_q = 20, x_sq = 5, y_q = x_q, y_sq = x_sq,
   site_name = "Site Name, YYYY", point_shape = c(19, 4), point_size = 1.5,
   tag_size = 3, header = get_header(), theme = get_theme())
 }
 \arguments{
 \item{vft}{A ViewFullTable.}
+
+\item{x_q}{Size in meters of a quadrat's side. For ForestGEO sites, a
+common value is 20.}
+
+\item{x_sq}{Size in meters of a subquadrat's side. For ForestGEO-CTFS sites, a
+common value is 5.}
+
+\item{y_q}{Size in meters of a quadrat's side. For ForestGEO sites, a
+common value is 20.}
+
+\item{y_sq}{Size in meters of a subquadrat's side. For ForestGEO-CTFS sites, a
+common value is 5.}
+
+\item{site_name}{A string to use as a title.}
+
+\item{point_shape}{A vector of two numbers giving the shape of the points to
+plot (see possible shapes in the documentation of ?\code{\link[graphics:points]{graphics::points()}},
+under the section entitled \emph{'pch' values}).}
+
+\item{point_size}{A number giving points size. Passed to
+\code{\link[ggplot2:geom_point]{ggplot2::geom_point()}}.}
+
+\item{tag_size}{A number giving tag size. Passed to \code{\link[ggplot2:geom_point]{ggplot2::geom_point()}}.}
+
+\item{header}{A string to use as a header (subtitle). To conveniently create
+this header use \code{\link[=get_header]{get_header()}}.}
+
+\item{theme}{A \code{\link[ggplot2:theme]{ggplot2::theme()}}. To conveniently create this theme
+use \code{\link[=get_theme]{get_theme()}}.}
+}
+\value{
+A list of ggplots, where each element of the list is a map of tree
+tags by status, showing four subquadrats.
 }
 \description{
-Map tree tags
+This function maps tree tags by status. Each map shows four subquadrats
+within a quadrat.
 }
 \examples{
 \dontrun{
 }
+}
+\seealso{
+\code{\link[graphics:points]{graphics::points()}}, \code{\link[ggplot2:geom_point]{ggplot2::geom_point()}}, \code{\link[ggplot2:theme]{ggplot2::theme()}}
+\code{\link[=get_header]{get_header()}}, \code{\link[=get_theme]{get_theme()}},
 }

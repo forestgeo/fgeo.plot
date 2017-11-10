@@ -4,17 +4,16 @@
 \alias{add_subquadrat}
 \title{Add a quadrat variable to a dataframe based based on qx and qy coordinates.}
 \usage{
-add_subquadrat(df, dim_x, dim_y, div_x, div_y)
+add_subquadrat(df, x_q, y_q, x_sq, y_sq)
 }
 \arguments{
 \item{df}{A ViewFullTable dataframe.}
 
-\item{dim_x, dim_y}{Quadrat dimension (side) for the plot. Commonly both are
-20.}
+\item{x_q, y_q}{Size in meters of a quadrat's side. For ForestGEO sites, a
+common value is 20.}
 
-\item{div_x, div_y}{Total number of divisions of each quadrat dimension
-(side). For most plots, the value of these arguments is 5, which results in
-a 4x4 grid of subquadrats within each quadrat.}
+\item{x_sq, y_sq}{Size in meters of a subquadrat's side. For ForestGEO-CTFS sites, a
+common value is 5.}
 }
 \value{
 A dataframe with the additional variable \code{subquadrat}.
