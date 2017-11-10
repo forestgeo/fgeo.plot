@@ -1,6 +1,6 @@
-#' A theme that is customized for `plot_repulsive_tags()`.
+#' A theme that is customized for `map_tags()`.
 #'
-#' Theme customized for `plot_repulsive_tags()`. You can further customize the
+#' Theme customized for [map_tags()]. You can further customize the
 #' theme by passing more arguments to [ggplot2::theme()] (via `...`) or by
 #' replacing this theme completely with a new [ggplot2::theme()].
 #'
@@ -22,7 +22,7 @@
 #' @seealso [ggplot2::theme()].
 #' @family functions to fine tune a plot of repulsive tags.
 #'
-#' @return A [ggplot2::theme()] customized for [plot_repulsive_tags()].
+#' @return A [ggplot2::theme()] customized for [map_tags()].
 #'
 #' @export
 #' @examples
