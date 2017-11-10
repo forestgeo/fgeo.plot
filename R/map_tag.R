@@ -96,7 +96,7 @@ check_crucial_names <- function(x, nms) {
 #' }
 add_subquadrat <- function(df, x_q, y_q, x_sq, y_sq) {
   message("Lowering names case")
-  df <- setNames(df, tolower(names(df)))
+  df <- stats::setNames(df, tolower(names(df)))
   check_crucial_names(df, c("qx", "qy"))
 
   check_add_subquadrat(
@@ -158,8 +158,8 @@ lapply(remaining_args, assertive::assert_all_are_finite)
 add_status_tree <- function(df) {
   # ensure that the status refers to the tree, not to the stem
   dplyr::mutate(
-    dplyr::group_by(df, tag),
-    status_tree = ifelse(any(status == "alive"), "alive", "dead")
+    dplyr::group_by(df, .data$tag),
+    status_tree = ifelse(any(.data$status == "alive"), "alive", "dead")
   )
 }
 
@@ -168,18 +168,18 @@ add_status_tree <- function(df) {
 #' @noRd
 add_status_tree_page_x1_x2_y1_y2_split_quad_id <- function(with_subquadrat) {
     with_status_tree <- add_status_tree(df = with_subquadrat)
-    paginated <- paginate(dplyr::group_by(with_status_tree, quadratname))
+    paginated <- paginate(dplyr::group_by(with_status_tree, .data$quadratname))
     with_limits <- add_subquad_limits(paginated)
     with_split_and_quad_id <- dplyr::mutate(
       with_limits,
-      split = paste(quadratname, page, sep = "_"),
-      quad_id = paste0("Q. ", quadratname)
+      split = paste(.data$quadratname, .data$page, sep = "_"),
+      quad_id = paste0("Q. ", .data$quadratname)
     )
     # Remove variable with redudndant information
     dplyr::select(
       # Can't remove a grouping variable. Also, best to restore df to flat
-      ungroup(with_split_and_quad_id),
-      -quadratname
+      dplyr::ungroup(with_split_and_quad_id),
+      -.data$quadratname
     )
   }
 
