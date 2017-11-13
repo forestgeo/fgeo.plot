@@ -107,7 +107,7 @@ test_that("errs with uppercase names", {
   vft_no_qx$QX <- NULL
   expect_error(
     map_tag(vft_no_qx),
-    "Ensure your data has names"
+    "Ensure that the lowercase version of the names of your data set matches "
   )
 })
 
@@ -140,7 +140,7 @@ test_that("outputs a dataframe with new expected variable", {
 
 
 
-context("test-check_add_subquadrat.R")
+context("test-check_subquadrat_dimensions")
 
 test_that("throws error with wrong inputs to add_subquadrat", {
   df <- ngelnyaki::ngelnyaki_vft_unid[1:5, c("QX", "QY")]
