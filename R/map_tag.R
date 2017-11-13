@@ -38,11 +38,15 @@ map_tag <- function(vft,
                     tag_size = 3,
                     header = get_header(),
                     theme = get_theme()) {
-  # Lowercase names (easier to handle), check and keep important variables
+  # Lowercase names (easier to handle), and check important variables
   vft_lower_nms <- stats::setNames(vft, tolower(names(vft)))
   crucial_vars_only <- c("tag", "qx", "qy", "status", "quadratname", "censusid")
   check_crucial_names(vft_lower_nms, crucial_vars_only)
-  subset_with_lower_nms <- vft_lower_nms[crucial_vars_only]
+
+  # Keep only: rows of last census, and variables that are important
+  last_census <- max(unique(vft_lower_nms$censusid))
+  is_last_census <- vft_lower_nms$censusid == last_census
+  subset_with_lower_nms <- vft_lower_nms[is_last_census, crucial_vars_only]
 
   # Prepare data to plot: add important variables and remove duplicated tags
   with_subquadrat <- add_subquadrat(
