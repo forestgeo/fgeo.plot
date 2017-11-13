@@ -42,6 +42,9 @@ map_tag <- function(vft,
   vft_lower_nms <- stats::setNames(vft, tolower(names(vft)))
   crucial_vars_only <- c("tag", "qx", "qy", "status", "quadratname", "censusid")
   check_crucial_names(vft_lower_nms, crucial_vars_only)
+  check_subquadrat_dimensions(
+    df = vft_lower_nms, x_q = x_q, y_q = y_q, x_sq = x_sq, y_sq = y_sq
+  )
 
   # Keep only: rows of last census, and variables that are important
   last_census <- max(unique(vft_lower_nms$censusid))
@@ -103,11 +106,19 @@ add_subquadrat <- function(df, x_q, y_q, x_sq, y_sq) {
   message("Lowering names case")
   df <- stats::setNames(df, tolower(names(df)))
   check_crucial_names(df, c("qx", "qy"))
-
-  check_add_subquadrat(
+  check_subquadrat_dimensions(
     df = df, x_q = x_q, y_q = y_q, x_sq = x_sq, y_sq = y_sq
   )
+  add_sbqd(df = df, x_q = x_q, y_q = y_q, x_sq = x_sq, y_sq = y_sq)
+}
 
+#' Help map_tag()
+#'
+#' This function is to be called by map_tag(); it has no checks, which saves
+#' checking again and again the data of each quadrat that was checked once at
+#' the start of map_tag(). For using directly, use add_subquadrat()
+#' @noRd
+add_sbqd <- function(df, x_q, y_q, x_sq, y_sq) {
   # Simplify nested parentheses
   x_q_mns.1 <- x_q - 0.1
   y_q_mns.1 <- y_q - 0.1
@@ -142,9 +153,10 @@ add_subquadrat <- function(df, x_q, y_q, x_sq, y_sq) {
   with_subquadrat
 }
 
+
 #' Help add_subquadrat()
 #' @noRd
-check_add_subquadrat <- function(df,
+check_subquadrat_dimensions <- function(df,
                                  x_q,
                                  y_q,
                                  x_sq,
