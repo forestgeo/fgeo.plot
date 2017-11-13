@@ -75,7 +75,9 @@ check_crucial_names <- function(x, nms) {
   if (are_names_expected) {
     return(invisible())
   } else {
-    stop("Ensure your data has names ", paste0(nms, collapse = ", "))
+    stop(
+      "Ensure that the lowercase version of the names of your data set matches ",
+      paste0(nms, collapse = ", "))
   }
 }
 
