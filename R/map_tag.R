@@ -52,7 +52,7 @@ map_tag <- function(vft,
   subset_with_lower_nms <- vft_lower_nms[is_last_census, crucial_vars_only]
 
   # Prepare data to plot: add important variables and remove duplicated tags
-  with_subquadrat <- add_subquadrat(
+  with_subquadrat <- add_sbqd(
     df = subset_with_lower_nms,
     x_q = x_q, y_q = y_q, x_sq = x_sq, y_sq = y_sq
   )
@@ -357,7 +357,7 @@ plot_repulsive_tags <- function(prep_df,
 #' @noRd
 df_labels <- function(...) {
   pos <- position_labels(...)
-  add_subquadrat(df = pos, ...)
+  add_sbqd(df = pos, ...)
 }
 
 #' Help df_labels()
