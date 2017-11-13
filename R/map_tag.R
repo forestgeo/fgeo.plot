@@ -40,7 +40,7 @@ map_tag <- function(vft,
                     theme = get_theme()) {
   # Lowercase names (easier to handle), check and keep important variables
   vft_lower_nms <- stats::setNames(vft, tolower(names(vft)))
-  crucial_vars_only <- c("tag", "qx", "qy", "status", "quadratname")
+  crucial_vars_only <- c("tag", "qx", "qy", "status", "quadratname", "censusid")
   check_crucial_names(vft_lower_nms, crucial_vars_only)
   subset_with_lower_nms <- vft_lower_nms[crucial_vars_only]
 
