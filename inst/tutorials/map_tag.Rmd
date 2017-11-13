@@ -35,7 +35,7 @@ update_geom_defaults("text", list(size = 14.5))
 
 # Overview
 
-This vignette shows you how to map the latest tree-status in subquadrats with  `map_tag()`, which currently lives in the __try__ package but will be moved to the __forestr__ package after receiving some feedback.
+This vignette shows you how to map the latest tree-status in subquadrats with `map_tag()`. Those maps are most useful during fieldwork, so the output of `map_tag()` is optimized for printing on paper. Currently, `map_tag()` lives in the __try__ package, but after I receive some feedback I will move it to the __forestr__.
 
 ```{r, eval=FALSE, echo=FALSE}
 # xxx after receiving feedback,  edit paragraph above.
@@ -68,39 +68,49 @@ options(dplyr.print_min = 6, dplyr.print_max = 6)
 # options(dplyr.print_min = 6, dplyr.print_max = 6)
 ```
 
-
-
-
-Loading data for examples.
+Currently, `map_tag()` works with ViewFullTables. Here you will use an example dataset from Barro Colorado Island, that was made public in 2012.
 
 ```{r}
-# Converting dataframe to tibble for better printing
-example_data <- as_tibble(forestr::bci12t7mini)
+# Example data set: A few quadrats of a ViewFullTable from BCI (census 7, made
+# public in 2012 via https://repository.si.edu/handle/10088/20925)
 
-# Let's find the top-3 most abundant species
-sp_n <- count(example_data, sp)
-sp_arranged <- arrange(sp_n, desc(n))
-sp_top3 <- sp_arranged$sp[1:3]
-sp_top3
+# Convert to tibble (modern dataframe) for better printing
+vft <- as_tibble(bci12vft_mini)
+vft
 
-# For a small example, keeping data of only the 3 most abundant species
-census <- filter(example_data, sp  %in% sp_top3)
-census
+vft %>% names()
+select(vft, 13:19)
 ```
 
-The next section shows you how to explore data quickly. You will produce good quality maps with available defaults. The section after the next one shows you how to customize you maps by making some common and less common changes. And the last section shows you how to fine tune your maps.
+# Quick Maps: Using Defaults
 
-# Exploring Data Quickly: Using Defaults
+Some data sets may have unexpected names. If so, changes them.
+
+```{r, error=TRUE}
+map_tag(vft, site_name = "BCI 2012")
+```
+
+```{r}
+# Evaluate names and fix the wrong ones
+select(vft, x, y)
+
+
+names(vft)
+vft <- dplyr::rename(vft, qx = x, qy = y)
+vft$gx
+vft$gx
+
+map_tag(vft, site_name = "BCI 2012")
+```
 
 ## Mapping Latest Tree Status in Subquadrats
 
-Although the output of `map_sp()` and `map_sp_pdf()` is printed to different devices -- i.e, the screen or a .pdf file --  those functions are almost identical. They are documented jointly and share the same arguments (except for the `file` argument that only belongs to `map_sp_pdf()`. (These functions are not merge into a single function because their outputs are different; functions that produce different output tend to cause more problems that those which output is consistently the same).
 
-```
-?map_sp
-# Or
-?map_sp_pdf
-```
+# Customizing Your Maps
+
+
+
+
 
 Notice that only the first two arguments of these functions are strictly necessary.
 
