@@ -38,7 +38,7 @@ map_tag <- function(vft,
                     tag_size = 3,
                     header = get_header(),
                     theme = get_theme(),
-                    shrink = 0.45) {
+                    extend_grid = 0) {
   # Lowercase names (easier to handle), and check important variables
   vft_lower_nms <- stats::setNames(vft, tolower(names(vft)))
   crucial_vars_only <- c("tag", "qx", "qy", "status", "quadratname", "censusid")
@@ -58,7 +58,7 @@ map_tag <- function(vft,
     x_q = x_q, y_q = y_q, x_sq = x_sq, y_sq = y_sq
   )
   with_crucial_vars <- add_status_tree_page_x1_x2_y1_y2_split_quad_id(
-    with_subquadrat, quad_size = x_q, shrink = shrink
+    with_subquadrat, quad_size = x_q, extend_grid = extend_grid
   )
   data_to_plot <- unique(with_crucial_vars)
 
@@ -188,14 +188,14 @@ add_status_tree <- function(df) {
 #' @noRd
 add_status_tree_page_x1_x2_y1_y2_split_quad_id <- function(with_subquadrat,
                                                            quad_size,
-                                                           shrink) {
+                                                           extend_grid) {
     with_status_tree <- add_status_tree(df = with_subquadrat)
     paginated <- dplyr::ungroup(  # restore flat data
       paginate(dplyr::group_by(with_status_tree, .data$quadratname))
     )
     with_limits <- add_subquad_limits(
       df_with_page = paginated,
-      quad_size = quad_size, shrink = shrink
+      quad_size = quad_size, extend_grid = extend_grid
     )
     with_split_and_quad_id <- dplyr::mutate(
       with_limits,
@@ -385,39 +385,39 @@ position_labels <- function(x_q, y_q, x_sq, y_sq) {
 
 
 #' Help map_tag()
-#' Add plot limits to a dataframe with `subquadrat` variable. Plots produced
-#' with __ggplot__ by default print with a margin around the limits set by the
-#' user. To remove that extra margin and maximize space, this function shrinks
-#' the limits a little.
-#' @param srink A number. By experience, `shrink = 0 ` maps default margins
-#'   beyond the limits; `shink = 0.45` chops the margins. Anything in between
-#'   should map a margin smaller than the default margin.
+#' Add plot limits to a dataframe with `subquadrat` variable.
+
+#' @param extend_grid A number to extend the grid beyond the plot limits.
 #' @noRd
-add_subquad_limits <- function(df_with_page, quad_size = 20, shrink = 0.45) {
+add_subquad_limits <- function(df_with_page, quad_size = 20, extend_grid = 0) {
+  # ggplots come with a default extention
+  default_extention <- 0.45
+  grid_adjust <- default_extention - extend_grid
+
   dplyr::mutate(df_with_page,
     x1 = dplyr::case_when(
-      page == 1 ~ 0 + shrink,
-      page == 2 ~ (quad_size / 2) + shrink,
-      page == 3 ~ (quad_size / 2) + shrink,
-      page == 4 ~ 0 + shrink
+      page == 1 ~ 0 + grid_adjust,
+      page == 2 ~ (quad_size / 2) + grid_adjust,
+      page == 3 ~ (quad_size / 2) + grid_adjust,
+      page == 4 ~ 0 + grid_adjust
     ),
     x2 = dplyr::case_when(
-      page == 1 ~ (quad_size / 2) - shrink,
-      page == 2 ~ quad_size - shrink,
-      page == 3 ~ quad_size - shrink,
-      page == 4 ~ (quad_size / 2) - shrink
+      page == 1 ~ (quad_size / 2) - grid_adjust,
+      page == 2 ~ quad_size - grid_adjust,
+      page == 3 ~ quad_size - grid_adjust,
+      page == 4 ~ (quad_size / 2) - grid_adjust
     ),
     y1 = dplyr::case_when(
-      page == 1 ~ 0 + shrink,
-      page == 2 ~ 0 + shrink,
-      page == 3 ~ (quad_size / 2) + shrink,
-      page == 4 ~ (quad_size / 2) + shrink
+      page == 1 ~ 0 + grid_adjust,
+      page == 2 ~ 0 + grid_adjust,
+      page == 3 ~ (quad_size / 2) + grid_adjust,
+      page == 4 ~ (quad_size / 2) + grid_adjust
     ),
     y2 = dplyr::case_when(
-      page == 1 ~ (quad_size / 2) - shrink,
-      page == 2 ~ (quad_size / 2) - shrink,
-      page == 3 ~ quad_size  - shrink,
-      page == 4 ~ quad_size - shrink
+      page == 1 ~ (quad_size / 2) - grid_adjust,
+      page == 2 ~ (quad_size / 2) - grid_adjust,
+      page == 3 ~ quad_size  - grid_adjust,
+      page == 4 ~ quad_size - grid_adjust
     )
   )
 }

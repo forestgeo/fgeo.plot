@@ -211,18 +211,61 @@ your_theme <- ggplot2::theme(
 map_tag(renamed, site_name = "BCI 2012", theme = your_theme)[[1]]
 ```
 
+## Extending The Grid Beyond the Plot Limits
+
+Although they shouldn't, trees sometimes are located beyond the limits of a quadrat. For example, if the side of your quadrats is 20 meters, some trees may plot at, say, `qx = 20.5`, or `qy = 21`. In such cases you may want to extend the plot grid to encompass those odd trees. To extend the grid use the argument `shrink`. (The example below has no trees beyond the quadrat limits, but hopefully you'll still understand when to use `extend_grid`.)
+
+```{r}
+map_tag(renamed, site_name = "BCI 2012", extend_grid = 0.4)[[4]]
+```
+
 xxxconthere.
 
 ## Changing the Dimension of Quadrats and Subquadrats
 
 ## xxx Fix This
 
+The limits are inflexible.
+
+
 You can change the size of the quadrat and subquadrats. For example, here we define that side of each quadrat is 40 meters, and the side of eacdh subquadrat is 10 meters. Each map will always show 4 subquadrats of the 16 subquadrats that make up the quadrat.
+
+## 200x200
+
+```{r}
+map_tag(renamed, site_name = "BCI 2012", 
+  x_q = 200,  # side of a quadrat in meters
+  x_sq = 50  # side of a subquadrat in meters
+)[[1]]
+```
+
+
+## 40x40
 
 ```{r}
 map_tag(renamed, site_name = "BCI 2012", 
   x_q = 40,  # side of a quadrat in meters
-  x_sq = 10  # side of a subquadrat in meters
+  x_sq = 20  # side of a subquadrat in meters
+)[[1]]
+```
+
+
+
+### xxx 10x10 quadrats
+
+```{r}
+map_tag(renamed, site_name = "BCI 2012", 
+  x_q = 10,  # side of a quadrat in meters
+  x_sq = 2.5  # side of a subquadrat in meters
+)[[1]]
+```
+
+### xxx 100x100 quadrats
+
+```{r}
+map_tag(renamed, site_name = "BCI 2012", 
+  x_q = 100,  # side of a quadrat in meters
+  x_sq = 25  # side of a subquadrat in meters
 )[[1]]
 ```
 
