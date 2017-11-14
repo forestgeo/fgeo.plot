@@ -175,13 +175,18 @@ test_that("outputs a dataframe with new expected variable", {
 context("test-lapply_plot_repulsive_tags")
 
 prep_df <- unique(
-  add_status_tree_page_x1_x2_y1_y2_split_quad_id(with_status_tree)
+  add_status_tree_page_x1_x2_y1_y2_split_quad_id(
+    with_status_tree, quad_size = 20, extend_grid = 0.45
+  )
 )
 prep_df_list <- split(prep_df, prep_df$split)
 
 test_that("outputs a ggplot", {
   plot_list <- prep_df_list %>%
-      lapply_plot_repulsive_tags(site_name = "my site")
+      lapply_plot_repulsive_tags(
+        site_name = "my site",
+        x_q = 20, x_sq = 5
+      )
   expect_true(
     any(
       grepl("ggplot", class(plot_list[[1]]))

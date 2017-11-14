@@ -66,6 +66,7 @@ map_tag <- function(vft,
   list_of_data_to_plot <- split(data_to_plot, data_to_plot$split)
   list_of_plots <- lapply_plot_repulsive_tags(
     list_of_data_to_plot,
+    x_q = x_q, x_sq = x_sq, y_q = y_q, y_sq = y_sq,
     site_name = site_name, point_shape = point_shape, point_size = point_size,
     tag_size = tag_size, header = header, theme = theme
   )
@@ -242,6 +243,10 @@ paginate <- function(df_with_subquadrat) {
 #' Help map_tag()
 #' @noRd
 lapply_plot_repulsive_tags <- function(list_of_data_to_plot,
+                                       x_q = x_q,
+                                       x_sq = x_sq,
+                                       y_q = x_q,  # same as x
+                                       y_sq = x_sq,  # same as x
                                        site_name = site_name,
                                        point_shape = c(19, 4),
                                        point_size = 1.5,
@@ -257,6 +262,7 @@ lapply_plot_repulsive_tags <- function(list_of_data_to_plot,
   plot_list <- lapply(
     X = list_of_data_to_plot,
     FUN = plot_repulsive_tags,
+    x_q = x_q, x_sq = x_sq, y_q = y_q, y_sq = y_sq,
     site_name = site_name, point_shape = point_shape, point_size = point_size,
     tag_size = tag_size, header = header, theme = theme
   )
