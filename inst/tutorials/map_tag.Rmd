@@ -230,7 +230,7 @@ qx_and_qy_variables <- select(renamed, qx, qy)
 lapply(qx_and_qy_variables, range)
 ```
 
-The range is between around 0 and 20. That is why we've been using using the defult quadrat dimension of 20 meters (`x_sq` and `y_sq`), and the default subquadrat dimension of 5 meters (`x_sq` and `y_sq`).
+The range is between around 0 and 20. That is why we've been using using the default quadrat dimension of 20 meters (`x_sq` and `y_sq`), and the default subquadrat dimension of 5 meters (`x_sq` and `y_sq`).
 
 ```{r}
 map_tag(renamed, site_name = "BCI 2012", 
@@ -239,7 +239,7 @@ map_tag(renamed, site_name = "BCI 2012",
 )[[1]]
 ```
 
-By default, `y_q` will be the same as `x_q` so you don't have to provide both -- just `x_q`. And the same is true for `y_sq` and `x_sq`. With this data -- with `qx` and `qy` ranging 0-20 meters -- the quadrat and subquadrat dimensions used above are the right ones. But `map_tag()` won't complain if you choose different parameters; so you have to be carefull not to shoot yourself on the foot.
+By default, `y_q` will be the same as `x_q` so you don't have to provide both -- just `x_q`. And the same is true for `y_sq` and `x_sq`. With this data -- with `qx` and `qy` ranging 0-20 meters -- the quadrat and subquadrat dimensions used above are the right ones. But `map_tag()` won't complain if you choose different parameters; so you have to be careful not to shoot yourself on the foot.
 
 The following two examples demonstrate the use wrong dimensions. Let's first use dimensions that are smaller than the range of `qx` and `qy`.
 
