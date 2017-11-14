@@ -104,7 +104,7 @@ check_crucial_names <- function(x, nms) {
 #' with_subquadrat <- add_subquadrat(df, 20, 20, 5, 5)
 #' head(with_subquadrat[c("qx", "qy", "subquadrat")])
 #' }
-add_subquadrat <- function(df, x_q, y_q, x_sq, y_sq) {
+add_subquadrat <- function(df, x_q, y_q = x_q, x_sq, y_sq = x_sq) {
   message("Lowering names case")
   df <- stats::setNames(df, tolower(names(df)))
   check_crucial_names(df, c("qx", "qy"))
