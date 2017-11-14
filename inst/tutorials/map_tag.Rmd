@@ -89,13 +89,13 @@ knitr::include_graphics("example-yosemite.pdf")
 
 ## What `map_tag()` Does?
 
-Let's review what has just happened. Although your ViewFullTable may have data of multiple censuses, `map_tag()` focuses exclusively on the latest census (via PlotNameCensus). `map_tag()` plots not the status of individual stems but the status of a tree. That is, if in the latest census at least one stem of a tree has status "alive", then `map_tag()` plots its status as "alive"; if no stem is "alive", `map_tag()` plots its status as "other". Why "other" and not "dead"? Because stems are classified not simply as "dead" or "alive": if it is not "alive", the value of `status` may be, for example, "dead" for one stem of a particular tree, and "broken below" for another stem of the same tree. Yet `map_tree()` is designed to plot only one value of status per indivudual tag. The solution is to group all values that are not "alive" into the single category "other".
+Let's review what has just happened. Although your ViewFullTable may have data of multiple censuses, `map_tag()` focuses exclusively on the latest census (via PlotNameCensus). `map_tag()` plots not the status of individual stems but the status of a tree. That is, if in the latest census at least one stem of a tree has status "alive", then `map_tag()` plots its status as "alive"; if no stem is "alive", `map_tag()` plots its status as "other". Why "other" and not "dead"? Because stems are classified not simply as "dead" or "alive": if it is not "alive", the value of `status` may be, for example, "dead" for one stem of a particular tree, and "broken below" for another stem of the same tree. Yet `map_tree()` is designed to plot only one value of status per individual tag. The solution is to group all values that are not "alive" into the single category "other".
 
-Ok, that was the bad news -- `map_tag()` won't let you change the values of the variable `status`. The good news is that you can change almost anything else. You will learn how to do that in the rest of this tutorial.
+OK, that was the bad news -- `map_tag()` won't let you change the values of the variable `status`. The good news is that you can change almost anything else. You will learn how to do that in the rest of this tutorial.
 
 # Preparation: Packages and Data
 
-Currently, `map_tag()` lives in the __try__ package, but after I receive some feedback I will move it to the __forestr__. You will also use dplyr to make it easy to manupulate data. (A number of other packages are also used but only under the hoods -- you don't need to worry about them because they'll will be installed and used automatically.)
+Currently, `map_tag()` lives in the __try__ package, but after I receive some feedback I will move it to the __forestr__. You will also use dplyr to make it easy to manipulate data. (A number of other packages are also used but only under the hoods -- you don't need to worry about them because they'll will be installed and used automatically.)
 
 ```{r pkg-show}
 # install_github("forestgeo/try@iss1_map_tag")
@@ -108,7 +108,7 @@ library(dplyr)
 options(dplyr.print_min = 6, dplyr.print_max = 6)
 ```
 
-The data you will use from now on is an example dataset from Barro Colorado Island (made public in 2012; https://repository.si.edu/handle/10088/20925).
+The data you will use from now on is an example data set from Barro Colorado Island (made public in 2012; https://repository.si.edu/handle/10088/20925).
 
 ```{r data-vtf}
 # Subset of a public ViewFullTable from BCI (source:
@@ -182,7 +182,7 @@ map_tag(renamed, site_name = "BCI 2012", header = your_header)[[1]]
 
 ## Using Pre-Made and Custom Themes
 
-Similarly to how you customized the header, you can also customize the plot theme. The argument `theme` defauls to `theme = get_theme()`, but you can either use any pre-made theme (see `?ggplot2::theme_bw`) or create a custom theme. This is how you can use a pre-made theme.
+Similarly to how you customized the header, you can also customize the plot theme. The argument `theme` defaults to `theme = get_theme()`, but you can either use any pre-made theme (see `?ggplot2::theme_bw`) or create a custom theme. This is how you can use a pre-made theme.
 
 ```{r pre-made-theme}
 # Allow using pre-made themes (e.g. ggplot2::theme_bw()) and building custom
@@ -223,7 +223,7 @@ map_tag(renamed, site_name = "BCI 2012", extend_grid = 0.4)[[4]]
 
 ## Customizing the Dimension of Quadrats and Subquadrats
 
-You can customize the dimension of your quadrats and subquadrats to fit the range of `qx` and qy` of your data. Let's examine that range is for the data you'd be using so far.
+You can customize the dimension of your quadrats and subquadrats to fit the range of `qx` and `qy` of your data. Let's examine that range is for the data you'd be using so far.
 
 ```{r}
 qx_and_qy_variables <- select(renamed, qx, qy)
@@ -261,7 +261,7 @@ map_tag(renamed,
 )[[1]]
 ```
 
-This image should flag that you have this kind of problem -- by which the range of data is smaller than quadrat and subquadrat dimensions you set. Notice that the points are all between `qx` and `qy` ranging 0-20. The tags, however, go beyond 20 because they automatically reppel themselves to avoid overlapping.
+This image should flag that you have this kind of problem -- by which the range of data is smaller than quadrat and subquadrat dimensions you set. Notice that the points are all between `qx` and `qy` ranging 0-20. The tags, however, go beyond 20 because they automatically repel themselves to avoid overlapping.
 
 ## The Right Dimensions for the Right Data
 
@@ -291,37 +291,19 @@ map_tag(smaller, x_q = 10, x_sq = 2.5, extend_grid = 0.25)[1]
 
 # Related Functions that Can Be Called Directly
 
+If you ever want to calculate the variable `subquadrat`, you can do that with `add_subquadrat()`.
 `add_subquadrat()`
 
+```{r}
+with_subquadrat <- add_subquadrat(renamed, x_q = 20, x_sq = 5)
+select(
+  with_subquadrat, 
+  # reorder variables to show first what's new 
+  subquadrat, qx, qy, everything()
+)
+```
 
 
+# Acknowledgements
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+I thank for ideas and guidance to Suzanne Lao, Stuart Davis, Shameema Jafferjee Esufa, David Kenfack and Anudeep Singh. Andudeep also wrote the algorithm of `add_subquadrat()` (which I translated from SQL to R).
