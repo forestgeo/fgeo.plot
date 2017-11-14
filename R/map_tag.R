@@ -81,7 +81,7 @@ check_crucial_names <- function(x, nms) {
     return(invisible())
   } else {
     stop(
-      "Ensure that the lowercase version of the names of your data set matches ",
+      "Ensure the lowercase version of the names of your data set matches:\n",
       paste0(nms, collapse = ", "))
   }
 }

@@ -107,7 +107,7 @@ test_that("errs with uppercase names", {
   vft_no_qx$QX <- NULL
   expect_error(
     map_tag(vft_no_qx),
-    "Ensure that the lowercase version of the names of your data set matches "
+    "Ensure the lowercase version of the names of your data set matches"
   )
 })
 
