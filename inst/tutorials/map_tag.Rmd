@@ -70,7 +70,7 @@ maps <- map_tag(yose_vft)
 Here is the first set of four subquadrats.
 
 ```{r yose-print-screen}
-maps[[1]]
+maps[1]
 ```
 
 You can output a .pdf with `pdf()`.
@@ -81,13 +81,11 @@ maps
 dev.off()
 ```
 
-This is what the saved .pdf looks like (scroll down the window below).
-
 ```{r, echo=FALSE}
 knitr::include_graphics("example-yosemite.pdf")
 ```
 
-## What `map_tag()` Does?
+## What Does `map_tag()` Do?
 
 Let's review what has just happened. Although your ViewFullTable may have data of multiple censuses, `map_tag()` focuses exclusively on the latest census (via PlotNameCensus). `map_tag()` plots not the status of individual stems but the status of a tree. That is, if in the latest census at least one stem of a tree has status "alive", then `map_tag()` plots its status as "alive"; if no stem is "alive", `map_tag()` plots its status as "other". Why "other" and not "dead"? Because stems are classified not simply as "dead" or "alive": if it is not "alive", the value of `status` may be, for example, "dead" for one stem of a particular tree, and "broken below" for another stem of the same tree. Yet `map_tree()` is designed to plot only one value of status per individual tag. The solution is to group all values that are not "alive" into the single category "other".
 
@@ -158,7 +156,7 @@ maps[1]
 The header is controlled by the argument `header`.
 
 ```{r custom-header}
-map_tag(renamed, site_name = "BCI 2012", header = "My header")[[1]]
+map_tag(renamed, site_name = "BCI 2012", header = "My header")[1]
 ```
 
 You can create a multi-line header by braking each line with "\\n".
@@ -166,7 +164,7 @@ You can create a multi-line header by braking each line with "\\n".
 ```{r header-basic}
 map_tag(renamed, site_name = "BCI 2012", 
   header = "Line 1: _________\nLine 2:\nLine 3:....................."
-)[[1]]
+)[1]
 ```
 
 But there is an alternative (easier) way: with `get_header()`. If you read signature of `map_tag()` (by running `map_tag`), you will notice that the default `header` is `header = get_header()` (see `?get_header()`).
@@ -177,7 +175,7 @@ your_header <- get_header(
   line2 = "Your header-line 3: _____________________________",
   line3 = "Your header-line 2: _____________________________"
 )
-map_tag(renamed, site_name = "BCI 2012", header = your_header)[[1]]
+map_tag(renamed, site_name = "BCI 2012", header = your_header)[1]
 ```
 
 ## Using Pre-Made and Custom Themes
@@ -189,7 +187,7 @@ Similarly to how you customized the header, you can also customize the plot them
 # themes (with ggplot::theme()).
 library(ggplot2)
 
-map_tag(renamed, site_name = "BCI 2012", theme = theme_gray())[[1]]
+map_tag(renamed, site_name = "BCI 2012", theme = theme_gray())[1]
 ```
 
 This is how you can use a custom theme (see `?ggplot2::theme()`).
@@ -210,7 +208,7 @@ your_theme <- ggplot2::theme(
   panel.grid.minor = element_line(colour = "black", linetype = "dotted"),
   panel.grid.major = element_line(colour = "black")
 )
-map_tag(renamed, site_name = "BCI 2012", theme = your_theme)[[1]]
+map_tag(renamed, site_name = "BCI 2012", theme = your_theme)[1]
 ```
 
 ## Extending The Grid Beyond the Plot Limits
@@ -218,7 +216,7 @@ map_tag(renamed, site_name = "BCI 2012", theme = your_theme)[[1]]
 Although they shouldn't, trees sometimes are located beyond the limits of a quadrat. For example, if the side of your quadrats is 20 meters, some trees may plot at, say, `qx = 20.5`, or `qy = 21`. In such cases you may want to extend the plot grid to encompass those odd trees. To extend the grid use the argument `shrink`. (The example below has no trees beyond the quadrat limits, but hopefully you'll still understand when to use `extend_grid`.)
 
 ```{r}
-map_tag(renamed, site_name = "BCI 2012", extend_grid = 0.4)[[4]]
+map_tag(renamed, site_name = "BCI 2012", extend_grid = 0.4)[4]
 ```
 
 ## Customizing the Dimension of Quadrats and Subquadrats
@@ -236,7 +234,7 @@ The range is between around 0 and 20. That is why we've been using using the def
 map_tag(renamed, site_name = "BCI 2012", 
   x_q = 20, x_sq = 5,
   y_q = 20, y_sq = 5
-)[[1]]
+)[1]
 ```
 
 By default, `y_q` will be the same as `x_q` so you don't have to provide both -- just `x_q`. And the same is true for `y_sq` and `x_sq`. With this data -- with `qx` and `qy` ranging 0-20 meters -- the quadrat and subquadrat dimensions used above are the right ones. But `map_tag()` won't complain if you choose different parameters; so you have to be careful not to shoot yourself on the foot.
@@ -249,7 +247,7 @@ map_tag(renamed,
   site_name = "BCI 2012", x_q = 10, x_sq = 2.5, 
   # if not extended, the lines surrounding the map won't plot
   extend_grid = 0.25
-)[[1]]
+)[1]
 ```
 
 And now let's use dimensions that are larger than the range of the data.
@@ -258,7 +256,7 @@ And now let's use dimensions that are larger than the range of the data.
 # Using 
 map_tag(renamed, 
   site_name = "BCI 2012", x_q = 100, x_sq = 50, 
-)[[1]]
+)[1]
 ```
 
 This image should flag that you have this kind of problem -- by which the range of data is smaller than quadrat and subquadrat dimensions you set. Notice that the points are all between `qx` and `qy` ranging 0-20. The tags, however, go beyond 20 because they automatically repel themselves to avoid overlapping.
@@ -289,10 +287,9 @@ smaller$qy <- sample(0:10, n, replace = TRUE)
 map_tag(smaller, x_q = 10, x_sq = 2.5, extend_grid = 0.25)[1]
 ```
 
-# Related Functions that Can Be Called Directly
+# Calling `add_subquadrat()` Directly
 
-If you ever want to calculate the variable `subquadrat`, you can do that with `add_subquadrat()`.
-`add_subquadrat()`
+If you only want to calculate the variable `subquadrat`, you don't need to use `map_tag()` -- can do that with `add_subquadrat()`.
 
 ```{r}
 with_subquadrat <- add_subquadrat(renamed, x_q = 20, x_sq = 5)
@@ -303,6 +300,19 @@ select(
 )
 ```
 
+Although it is unecessary and a bit more complicated, you can also get the `subquadrat` variable from the data the underlies the maps.
+
+```{r}
+library(purrr)
+
+maps <- map_tag(renamed, x_q = 20, x_sq = 5)
+data_list <- purrr::map(maps, "data")
+data_combined <- purrr::reduce(data_list, rbind)
+select(
+  data_combined,
+  subquadrat, qx, qy, everything()
+)
+```
 
 # Acknowledgements
 
