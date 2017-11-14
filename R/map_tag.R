@@ -37,7 +37,8 @@ map_tag <- function(vft,
                     point_size = 1.5,
                     tag_size = 3,
                     header = get_header(),
-                    theme = get_theme()) {
+                    theme = get_theme(),
+                    shrink = 0.45) {
   # Lowercase names (easier to handle), and check important variables
   vft_lower_nms <- stats::setNames(vft, tolower(names(vft)))
   crucial_vars_only <- c("tag", "qx", "qy", "status", "quadratname", "censusid")
@@ -57,7 +58,7 @@ map_tag <- function(vft,
     x_q = x_q, y_q = y_q, x_sq = x_sq, y_sq = y_sq
   )
   with_crucial_vars <- add_status_tree_page_x1_x2_y1_y2_split_quad_id(
-    with_subquadrat
+    with_subquadrat, quad_size = x_q, shrink = shrink
   )
   data_to_plot <- unique(with_crucial_vars)
 
@@ -185,12 +186,17 @@ add_status_tree <- function(df) {
 #' Help map_tag()
 #' Prepare dataset for plotting, by adding a number of useful variables
 #' @noRd
-add_status_tree_page_x1_x2_y1_y2_split_quad_id <- function(with_subquadrat) {
+add_status_tree_page_x1_x2_y1_y2_split_quad_id <- function(with_subquadrat,
+                                                           quad_size,
+                                                           shrink) {
     with_status_tree <- add_status_tree(df = with_subquadrat)
     paginated <- dplyr::ungroup(  # restore flat data
       paginate(dplyr::group_by(with_status_tree, .data$quadratname))
     )
-    with_limits <- add_subquad_limits(paginated)
+    with_limits <- add_subquad_limits(
+      df_with_page = paginated,
+      quad_size = quad_size, shrink = shrink
+    )
     with_split_and_quad_id <- dplyr::mutate(
       with_limits,
       split = paste(.data$quadratname, .data$page, sep = "_"),

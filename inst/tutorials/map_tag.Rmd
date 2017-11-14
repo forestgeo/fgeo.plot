@@ -217,19 +217,81 @@ xxxconthere.
 
 ## xxx Fix This
 
-You should be able to change the size of the quadrat and subquadrats, but currently this feature is not working correctly. I'll fix it shorly. What are the possible quadrat sized?
+You can change the size of the quadrat and subquadrats. For example, here we define that side of each quadrat is 40 meters, and the side of eacdh subquadrat is 10 meters. Each map will always show 4 subquadrats of the 16 subquadrats that make up the quadrat.
 
 ```{r}
-maps <- map_tag(renamed, site_name = "BCI 2012", 
-  x_q = 10, x_sq = 2.5, y_q = 10, y_sq = 2.5
-)
-pdf("smaller.pdf")
-maps[1:4]
-dev.off()
+map_tag(renamed, site_name = "BCI 2012", 
+  x_q = 40,  # side of a quadrat in meters
+  x_sq = 10  # side of a subquadrat in meters
+)[[1]]
 ```
+
+
+```{r}
+map_tag(renamed, site_name = "BCI 2012", 
+  x_q = 80, x_sq = 40
+)[[1]]
+```
+
+
 
 # Related Functions that Can Be Called Directly
 
 `add_subquadrat()`
+
+```{r}
+df <- data.frame(
+  qx = sample(1:20, 100, replace = TRUE),
+  qy = sample(1:20, 100, replace = TRUE),
+  stringsAsFactors = FALSE
+)
+df
+
+with_subquadrat <- add_subquadrat(df, 20, 20, 5, 5)
+head(with_subquadrat[c("qx", "qy", "subquadrat")])
+
+ggplot(with_subquadrat, aes(qx, qy)) + 
+  geom_point() +
+  
+add_subquad_limits
+
+
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
