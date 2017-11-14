@@ -223,114 +223,75 @@ map_tag(renamed, site_name = "BCI 2012", extend_grid = 0.4)[[4]]
 
 ## Customizing the Dimension of Quadrats and Subquadrats
 
-You can customize the dimension of your quadrats and subquadrats. The next example also shows how the argument `extend_grid` can be useful. Let's start by defining a quadrat side of 10 meters and a subquadrat side of 2.5 meters. Notice that the limits of the subquadrats aren't mapped.
+You can customize the dimension of your quadrats and subquadrats to fit the range of `qx` and qy` of your data. Let's examine that range is for the data you'd be using so far.
+
+```{r}
+qx_and_qy_variables <- select(renamed, qx, qy)
+lapply(qx_and_qy_variables, range)
+```
+
+The range is between around 0 and 20. That is why we've been using using the defult quadrat dimension of 20 meters (`x_sq` and `y_sq`), and the default subquadrat dimension of 5 meters (`x_sq` and `y_sq`).
 
 ```{r}
 map_tag(renamed, site_name = "BCI 2012", 
-  x_q = 10,  # side of a quadrat in meters
-  x_sq = 2.5  # side of a subquadrat in meters
+  x_q = 20, x_sq = 5,
+  y_q = 20, y_sq = 5
 )[[1]]
 ```
 
-To fix this problem -- to plot the missing limits -- you can use `extend_grid`.
+By default, `y_q` will be the same as `x_q` so you don't have to provide both -- just `x_q`. And the same is true for `y_sq` and `x_sq`. With this data -- with `qx` and `qy` ranging 0-20 meters -- the quadrat and subquadrat dimensions used above are the right ones. But `map_tag()` won't complain if you choose different parameters; so you have to be carefull not to shoot yourself on the foot.
+
+The following two examples demonstrate the use wrong dimensions. Let's first use dimensions that are smaller than the range of `qx` and `qy`.
 
 ```{r}
-map_tag(renamed, site_name = "BCI 2012", 
-  extend_grid = 0.25,
-  x_q = 10,  # side of a quadrat in meters
-  x_sq = 2.5  # side of a subquadrat in meters
+# Using 
+map_tag(renamed, 
+  site_name = "BCI 2012", x_q = 10, x_sq = 2.5, 
+  # if not extended, the lines surrounding the map won't plot
+  extend_grid = 0.25
 )[[1]]
 ```
 
-## xxx Fix This
-
-The limits are inflexible.
-
-
-
-
-You can change the size of the quadrat and subquadrats. For example, here we define that side of each quadrat is 40 meters, and the side of eacdh subquadrat is 10 meters. Each map will always show 4 subquadrats of the 16 subquadrats that make up the quadrat.
-
-
-
-### xxx 10x10 quadrats
+And now let's use dimensions that are larger than the range of the data.
 
 ```{r}
-map_tag(renamed, site_name = "BCI 2012", 
-  extend_grid = 0.25,
-  x_q = 10,  # side of a quadrat in meters
-  x_sq = 2.5  # side of a subquadrat in meters
+# Using 
+map_tag(renamed, 
+  site_name = "BCI 2012", x_q = 100, x_sq = 50, 
 )[[1]]
 ```
 
-### xxx 100x100 quadrats
+This image should flag that you have this kind of problem -- by which the range of data is smaller than quadrat and subquadrat dimensions you set. Notice that the points are all between `qx` and `qy` ranging 0-20. The tags, however, go beyond 20 because they automatically reppel themselves to avoid overlapping.
 
-```{r}
-map_tag(renamed, site_name = "BCI 2012", 
-  x_q = 100,  # side of a quadrat in meters
-  x_sq = 25  # side of a subquadrat in meters
-)[[1]]
+## The Right Dimensions for the Right Data
+
+If `qx` and `qy` of your data was in the 0-100 meters range, then yes, the appropriate quadrat dimension to use would be 100 and 50.
+
+```{r bigger}
+# Creating new data set with qx and qy ranging 0-100
+bigger <- renamed
+n <- nrow(bigger)
+bigger$qx <- sample(0:100, n, replace = TRUE)
+bigger$qy <- sample(0:100, n, replace = TRUE)
+
+map_tag(bigger, x_q = 100, x_sq = 25, extend_grid = -1.75)[1]
 ```
 
+And if `qx` and `qy` of your data range 0-10, then the appropriate quadrat dimension to use would be 10 and 2.5.
 
+```{r smaller}
+# Creating new data set with qx and qy ranging 0-100
+smaller <- renamed
+n <- nrow(smaller)
+smaller$qx <- sample(0:10, n, replace = TRUE)
+smaller$qy <- sample(0:10, n, replace = TRUE)
 
-## 200x200
-
-```{r}
-map_tag(renamed, site_name = "BCI 2012", 
-  x_q = 200,  # side of a quadrat in meters
-  x_sq = 50  # side of a subquadrat in meters
-)[[1]]
+map_tag(smaller, x_q = 10, x_sq = 2.5, extend_grid = 0.25)[1]
 ```
-
-
-## 40x40
-
-```{r}
-map_tag(renamed, site_name = "BCI 2012", 
-  x_q = 40,  # side of a quadrat in meters
-  x_sq = 20  # side of a subquadrat in meters
-)[[1]]
-```
-
-
-
-
-```{r}
-map_tag(renamed, site_name = "BCI 2012", 
-  x_q = 80, x_sq = 40
-)[[1]]
-```
-
-
 
 # Related Functions that Can Be Called Directly
 
 `add_subquadrat()`
-
-```{r}
-df <- data.frame(
-  qx = sample(1:20, 100, replace = TRUE),
-  qy = sample(1:20, 100, replace = TRUE),
-  stringsAsFactors = FALSE
-)
-df
-
-with_subquadrat <- add_subquadrat(df, 20, 20, 5, 5)
-head(with_subquadrat[c("qx", "qy", "subquadrat")])
-
-ggplot(with_subquadrat, aes(qx, qy)) + 
-  geom_point() +
-  
-add_subquad_limits
-
-
-
-```
-
-
-
-
 
 
 
