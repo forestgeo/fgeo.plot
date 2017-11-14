@@ -8,8 +8,10 @@ output:
     toc_depth: 6
 vignette: >
   %\VignetteIndexEntry{Mapping Latest Tree Status in Subquadrats}
-  %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+editor_options: 
+  chunk_output_type: inline
 ---
 
 ```{r setup, echo = FALSE, message=FALSE, warning=FALSE}
@@ -219,16 +221,58 @@ Although they shouldn't, trees sometimes are located beyond the limits of a quad
 map_tag(renamed, site_name = "BCI 2012", extend_grid = 0.4)[[4]]
 ```
 
-xxxconthere.
+## Customizing the Dimension of Quadrats and Subquadrats
 
-## Changing the Dimension of Quadrats and Subquadrats
+You can customize the dimension of your quadrats and subquadrats. The next example also shows how the argument `extend_grid` can be useful. Let's start by defining a quadrat side of 10 meters and a subquadrat side of 2.5 meters. Notice that the limits of the subquadrats aren't mapped.
+
+```{r}
+map_tag(renamed, site_name = "BCI 2012", 
+  x_q = 10,  # side of a quadrat in meters
+  x_sq = 2.5  # side of a subquadrat in meters
+)[[1]]
+```
+
+To fix this problem -- to plot the missing limits -- you can use `extend_grid`.
+
+```{r}
+map_tag(renamed, site_name = "BCI 2012", 
+  extend_grid = 0.25,
+  x_q = 10,  # side of a quadrat in meters
+  x_sq = 2.5  # side of a subquadrat in meters
+)[[1]]
+```
 
 ## xxx Fix This
 
 The limits are inflexible.
 
 
+
+
 You can change the size of the quadrat and subquadrats. For example, here we define that side of each quadrat is 40 meters, and the side of eacdh subquadrat is 10 meters. Each map will always show 4 subquadrats of the 16 subquadrats that make up the quadrat.
+
+
+
+### xxx 10x10 quadrats
+
+```{r}
+map_tag(renamed, site_name = "BCI 2012", 
+  extend_grid = 0.25,
+  x_q = 10,  # side of a quadrat in meters
+  x_sq = 2.5  # side of a subquadrat in meters
+)[[1]]
+```
+
+### xxx 100x100 quadrats
+
+```{r}
+map_tag(renamed, site_name = "BCI 2012", 
+  x_q = 100,  # side of a quadrat in meters
+  x_sq = 25  # side of a subquadrat in meters
+)[[1]]
+```
+
+
 
 ## 200x200
 
@@ -250,24 +294,6 @@ map_tag(renamed, site_name = "BCI 2012",
 ```
 
 
-
-### xxx 10x10 quadrats
-
-```{r}
-map_tag(renamed, site_name = "BCI 2012", 
-  x_q = 10,  # side of a quadrat in meters
-  x_sq = 2.5  # side of a subquadrat in meters
-)[[1]]
-```
-
-### xxx 100x100 quadrats
-
-```{r}
-map_tag(renamed, site_name = "BCI 2012", 
-  x_q = 100,  # side of a quadrat in meters
-  x_sq = 25  # side of a subquadrat in meters
-)[[1]]
-```
 
 
 ```{r}
