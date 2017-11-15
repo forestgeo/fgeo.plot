@@ -18,7 +18,12 @@
 #' @inheritParams add_subquadrat
 #'
 #' @seealso [graphics::points()], [ggplot2::geom_point()], [ggplot2::theme()]
-#'   [get_header()], [get_theme()],
+#'   [get_header()], [get_theme()], [ádd_subquadrat()].
+#'
+#' @section Acknowledgements:
+#' Useful ideas and guidance came from Suzanne Lao, Stuart Davis, Shameema
+#' Jafferjee Esufa, David Kenfack and Anudeep Singh. Andudeep Sinh also wrote
+#' the algorithm to calculate subquadrats.
 #'
 #' @return A list of ggplots, where each element of the list is a map of tree
 #'   tags by status, showing four subquadrats.
