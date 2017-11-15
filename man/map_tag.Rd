@@ -40,6 +40,9 @@ this header use \code{\link[=get_header]{get_header()}}.}
 
 \item{theme}{A \code{\link[ggplot2:theme]{ggplot2::theme()}}. To conveniently create this theme
 use \code{\link[=get_theme]{get_theme()}}.}
+
+\item{extend_grid}{A number to adjust the extension of the minor and major
+grid lines beyond the plot limits.}
 }
 \value{
 A list of ggplots, where each element of the list is a map of tree
