@@ -4,10 +4,14 @@ library(purrr)
 library(gridExtra)
 
 # Minimal data
-few_quads <- unique(ngelnyaki::ngelnyaki_vft_unid$QuadratName)[1]
-vft <- ngelnyaki::ngelnyaki_vft_unid %>% filter(QuadratName %in% few_quads)
 
+# Fix some odd variables of this particular data set
+# See email by Suzanne Lao https://goo.gl/UwiRbj
+minivft <- dplyr::rename(try::bci12vft_mini, QX = x, QY = y) %>%
+  tibble::rowid_to_column("DBHID")
 
+few_quads <- unique(minivft$QuadratName)[1]
+vft <- minivft %>% filter(QuadratName %in% few_quads)
 
 context("test-map_tag.R")
 
@@ -142,8 +146,12 @@ test_that("outputs a dataframe with new expected variable", {
 
 context("test-check_subquadrat_dimensions")
 
+
+
+
+
 test_that("throws error with wrong inputs to add_subquadrat", {
-  df <- ngelnyaki::ngelnyaki_vft_unid[1:5, c("QX", "QY")]
+  df <- minivft[1:5, c("QX", "QY")]
   # check that works
   expect_message(add_subquadrat(df, 20, 20, 5, 5))
   expect_message(add_subquadrat(df, 40, 50, 5, 5))

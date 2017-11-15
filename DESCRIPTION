@@ -24,7 +24,6 @@ Suggests:
     covr,
     gridExtra,
     knitr,
-    ngelnyaki,
     rmarkdown,
     testthat,
     tibble,

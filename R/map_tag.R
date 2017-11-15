@@ -182,8 +182,8 @@ check_crucial_names <- function(x, nms) {
 #'
 #' @examples
 #' \dontrun{
-#' # ngelnyaki is a private dataset
-#' df <- ngelnyaki::ngelnyaki_vft_unid
+#' # try::bci12vft_mini is included in this package
+#' df <- try::bci12vft_mini
 #' with_subquadrat <- add_subquadrat(df, 20, 20, 5, 5)
 #' head(with_subquadrat[c("qx", "qy", "subquadrat")])
 #' }
