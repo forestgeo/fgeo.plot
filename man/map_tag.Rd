@@ -6,7 +6,8 @@
 \usage{
 map_tag(vft, x_q = 20, x_sq = 5, y_q = x_q, y_sq = x_sq,
   site_name = "Site Name, YYYY", point_shape = c(19, 4), point_size = 1.5,
-  tag_size = 3, header = get_header(), theme = get_theme())
+  tag_size = 3, header = get_header(), theme = get_theme(),
+  extend_grid = 0)
 }
 \arguments{
 \item{vft}{A ViewFullTable.}
@@ -48,11 +49,93 @@ tags by status, showing four subquadrats.
 This function maps tree tags by status. Each map shows four subquadrats
 within a quadrat.
 }
+\section{Acknowledgements}{
+
+Useful ideas and guidance came from Suzanne Lao, Stuart Davis, Shameema
+Jafferjee Esufa, David Kenfack and Anudeep Singh. Andudeep Sinh also wrote
+the algorithm to calculate subquadrats.
+}
+
 \examples{
 \dontrun{
+# install.packages(dplyr)
+library(dplyr)
+
+# Subset of a public ViewFullTable from BCI (source:
+# https://repository.si.edu/handle/10088/20925).
+
+# Convert to tibble (modern dataframe) for better printing
+vft <- as_tibble(bci12vft_mini)
+vft
+
+# This data set has two wrong names that need to be fixed before using map_tag()
+renamed <- dplyr::rename(vft, qx = x, qy = y)
+maps <- map_tag(renamed)
+
+# Plotting only one map to screen
+maps[1]
+
+# Printing only maps 1-4 to a .pdf
+pdf("default-map.pdf", paper = "a4")
+maps[1:4]
+dev.off()
+
+# Common customization (printing only 1 map to screen)
+map_tag(renamed,
+  site_name = "BCI 2012", point_size = 3, point_shape = c(17, 6), tag_size = 5
+)[1]
+
+# Custom header
+map_tag(renamed, site_name = "BCI 2012",
+  header = "Line 1: _________\\nLine 2:\\nLine 3:....................."
+)[1]
+
+# Maybe easier
+your_header <- get_header(
+  line1 = "Your header-line 1: _____________________________",
+  line2 = "Your header-line 3: _____________________________",
+  line3 = "Your header-line 2: _____________________________"
+)
+map_tag(renamed, site_name = "BCI 2012", header = your_header)[1]
+
+# Custom theme: using a pre-made theme
+# Allow using pre-made themes (e.g. ggplot2::theme_bw()) and building custom
+# themes (with ggplot::theme()).
+library(ggplot2)
+
+map_tag(renamed, site_name = "BCI 2012", theme = theme_gray())[1]
+
+# Custom theme: using a pre-made theme
+# An extreeme example to show that themes are extreemely flexible
+your_theme <- ggplot2::theme(
+  legend.position = "bottom",
+  legend.title = element_blank(),
+  legend.text = element_text(size = 8, colour = "red"),
+  text = element_text(size = 11, face = "bold.italic", colour = "white"),
+  plot.background = element_rect(fill = "black"),
+  plot.margin = margin(2, 2, 2, 2, "cm"),
+  strip.background = element_rect(fill = "darkgreen"),
+  strip.text = element_text(colour = "white"),
+  # make grid to dissapear by matching background colour
+  panel.background = element_rect(fill = "lightgreen"),
+  panel.grid.minor = element_line(colour = "black", linetype = "dotted"),
+  panel.grid.major = element_line(colour = "black")
+)
+map_tag(renamed, site_name = "BCI 2012", theme = your_theme)[1]
+
+# Adapting the dimensions of quadrat and subquadrat to the range of qx and qy
+# Creating new data set with qx and qy ranging 0-100
+smaller <- renamed
+n <- nrow(smaller)
+smaller$qx <- sample(0:10, n, replace = TRUE)
+smaller$qy <- sample(0:10, n, replace = TRUE)
+
+map_tag(smaller, x_q = 10, x_sq = 2.5)[1]
+# Sometimes to make the limit-lines appear, you need to extend the grid a little
+map_tag(smaller, x_q = 10, x_sq = 2.5, extend_grid = 0.25)[1]
 }
 }
 \seealso{
 \code{\link[graphics:points]{graphics::points()}}, \code{\link[ggplot2:geom_point]{ggplot2::geom_point()}}, \code{\link[ggplot2:theme]{ggplot2::theme()}}
-\code{\link[=get_header]{get_header()}}, \code{\link[=get_theme]{get_theme()}},
+\code{\link[=get_header]{get_header()}}, \code{\link[=get_theme]{get_theme()}}, \code{\link[=add_subquadrat]{add_subquadrat()}}.
 }

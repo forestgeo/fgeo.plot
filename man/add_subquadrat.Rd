@@ -4,7 +4,7 @@
 \alias{add_subquadrat}
 \title{Add a quadrat variable to a dataframe based based on qx and qy coordinates.}
 \usage{
-add_subquadrat(df, x_q, y_q, x_sq, y_sq)
+add_subquadrat(df, x_q, y_q = x_q, x_sq, y_sq = x_sq)
 }
 \arguments{
 \item{df}{A ViewFullTable dataframe.}

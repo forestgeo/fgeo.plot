@@ -19,6 +19,11 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Mauro Lepore \email{maurolepore@gmail.com}
+\strong{Maintainer}: Mauro Lepore \email{leporem@si.edu} [contractor]
+
+Other contributors:
+\itemize{
+  \item CTFS-ForestGEO \email{ForestGEO@si.edu} [copyright holder, funder]
+}
 
 }
