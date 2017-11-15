@@ -1,8 +1,10 @@
 Package: try
 Title: Try New Things
 Version: 0.0.00.9000
-Authors@R: person("Mauro", "Lepore", email = "maurolepore@gmail.com", 
-    role = c("aut", "cre"))
+Authors@R: c(
+    person("Mauro", "Lepore", , "leporem@si.edu", role = c("aut", "ctr", "cre")),
+    person("CTFS-ForestGEO", , , "ForestGEO@si.edu", role = c("cph", "fnd"))
+    )
 Description: Try makes if  easy to share code to try new things. It aims to
     draft a solution to address a very specific issue.
 License: MIT + file LICENSE
