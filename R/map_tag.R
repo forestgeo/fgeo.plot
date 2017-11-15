@@ -15,10 +15,12 @@
 #'   this header use [get_header()].
 #' @param theme A [ggplot2::theme()]. To conveniently create this theme
 #'   use [get_theme()].
+#' @param extend_grid A number to adjust the extension of the minor and major
+#'   grid lines beyond the plot limits.
 #' @inheritParams add_subquadrat
 #'
 #' @seealso [graphics::points()], [ggplot2::geom_point()], [ggplot2::theme()]
-#'   [get_header()], [get_theme()], [ádd_subquadrat()].
+#'   [get_header()], [get_theme()], [add_subquadrat()].
 #'
 #' @section Acknowledgements:
 #' Useful ideas and guidance came from Suzanne Lao, Stuart Davis, Shameema
