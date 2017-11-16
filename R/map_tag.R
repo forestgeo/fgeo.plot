@@ -127,10 +127,13 @@ map_tag <- function(vft,
                     header = get_header(),
                     theme = get_theme(),
                     extend_grid = 0) {
-  # Lowercase names (easier to handle), and check important variables
+  # Lowercase names: avoid errors due to confusing upper- and lower-case
   vft_lower_nms <- stats::setNames(vft, tolower(names(vft)))
-  crucial_vars_only <- c("tag", "qx", "qy", "status", "quadratname", "censusid")
-  check_crucial_names(vft_lower_nms, crucial_vars_only)
+  crucial_vars <- c(
+    "tag", "qx", "qy", "status", "quadratname", "censusid", "plotid"
+  )
+  check_crucial_names(vft_lower_nms, crucial_vars)
+  check_single_plotid(vft_lower_nms)
   check_subquadrat_dimensions(
     df = vft_lower_nms, x_q = x_q, y_q = y_q, x_sq = x_sq, y_sq = y_sq
   )
@@ -138,7 +141,7 @@ map_tag <- function(vft,
   # Keep only: rows of last census, and variables that are important
   last_census <- max(unique(vft_lower_nms$censusid))
   is_last_census <- vft_lower_nms$censusid == last_census
-  subset_with_lower_nms <- vft_lower_nms[is_last_census, crucial_vars_only]
+  subset_with_lower_nms <- vft_lower_nms[is_last_census, crucial_vars]
 
   # Prepare data to plot: add important variables and remove duplicated tags
   with_subquadrat <- add_sbqd(
@@ -161,7 +164,7 @@ map_tag <- function(vft,
   list_of_plots
 }
 
-#' Help lower_names_then_check()
+#' Help map_tag()
 #' @noRd
 check_crucial_names <- function(x, nms) {
   are_names_expected <- all(nms %in% names(x))
@@ -171,6 +174,20 @@ check_crucial_names <- function(x, nms) {
     stop(
       "Ensure the lowercase version of the names of your data set matches:\n",
       paste0(nms, collapse = ", "))
+  }
+}
+
+#' Help map_tag()
+#' @noRd
+check_single_plotid <- function(x) {
+  number_of_plots <- length(unique(x$plotid))
+  if (number_of_plots > 1) {
+    stop(
+      "`plotid` contains these plots: ", paste(plots, collapse = ", "), "\n",
+      "  * Filter your data to keep a single plot; then try again"
+    )
+  } else {
+    invisible()
   }
 }
 

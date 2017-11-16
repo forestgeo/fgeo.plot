@@ -22,6 +22,15 @@ test_that("outputs same as satisfactory reference", {
 })
 
 
+test_that("map_tag() stops if data has more than one PlotID", {
+  new_row <-   vft[1, ]
+  new_row$PlotID <- 2L
+  vft_with_new_row <- bind_rows(new_row, vft)
+  expect_error(map_tag(vft_with_new_row))
+})
+
+
+
 
 test_that("wrong inputs passed to lapply_plot_repulsive_tags() get noticed", {
 
