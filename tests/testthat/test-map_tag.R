@@ -96,7 +96,7 @@ test_that("plots all unique tags in data", {
 test_that("plots the same with all or just the minimum needed vars in data", {
   all <- map_tag(vft)
   vft_with_min_vars <- vft %>%
-    select(Tag, Status, QX, QY, QuadratName, DBHID, CensusID)
+    select(Tag, Status, QX, QY, QuadratName, DBHID, CensusID, PlotID)
   min <- map_tag(vft_with_min_vars)
 
   expect_equal(all, min)
@@ -120,7 +120,7 @@ test_that("errs with uppercase names", {
   vft_no_qx$QX <- NULL
   expect_error(
     map_tag(vft_no_qx),
-    "Ensure the lowercase version of the names of your data set matches"
+    "Ensure your data set has these variables"
   )
 })
 

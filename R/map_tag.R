@@ -172,8 +172,10 @@ check_crucial_names <- function(x, nms) {
     return(invisible())
   } else {
     stop(
-      "Ensure the lowercase version of the names of your data set matches:\n",
-      paste0(nms, collapse = ", "))
+      "Ensure your data set has these variables (regardles of the case):\n",
+      paste0(nms, collapse = ", "),
+      call. = FALSE
+    )
   }
 }
 
@@ -184,7 +186,8 @@ check_single_plotid <- function(x) {
   if (number_of_plots > 1) {
     stop(
       "`plotid` contains these plots: ", paste(plots, collapse = ", "), "\n",
-      "  * Filter your data to keep a single plot; then try again"
+      "  * Filter your data to keep a single plot; then try again",
+      call. = FALSE
     )
   } else {
     invisible()
