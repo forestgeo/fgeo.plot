@@ -17,3 +17,4 @@
 ^min_multipaged\.pdf$
 ^ref-map_tag\.rds$
 ^inst$
+^LICENSE\.md$

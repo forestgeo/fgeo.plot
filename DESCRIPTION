@@ -7,7 +7,7 @@ Authors@R: c(
     )
 Description: Try makes if  easy to share code to try new things. It aims to
     draft a solution to address a very specific issue.
-License: MIT + file LICENSE
+License: GPL-3
 URL: https://github.com/forestgeo/try
 BugReports: https://github.com/forestgeo/try/issues
 Depends: 
