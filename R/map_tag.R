@@ -33,20 +33,25 @@
 #'
 #' @examples
 #' \dontrun{
-# Using the package dplyr for easier data manipulation
-#' # install.packages(dplyr)
 #' library(dplyr)
+#' library(ggplot)
 #'
 #' # Subset of a public ViewFullTable from BCI (source:
 #' # https://repository.si.edu/handle/10088/20925).
 #'
-#' # Convert to tibble (modern dataframe) for better printing
+#' # Improve printing method
 #' vft <- as_tibble(bci12vft_mini)
 #' vft
 #'
+#' # Folter the plot you want to map
+#' vft1 <- filter(vft, PlotID == 1)
+#'
+#' # Another look
+#' glimpse(vft1)
+#'
 #' # This data set has two wrong names that need to be fixed before using map_tag()
-#' renamed <- dplyr::rename(vft, qx = x, qy = y)
-#' maps <- map_tag(renamed)
+#' vft1_rnm <- dplyr::rename(vft1, qx = x, qy = y)
+#' maps <- map_tag(vft1_rnm)
 #'
 #' # Plotting only one map to screen
 #' maps[1]
@@ -57,12 +62,12 @@
 #' dev.off()
 #'
 #' # Common customization (printing only 1 map to screen)
-#' map_tag(renamed,
+#' map_tag(vft1_rnm,
 #'   site_name = "BCI 2012", point_size = 3, point_shape = c(17, 6), tag_size = 5
 #' )[1]
 #'
 #' # Custom header
-#' map_tag(renamed, site_name = "BCI 2012",
+#' map_tag(vft1_rnm, site_name = "BCI 2012",
 #'   header = "Line 1: _________\nLine 2:\nLine 3:....................."
 #' )[1]
 #'
@@ -72,14 +77,14 @@
 #'   line2 = "Your header-line 3: _____________________________",
 #'   line3 = "Your header-line 2: _____________________________"
 #' )
-#' map_tag(renamed, site_name = "BCI 2012", header = your_header)[1]
+#' map_tag(vft1_rnm, site_name = "BCI 2012", header = your_header)[1]
 #'
 #' # Custom theme: using a pre-made theme
 #' # Allow using pre-made themes (e.g. ggplot2::theme_bw()) and building custom
 #' # themes (with ggplot::theme()).
 #' library(ggplot2)
 #'
-#' map_tag(renamed, site_name = "BCI 2012", theme = theme_gray())[1]
+#' map_tag(vft1_rnm, site_name = "BCI 2012", theme = theme_gray())[1]
 #'
 #' # Custom theme: using a pre-made theme
 #' # An extreeme example to show that themes are extreemely flexible
@@ -97,11 +102,11 @@
 #'   panel.grid.minor = element_line(colour = "black", linetype = "dotted"),
 #'   panel.grid.major = element_line(colour = "black")
 #' )
-#' map_tag(renamed, site_name = "BCI 2012", theme = your_theme)[1]
+#' map_tag(vft1_rnm, site_name = "BCI 2012", theme = your_theme)[1]
 #'
 #' # Adapting the dimensions of quadrat and subquadrat to the range of qx and qy
 #' # Creating new data set with qx and qy ranging 0-100
-#' smaller <- renamed
+#' smaller <- vft1_rnm
 #' n <- nrow(smaller)
 #' smaller$qx <- sample(0:10, n, replace = TRUE)
 #' smaller$qy <- sample(0:10, n, replace = TRUE)
