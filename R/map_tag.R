@@ -182,7 +182,8 @@ check_crucial_names <- function(x, nms) {
 #' Help map_tag()
 #' @noRd
 check_single_plotid <- function(x) {
-  number_of_plots <- length(unique(x$plotid))
+  plots <- unique(x$plotid)
+  number_of_plots <- length(plots)
   if (number_of_plots > 1) {
     stop(
       "`plotid` contains these plots: ", paste(plots, collapse = ", "), "\n",
