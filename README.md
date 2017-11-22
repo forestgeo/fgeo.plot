@@ -14,7 +14,7 @@ output:
 
 
 
-[![Travis-CI Build Status](https://travis-ci.org/maurolepore/try.svg?branch=master)](https://travis-ci.org/maurolepore/try) [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/try)](https://cran.r-project.org/package=try)
+[![Travis-CI Build Status](https://travis-ci.org/forestgeo/try.svg?branch=master)](https://travis-ci.org/forestgeo/try) [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/try)](https://cran.r-project.org/package=try)
 
 # Overview
 
