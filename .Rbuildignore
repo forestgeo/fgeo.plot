@@ -18,3 +18,5 @@
 ^ref-map_tag\.rds$
 ^inst$
 ^LICENSE\.md$
+^_pkgdown\.yml$
+^README\.html$

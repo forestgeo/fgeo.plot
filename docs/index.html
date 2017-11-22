@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Try New Things • try</title>
-<!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/united/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 <!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
 <script src="jquery.sticky-kit.min.js"></script><script src="pkgdown.js"></script><!-- mathjax --><script src="https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!--[if lt IE 9]>
@@ -15,7 +15,7 @@
 <![endif]-->
 </head>
 <body>
-    <div class="container template-home">
+    <div class="container template-vignette">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
@@ -29,13 +29,7 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li>
-  <a href="/index.html">
-    <span class="fa fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
-  <a href="reference/index.html">Reference</a>
+  <a href="reference/index.html">Functions Index</a>
 </li>
       </ul>
 <ul class="nav navbar-nav navbar-right">
@@ -55,8 +49,13 @@
 
       
       </header><div class="row">
-  <div class="contents col-md-9">
+  <div class="col-md-9">
     
+
+    
+    
+<div class="contents">
+<!-- Don't edit README.md; instead, edit README.Rmd -->
 <div id="try" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
 <a href="#try" class="anchor"></a>try</h1></div>
@@ -65,32 +64,44 @@
 <div id="overview" class="section level1">
 <h1 class="hasAnchor">
 <a href="#overview" class="anchor"></a>Overview</h1>
-<p>Try makes if easy to share code to try new things. It aims to draft a solution to address a very specific issue.</p>
+<p><strong>try</strong> makes if easy to share code to try new things. It aims to draft a solution to address a very specific issue.</p>
+<div id="installation" class="section level2">
+<h2 class="hasAnchor">
+<a href="#installation" class="anchor"></a>Installation</h2>
+<p>Install <strong>try</strong> from GitHub with:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># install.packages("devtools")</span>
+devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="dt">repo =</span> <span class="st">"forestgeo/try"</span>)
+<span class="kw">library</span>(try)</code></pre></div>
+<p>Or with:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">source</span>(<span class="st">"https://install-github.me/forestgeo/try"</span>)</code></pre></div>
+<p>After installing and loading <strong>try</strong>, get help about the main function with <code>?map_tag()</code>.</p>
 </div>
-<div id="installation" class="section level1">
-<h1 class="hasAnchor">
-<a href="#installation" class="anchor"></a>Installation</h1>
-<p>Install a specific ISSUE from GitHub with:</p>
-<div class="sourceCode"><pre class="sourceCode R"><code class="sourceCode r"><span class="co"># install.packages("devtools")</span>
-devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="dt">repo =</span> <span class="st">"forestgeo/try@ISSUE"</span>)</code></pre></div>
-<p>The argument <code>repo</code> of <code><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">devtools::install_github()</a></code> can be in the format <code>username/repo#pull</code> or <code>username/repo@ref</code>, where <code>ref</code> could be a commit, tag, or branch name, or a call to <code>github_pull()</code>.</p>
+<div id="tutorial" class="section level2">
+<h2 class="hasAnchor">
+<a href="#tutorial" class="anchor"></a>Tutorial</h2>
+<p>For a tutorial, see: <a href="https://bookdown.org/forestgeoguest/map_tag/map_tag.html" class="uri">https://bookdown.org/forestgeoguest/map_tag/map_tag.html</a></p>
 </div>
-
+</div>
+</div>
   </div>
 
-  <div class="col-md-3" id="sidebar">
-    <h2>Links</h2>
+  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
+    <h2 class="hasAnchor">
+<a href="#sidebar" class="anchor"></a>Links</h2>
 <ul class="list-unstyled">
 <li>Browse source code at <br><a href="https://github.com/forestgeo/try">https://​github.com/​forestgeo/​try</a>
 </li>
 <li>Report a bug at <br><a href="https://github.com/forestgeo/try/issues">https://​github.com/​forestgeo/​try/​issues</a>
+</li>
+<li>Learn more at <br><a href="http://www.forestgeo.si.edu/">http://​www.forestgeo.si.edu/​</a>
 </li>
 </ul>
 <h2>License</h2>
 <p><a href="https://www.r-project.org/Licenses/GPL-3">GPL-3</a></p>
 <h2>Developers</h2>
 <ul class="list-unstyled">
-<li>Mauro Lepore <br><small class="roles"> Author, maintainer </small> </li>
+<li>Mauro Lepore <br><small class="roles"> Author, contractor, maintainer </small> </li>
+<li>CTFS-ForestGEO <br><small class="roles"> Copyright holder, funder </small> </li>
 </ul>
 <h2>Dev status</h2>
 <ul class="list-unstyled">
@@ -98,11 +109,12 @@ devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocument
 <li><a href="https://cran.r-project.org/package=try"><img src="http://www.r-pkg.org/badges/version/try" alt="CRAN_Status_Badge"></a></li>
 </ul>
 </div>
+
 </div>
 
 
       <footer><div class="copyright">
-  <p>Developed by Mauro Lepore.</p>
+  <p>Developed by Mauro Lepore, CTFS-ForestGEO.</p>
 </div>
 
 <div class="pkgdown">
