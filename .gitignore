@@ -1,7 +1,4 @@
 .Rproj.user
 .Rhistory
 .RData
-inst/doc
-vignettes/rsconnect
-issues
-
+.Ruserdata
