@@ -1,4 +1,16 @@
 .Rproj.user
 .Rhistory
 .RData
+<<<<<<< HEAD
 .Ruserdata
+=======
+inst/doc
+vignettes/rsconnect
+iss001_avoid_text_overlap_cache
+iss001_avoid_text_overlap_files
+all_multipaged.pdf
+min_multipaged.pdf
+Yose.pdf
+tmp2.R
+Rplots.pdf
+>>>>>>> iss1_map_tag
