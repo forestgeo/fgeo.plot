@@ -62,7 +62,8 @@ the algorithm to calculate subquadrats.
 \examples{
 \dontrun{
 library(dplyr)
-library(ggplot)
+library(ggplot2)
+library(try)
 
 # Subset of a public ViewFullTable from BCI (source:
 # https://repository.si.edu/handle/10088/20925).
@@ -72,7 +73,7 @@ vft <- as_tibble(bci12vft_mini)
 vft
 
 # Folter the plot you want to map
-vft1 <- filter(vft, PlotID == 1)
+vft1 <- dplyr::filter(vft, PlotID == 1)
 
 # Another look
 glimpse(vft1)
@@ -91,12 +92,12 @@ dev.off()
 
 # Common customization (printing only 1 map to screen)
 map_tag(vft1_rnm,
-  site_name = "BCI 2012", point_size = 3, point_shape = c(17, 6), tag_size = 5
+        site_name = "BCI 2012", point_size = 3, point_shape = c(17, 6), tag_size = 5
 )[1]
 
 # Custom header
 map_tag(vft1_rnm, site_name = "BCI 2012",
-  header = "Line 1: _________\\nLine 2:\\nLine 3:....................."
+        header = "Line 1: _________\\nLine 2:\\nLine 3:....................."
 )[1]
 
 # Maybe easier
@@ -140,7 +141,7 @@ smaller$qx <- sample(0:10, n, replace = TRUE)
 smaller$qy <- sample(0:10, n, replace = TRUE)
 
 map_tag(smaller, x_q = 10, x_sq = 2.5)[1]
-# Sometimes to make the limit-lines appear, you need to extend the grid a little
+# If limit-lines aren't visible, try extending the grid a little
 map_tag(smaller, x_q = 10, x_sq = 2.5, extend_grid = 0.25)[1]
 }
 }
