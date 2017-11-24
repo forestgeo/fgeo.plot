@@ -171,7 +171,8 @@ the algorithm to calculate subquadrats.</p>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='co'># NOT RUN {</span>
 <span class='fu'>library</span>(<span class='no'>dplyr</span>)
-<span class='fu'>library</span>(<span class='no'>ggplot</span>)
+<span class='fu'>library</span>(<span class='no'>ggplot2</span>)
+<span class='fu'>library</span>(<span class='no'>try</span>)
 
 <span class='co'># Subset of a public ViewFullTable from BCI (source:</span>
 <span class='co'># https://repository.si.edu/handle/10088/20925).</span>
@@ -181,7 +182,7 @@ the algorithm to calculate subquadrats.</p>
 <span class='no'>vft</span>
 
 <span class='co'># Folter the plot you want to map</span>
-<span class='no'>vft1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://dplyr.tidyverse.org/reference/filter.html'>filter</a></span>(<span class='no'>vft</span>, <span class='no'>PlotID</span> <span class='kw'>==</span> <span class='fl'>1</span>)
+<span class='no'>vft1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='http://dplyr.tidyverse.org/reference/filter.html'>filter</a></span>(<span class='no'>vft</span>, <span class='no'>PlotID</span> <span class='kw'>==</span> <span class='fl'>1</span>)
 
 <span class='co'># Another look</span>
 <span class='fu'><a href='http://dplyr.tidyverse.org/reference/reexports.html'>glimpse</a></span>(<span class='no'>vft1</span>)
@@ -200,12 +201,12 @@ the algorithm to calculate subquadrats.</p>
 
 <span class='co'># Common customization (printing only 1 map to screen)</span>
 <span class='fu'>map_tag</span>(<span class='no'>vft1_rnm</span>,
-  <span class='kw'>site_name</span> <span class='kw'>=</span> <span class='st'>"BCI 2012"</span>, <span class='kw'>point_size</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>point_shape</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>17</span>, <span class='fl'>6</span>), <span class='kw'>tag_size</span> <span class='kw'>=</span> <span class='fl'>5</span>
+        <span class='kw'>site_name</span> <span class='kw'>=</span> <span class='st'>"BCI 2012"</span>, <span class='kw'>point_size</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>point_shape</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>17</span>, <span class='fl'>6</span>), <span class='kw'>tag_size</span> <span class='kw'>=</span> <span class='fl'>5</span>
 )[<span class='fl'>1</span>]
 
 <span class='co'># Custom header</span>
 <span class='fu'>map_tag</span>(<span class='no'>vft1_rnm</span>, <span class='kw'>site_name</span> <span class='kw'>=</span> <span class='st'>"BCI 2012"</span>,
-  <span class='kw'>header</span> <span class='kw'>=</span> <span class='st'>"Line 1: _________\nLine 2:\nLine 3:....................."</span>
+        <span class='kw'>header</span> <span class='kw'>=</span> <span class='st'>"Line 1: _________\nLine 2:\nLine 3:....................."</span>
 )[<span class='fl'>1</span>]
 
 <span class='co'># Maybe easier</span>
@@ -249,7 +250,7 @@ the algorithm to calculate subquadrats.</p>
 <span class='no'>smaller</span>$<span class='no'>qy</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://dplyr.tidyverse.org/reference/sample.html'>sample</a></span>(<span class='fl'>0</span>:<span class='fl'>10</span>, <span class='no'>n</span>, <span class='kw'>replace</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 
 <span class='fu'>map_tag</span>(<span class='no'>smaller</span>, <span class='kw'>x_q</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>x_sq</span> <span class='kw'>=</span> <span class='fl'>2.5</span>)[<span class='fl'>1</span>]
-<span class='co'># Sometimes to make the limit-lines appear, you need to extend the grid a little</span>
+<span class='co'># If limit-lines aren't visible, try extending the grid a little</span>
 <span class='fu'>map_tag</span>(<span class='no'>smaller</span>, <span class='kw'>x_q</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>x_sq</span> <span class='kw'>=</span> <span class='fl'>2.5</span>, <span class='kw'>extend_grid</span> <span class='kw'>=</span> <span class='fl'>0.25</span>)[<span class='fl'>1</span>]
 <span class='co'># }</span></pre>
   </div>
