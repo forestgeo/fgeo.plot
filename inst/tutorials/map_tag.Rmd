@@ -21,7 +21,7 @@ editor_options:
 library(try)
 
 # tidiverse contains multiple other packages for most common data-science tasks
-# install.packages(tidyverse)
+# install.packages("tidyverse")
 library(tidyverse)
 # Print only a few rows of data framed to save time and space
 options(dplyr.print_min = 6, dplyr.print_max = 6)
