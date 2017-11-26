@@ -21,3 +21,4 @@
 ^_pkgdown\.yml$
 ^README\.html$
 ^logo\.png$
+^inst/app$
