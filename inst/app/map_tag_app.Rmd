@@ -1,0 +1,106 @@
+---
+title: "map_tag()"
+runtime: shiny
+output:
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    theme: united
+    social: menu
+    source_code: embed
+    navbar:
+      - {title: "Developer", href: "https://github.com/maurolepore", 
+        align: right, icon: fa-user}
+---
+
+```{r global, include=FALSE}
+library(flexdashboard)
+library(try)
+library(dplyr)
+library(ggplot2)
+```
+
+1. Define basic layout {data.width=700}
+=======================================================================
+
+--- ARGUMENTS AND DATA {data-width=400}
+-----------------------------------------------------------------------
+
+### Arguments (see [`?map_tag()`](https://goo.gl/86gjjB)) {data-height=70}
+
+```{r}
+fluidRow(
+  column(5, textInput("site", "site_name", "My site, 2017")),
+  column(5, numericInput("pointsize", "point_size", 3))
+)
+
+fluidRow(
+  column(5, sliderInput("pointshape_alive", "point_shape (alive)", min = 1, max = 25, 17)),
+  column(5, sliderInput("pointshape_dead", "point_shape (dead)", min = 1, max = 25, 6))
+)
+```
+
+### Example data set, after filtering a unique `PlotID` {data-height=30}
+
+```{r}
+vft <- as_tibble(bci12vft_mini)
+datex <- dplyr::filter(vft, PlotID == 1)
+
+# This data set has two wrong names that need to be fixed before using map_tag()
+first_quad <- unique(datex$QuadratName)[[1]]
+
+vars <-  c("tag", "x", "y", "status", "quadratname", "censusid", "plotid")
+datex1 <- datex[, tolower(names(datex)) %in% vars]
+
+
+example_data <- datex1 %>% 
+  rename(qx = x, qy = y) %>% 
+  filter(QuadratName %in% first_quad) %>% 
+  print(n = 3)
+```
+
+
+
+--- PLOT {data-width=400}
+-----------------------------------------------------------------------
+
+### Preview
+
+```{r, fig.asp=1.15}
+renderPlot({
+  maps <- map_tag(
+    example_data, 
+    site_name = input$site,
+    point_size = input$pointsize,
+    point_shape = c(input$pointshape_alive, input$pointshape_dead),
+  )
+  maps[[1]]
+})
+```
+
+
+
+
+
+2. Define advanced layout {data.width=700}
+=======================================================================
+
+--- INPUTS {.sidebar data-width=370}
+-----------------------------------------------------------------------
+
+3. Upload data and download maps
+=======================================================================
+
+--- INPUTS {.sidebar data-width=370}
+-----------------------------------------------------------------------
+
+
+```{r}
+h4("1. Choose data")
+helpText("Upload a .csv file:")
+fileInput("dataset", NULL)
+active_df <- reactive({
+  req(input$dataset)
+  readr::read_csv(input$dataset$datapath)
+})
+```
+

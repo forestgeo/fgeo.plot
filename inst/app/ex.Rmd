@@ -1,0 +1,185 @@
+---
+title: "GetKrigedSoil()"
+runtime: shiny
+output:
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    theme: united
+    social: menu
+    source_code: embed
+    navbar:
+      - {title: "Code", href: "https://github.com/maurolepore", align: right,
+        icon: fa-user}
+      - {title: "App", href: "https://github.com/maurolepore", align: right,
+        icon: fa-user}
+---
+
+```{r global, include=FALSE}
+library(flexdashboard)
+library(krig)
+library(dplyr)
+library(ggplot2)
+library(tibble)
+```
+
+Start (defaults settings) {data.width=700}
+=======================================================================
+
+--- INPUTS {.sidebar data-width=250}
+-----------------------------------------------------------------------
+
+```{r data}
+h4("1. Choose data")
+helpText("Upload a .csv file:")
+fileInput("dataset", NULL)
+active_df <- reactive({
+  req(input$dataset)
+  readr::read_csv(input$dataset$datapath)
+})
+helpText("Example data set:")
+print(as.tibble(krig::soil_random), n = 3)
+```
+
+```{r}
+h4("2. Which is soil column?")
+helpText("Type the name of a column:")
+fluidRow(column(5, textInput("var_id", NULL, value = "M3Al")))
+```
+
+```{r}
+h4("3. Wait")
+helpText(
+  "Depending on the size of the data set, results may take several",
+  "seconds to appear and refresh."
+)
+```
+
+--- DATA {data-width=400}
+-----------------------------------------------------------------------
+
+### Data
+
+```{r}
+numericInput("print_n", "How many rows to show?", 3)
+renderPrint({
+  head(active_df(), input$print_n)
+})
+```
+
+### Plot
+
+```{r}
+renderPlot({
+  result <- GetKrigedSoil(active_df(), var = input$var_id)
+  ggplot(result$df, aes(x, y, fill = z)) +
+    geom_tile() +
+    coord_equal() +
+    theme(legend.position = "top")
+})
+```
+
+--- RESULTS {data-width=400}
+-----------------------------------------------------------------------
+
+### Result {data-height=97}
+
+```{r}
+numericInput("print_n2", "How many elements of each result to show?", 6)
+renderPrint({
+  result <- GetKrigedSoil(active_df(), var = input$var_id)
+  lapply(result, head, input$print_n2)
+})
+```
+
+Finish (custom settings)
+=======================================================================
+
+--- INPUTS {.sidebar data-width=250}
+-----------------------------------------------------------------------
+
+```{r}
+h4("4. CUstomize parameters")
+helpText("Click for help:")
+```
+
+#### [`?GetKrigedSoil()`](https://goo.gl/MAkNBV)
+
+```{r}
+hr()
+
+fluidRow(
+  column(5, numericInput("gridSize_id", "gridSize", value = 20)),
+  column(5, selectInput(
+      "useKsLine_id", "useKsLine", choices = c(TRUE, FALSE), selected = TRUE
+    )
+  )
+)
+fluidRow(
+  column(5, numericInput("xSize_id", "xSize", value = 1000)),
+  column(5, numericInput("ySize_id", "ySize", value =  500))
+)
+
+helpText("breaks")
+fluidRow(
+  column(5, numericInput("first_id", "First", value = 2)),
+  column(5, numericInput("last_id", "Last", value = 320))
+)
+numericInput("n_id", "n", value = 30)
+```
+
+```{r}
+h4("5. Wait")
+helpText(
+  "Depending on the size of the data set, results may take several",
+  "seconds to appear and refresh."
+)
+```
+
+--- DATA {data-width=400}
+-----------------------------------------------------------------------
+
+### Data
+
+```{r}
+numericInput("print_n", "How many rows to show?", 3)
+renderPrint({
+  head(active_df(), input$print_n)
+})
+```
+
+### Plot
+
+```{r}
+renderPlot({
+  result <- GetKrigedSoil(active_df(), var = input$var_id)
+  ggplot(result$df, aes(x, y, fill = z)) +
+    geom_tile() +
+    coord_equal() +
+    theme(legend.position = "top")
+})
+```
+
+--- RESULTS {data-width=400}
+-----------------------------------------------------------------------
+
+### Result {data-height=97}
+
+```{r}
+numericInput("print_n2", "How many elements of each result to show?", 6)
+renderPrint({
+  result <- GetKrigedSoil(
+    active_df(),
+    var = input$var_id,
+    xSize = input$xSize_id,
+    ySize = input$ySize_id,
+    useKsLine = input$useKsLine_id,
+    krigeParams = NULL,
+    breaks = ExpList(
+      input$first_id,
+      input$last_id,
+      input$n_id
+    )
+  )
+  lapply(result, head, input$print_n2)
+})
+```
