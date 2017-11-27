@@ -5,15 +5,15 @@ resource_files:
 runtime: shiny
 output:
   flexdashboard::flex_dashboard:
+    theme: united
+    orientation: columns
+    social: menu
+    source_code: embed
     navbar:
     - align: right
       href: https://github.com/maurolepore
       icon: fa-user
       title: Mauro Lepore
-    orientation: columns
-    social: menu
-    source_code: embed
-    theme: united
 ---
 
 ```{r global, include=FALSE}
@@ -38,9 +38,9 @@ active_df <- reactive({
 })
 ```
 
-```{r}
-helpText("Example data set, after filtering a unique `PlotID`")
+Example data set, after filtering a unique `PlotID` ([download](https://goo.gl/qdLNFi))
 
+```{r}
 vft <- as_tibble(try::bci12vft_mini)
 datex <- dplyr::filter(vft, PlotID == 1)
 
