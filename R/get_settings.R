@@ -56,7 +56,7 @@ get_theme <- function(panel_grid_major_colour = "black",
   )
 }
 
-#' A simple way to produce a three-lines header for a plot of repulsive tags.
+#' A simple way to produce a three-lines header for `map_tag()`.
 #'
 #' @param line1,line2,line3 Strings to use on the first, second and third line
 #'  of the header.
