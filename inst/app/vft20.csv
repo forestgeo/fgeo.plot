@@ -1,4 +1,4 @@
-MeasureID,PlotID,Plot,Family,GenusSpecies,Genus,SpeciesName,SubSpeciesName,SpeciesID,Mnemonic,QuadratID,QuadratName,qx,qy,gx,gy,TreeID,Tag,StemID,StemTag,PrimaryStem,CensusID,PlotCensusNumber,DBH,HOM,ExactDate,ListOfTSM,Status
+MeasureID,PlotID,Plot,Family,GenusSpecies,Genus,SpeciesName,SubSpeciesName,SpeciesID,Mnemonic,QuadratID,QuadratName,x,y,gx,gy,TreeID,Tag,StemID,StemTag,PrimaryStem,CensusID,PlotCensusNumber,DBH,HOM,ExactDate,ListOfTSM,Status
 2,1,bci,Lecythidaceae,Gustavia superba,Gustavia,superba,NULL,460,gustsu,1250,4924,14.1,8.3,994.1,488.3,19,000002,1,NA,main,6,6,304,3,2005-10-14,"B,cylY",alive
 3,1,bci,Myristicaceae,Virola surinamensis,Virola,surinamensis,NULL,1075,virosu,1250,4924,10.5,8.9,990.5,488.9,21,000004,1,NA,main,6,6,357,1.3,2005-10-11,NULL,alive
 4,1,bci,Malvaceae,Quararibea asterolepis,Quararibea,asterolepis,NULL,871,quaras,1250,4924,13.5,18.3,993.5,498.3,23,000006,7,NULL,main,6,6,313,3,2005-10-14,"B,cylY",alive
