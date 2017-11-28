@@ -52,7 +52,6 @@ vars <-  c("tag", "x", "y", "status", "quadratname", "censusid", "plotid")
 datex1 <- datex[, tolower(names(datex)) %in% vars]
 
 example_data <- datex1 %>% 
-  dplyr::rename(qx = x, qy = y) %>% 
   dplyr::filter(QuadratName %in% first_quad) %>% 
   print(n = 3)
 ```
@@ -61,9 +60,9 @@ example_data <- datex1 %>%
 
 ```{r}
 renderPrint({
-  rngx <- paste0(range(active_df()$qx), collapse = " ")
-  rngy <- paste0(range(active_df()$qy), collapse = " ")
-  cat("range qx: ", rngx, "\n", "range qy: ", rngy, "\n", "\n", sep = "")
+  rngx <- paste0(range(active_df()$x), collapse = " ")
+  rngy <- paste0(range(active_df()$y), collapse = " ")
+  cat("range x: ", rngx, "\n", "range y: ", rngy, "\n", "\n", sep = "")
   glimpse(active_df()[1, ])
 })
 ```
