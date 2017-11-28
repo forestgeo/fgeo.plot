@@ -3,13 +3,10 @@ title: "Mapping Latest Tree-Status in Subquadrats"
 author: "Mauro Lepore"
 date: "`r Sys.Date()`"
 output:
-  rmarkdown::html_vignette:
+  rmarkdown::html_notebook:
     toc: true
     toc_depth: 6
-vignette: >
-  %\VignetteIndexEntry{Mapping Latest Tree Status in Subquadrats}
-  %\VignetteEncoding{UTF-8}
-  %\VignetteEngine{knitr::rmarkdown}
+    theme: united
 editor_options: 
   chunk_output_type: inline
 ---
@@ -59,7 +56,9 @@ filter_first_quadrat <- function(vft) {
   first_quadrat <- unique(vft$QuadratName)[1]
   vft[vft$QuadratName == first_quadrat, ]
 }
-yose_vft <- filter_first_quadrat(yosemite::ViewFullTable_yosemite)
+yose_vft <- yosemite::ViewFullTable_yosemite %>% 
+  rename(x = QX, y = QY) %>% 
+  filter_first_quadrat()
 ```
 
 ```{r}
