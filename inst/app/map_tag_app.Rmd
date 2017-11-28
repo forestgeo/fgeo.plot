@@ -10,10 +10,10 @@ output:
     social: menu
     source_code: embed
     navbar:
-    - align: right
-      href: https://github.com/maurolepore
-      icon: fa-user
-      title: Mauro Lepore
+      - align: right
+    href: https://github.com/maurolepore
+    icon: fa-user
+    title: Mauro Lepore
 ---
 
 ```{r global, include=FALSE}
