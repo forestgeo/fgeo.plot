@@ -4,11 +4,7 @@ library(purrr)
 library(gridExtra)
 
 # Minimal data
-
-# Fix some odd variables of this particular data set
-# See email by Suzanne Lao https://goo.gl/UwiRbj
-minivft <- dplyr::rename(try::bci12vft_mini, QX = x, QY = y) %>%
-  tibble::rowid_to_column("DBHID")
+minivft <- tibble::rowid_to_column(try::bci12vft_mini, "DBHID")
 
 few_quads <- unique(minivft$QuadratName)[1]
 vft <- minivft %>% filter(QuadratName %in% few_quads)
@@ -96,7 +92,7 @@ test_that("plots all unique tags in data", {
 test_that("plots the same with all or just the minimum needed vars in data", {
   all <- map_tag(vft)
   vft_with_min_vars <- vft %>%
-    select(Tag, Status, QX, QY, QuadratName, DBHID, CensusID, PlotID)
+    select(Tag, Status, x, y, QuadratName, DBHID, CensusID, PlotID)
   min <- map_tag(vft_with_min_vars)
 
   expect_equal(all, min)
@@ -115,11 +111,11 @@ test_that("plots the same with all or just the minimum needed vars in data", {
 
 
 
-test_that("errs with uppercase names", {
-  vft_no_qx <- vft
-  vft_no_qx$QX <- NULL
+test_that("errs if a crucial name is missing", {
+  vft_no_x <- vft
+  vft_no_x$x <- NULL
   expect_error(
-    map_tag(vft_no_qx),
+    map_tag(vft_no_x),
     "Ensure your data set has these variables"
   )
 })
@@ -143,7 +139,7 @@ lower_names_then_check <- function(x, nms) {
 }
 
 # reusing
-vft2 <- lower_names_then_check(vft, nms = c("tag", "qx", "qy", "status"))
+vft2 <- lower_names_then_check(vft, nms = c("tag", "x", "y", "status"))
 with_sq <- add_subquadrat(df = vft2, 20, 20, 5, 5)
 
 test_that("outputs a dataframe with new expected variable", {
@@ -160,7 +156,7 @@ context("test-check_subquadrat_dimensions")
 
 
 test_that("throws error with wrong inputs to add_subquadrat", {
-  df <- minivft[1:5, c("QX", "QY")]
+  df <- minivft[1:5, c("x", "y")]
   # check that works
   expect_message(add_subquadrat(df, 20, 20, 5, 5))
   expect_message(add_subquadrat(df, 40, 50, 5, 5))

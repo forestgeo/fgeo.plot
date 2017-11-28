@@ -2,7 +2,7 @@
 % Please edit documentation in R/map_tag.R
 \name{add_subquadrat}
 \alias{add_subquadrat}
-\title{Add a quadrat variable to a dataframe based based on qx and qy coordinates.}
+\title{Add a quadrat variable to a dataframe based based on x and y coordinates.}
 \usage{
 add_subquadrat(df, x_q, y_q = x_q, x_sq, y_sq = x_sq)
 }
@@ -19,14 +19,14 @@ common value is 5.}
 A dataframe with the additional variable \code{subquadrat}.
 }
 \description{
-Add a quadrat variable to a dataframe based based on qx and qy coordinates.
+Add a quadrat variable to a dataframe based based on x and y coordinates.
 }
 \examples{
 \dontrun{
 # try::bci12vft_mini is included in this package
 df <- try::bci12vft_mini
 with_subquadrat <- add_subquadrat(df, 20, 20, 5, 5)
-head(with_subquadrat[c("qx", "qy", "subquadrat")])
+head(with_subquadrat[c("x", "y", "subquadrat")])
 }
 }
 \author{
