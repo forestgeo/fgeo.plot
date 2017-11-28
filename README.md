@@ -40,5 +40,5 @@ After installing and loading __try__, get help about the main function with `?ma
 
 ## Tutorial
 
-For a tutorial, see: https://bookdown.org/forestgeoguest/map_tag/map_tag.html
+For a tutorial, see: https://bookdown.org/forestgeoguest/map_tag/map_tag.html.
 
