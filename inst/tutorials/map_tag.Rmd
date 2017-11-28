@@ -15,14 +15,13 @@ editor_options:
 ---
 
 ```{r pkg-hide, echo = FALSE, message=FALSE, warning=FALSE}
-# Show this chunk after a motivational example
-
-# install_github("forestgeo/try@iss1_map_tag")
+# install_github("forestgeo/try")
 library(try)
+# install.packages("ggplot2")
+library(ggplot2)
+# install.packages("dplyr")
+library(dplyr)
 
-# tidiverse contains multiple other packages for most common data-science tasks
-# install.packages("tidyverse")
-library(tidyverse)
 # Print only a few rows of data framed to save time and space
 options(dplyr.print_min = 6, dplyr.print_max = 6)
 ```
@@ -104,20 +103,13 @@ OK, that was the bad news -- `map_tag()` won't let you change the values of the 
 
 # Preparation: Packages and Data
 
-The packages you will use are __try__ and __tidyverse__. __try__ contains the function `map_tag()` (after I receive some feedback I will move it to the package __forestr__). __tidyverse__ provides the most commonly used tools in any analysis.
+The packages you will use are __try__, __ggplot2__ and __dplyr__. __try__ contains the function `map_tag()` (after I receive some feedback I will move it to the package __forestr__). __ggplot2__ and __dplyr__ provide powerful tools for vizualizing and wrangling data. (These packages are part of the tidyverse (https://www.tidyverse.org/) -- a collection of R packages designed for data science. All packages share an underlying philosophy and common APIs.)
 
-```{r pkg-show}
-# install_github("forestgeo/try@iss1_map_tag")
-library(try)
-
-# tidiverse contains multiple other packages for most common data-science tasks
-# install.packages(tidyverse)
-library(tidyverse)
-# Print only a few rows of data framed to save time and space
-options(dplyr.print_min = 6, dplyr.print_max = 6)
+```{r sho-chunk-that-was-hidden-above}
+<<pkg-hide>>
 ```
 
-The data you will use from now on is an example data set from Barro Colorado Island (made public in 2012; https://repository.si.edu/handle/10088/20925).
+From now on, The data you will use is an example data set from Barro Colorado Island made public in 2012 (see https://repository.si.edu/handle/10088/20925 and [`?try::bci12vft_mini`](https://forestgeo.github.io/try/reference/bci12vft_mini.html)).
 
 ```{r data-vtf}
 # Subset of a public ViewFullTable from BCI (source:
@@ -135,14 +127,17 @@ bci_vft1 <- filter(bci_vft, PlotID == 1)
 Not all data sets may be named appropriately. `map_tag()` expects some variables to have specific names. If the name of your variables is different than expected, you'll get an error.
 
 ```{r rename-variables, error=TRUE}
+# Replacing a crucial name with a bad name
+bci_vft_bad_nms <- rename(bci_vft1, bad_x = x)
+
 # Fails
-map_tag(bci_vft1)
+map_tag(bci_vft_bad_nms)
 ```
 
 Reading the error message will help you identify which variables you need to rename.
 
 ```{r fix-names}
-bci_vft1_rnm <- dplyr::rename(bci_vft1, qx = x, qy = y)
+bci_vft1_rnm <- dplyr::rename(bci_vft_bad_nms, x = bad_x)
 # Using lowercase names for simiplicity
 names(bci_vft1_rnm) <- tolower(names(bci_vft1_rnm))
 ```
@@ -227,7 +222,7 @@ map_tag(bci_vft1_rnm, site_name = "BCI 2012", theme = your_theme)[1]
 
 ## Extending The Grid Beyond the Plot Limits
 
-Although they shouldn't, trees sometimes are located beyond the limits of a quadrat. For example, if the side of your quadrats is 20 meters, some trees may plot at, say, `qx = 20.5`, or `qy = 21`. In such cases you may want to extend the plot grid to encompass those odd trees. To extend the grid use the argument `shrink`. (The example below has no trees beyond the quadrat limits, but hopefully you'll still understand when to use `extend_grid`.)
+Although they shouldn't, trees sometimes are located beyond the limits of a quadrat. For example, if the side of your quadrats is 20 meters, some trees may plot at, say, `x = 20.5`, or `y = 21`. In such cases you may want to extend the plot grid to encompass those odd trees. To extend the grid use the argument `shrink`. (The example below has no trees beyond the quadrat limits, but hopefully you'll still understand when to use `extend_grid`.)
 
 ```{r}
 map_tag(bci_vft1_rnm, site_name = "BCI 2012", extend_grid = 0.4)[4]
@@ -235,11 +230,11 @@ map_tag(bci_vft1_rnm, site_name = "BCI 2012", extend_grid = 0.4)[4]
 
 ## Customizing the Dimension of Quadrats and Subquadrats
 
-You can customize the dimension of your quadrats and subquadrats to fit the range of `qx` and `qy` of your data. Let's examine what the range is for the data you have been using so far.
+You can customize the dimension of your quadrats and subquadrats to fit the range of `x` and `y` of your data. Let's examine what the range is for the data you have been using so far.
 
 ```{r}
-qx_and_qy_variables <- select(bci_vft1_rnm, qx, qy)
-lapply(qx_and_qy_variables, range)
+x_and_y_variables <- select(bci_vft1_rnm, x, y)
+lapply(x_and_y_variables, range)
 ```
 
 The range is between around 0 and 20. That is why we have been using using the default quadrat dimension of 20 meters (`x_q = 20`; and `y_sq = x_q = 20`), and the default subquadrat dimension of 5 meters (`x_sq = 5`; and `y_sq = x_sq = 5`).
@@ -251,9 +246,9 @@ map_tag(bci_vft1_rnm, site_name = "BCI 2012",
 )[1]
 ```
 
-By default, `y_q` will be the same as `x_q` -- so you don't have to provide both (only `x_q` is mandatory). And the same is true for `y_sq` and `x_sq`. With this data -- with `qx` and `qy` ranging 0-20 meters -- the quadrat and subquadrat dimensions used above are the right ones. But `map_tag()` won't complain if you choose different parameters; so you have to be careful not to shoot yourself on the foot.
+By default, `y_q` will be the same as `x_q` -- so you don't have to provide both (only `x_q` is mandatory). And the same is true for `y_sq` and `x_sq`. With this data -- with `x` and `y` ranging 0-20 meters -- the quadrat and subquadrat dimensions used above are the right ones. But `map_tag()` won't complain if you choose different parameters; so you have to be careful not to shoot yourself on the foot.
 
-The following two examples demonstrate the use wrong dimensions. Let's first use dimensions that are smaller than the range of `qx` and `qy`.
+The following two examples demonstrate the use wrong dimensions. Let's first use dimensions that are smaller than the range of `x` and `y`.
 
 ```{r}
 map_tag(bci_vft1_rnm, 
@@ -272,18 +267,18 @@ map_tag(bci_vft1_rnm,
 )[1]
 ```
 
-This image should flag that you have this kind of problem -- by which the range of data is smaller than the dimensions you set for your quadrat and subquadrat. Notice that the points (the actual positions of the trees) are all between `qx` and `qy` ranging 0-20. The tags, however, go beyond 20 because they automatically repel themselves to avoid overlapping.
+This image should flag that you have this kind of problem -- by which the range of data is smaller than the dimensions you set for your quadrat and subquadrat. Notice that the points (the actual positions of the trees) are all between `x` and `y` ranging 0-20. The tags, however, go beyond 20 because they automatically repel themselves to avoid overlapping.
 
 ## The Right Dimensions for the Right Data
 
-Had `qx` and `qy` of your data ranged 0-100, then yes -- the appropriate quadrat and subquadrat dimensions to use would be 100 and 25.
+Had `x` and `y` of your data ranged 0-100, then yes -- the appropriate quadrat and subquadrat dimensions to use would be 100 and 25.
 
 ```{r bigger}
-# Creating new data set with qx and qy ranging 0-100
+# Creating new data set with x and y ranging 0-100
 bigger <- bci_vft1_rnm
 n <- nrow(bigger)
-bigger$qx <- sample(0:100, n, replace = TRUE)
-bigger$qy <- sample(0:100, n, replace = TRUE)
+bigger$x <- sample(0:100, n, replace = TRUE)
+bigger$y <- sample(0:100, n, replace = TRUE)
 
 map_tag(
   bigger, 
@@ -292,14 +287,14 @@ map_tag(
 )[1]
 ```
 
-And if `qx` and `qy` of your data range 0-10, then the appropriate quadrat dimension to use would be 10 and 2.5.
+And if `x` and `y` of your data range 0-10, then the appropriate quadrat dimension to use would be 10 and 2.5.
 
 ```{r smaller}
-# Creating new data set with qx and qy ranging 0-100
+# Creating new data set with x and y ranging 0-100
 smaller <- bci_vft1_rnm
 n <- nrow(smaller)
-smaller$qx <- sample(0:10, n, replace = TRUE)
-smaller$qy <- sample(0:10, n, replace = TRUE)
+smaller$x <- sample(0:10, n, replace = TRUE)
+smaller$y <- sample(0:10, n, replace = TRUE)
 
 map_tag(smaller, x_q = 10, x_sq = 2.5, extend_grid = 0.25)[1]
 ```
@@ -313,7 +308,7 @@ with_subquadrat <- add_subquadrat(bci_vft1_rnm, x_q = 20, x_sq = 5)
 select(
   with_subquadrat, 
   # reorder variables to show first what's new 
-  subquadrat, qx, qy, everything()
+  subquadrat, x, y, everything()
 )
 ```
 
@@ -325,7 +320,7 @@ data_list <- purrr::map(maps, "data")
 data_combined <- purrr::reduce(data_list, rbind)
 select(
   data_combined,
-  subquadrat, qx, qy, everything()
+  subquadrat, x, y, everything()
 )
 ```
 
