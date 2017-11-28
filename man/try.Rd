@@ -23,6 +23,7 @@ solution to address a very specific issue.
 Useful links:
 \itemize{
   \item \url{https://github.com/forestgeo/try}
+  \item \url{https://forestgeo.github.io/try/}
   \item Report bugs at \url{https://github.com/forestgeo/try/issues}
 }
 
@@ -30,6 +31,7 @@ Useful links:
 Useful links:
 \itemize{
   \item \url{https://github.com/forestgeo/try}
+  \item \url{https://forestgeo.github.io/try/}
   \item Report bugs at \url{https://github.com/forestgeo/try/issues}
 }
 

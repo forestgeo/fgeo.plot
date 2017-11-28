@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_settings.R
 \name{get_header}
 \alias{get_header}
-\title{A simple way to produce a three-lines header for a plot of repulsive tags.}
+\title{A simple way to produce a three-lines header for \code{map_tag()}.}
 \usage{
 get_header(line1 = pad(c("Checking: ", "Checked date: ")),
   line2 = pad(c("Recording: "), total_width = 24),
@@ -17,7 +17,7 @@ A three-lines string to be used as the header on a plot of repulsive
 tags.
 }
 \description{
-A simple way to produce a three-lines header for a plot of repulsive tags.
+A simple way to produce a three-lines header for \code{map_tag()}.
 }
 \examples{
 # Use common defaults

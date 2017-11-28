@@ -72,7 +72,7 @@ library(try)
 vft <- as_tibble(bci12vft_mini)
 vft
 
-# Folter the plot you want to map
+# Filter the plot you want to map
 vft1 <- dplyr::filter(vft, PlotID == 1)
 
 # Another look
