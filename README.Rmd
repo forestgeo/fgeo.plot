@@ -9,6 +9,7 @@ output:
 <!-- Don't edit README.md; instead, edit README.Rmd -->
 
 ```{r, echo = FALSE}
+library(icon)
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
@@ -30,9 +31,15 @@ knitr::opts_chunk$set(
 
 __try__ makes if  easy to share code to try new things. It aims to draft a solution to address a very specific issue.
 
+[`r fa_play_circle()` App](https://bookdown.org/forestgeoguest/map_tag_app/)
+
+`r fa_book()` Tutorial: https://bookdown.org/forestgeoguest/map_tag/
+
+[`r fa_book()` Tutorial](https://bookdown.org/forestgeoguest/map_tag/)
+
 ## Installation
 
-Install __try__ from GitHub with:
+`r fa_download()` Install __try__ from GitHub with:
 
 ```R
 # install.packages("devtools")
@@ -47,8 +54,3 @@ source("https://install-github.me/forestgeo/try")
 ```
 
 After installing and loading __try__, get help about the main function with `?map_tag()`.
-
-## Tutorial
-
-For a tutorial, see: https://bookdown.org/forestgeoguest/map_tag/map_tag.html.
-
