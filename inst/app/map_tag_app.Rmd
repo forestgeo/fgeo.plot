@@ -10,10 +10,7 @@ output:
     social: menu
     source_code: embed
     navbar:
-      - align: right
-    href: https://github.com/maurolepore
-    icon: fa-user
-    title: Mauro Lepore
+      - {title: "Mauro Lepore", href: "https://github.com/maurolepore", align: right, icon: fa-user}
 ---
 
 ```{r global, include=FALSE}
@@ -31,41 +28,31 @@ Upload a file, change key arguments of map_tag(), and preview the effect
 -----------------------------------------------------------------------
 
 ```{r}
-notice <- "Upload a .csv file (will show one quadrat only):"
-fileInput("dataset", notice)
-active_df <- reactive({
-  req(input$dataset)
-  readr::read_csv(input$dataset$datapath)
+vft20 <- readr::read_csv("vft20.csv")
+vft40 <- readr::read_csv("vft40.csv")
+selectInput("vft", "Choose an example data set", 
+  choices = c("Dataset with quadrat side = 20 m", "Dataset with quadrat side = 40 m")
+)
+vft <- reactive({
+  if (input$vft == "Dataset with quadrat side = 20 m") {
+    vft20
+  } else {
+    vft40
+  }
 })
 ```
-
-Example data set, after filtering a unique `PlotID`
-
-```{r}
-vft <- as_tibble(try::bci12vft_mini)
-datex <- dplyr::filter(vft, PlotID == 1)
-
-# This data set has two wrong names that need to be fixed before using map_tag()
-first_quad <- unique(datex$QuadratName)[[1]]
-
-vars <-  c("tag", "x", "y", "status", "quadratname", "censusid", "plotid")
-datex1 <- datex[, tolower(names(datex)) %in% vars]
-
-example_data <- datex1 %>% 
-  dplyr::filter(QuadratName %in% first_quad) %>% 
-  print(n = 3)
-```
-
-### Glimpse of uploaded data (showing only the first row) {data-height=35}
 
 ```{r}
 renderPrint({
-  rngx <- paste0(range(active_df()$x), collapse = " ")
-  rngy <- paste0(range(active_df()$y), collapse = " ")
+  rngx <- paste0(range(vft()$x), collapse = " ")
+  rngy <- paste0(range(vft()$y), collapse = " ")
   cat("range x: ", rngx, "\n", "range y: ", rngy, "\n", "\n", sep = "")
-  glimpse(active_df()[1, ])
+  
+  vft()
 })
 ```
+
+
 
 --- ARGUMENTS {data-width=250}
 -----------------------------------------------------------------------
@@ -107,8 +94,6 @@ textInput("line_2", "line2", pad(c("Recording: "), total_width = 24))
 textInput("line_3", "line3", pad(c("Measuring: ", "Measurement date: ")))
 ```
 
-
-
 --- PLOT {data-width=350}
 -----------------------------------------------------------------------
 
@@ -117,7 +102,7 @@ textInput("line_3", "line3", pad(c("Measuring: ", "Measurement date: ")))
 ```{r, fig.asp=1.15}
 renderPlot({
   maps <- map_tag(
-    active_df(), 
+    vft(), 
     x_q = input$xquad,
     x_sq = input$xsubquad,
     site_name = input$site,
