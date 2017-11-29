@@ -10,7 +10,8 @@ output:
     social: menu
     source_code: embed
     navbar:
-      - {title: "Mauro Lepore", href: "https://github.com/maurolepore", align: right, icon: fa-user}
+      - {title: "Mauro Lepore", href: "https://github.com/maurolepore", 
+        align: right, icon: fa-user}
 ---
 
 ```{r global, include=FALSE}
@@ -33,7 +34,9 @@ Choose a file, adjust the arguments, and preview the effect
 vft20 <- readr::read_csv("vft20.csv")
 vft40 <- readr::read_csv("vft40.csv")
 selectInput("vft", NULL, 
-  choices = c("Dataset with quadrat side = 20 m", "Dataset with quadrat side = 40 m")
+  choices = c(
+    "Dataset with quadrat side = 20 m", "Dataset with quadrat side = 40 m"
+  )
 )
 vft <- reactive({
   if (input$vft == "Dataset with quadrat side = 20 m") {
