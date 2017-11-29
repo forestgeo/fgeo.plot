@@ -21,16 +21,18 @@ library(ggplot2)
 library(icon)
 ```
 
-Upload a file, change key arguments of map_tag(), and preview the effect
+Choose a file, adjust the arguments, and preview the effect
 =======================================================================
 
 --- DATA {data-width=350}
 -----------------------------------------------------------------------
 
+### Choose a data set; then set `x_q` and `x_sq` {data-height=10}
+
 ```{r}
 vft20 <- readr::read_csv("vft20.csv")
 vft40 <- readr::read_csv("vft40.csv")
-selectInput("vft", "Choose an example data set", 
+selectInput("vft", NULL, 
   choices = c("Dataset with quadrat side = 20 m", "Dataset with quadrat side = 40 m")
 )
 vft <- reactive({
@@ -42,6 +44,8 @@ vft <- reactive({
 })
 ```
 
+### Data were filtered to keep only one `PlotID` and one `QuadratName` {data-height=90}
+
 ```{r}
 renderPrint({
   rngx <- paste0(range(vft()$x), collapse = " ")
@@ -52,20 +56,18 @@ renderPrint({
 })
 ```
 
-
-
 --- ARGUMENTS {data-width=250}
 -----------------------------------------------------------------------
 
 `r icon::fa_question_circle()` [`map_tag()`](https://forestgeo.github.io/try/reference/map_tag.html)
 
 ```{r}
-textInput("site", "site_name", "My site, 2017")
-
 fluidRow(
   column(6, numericInput("xquad", "x_q", 20)),
   column(6, numericInput("xsubquad", "x_sq", 5))
 )
+
+textInput("site", "site_name", "My site, 2017")
 
 fluidRow(
   column(6, numericInput("tagsize", "tag_size", 3)),
