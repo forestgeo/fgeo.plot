@@ -18,13 +18,7 @@ output:
 
 # Overview
 
-__try__ makes if  easy to share code to try new things. It aims to draft a solution to address a very specific issue.
-
-[<!--html_preserve--><i class="fa  fa-play-circle "></i><!--/html_preserve--> App](https://bookdown.org/forestgeoguest/map_tag_app/)
-
-<!--html_preserve--><i class="fa  fa-book "></i><!--/html_preserve--> Tutorial: https://bookdown.org/forestgeoguest/map_tag/
-
-[<!--html_preserve--><i class="fa  fa-book "></i><!--/html_preserve--> Tutorial](https://bookdown.org/forestgeoguest/map_tag/)
+__try__ makes it  easy to share code to try new things. It aims to draft a solution to address a specific issue.
 
 ## Installation
 
