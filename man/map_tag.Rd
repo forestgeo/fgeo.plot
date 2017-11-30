@@ -52,6 +52,23 @@ tags by status, showing four subquadrats.
 This function maps tree tags by status. Each map shows four subquadrats
 within a quadrat.
 }
+\details{
+\code{map_tag()} plots a status that refers to the tree -- not to each individual
+stem. For a tree to plot as "dead", all its stems must be dead (for the
+selected census); else the tree will plot as "alive".
+
+From all censuses, this function will filter the one with greater numeric
+value, and it will warn of such filtering. That is because most likely you
+want information of the tree \code{Status} from the last census only. If this is
+not what you want, here are some solutions:
+\itemize{
+\item If you want to map a different census: filter the census you want and feed
+\code{map_tag()} with the filtered data set.
+\item If you want to lump trees accross multiple censuses, filter all the threes
+that you want and change the value of \code{CensusID} so that all trees have the
+same value of \code{CensusID}. Then feed \code{map_tag()} with the filtered data set.
+}
+}
 \section{Acknowledgements}{
 
 Useful ideas and guidance came from Suzanne Lao, Stuart Davis, Shameema
@@ -83,7 +100,7 @@ maps <- map_tag(vft1)
 maps[1]
 
 # Printing only maps 1-4 to a .pdf
-pdf("default-map.pdf", paper = "a4")
+pdf("default-map.pdf", paper = "letter", height = 10.5, width = 8)
 maps[1:4]
 dev.off()
 

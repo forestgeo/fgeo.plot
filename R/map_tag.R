@@ -4,12 +4,8 @@
 #' within a quadrat.
 #'
 #' `map_tag()` plots a status that refers to the tree -- not to each individual
-#' stem. Thus, for a given tag, if at least one stem is alive, then the tree
-#' will be ploted with status "alive".
-#'
-#' The statuses are categorized as "dead" versus "alive" -- these two categories
-#' group the values of the variable `Status` as follows: "alive = alive";
-#' "other" = all other.
+#' stem. For a tree to plot as "dead", all its stems must be dead (for the
+#' selected census); else the tree will plot as "alive".
 #'
 #' From all censuses, this function will filter the one with greater numeric
 #' value, and it will warn of such filtering. That is because most likely you
@@ -312,7 +308,7 @@ add_status_tree <- function(df) {
   grouped <- dplyr::group_by(df, .data$tag)
   mutated_grouped <- dplyr::mutate(
     grouped,
-    status_tree = ifelse(any(.data$status == "alive"), "alive", "other")
+    status_tree = ifelse(all(.data$status == "dead"), "dead", "alive")
   )
   dplyr::ungroup(mutated_grouped)
 }
