@@ -1,15 +1,19 @@
 ---
 title: "Map quadrat"
-subtitle: "A prototype"
 author: "maurolepore@gmail.com"
-date: "2017-11-29"
+date: '2017-11-29'
 output:
+  html_document:
+    df_print: paged
+    toc: yes
+    toc_depth: '6'
   html_notebook:
     theme: united
-    toc: true
+    toc: yes
     toc_depth: 6
-editor_options: 
-  chunk_output_type: console
+subtitle: A prototype
+editor_options:
+  chunk_output_type: inline
 ---
 
 ```{r setup, include=FALSE}
@@ -20,8 +24,11 @@ knitr::opts_chunk$set(
   comment = "#>",
   collapse = TRUE,
   cache = TRUE,
+  fig.show = "hold",
+  out.width = "98%",
   fig.align = "center",
-  fig.show = "hold"
+  fig.width = 7.5, 
+  fig.asp = 0.9
 )
 
 options(dplyr.print_min = 10, dplyr.print_max = 10)
@@ -141,7 +148,7 @@ header <- paste0(
 )
 
 theme <- theme(
-  # panel.background = element_rect(fill = "white"),
+  panel.background = element_rect(fill = "white"),
   panel.grid.minor = element_blank(),
   panel.grid.major = element_blank(),
   legend.position = "none",
