@@ -14,7 +14,7 @@ output:
     toc_depth: 6
 subtitle: A prototype
 editor_options:
-  chunk_output_type: console
+  chunk_output_type: inline
 ---
 
 ```{r setup, include=FALSE}
@@ -54,7 +54,7 @@ I'l use __dplyr__ and __ggplot2__ for data wrangling and visualization. Also, I'
 
 ```{r}
 # Ensure random operations are reproducible
-set.seed(1014)
+set.seed(1234)
 
 library(try)
 library(assertive)
@@ -69,11 +69,16 @@ This section develops a script that prototypes one way to do this job. The code 
 
 ```{r}
 # Example data set
+# example_data <- sinharaja::sinh_vft
 example_data <- try::bci12vft_mini
+
+
 glimpse(example_data)
 ```
 
 ## Check input
+
+### Check single plot; reject if not multiple plots are detected
 
 All quadrats should come from a single research plot. I'll check if this true.
 
@@ -89,6 +94,8 @@ this_plotid <- 1
 filtered_plotid <- filter(example_data, PlotID == this_plotid)
 ```
 
+### Check tree diameter; warn if trees smaller than a common limit are detected
+
 A detail of the taks is that users will likely want to map trees which diameter (variable `DBH`) is greater than 10 cm. But that particular value of diameter may vary. The code will be inclusive; it'll accept trees of all diameters and will only warn if it detects trees smaller or equal than 10 cm.
 
 ```{r}
@@ -103,13 +110,32 @@ check_dbh <- function(x, limit) {
 check_dbh(filtered_plotid$DBH, 10)
 ```
 
-I'll be up to the user to exclude trees smaller than the desired limit.
+Excluding trees smaller than the desired limit will be up to the user, either via a "`prepare_data()`" function, or directly with something like this:
 
 ```{r}
-over_limit <- filter(filtered_plotid, DBH > 10)
+limit <- 10
+over_limit <- filter(filtered_plotid, DBH > limit)
 # Silent means that filtering was successful
-check_dbh(over_limit$DBH, 10)
+check_dbh(over_limit$DBH, limit)
 ```
+
+### Check for multiple censuses; warn if multiple censuses are detected.
+
+I believe the map should inform only the latest `Status`. That is, if multiple censuses where done, only the last one will be used to inform that the `Status` of each stem was.
+
+```{r}
+if (length(unique(over_limit$CensusID)) > 1) {
+  warning(
+    "Multiple censuses were detected\n",
+    "  * Filtering only the greatest `CensusID`"
+  )
+  last_census <- max(unique(over_limit$CensusID))
+  is_last_census <- over_limit$CensusID == last_census
+  over_limit <- over_limit[is_last_census, ]
+}
+```
+
+
 
 ## Map
 
@@ -119,7 +145,7 @@ For now I'll focus on a single quadrat. (I'll work later on the code to iterate 
 
 ```{r}
 # Choosing one quadrat at random
-this_quadrat <- sample(over_limit$QuadratName, 1)
+this_quadrat <- "4919"
 one_quadrat <- filter(over_limit, QuadratName == this_quadrat)
 ```
 
@@ -198,13 +224,19 @@ theme <- theme(
   axis.ticks.length = unit(-0.1, "cm")
 )
 
-# Used to add first letter of `Status` to each tree `Tag`
-add_first_letter <- function(x, y) {
-  paste0(x, ".", sub("^(.).*$", "\\1", y))
+# Add the ending ".d" to the `Tag` of dead stems.
+tag_dead <- function(x, y) {
+  is_dead <- y == "dead"
+  x[is_dead] <- paste0(x[is_dead], ".", sub("^(.).*$", "\\1", y[is_dead]))
+  x
 }
+
+# See if this works
+tag_dead(x = c("tag1", "tag2"), y = c("dead", "alive"))
+
 ```
 
-### Plot
+### Set paramenters
 
 ```{r params}
 # Parameters that will likely become arguments of a function
@@ -224,19 +256,30 @@ header <- paste0(
 )
 ```
 
-```{r plot}
-# Plot
+## Prepare
+
+```{r}
+one_quadrat <- mutate(
+  one_quadrat, 
+  # Tad dead trees
+  tagged_tag = tag_dead(Tag, Status),
+  # Standarize the size of the points by the total number of trees
+  dbh_standarized = DBH / length(DBH)
+)
+
+dead <- filter(one_quadrat, Status == "dead")
+```
+
+## Plot
+
+```{r}
 ggplot(data = one_quadrat, aes(x = x, y = y)) +
-  geom_point(aes(size = DBH / length(DBH)), shape = 1) +
-  geom_text_repel(
-    aes(label = add_first_letter(Tag, Status)), 
-    size = size_label
-  ) +
-  labs(
-    title = title,
-    subtitle = header,
-    x = NULL, y = NULL
-  ) +
+  geom_point(aes(size = dbh_standarized), shape = 1) +
+  geom_text_repel(aes(label = tagged_tag), size = size_label) +
+  # /* Repeat for the dead trees, which are lost because dbh is NA
+  geom_text_repel(data = dead, aes(label = tagged_tag), size = size_label) +
+  # */
+  labs(title = title, subtitle = header, x = NULL, y = NULL) +
   geom_vline(
     xintercept = seq(lim_min, lim_max, by = subquadrat_side), 
     linetype = "dashed"
@@ -254,4 +297,102 @@ ggplot(data = one_quadrat, aes(x = x, y = y)) +
   theme
 ```
 
+
+## Observe potential problem
+
+
+I'm suprised that all trees are alive, and I wonder if this is an error.
+
+```{r}
+unique(one_quadrat$Status)
+```
+
+I'll check if the plot works if I introduce dead trees.
+
+```{r}
+with_dead <- one_quadrat
+with_dead$Status[1:30] <- "dead"
+with_dead$DBH[1:30] <- NA
+```
+
+Next I'll repeate the exact same preparation and plotting code.
+
+
+## Prepare
+
+```{r}
+with_dead <- mutate(
+  with_dead, 
+  # Tad dead trees
+  tagged_tag = tag_dead(Tag, Status),
+  # Standarize the size of the points by the total number of trees
+  dbh_standarized = DBH / length(DBH)
+)
+
+dead <- filter(with_dead, Status == "dead")
+```
+
+## Plot
+
+```{r}
+ggplot(data = with_dead, aes(x = x, y = y)) +
+  geom_point(aes(size = dbh_standarized), shape = 1) +
+  geom_text_repel(aes(label = tagged_tag), size = size_label) +
+  # /* Repeat for the dead trees, which are lost because dbh is NA
+  geom_text_repel(data = dead, aes(label = tagged_tag), size = size_label) +
+  # */
+  labs(title = title, subtitle = header, x = NULL, y = NULL) +
+  geom_vline(
+    xintercept = seq(lim_min, lim_max, by = subquadrat_side), 
+    linetype = "dashed"
+  ) +
+  geom_hline(
+    yintercept = seq(lim_min, lim_max, by = subquadrat_side), 
+    linetype = "dashed"
+  ) +
+  coord_fixed(
+    xlim = c(lim_min + offset, lim_max - offset), 
+    ylim = c(lim_min + offset, lim_max - offset)
+  ) +
+  scale_x_continuous(breaks = lim_min:lim_max, sec.axis = dup_axis()) +
+  scale_y_continuous(breaks = lim_min:lim_max, sec.axis = dup_axis()) +
+  theme
+```
+
+## Explain why dead trees are plotted independently
+
+This is why the tags are plotted twice -- once for the entire dataset and once of dead treed only. Deead trees have `DBH = NA`, which I get removed automatically by __ggplot2__ when `DBH` is passed to `geom_point()`. Below
+
+```{r}
+select(with_dead, DBH, Status, Tag, tagged_tag)
+```
+
+```{r}
+ggplot(data = with_dead, aes(x = x, y = y)) +
+  geom_point(aes(size = dbh_standarized), shape = 1) +
+  geom_text_repel(aes(label = tagged_tag), size = size_label) +
+  # /* Repeat for the dead trees, which are lost because dbh is NA
+  # geom_text_repel(data = dead, aes(label = tagged_tag), size = size_label) +
+  # */
+  labs(title = title, subtitle = header, x = NULL, y = NULL) +
+  geom_vline(
+    xintercept = seq(lim_min, lim_max, by = subquadrat_side), 
+    linetype = "dashed"
+  ) +
+  geom_hline(
+    yintercept = seq(lim_min, lim_max, by = subquadrat_side), 
+    linetype = "dashed"
+  ) +
+  coord_fixed(
+    xlim = c(lim_min + offset, lim_max - offset), 
+    ylim = c(lim_min + offset, lim_max - offset)
+  ) +
+  scale_x_continuous(breaks = lim_min:lim_max, sec.axis = dup_axis()) +
+  scale_y_continuous(breaks = lim_min:lim_max, sec.axis = dup_axis()) +
+  theme
+```
+
+## My conclusion about dead trees not appearing on the example data
+
+The last few sectios confirmed that the plot is able to map dead trees. The reason why the example data isn't showing dead trees is indeed because no alive tree is left after the filtering process I went through here. The issue remains to find out the filtering I'm doing is resonable or if I am inadvertedly removing dead trees. One way to check is to use real data -- not the minimal example data I used here -- and confirm that the plot shows trees that in the last census had `Status = "dead"`.
 
