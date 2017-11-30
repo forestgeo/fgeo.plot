@@ -4,6 +4,7 @@ author: "maurolepore@gmail.com"
 date: '2017-11-29'
 output:
   html_document:
+    theme: united
     df_print: paged
     toc: yes
     toc_depth: '6'
@@ -13,7 +14,7 @@ output:
     toc_depth: 6
 subtitle: A prototype
 editor_options:
-  chunk_output_type: inline
+  chunk_output_type: console
 ---
 
 ```{r setup, include=FALSE}
@@ -36,9 +37,16 @@ options(dplyr.print_min = 10, dplyr.print_max = 10)
 
 # Overview
 
-Here I build a tool for data science that can be used as a scipt, as a function, and as an web application. None of those interfaces is better or worse the any other. From a user's perspective, each interface is useful in some context; and from a developer's perspective, the flow from script to web-application moves the focus from implementation details to abstraction; and from shifting the focus from the developer to the user.
+```{r hide-note1, include=FALSE}
+# Here I build a tool for data science that can be used as a scipt, as a
+# function, and as an web application. None of those interfaces is better or
+# worse the any other. From a user's perspective, each interface is useful in
+# some context; and from a developer's perspective, the flow from script to
+# web-application moves the focus from implementation details to abstraction;
+# and from shifting the focus from the developer to the user.
+```
 
-The job is to map the position of trees within a quadrat; and to develop a tool able to iterate over each quadrat in a data set. The example data set is a subset of a public data set of trees censuses on Barro Colorado Island, Panama (source: https://repository.si.edu/handle/10088/20925).
+The job is to map the position of trees within a quadrat. Later, the task will be to iterate over each quadrat in a data set. The example data set is a subset of a public data set of trees censuses on Barro Colorado Island, Panama (source: https://repository.si.edu/handle/10088/20925).
 
 # Setup
 
@@ -57,7 +65,7 @@ library(dplyr)
 
 # Script
 
-This section develops a script that prototypes the solution to my problem. [The code style I use is based on [The tidyverse style guide](http://style.tidyverse.org/); I aim not to minmimize lines of code but to maximize readablilty. I need to re read this code later and understand it quickly. Also, I want to share this script with reviewers and get their feedback even if they don't "speak" \R. In short, I aim to write code that reads close to English.] I start by glimpsing the example data set.
+This section develops a script that prototypes one way to do this job. The code style I use is based on [The tidyverse style guide](http://style.tidyverse.org/); I aim not to minmimize lines of code but to maximize readablilty. I need to re read this code later and understand it quickly. I start by glimpsing the example data set.
 
 ```{r}
 # Example data set
@@ -105,7 +113,9 @@ check_dbh(over_limit$DBH, 10)
 
 ## Map
 
-For now I'll focus on a single quadrat (I'll think later about how to iterate over multiple quadrats).
+### Requirements
+
+For now I'll focus on a single quadrat. (I'll work later on the code to iterate over multiple quadrats.)
 
 ```{r}
 # Choosing one quadrat at random
@@ -113,74 +123,134 @@ this_quadrat <- sample(over_limit$QuadratName, 1)
 one_quadrat <- filter(over_limit, QuadratName == this_quadrat)
 ```
 
-This is my plan. I describe the plan first and then I do it. The plan helps me to keep focus on the job at hand (I wouldn't plan a small and vague plot; but if I don't plan this plot, useles detail will likely put me off track):
+The requirements are quoted below; they come from a private email (via [@](https://mail.google.com/mail/u/0/?zx=yxdmg1oh1mf4#search/is%3Aunread+OR+has%3Apurple-question/1600a06b2c2f4304))
 
-* I'll add a one-line title; I'll to this at the top of the code to help visualize where on the plot each code chunk is doing its job.
+* 1. Status: I'll map the `Status` of each stem to a the ending of each label. This is a better alternative than mapping to, say point shape, because each tree `Tag` has multiple stems associated to them, and they will reppel each other. If the `Status` was mapped to shape, multiple points will plot on top of each other and the overlapping will obscure the information.
 
-* I'll add a multi-line subtitile, wich I'll do in advance to avoid cluttering the code of the plot. Also, placing this code under the title will help to visualize where on the plot this code chunk is doing its job.
+>  It would be nice to include the status. I used to put a "D" (dead) or an "R"(stem lost or broken) after the tag number to differentiate them from the live trees. For example, 8334D or 8145R.
 
-* I'll map the position of each tree to a point, using the variables `x` and `y`.
+* 2. I won't label subquadrats inside eadh quadrat.
 
-* I'll map the shape of the point to an empty circle, and will map its size to the size of each tree, standarized by the number of trees the quadrat.
+>  I don't need the subquadrat labels, since they are the same for every quadrat.
 
-* Also, I'll map the position to the `Tag` name of each tree -- that way field workers will know what tree they expect to find where. To avoid overlap, I'll implement repulsive labels with `ggrepel::geom_text_repel()`.
+* 3. I'll fix the quadrat size to 20x20m. I'll keep in mind that this may need to be flexible in the future.
 
-* I'll add a custom theme, to adjust a number of layout properties:
+> 3. [In] most sites, the quadrats are 20x20 meters.
 
-    * I'll set the background colour to white;
-    * I'll set the direction of the axes ticks to inward;
-    * I'll set the number of axes ticks to one integer along the range of `x` and `y` values;
-    * I'll remove all text from the axes;
-    * I'll set one grid line every 5 integers along the range of `x` and `y` values;
-    * I'll set he type of the grid lines to dashed.
+* 4. I'll map the shape of the point to an empty circle, and will map its size to the size of each tree, standarized by the number of trees the quadrat.
+
+> It would be nice to have a larger circle for the larger trees so that the field workers can look for a large tree. However, for very crowded quadrats, we can ignore this or make the circles smaller than if there are less trees. In my script, I count the number of trees in that quadrat and calculate the size depending on the number.
+
+* 5. Shape and position:
+
+    * I'll map live trees to a circular shape. 
+    * I'll map the position of each tree to a point, using the variables `x` and `y`.
+    * Also, I'll map the position to the `Tag` name of each tree -- that way field workers will know what tree they expect to find where. To avoid overlap, I'll implement repulsive labels with `ggrepel::geom_text_repel()`.
+
+> 5. For the live trees, yes, please use circles (tree trunks tend to be circular). But you are welcome to use other symbols for the "other" categories.
+
+* 6. I'll remove all text from the axes;
+
+> The reason I don't have the tick legends is to give more space to the map on the page.
+
+* 7. I'll set the direction of the axes ticks to inward;
+
+> Same reason as above, to make the map as large as possible on the page. However, I wouldn't mind if they are outwards.
+
+* 8. I'll set the count of axes ticks to one meter along the range of `x` and `y` values;
+
+> Yes, so that the field workers can orient themselves on the maps and more carefully draw the location of the trees.
+
+* 9. I'll set one grid line every 5 meters along the range of `x` and `y` values;
+
+> Yes, each grid represents a 5x5 m subquadrat. This is how the plots are physically gridded in the field.
+
+* 10. I'll set he type of the grid lines to dashed.
+
+> Dashed seems to me to be better than solid.
+
+* 11. I'll add a one-line title; I'll to this at the top of the code to help visualize where on the plot each code chunk is doing its job.
+
+> ... would be great if I can manually choose the title.
+
+> The plotname in ViewFullTable carries the name of the plot.
+
+* 12. I'll add a multi-line subtitile, wich I'll do in advance to avoid cluttering the code of the plot. Also, placing this code under the title will help to visualize where on the plot this code chunk is doing its job.
+
+> I think each site would like to be able to type in their subheaders.
+
+* I'll set the background colour to white;
 
 (Eventually I'll let the user adjust these options -- but I'll do that later; now I focus on getting the maps close to the most common requirement.)
 
+### Helpers
 
 ```{r}
-title <- "Title"
-header <- paste0(
-  "Column1          Column2          Column3    \n",
-  "                                             \n",
-  "___________      ___________      ___________\n",
-  "___________      ___________      ___________\n",
-  "___________      ___________      ___________\n"
-)
-
 theme <- theme(
   panel.background = element_rect(fill = "white"),
   panel.grid.minor = element_blank(),
   panel.grid.major = element_blank(),
   legend.position = "none",
   plot.title = element_text(size = 20),
+  plot.subtitle = element_text(size = 12),
   axis.text = element_blank(),
-  plot.subtitle = element_text(size = 12)
+  panel.border = element_rect(colour = "black", fill = NA),
+  axis.ticks.length = unit(-0.1, "cm")
 )
 
-offset <- 0
-shrinked_sequence <- c(0 + offset, 20 - offset)
+# Used to add first letter of `Status` to each tree `Tag`
+add_first_letter <- function(x, y) {
+  paste0(x, ".", sub("^(.).*$", "\\1", y))
+}
+```
 
-# xxx remove this! This is to plot faster
-oq <- sample_n(one_quadrat, 50)
+### Plot
 
-ggplot(data = oq, aes(x = x, y = y)) +
-  # Grids
-  geom_vline(xintercept = shrinked_sequence) +
-  geom_hline(yintercept = shrinked_sequence) +
-  geom_vline(xintercept = c(5, 10, 15), linetype = "dashed") +
-  geom_hline(yintercept = c(5, 10, 15), linetype = "dashed") +
-  
+```{r params}
+# Parameters that will likely become arguments of a function
+lim_min <- 0
+lim_max <- 20
+subquadrat_side <- 5
+size_label <- 2
+# Adjust a margin around the plot area that ggplot2 inserts by default
+offset <- 1
+title <- paste("My Title", unique(one_quadrat$QuadratName), sep = ", ")
+header <- paste0(
+  "Nombres y fecha:           Revisado por:                Entrado en PC por:\n",
+  "                                                                          \n",
+  "__________________  __________________  __________________\n",
+  "__________________  __________________  __________________\n",
+  "__________________  __________________  __________________\n"
+)
+```
+
+```{r plot}
+# Plot
+ggplot(data = one_quadrat, aes(x = x, y = y)) +
   geom_point(aes(size = DBH / length(DBH)), shape = 1) +
-  geom_text_repel(aes(label = Tag)) +
+  geom_text_repel(
+    aes(label = add_first_letter(Tag, Status)), 
+    size = size_label
+  ) +
   labs(
     title = title,
     subtitle = header,
     x = NULL, y = NULL
   ) +
-  coord_fixed(xlim = shrinked_sequence) +
-  coord_fixed(ylim = shrinked_sequence) +
-  scale_x_continuous(breaks = 0:20) +
-  scale_y_continuous(breaks = 0:20) +
+  geom_vline(
+    xintercept = seq(lim_min, lim_max, by = subquadrat_side), 
+    linetype = "dashed"
+  ) +
+  geom_hline(
+    yintercept = seq(lim_min, lim_max, by = subquadrat_side), 
+    linetype = "dashed"
+  ) +
+  coord_fixed(
+    xlim = c(lim_min + offset, lim_max - offset), 
+    ylim = c(lim_min + offset, lim_max - offset)
+  ) +
+  scale_x_continuous(breaks = lim_min:lim_max, sec.axis = dup_axis()) +
+  scale_y_continuous(breaks = lim_min:lim_max, sec.axis = dup_axis()) +
   theme
 ```
 
