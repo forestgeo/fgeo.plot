@@ -8,10 +8,11 @@ output:
     theme: united
     toc: true
     toc_depth: 6
+editor_options: 
+  chunk_output_type: console
 ---
 
 ```{r setup, include=FALSE}
-set.seed(1014)
 options(digits = 3)
 
 knitr::opts_chunk$set(
@@ -26,73 +27,154 @@ knitr::opts_chunk$set(
 options(dplyr.print_min = 10, dplyr.print_max = 10)
 ```
 
-### Overview
+# Overview
 
 Here I build a tool for data science that can be used as a scipt, as a function, and as an web application. None of those interfaces is better or worse the any other. From a user's perspective, each interface is useful in some context; and from a developer's perspective, the flow from script to web-application moves the focus from implementation details to abstraction; and from shifting the focus from the developer to the user.
 
-### Setup
+The job is to map the position of trees within a quadrat; and to develop a tool able to iterate over each quadrat in a data set. The example data set is a subset of a public data set of trees censuses on Barro Colorado Island, Panama (source: https://repository.si.edu/handle/10088/20925).
+
+# Setup
+
+I'l use __dplyr__ and __ggplot2__ for data wrangling and visualization. Also, I'll use __ggrepel__ to avoid overlaping on the maps; [__try__](https://github.com/forestgeo/try) which contains an example dataset; and __assertive__, to assert some important aspects of the data.
 
 ```{r}
+# Ensure random operations are reproducible
+set.seed(1014)
+
 library(try)
-library(ggplot2)
+library(assertive)
 library(ggrepel)
+library(ggplot2)
 library(dplyr)
 ```
 
-### Prepare data
+# Script
 
-This is a coarse praparation of the data; it filters rows to keep only one `PlotID` and only one `QuadratName`; it also removes duplicates.
+This section develops a script that prototypes the solution to my problem. [The code style I use is based on [The tidyverse style guide](http://style.tidyverse.org/); I aim not to minmimize lines of code but to maximize readablilty. I need to re read this code later and understand it quickly. Also, I want to share this script with reviewers and get their feedback even if they don't "speak" \R. In short, I aim to write code that reads close to English.] I start by glimpsing the example data set.
 
 ```{r}
-vft <- bci12vft_mini
-one_quadrat <-  unique(vft$QuadratName)[[1]]
-
-# Filter rows
-quad <- filter(vft, PlotID == 1, QuadratName == one_quadrat)
-# Select columns
-crucial_vars <- c(
-  "tag", "x", "y", "status", "quadratname", "censusid", "plotid"
-)
-quad <- quad[, tolower(names(quad)) %in% crucial_vars]
-# Remove duplicates
-quad <- unique(quad)
-
+# Example data set
+example_data <- try::bci12vft_mini
+glimpse(example_data)
 ```
 
-### Map data
+## Check input
 
-Define a new function
+All quadrats should come from a single research plot. I'll check if this true.
 
 ```{r}
-map_one_quadrat <- function(data,
-                            x,
-                            y,
-                            shape,
-                            label,
-                            point_size = 1.5,
-                            tag_size = 3,
-                            site_name = "My site, YYYY",
-                            header = get_header(),
-                            theme = get_theme()) {
-  ggplot(data, aes_string(x = x, y = y, shape = shape)) +
-    geom_point() +
-    ggrepel::geom_text_repel(aes_string(label = label), size = tag_size) +
-    labs(
-      title = paste0(site_name, ". Q. ", one_quadrat),
-      subtitle = header,
-      x = NULL, y = NULL
-    ) +
-    coord_fixed() +
-    theme
+censuses_n <- unique(example_data$PlotID)
+is_of_length(censuses_n, 1)
+```
+
+Should the data set contain multiple plots, I would reject the data and ask the user to filter a single plot. The user should then do something like this:
+
+```{r}
+this_plotid <- 1
+filtered_plotid <- filter(example_data, PlotID == this_plotid)
+```
+
+A detail of the taks is that users will likely want to map trees which diameter (variable `DBH`) is greater than 10 cm. But that particular value of diameter may vary. The code will be inclusive; it'll accept trees of all diameters and will only warn if it detects trees smaller or equal than 10 cm.
+
+```{r}
+# Expecting to reuse this code
+check_dbh <- function(x, limit) {
+  if (any(x <= limit)) {
+    warning("The diameter of some trees is smaller or equal to ", limit, " cm")
+  } else{
+    invisible()
+  }
 }
+check_dbh(filtered_plotid$DBH, 10)
 ```
 
-```{r, fig.width=6, fig.asp=1.1, out.width="100%"}
-map_one_quadrat(
-  data = quad, x = "x", y = "y", shape = "Status", label = "Tag", tag_size = 2,
-  site_name = "BCI 2018"
+I'll be up to the user to exclude trees smaller than the desired limit.
+
+```{r}
+over_limit <- filter(filtered_plotid, DBH > 10)
+# Silent means that filtering was successful
+check_dbh(over_limit$DBH, 10)
+```
+
+## Map
+
+For now I'll focus on a single quadrat (I'll think later about how to iterate over multiple quadrats).
+
+```{r}
+# Choosing one quadrat at random
+this_quadrat <- sample(over_limit$QuadratName, 1)
+one_quadrat <- filter(over_limit, QuadratName == this_quadrat)
+```
+
+This is my plan. I describe the plan first and then I do it. The plan helps me to keep focus on the job at hand (I wouldn't plan a small and vague plot; but if I don't plan this plot, useles detail will likely put me off track):
+
+* I'll add a one-line title; I'll to this at the top of the code to help visualize where on the plot each code chunk is doing its job.
+
+* I'll add a multi-line subtitile, wich I'll do in advance to avoid cluttering the code of the plot. Also, placing this code under the title will help to visualize where on the plot this code chunk is doing its job.
+
+* I'll map the position of each tree to a point, using the variables `x` and `y`.
+
+* I'll map the shape of the point to an empty circle, and will map its size to the size of each tree, standarized by the number of trees the quadrat.
+
+* Also, I'll map the position to the `Tag` name of each tree -- that way field workers will know what tree they expect to find where. To avoid overlap, I'll implement repulsive labels with `ggrepel::geom_text_repel()`.
+
+* I'll add a custom theme, to adjust a number of layout properties:
+
+    * I'll set the background colour to white;
+    * I'll set the direction of the axes ticks to inward;
+    * I'll set the number of axes ticks to one integer along the range of `x` and `y` values;
+    * I'll remove all text from the axes;
+    * I'll set one grid line every 5 integers along the range of `x` and `y` values;
+    * I'll set he type of the grid lines to dashed.
+
+(Eventually I'll let the user adjust these options -- but I'll do that later; now I focus on getting the maps close to the most common requirement.)
+
+
+```{r}
+title <- "Title"
+header <- paste0(
+  "Column1          Column2          Column3    \n",
+  "                                             \n",
+  "___________      ___________      ___________\n",
+  "___________      ___________      ___________\n",
+  "___________      ___________      ___________\n"
 )
-```
 
+theme <- theme(
+  # panel.background = element_rect(fill = "white"),
+  panel.grid.minor = element_blank(),
+  panel.grid.major = element_blank(),
+  legend.position = "none",
+  plot.title = element_text(size = 20),
+  axis.text = element_blank(),
+  plot.subtitle = element_text(size = 12)
+)
+
+offset <- 0
+shrinked_sequence <- c(0 + offset, 20 - offset)
+
+# xxx remove this! This is to plot faster
+oq <- sample_n(one_quadrat, 50)
+
+ggplot(data = oq, aes(x = x, y = y)) +
+  # Grids
+  geom_vline(xintercept = shrinked_sequence) +
+  geom_hline(yintercept = shrinked_sequence) +
+  geom_vline(xintercept = c(5, 10, 15), linetype = "dashed") +
+  geom_hline(yintercept = c(5, 10, 15), linetype = "dashed") +
+  
+  geom_point(aes(size = DBH / length(DBH)), shape = 1) +
+  geom_text_repel(aes(label = Tag)) +
+  labs(
+    title = title,
+    subtitle = header,
+    x = NULL, y = NULL
+  ) +
+  coord_fixed(xlim = shrinked_sequence) +
+  coord_fixed(ylim = shrinked_sequence) +
+  scale_x_continuous(breaks = 0:20) +
+  scale_y_continuous(breaks = 0:20) +
+  theme
+```
 
 
