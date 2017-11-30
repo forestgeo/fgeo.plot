@@ -3,6 +3,10 @@
 #' This function maps tree tags by status. Each map shows four subquadrats
 #' within a quadrat.
 #'
+#' `map_tag()` plots a status that refers to the tree -- not to each individual
+#' stem. Thus, for a given tag, if at least one stem is alive, then the tree
+#' will be ploted with status "alive".
+#'
 #' The statuses are categorized as "dead" versus "alive" -- these two categories
 #' group the values of the variable `Status` as follows: "alive = alive";
 #' "other" = all other.
