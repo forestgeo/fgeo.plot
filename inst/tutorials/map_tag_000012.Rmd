@@ -33,29 +33,36 @@ Setup
 ```{r}
 library(try)
 library(dplyr)
+library(ggplot2)
 ```
 
-Filter tag 000012
+Filter tag 000012.
 
 ```{r}
 # Fix wrong names
 vft <- rename(sinharaja::sinh_vft , x = QX, y = QY)
 
-tag_000012 <- vft %>% 
-  filter(grepl("000012", Tag)) %>% 
-  select(QuadratName, Tag, Status, everything())
-tag_000012
+tag_000012 <- filter(vft, grepl("000012", Tag))
+select(tag_000012, QuadratName, Tag, CensusID, Status, DBH)
 ```
 
-Mapping only tag 00012
+In the table above, notice that the Status of last census is dead. `map_tag()` currently plots the status of the last census:
 
 ```{r, fig.width=6, fig.asp=1.1, out.width="100%"}
 map_tag(tag_000012)
 ```
 
-There are more than 2 statuses. Now the code uses `alive = alive`; `other = ` all the rest. Shameema, how od you want to pool the categories?
+Now, `map_tag()` shows a snapshot of the latest status of the plot. I believe this is more useful than showing the entire history of each stem -- which not only may confuse the field workers but also will consume much more time to plot.
+
+If `map_tag()` plotted the status history ofeach stem, each stem will show multiple tags, and multiple overlapping poins of different shapes -- each shape representing one historical status. This is what it would look like:
 
 ```{r}
-unique(vft$Status)
+tag_000012 %>% 
+  ggplot(aes(x, y)) + 
+    geom_point(aes(shape = Status), size = 5) +
+    scale_shape_manual(values = c(1, 6)) +
+    ggrepel::geom_text_repel(aes(label = paste(Tag, Status, sep = "_"))) +
+    theme_minimal()
 ```
 
+If this is messy with just one tag, imagine what it'll look like with all tags! What do you think?
