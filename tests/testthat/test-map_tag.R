@@ -217,4 +217,31 @@ test_that("outputs a ggplot", {
 
 
 
+context("test-add_status_tree")
 
+test_that("the tree status is dead only if one stem is dead", {
+  one_dead <- tibble(
+    tag = c(
+      1, 1,
+      2, 2,
+      3, 3
+    ),
+    status = c(
+      "alive", "dead",
+      "dead", "dead",
+      "broken below", "missing"
+    )
+  )
+  expected <- c(rep("alive", 2), rep("dead", 2), rep("alive", 2))
+  expect_equal(add_status_tree(one_dead)$status_tree, expected)
+})
+
+
+add_status_tree <- function(df) {
+  grouped <- dplyr::group_by(df, .data$tag)
+  mutated_grouped <- dplyr::mutate(
+    grouped,
+    status_tree = ifelse(all(.data$status == "dead"), "dead", "alive")
+  )
+  dplyr::ungroup(mutated_grouped)
+}
