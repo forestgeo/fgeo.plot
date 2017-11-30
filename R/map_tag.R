@@ -3,6 +3,20 @@
 #' This function maps tree tags by status. Each map shows four subquadrats
 #' within a quadrat.
 #'
+#' The statuses are categorized as "dead" versus "alive" -- these two categories
+#' group the values of the variable `Status` as follows: "alive = alive";
+#' "other" = all other.
+#'
+#' From all censuses, this function will filter the one with greater numeric
+#' value, and it will warn of such filtering. That is because most likely you
+#' want information of the tree `Status` from the last census only. If this is
+#' not what you want, here are some solutions:
+#' * If you want to map a different census: filter the census you want and feed
+#'  `map_tag()` with the filtered data set.
+#' * If you want to lump trees accross multiple censuses, filter all the threes
+#' that you want and change the value of `CensusID` so that all trees have the
+#' same value of `CensusID`. Then feed `map_tag()` with the filtered data set.
+#'
 #' @param vft A ViewFullTable.
 #' @param site_name A string to use as a title.
 #' @param point_shape A vector of two numbers giving the shape of the points to
@@ -136,9 +150,17 @@ map_tag <- function(vft,
     df = vft_lower_nms, x_q = x_q, y_q = y_q, x_sq = x_sq, y_sq = y_sq
   )
 
-  # Keep only: rows of last census, and variables that are important
+  # Keep only rows of last census
+  if (length(unique(vft_lower_nms$censusid)) > 1) {
+    warning(
+      "Multiple censuses were detected\n",
+      "  * Filtering only the greatest `CensusID`"
+    )
+  }
   last_census <- max(unique(vft_lower_nms$censusid))
   is_last_census <- vft_lower_nms$censusid == last_census
+
+  # Keep only variables that are important
   subset_with_lower_nms <- vft_lower_nms[is_last_census, crucial_vars]
 
   # Prepare data to plot: add important variables and remove duplicated tags
