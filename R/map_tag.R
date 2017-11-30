@@ -55,7 +55,7 @@
 #' maps[1]
 #'
 #' # Printing only maps 1-4 to a .pdf
-#' pdf("default-map.pdf", paper = "a4")
+#' pdf("default-map.pdf", paper = "letter", height = 10.5, width = 8)
 #' maps[1:4]
 #' dev.off()
 #'

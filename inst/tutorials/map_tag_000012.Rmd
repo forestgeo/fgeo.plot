@@ -1,0 +1,61 @@
+---
+title: "Map Tag 000012"
+author: "maurolepore@gmail.com"
+date: "2017-11-29"
+output:
+  rmarkdown::html_notebook:
+    toc: true
+    toc_depth: 6
+    theme: united
+---
+
+```{r setup, include=FALSE}
+set.seed(1014)
+options(digits = 3)
+
+knitr::opts_chunk$set(
+  echo = TRUE,
+  comment = "#>",
+  collapse = TRUE,
+  cache = TRUE,
+  out.width = "70%",
+  fig.align = "center",
+  fig.width = 6,
+  fig.asp = 0.618,  # 1 / phi
+  fig.show = "hold"
+)
+
+options(dplyr.print_min = 6, dplyr.print_max = 6)
+```
+
+Setup
+
+```{r}
+library(try)
+library(dplyr)
+```
+
+Filter tag 000012
+
+```{r}
+# Fix wrong names
+vft <- rename(sinharaja::sinh_vft , x = QX, y = QY)
+
+tag_000012 <- vft %>% 
+  filter(grepl("000012", Tag)) %>% 
+  select(QuadratName, Tag, Status, everything())
+tag_000012
+```
+
+Mapping only tag 00012
+
+```{r, fig.width=6, fig.asp=1.1, out.width="100%"}
+map_tag(tag_000012)
+```
+
+There are more than 2 statuses. Now the code uses `alive = alive`; `other = ` all the rest. Shameema, how od you want to pool the categories?
+
+```{r}
+unique(vft$Status)
+```
+

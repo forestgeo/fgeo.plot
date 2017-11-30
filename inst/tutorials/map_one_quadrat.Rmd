@@ -1,0 +1,98 @@
+---
+title: "Map quadrat"
+subtitle: "A prototype"
+author: "maurolepore@gmail.com"
+date: "2017-11-29"
+output:
+  html_notebook:
+    theme: united
+    toc: true
+    toc_depth: 6
+---
+
+```{r setup, include=FALSE}
+set.seed(1014)
+options(digits = 3)
+
+knitr::opts_chunk$set(
+  echo = TRUE,
+  comment = "#>",
+  collapse = TRUE,
+  cache = TRUE,
+  fig.align = "center",
+  fig.show = "hold"
+)
+
+options(dplyr.print_min = 10, dplyr.print_max = 10)
+```
+
+### Overview
+
+Here I build a tool for data science that can be used as a scipt, as a function, and as an web application. None of those interfaces is better or worse the any other. From a user's perspective, each interface is useful in some context; and from a developer's perspective, the flow from script to web-application moves the focus from implementation details to abstraction; and from shifting the focus from the developer to the user.
+
+### Setup
+
+```{r}
+library(try)
+library(ggplot2)
+library(ggrepel)
+library(dplyr)
+```
+
+### Prepare data
+
+This is a coarse praparation of the data; it filters rows to keep only one `PlotID` and only one `QuadratName`; it also removes duplicates.
+
+```{r}
+vft <- bci12vft_mini
+one_quadrat <-  unique(vft$QuadratName)[[1]]
+
+# Filter rows
+quad <- filter(vft, PlotID == 1, QuadratName == one_quadrat)
+# Select columns
+crucial_vars <- c(
+  "tag", "x", "y", "status", "quadratname", "censusid", "plotid"
+)
+quad <- quad[, tolower(names(quad)) %in% crucial_vars]
+# Remove duplicates
+quad <- unique(quad)
+
+```
+
+### Map data
+
+Define a new function
+
+```{r}
+map_one_quadrat <- function(data,
+                            x,
+                            y,
+                            shape,
+                            label,
+                            point_size = 1.5,
+                            tag_size = 3,
+                            site_name = "My site, YYYY",
+                            header = get_header(),
+                            theme = get_theme()) {
+  ggplot(data, aes_string(x = x, y = y, shape = shape)) +
+    geom_point() +
+    ggrepel::geom_text_repel(aes_string(label = label), size = tag_size) +
+    labs(
+      title = paste0(site_name, ". Q. ", one_quadrat),
+      subtitle = header,
+      x = NULL, y = NULL
+    ) +
+    coord_fixed() +
+    theme
+}
+```
+
+```{r, fig.width=6, fig.asp=1.1, out.width="100%"}
+map_one_quadrat(
+  data = quad, x = "x", y = "y", shape = "Status", label = "Tag", tag_size = 2,
+  site_name = "BCI 2018"
+)
+```
+
+
+
