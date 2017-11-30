@@ -13,7 +13,7 @@ context("test-map_tag.R")
 
 # Redo once the plot is stable
 test_that("outputs same as satisfactory reference", {
-  plots <- map_tag(vft)
+  plots <- suppressWarnings(map_tag(vft))
   expect_equal_to_reference(plots, "ref-map_tag.rds")
 })
 
@@ -31,43 +31,51 @@ test_that("map_tag() stops if data has more than one PlotID", {
 test_that("wrong inputs passed to lapply_plot_repulsive_tags() get noticed", {
 
   expect_error(
-    map_tag(
-      vft,
-      # next line is wrong input
-      site_name = 1,
-      point_shape = c(0, 2),
-      point_size = 6,
-      tag_size = 10
+    suppressWarnings(
+      map_tag(
+       vft,
+       # next line is wrong input
+       site_name = 1,
+       point_shape = c(0, 2),
+       point_size = 6,
+       tag_size = 10
+      )
     )
   )
   expect_error(
-    map_tag(
-      vft,
-      site_name = "my site",
-      # next line is wrong input
-      point_shape = c("a", "b"),
-      point_size = 6,
-      tag_size = 10
+    suppressWarnings(
+      map_tag(
+        vft,
+        site_name = "my site",
+        # next line is wrong input
+        point_shape = c("a", "b"),
+        point_size = 6,
+        tag_size = 10
+      )
     )
   )
   expect_error(
-    map_tag(
-      vft,
-      site_name = "my site",
-      point_shape = c(1, 2),
-      # next line is wrong input
-      point_size = "a",
-      tag_size = 10
+    suppressWarnings(
+      map_tag(
+        vft,
+        site_name = "my site",
+        point_shape = c(1, 2),
+        # next line is wrong input
+        point_size = "a",
+        tag_size = 10
+      )
     )
   )
   expect_error(
-    map_tag(
-      vft,
-      site_name = "my site",
-      point_shape = c(1, 2),
-      point_size = 1,
-      # next line is wrong input
-      tag_size = "a"
+    suppressWarnings(
+      map_tag(
+        vft,
+        site_name = "my site",
+        point_shape = c(1, 2),
+        point_size = 1,
+        # next line is wrong input
+        tag_size = "a"
+      )
     )
   )
 })
@@ -75,7 +83,7 @@ test_that("wrong inputs passed to lapply_plot_repulsive_tags() get noticed", {
 
 
 test_that("plots all unique tags in data", {
-  plots <- map_tag(vft)
+  plots <- suppressWarnings(map_tag(vft))
   unique_tags_in_plot_n <- plots %>%
     map_df("data") %>%
     select(tag) %>%
@@ -90,10 +98,10 @@ test_that("plots all unique tags in data", {
 
 
 test_that("plots the same with all or just the minimum needed vars in data", {
-  all <- map_tag(vft)
+  all <- suppressWarnings(map_tag(vft))
   vft_with_min_vars <- vft %>%
     select(Tag, Status, x, y, QuadratName, DBHID, CensusID, PlotID)
-  min <- map_tag(vft_with_min_vars)
+  min <- suppressWarnings(map_tag(vft_with_min_vars))
 
   expect_equal(all, min)
 
@@ -121,7 +129,7 @@ test_that("errs if a crucial name is missing", {
 })
 
 test_that("outputs a ggplot", {
-  result <- map_tag(vft)
+  result <- suppressWarnings(map_tag(vft))
   expect_true(
     any(grepl("ggplot", class(result[[1]])))
   )
