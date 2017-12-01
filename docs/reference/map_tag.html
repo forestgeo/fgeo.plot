@@ -52,7 +52,11 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../reference/index.html">Functions Index</a>
+  <a href="../reference/index.html">
+    <span class="fa fa-list"></span>
+     
+    Functions Index
+  </a>
 </li>
 <li>
   <a href="https://bookdown.org/forestgeoguest/map_tag/">
@@ -62,12 +66,23 @@
   </a>
 </li>
 <li>
-  <a href="https://bookdown.org/forestgeoguest/map_tag_app">App</a>
+  <a href="https://bookdown.org/forestgeoguest/map_tag_app">
+    <span class="fa fa-play-circle"></span>
+     
+    App
+  </a>
 </li>
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
         <li>
+  <a href="../news/index.html">
+    <span class="fa fa-newspaper-o"></span>
+     
+    news
+  </a>
+</li>
+<li>
   <a href="https://github.com/maurolepore">
     <span class="fa fa-gavel"></span>
      
@@ -171,6 +186,22 @@ grid lines beyond the plot limits.</p></td>
     <p>A list of ggplots, where each element of the list is a map of tree
 tags by status, showing four subquadrats.</p>
     
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p><code>map_tag()</code> plots a status that refers to the tree -- not to each individual
+stem. For a tree to plot as "dead", all its stems must be dead (for the
+selected census); else the tree will plot as "alive".</p>
+<p>From all censuses, this function will filter the one with greater numeric
+value, and it will warn of such filtering. That is because most likely you
+want information of the tree <code>Status</code> from the last census only. If this is
+not what you want, here are some solutions:</p><ul>
+<li><p>If you want to map a different census: filter the census you want and feed
+<code>map_tag()</code> with the filtered data set.</p></li>
+<li><p>If you want to lump trees accross multiple censuses, filter all the threes
+that you want and change the value of <code>CensusID</code> so that all trees have the
+same value of <code>CensusID</code>. Then feed <code>map_tag()</code> with the filtered data set.</p></li>
+</ul>
+    
     <h2 class="hasAnchor" id="acknowledgements"><a class="anchor" href="#acknowledgements"></a>Acknowledgements</h2>
 
     
@@ -208,7 +239,7 @@ the algorithm to calculate subquadrats.</p>
 <span class='no'>maps</span>[<span class='fl'>1</span>]
 
 <span class='co'># Printing only maps 1-4 to a .pdf</span>
-<span class='fu'>pdf</span>(<span class='st'>"default-map.pdf"</span>, <span class='kw'>paper</span> <span class='kw'>=</span> <span class='st'>"a4"</span>)
+<span class='fu'>pdf</span>(<span class='st'>"default-map.pdf"</span>, <span class='kw'>paper</span> <span class='kw'>=</span> <span class='st'>"letter"</span>, <span class='kw'>height</span> <span class='kw'>=</span> <span class='fl'>10.5</span>, <span class='kw'>width</span> <span class='kw'>=</span> <span class='fl'>8</span>)
 <span class='no'>maps</span>[<span class='fl'>1</span>:<span class='fl'>4</span>]
 <span class='fu'>dev.off</span>()
 
@@ -273,6 +304,8 @@ the algorithm to calculate subquadrats.</p>
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
+
+      <li><a href="#details">Details</a></li>
 
       <li><a href="#acknowledgements">Acknowledgements</a></li>
 

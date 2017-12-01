@@ -20,12 +20,17 @@ navbar:
   left:
     - text: Functions Index
       href: reference/index.html
+      icon: fa-list
     - text: Turorial
       icon: fa-file-text
       href: https://bookdown.org/forestgeoguest/map_tag/
     - text: App
       href: https://bookdown.org/forestgeoguest/map_tag_app
+      icon: fa-play-circle
   right:
+    - text: news
+      href: news/index.html
+      icon: fa-newspaper-o
     - icon: fa-gavel
       href: https://github.com/maurolepore
     - icon: fa-github
