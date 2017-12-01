@@ -22,3 +22,4 @@
 ^README\.html$
 ^logo\.png$
 ^inst/app$
+^rsconnect$
