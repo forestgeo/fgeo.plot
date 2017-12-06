@@ -1,5 +1,6 @@
 urls:
   reference: https://forestgeo.github.io/try//reference
   article: https://forestgeo.github.io/try//articles
-articles: {}
+articles:
+  map_tag: map_tag.html
 
