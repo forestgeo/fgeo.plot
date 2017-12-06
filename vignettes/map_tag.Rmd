@@ -46,7 +46,7 @@ update_geom_defaults("text", list(size = 14.5))
 
 # Overview
 
-This tutorial will show you you how to map the latest tree-status in subquadrats with `map_tag()`.
+This tutorial will show you you how to map the latest tree-status in subquadrats with `map_tag()`. The fastest way to interact with `map_tag()` is via this app : https://bookdown.org/forestgeoguest/map_tag_app/.
 
 # Motivation
 
