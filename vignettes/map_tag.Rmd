@@ -7,7 +7,7 @@ output:
     toc: true
     toc_depth: 6
 vignette: >
-  %\VignetteIndexEntry{Map tree tags with map_tag()}
+  %\VignetteIndexEntry{Mapping Latest Tree-Status in Subquadrats}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
