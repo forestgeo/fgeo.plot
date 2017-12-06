@@ -19,49 +19,33 @@ output:
     #     align: left, icon: fa-file-text}
 ```
 
-
 ```{r global, include=FALSE}
 library(flexdashboard)
 library(try)
 library(dplyr)
 library(ggplot2)
 library(icon)
+
+vft <- readr::read_csv("vft.csv")
 ```
 
-Choose a file, adjust the arguments, and preview the effect
+Adjust the arguments, and preview the effect
 =======================================================================
 
 --- DATA {data-width=350}
 -----------------------------------------------------------------------
 
-### Choose a data set; then set `x_q` and `x_sq` {data-height=10}
-
-```{r}
-vft20 <- readr::read_csv("vft20.csv")
-vft40 <- readr::read_csv("vft40.csv")
-selectInput("vft", NULL, 
-  choices = c(
-    "Dataset with quadrat side = 20 m", "Dataset with quadrat side = 40 m"
-  )
-)
-vft <- reactive({
-  if (input$vft == "Dataset with quadrat side = 20 m") {
-    vft20
-  } else {
-    vft40
-  }
-})
-```
+`r h1("Example data set")`
 
 ### Data were filtered to keep only one `PlotID` and one `QuadratName` {data-height=90}
 
 ```{r}
 renderPrint({
-  rngx <- paste0(range(vft()$x), collapse = " ")
-  rngy <- paste0(range(vft()$y), collapse = " ")
+  rngx <- paste0(range(vft$QX), collapse = " ")
+  rngy <- paste0(range(vft$QY), collapse = " ")
   cat("range x: ", rngx, "\n", "range y: ", rngy, "\n", "\n", sep = "")
   
-  vft()
+  vft
 })
 ```
 
@@ -71,11 +55,6 @@ renderPrint({
 `r icon::fa_question_circle()` [`map_tag()`](https://forestgeo.github.io/try/reference/map_tag.html)
 
 ```{r}
-fluidRow(
-  column(6, numericInput("xquad", "x_q", 20)),
-  column(6, numericInput("xsubquad", "x_sq", 5))
-)
-
 textInput("site", "site_name", "My site, 2017")
 
 fluidRow(
@@ -113,9 +92,7 @@ textInput("line_3", "line3", pad(c("Measuring: ", "Measurement date: ")))
 ```{r, fig.asp=1.15}
 renderPlot({
   maps <- map_tag(
-    vft(), 
-    x_q = input$xquad,
-    x_sq = input$xsubquad,
+    vft, 
     site_name = input$site,
     point_size = input$pointsize,
     point_shape = c(input$pointshape_alive, input$pointshape_dead),

@@ -1,4 +1,4 @@
-PlotID,QuadratName,x,y,Tag,CensusID,Status
+PlotID,QuadratName,QX,QY,Tag,CensusID,Status
 1,4924,14.1,8.3,000002,6,alive
 1,4924,10.5,8.9,000004,6,alive
 1,4924,13.5,18.3,000006,6,alive
