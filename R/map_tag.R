@@ -450,40 +450,16 @@ plot_repulsive_tags <- function(prep_df,
   ggplot2::ggplot(
     data = prep_df,
     ggplot2::aes(
-<<<<<<< HEAD
-      x = x, y = y, shape = status_tree
-||||||| 6d80475... Change map_tag() and friends to use the cucial var x and y, not qx and qy.
-      x = prep_df$x, y = prep_df$y, shape = prep_df$status_tree
-=======
       x = prep_df$qx, y = prep_df$qy, shape = prep_df$status_tree
->>>>>>> parent of 6d80475... Change map_tag() and friends to use the cucial var x and y, not qx and qy.
     )
   ) +
     ggplot2::scale_shape_manual(values = point_shape) +
-<<<<<<< HEAD
-    # /* make this conditional ***********************************************
-    # Dissable because it errs
-    ggplot2::geom_label(
-      data = lab_df,
-      ggplot2::aes(x, y, label = subquadrat),
-      colour = "white", fill = "#f4f2f2", fontface = "bold", size = 12
-    ) +
-    # */ make this conditional ***********************************************
-||||||| 6d80475... Change map_tag() and friends to use the cucial var x and y, not qx and qy.
-    # # Dissable because it errs
-    # ggplot2::geom_label(
-    #   data = lab_df,
-    #   ggplot2::aes(lab_df$x, lab_df$y, label = lab_df$subquadrat),
-    #   colour = "white", fill = "#f4f2f2", fontface = "bold", size = 12
-    # ) +
-=======
     # # Dissable because it errs
     # ggplot2::geom_label(
     #   data = lab_df,
     #   ggplot2::aes(lab_df$qx, lab_df$qy, label = lab_df$subquadrat),
     #   colour = "white", fill = "#f4f2f2", fontface = "bold", size = 12
     # ) +
->>>>>>> parent of 6d80475... Change map_tag() and friends to use the cucial var x and y, not qx and qy.
     ggplot2::geom_point(size = point_size) +
     ggrepel::geom_text_repel(ggplot2::aes(label = prep_df$tag), size = tag_size) +
     ggplot2::scale_x_continuous(

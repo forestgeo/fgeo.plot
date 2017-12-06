@@ -104,16 +104,8 @@ test_that("plots all unique tags in data", {
 test_that("plots the same with all or just the minimum needed vars in data", {
   all <- suppressWarnings(map_tag(vft))
   vft_with_min_vars <- vft %>%
-<<<<<<< HEAD
-    select(Tag, Status, x, y, QuadratName, DBHID, CensusID, PlotID)
-  min <- suppressWarnings(map_tag(vft_with_min_vars))
-||||||| 6d80475... Change map_tag() and friends to use the cucial var x and y, not qx and qy.
-    select(Tag, Status, x, y, QuadratName, DBHID, CensusID, PlotID)
-  min <- map_tag(vft_with_min_vars)
-=======
     select(Tag, Status, QX, QY, QuadratName, DBHID, CensusID, PlotID)
   min <- map_tag(vft_with_min_vars)
->>>>>>> parent of 6d80475... Change map_tag() and friends to use the cucial var x and y, not qx and qy.
 
   expect_equal(all, min)
 
