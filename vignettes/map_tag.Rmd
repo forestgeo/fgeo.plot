@@ -40,8 +40,6 @@ knitr::opts_chunk$set(
   fig.asp = 0.9,
   fig.show = "hold"
 )
-
-update_geom_defaults("text", list(size = 14.5))
 ```
 
 # Overview
@@ -50,30 +48,32 @@ This tutorial will show you you how to map the latest tree-status in subquadrats
 
 # Motivation
 
-Imagine you need some maps to work in the field at the site Yosemite. All you need is a ViewFullTable and the function `map_tag()`. Here is a glimpse of your data.
+Imagine you need some maps to work in the field at some site. All you need is a ViewFullTable and the function `map_tag()`. Here is a glimpse of your data.
 
 ```{r hide-sinh, echo=FALSE}
 filter_first_quadrat <- function(vft) {
   first_quadrat <- unique(vft$QuadratName)[1]
   vft[vft$QuadratName == first_quadrat, ]
 }
-yose_vft <- yosemite::ViewFullTable_yosemite %>% 
+some_site_vft <- try::bci12vft_mini %>%
+  # BCI has older names that must be fixed to work with map_tag()
+  rename(QX = x, QY = y) %>% 
   filter_first_quadrat()
 ```
 
 ```{r}
-glimpse(yose_vft)
+glimpse(some_site_vft)
 ```
 
 First you filter the specific plot you want to produce maps for.
 
 ```{r}
-yose_vft1 <- filter(yose_vft, PlotID == 1)
+some_site_vft1 <- filter(some_site_vft, PlotID == 1)
 ```
 
 ```{r}
 # Using a private data set; and using only one quadrat for a small example
-maps <- map_tag(yose_vft1)
+maps <- map_tag(some_site_vft1)
 ```
 
 Here is the first set of four subquadrats.
