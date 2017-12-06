@@ -23,7 +23,7 @@ navbar:
       icon: fa-list
     - text: Turorial
       icon: fa-file-text
-      href: https://bookdown.org/forestgeoguest/map_tag/
+      href: articles/index.html
     - text: App
       href: https://bookdown.org/forestgeoguest/map_tag_app
       icon: fa-play-circle
