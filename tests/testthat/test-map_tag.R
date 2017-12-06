@@ -4,7 +4,11 @@ library(purrr)
 library(gridExtra)
 
 # Minimal data
-minivft <- tibble::rowid_to_column(try::bci12vft_mini, "DBHID")
+
+# Fix some odd variables of this particular data set
+# See email by Suzanne Lao https://goo.gl/UwiRbj
+minivft <- dplyr::rename(try::bci12vft_mini, QX = x, QY = y) %>%
+  tibble::rowid_to_column("DBHID")
 
 few_quads <- unique(minivft$QuadratName)[1]
 vft <- minivft %>% filter(QuadratName %in% few_quads)
@@ -100,8 +104,16 @@ test_that("plots all unique tags in data", {
 test_that("plots the same with all or just the minimum needed vars in data", {
   all <- suppressWarnings(map_tag(vft))
   vft_with_min_vars <- vft %>%
+<<<<<<< HEAD
     select(Tag, Status, x, y, QuadratName, DBHID, CensusID, PlotID)
   min <- suppressWarnings(map_tag(vft_with_min_vars))
+||||||| 6d80475... Change map_tag() and friends to use the cucial var x and y, not qx and qy.
+    select(Tag, Status, x, y, QuadratName, DBHID, CensusID, PlotID)
+  min <- map_tag(vft_with_min_vars)
+=======
+    select(Tag, Status, QX, QY, QuadratName, DBHID, CensusID, PlotID)
+  min <- map_tag(vft_with_min_vars)
+>>>>>>> parent of 6d80475... Change map_tag() and friends to use the cucial var x and y, not qx and qy.
 
   expect_equal(all, min)
 
@@ -119,11 +131,11 @@ test_that("plots the same with all or just the minimum needed vars in data", {
 
 
 
-test_that("errs if a crucial name is missing", {
-  vft_no_x <- vft
-  vft_no_x$x <- NULL
+test_that("errs with uppercase names", {
+  vft_no_qx <- vft
+  vft_no_qx$QX <- NULL
   expect_error(
-    map_tag(vft_no_x),
+    map_tag(vft_no_qx),
     "Ensure your data set has these variables"
   )
 })
@@ -147,7 +159,7 @@ lower_names_then_check <- function(x, nms) {
 }
 
 # reusing
-vft2 <- lower_names_then_check(vft, nms = c("tag", "x", "y", "status"))
+vft2 <- lower_names_then_check(vft, nms = c("tag", "qx", "qy", "status"))
 with_sq <- add_subquadrat(df = vft2, 20, 20, 5, 5)
 
 test_that("outputs a dataframe with new expected variable", {
@@ -164,7 +176,7 @@ context("test-check_subquadrat_dimensions")
 
 
 test_that("throws error with wrong inputs to add_subquadrat", {
-  df <- minivft[1:5, c("x", "y")]
+  df <- minivft[1:5, c("QX", "QY")]
   # check that works
   expect_message(add_subquadrat(df, 20, 20, 5, 5))
   expect_message(add_subquadrat(df, 40, 50, 5, 5))

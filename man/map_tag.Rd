@@ -95,8 +95,11 @@ vft1 <- dplyr::filter(vft, PlotID == 1)
 # Another look
 glimpse(vft1)
 
-# Creating all maps but plotting to screen only one map
-maps <- map_tag(vft1)
+# This data set has two wrong names that need to be fixed before using map_tag()
+vft1_rnm <- dplyr::rename(vft1, qx = x, qy = y)
+maps <- map_tag(vft1_rnm)
+
+# Plotting only one map to screen
 maps[1]
 
 # Printing only maps 1-4 to a .pdf
@@ -147,12 +150,12 @@ your_theme <- ggplot2::theme(
 )
 map_tag(vft1_rnm, site_name = "BCI 2012", theme = your_theme)[1]
 
-# Adapting the dimensions of quadrat and subquadrat to the range of x and y
-# Creating new data set with x and y ranging 0-100
+# Adapting the dimensions of quadrat and subquadrat to the range of qx and qy
+# Creating new data set with qx and qy ranging 0-100
 smaller <- vft1_rnm
 n <- nrow(smaller)
-smaller$x <- sample(0:10, n, replace = TRUE)
-smaller$y <- sample(0:10, n, replace = TRUE)
+smaller$qx <- sample(0:10, n, replace = TRUE)
+smaller$qy <- sample(0:10, n, replace = TRUE)
 
 map_tag(smaller, x_q = 10, x_sq = 2.5)[1]
 # If limit-lines aren't visible, try extending the grid a little

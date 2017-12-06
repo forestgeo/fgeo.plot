@@ -64,8 +64,11 @@
 #' # Another look
 #' glimpse(vft1)
 #'
-#' # Creating all maps but plotting to screen only one map
-#' maps <- map_tag(vft1)
+#' # This data set has two wrong names that need to be fixed before using map_tag()
+#' vft1_rnm <- dplyr::rename(vft1, qx = x, qy = y)
+#' maps <- map_tag(vft1_rnm)
+#'
+#' # Plotting only one map to screen
 #' maps[1]
 #'
 #' # Printing only maps 1-4 to a .pdf
@@ -116,12 +119,12 @@
 #' )
 #' map_tag(vft1_rnm, site_name = "BCI 2012", theme = your_theme)[1]
 #'
-#' # Adapting the dimensions of quadrat and subquadrat to the range of x and y
-#' # Creating new data set with x and y ranging 0-100
+#' # Adapting the dimensions of quadrat and subquadrat to the range of qx and qy
+#' # Creating new data set with qx and qy ranging 0-100
 #' smaller <- vft1_rnm
 #' n <- nrow(smaller)
-#' smaller$x <- sample(0:10, n, replace = TRUE)
-#' smaller$y <- sample(0:10, n, replace = TRUE)
+#' smaller$qx <- sample(0:10, n, replace = TRUE)
+#' smaller$qy <- sample(0:10, n, replace = TRUE)
 #'
 #' map_tag(smaller, x_q = 10, x_sq = 2.5)[1]
 #' # If limit-lines aren't visible, try extending the grid a little
@@ -142,7 +145,7 @@ map_tag <- function(vft,
   # Lowercase names: avoid errors due to confusing upper- and lower-case
   vft_lower_nms <- stats::setNames(vft, tolower(names(vft)))
   crucial_vars <- c(
-    "tag", "x", "y", "status", "quadratname", "censusid", "plotid"
+    "tag", "qx", "qy", "status", "quadratname", "censusid", "plotid"
   )
   check_crucial_names(vft_lower_nms, crucial_vars)
   check_single_plotid(vft_lower_nms)
@@ -215,7 +218,7 @@ check_single_plotid <- function(x) {
   }
 }
 
-#' Add a quadrat variable to a dataframe based based on x and y coordinates.
+#' Add a quadrat variable to a dataframe based based on qx and qy coordinates.
 #'
 #' @param df A ViewFullTable dataframe.
 #' @param x_q,y_q Size in meters of a quadrat's side. For ForestGEO sites, a
@@ -231,12 +234,12 @@ check_single_plotid <- function(x) {
 #' # try::bci12vft_mini is included in this package
 #' df <- try::bci12vft_mini
 #' with_subquadrat <- add_subquadrat(df, 20, 20, 5, 5)
-#' head(with_subquadrat[c("x", "y", "subquadrat")])
+#' head(with_subquadrat[c("qx", "qy", "subquadrat")])
 #' }
 add_subquadrat <- function(df, x_q, y_q = x_q, x_sq, y_sq = x_sq) {
   message("Lowering names case")
   df <- stats::setNames(df, tolower(names(df)))
-  check_crucial_names(df, c("x", "y"))
+  check_crucial_names(df, c("qx", "qy"))
   check_subquadrat_dimensions(
     df = df, x_q = x_q, y_q = y_q, x_sq = x_sq, y_sq = y_sq
   )
@@ -255,9 +258,9 @@ add_sbqd <- function(df, x_q, y_q, x_sq, y_sq) {
   y_q_mns.1 <- y_q - 0.1
 
   # Conditions (odd means that the coordinate goes beyond normal limits)
-  is_odd_both <- df$x >=  x_q & df$y >=  y_q
-  is_odd_x <- df$x >=  x_q
-  is_odd_y <- df$y >=  y_q
+  is_odd_both <- df$qx >=  x_q & df$qy >=  y_q
+  is_odd_x <- df$qx >=  x_q
+  is_odd_y <- df$qy >=  y_q
   is_not_odd <- TRUE
 
   # Cases
@@ -269,15 +272,15 @@ add_sbqd <- function(df, x_q, y_q, x_sq, y_sq) {
       ),
       is_odd_x ~ paste0(
         (1 + floor((x_q_mns.1 - x_q * floor(x_q_mns.1 / x_q)) / x_sq)),
-        (1 + floor((df$y - y_q * floor(df$y/ y_q)) / y_sq))
+        (1 + floor((df$qy - y_q * floor(df$qy/ y_q)) / y_sq))
       ),
       is_odd_y ~ paste0(
-        (1 + floor((df$x - x_q * floor(df$x/ x_q)) / x_sq)),
+        (1 + floor((df$qx - x_q * floor(df$qx/ x_q)) / x_sq)),
         (1 + floor((y_q_mns.1- y_q * floor(y_q_mns.1 / y_q)) / y_sq))
       ),
       is_not_odd ~ paste0(
-        (1 + floor((df$x - x_q * floor(df$x/ x_q)) / x_sq)),
-        (1 + floor((df$y - y_q * floor(df$y/ y_q)) / y_sq))
+        (1 + floor((df$qx - x_q * floor(df$qx/ x_q)) / x_sq)),
+        (1 + floor((df$qy - y_q * floor(df$qy/ y_q)) / y_sq))
       )
     )
   )
@@ -447,10 +450,17 @@ plot_repulsive_tags <- function(prep_df,
   ggplot2::ggplot(
     data = prep_df,
     ggplot2::aes(
+<<<<<<< HEAD
       x = x, y = y, shape = status_tree
+||||||| 6d80475... Change map_tag() and friends to use the cucial var x and y, not qx and qy.
+      x = prep_df$x, y = prep_df$y, shape = prep_df$status_tree
+=======
+      x = prep_df$qx, y = prep_df$qy, shape = prep_df$status_tree
+>>>>>>> parent of 6d80475... Change map_tag() and friends to use the cucial var x and y, not qx and qy.
     )
   ) +
     ggplot2::scale_shape_manual(values = point_shape) +
+<<<<<<< HEAD
     # /* make this conditional ***********************************************
     # Dissable because it errs
     ggplot2::geom_label(
@@ -459,6 +469,21 @@ plot_repulsive_tags <- function(prep_df,
       colour = "white", fill = "#f4f2f2", fontface = "bold", size = 12
     ) +
     # */ make this conditional ***********************************************
+||||||| 6d80475... Change map_tag() and friends to use the cucial var x and y, not qx and qy.
+    # # Dissable because it errs
+    # ggplot2::geom_label(
+    #   data = lab_df,
+    #   ggplot2::aes(lab_df$x, lab_df$y, label = lab_df$subquadrat),
+    #   colour = "white", fill = "#f4f2f2", fontface = "bold", size = 12
+    # ) +
+=======
+    # # Dissable because it errs
+    # ggplot2::geom_label(
+    #   data = lab_df,
+    #   ggplot2::aes(lab_df$qx, lab_df$qy, label = lab_df$subquadrat),
+    #   colour = "white", fill = "#f4f2f2", fontface = "bold", size = 12
+    # ) +
+>>>>>>> parent of 6d80475... Change map_tag() and friends to use the cucial var x and y, not qx and qy.
     ggplot2::geom_point(size = point_size) +
     ggrepel::geom_text_repel(ggplot2::aes(label = prep_df$tag), size = tag_size) +
     ggplot2::scale_x_continuous(
@@ -486,14 +511,14 @@ plot_repulsive_tags <- function(prep_df,
 #' # dummy data
 #' tags <- tibble(
 #'   tag = sample(1:10000, 100),
-#'   x = sample(1:20, 100, replace = TRUE),
-#'   y = sample(1:20, 100, replace = TRUE)
+#'   qx = sample(1:20, 100, replace = TRUE),
+#'   qy = sample(1:20, 100, replace = TRUE)
 #' )
 #'
 #' df_labs <- df_labels(x_q = 20, y_q = 20, x_sq = 5, y_sq = 5)
 #'
-#' ggplot(data = tags, aes(x, y)) +
-#'   geom_label(data = df_labs, aes(x, y, label = subquadrat),
+#' ggplot(data = tags, aes(qx, qy)) +
+#'   geom_label(data = df_labs, aes(qx, qy, label = subquadrat),
 #'     colour = "white", fill = "grey", fontface = "bold") +
 #'   ggrepel::geom_text_repel(aes(label = tag))
 #'
@@ -517,7 +542,7 @@ position_labels <- function(x_q, y_q, x_sq, y_sq) {
   ycentered <- seq(0, y_q, y_sq) + yoffset
   ytrimed <- ycentered[ycentered < y_q]  # remove tags beyond the range
 
-  expand.grid(x = xtrimed, y = ytrimed, stringsAsFactors = FALSE)
+  expand.grid(qx = xtrimed, qy = ytrimed, stringsAsFactors = FALSE)
 }
 
 
