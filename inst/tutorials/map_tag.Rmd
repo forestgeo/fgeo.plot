@@ -125,17 +125,14 @@ bci_vft1 <- filter(bci_vft, PlotID == 1)
 Not all data sets may be named appropriately. `map_tag()` expects some variables to have specific names. If the name of your variables is different than expected, you'll get an error.
 
 ```{r rename-variables, error=TRUE}
-# Replacing a crucial name with a bad name
-bci_vft_bad_nms <- rename(bci_vft1, bad_x = qx)
-
 # Fails
-map_tag(bci_vft_bad_nms)
+map_tag(bci_vft1)
 ```
 
 Reading the error message will help you identify which variables you need to rename.
 
 ```{r fix-names}
-bci_vft1_rnm <- dplyr::rename(bci_vft_bad_nms, x = bad_x)
+bci_vft1_rnm <- dplyr::rename(bci_vft1, qx = x, qy = y)
 # Using lowercase names for simiplicity
 names(bci_vft1_rnm) <- tolower(names(bci_vft1_rnm))
 ```
