@@ -57,7 +57,6 @@ filter_first_quadrat <- function(vft) {
   vft[vft$QuadratName == first_quadrat, ]
 }
 yose_vft <- yosemite::ViewFullTable_yosemite %>% 
-  rename(x = QX, y = QY) %>% 
   filter_first_quadrat()
 ```
 
