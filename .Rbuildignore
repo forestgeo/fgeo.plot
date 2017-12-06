@@ -10,6 +10,7 @@
 ^issues$
 ^docs$
 ^vignettes/rsconnect$
+^vignettes/map_tag_cache$
 ^all_selected_quads_status_in_tag\.pdf$
 ^quarentine\.R$
 ^tmp2\.R$
