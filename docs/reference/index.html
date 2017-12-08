@@ -52,35 +52,28 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../reference/index.html">
-    <span class="fa fa-list"></span>
-     
-    Functions Index
-  </a>
-</li>
-<li>
-  <a href="../articles/index.html">
-    <span class="fa fa-file-text"></span>
-     
-    Turorial
-  </a>
-</li>
-<li>
-  <a href="https://bookdown.org/forestgeoguest/map_tag_app">
-    <span class="fa fa-play-circle"></span>
-     
-    App
-  </a>
+  <a href="../reference/index.html">Functions Index</a>
 </li>
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="../news/index.html">
-    <span class="fa fa-newspaper-o"></span>
+  <a href="../articles/index.html">Turorials</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Apps
      
-    news
+    <span class="caret"></span>
   </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="https://bookdown.org/forestgeoguest/map_tag_app">Map tree tags for fieldwork</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="../news/index.html">news</a>
 </li>
 <li>
   <a href="https://github.com/maurolepore">
@@ -89,7 +82,7 @@
   </a>
 </li>
 <li>
-  <a href="https://github.com/forestgeo/try">
+  <a href="https://github.com/forestgeo/map">
     <span class="fa fa-github"></span>
      
   </a>
@@ -107,7 +100,7 @@
     <div class="page-header">
       <h1>
         Reference
-        <small>version&nbsp;0.0.00.9004</small>
+        <small>version&nbsp;0.0.00.9005</small>
       </h1>
     </div>
 
@@ -122,7 +115,21 @@
       <tbody>
         <tr>
           <th colspan="2">
-            <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
+            <h2 id="section-main-functions" class="hasAnchor"><a href="#section-main-functions" class="anchor"></a>Main functions</h2>
+            <p class="section-desc"></p>
+          </th>
+        </tr>
+        <tr>
+          <!--  -->
+          <td>
+            <p><code><a href="map_tag.html">map_tag</a></code> </p>
+          </td>
+          <td><p>Map tree tags by status, showing four subquadrats per plot-page.</p></td>
+        </tr>
+      </tbody><tbody>
+        <tr>
+          <th colspan="2">
+            <h2 id="section-helpers" class="hasAnchor"><a href="#section-helpers" class="anchor"></a>Helpers</h2>
             <p class="section-desc"></p>
           </th>
         </tr>
@@ -132,12 +139,6 @@
             <p><code><a href="add_subquadrat.html">add_subquadrat</a></code> </p>
           </td>
           <td><p>Add a quadrat variable to a dataframe based based on qx and qy coordinates.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="bci12vft_mini.html">bci12vft_mini</a></code> </p>
-          </td>
-          <td><p>An example ViewFullTable data set.</p></td>
         </tr><tr>
           <!--  -->
           <td>
@@ -153,15 +154,23 @@
         </tr><tr>
           <!--  -->
           <td>
-            <p><code><a href="map_tag.html">map_tag</a></code> </p>
-          </td>
-          <td><p>Map tree tags by status, showing four subquadrats per plot-page.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
             <p><code><a href="pad.html">pad</a></code> </p>
           </td>
           <td><p>Pad strings.</p></td>
+        </tr>
+      </tbody><tbody>
+        <tr>
+          <th colspan="2">
+            <h2 id="section-data-set" class="hasAnchor"><a href="#section-data-set" class="anchor"></a>Data set</h2>
+            <p class="section-desc"></p>
+          </th>
+        </tr>
+        <tr>
+          <!--  -->
+          <td>
+            <p><code><a href="bci12vft_mini.html">bci12vft_mini</a></code> </p>
+          </td>
+          <td><p>An example ViewFullTable data set.</p></td>
         </tr>
       </tbody>
       </table>
@@ -171,14 +180,16 @@
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#section-all-functions">All functions</a></li>
+      <li><a href="#section-main-functions">Main functions</a></li>
+      <li><a href="#section-helpers">Helpers</a></li>
+      <li><a href="#section-data-set">Data set</a></li>
     </ul>
   </div>
 </div>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Mauro Lepore, CTFS-ForestGEO.</p>
+  <p>Developed by <a href='https://github.com/maurolepore'>Mauro Lepore</a>, <a href='http://www.forestgeo.si.edu/'>CTFS-ForestGEO</a>.</p>
 </div>
 
 <div class="pkgdown">

@@ -29,34 +29,27 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li>
-  <a href="reference/index.html">
-    <span class="fa fa-list"></span>
-     
-    Functions Index
-  </a>
-</li>
-<li>
-  <a href="articles/index.html">
-    <span class="fa fa-file-text"></span>
-     
-    Turorial
-  </a>
-</li>
-<li>
-  <a href="https://bookdown.org/forestgeoguest/map_tag_app">
-    <span class="fa fa-play-circle"></span>
-     
-    App
-  </a>
+  <a href="reference/index.html">Functions Index</a>
 </li>
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="news/index.html">
-    <span class="fa fa-newspaper-o"></span>
+  <a href="articles/index.html">Turorials</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Apps
      
-    news
+    <span class="caret"></span>
   </a>
+  <ul class="dropdown-menu" role="menu">
+<li>
+      <a href="https://bookdown.org/forestgeoguest/map_tag_app">Map tree tags for fieldwork</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="news/index.html">news</a>
 </li>
 <li>
   <a href="https://github.com/maurolepore">
@@ -65,7 +58,7 @@
   </a>
 </li>
 <li>
-  <a href="https://github.com/forestgeo/try">
+  <a href="https://github.com/forestgeo/map">
     <span class="fa fa-github"></span>
      
   </a>
@@ -79,8 +72,7 @@
 <!--/.navbar -->
 
       
-      </header><link href="index_files/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet">
-<div class="row">
+      </header><div class="row">
   <div class="col-md-9">
     
 
@@ -88,25 +80,45 @@
     
 <div class="contents">
 <!-- Don't edit README.md; instead, edit README.Rmd -->
-<div id="try" class="section level1">
+<div id="map" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
-<a href="#try" class="anchor"></a>try</h1></div>
+<a href="#map" class="anchor"></a>map</h1></div>
 
+<div id="tools-to-map-forestgeos-data-" class="section level2">
+<h2 class="hasAnchor">
+<a href="#tools-to-map-forestgeos-data-" class="anchor"></a>Tools to map ForestGEO’s data.</h2>
 </div>
-<div id="overview" class="section level1">
-<h1 class="hasAnchor">
-<a href="#overview" class="anchor"></a>Overview</h1>
-<p><strong>try</strong> makes it easy to share code to try new things. It aims to draft a solution to address a specific issue.</p>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
-<p><i class="fa  fa-download "></i> Install <strong>try</strong> from GitHub with:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># install.packages("devtools")</span>
-devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="dt">repo =</span> <span class="st">"forestgeo/try"</span>)
-<span class="kw">library</span>(try)</code></pre></div>
+<p>Install <strong>map</strong> from GitHub with:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># install.packages("remotes")</span>
+remotes<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/remotes/topics/install_github">install_github</a></span>(<span class="dt">repo =</span> <span class="st">"forestgeo/map"</span>)
+<span class="kw">library</span>(map)</code></pre></div>
 <p>Or with:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">source</span>(<span class="st">"https://install-github.me/forestgeo/try"</span>)</code></pre></div>
-<p>After installing and loading <strong>try</strong>, get help about the main function with <code>?map_tag()</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">source</span>(<span class="st">"https://install-github.me/forestgeo/map"</span>)</code></pre></div>
+<p>After installing and loading <strong>map</strong>, get help about the main function with <code>?map_tag()</code>.</p>
+</div>
+<div id="example" class="section level2">
+<h2 class="hasAnchor">
+<a href="#example" class="anchor"></a>Example</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)
+<span class="kw">library</span>(ggplot2)
+<span class="kw">library</span>(map)
+
+<span class="co"># Filter the plot you want to map</span>
+vft &lt;-<span class="st"> </span>dplyr<span class="op">::</span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(map<span class="op">::</span>bci12vft_mini, PlotID <span class="op">==</span><span class="st"> </span><span class="dv">1</span>)
+
+<span class="co"># This data set has two wrong names that need to be fixed before using map_tag()</span>
+vft_rnm &lt;-<span class="st"> </span>dplyr<span class="op">::</span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/select.html">rename</a></span>(vft, <span class="dt">qx =</span> x, <span class="dt">qy =</span> y)
+maps &lt;-<span class="st"> </span><span class="kw"><a href="reference/map_tag.html">map_tag</a></span>(vft_rnm)
+<span class="co">#&gt; Warning in map_tag(vft_rnm): Multiple censuses were detected</span>
+<span class="co">#&gt;   * Filtering only the greatest `CensusID`</span>
+
+<span class="co"># Plotting only one map to screen</span>
+maps[<span class="dv">1</span>]
+<span class="co">#&gt; $`4915_1`</span></code></pre></div>
+<p><img src="README-example-map-1.png" width="98%" style="display: block; margin: auto;"></p>
 </div>
 </div>
 </div>
@@ -127,13 +139,15 @@ devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocument
 <p><a href="https://www.r-project.org/Licenses/GPL-3">GPL-3</a></p>
 <h2>Developers</h2>
 <ul class="list-unstyled">
-<li>Mauro Lepore <br><small class="roles"> Author, contractor, maintainer </small> </li>
-<li>CTFS-ForestGEO <br><small class="roles"> Copyright holder, funder </small> </li>
+<li>
+<a href="https://github.com/maurolepore">Mauro Lepore</a> <br><small class="roles"> Author, contractor, maintainer </small> </li>
+<li>
+<a href="http://www.forestgeo.si.edu/">CTFS-ForestGEO</a> <br><small class="roles"> Copyright holder, funder </small> </li>
 </ul>
 <h2>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://travis-ci.org/forestgeo/try"><img src="https://travis-ci.org/forestgeo/try.svg?branch=master" alt="Travis-CI Build Status"></a></li>
-<li><a href="https://cran.r-project.org/package=try"><img src="http://www.r-pkg.org/badges/version/try" alt="CRAN_Status_Badge"></a></li>
+<li><a href="https://travis-ci.org/forestgeo/map"><img src="https://travis-ci.org/forestgeo/map.svg?branch=master" alt="Travis-CI Build Status"></a></li>
+<li><a href="https://cran.r-project.org/package=map"><img src="http://www.r-pkg.org/badges/version/map" alt="CRAN_Status_Badge"></a></li>
 </ul>
 </div>
 
@@ -141,7 +155,7 @@ devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocument
 
 
       <footer><div class="copyright">
-  <p>Developed by Mauro Lepore, CTFS-ForestGEO.</p>
+  <p>Developed by <a href="https://github.com/maurolepore">Mauro Lepore</a>, <a href="http://www.forestgeo.si.edu/">CTFS-ForestGEO</a>.</p>
 </div>
 
 <div class="pkgdown">
