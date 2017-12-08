@@ -12,6 +12,7 @@
 ^issues$
 ^LICENSE\.md$
 ^NEWS\.md$
+^README\.png$
 ^README\.Rmd$
 ^README\.html$
 ^rsconnect$
