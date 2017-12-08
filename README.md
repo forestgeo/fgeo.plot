@@ -3,7 +3,9 @@
 map <img src="https://i.imgur.com/39pvr4n.png" align="right" height=44 />
 =========================================================================
 
-[![Travis-CI Build Status](https://travis-ci.org/forestgeo/map.svg?branch=master)](https://travis-ci.org/forestgeo/map) [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/map)](https://cran.r-project.org/package=map)
+[![Build Status](https://travis-ci.org/forestgeo/map.svg?branch=master)](https://travis-ci.org/forestgeo/map)
+
+[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/map)](https://cran.r-project.org/package=map)
 
 Tools to map ForestGEO's data.
 ------------------------------
