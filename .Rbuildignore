@@ -16,7 +16,6 @@
 ^README\.html$
 ^rsconnect$
 ^tmp\.R$
-^\./vignettes/rsconnect$
-^\./vignettes/.*\.pdf$
-^\./vignettes/map_tag_cache$
-^\./vignettes/map_tag_files
+^vignettes/rsconnect$
+^vignettes/map_tag_cache$
+^vignettes/map_tag_files
