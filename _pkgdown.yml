@@ -43,6 +43,9 @@ navbar:
     - icon: fa-github
       href: https://github.com/forestgeo/map
 
+    - text: fgeo
+      href: https://forestgeo.github.io/fgeo/
+
 
 
 reference:
