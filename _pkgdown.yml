@@ -69,4 +69,5 @@ articles:
   - title: "All tutorials"
     contents:
       - map_tag
+      - map_sp
 
