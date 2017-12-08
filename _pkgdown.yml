@@ -1,12 +1,14 @@
 url: https://forestgeo.github.io/map/
 
-
+authors:
+  Mauro Lepore:
+    href: https://github.com/maurolepore
+  CTFS-ForestGEO:
+    href: http://www.forestgeo.si.edu/
 
 template:
   params:
     bootswatch: united
-
-
 
 home:
   links:
@@ -16,28 +18,38 @@ home:
 
 
 navbar:
+
   type: default
+
   left:
     - text: Functions Index
       href: reference/index.html
+
   right:
     - text: Turorials
       href: articles/index.html
+
     - text: Apps
-      href: https://bookdown.org/forestgeoguest/map_tag_app
+      menu:
+      - text: Map tree tags for fieldwork
+        href: https://bookdown.org/forestgeoguest/map_tag_app
+
     - text: news
       href: news/index.html
+
     - icon: fa-gavel
       href: https://github.com/maurolepore
+
     - icon: fa-github
       href: https://github.com/forestgeo/map
 
 
 
 reference:
-  - title: "Data set"
+
+  - title: "Main functions"
     contents:
-      - bci12vft_mini
+      - map_tag
 
   - title: "Helpers"
     contents:
@@ -46,6 +58,15 @@ reference:
       - get_theme
       - pad
 
-  - title: "Main functions"
+  - title: "Data set"
+    contents:
+      - bci12vft_mini
+
+
+
+articles:
+
+  - title: "All tutorials"
     contents:
       - map_tag
+
