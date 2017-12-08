@@ -1,39 +1,30 @@
----
-output: 
-  html_document:
-    theme: united
-    keep_html: no
-    keep_md: yes
----
 
 <!-- Don't edit README.md; instead, edit README.Rmd -->
+map
+===
 
+[![Travis-CI Build Status](https://travis-ci.org/forestgeo/map.svg?branch=master)](https://travis-ci.org/forestgeo/map) [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/map)](https://cran.r-project.org/package=map)
 
+Overview
+--------
 
-# try
+**map** provides tools to map ForestGEO's data.
 
+Installation
+------------
 
+Install **map** from GitHub with:
 
-[![Travis-CI Build Status](https://travis-ci.org/forestgeo/try.svg?branch=master)](https://travis-ci.org/forestgeo/try) [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/try)](https://cran.r-project.org/package=try)
-
-# Overview
-
-__try__ makes it  easy to share code to try new things. It aims to draft a solution to address a specific issue.
-
-## Installation
-
-<!--html_preserve--><i class="fa  fa-download "></i><!--/html_preserve--> Install __try__ from GitHub with:
-
-```R
-# install.packages("devtools")
-devtools::install_github(repo = "forestgeo/try")
-library(try)
+``` r
+# install.packages("remotes")
+remotes::install_github(repo = "forestgeo/map")
+library(map)
 ```
 
 Or with:
 
-```R
-source("https://install-github.me/forestgeo/try")
+``` r
+source("https://install-github.me/forestgeo/map")
 ```
 
-After installing and loading __try__, get help about the main function with `?map_tag()`.
+After installing and loading **map**, get help about the main function with `?map_tag()`.
