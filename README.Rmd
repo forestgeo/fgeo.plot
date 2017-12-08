@@ -7,8 +7,13 @@ output:
 <!-- Don't edit README.md; instead, edit README.Rmd -->
 
 ```{r, echo = FALSE}
-library(icon)
 knitr::opts_chunk$set(
+  echo = TRUE,
+  fig.show = "hold",
+  fig.align = "center",
+  out.width = "98%",
+  fig.width = 7.5, 
+  fig.asp = 0.9,
   collapse = TRUE,
   comment = "#>",
   fig.path = "README-"
@@ -19,9 +24,7 @@ knitr::opts_chunk$set(
 
 [![Travis-CI Build Status](https://travis-ci.org/forestgeo/map.svg?branch=master)](https://travis-ci.org/forestgeo/map) [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/map)](https://cran.r-project.org/package=map)
 
-## Overview
-
-__map__ provides tools to map ForestGEO's data.
+## Tools to map ForestGEO's data.
 
 ## Installation
 
@@ -40,3 +43,22 @@ source("https://install-github.me/forestgeo/map")
 ```
 
 After installing and loading __map__, get help about the main function with `?map_tag()`.
+
+## Example
+
+```{r example-map,message=FALSE}
+library(dplyr)
+library(ggplot2)
+library(map)
+
+# Filter the plot you want to map
+vft <- dplyr::filter(map::bci12vft_mini, PlotID == 1)
+
+# This data set has two wrong names that need to be fixed before using map_tag()
+vft_rnm <- dplyr::rename(vft, qx = x, qy = y)
+maps <- map_tag(vft_rnm)
+
+# Plotting only one map to screen
+maps[1]
+```
+
