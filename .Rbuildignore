@@ -17,5 +17,6 @@
 ^rsconnect$
 ^tmp\.R$
 ^\./vignettes/rsconnect$
-^\./vignettes/.*_cache$
 ^\./vignettes/.*\.pdf$
+^\./vignettes/map_tag_cache$
+^\./vignettes/map_tag_files
