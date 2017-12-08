@@ -1,6 +1,6 @@
 # map 0.0.00.9005
 
-* Rename to map
+* Rename to map.
 
 # try 0.0.00.9004
 
