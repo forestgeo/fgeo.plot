@@ -31,7 +31,7 @@ options(dplyr.print_min = 6, dplyr.print_max = 6)
 Setup
 
 ```{r}
-library(try)
+library(map)
 library(dplyr)
 library(ggplot2)
 ```

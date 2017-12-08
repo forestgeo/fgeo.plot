@@ -27,7 +27,7 @@
 #' @export
 #' @examples
 #' ggplot2::theme()
-#' try::get_theme()
+#' map::get_theme()
 get_theme <- function(panel_grid_major_colour = "black",
                       panel_grid_minor_colour = "black",
                       panel_grid_minor_linetype = "dotted",

@@ -50,13 +50,13 @@ The job is to map the position of trees within a quadrat. Later, the task will b
 
 # Setup
 
-I'l use __dplyr__ and __ggplot2__ for data wrangling and visualization. Also, I'll use __ggrepel__ to avoid overlaping on the maps; [__try__](https://github.com/forestgeo/try) which contains an example dataset; and __assertive__, to assert some important aspects of the data.
+I'l use __dplyr__ and __ggplot2__ for data wrangling and visualization. Also, I'll use __ggrepel__ to avoid overlaping on the maps; [__map__](https://github.com/forestgeo/map) which contains an example dataset; and __assertive__, to assert some important aspects of the data.
 
 ```{r}
 # Ensure random operations are reproducible
 set.seed(1234)
 
-library(try)
+library(map)
 library(assertive)
 library(ggrepel)
 library(ggplot2)
@@ -70,7 +70,7 @@ This section develops a script that prototypes one way to do this job. The code 
 ```{r}
 # Example data set
 # example_data <- sinharaja::sinh_vft
-example_data <- try::bci12vft_mini
+example_data <- map::bci12vft_mini
 
 
 glimpse(example_data)

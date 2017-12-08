@@ -80,7 +80,7 @@ the algorithm to calculate subquadrats.
 \dontrun{
 library(dplyr)
 library(ggplot2)
-library(try)
+library(map)
 
 # Subset of a public ViewFullTable from BCI (source:
 # https://repository.si.edu/handle/10088/20925).

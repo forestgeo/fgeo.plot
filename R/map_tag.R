@@ -49,7 +49,7 @@
 #' \dontrun{
 #' library(dplyr)
 #' library(ggplot2)
-#' library(try)
+#' library(map)
 #'
 #' # Subset of a public ViewFullTable from BCI (source:
 #' # https://repository.si.edu/handle/10088/20925).
@@ -231,8 +231,8 @@ check_single_plotid <- function(x) {
 #'
 #' @examples
 #' \dontrun{
-#' # try::bci12vft_mini is included in this package
-#' df <- try::bci12vft_mini
+#' # map::bci12vft_mini is included in this package
+#' df <- map::bci12vft_mini
 #' with_subquadrat <- add_subquadrat(df, 20, 20, 5, 5)
 #' head(with_subquadrat[c("qx", "qy", "subquadrat")])
 #' }

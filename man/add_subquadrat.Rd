@@ -23,8 +23,8 @@ Add a quadrat variable to a dataframe based based on qx and qy coordinates.
 }
 \examples{
 \dontrun{
-# try::bci12vft_mini is included in this package
-df <- try::bci12vft_mini
+# map::bci12vft_mini is included in this package
+df <- map::bci12vft_mini
 with_subquadrat <- add_subquadrat(df, 20, 20, 5, 5)
 head(with_subquadrat[c("qx", "qy", "subquadrat")])
 }

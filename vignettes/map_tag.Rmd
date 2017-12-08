@@ -13,8 +13,8 @@ vignette: >
 ---
 
 ```{r pkg-hide, echo = FALSE, message=FALSE, warning=FALSE}
-# install_github("forestgeo/try")
-library(try)
+# install_github("forestgeo/map")
+library(map)
 # install.packages("ggplot2")
 library(ggplot2)
 # install.packages("dplyr")
@@ -55,7 +55,7 @@ filter_first_quadrat <- function(vft) {
   first_quadrat <- unique(vft$QuadratName)[1]
   vft[vft$QuadratName == first_quadrat, ]
 }
-some_site_vft <- try::bci12vft_mini %>%
+some_site_vft <- map::bci12vft_mini %>%
   # BCI has older names that must be fixed to work with map_tag()
   rename(QX = x, QY = y) %>% 
   filter_first_quadrat()
@@ -85,13 +85,13 @@ maps[1]
 You can output a .pdf with `pdf()`.
 
 ```{r yose-print-pdf}
-pdf("example-yosemite.pdf", paper = "a4")
+pdf("example-some_site.pdf", paper = "a4")
 maps
 dev.off()
 ```
 
 ```{r, echo=FALSE}
-knitr::include_graphics("example-yosemite.pdf")
+knitr::include_graphics("example-some_site.pdf")
 ```
 
 ## What Does `map_tag()` Do?
@@ -102,13 +102,13 @@ OK, that was the bad news -- `map_tag()` won't let you change the values of the 
 
 # Preparation: Packages and Data
 
-The packages you will use are __try__, __ggplot2__ and __dplyr__. __try__ contains the function `map_tag()` (after I receive some feedback I will move it to the package __forestr__). __ggplot2__ and __dplyr__ provide powerful tools for vizualizing and wrangling data. (These packages are part of the tidyverse (https://www.tidyverse.org/) -- a collection of R packages designed for data science. All packages share an underlying philosophy and common APIs.)
+The packages you will use are __map__, __ggplot2__ and __dplyr__. __map__ contains the function `map_tag()` (after I receive some feedback I will move it to the package __forestr__). __ggplot2__ and __dplyr__ provide powerful tools for vizualizing and wrangling data. (These packages are part of the tidyverse (https://www.tidyverse.org/) -- a collection of R packages designed for data science. All packages share an underlying philosophy and common APIs.)
 
 ```{r sho-chunk-that-was-hidden-above}
 <<pkg-hide>>
 ```
 
-From now on, The data you will use is an example data set from Barro Colorado Island made public in 2012 (see https://repository.si.edu/handle/10088/20925 and [`?try::bci12vft_mini`](https://forestgeo.github.io/try/reference/bci12vft_mini.html)).
+From now on, The data you will use is an example data set from Barro Colorado Island made public in 2012 (see https://repository.si.edu/handle/10088/20925 and [`?map::bci12vft_mini`](https://forestgeo.github.io/map/reference/bci12vft_mini.html)).
 
 ```{r data-vtf}
 # Subset of a public ViewFullTable from BCI (source:

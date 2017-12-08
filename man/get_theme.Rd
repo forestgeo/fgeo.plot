@@ -45,7 +45,7 @@ replacing this theme completely with a new \code{\link[ggplot2:theme]{ggplot2::t
 }
 \examples{
 ggplot2::theme()
-try::get_theme()
+map::get_theme()
 }
 \seealso{
 \code{\link[ggplot2:theme]{ggplot2::theme()}}.

@@ -1,4 +1,4 @@
 library(testthat)
-library(try)
+library(map)
 
-test_check("try")
+test_check("map")

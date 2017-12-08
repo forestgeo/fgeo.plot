@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mapping Latest Tree-Status in Subquadrats • try</title>
+<title>Mapping Latest Tree-Status in Subquadrats • map</title>
 <!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/united/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 <!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
@@ -24,7 +24,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">try</a>
+      <a class="navbar-brand" href="../index.html">map</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
@@ -85,7 +85,7 @@
       <h1>Mapping Latest Tree-Status in Subquadrats</h1>
                         <h4 class="author">Mauro Lepore</h4>
             
-            <h4 class="date">2017-12-06</h4>
+            <h4 class="date">2017-12-08</h4>
           </div>
 
     
@@ -142,7 +142,7 @@ maps &lt;-<span class="st"> </span><span class="kw"><a href="../reference/map_ta
 <span class="co">#&gt; $`4924_1`</span></code></pre></div>
 <p><img src="map_tag_files/figure-html/yose-print-screen-1.png" width="98%" style="display: block; margin: auto;"></p>
 <p>You can output a .pdf with <code>pdf()</code>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pdf</span>(<span class="st">"example-yosemite.pdf"</span>, <span class="dt">paper =</span> <span class="st">"a4"</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pdf</span>(<span class="st">"example-some_site.pdf"</span>, <span class="dt">paper =</span> <span class="st">"a4"</span>)
 maps
 <span class="co">#&gt; $`4924_1`</span>
 <span class="co">#&gt; </span>
@@ -154,7 +154,7 @@ maps
 <span class="kw">dev.off</span>()
 <span class="co">#&gt; png </span>
 <span class="co">#&gt;   2</span></code></pre></div>
-<embed src="example-yosemite.pdf" width="98%" style="display: block; margin: auto;" type="application/pdf"></embed><div id="what-does-map_tag-do" class="section level2">
+<embed src="example-some_site.pdf" width="98%" style="display: block; margin: auto;" type="application/pdf"></embed><div id="what-does-map_tag-do" class="section level2">
 <h2 class="hasAnchor">
 <a href="#what-does-map_tag-do" class="anchor"></a>What Does <code><a href="../reference/map_tag.html">map_tag()</a></code> Do?</h2>
 <p>Let’s review what has just happened. Although your ViewFullTable may have data of multiple censuses, <code><a href="../reference/map_tag.html">map_tag()</a></code> focuses exclusively on the latest census (via PlotNameCensus). <code><a href="../reference/map_tag.html">map_tag()</a></code> plots not the status of individual stems but the status of a tree. That is, if in the latest census at least one stem of a tree has status “alive”, then <code><a href="../reference/map_tag.html">map_tag()</a></code> plots its status as “alive”; if no stem is “alive”, <code><a href="../reference/map_tag.html">map_tag()</a></code> plots its status as “other”. Why “other” and not “dead”? Because stems are classified not simply as “dead” or “alive”: if it is not “alive”, the value of <code>status</code> may be, for example, “dead” for one stem of a particular tree, and “broken below” for another stem of the same tree. Yet <code>map_tree()</code> is designed to plot only one value of status per individual tag. The solution is to group all values that are not “alive” into the single category “other”.</p>
@@ -164,9 +164,9 @@ maps
 <div id="preparation-packages-and-data" class="section level1">
 <h1 class="hasAnchor">
 <a href="#preparation-packages-and-data" class="anchor"></a>Preparation: Packages and Data</h1>
-<p>The packages you will use are <strong>try</strong>, <strong>ggplot2</strong> and <strong>dplyr</strong>. <strong>try</strong> contains the function <code><a href="../reference/map_tag.html">map_tag()</a></code> (after I receive some feedback I will move it to the package <strong>forestr</strong>). <strong>ggplot2</strong> and <strong>dplyr</strong> provide powerful tools for vizualizing and wrangling data. (These packages are part of the tidyverse (<a href="https://www.tidyverse.org/" class="uri">https://www.tidyverse.org/</a>) – a collection of R packages designed for data science. All packages share an underlying philosophy and common APIs.)</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># install_github("forestgeo/try")</span>
-<span class="kw">library</span>(try)
+<p>The packages you will use are <strong>map</strong>, <strong>ggplot2</strong> and <strong>dplyr</strong>. <strong>map</strong> contains the function <code><a href="../reference/map_tag.html">map_tag()</a></code> (after I receive some feedback I will move it to the package <strong>forestr</strong>). <strong>ggplot2</strong> and <strong>dplyr</strong> provide powerful tools for vizualizing and wrangling data. (These packages are part of the tidyverse (<a href="https://www.tidyverse.org/" class="uri">https://www.tidyverse.org/</a>) – a collection of R packages designed for data science. All packages share an underlying philosophy and common APIs.)</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># install_github("forestgeo/map")</span>
+<span class="kw">library</span>(map)
 <span class="co"># install.packages("ggplot2")</span>
 <span class="kw">library</span>(ggplot2)
 <span class="co"># install.packages("dplyr")</span>
@@ -174,7 +174,7 @@ maps
 
 <span class="co"># Print only a few rows of data framed to save time and space</span>
 <span class="kw">options</span>(<span class="dt">dplyr.print_min =</span> <span class="dv">6</span>, <span class="dt">dplyr.print_max =</span> <span class="dv">6</span>)</code></pre></div>
-<p>From now on, The data you will use is an example data set from Barro Colorado Island made public in 2012 (see <a href="https://repository.si.edu/handle/10088/20925" class="uri">https://repository.si.edu/handle/10088/20925</a> and <a href="https://forestgeo.github.io/try/reference/bci12vft_mini.html"><code><a href="https://forestgeo.github.io/try//reference/bci12vft_mini.html">?try::bci12vft_mini</a></code></a>).</p>
+<p>From now on, The data you will use is an example data set from Barro Colorado Island made public in 2012 (see <a href="https://repository.si.edu/handle/10088/20925" class="uri">https://repository.si.edu/handle/10088/20925</a> and <a href="https://forestgeo.github.io/map/reference/bci12vft_mini.html"><code><a href="https://forestgeo.github.io/try//reference/bci12vft_mini.html">?map::bci12vft_mini</a></code></a>).</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Subset of a public ViewFullTable from BCI (source:</span>
 <span class="co"># https://repository.si.edu/handle/10088/20925).</span>
 

@@ -1,3 +1,7 @@
+# map 0.0.00.9005
+
+* Rename to map
+
 # try 0.0.00.9004
 
 * Use data with variables `QX` and `QY` instead of `x` and `y` (#18).

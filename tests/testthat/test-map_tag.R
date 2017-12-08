@@ -7,7 +7,7 @@ library(gridExtra)
 
 # Fix some odd variables of this particular data set
 # See email by Suzanne Lao https://goo.gl/UwiRbj
-minivft <- dplyr::rename(try::bci12vft_mini, QX = x, QY = y) %>%
+minivft <- dplyr::rename(map::bci12vft_mini, QX = x, QY = y) %>%
   tibble::rowid_to_column("DBHID")
 
 few_quads <- unique(minivft$QuadratName)[1]
