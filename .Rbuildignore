@@ -12,9 +12,9 @@
 ^issues$
 ^LICENSE\.md$
 ^NEWS\.md$
-^README\.png$
 ^README\.Rmd$
 ^README\.html$
+^README-example-map-1\.png$
 ^rsconnect$
 ^tmp\.R$
 ^vignettes/rsconnect$
