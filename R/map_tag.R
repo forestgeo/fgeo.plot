@@ -449,7 +449,7 @@ plot_repulsive_tags <- function(prep_df,
   quad_id_label <- unique(prep_df$quad_id)
   ggplot2::ggplot(
     data = prep_df,
-    # */ ********************************************************************
+    # /* ********************************************************************
     # If in this chunk I refer to `var` as `df$var` I get this error:
     #   Error: Aesthetics must be either length 1 or the same as the data (16):
     #   x, y, label, shape
