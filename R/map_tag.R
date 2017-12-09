@@ -449,17 +449,19 @@ plot_repulsive_tags <- function(prep_df,
   quad_id_label <- unique(prep_df$quad_id)
   ggplot2::ggplot(
     data = prep_df,
-    ggplot2::aes(
-      x = prep_df$qx, y = prep_df$qy, shape = prep_df$status_tree
-    )
+    # */ ********************************************************************
+    # If in this chunk I refer to `var` as `df$var` I get this error:
+    #   Error: Aesthetics must be either length 1 or the same as the data (16):
+    #   x, y, label, shape
+    ggplot2::aes(x = qx, y = qy, shape = status_tree)
   ) +
     ggplot2::scale_shape_manual(values = point_shape) +
-    # # Dissable because it errs
-    # ggplot2::geom_label(
-    #   data = lab_df,
-    #   ggplot2::aes(lab_df$qx, lab_df$qy, label = lab_df$subquadrat),
-    #   colour = "white", fill = "#f4f2f2", fontface = "bold", size = 12
-    # ) +
+    ggplot2::geom_label(
+      data = lab_df,
+      ggplot2::aes(qx, qy, label = subquadrat),
+      colour = "white", fill = "#f4f2f2", fontface = "bold", size = 12
+    ) +
+    # */ ********************************************************************
     ggplot2::geom_point(size = point_size) +
     ggrepel::geom_text_repel(ggplot2::aes(label = prep_df$tag), size = tag_size) +
     ggplot2::scale_x_continuous(
