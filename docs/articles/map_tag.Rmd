@@ -1,0 +1,325 @@
+---
+title: "Mapping Latest Tree-Status in Subquadrats"
+author: "Mauro Lepore"
+date: "`r Sys.Date()`"
+output:
+  rmarkdown::html_vignette:
+    toc: true
+    toc_depth: 6
+vignette: >
+  %\VignetteIndexEntry{Mapping Latest Tree-Status in Subquadrats}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r pkg-hide, echo = FALSE, message=FALSE, warning=FALSE}
+# install_github("forestgeo/map")
+library(map)
+# install.packages("ggplot2")
+library(ggplot2)
+# install.packages("dplyr")
+library(dplyr)
+
+# Print only a few rows of data framed to save time and space
+options(dplyr.print_min = 6, dplyr.print_max = 6)
+```
+
+```{r setup, echo = FALSE, message=FALSE, warning=FALSE}
+# hadley's settings
+set.seed(1014)
+options(digits = 3)
+
+knitr::opts_chunk$set(
+  echo = TRUE,
+  comment = "#>",
+  collapse = TRUE,
+  cache = TRUE,
+  out.width = "98%",
+  fig.align = "center",
+  fig.width = 7.5, 
+  fig.asp = 0.9,
+  fig.show = "hold"
+)
+```
+
+# Overview
+
+This tutorial will show you you how to map the latest tree-status in subquadrats with `map_tag()`. The fastest way to interact with `map_tag()` is via this app : https://bookdown.org/forestgeoguest/map_tag_app/.
+
+# Motivation
+
+Imagine you need some maps to work in the field at some site. All you need is a ViewFullTable and the function `map_tag()`. Here is a glimpse of your data.
+
+```{r hide-sinh, echo=FALSE}
+filter_first_quadrat <- function(vft) {
+  first_quadrat <- unique(vft$QuadratName)[1]
+  vft[vft$QuadratName == first_quadrat, ]
+}
+some_site_vft <- map::bci12vft_mini %>%
+  # BCI has older names that must be fixed to work with map_tag()
+  rename(QX = x, QY = y) %>% 
+  filter_first_quadrat()
+```
+
+```{r}
+glimpse(some_site_vft)
+```
+
+First you filter the specific plot you want to produce maps for.
+
+```{r}
+some_site_vft1 <- filter(some_site_vft, PlotID == 1)
+```
+
+```{r}
+# Using a private data set; and using only one quadrat for a small example
+maps <- map_tag(some_site_vft1)
+```
+
+Here is the first set of four subquadrats.
+
+```{r yose-print-screen}
+maps[1]
+```
+
+You can output a .pdf with `pdf()`.
+
+```{r yose-print-pdf}
+pdf("example-some_site.pdf", paper = "a4")
+maps
+dev.off()
+```
+
+```{r, echo=FALSE}
+knitr::include_graphics("example-some_site.pdf")
+```
+
+## What Does `map_tag()` Do?
+
+Let's review what has just happened. Although your ViewFullTable may have data of multiple censuses, `map_tag()` focuses exclusively on the latest census (via PlotNameCensus). `map_tag()` plots not the status of individual stems but the status of a tree. That is, if in the latest census at least one stem of a tree has status "alive", then `map_tag()` plots its status as "alive"; if no stem is "alive", `map_tag()` plots its status as "other". Why "other" and not "dead"? Because stems are classified not simply as "dead" or "alive": if it is not "alive", the value of `status` may be, for example, "dead" for one stem of a particular tree, and "broken below" for another stem of the same tree. Yet `map_tree()` is designed to plot only one value of status per individual tag. The solution is to group all values that are not "alive" into the single category "other".
+
+OK, that was the bad news -- `map_tag()` won't let you change the values of the variable `status`. The good news is that you can change almost anything else. You will learn how to do that in the rest of this tutorial.
+
+# Preparation: Packages and Data
+
+The packages you will use are __map__, __ggplot2__ and __dplyr__. __map__ contains the function `map_tag()` (after I receive some feedback I will move it to the package __forestr__). __ggplot2__ and __dplyr__ provide powerful tools for vizualizing and wrangling data. (These packages are part of the tidyverse (https://www.tidyverse.org/) -- a collection of R packages designed for data science. All packages share an underlying philosophy and common APIs.)
+
+```{r sho-chunk-that-was-hidden-above}
+<<pkg-hide>>
+```
+
+From now on, The data you will use is an example data set from Barro Colorado Island made public in 2012 (see https://repository.si.edu/handle/10088/20925 and [`?map::bci12vft_mini`](https://forestgeo.github.io/map/reference/bci12vft_mini.html)).
+
+```{r data-vtf}
+# Subset of a public ViewFullTable from BCI (source:
+# https://repository.si.edu/handle/10088/20925).
+
+# Convert to tibble (modern dataframe) for better printing
+bci_vft <- as_tibble(bci12vft_mini)
+glimpse(bci_vft)
+```
+
+```{r}
+bci_vft1 <- filter(bci_vft, PlotID == 1)
+```
+
+Not all data sets may be named appropriately. `map_tag()` expects some variables to have specific names. If the name of your variables is different than expected, you'll get an error.
+
+```{r rename-variables, error=TRUE}
+# Fails
+map_tag(bci_vft1)
+```
+
+Reading the error message will help you identify which variables you need to rename.
+
+```{r fix-names}
+bci_vft1_rnm <- dplyr::rename(bci_vft1, qx = x, qy = y)
+# Using lowercase names for simiplicity
+names(bci_vft1_rnm) <- tolower(names(bci_vft1_rnm))
+```
+
+With the techniques you'll learn here, you can produce maps of an entire data set, or of just a few quadrats. To save space, let's focus just on (any) one quadrat.
+
+```{r filter-bci}
+any_quadrat <- sample(unique(bci_vft1_rnm$quadratname), 1)
+filter(bci_vft1_rnm, quadratname == any_quadrat)
+```
+
+# Customizing Your Maps
+
+This section shows how you can change the default of your maps (see also `?map_tag()`). For example, you can customize the plot title, and the points and tags. 
+
+```{r custom-title-point-shape}
+maps <- map_tag(bci_vft1_rnm, 
+  site_name = "BCI 2012", point_size = 3, point_shape = c(17, 6), tag_size = 5
+)
+maps[1]
+```
+
+## Customizing The Header
+
+The header can be customized in two ways. One ways it to pass a string to the argument `header`.
+
+```{r custom-header}
+map_tag(bci_vft1_rnm, site_name = "BCI 2012", header = "My header")[1]
+```
+
+The string can be multi-lined; to insert line brakes, use "\\n".
+
+```{r header-basic}
+map_tag(bci_vft1_rnm, site_name = "BCI 2012", 
+  header = "Line 1: _________\nLine 2:\nLine 3:....................."
+)[1]
+```
+
+The second way is to use `get_header()` (see `?get_header()`).
+
+```{r header-via-helper}
+your_header <- get_header(
+  line1 = "Your header-line 1: _____________________________",
+  line2 = "Your header-line 3: _____________________________",
+  line3 = "Your header-line 2: _____________________________"
+)
+map_tag(bci_vft1_rnm, site_name = "BCI 2012", header = your_header)[1]
+```
+
+## Using Pre-Made and Custom Themes
+
+Similarly to how you customized the header, you can also customize the plot theme. By default, `theme = get_theme()` (see `?get_theme()`); but you can either use any pre-made theme (see `?ggplot2::theme_bw`) or create a custom theme. This is how you can use a pre-made theme.
+
+```{r pre-made-theme}
+# Allow using pre-made themes (e.g. ggplot2::theme_bw()) and building custom
+# themes (with ggplot::theme()).
+library(ggplot2)
+
+map_tag(bci_vft1_rnm, site_name = "BCI 2012", theme = theme_gray())[1]
+```
+
+And this is how you can use a custom theme (see `?ggplot2::theme()`).
+
+```{r custom-theme}
+# An extreeme example -- to show that themes are extreemely flexible
+your_theme <- ggplot2::theme(
+  legend.position = "bottom",
+  legend.title = element_blank(),
+  legend.text = element_text(size = 8, colour = "red"),
+  text = element_text(size = 11, face = "bold.italic", colour = "white"),
+  plot.background = element_rect(fill = "black"),
+  plot.margin = margin(2, 2, 2, 2, "cm"),
+  strip.background = element_rect(fill = "darkgreen"),
+  strip.text = element_text(colour = "white"),
+  # make grid to dissapear by matching background colour
+  panel.background = element_rect(fill = "lightgreen"),
+  panel.grid.minor = element_line(colour = "black", linetype = "dotted"),
+  panel.grid.major = element_line(colour = "black")
+)
+map_tag(bci_vft1_rnm, site_name = "BCI 2012", theme = your_theme)[1]
+```
+
+## Extending The Grid Beyond the Plot Limits
+
+Although they shouldn't, trees sometimes are located beyond the limits of a quadrat. For example, if the side of your quadrats is 20 meters, some trees may plot at, say, `qx = 20.5`, or `qy = 21`. In such cases you may want to extend the plot grid to encompass those odd trees. To extend the grid use the argument `shrink`. (The example below has no trees beyond the quadrat limits, but hopefully you'll still understand when to use `extend_grid`.)
+
+```{r}
+map_tag(bci_vft1_rnm, site_name = "BCI 2012", extend_grid = 0.4)[4]
+```
+
+## Customizing the Dimension of Quadrats and Subquadrats
+
+You can customize the dimension of your quadrats and subquadrats to fit the range of `qx` and `qy` of your data. Let's examine what the range is for the data you have been using so far.
+
+```{r}
+qx_and_qy_variables <- select(bci_vft1_rnm, qx, qy)
+lapply(qx_and_qy_variables, range)
+```
+
+The range is between around 0 and 20. That is why we have been using using the default quadrat dimension of 20 meters (`x_q = 20`; and `y_sq = x_q = 20`), and the default subquadrat dimension of 5 meters (`x_sq = 5`; and `y_sq = x_sq = 5`).
+
+```{r}
+map_tag(bci_vft1_rnm, site_name = "BCI 2012", 
+  x_q = 20, x_sq = 5,
+  y_q = 20, y_sq = 5
+)[1]
+```
+
+By default, `y_q` will be the same as `x_q` -- so you don't have to provide both (only `x_q` is mandatory). And the same is true for `y_sq` and `x_sq`. With this data -- with `qx` and `qy` ranging 0-20 meters -- the quadrat and subquadrat dimensions used above are the right ones. But `map_tag()` won't complain if you choose different parameters; so you have to be careful not to shoot yourself on the foot.
+
+The following two examples demonstrate the use wrong dimensions. Let's first use dimensions that are smaller than the range of `qx` and `qy`.
+
+```{r}
+map_tag(bci_vft1_rnm, 
+  site_name = "BCI 2012", x_q = 10, x_sq = 2.5, 
+  # if not extended, the lines surrounding the map won't plot
+  extend_grid = 0.25
+)[1]
+```
+
+And now let's use dimensions that are larger than the range of the data.
+
+```{r}
+# Using 
+map_tag(bci_vft1_rnm, 
+  site_name = "BCI 2012", x_q = 100, x_sq = 25, 
+)[1]
+```
+
+This image should flag that you have this kind of problem -- by which the range of data is smaller than the dimensions you set for your quadrat and subquadrat. Notice that the points (the actual positions of the trees) are all between `qx` and `qy` ranging 0-20. The tags, however, go beyond 20 because they automatically repel themselves to avoid overlapping.
+
+## The Right Dimensions for the Right Data
+
+Had `qx` and `qy` of your data ranged 0-100, then yes -- the appropriate quadrat and subquadrat dimensions to use would be 100 and 25.
+
+```{r bigger}
+# Creating new data set with qx and qy ranging 0-100
+bigger <- bci_vft1_rnm
+n <- nrow(bigger)
+bigger$qx <- sample(0:100, n, replace = TRUE)
+bigger$qy <- sample(0:100, n, replace = TRUE)
+
+map_tag(
+  bigger, 
+  x_q = 100, x_sq = 25, 
+  extend_grid = -1.75
+)[1]
+```
+
+And if `qx` and `qy` of your data range 0-10, then the appropriate quadrat dimension to use would be 10 and 2.5.
+
+```{r smaller}
+# Creating new data set with qx and qy ranging 0-100
+smaller <- bci_vft1_rnm
+n <- nrow(smaller)
+smaller$qx <- sample(0:10, n, replace = TRUE)
+smaller$qy <- sample(0:10, n, replace = TRUE)
+
+map_tag(smaller, x_q = 10, x_sq = 2.5, extend_grid = 0.25)[1]
+```
+
+# Calling `add_subquadrat()` Directly
+
+If you want to only calculate the variable `subquadrat`, you don't need to use `map_tag()` -- can directly call `add_subquadrat()`.
+
+```{r}
+with_subquadrat <- add_subquadrat(bci_vft1_rnm, x_q = 20, x_sq = 5)
+select(
+  with_subquadrat, 
+  # reorder variables to show first what's new 
+  subquadrat, qx, qy, everything()
+)
+```
+
+But if you don't mind going through a little more trouble, you can also get the `subquadrat` variable from the data the underlies the maps.
+
+```{r}
+maps <- map_tag(bci_vft1_rnm, x_q = 20, x_sq = 5)
+data_list <- purrr::map(maps, "data")
+data_combined <- purrr::reduce(data_list, rbind)
+select(
+  data_combined,
+  subquadrat, qx, qy, everything()
+)
+```
+
+# Acknowledgements
+
+I thank for ideas and guidance to Suzanne Lao, Stuart Davis, Shameema Jafferjee Esufa, David Kenfack and Anudeep Singh. Andudeep also wrote the algorithm of `add_subquadrat()` (which I translated from SQL to R).
