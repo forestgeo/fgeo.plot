@@ -50,7 +50,6 @@ After installing and loading __map__, get help about the main function with `?ma
 
 ```{r example-map,message=FALSE}
 library(dplyr)
-library(ggplot2)
 library(map)
 
 # Filter the plot you want to map

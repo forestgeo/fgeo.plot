@@ -15,9 +15,6 @@ vignette: >
 ```{r pkg-hide, echo = FALSE, message=FALSE, warning=FALSE}
 # install_github("forestgeo/map")
 library(map)
-# install.packages("ggplot2")
-library(ggplot2)
-# install.packages("dplyr")
 library(dplyr)
 
 # Print only a few rows of data framed to save time and space

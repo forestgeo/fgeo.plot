@@ -32,7 +32,6 @@ Example
 
 ``` r
 library(dplyr)
-library(ggplot2)
 library(map)
 
 # Filter the plot you want to map
