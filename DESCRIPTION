@@ -18,7 +18,8 @@ Imports:
     ggrepel,
     rlang,
     stats,
-    stringr
+    stringr,
+    directlabels
 Suggests: 
     covr,
     gridExtra,
