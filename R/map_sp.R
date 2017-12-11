@@ -201,8 +201,8 @@ map_sp_pdf <- function(census,
     xlim = xlim, ylim = ylim, theme = theme,
     elevation = elevation, line_size = line_size, low = low, high = high,
     bins = bins, ...)
-  pdf(file = file)
-  on.exit(dev.off())
+  grDevices::pdf(file = file)
+  on.exit(grDevices::dev.off())
   invisible(lapply(plots, print))
 
   invisible(plots)
