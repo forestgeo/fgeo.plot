@@ -66,13 +66,15 @@ reference:
   - title: "Data set"
     contents:
       - bci12vft_mini
-
-
+      - bciYYtNmini
+      - bciYYsNmini
+      - bci_elevation
 
 articles:
 
   - title: "All tutorials"
     contents:
       - map_tag
+      - map
 
 
