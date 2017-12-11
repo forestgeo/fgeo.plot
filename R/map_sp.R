@@ -281,19 +281,14 @@ map_basic <- function(census, xlim, ylim, theme = ggplot2::theme_bw(), ...) {
   check_crucial_names(census, c("gx", "gy"))
   assertive::assert_all_are_not_na(c(xlim, ylim))
 
-  ggplot2::ggplot(
-    data = census,
-    ggplot2::aes(x = gx, y = gy)
-  ) +
-    ggplot2::geom_point(...) +
-    ggplot2::labs(x = NULL, y = NULL, title = unique(census$sp)) +
-    ggplot2::coord_fixed(xlim = xlim, ylim = ylim) +
-    ggplot2::scale_x_continuous(minor_breaks = seq(xlim[1], xlim[2], 20)) +
-    ggplot2::scale_y_continuous(minor_breaks = seq(ylim[1], ylim[2], 20)) +
+  ggplot(data = census, aes(x = gx, y = gy)) +
+    geom_point(...) +
+    labs(x = NULL, y = NULL, title = unique(census$sp)) +
+    coord_fixed(xlim = xlim, ylim = ylim) +
+    scale_x_continuous(minor_breaks = seq(xlim[1], xlim[2], 20)) +
+    scale_y_continuous(minor_breaks = seq(ylim[1], ylim[2], 20)) +
     theme +
-    ggplot2::theme(
-      panel.grid.minor = ggplot2::element_line(linetype = "dashed")
-    )
+    theme(panel.grid.minor = element_line(linetype = "dashed"))
 }
 
 #' Add elevation lines to a ggplot.
@@ -311,10 +306,10 @@ add_elevation <- function(ggplot,
   check_crucial_names(elevation, c("gx", "gy", "elev"))
 
   p <- ggplot +
-    ggplot2::stat_contour(data = elevation,
-      ggplot2::aes(x = gx, y = gy, z = elev, colour = ..level..),
+    stat_contour(data = elevation,
+      aes(x = gx, y = gy, z = elev, colour = ..level..),
       size = line_size, bins = bins) +
-    ggplot2::scale_colour_continuous(low = low, high = high)
+    scale_colour_continuous(low = low, high = high)
   labels_properties <- list("far.from.others.borders", "calc.boxes",
     "enlarge.box", box.color = NA, fill = "transparent", "draw.rects")
   p_with_labels <- directlabels::direct.label(p, labels_properties)
