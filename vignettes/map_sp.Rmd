@@ -41,8 +41,8 @@ This vignette shows you how to map species distribution with `map_sp()` and `map
 # To install from a private repo, generate a personal access token (PAT) in
 # https://github.com/settings/tokens and supply to this argument.
 GITHUB_PAT <- "your token"
-# install_github("forestgeo/forestr", auth_token = GITHUB_PAT)
-library(forestr)
+# install_github("forestgeo/map", auth_token = GITHUB_PAT)
+library(map)
 
 # Also using the package dplyr for easier data manipulation
 # install.packages(dplyr)
@@ -55,7 +55,7 @@ Loading data for examples.
 
 ```{r}
 # Converting dataframe to tibble for better printing
-example_data <- as_tibble(forestr::bci12t7mini)
+example_data <- as_tibble(map::bci12t7mini)
 
 # Let's find the top-3 most abundant species
 sp_n <- count(example_data, sp)
@@ -116,7 +116,7 @@ map_sp(with_wrong_name, c("hybapr", "faraoc"))
 You may have elevation data from your site.
 
 ```{r}
-my_elev <- forestr::bci_elevation
+my_elev <- map::bci_elevation
 my_elev
 ```
 
