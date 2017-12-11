@@ -447,34 +447,34 @@ plot_repulsive_tags <- function(prep_df,
   lab_df$status_tree <- NA
 
   quad_id_label <- unique(prep_df$quad_id)
-  ggplot2::ggplot(
+  ggplot(
     data = prep_df,
     # /* ********************************************************************
     # If in this chunk I refer to `var` as `df$var` I get this error:
     #   Error: Aesthetics must be either length 1 or the same as the data (16):
     #   x, y, label, shape
-    ggplot2::aes(x = qx, y = qy, shape = status_tree)
+    aes(x = qx, y = qy, shape = status_tree)
   ) +
-    ggplot2::scale_shape_manual(values = point_shape) +
-    ggplot2::geom_label(
+    scale_shape_manual(values = point_shape) +
+    geom_label(
       data = lab_df,
-      ggplot2::aes(qx, qy, label = subquadrat),
+      aes(qx, qy, label = subquadrat),
       colour = "white", fill = "#f4f2f2", fontface = "bold", size = 12
     ) +
     # */ ********************************************************************
-    ggplot2::geom_point(size = point_size) +
-    ggrepel::geom_text_repel(ggplot2::aes(label = prep_df$tag), size = tag_size) +
-    ggplot2::scale_x_continuous(
+    geom_point(size = point_size) +
+    ggrepel::geom_text_repel(aes(label = prep_df$tag), size = tag_size) +
+    scale_x_continuous(
       minor_breaks = seq(1, x_q, 1), breaks = seq(0, x_q, x_sq)
     ) +
-    ggplot2::scale_y_continuous(
+    scale_y_continuous(
       minor_breaks = seq(1, y_q, 1), breaks = seq(0, y_q, y_sq)
     ) +
-    ggplot2::coord_fixed(
+    coord_fixed(
       xlim = c(unique(prep_df$x1), unique(prep_df$x2)),
       ylim = c(unique(prep_df$y1), unique(prep_df$y2))
     ) +
-    ggplot2::labs(
+    labs(
       title = paste0(site_name, ". ", quad_id_label),
       subtitle = header,
       x = NULL, y = NULL
