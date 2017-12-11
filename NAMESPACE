@@ -3,6 +3,8 @@
 export(add_subquadrat)
 export(get_header)
 export(get_theme)
+export(map_sp)
+export(map_sp_pdf)
 export(map_tag)
 export(pad)
 import(ggplot2)
