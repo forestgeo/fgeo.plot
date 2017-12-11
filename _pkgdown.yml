@@ -34,7 +34,7 @@ navbar:
       - text: Map tree tags for fieldwork
         href: https://bookdown.org/forestgeoguest/map_tag_app
 
-    - text: news
+    - text: News
       href: news/index.html
 
     - icon: fa-gavel
