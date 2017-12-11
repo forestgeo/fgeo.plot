@@ -19,7 +19,8 @@ Imports:
     rlang,
     stats,
     stringr,
-    directlabels
+    directlabels,
+    grDevices
 Suggests: 
     covr,
     gridExtra,
