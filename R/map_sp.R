@@ -50,7 +50,7 @@
 #' # Quick exploration with defaults -----------------------------------------
 #'
 #' # Example data. Converting dataframe to tibble for better printing
-#' census <- as_tibble(forestr::bci12t7mini)
+#' census <- as_tibble(map::bci12t7mini)
 #'
 #' # Print to screen
 #' map_sp(census, "hybapr")
@@ -61,7 +61,7 @@
 #' p
 #'
 #' # Add elevation data
-#' elev <- forestr::bci_elevation
+#' elev <- map::bci_elevation
 #'
 #' # Not the right names
 #' names(elev)

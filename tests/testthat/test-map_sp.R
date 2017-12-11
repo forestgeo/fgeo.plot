@@ -2,10 +2,10 @@
 
 library(dplyr)
 
-census <- forestr::bci12t7mini
-few_sp <- dplyr::count(census, sp) %>% 
-  dplyr::arrange(n) %>% 
-  tail(3) %>% 
+census <- map::bci12t7mini
+few_sp <- dplyr::count(census, sp) %>%
+  dplyr::arrange(n) %>%
+  tail(3) %>%
   dplyr::pull(sp)
 census <- census %>% dplyr::filter(sp  %in% few_sp)
 
@@ -19,7 +19,7 @@ context("map_sp")
 test_that("errs with wrong inputs.", {
   # wrong name
   expect_error(
-    map_sp(census = dplyr::rename(census, spp = sp), 
+    map_sp(census = dplyr::rename(census, spp = sp),
     species = all_species)
   )
   # wrong species
