@@ -35,7 +35,7 @@ update_geom_defaults("text", list(size = 14.5))
 
 # Overview
 
-This vignette shows you how to map species distribution with `map_sp()` and `map_sp_pdf()` from the __forestr__ package.
+This vignette shows you how to map species distribution with `map_sp()` and `map_sp_pdf()` from the __map__ package.
 
 ```{r}
 # To install from a private repo, generate a personal access token (PAT) in
@@ -264,7 +264,7 @@ map_sp(odd_data, two_species, xlim = c(0, 1000), ylim = c(0, 500))
 
 # Fine Tunning
 
-This last section shows you how to fine tune your plots. For this, you will need a couple of functions from packages other than __forestr__.
+This last section shows you how to fine tune your plots. For this, you will need a couple of functions from packages other than __map__.
 
 ## Multiple Plots in One Page
 

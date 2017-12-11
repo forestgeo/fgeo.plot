@@ -99,7 +99,7 @@ OK, that was the bad news -- `map_tag()` won't let you change the values of the 
 
 # Preparation: Packages and Data
 
-The packages you will use are __map__, __ggplot2__ and __dplyr__. __map__ contains the function `map_tag()` (after I receive some feedback I will move it to the package __forestr__). __ggplot2__ and __dplyr__ provide powerful tools for vizualizing and wrangling data. (These packages are part of the tidyverse (https://www.tidyverse.org/) -- a collection of R packages designed for data science. All packages share an underlying philosophy and common APIs.)
+The packages you will use are __map__, __ggplot2__ and __dplyr__. __map__ contains the function `map_tag()`, and __ggplot2__ and __dplyr__ provide powerful tools for vizualizing and wrangling data. (These packages are part of the tidyverse (https://www.tidyverse.org/) -- a collection of R packages designed for data science. All packages share an underlying philosophy and common APIs.)
 
 ```{r sho-chunk-that-was-hidden-above}
 <<pkg-hide>>
