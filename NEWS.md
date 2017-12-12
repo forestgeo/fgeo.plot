@@ -1,3 +1,11 @@
+# map 0.0.00.9007
+
+* Add `map_sp()` from __forestr__ to keep all mapping functions in __map__.
+
+# map 0.0.00.9006
+
+* Fix bug. Now `map_tag()` again plots subquadrat labels.
+
 # map 0.0.00.9005
 
 * Rename to map.
