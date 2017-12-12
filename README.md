@@ -1,12 +1,9 @@
 
 <!-- Don't edit README.md; instead, edit README.Rmd -->
-map <img src="https://i.imgur.com/39pvr4n.png" align="right" height=44 />
-=========================================================================
+map: map ForestGEO's data <img src="https://i.imgur.com/39pvr4n.png" align="right" height=44 />
+===============================================================================================
 
 [![Build Status](https://travis-ci.org/forestgeo/map.svg?branch=master)](https://travis-ci.org/forestgeo/map) [![Coverage status](https://codecov.io/gh/forestgeo/map/branch/master/graph/badge.svg)](https://codecov.io/github/forestgeo/map?branch=master) [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/map)](https://cran.r-project.org/package=map)
-
-Tools to map ForestGEO's data.
-------------------------------
 
 Installation
 ------------
@@ -25,8 +22,6 @@ Or with:
 ``` r
 source("https://install-github.me/forestgeo/map")
 ```
-
-After installing and loading **map**, get help about the main function with `?map_tag()`.
 
 Example
 -------
