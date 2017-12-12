@@ -45,8 +45,6 @@ Or with:
 source("https://install-github.me/forestgeo/map")
 ```
 
-After installing and loading __map__, get help about the main function with `?map_tag()`.
-
 ## Example
 
 ```{r example-map,message=FALSE}
