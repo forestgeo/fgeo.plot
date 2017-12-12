@@ -14,6 +14,7 @@ Installation
 Install **map** from GitHub with:
 
 ``` r
+# To install from a private repo, see auth_token at https://goo.gl/re1LFe
 # install.packages("remotes")
 remotes::install_github(repo = "forestgeo/map")
 library(map)
