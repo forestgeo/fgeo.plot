@@ -31,7 +31,7 @@ library(dplyr)
 library(map)
 
 # Filter the plot you want to map
-vft <- dplyr::filter(map::bci12vft_mini, PlotID == 1)
+vft <- dplyr::filter(bciex::bci12vft_mini, PlotID == 1)
 
 # This data set has two wrong names that need to be fixed before using map_tag()
 vft_rnm <- dplyr::rename(vft, qx = x, qy = y)
