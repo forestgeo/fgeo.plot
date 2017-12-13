@@ -112,7 +112,7 @@ From now on, The data you will use is an example data set from Barro Colorado Is
 # https://repository.si.edu/handle/10088/20925).
 
 # Convert to tibble (modern dataframe) for better printing
-bci_vft <- as_tibble(bci12vft_mini)
+bci_vft <- as_tibble(bciex::bci12vft_mini)
 glimpse(bci_vft)
 ```
 
