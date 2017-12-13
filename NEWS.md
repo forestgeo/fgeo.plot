@@ -1,6 +1,7 @@
 # map 0.0.00.9007
 
 * Add `map_sp()` from __forestr__ to keep all mapping functions in __map__.
+* Remove data. Instead use data from __bciex__.
 
 # map 0.0.00.9006
 

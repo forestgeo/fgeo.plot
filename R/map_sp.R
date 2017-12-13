@@ -50,7 +50,7 @@
 #' # Quick exploration with defaults -----------------------------------------
 #'
 #' # Example data. Converting dataframe to tibble for better printing
-#' census <- as_tibble(map::bci12t7mini)
+#' census <- as_tibble(bciex::bci12t7mini)
 #'
 #' # Print to screen
 #' map_sp(census, "hybapr")

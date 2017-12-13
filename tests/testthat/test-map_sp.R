@@ -2,7 +2,7 @@
 
 library(dplyr)
 
-census <- map::bci12t7mini
+census <- bciex::bci12t7mini
 few_sp <- dplyr::count(census, sp) %>%
   dplyr::arrange(n) %>%
   tail(3) %>%

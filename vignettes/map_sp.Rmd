@@ -55,7 +55,7 @@ Loading data for examples.
 
 ```{r}
 # Converting dataframe to tibble for better printing
-example_data <- as_tibble(map::bci12t7mini)
+example_data <- as_tibble(bciex::bci12t7mini)
 
 # Let's find the top-3 most abundant species
 sp_n <- count(example_data, sp)
