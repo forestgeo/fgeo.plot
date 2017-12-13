@@ -61,7 +61,7 @@
 #' p
 #'
 #' # Add elevation data
-#' elev <- map::bci_elevation
+#' elev <- bciex::bci_elevation
 #'
 #' # Not the right names
 #' names(elev)

@@ -52,7 +52,7 @@ filter_first_quadrat <- function(vft) {
   first_quadrat <- unique(vft$QuadratName)[1]
   vft[vft$QuadratName == first_quadrat, ]
 }
-some_site_vft <- map::bci12vft_mini %>%
+some_site_vft <- bciex::bci12vft_mini %>%
   # BCI has older names that must be fixed to work with map_tag()
   rename(QX = x, QY = y) %>% 
   filter_first_quadrat()
@@ -105,7 +105,7 @@ The packages you will use are __map__, __ggplot2__ and __dplyr__. __map__ contai
 <<pkg-hide>>
 ```
 
-From now on, The data you will use is an example data set from Barro Colorado Island made public in 2012 (see https://repository.si.edu/handle/10088/20925 and [`?map::bci12vft_mini`](https://forestgeo.github.io/map/reference/bci12vft_mini.html)).
+From now on, The data you will use is an example data set from Barro Colorado Island made public in 2012 (see https://repository.si.edu/handle/10088/20925 and [`?bciex::bci12vft_mini`](https://forestgeo.github.io/map/reference/bci12vft_mini.html)).
 
 ```{r data-vtf}
 # Subset of a public ViewFullTable from BCI (source:

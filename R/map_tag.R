@@ -231,8 +231,8 @@ check_single_plotid <- function(x) {
 #'
 #' @examples
 #' \dontrun{
-#' # map::bci12vft_mini is included in this package
-#' df <- map::bci12vft_mini
+#' # bciex::bci12vft_mini is included in this package
+#' df <- bciex::bci12vft_mini
 #' with_subquadrat <- add_subquadrat(df, 20, 20, 5, 5)
 #' head(with_subquadrat[c("qx", "qy", "subquadrat")])
 #' }

@@ -116,7 +116,7 @@ map_sp(with_wrong_name, c("hybapr", "faraoc"))
 You may have elevation data from your site.
 
 ```{r}
-my_elev <- map::bci_elevation
+my_elev <- bciex::bci_elevation
 my_elev
 ```
 

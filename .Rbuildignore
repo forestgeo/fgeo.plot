@@ -19,5 +19,4 @@
 ^tmp\.R$
 ^vignettes/rsconnect$
 ^vignettes/map_tag_cache$
-^vignettes/map_tag_files
 ^inst/figures$
