@@ -63,17 +63,9 @@ reference:
       - get_theme
       - pad
 
-  - title: "Data set"
-    contents:
-      - bci12vft_mini
-
-
-
 articles:
 
   - title: "All tutorials"
     contents:
       - map_tag
       - map_sp
-
-
