@@ -295,13 +295,13 @@ check_subquadrat_dimensions <- function(df,
                                  y_q,
                                  x_sq,
                                  y_sq) {
-  assertive::assert_is_data.frame(df)
+  stopifnot(is.data.frame(df))
   remaining_args <- list(x_q, y_q, x_sq, y_sq)
 
-lapply(remaining_args, assertive::assert_is_numeric)
-lapply(remaining_args, assertive::assert_is_of_length, 1)
-lapply(remaining_args, assertive::assert_all_are_positive)
-lapply(remaining_args, assertive::assert_all_are_finite)
+lapply(remaining_args, function(x) stopifnot(is.numeric(x)))
+lapply(remaining_args, function(x) stopifnot(length(x) == 1))
+lapply(remaining_args, function(x) stopifnot(all(x >= 0)))
+lapply(remaining_args, function(x) stopifnot(all(abs(x) != Inf)))
 }
 
 #' Help map_tag()
@@ -410,18 +410,18 @@ check_lapply_plot_repulsive_tags <- function(list_of_data_to_plot,
                                              tag_size,
                                              header,
                                              theme) {
-  assertive::assert_is_data.frame(list_of_data_to_plot[[1]])
+  stopifnot(is.data.frame(list_of_data_to_plot[[1]]))
 
-  assertive::assert_is_character(header)
-  assertive::assert_is_character(site_name)
+  stopifnot(is.character(header))
+  stopifnot(is.character(site_name))
 
-  assertive::assert_is_numeric(point_shape)
-  assertive::assert_is_numeric(point_size)
-  assertive::assert_is_numeric(tag_size)
+  stopifnot(is.numeric(point_shape))
+  stopifnot(is.numeric(point_size))
+  stopifnot(is.numeric(tag_size))
 
-  assertive::assert_is_of_length(point_shape, 2)
-  assertive::assert_is_of_length(point_size, 1)
-  assertive::assert_is_of_length(tag_size, 1)
+  stopifnot(length(point_shape) == 2)
+  stopifnot(length(point_size) == 1)
+  stopifnot(length(tag_size) == 1)
 }
 
 #' Help map_tag()

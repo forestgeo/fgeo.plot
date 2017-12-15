@@ -50,14 +50,13 @@ The job is to map the position of trees within a quadrat. Later, the task will b
 
 # Setup
 
-I'l use __dplyr__ and __ggplot2__ for data wrangling and visualization. Also, I'll use __ggrepel__ to avoid overlaping on the maps; [__map__](https://github.com/forestgeo/map) which contains an example dataset; and __assertive__, to assert some important aspects of the data.
+I'l use __dplyr__ and __ggplot2__ for data wrangling and visualization. Also, I'll use __ggrepel__ to avoid overlaping on the maps; [__map__](https://github.com/forestgeo/map) which contains an example dataset.
 
 ```{r}
 # Ensure random operations are reproducible
 set.seed(1234)
 
 library(map)
-library(assertive)
 library(ggrepel)
 library(ggplot2)
 library(dplyr)
@@ -69,7 +68,6 @@ This section develops a script that prototypes one way to do this job. The code 
 
 ```{r}
 # Example data set
-# example_data <- sinharaja::sinh_vft
 example_data <- bciex::bci12vft_mini
 
 
@@ -84,7 +82,7 @@ All quadrats should come from a single research plot. I'll check if this true.
 
 ```{r}
 censuses_n <- unique(example_data$PlotID)
-is_of_length(censuses_n, 1)
+length(censuses_n) == 1
 ```
 
 Should the data set contain multiple plots, I would reject the data and ask the user to filter a single plot. The user should then do something like this:

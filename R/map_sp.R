@@ -211,10 +211,10 @@ map_sp_pdf <- function(census,
 #' Wrap multiple checks in map_sp() and map_sp_pdf() for clarity.
 #' @noRd
 check_map_sp <- function(cns, sp) {
-  assertive::assert_is_data.frame(cns)
+  stopifnot(is.data.frame(cns))
   check_crucial_names(x = cns, nms = c("gx", "gy", "sp"))
-  assertive::assert_is_character(sp)
-  assertive::assert_is_non_empty(sp)
+  stopifnot(is.character(sp))
+  if (length(sp) == 0) {stop("The vector `sp` is empty.")}
 }
 
 #' If file extension is not .pdf, ignore the given file-name
@@ -260,8 +260,8 @@ map_one_sp <- function(census,
                        high = "#56B1F7",
                        bins = NULL,
                        ...) {
-  assertive::assert_is_character(one_sp)
-  assertive::assert_is_of_length(one_sp, 1)
+  stopifnot(is.character(one_sp))
+  if (length(one_sp) != 1) {stop("`one_sp` is not of length 1.")}
 
   if (is.null(xlim)) {xlim <- c(0, max(census$gx, na.rm = TRUE))}
   if (is.null(ylim)) {ylim <- c(0, max(census$gy, na.rm = TRUE))}
@@ -279,7 +279,11 @@ map_one_sp <- function(census,
 #' @noRd
 map_basic <- function(census, xlim, ylim, theme = ggplot2::theme_bw(), ...) {
   check_crucial_names(census, c("gx", "gy"))
-  assertive::assert_all_are_not_na(c(xlim, ylim))
+  xlim_contains_no_NA <- !is.na(xlim)
+  stopifnot(xlim_contains_no_NA)
+  ylim_contains_no_NA <- !is.na(ylim)
+  stopifnot(ylim_contains_no_NA)
+
 
   ggplot(data = census, aes(x = gx, y = gy)) +
     geom_point(...) +

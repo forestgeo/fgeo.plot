@@ -30,7 +30,7 @@ test_that("outputs a non empty list", {
   result <-  map_sp(census = census, species = all_species)
   expect_type(result, "list")
   expect_silent(
-    lapply(result, assertive::is_non_empty) %>%
+    lapply(result, function(x) stopifnot(length(x) != 0)) %>%
       unlist() %>%
       all()
   )
