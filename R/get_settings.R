@@ -74,60 +74,13 @@ get_theme <- function(panel_grid_major_colour = "black",
 #' # Or make your own strings.
 #' get_header(line1 = "This is", line2 = "a customized", line3 = "header")
 #' get_header(line1 = "Only", line2 = "two lines", line3 = NULL)
-get_header <- function(line1 = pad(c("Checking: ", "Checked date: ")),
-                       line2 = pad(c("Recording: "), total_width = 24),
-                       line3 = pad(c("Measuring: ", "Measurement date: "))) {
+get_header <- function(line1 = "Checking: _______________ Checked date: _______________",
+                       line2 = "Recording: _____________",
+                       line3 = "Measuring: _____________ Measurement date: _____________") {
   paste0(
     "\n",
     line1, "\n",
     line2, "\n",
     line3
   )
-}
-
-#' Pad strings.
-#'
-#' `pad` provides a convenient way to create each line of the headers produced
-#' with [get_header()].
-#'
-#' This function may output strings a little shorter or a little longer than
-#' expected based on `total_width`. This is a bug, and appears sometimes when
-#' the strings contain spaces. Because  this bug is not too serious, and I leave
-#' it for now.
-#'
-#' @param total_width Total width of the string after pasting each string in the
-#'   vector of strings.
-#' @param string A character vector.
-#' @param side Side on which padding character is added (left, right or both).
-#' @param pad Single padding character (default is a space).
-#'
-#' @family functions to fine tune a plot of repulsive tags.
-#'
-#' @return A padded string that is convenient to produce each line of
-#'   [get_header()]
-#' @export
-#'
-#' @examples
-#' pad(c("Hello", "world"))
-#' pad(c("Different pad", "and shorter"), total_width = 50, pad = ".")
-#' pad(c("Padding", "to the left"), total_width = 70, pad = ".", side = "left")
-pad <- function(string, total_width = 55, side = "right", pad = "_") {
-  string_length <- length(string)
-  max_characters_n <- total_width
-  string_characters_n <- sum(nchar(string))
-
-  space_to_fill <- (max_characters_n - string_characters_n) / string_length
-
-  filler <- stringr::str_pad(
-    string = pad,
-    width = space_to_fill,
-    side = side,
-    pad = pad
-  )
-
-  if (side == "right") {
-    paste0(string, filler, collapse = " ")
-  } else {
-    paste0(filler, string, collapse = " ")
-  }
 }

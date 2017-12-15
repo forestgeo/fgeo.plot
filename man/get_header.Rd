@@ -4,9 +4,9 @@
 \alias{get_header}
 \title{A simple way to produce a three-lines header for \code{map_tag()}.}
 \usage{
-get_header(line1 = pad(c("Checking: ", "Checked date: ")),
-  line2 = pad(c("Recording: "), total_width = 24),
-  line3 = pad(c("Measuring: ", "Measurement date: ")))
+get_header(line1 = "Checking: _______________ Checked date: _______________",
+  line2 = "Recording: _____________",
+  line3 = "Measuring: _____________ Measurement date: _____________")
 }
 \arguments{
 \item{line1, line2, line3}{Strings to use on the first, second and third line
@@ -28,6 +28,5 @@ get_header(line1 = "This is", line2 = "a customized", line3 = "header")
 get_header(line1 = "Only", line2 = "two lines", line3 = NULL)
 }
 \seealso{
-Other functions to fine tune a plot of repulsive tags.: \code{\link{get_theme}},
-  \code{\link{pad}}
+Other functions to fine tune a plot of repulsive tags.: \code{\link{get_theme}}
 }

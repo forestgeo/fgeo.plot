@@ -50,6 +50,5 @@ map::get_theme()
 \seealso{
 \code{\link[ggplot2:theme]{ggplot2::theme()}}.
 
-Other functions to fine tune a plot of repulsive tags.: \code{\link{get_header}},
-  \code{\link{pad}}
+Other functions to fine tune a plot of repulsive tags.: \code{\link{get_header}}
 }

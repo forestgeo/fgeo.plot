@@ -17,7 +17,6 @@ Imports:
     ggrepel,
     rlang,
     stats,
-    stringr,
     directlabels,
     grDevices,
     bciex
