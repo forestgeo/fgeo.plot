@@ -56,31 +56,38 @@ get_theme <- function(panel_grid_major_colour = "black",
   )
 }
 
-#' A simple way to produce a three-lines header for `map_tag()`.
+
+
+#' Pre-made headers.
 #'
-#' @param line1,line2,line3 Strings to use on the first, second and third line
-#'  of the header.
-#'
-#' @return A three-lines string to be used as the header on a plot of repulsive
-#'   tags.
-#'
-#' @family functions to fine tune a plot of repulsive tags.
-#' @export
-#'
+#' @name headers
 #' @examples
-#' # Use common defaults
-#' get_header()
-#'
-#' # Or make your own strings.
-#' get_header(line1 = "This is", line2 = "a customized", line3 = "header")
-#' get_header(line1 = "Only", line2 = "two lines", line3 = NULL)
-get_header <- function(line1 = "Checking: _______________ Checked date: _______________",
-                       line2 = "Recording: _____________",
-                       line3 = "Measuring: _____________ Measurement date: _____________") {
-  paste0(
-    "\n",
-    line1, "\n",
-    line2, "\n",
-    line3
+#' header_map_tag()
+#' header_map_quad()
+NULL
+
+#' @rdname headers
+#' @export
+header_map_tag <- function() {
+  paste(
+    "",
+    "Checking: _______________ Checked date: _______________",
+    "Recording: _____________",
+    "Measuring: _____________ Measurement date: _____________",
+    sep = "\n"
+  )
+}
+
+#' @rdname headers
+#' @export
+header_map_quad <- function() {
+  fill_blank <- "__________________  __________________  __________________"
+  paste(
+    "Nombres y fecha:           Revisado por:                Entrado en PC por:",
+    "",
+    fill_blank,
+    fill_blank,
+    fill_blank,
+    sep = "\n"
   )
 }

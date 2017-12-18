@@ -6,7 +6,7 @@
 \usage{
 map_tag(vft, x_q = 20, x_sq = 5, y_q = x_q, y_sq = x_sq,
   site_name = "Site Name, YYYY", point_shape = c(19, 4), point_size = 1.5,
-  tag_size = 3, header = get_header(), theme = get_theme(),
+  tag_size = 3, header = header_map_tag(), theme = get_theme(),
   extend_grid = 0)
 }
 \arguments{
@@ -35,8 +35,7 @@ under the section entitled \emph{'pch' values}).}
 
 \item{tag_size}{A number giving tag size. Passed to \code{\link[ggplot2:geom_point]{ggplot2::geom_point()}}.}
 
-\item{header}{A string to use as a header (subtitle). To conveniently create
-this header use \code{\link[=get_header]{get_header()}}.}
+\item{header}{A string to use as a header (see \code{\link[=header_map_tag]{header_map_tag()}}).}
 
 \item{theme}{A \code{\link[ggplot2:theme]{ggplot2::theme()}}. To conveniently create this theme
 use \code{\link[=get_theme]{get_theme()}}.}
@@ -81,6 +80,7 @@ the algorithm to calculate subquadrats.
 library(dplyr)
 library(ggplot2)
 library(map)
+library(bciex)
 
 # Subset of a public ViewFullTable from BCI (source:
 # https://repository.si.edu/handle/10088/20925).
@@ -117,13 +117,8 @@ map_tag(vft1_rnm, site_name = "BCI 2012",
         header = "Line 1: _________\\nLine 2:\\nLine 3:....................."
 )[1]
 
-# Maybe easier
-your_header <- get_header(
-  line1 = "Your header-line 1: _____________________________",
-  line2 = "Your header-line 3: _____________________________",
-  line3 = "Your header-line 2: _____________________________"
-)
-map_tag(vft1_rnm, site_name = "BCI 2012", header = your_header)[1]
+# Or use a pre-made header
+map_tag(vft1_rnm, site_name = "BCI 2012", header = header_map_tag())[1]
 
 # Custom theme: using a pre-made theme
 # Allow using pre-made themes (e.g. ggplot2::theme_bw()) and building custom
@@ -164,5 +159,5 @@ map_tag(smaller, x_q = 10, x_sq = 2.5, extend_grid = 0.25)[1]
 }
 \seealso{
 \code{\link[graphics:points]{graphics::points()}}, \code{\link[ggplot2:geom_point]{ggplot2::geom_point()}}, \code{\link[ggplot2:theme]{ggplot2::theme()}}
-\code{\link[=get_header]{get_header()}}, \code{\link[=get_theme]{get_theme()}}, \code{\link[=add_subquadrat]{add_subquadrat()}}.
+\code{\link[=header_map_tag]{header_map_tag()}}, \code{\link[=get_theme]{get_theme()}}, \code{\link[=add_subquadrat]{add_subquadrat()}}.
 }

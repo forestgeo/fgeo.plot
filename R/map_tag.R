@@ -25,8 +25,7 @@
 #' @param point_size A number giving points size. Passed to
 #'   [ggplot2::geom_point()].
 #' @param tag_size A number giving tag size. Passed to [ggplot2::geom_point()].
-#' @param header A string to use as a header (subtitle). To conveniently create
-#'   this header use [get_header()].
+#' @param header A string to use as a header (see [header_map_tag()]).
 #' @param theme A [ggplot2::theme()]. To conveniently create this theme
 #'   use [get_theme()].
 #' @param extend_grid A number to adjust the extension of the minor and major
@@ -34,7 +33,7 @@
 #' @inheritParams add_subquadrat
 #'
 #' @seealso [graphics::points()], [ggplot2::geom_point()], [ggplot2::theme()]
-#'   [get_header()], [get_theme()], [add_subquadrat()].
+#'   [header_map_tag()], [get_theme()], [add_subquadrat()].
 #'
 #' @section Acknowledgements:
 #' Useful ideas and guidance came from Suzanne Lao, Stuart Davis, Shameema
@@ -50,6 +49,7 @@
 #' library(dplyr)
 #' library(ggplot2)
 #' library(map)
+#' library(bciex)
 #'
 #' # Subset of a public ViewFullTable from BCI (source:
 #' # https://repository.si.edu/handle/10088/20925).
@@ -86,13 +86,8 @@
 #'         header = "Line 1: _________\nLine 2:\nLine 3:....................."
 #' )[1]
 #'
-#' # Maybe easier
-#' your_header <- get_header(
-#'   line1 = "Your header-line 1: _____________________________",
-#'   line2 = "Your header-line 3: _____________________________",
-#'   line3 = "Your header-line 2: _____________________________"
-#' )
-#' map_tag(vft1_rnm, site_name = "BCI 2012", header = your_header)[1]
+#' # Or use a pre-made header
+#' map_tag(vft1_rnm, site_name = "BCI 2012", header = header_map_tag())[1]
 #'
 #' # Custom theme: using a pre-made theme
 #' # Allow using pre-made themes (e.g. ggplot2::theme_bw()) and building custom
@@ -139,7 +134,7 @@ map_tag <- function(vft,
                     point_shape = c(19, 4),
                     point_size = 1.5,
                     tag_size = 3,
-                    header = get_header(),
+                    header = header_map_tag(),
                     theme = get_theme(),
                     extend_grid = 0) {
   # Lowercase names: avoid errors due to confusing upper- and lower-case
@@ -383,7 +378,7 @@ lapply_plot_repulsive_tags <- function(list_of_data_to_plot,
                                        point_shape = c(19, 4),
                                        point_size = 1.5,
                                        tag_size = 3,
-                                       header = get_header(),
+                                       header = header_map_tag(),
                                        theme = get_theme()) {
   check_lapply_plot_repulsive_tags(
     list_of_data_to_plot = list_of_data_to_plot, site_name = site_name,

@@ -207,97 +207,20 @@ The requirements are quoted below; they come from a private email (via [@](https
 
 (Eventually I'll let the user adjust these options -- but I'll do that later; now I focus on getting the maps close to the most common requirement.)
 
-### Helpers
-
-```{r}
-theme <- theme(
-  panel.background = element_rect(fill = "white"),
-  panel.grid.minor = element_blank(),
-  panel.grid.major = element_blank(),
-  legend.position = "none",
-  plot.title = element_text(size = 20),
-  plot.subtitle = element_text(size = 12),
-  axis.text = element_blank(),
-  panel.border = element_rect(colour = "black", fill = NA),
-  axis.ticks.length = unit(-0.1, "cm")
-)
-
-# Add the ending ".d" to the `Tag` of dead stems.
-tag_dead <- function(x, y) {
-  is_dead <- y == "dead"
-  x[is_dead] <- paste0(x[is_dead], ".", sub("^(.).*$", "\\1", y[is_dead]))
-  x
-}
-
-# See if this works
-tag_dead(x = c("tag1", "tag2"), y = c("dead", "alive"))
-
-```
-
-### Set paramenters
+### Map
 
 ```{r params}
-# Parameters that will likely become arguments of a function
-lim_min <- 0
-lim_max <- 20
-subquadrat_side <- 5
-size_label <- 2
-# Adjust a margin around the plot area that ggplot2 inserts by default
-offset <- 1
-title <- paste("My Title", unique(one_quadrat$QuadratName), sep = ", ")
-header <- paste0(
-  "Nombres y fecha:           Revisado por:                Entrado en PC por:\n",
-  "                                                                          \n",
-  "__________________  __________________  __________________\n",
-  "__________________  __________________  __________________\n",
-  "__________________  __________________  __________________\n"
-)
-```
-
-## Prepare
-
-```{r}
-one_quadrat <- mutate(
+one_quadrat <- dplyr::mutate(
   one_quadrat, 
-  # Tad dead trees
+  # Tag dead trees
   tagged_tag = tag_dead(Tag, Status),
   # Standarize the size of the points by the total number of trees
   dbh_standarized = DBH / length(DBH)
 )
-
-dead <- filter(one_quadrat, Status == "dead")
+map_quad(one_quadrat)
 ```
-
-## Plot
-
-```{r}
-ggplot(data = one_quadrat, aes(x = x, y = y)) +
-  geom_point(aes(size = dbh_standarized), shape = 1) +
-  geom_text_repel(aes(label = tagged_tag), size = size_label) +
-  # /* Repeat for the dead trees, which are lost because dbh is NA
-  geom_text_repel(data = dead, aes(label = tagged_tag), size = size_label) +
-  # */
-  labs(title = title, subtitle = header, x = NULL, y = NULL) +
-  geom_vline(
-    xintercept = seq(lim_min, lim_max, by = subquadrat_side), 
-    linetype = "dashed"
-  ) +
-  geom_hline(
-    yintercept = seq(lim_min, lim_max, by = subquadrat_side), 
-    linetype = "dashed"
-  ) +
-  coord_fixed(
-    xlim = c(lim_min + offset, lim_max - offset), 
-    ylim = c(lim_min + offset, lim_max - offset)
-  ) +
-  scale_x_continuous(breaks = lim_min:lim_max, sec.axis = dup_axis()) +
-  scale_y_continuous(breaks = lim_min:lim_max, sec.axis = dup_axis()) +
-  theme
-```
-
 
 ## Observe potential problem
-
 
 I'm suprised that all trees are alive, and I wonder if this is an error.
 
@@ -305,7 +228,9 @@ I'm suprised that all trees are alive, and I wonder if this is an error.
 unique(one_quadrat$Status)
 ```
 
-I'll check if the plot works if I introduce dead trees.
+Maybe the data trully has no dead trees; or maybe I'm inadvertedly removing dead trees when I prepare the data. I must confirm with real data -- not with the the minimal data set I used here.
+
+This plot confirms that the problem might be when the data is prepared -- not when it is plotted.
 
 ```{r}
 with_dead <- one_quadrat
@@ -326,71 +251,50 @@ with_dead <- mutate(
   # Standarize the size of the points by the total number of trees
   dbh_standarized = DBH / length(DBH)
 )
-
-dead <- filter(with_dead, Status == "dead")
+map_quad(with_dead)
 ```
 
-## Plot
+## Iterate over multiple quadrats
+
+Create data. Using `with_dead` to ensure the plot will show both dead and alive trees.
 
 ```{r}
-ggplot(data = with_dead, aes(x = x, y = y)) +
-  geom_point(aes(size = dbh_standarized), shape = 1) +
-  geom_text_repel(aes(label = tagged_tag), size = size_label) +
-  # /* Repeat for the dead trees, which are lost because dbh is NA
-  geom_text_repel(data = dead, aes(label = tagged_tag), size = size_label) +
-  # */
-  labs(title = title, subtitle = header, x = NULL, y = NULL) +
-  geom_vline(
-    xintercept = seq(lim_min, lim_max, by = subquadrat_side), 
-    linetype = "dashed"
-  ) +
-  geom_hline(
-    yintercept = seq(lim_min, lim_max, by = subquadrat_side), 
-    linetype = "dashed"
-  ) +
-  coord_fixed(
-    xlim = c(lim_min + offset, lim_max - offset), 
-    ylim = c(lim_min + offset, lim_max - offset)
-  ) +
-  scale_x_continuous(breaks = lim_min:lim_max, sec.axis = dup_axis()) +
-  scale_y_continuous(breaks = lim_min:lim_max, sec.axis = dup_axis()) +
-  theme
+# Splitting the data to pretend it comes from multiple quadrats
+with_dead$QuadratName <- sample(
+  1:4, length(with_dead$QuadratName), replace = TRUE
+)
+
+p <- with_dead %>% map_quad()
+p
+
+pdf()
+p
+dev.off()
 ```
 
-## Explain why dead trees are plotted independently
 
-This is why the tags are plotted twice -- once for the entire dataset and once of dead treed only. Deead trees have `DBH = NA`, which I get removed automatically by __ggplot2__ when `DBH` is passed to `geom_point()`. Below
 
-```{r}
-select(with_dead, DBH, Status, Tag, tagged_tag)
-```
 
-```{r}
-ggplot(data = with_dead, aes(x = x, y = y)) +
-  geom_point(aes(size = dbh_standarized), shape = 1) +
-  geom_text_repel(aes(label = tagged_tag), size = size_label) +
-  # /* Repeat for the dead trees, which are lost because dbh is NA
-  # geom_text_repel(data = dead, aes(label = tagged_tag), size = size_label) +
-  # */
-  labs(title = title, subtitle = header, x = NULL, y = NULL) +
-  geom_vline(
-    xintercept = seq(lim_min, lim_max, by = subquadrat_side), 
-    linetype = "dashed"
-  ) +
-  geom_hline(
-    yintercept = seq(lim_min, lim_max, by = subquadrat_side), 
-    linetype = "dashed"
-  ) +
-  coord_fixed(
-    xlim = c(lim_min + offset, lim_max - offset), 
-    ylim = c(lim_min + offset, lim_max - offset)
-  ) +
-  scale_x_continuous(breaks = lim_min:lim_max, sec.axis = dup_axis()) +
-  scale_y_continuous(breaks = lim_min:lim_max, sec.axis = dup_axis()) +
-  theme
-```
 
-## My conclusion about dead trees not appearing on the example data
 
-The last few sectios confirmed that the plot is able to map dead trees. The reason why the example data isn't showing dead trees is indeed because no alive tree is left after the filtering process I went through here. The issue remains to find out the filtering I'm doing is resonable or if I am inadvertedly removing dead trees. One way to check is to use real data -- not the minimal example data I used here -- and confirm that the plot shows trees that in the last census had `Status = "dead"`.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

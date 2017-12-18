@@ -169,15 +169,10 @@ map_tag(bci_vft1_rnm, site_name = "BCI 2012",
 )[1]
 ```
 
-The second way is to use `get_header()` (see `?get_header()`).
+The second way is to use `header_map_tag()` (see `?header_map_tag()`).
 
 ```{r header-via-helper}
-your_header <- get_header(
-  line1 = "Your header-line 1: _____________________________",
-  line2 = "Your header-line 3: _____________________________",
-  line3 = "Your header-line 2: _____________________________"
-)
-map_tag(bci_vft1_rnm, site_name = "BCI 2012", header = your_header)[1]
+map_tag(bci_vft1_rnm, site_name = "BCI 2012", header = header_map_tag())[1]
 ```
 
 ## Using Pre-Made and Custom Themes
