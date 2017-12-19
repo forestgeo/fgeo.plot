@@ -182,37 +182,6 @@ map_tag <- function(vft,
   list_of_plots
 }
 
-#' Help map_tag()
-#' @noRd
-check_crucial_names <- function(x, nms) {
-  are_names_expected <- all(nms %in% names(x))
-  if (are_names_expected) {
-    return(invisible())
-  } else {
-    stop(
-      "Ensure your data set has these variables (regardles of the case):\n",
-      paste0(nms, collapse = ", "),
-      call. = FALSE
-    )
-  }
-}
-
-#' Help map_tag()
-#' @noRd
-check_single_plotid <- function(x) {
-  plots <- unique(x$plotid)
-  number_of_plots <- length(plots)
-  if (number_of_plots > 1) {
-    stop(
-      "`plotid` contains these plots: ", paste(plots, collapse = ", "), "\n",
-      "  * Filter your data to keep a single plot; then try again",
-      call. = FALSE
-    )
-  } else {
-    invisible()
-  }
-}
-
 #' Add a quadrat variable to a dataframe based based on qx and qy coordinates.
 #'
 #' @param df A ViewFullTable dataframe.
@@ -282,21 +251,20 @@ add_sbqd <- function(df, x_q, y_q, x_sq, y_sq) {
   with_subquadrat
 }
 
-
 #' Help add_subquadrat()
 #' @noRd
 check_subquadrat_dimensions <- function(df,
-                                 x_q,
-                                 y_q,
-                                 x_sq,
-                                 y_sq) {
+                                        x_q,
+                                        y_q,
+                                        x_sq,
+                                        y_sq) {
   stopifnot(is.data.frame(df))
   remaining_args <- list(x_q, y_q, x_sq, y_sq)
 
-lapply(remaining_args, function(x) stopifnot(is.numeric(x)))
-lapply(remaining_args, function(x) stopifnot(length(x) == 1))
-lapply(remaining_args, function(x) stopifnot(all(x >= 0)))
-lapply(remaining_args, function(x) stopifnot(all(abs(x) != Inf)))
+  lapply(remaining_args, function(x) stopifnot(is.numeric(x)))
+  lapply(remaining_args, function(x) stopifnot(length(x) == 1))
+  lapply(remaining_args, function(x) stopifnot(all(x >= 0)))
+  lapply(remaining_args, function(x) stopifnot(all(abs(x) != Inf)))
 }
 
 #' Help map_tag()
