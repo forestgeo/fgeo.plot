@@ -74,11 +74,11 @@ check_map_quad <- function(crucial_vars,
   check_single_censusid(.vft)
 }
 
-map_quad_each <- function(df,
+map_quad_each <- function(.df,
                           lim_min,
                           lim_max,
                           subquadrat_side,
-  tag_size,
+                          tag_size,
                           extend_grid,
                           title_quad,
                           header,
@@ -87,10 +87,10 @@ map_quad_each <- function(df,
   default_extention <- 1
   grid_adjust <- default_extention - extend_grid
 
-  title_quad <- paste(title_quad, unique(df$quadratname), sep = " ")
-  ggplot(df, aes(x = qx, y = qy)) +
-    geom_text_repel(aes(label = tagged_tag), size = tag_size) +
-    geom_point(aes(size = dbh_standarized), shape = 1) +
+  title_quad <- paste(title_quad, unique(.df$quadratname), sep = " ")
+  ggplot(.df, aes(x = qx, y = qy)) +
+    geom_text_repel(aes(label = .df$tagged_tag), size = tag_size) +
+    geom_point(aes(size = .df$dbh_standarized), shape = 1) +
     labs(title = title_quad, subtitle = header, x = NULL, y = NULL) +
     geom_vline(
       xintercept = seq(lim_min, lim_max, by = subquadrat_side),

@@ -17,7 +17,7 @@ context("test-map_tag.R")
 
 # Redo once the plot is stable
 test_that("outputs same as satisfactory reference", {
-  plots <- suppressWarnings(map_tag(vft))
+  plots <- suppressWarnings(map_tag(vft)[1])
   expect_equal_to_reference(plots, "ref-map_tag.rds")
 })
 
@@ -102,23 +102,12 @@ test_that("plots all unique tags in data", {
 
 
 test_that("plots the same with all or just the minimum needed vars in data", {
-  all <- suppressWarnings(map_tag(vft))
+  all <- suppressWarnings(map_tag(vft)[1])
   vft_with_min_vars <- vft %>%
     select(Tag, Status, QX, QY, QuadratName, DBHID, CensusID, PlotID)
-  min <- suppressWarnings(map_tag(vft_with_min_vars))
+  min <- suppressWarnings(map_tag(vft_with_min_vars)[1])
 
   expect_equal(all, min)
-
-  # # Visual confirmation
-  all_multipaged <- marrangeGrob(all, nrow = 1, ncol = 1)
-  ggplot2::ggsave("all_multipaged.pdf", all_multipaged,
-    paper = "letter", width = 8, height = 10.5
-  )
-  min_multipaged <- marrangeGrob(min, nrow = 1, ncol = 1)
-  ggplot2::ggsave(
-    "min_multipaged.pdf", min_multipaged,
-    paper = "letter", width = 8, height = 10.5
-  )
 })
 
 
@@ -133,7 +122,7 @@ test_that("errs with uppercase names", {
 })
 
 test_that("outputs a ggplot", {
-  result <- suppressWarnings(map_tag(vft))
+  result <- suppressWarnings(map_tag(vft)[1])
   expect_true(
     any(grepl("ggplot", class(result[[1]])))
   )
