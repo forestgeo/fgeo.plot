@@ -5,13 +5,14 @@
 \title{Map trees within a quadrat.}
 \usage{
 map_quad(vft, lim_min = 0, lim_max = 20, subquadrat_side = 5,
-  size_label = 2, offset = 1, title_quad = "Site Name, YYYY, Quadrat:",
-  header = header_map_quad(), .theme = theme_map_quad())
+  size_label = 2, extend_grid = 1,
+  title_quad = "Site Name, YYYY, Quadrat:", header = header_map_quad(),
+  theme = theme_map_quad())
 }
 \arguments{
 \item{vft}{A dataframe -- specifically, a ForestGEO ViewFullTable.}
 
-\item{.theme}{}
+\item{theme}{}
 }
 \description{
 Map trees within a quadrat.

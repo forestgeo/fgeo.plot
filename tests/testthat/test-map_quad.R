@@ -1,4 +1,5 @@
-one_quadrat <- map_quad(dplyr::filter(four_quadrats, QuadratName == 1))
+one_quadrat <- dplyr::filter(four_quadrats, QuadratName == 1)
+one_map <- map_quad(one_quadrat)
 
 
 
@@ -11,15 +12,15 @@ test_that("wrong inputs to are rejected", {
   expect_error(map_quad(one_quadrat, lim_max = "a"))
   expect_error(map_quad(one_quadrat, subquadrat_side = "a"))
   expect_error(map_quad(one_quadrat, size_label = "a"))
-  expect_error(map_quad(one_quadrat, offset = "a"))
-  # not character
+  expect_error(map_quad(one_quadrat, extend_grid = "a"))
   expect_error(map_quad(one_quadrat, header = 1))
   expect_error(map_quad(one_quadrat, title_quad = 1))
+  expect_error(map_quad(one_quadrat, theme = 1))
 })
 
 test_that("returns a list of ggplots", {
-  expect_type(one_quadrat, "list")
-  expect_s3_class(one_quadrat[[1]], "ggplot")
+  expect_type(one_map, "list")
+  expect_s3_class(one_map[[1]], "ggplot")
 })
 
 
