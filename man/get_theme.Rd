@@ -4,14 +4,16 @@
 \alias{get_theme}
 \title{A theme that is customized for \code{map_tag()}.}
 \usage{
-get_theme(panel_grid_major_colour = "black",
-  panel_grid_minor_colour = "black", panel_grid_minor_linetype = "dotted",
-  panel_background_fill = "white", plot_title_size = 20,
-  plot_subtitle_size = 12, legend_position = "top",
-  axis_ticks = element_blank(), axis_text_size = 12,
-  legend_title = element_blank(), ...)
+get_theme(panel.grid.major = element_line(colour = "black"),
+  panel.grid.minor = element_line(colour = "black", linetype = "dotted"),
+  panel.background = element_rect(fill = "white"),
+  plot.title = element_text(size = 20), plot.subtitle = element_text(size =
+  12), legend.position = "top", legend.title = element_blank(),
+  axis.ticks = element_blank(), axis.text = element_text(size = 12), ...)
 }
 \arguments{
+\item{...}{Other arguments passed to \code{\link[ggplot2:theme]{ggplot2::theme()}}.}
+
 \item{panel_grid_major_colour}{Colour of major grid
 lines.}
 
@@ -32,8 +34,6 @@ subtitle.}
 \item{axis_text_size}{Size of tick labels along axes.}
 
 \item{legend_title}{title of legend.}
-
-\item{...}{Other arguments passed to \code{\link[ggplot2:theme]{ggplot2::theme()}}.}
 }
 \value{
 A \code{\link[ggplot2:theme]{ggplot2::theme()}} customized for \code{\link[=map_tag]{map_tag()}}.

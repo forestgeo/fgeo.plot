@@ -28,35 +28,59 @@
 #' @examples
 #' ggplot2::theme()
 #' map::get_theme()
-get_theme <- function(panel_grid_major_colour = "black",
-                      panel_grid_minor_colour = "black",
-                      panel_grid_minor_linetype = "dotted",
-                      panel_background_fill = "white",
-                      plot_title_size = 20,
-                      plot_subtitle_size = 12,
-                      legend_position = "top",
-                      axis_ticks = element_blank(),
-                      axis_text_size = 12,
-                      legend_title = element_blank(),
-                      ...) {
+# get_theme <- function(panel_grid_major_colour = "black",
+#                       panel_grid_minor_colour = "black",
+#                       panel_grid_minor_linetype = "dotted",
+#                       panel_background_fill = "white",
+#                       plot_title_size = 20,
+#                       plot_subtitle_size = 12,
+#                       legend_position = "top",
+#                       axis_ticks = element_blank(),
+#                       axis_text_size = 12,
+#                       legend_title = element_blank(),
+#                       ...) {
+#   theme(
+#     panel.grid.major = element_line(colour = panel_grid_major_colour),
+#     panel.grid.minor = element_line(
+#       colour = panel_grid_minor_colour,
+#       linetype = panel_grid_minor_linetype
+#     ),
+#     panel.background = element_rect(fill = panel_background_fill),
+#     plot.title = element_text(size = plot_title_size),
+#     plot.subtitle = element_text(size = plot_subtitle_size),
+#     legend.position = legend_position,
+#     legend.title = legend_title,
+#     axis.ticks = axis_ticks,
+#     axis.text = element_text(size = axis_text_size),
+#     ...
+#   )
+# }
+get_theme <- function(panel.grid.major = element_line(colour =  "black"),
+                      panel.grid.minor = element_line(
+                        colour =  "black",
+                        linetype = "dotted"
+                      ),
+                      panel.background = element_rect(fill = "white"),
+                      plot.title = element_text(size = 20),
+                      plot.subtitle = element_text(size = 12),
+                      legend.position = "top",
+                      legend.title = element_blank(),
+                      axis.ticks = element_blank(),
+                      axis.text = element_text(size = 12),
+                      ...){
   theme(
-    panel.grid.major = element_line(colour = panel_grid_major_colour),
-    panel.grid.minor = element_line(
-      colour = panel_grid_minor_colour,
-      linetype = panel_grid_minor_linetype
-    ),
-    panel.background = element_rect(fill = panel_background_fill),
-    plot.title = element_text(size = plot_title_size),
-    plot.subtitle = element_text(size = plot_subtitle_size),
-    legend.position = legend_position,
-    legend.title = legend_title,
-    axis.ticks = axis_ticks,
-    axis.text = element_text(size = axis_text_size),
+    panel.grid.major = panel.grid.major,
+    panel.grid.minor = panel.grid.minor,
+    panel.background = panel.background,
+    plot.title = plot.title,
+    plot.subtitle = plot.subtitle,
+    legend.position = legend.position,
+    legend.title = legend.title,
+    axis.ticks = axis.ticks,
+    axis.text = axis.text,
     ...
   )
 }
-
-
 
 #' Pre-made headers.
 #'
