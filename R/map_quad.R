@@ -25,16 +25,16 @@ map_quad <- function(vft,
                      subquadrat_side = 5,
                      tag_size = 2,
                      extend_grid = 0) {
-  vft_lower_nms <- stats::setNames(vft, tolower(names(vft)))
+  .vft <- stats::setNames(vft, tolower(names(vft)))
   crucial_vars <- c("quadratname", "qx", "qy", "tagged_tag", "dbh_standarized")
   check_map_quad(
-    crucial_vars = crucial_vars, vft = vft_lower_nms, lim_min = lim_min,
+    crucial_vars = crucial_vars, .vft = .vft, lim_min = lim_min,
     lim_max = lim_max, subquadrat_side = subquadrat_side, tag_size =
     tag_size, extend_grid = extend_grid, title_quad = title_quad, header = header,
     theme = theme
   )
   # Remove useless vars
-  vft_checked <- vft_lower_nms[crucial_vars]
+  vft_checked <- .vft[crucial_vars]
 
   df_list <- split(vft_checked, vft_checked$quadratname)
   lapply(
@@ -51,7 +51,7 @@ map_quad <- function(vft,
 }
 
 check_map_quad <- function(crucial_vars,
-                           vft_lower_nms,
+                           .vft,
                            lim_min,
                            lim_max,
                            subquadrat_side,
@@ -60,8 +60,8 @@ check_map_quad <- function(crucial_vars,
                            title_quad,
                            header,
                            theme) {
-  if (missing(vft_lower_nms)) stop("`vft` can't be missing")
-  if (!is.data.frame(vft_lower_nms)) stop("`vft` should be a dataframe")
+  if (missing(.vft)) stop("`vft` can't be missing")
+  if (!is.data.frame(.vft)) stop("`vft` should be a dataframe")
   stopifnot(
     is.numeric(lim_min), is.numeric(lim_max), is.numeric(subquadrat_side),
     is.numeric(tag_size), is.numeric(extend_grid)
@@ -69,9 +69,9 @@ check_map_quad <- function(crucial_vars,
   arg_theme_has_class_theme <- any(grepl("theme", class(theme)))
   stopifnot(arg_theme_has_class_theme)
   stopifnot(is.character(title_quad), is.character(header))
-  check_crucial_names(vft_lower_nms, crucial_vars)
-  check_single_plotid(vft_lower_nms)
-  check_single_censusid(vft_lower_nms)
+  check_crucial_names(.vft, crucial_vars)
+  check_single_plotid(.vft)
+  check_single_censusid(.vft)
 }
 
 map_quad_each <- function(df,
