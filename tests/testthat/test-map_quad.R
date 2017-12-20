@@ -1,6 +1,39 @@
-context("test-map_one_quad.R")
+context("test-map_quad.R")
 
-test_that("theme_map_quad returns a valid ggplot2 theme", {
+test_that("checks of map_quad() do their job", {
+  # missing vft
+  expect_error(
+    map_quad()
+  )
+  # not dataframe
+  expect_error(
+    map_quad(1)
+  )
+  # not numeric
+  expect_error(map_quad(map::one_quadrat, lim_min = "a"))
+  expect_error(map_quad(map::one_quadrat, lim_max = "a"))
+  expect_error(map_quad(map::one_quadrat, subquadrat_side = "a"))
+  expect_error(map_quad(map::one_quadrat, size_label = "a"))
+  expect_error(map_quad(map::one_quadrat, offset = "a"))
+  # not character
+  expect_error(map_quad(map::one_quadrat, header = 1))
+  expect_error(map_quad(map::one_quadrat, title = 1))
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+test_that("theme_map_quad() returns a valid ggplot2 theme", {
   expect_s3_class(theme_map_quad(), c("theme", "gg"))
 })
 

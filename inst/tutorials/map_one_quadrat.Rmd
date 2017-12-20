@@ -68,8 +68,9 @@ This section develops a script that prototypes one way to do this job. The code 
 
 ```{r}
 # Example data set
-example_data <- bciex::bci12vft_mini
-
+example_data <- bciex::bci12vft_mini %>% 
+  # Fix wrong names (https://goo.gl/Gvo1mn)
+  rename(QX = x, QY = y)
 
 glimpse(example_data)
 ```

@@ -1,12 +1,12 @@
-#' Title
+#' Map trees within a quadrat.
 #'
-#' @param vft
+#' @param vft A dataframe -- specifically, a ForestGEO ViewFullTable.
 #' @param lim_min
 #' @param lim_max
 #' @param subquadrat_side
 #' @param size_label
 #' @param offset
-#' @param title
+#' @param .title
 #' @param header
 #' @param .theme
 #'
@@ -15,53 +15,88 @@
 #'
 #' @examples
 map_quad <- function(vft,
-                    lim_min = 0,
-                    lim_max = 20,
-                    subquadrat_side = 5,
-                    size_label = 2,
-                    offset = 1,
-                    title = "My Title",
-                    header = header_map_quad(),
-                    .theme = theme_map_quad()) {
-  # xxx cont. checks; tests; document
+                     lim_min = 0,
+                     lim_max = 20,
+                     subquadrat_side = 5,
+                     size_label = 2,
+                     offset = 1,
+                     .title = "Site Name, YYYY, Q.",
+                     header = header_map_quad(),
+                     .theme = theme_map_quad()) {
+  vft_lower_nms <- stats::setNames(vft, tolower(names(vft)))
+  crucial_vars <- c("quadratname", "qx", "qy", "tagged_tag", "dbh_standarized")
+  check_map_quad(
+    crucial_vars = crucial_vars, vft = vft_lower_nms, lim_min = lim_min,
+    lim_max = lim_max, subquadrat_side = subquadrat_side, size_label =
+    size_label, offset = offset, .title = .title, header = header
+  )
+  # Remove useless vars
+  vft_checked <- vft_lower_nms[crucial_vars]
 
+  df_list <- split(vft_checked, vft_checked$quadratname)
+  lapply(
+    df_list, map_quad_each,
+    lim_min = lim_min,
+    lim_max = lim_max,
+    subquadrat_side = subquadrat_side,
+    size_label = size_label,
+    offset = offset,
+    .title = .title,
+    header = header,
+    .theme = .theme
+  )
+}
 
+check_map_quad <- function(crucial_vars,
+                           vft_lower_nms,
+                           lim_min,
+                           lim_max,
+                           subquadrat_side,
+                           size_label,
+                           offset,
+                           .title,
+                           header) {
+  if (missing(vft_lower_nms)) stop("`vft` can't be missing")
+  if (!is.data.frame(vft_lower_nms)) stop("`vft` should be a dataframe")
+  stopifnot(
+    is.numeric(lim_min), is.numeric(lim_max), is.numeric(subquadrat_side),
+    is.numeric(size_label), is.numeric(offset)
+  )
+  stopifnot(is.character(.title), is.character(header))
+  check_crucial_names(vft_lower_nms, crucial_vars)
+  check_single_plotid(vft_lower_nms)
+  check_single_censusid(vft_lower_nms)
+}
 
-
-
-
-
-
-
-
-
-
-
-  map_quad_each <- function(df) {
-    .title <- paste(title, unique(one_quadrat$QuadratName), sep = ", ")
-    ggplot(df, aes(x = x, y = y)) +
-    geom_text_repel(aes(label = tagged_tag), size = size_label) +
-    geom_point(aes(size = dbh_standarized), shape = 1) +
-    labs(title = .title, subtitle = header, x = NULL, y = NULL) +
-    geom_vline(
-      xintercept = seq(lim_min, lim_max, by = subquadrat_side),
-      linetype = "dashed"
-    ) +
-    geom_hline(
-      yintercept = seq(lim_min, lim_max, by = subquadrat_side),
-      linetype = "dashed"
-    ) +
-    coord_fixed(
-      xlim = c(lim_min + offset, lim_max - offset),
-      ylim = c(lim_min + offset, lim_max - offset)
-    ) +
-    scale_x_continuous(breaks = lim_min:lim_max, sec.axis = dup_axis()) +
-    scale_y_continuous(breaks = lim_min:lim_max, sec.axis = dup_axis()) +
-    .theme
-  }
-
-  df_list <- split(vft, vft$QuadratName)
-  lapply(df_list, map_quad_each)
+map_quad_each <- function(df,
+                          lim_min,
+                          lim_max,
+                          subquadrat_side,
+                          size_label,
+                          offset,
+                          .title,
+                          header,
+                          .theme) {
+  .title <- paste(.title, unique(df$quadratname), sep = " ")
+  ggplot(df, aes(x = qx, y = qy)) +
+  geom_text_repel(aes(label = tagged_tag), size = size_label) +
+  geom_point(aes(size = dbh_standarized), shape = 1) +
+  labs(title = .title, subtitle = header, x = NULL, y = NULL) +
+  geom_vline(
+    xintercept = seq(lim_min, lim_max, by = subquadrat_side),
+    linetype = "dashed"
+  ) +
+  geom_hline(
+    yintercept = seq(lim_min, lim_max, by = subquadrat_side),
+    linetype = "dashed"
+  ) +
+  coord_fixed(
+    xlim = c(lim_min + offset, lim_max - offset),
+    ylim = c(lim_min + offset, lim_max - offset)
+  ) +
+  scale_x_continuous(breaks = lim_min:lim_max, sec.axis = dup_axis()) +
+  scale_y_continuous(breaks = lim_min:lim_max, sec.axis = dup_axis()) +
+  .theme
 }
 
 # Helpers -----------------------------------------------------------------

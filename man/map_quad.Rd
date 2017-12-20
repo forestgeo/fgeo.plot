@@ -2,15 +2,17 @@
 % Please edit documentation in R/map_quad.R
 \name{map_quad}
 \alias{map_quad}
-\title{Title}
+\title{Map trees within a quadrat.}
 \usage{
 map_quad(vft, lim_min = 0, lim_max = 20, subquadrat_side = 5,
-  size_label = 2, offset = 1, title = "My Title",
+  size_label = 2, offset = 1, .title = "Site Name, YYYY, Q.",
   header = header_map_quad(), .theme = theme_map_quad())
 }
 \arguments{
+\item{vft}{A dataframe -- specifically, a ForestGEO ViewFullTable.}
+
 \item{.theme}{}
 }
 \description{
-Title
+Map trees within a quadrat.
 }

@@ -24,3 +24,12 @@ check_single_plotid <- function(x) {
     invisible()
   }
 }
+
+check_single_censusid <- function(x) {
+  if (length(unique(x$censusid)) > 1) {
+    warning(
+      "Multiple censuses were detected",
+      "  * Likely you should filter the data to keep only the last `CensusID`"
+    )
+  }
+}
