@@ -79,46 +79,58 @@ map_quad_each <- function(df,
                           .theme) {
   .title <- paste(.title, unique(df$quadratname), sep = " ")
   ggplot(df, aes(x = qx, y = qy)) +
-  geom_text_repel(aes(label = tagged_tag), size = size_label) +
-  geom_point(aes(size = dbh_standarized), shape = 1) +
-  labs(title = .title, subtitle = header, x = NULL, y = NULL) +
-  geom_vline(
-    xintercept = seq(lim_min, lim_max, by = subquadrat_side),
-    linetype = "dashed"
-  ) +
-  geom_hline(
-    yintercept = seq(lim_min, lim_max, by = subquadrat_side),
-    linetype = "dashed"
-  ) +
-  coord_fixed(
-    xlim = c(lim_min + offset, lim_max - offset),
-    ylim = c(lim_min + offset, lim_max - offset)
-  ) +
-  scale_x_continuous(breaks = lim_min:lim_max, sec.axis = dup_axis()) +
-  scale_y_continuous(breaks = lim_min:lim_max, sec.axis = dup_axis()) +
-  .theme
+    geom_text_repel(aes(label = tagged_tag), size = size_label) +
+    geom_point(aes(size = dbh_standarized), shape = 1) +
+    labs(title = .title, subtitle = header, x = NULL, y = NULL) +
+    geom_vline(
+      xintercept = seq(lim_min, lim_max, by = subquadrat_side),
+      linetype = "dashed"
+    ) +
+    geom_hline(
+      yintercept = seq(lim_min, lim_max, by = subquadrat_side),
+      linetype = "dashed"
+    ) +
+    coord_fixed(
+      xlim = c(lim_min + offset, lim_max - offset),
+      ylim = c(lim_min + offset, lim_max - offset)
+    ) +
+    scale_x_continuous(breaks = lim_min:lim_max, sec.axis = dup_axis()) +
+    scale_y_continuous(breaks = lim_min:lim_max, sec.axis = dup_axis()) +
+    .theme
 }
 
 # Helpers -----------------------------------------------------------------
 
-#' Theme for map_quad
+#' Theme for map_quad.
+#'
+#' @inheritDotParams ggplot2::theme
 #'
 #' @return A ggplot2 theme.
 #' @export
 #'
 #' @examples
 #' theme_map_quad()
-theme_map_quad <- function() {
+theme_map_quad <- function(axis.text = element_blank(),
+                           panel.background = element_rect(fill = "white"),
+                           panel.grid.minor = element_blank(),
+                           panel.grid.major = element_blank(),
+                           legend.position = "none",
+                           plot.title = element_text(size = 20),
+                           plot.subtitle = element_text(size = 12),
+                           panel.border = element_rect(colour = "black", fill = NA),
+                           axis.ticks.length = unit(-0.1, "cm"),
+                           ...) {
   theme(
-    panel.background = element_rect(fill = "white"),
-    panel.grid.minor = element_blank(),
-    panel.grid.major = element_blank(),
-    legend.position = "none",
-    plot.title = element_text(size = 20),
-    plot.subtitle = element_text(size = 12),
-    axis.text = element_blank(),
-    panel.border = element_rect(colour = "black", fill = NA),
-    axis.ticks.length = unit(-0.1, "cm")
+    panel.background = panel.background,
+    panel.grid.minor = panel.grid.minor,
+    panel.grid.major = panel.grid.major,
+    legend.position = legend.position,
+    plot.title = plot.title,
+    plot.subtitle = plot.subtitle,
+    axis.text = axis.text,
+    panel.border = panel.border,
+    axis.ticks.length = axis.ticks.length,
+    ...
   )
 }
 
