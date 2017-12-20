@@ -1,37 +1,33 @@
+# map_quad() --------------------------------------------------------------
+
+map_quad(four_quadrats)[[1]]
+
+
+
+# map_tag() ---------------------------------------------------------------
+
 library(dplyr)
+library(ggplot2)
 library(map)
+library(bciex)
+
+# Subset of a public ViewFullTable from BCI (source:
+# https://repository.si.edu/handle/10088/20925).
+
+# Improve printing method
+vft <- as_tibble(bci12vft_mini)
+vft
+
+# Filter the plot you want to map
+vft1 <- dplyr::filter(vft, PlotID == 1)
 
 
-vft <- bci12vft_mini
-one_quadrat <-  unique(vft$QuadratName)[[1]]
+# This data set has two wrong names that need to be fixed before using map_tag()
+vft1_rnm <- dplyr::rename(vft1, qx = x, qy = y)
+maps <- map_tag(vft1_rnm)
 
-# Filter rows
-quad <- filter(vft, PlotID == 1, QuadratName == one_quadrat)
-# Select columns
-crucial_vars <- c(
-  "tag", "x", "y", "status", "quadratname", "censusid", "plotid"
-)
-quad <- quad[, tolower(names(quad)) %in% crucial_vars]
-# Remove duplicates
-quad <- unique(quad)
+# Plotting only one map to screen
+maps[1]
 
 
-map_one_quadrat <- function(vft,
-                            x,
-                            y,
-                            shape,
-                            label,
-                            site_name = "My site, YYYY",
-                            header = get_header(),
-                            theme = get_theme()) {
-  ggplot(data = vtf, aes_string(x = x, y = y, shape = shape)) +
-    geom_point() +
-    ggrepel::geom_text_repel(aes(label = label)) +
-    labs(
-      title = paste0(site_name, ". ", one_quadrat),
-      subtitle = header,
-      x = NULL, y = NULL
-    ) +
-    coord_fixed() +
-    theme
-}
+

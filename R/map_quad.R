@@ -20,7 +20,7 @@ map_quad <- function(vft,
                      subquadrat_side = 5,
                      size_label = 2,
                      offset = 1,
-                     title_quad = "Site Name, YYYY, Q.",
+                     title_quad = "Site Name, YYYY, Quadrat:",
                      header = header_map_quad(),
                      .theme = theme_map_quad()) {
   vft_lower_nms <- stats::setNames(vft, tolower(names(vft)))
