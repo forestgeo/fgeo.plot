@@ -104,6 +104,7 @@ map_quad_each <- function(df,
 #' Theme for map_quad.
 #'
 #' @inheritDotParams ggplot2::theme
+#' @seealso [ggplot2::theme]
 #'
 #' @return A ggplot2 theme.
 #' @export
