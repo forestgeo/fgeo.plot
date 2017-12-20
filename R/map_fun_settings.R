@@ -1,19 +1,26 @@
-#' A theme for `map_tag()`.
+# Themes ------------------------------------------------------------------
+
+#' Themes.
 #'
-#' You can further customize the theme by passing more arguments to
-#' [ggplot2::theme()] (via `...`) or by replacing this theme completely with a
-#' new [ggplot2::theme()].
+#' These functions output themes for specific functions. You can customize any
+#' theme by changing the default arguments and also by passing more arguments to
+#' [ggplot2::theme()] (via `...`).
 #'
 #' @inheritDotParams ggplot2::theme
 #'
 #' @seealso [ggplot2::theme()].
 #'
-#' @return A [ggplot2::theme()] for [map_tag()].
+#' @return A [ggplot2::theme()].
 #'
-#' @export
 #' @examples
-#' get_theme()
-get_theme <- function(panel.grid.major = element_line(colour =  "black"),
+#' theme_map_tag()
+#' theme_map_quad()
+#' @name themes
+NULL
+
+#' @rdname themes
+#' @export
+theme_map_tag <- function(panel.grid.major = element_line(colour =  "black"),
                       panel.grid.minor = element_line(
                         colour =  "black",
                         linetype = "dotted"
@@ -39,6 +46,36 @@ get_theme <- function(panel.grid.major = element_line(colour =  "black"),
     ...
   )
 }
+
+#' @rdname themes
+#' @export
+theme_map_quad <- function(axis.text = element_blank(),
+  panel.background = element_rect(fill = "white"),
+  panel.grid.minor = element_blank(),
+  panel.grid.major = element_blank(),
+  legend.position = "none",
+  plot.title = element_text(size = 20),
+  plot.subtitle = element_text(size = 12),
+  panel.border = element_rect(colour = "black", fill = NA),
+  axis.ticks.length = unit(-0.1, "cm"),
+  ...) {
+  theme(
+    panel.background = panel.background,
+    panel.grid.minor = panel.grid.minor,
+    panel.grid.major = panel.grid.major,
+    legend.position = legend.position,
+    plot.title = plot.title,
+    plot.subtitle = plot.subtitle,
+    axis.text = axis.text,
+    panel.border = panel.border,
+    axis.ticks.length = axis.ticks.length,
+    ...
+  )
+}
+
+
+
+# Headers -----------------------------------------------------------------
 
 #' Pre-made headers.
 #'

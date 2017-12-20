@@ -27,13 +27,13 @@
 #' @param tag_size A number giving tag size. Passed to [ggplot2::geom_point()].
 #' @param header A string to use as a header (see [header_map_tag()]).
 #' @param theme A [ggplot2::theme()]. To conveniently create this theme
-#'   use [get_theme()].
+#'   use [theme_map_tag()].
 #' @param extend_grid A number to adjust the extension of the minor and major
 #'   grid lines beyond the plot limits.
 #' @inheritParams add_subquadrat
 #'
 #' @seealso [graphics::points()], [ggplot2::geom_point()], [ggplot2::theme()]
-#'   [header_map_tag()], [get_theme()], [add_subquadrat()].
+#'   [header_map_tag()], [theme_map_tag()], [add_subquadrat()].
 #'
 #' @section Acknowledgements:
 #' Useful ideas and guidance came from Suzanne Lao, Stuart Davis, Shameema
@@ -96,7 +96,7 @@
 #' map_tag(vft1_rnm, title_quad = "BCI 2012", theme = theme_gray())[1]
 #'
 #' # Customizing the default theme of map_tag()
-#' theme_small_change <- get_theme(legend.position = "bottom")
+#' theme_small_change <- theme_map_tag(legend.position = "bottom")
 #' map_tag(vft1_rnm, title_quad = "BCI 2012", theme = theme_small_change)[1]
 #'
 #' # Customizing the default theme extreemely, to show flexibility
@@ -137,7 +137,7 @@ map_tag <- function(vft,
                     point_size = 1.5,
                     tag_size = 3,
                     header = header_map_tag(),
-                    theme = get_theme(),
+                    theme = theme_map_tag(),
                     extend_grid = 0) {
   # Lowercase names: avoid errors due to confusing upper- and lower-case
   vft_lower_nms <- stats::setNames(vft, tolower(names(vft)))
@@ -349,7 +349,7 @@ lapply_plot_repulsive_tags <- function(list_of_data_to_plot,
                                        point_size = 1.5,
                                        tag_size = 3,
                                        header = header_map_tag(),
-                                       theme = get_theme()) {
+                                       theme = theme_map_tag()) {
   check_lapply_plot_repulsive_tags(
     list_of_data_to_plot = list_of_data_to_plot, title_quad = title_quad,
     point_shape = point_shape, point_size = point_size, tag_size = tag_size,

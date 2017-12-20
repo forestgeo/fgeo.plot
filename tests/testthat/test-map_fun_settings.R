@@ -17,9 +17,9 @@ test_that("header_map_quad outputs the expected string", {
 
 
 
-context("test-get_theme")
+context("test-theme_map_tag")
 
 test_that("outputs an object of class equal to that of a ggplot2 theme", {
-  x <- get_theme()
+  x <- theme_map_tag()
   expect_equal(class(x), class(ggplot2::theme()))
 })

@@ -101,40 +101,6 @@ map_quad_each <- function(df,
 
 # Helpers -----------------------------------------------------------------
 
-#' Theme for map_quad.
-#'
-#' @inheritDotParams ggplot2::theme
-#' @seealso [ggplot2::theme]
-#'
-#' @return A ggplot2 theme.
-#' @export
-#'
-#' @examples
-#' theme_map_quad()
-theme_map_quad <- function(axis.text = element_blank(),
-                           panel.background = element_rect(fill = "white"),
-                           panel.grid.minor = element_blank(),
-                           panel.grid.major = element_blank(),
-                           legend.position = "none",
-                           plot.title = element_text(size = 20),
-                           plot.subtitle = element_text(size = 12),
-                           panel.border = element_rect(colour = "black", fill = NA),
-                           axis.ticks.length = unit(-0.1, "cm"),
-                           ...) {
-  theme(
-    panel.background = panel.background,
-    panel.grid.minor = panel.grid.minor,
-    panel.grid.major = panel.grid.major,
-    legend.position = legend.position,
-    plot.title = plot.title,
-    plot.subtitle = plot.subtitle,
-    axis.text = axis.text,
-    panel.border = panel.border,
-    axis.ticks.length = axis.ticks.length,
-    ...
-  )
-}
-
 #' Add the ending ".d" to the `Tag` of dead stems.
 #'
 #' @param x A character vector.
