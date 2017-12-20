@@ -35,8 +35,6 @@ range of the data. Integers}
 
 \item{...}{Arguments passed to \code{\link[ggplot2:geom_point]{ggplot2::geom_point()}} to customize, for
 example, the size, shape, or colour of the points.}
-
-\item{file}{A character string giving the name of the file.}
 }
 \value{
 A list of which each element is a plot of class ggplot.

@@ -1,5 +1,3 @@
-# setup -------------------------------------------------------------------
-
 library(dplyr)
 
 census <- bciex::bci12t7mini
@@ -19,7 +17,7 @@ context("map_sp")
 test_that("errs with wrong inputs.", {
   # wrong name
   expect_error(
-    map_sp(census = dplyr::rename(census, spp = sp),
+    map_sp(census = dplyr::rename(census, wrong_nm = sp),
     species = all_species)
   )
   # wrong species

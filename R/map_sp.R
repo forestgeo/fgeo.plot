@@ -18,7 +18,6 @@
 #'   #132B43).
 #' @param bins A number. Setting bins creates evenly spaced contours in the
 #'   range of the data. Integers
-#' @param file A character string giving the name of the file.
 #' @param ... Arguments passed to [ggplot2::geom_point()] to customize, for
 #'   example, the size, shape, or colour of the points.
 #'
@@ -157,36 +156,20 @@ map_sp <- function(census,
                    high = "#56B1F7",
                    bins = NULL,
                    ...) {
-  p <- map_sp_invisible(
-    census = census, species = species, xlim = xlim, ylim = ylim,
-    theme = theme, elevation = elevation, line_size = line_size, low = low,
-    high = high, bins = bins, ...
-  )
+  check_map_sp(census = census, species = species, xlim = xlim, ylim = ylim)
+
+  p <- lapply(X = species, FUN = map_one_sp, census = census, ...)
+  names(p) <- species
   p
 }
 
-check_map_sp <- function(cns, sp) {
-  stopifnot(is.data.frame(cns))
-  check_crucial_names(x = cns, nms = c("gx", "gy", "sp"))
-  stopifnot(is.character(sp))
-  if (length(sp) == 0) {stop("The vector `sp` is empty.")}
+check_map_sp <- function(census, species, xlim, ylim) {
+  stopifnot(is.data.frame(census))
+  stopifnot(is.character(species))
+  if (length(species) == 0) {stop("The vector `sp` is empty.")}
+  check_crucial_names(census, c("gx", "gy", "sp"))
 }
 
-#' Do the heavy lifting and return invisible.
-#'
-#' Allows the map to be printed visibly with map_sp()
-#'
-#' @noRd
-map_sp_invisible <- function(census, species, ...) {
-  check_map_sp(census, species)
-
-  # `...` passess all args to all funs; So pass args matched only in one fun.
-  plots <- lapply(X = species, FUN = map_one_sp, census = census, ...)
-  names(plots) <- species
-  invisible(plots)
-}
-
-#' Standarized plot for each species (fixed ratio and limits).
 #' @noRd
 map_one_sp <- function(census,
                        one_sp,
@@ -217,13 +200,6 @@ map_one_sp <- function(census,
 #' General plot of gx by gy faceted by species.
 #' @noRd
 map_basic <- function(census, xlim, ylim, theme = ggplot2::theme_bw(), ...) {
-  check_crucial_names(census, c("gx", "gy"))
-  xlim_contains_no_NA <- !is.na(xlim)
-  stopifnot(xlim_contains_no_NA)
-  ylim_contains_no_NA <- !is.na(ylim)
-  stopifnot(ylim_contains_no_NA)
-
-
   ggplot(data = census, aes(x = gx, y = gy)) +
     geom_point(...) +
     labs(x = NULL, y = NULL, title = unique(census$sp)) +
