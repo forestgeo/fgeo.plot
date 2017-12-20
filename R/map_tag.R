@@ -17,23 +17,22 @@
 #' that you want and change the value of `CensusID` so that all trees have the
 #' same value of `CensusID`. Then feed `map_tag()` with the filtered data set.
 #'
-#' @param vft A ViewFullTable.
-#' @param title_quad A string to use as a title.
+#' @template vft
+#' @template title_quad
 #' @param point_shape A vector of two numbers giving the shape of the points to
 #'   plot (see possible shapes in the documentation of ?[graphics::points()],
 #'   under the section entitled _'pch' values_).
 #' @param point_size A number giving points size. Passed to
 #'   [ggplot2::geom_point()].
-#' @param tag_size A number giving tag size. Passed to [ggplot2::geom_point()].
-#' @param header A string to use as a header (see [header_map_tag()]).
-#' @param theme A [ggplot2::theme()]. To conveniently create this theme
-#'   use [theme_map_tag()].
-#' @param extend_grid A number to adjust the extension of the minor and major
-#'   grid lines beyond the plot limits.
+#' @template tag_size
+#' @template header
+#' @template theme
+#' @template extend_grid
 #' @inheritParams add_subquadrat
 #'
 #' @seealso [graphics::points()], [ggplot2::geom_point()], [ggplot2::theme()]
-#'   [header_map_tag()], [theme_map_tag()], [add_subquadrat()].
+#'   [header_map_tag()], [theme_map_tag()], [add_subquadrat()],
+#'   [ggrepel::geom_text_repel].
 #'
 #' @section Acknowledgements:
 #' Useful ideas and guidance came from Suzanne Lao, Stuart Davis, Shameema

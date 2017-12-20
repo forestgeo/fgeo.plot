@@ -10,7 +10,7 @@ map_tag(vft, x_q = 20, x_sq = 5, y_q = x_q, y_sq = x_sq,
   theme = theme_map_tag(), extend_grid = 0)
 }
 \arguments{
-\item{vft}{A ViewFullTable.}
+\item{vft}{A dataframe -- specifically, a ForestGEO ViewFullTable.}
 
 \item{x_q}{Size in meters of a quadrat's side. For ForestGEO sites, a
 common value is 20.}
@@ -33,15 +33,15 @@ under the section entitled \emph{'pch' values}).}
 \item{point_size}{A number giving points size. Passed to
 \code{\link[ggplot2:geom_point]{ggplot2::geom_point()}}.}
 
-\item{tag_size}{A number giving tag size. Passed to \code{\link[ggplot2:geom_point]{ggplot2::geom_point()}}.}
+\item{tag_size}{A number giving tag size. Passed to
+[ggrepel::geom_text_repel].}
 
-\item{header}{A string to use as a header (see \code{\link[=header_map_tag]{header_map_tag()}}).}
+\item{header}{A string to use as a header (see [headers]).}
 
-\item{theme}{A \code{\link[ggplot2:theme]{ggplot2::theme()}}. To conveniently create this theme
-use \code{\link[=theme_map_tag]{theme_map_tag()}}.}
+\item{theme}{A valid [ggplot2::theme()] (see [themes]).}
 
-\item{extend_grid}{A number to adjust the extension of the minor and major
-grid lines beyond the plot limits.}
+\item{extend_grid}{A number to adjust the extension of the grid lines beyond
+the plot limits.}
 }
 \value{
 A list of ggplots, where each element of the list is a map of tree
@@ -161,5 +161,6 @@ map_tag(smaller, x_q = 10, x_sq = 2.5, extend_grid = 0.25)[1]
 }
 \seealso{
 \code{\link[graphics:points]{graphics::points()}}, \code{\link[ggplot2:geom_point]{ggplot2::geom_point()}}, \code{\link[ggplot2:theme]{ggplot2::theme()}}
-\code{\link[=header_map_tag]{header_map_tag()}}, \code{\link[=theme_map_tag]{theme_map_tag()}}, \code{\link[=add_subquadrat]{add_subquadrat()}}.
+\code{\link[=header_map_tag]{header_map_tag()}}, \code{\link[=theme_map_tag]{theme_map_tag()}}, \code{\link[=add_subquadrat]{add_subquadrat()}},
+\link[ggrepel:geom_text_repel]{ggrepel::geom_text_repel}.
 }

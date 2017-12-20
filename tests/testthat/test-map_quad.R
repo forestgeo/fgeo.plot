@@ -5,13 +5,29 @@ one_map <- map_quad(one_quadrat)
 
 context("map_quad")
 
+test_that("passes with default arguments", {
+  expect_silent(
+    map_quad(
+      one_quadrat,
+      title_quad = "Site Name, YYYY, Quadrat:",
+      header = header_map_quad(),
+      theme = theme_map_quad(),
+      lim_min = 0,
+      lim_max = 20,
+      subquadrat_side = 5,
+      tag_size = 2,
+      extend_grid = 0
+    )[[1]]
+  )
+})
+
 test_that("wrong inputs to are rejected", {
   expect_error(map_quad())
   expect_error(map_quad(1))
   expect_error(map_quad(one_quadrat, lim_min = "a"))
   expect_error(map_quad(one_quadrat, lim_max = "a"))
   expect_error(map_quad(one_quadrat, subquadrat_side = "a"))
-  expect_error(map_quad(one_quadrat, size_label = "a"))
+  expect_error(map_quad(one_quadrat, tag_size = "a"))
   expect_error(map_quad(one_quadrat, extend_grid = "a"))
   expect_error(map_quad(one_quadrat, header = 1))
   expect_error(map_quad(one_quadrat, title_quad = 1))

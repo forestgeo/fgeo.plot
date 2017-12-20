@@ -1,34 +1,36 @@
 #' Map trees within a quadrat.
 #'
-#' @param vft A dataframe -- specifically, a ForestGEO ViewFullTable.
-#' @param lim_min
-#' @param lim_max
-#' @param subquadrat_side
-#' @param size_label
-#' @param extend_grid
-#' @param title_quad
-#' @param header
-#' @param theme
+#' @template vft
+#' @template title_quad
+#' @template header
+#' @template theme
+#' @param lim_min,lim_max Minimum and maximum limits of the plot area.
+#' @param subquadrat_side Length in meters of the side of a subquadrat.
+#' @template tag_size
+#' @template extend_grid
 #'
-#' @return
+#' @return A list which each element is a plot of class ggplot.
 #' @export
 #'
 #' @examples
+#' p <- map_quad(four_quadrats, extend_grid = 0)[[1]]
+#' class(p)
+#' class(p[[1]])
 map_quad <- function(vft,
+                     title_quad = "Site Name, YYYY, Quadrat:",
+                     header = header_map_quad(),
+                     theme = theme_map_quad(),
                      lim_min = 0,
                      lim_max = 20,
                      subquadrat_side = 5,
-                     size_label = 2,
-                     extend_grid = 0,
-                     title_quad = "Site Name, YYYY, Quadrat:",
-                     header = header_map_quad(),
-                     theme = theme_map_quad()) {
+                     tag_size = 2,
+                     extend_grid = 0) {
   vft_lower_nms <- stats::setNames(vft, tolower(names(vft)))
   crucial_vars <- c("quadratname", "qx", "qy", "tagged_tag", "dbh_standarized")
   check_map_quad(
     crucial_vars = crucial_vars, vft = vft_lower_nms, lim_min = lim_min,
-    lim_max = lim_max, subquadrat_side = subquadrat_side, size_label =
-    size_label, extend_grid = extend_grid, title_quad = title_quad, header = header,
+    lim_max = lim_max, subquadrat_side = subquadrat_side, tag_size =
+    tag_size, extend_grid = extend_grid, title_quad = title_quad, header = header,
     theme = theme
   )
   # Remove useless vars
@@ -40,7 +42,7 @@ map_quad <- function(vft,
     lim_min = lim_min,
     lim_max = lim_max,
     subquadrat_side = subquadrat_side,
-    size_label = size_label,
+    tag_size = tag_size,
     extend_grid = extend_grid,
     title_quad = title_quad,
     header = header,
@@ -53,7 +55,7 @@ check_map_quad <- function(crucial_vars,
                            lim_min,
                            lim_max,
                            subquadrat_side,
-                           size_label,
+                           tag_size,
                            extend_grid,
                            title_quad,
                            header,
@@ -62,7 +64,7 @@ check_map_quad <- function(crucial_vars,
   if (!is.data.frame(vft_lower_nms)) stop("`vft` should be a dataframe")
   stopifnot(
     is.numeric(lim_min), is.numeric(lim_max), is.numeric(subquadrat_side),
-    is.numeric(size_label), is.numeric(extend_grid)
+    is.numeric(tag_size), is.numeric(extend_grid)
   )
   arg_theme_has_class_theme <- any(grepl("theme", class(theme)))
   stopifnot(arg_theme_has_class_theme)
@@ -76,7 +78,7 @@ map_quad_each <- function(df,
                           lim_min,
                           lim_max,
                           subquadrat_side,
-                          size_label,
+  tag_size,
                           extend_grid,
                           title_quad,
                           header,
@@ -87,7 +89,7 @@ map_quad_each <- function(df,
 
   title_quad <- paste(title_quad, unique(df$quadratname), sep = " ")
   ggplot(df, aes(x = qx, y = qy)) +
-    geom_text_repel(aes(label = tagged_tag), size = size_label) +
+    geom_text_repel(aes(label = tagged_tag), size = tag_size) +
     geom_point(aes(size = dbh_standarized), shape = 1) +
     labs(title = title_quad, subtitle = header, x = NULL, y = NULL) +
     geom_vline(

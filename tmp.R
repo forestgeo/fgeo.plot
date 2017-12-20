@@ -1,7 +1,8 @@
 # map_quad() --------------------------------------------------------------
 
-map_quad(four_quadrats, extend_grid = 0)[[1]]
-
+p <- map_quad(four_quadrats, extend_grid = 0)[[1]]
+class(p)
+class(p[[1]])
 
 
 # map_tag() ---------------------------------------------------------------

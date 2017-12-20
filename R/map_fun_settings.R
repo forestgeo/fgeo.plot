@@ -6,12 +6,10 @@
 #' theme by changing the default arguments and also by passing more arguments to
 #' [ggplot2::theme()] (via `...`).
 #'
-#' @inheritDotParams ggplot2::theme
-#'
+#' @inheritParams ggplot2::theme
+#' @param ... Additional arguments passed to  [ggplot2::theme()].
 #' @seealso [ggplot2::theme()].
-#'
 #' @return A [ggplot2::theme()].
-#'
 #' @examples
 #' theme_map_tag()
 #' theme_map_quad()
