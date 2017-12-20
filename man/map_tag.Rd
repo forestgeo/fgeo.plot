@@ -5,9 +5,9 @@
 \title{Map tree tags by status, showing four subquadrats per plot-page.}
 \usage{
 map_tag(vft, x_q = 20, x_sq = 5, y_q = x_q, y_sq = x_sq,
-  site_name = "Site Name, YYYY", point_shape = c(19, 4), point_size = 1.5,
-  tag_size = 3, header = header_map_tag(), theme = get_theme(),
-  extend_grid = 0)
+  title_quad = "Site Name, YYYY. Quadrat:", point_shape = c(19, 4),
+  point_size = 1.5, tag_size = 3, header = header_map_tag(),
+  theme = get_theme(), extend_grid = 0)
 }
 \arguments{
 \item{vft}{A ViewFullTable.}
@@ -24,7 +24,7 @@ common value is 20.}
 \item{y_sq}{Size in meters of a subquadrat's side. For ForestGEO-CTFS sites, a
 common value is 5.}
 
-\item{site_name}{A string to use as a title.}
+\item{title_quad}{A string to use as a title.}
 
 \item{point_shape}{A vector of two numbers giving the shape of the points to
 plot (see possible shapes in the documentation of ?\code{\link[graphics:points]{graphics::points()}},
@@ -109,26 +109,26 @@ dev.off()
 
 # Common customization (printing only 1 map to screen)
 map_tag(vft1_rnm,
-  site_name = "BCI 2012", point_size = 3, point_shape = c(17, 6), tag_size = 5
+  title_quad = "BCI 2012", point_size = 3, point_shape = c(17, 6), tag_size = 5
 )[1]
 
 # Custom header
-map_tag(vft1_rnm, site_name = "BCI 2012",
+map_tag(vft1_rnm, title_quad = "BCI 2012",
   header = "Line 1: _________\\nLine 2:\\nLine 3:....................."
 )[1]
 
 # Or use a pre-made header
-map_tag(vft1_rnm, site_name = "BCI 2012", header = header_map_tag())[1]
+map_tag(vft1_rnm, title_quad = "BCI 2012", header = header_map_tag())[1]
 
 # Themes
 
 # Using a pre-made theme from ggplot2
 library(ggplot2)
-map_tag(vft1_rnm, site_name = "BCI 2012", theme = theme_gray())[1]
+map_tag(vft1_rnm, title_quad = "BCI 2012", theme = theme_gray())[1]
 
 # Customizing the default theme of map_tag()
 theme_small_change <- get_theme(legend.position = "bottom")
-map_tag(vft1_rnm, site_name = "BCI 2012", theme = theme_small_change)[1]
+map_tag(vft1_rnm, title_quad = "BCI 2012", theme = theme_small_change)[1]
 
 # Customizing the default theme extreemely, to show flexibility
 theme_extreeme_change <- ggplot2::theme(
@@ -145,7 +145,7 @@ theme_extreeme_change <- ggplot2::theme(
   panel.grid.minor = element_line(colour = "black", linetype = "dotted"),
   panel.grid.major = element_line(colour = "black")
 )
-map_tag(vft1_rnm, site_name = "BCI 2012", theme = theme_extreeme_change)[1]
+map_tag(vft1_rnm, title_quad = "BCI 2012", theme = theme_extreeme_change)[1]
 
 # Adapting the dimensions of quadrat and subquadrat to the range of qx and qy
 # Creating new data set with qx and qy ranging 0-100

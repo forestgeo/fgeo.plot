@@ -14,7 +14,7 @@ test_that("wrong inputs to are rejected", {
   expect_error(map_quad(one_quadrat, offset = "a"))
   # not character
   expect_error(map_quad(one_quadrat, header = 1))
-  expect_error(map_quad(one_quadrat, .title = 1))
+  expect_error(map_quad(one_quadrat, title_quad = 1))
 })
 
 test_that("returns a list of ggplots", {

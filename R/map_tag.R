@@ -18,7 +18,7 @@
 #' same value of `CensusID`. Then feed `map_tag()` with the filtered data set.
 #'
 #' @param vft A ViewFullTable.
-#' @param site_name A string to use as a title.
+#' @param title_quad A string to use as a title.
 #' @param point_shape A vector of two numbers giving the shape of the points to
 #'   plot (see possible shapes in the documentation of ?[graphics::points()],
 #'   under the section entitled _'pch' values_).
@@ -78,26 +78,26 @@
 #'
 #' # Common customization (printing only 1 map to screen)
 #' map_tag(vft1_rnm,
-#'   site_name = "BCI 2012", point_size = 3, point_shape = c(17, 6), tag_size = 5
+#'   title_quad = "BCI 2012", point_size = 3, point_shape = c(17, 6), tag_size = 5
 #' )[1]
 #'
 #' # Custom header
-#' map_tag(vft1_rnm, site_name = "BCI 2012",
+#' map_tag(vft1_rnm, title_quad = "BCI 2012",
 #'   header = "Line 1: _________\nLine 2:\nLine 3:....................."
 #' )[1]
 #'
 #' # Or use a pre-made header
-#' map_tag(vft1_rnm, site_name = "BCI 2012", header = header_map_tag())[1]
+#' map_tag(vft1_rnm, title_quad = "BCI 2012", header = header_map_tag())[1]
 #'
 #' # Themes
 #'
 #' # Using a pre-made theme from ggplot2
 #' library(ggplot2)
-#' map_tag(vft1_rnm, site_name = "BCI 2012", theme = theme_gray())[1]
+#' map_tag(vft1_rnm, title_quad = "BCI 2012", theme = theme_gray())[1]
 #'
 #' # Customizing the default theme of map_tag()
 #' theme_small_change <- get_theme(legend.position = "bottom")
-#' map_tag(vft1_rnm, site_name = "BCI 2012", theme = theme_small_change)[1]
+#' map_tag(vft1_rnm, title_quad = "BCI 2012", theme = theme_small_change)[1]
 #'
 #' # Customizing the default theme extreemely, to show flexibility
 #' theme_extreeme_change <- ggplot2::theme(
@@ -114,7 +114,7 @@
 #'   panel.grid.minor = element_line(colour = "black", linetype = "dotted"),
 #'   panel.grid.major = element_line(colour = "black")
 #' )
-#' map_tag(vft1_rnm, site_name = "BCI 2012", theme = theme_extreeme_change)[1]
+#' map_tag(vft1_rnm, title_quad = "BCI 2012", theme = theme_extreeme_change)[1]
 #'
 #' # Adapting the dimensions of quadrat and subquadrat to the range of qx and qy
 #' # Creating new data set with qx and qy ranging 0-100
@@ -132,7 +132,7 @@ map_tag <- function(vft,
                     x_sq = 5,
                     y_q = x_q,
                     y_sq = x_sq,
-                    site_name = "Site Name, YYYY. Quadrat:",
+                    title_quad = "Site Name, YYYY. Quadrat:",
                     point_shape = c(19, 4),
                     point_size = 1.5,
                     tag_size = 3,
@@ -178,7 +178,7 @@ map_tag <- function(vft,
   list_of_plots <- lapply_plot_repulsive_tags(
     list_of_data_to_plot,
     x_q = x_q, x_sq = x_sq, y_q = y_q, y_sq = y_sq,
-    site_name = site_name, point_shape = point_shape, point_size = point_size,
+    title_quad = title_quad, point_shape = point_shape, point_size = point_size,
     tag_size = tag_size, header = header, theme = theme
   )
   list_of_plots
@@ -344,14 +344,14 @@ lapply_plot_repulsive_tags <- function(list_of_data_to_plot,
                                        x_sq = x_sq,
                                        y_q = x_q,  # same as x
                                        y_sq = x_sq,  # same as x
-                                       site_name = site_name,
+                                       title_quad = title_quad,
                                        point_shape = c(19, 4),
                                        point_size = 1.5,
                                        tag_size = 3,
                                        header = header_map_tag(),
                                        theme = get_theme()) {
   check_lapply_plot_repulsive_tags(
-    list_of_data_to_plot = list_of_data_to_plot, site_name = site_name,
+    list_of_data_to_plot = list_of_data_to_plot, title_quad = title_quad,
     point_shape = point_shape, point_size = point_size, tag_size = tag_size,
     header = header, theme = theme
   )
@@ -360,7 +360,7 @@ lapply_plot_repulsive_tags <- function(list_of_data_to_plot,
     X = list_of_data_to_plot,
     FUN = plot_repulsive_tags,
     x_q = x_q, x_sq = x_sq, y_q = y_q, y_sq = y_sq,
-    site_name = site_name, point_shape = point_shape, point_size = point_size,
+    title_quad = title_quad, point_shape = point_shape, point_size = point_size,
     tag_size = tag_size, header = header, theme = theme
   )
   invisible(plot_list)
@@ -369,7 +369,7 @@ lapply_plot_repulsive_tags <- function(list_of_data_to_plot,
 #' Help lapply_plot_repulsive_tags() by checking inputs.
 #' @noRd
 check_lapply_plot_repulsive_tags <- function(list_of_data_to_plot,
-                                             site_name,
+                                             title_quad,
                                              point_shape,
                                              point_size,
                                              tag_size,
@@ -378,7 +378,7 @@ check_lapply_plot_repulsive_tags <- function(list_of_data_to_plot,
   stopifnot(is.data.frame(list_of_data_to_plot[[1]]))
 
   stopifnot(is.character(header))
-  stopifnot(is.character(site_name))
+  stopifnot(is.character(title_quad))
 
   stopifnot(is.numeric(point_shape))
   stopifnot(is.numeric(point_size))
@@ -396,7 +396,7 @@ check_lapply_plot_repulsive_tags <- function(list_of_data_to_plot,
 #' @inheritParams map_tag
 #' @noRd
 plot_repulsive_tags <- function(prep_df,
-                                site_name,
+                                title_quad,
                                 point_shape,
                                 point_size,
                                 tag_size,
@@ -439,8 +439,8 @@ plot_repulsive_tags <- function(prep_df,
       ylim = c(unique(prep_df$y1), unique(prep_df$y2))
     ) +
     labs(
-      # title = paste0(site_name, quad_id_label),
-      title =  paste(site_name, unique(prep_df$quad_id), sep = " "),
+      # title = paste0(title_quad, quad_id_label),
+      title =  paste(title_quad, unique(prep_df$quad_id), sep = " "),
       subtitle = header,
       x = NULL, y = NULL
     ) +

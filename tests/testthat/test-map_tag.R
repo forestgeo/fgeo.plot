@@ -39,7 +39,7 @@ test_that("wrong inputs passed to lapply_plot_repulsive_tags() get noticed", {
       map_tag(
        vft,
        # next line is wrong input
-       site_name = 1,
+       title_quad = 1,
        point_shape = c(0, 2),
        point_size = 6,
        tag_size = 10
@@ -50,7 +50,7 @@ test_that("wrong inputs passed to lapply_plot_repulsive_tags() get noticed", {
     suppressWarnings(
       map_tag(
         vft,
-        site_name = "my site",
+        title_quad = "my site",
         # next line is wrong input
         point_shape = c("a", "b"),
         point_size = 6,
@@ -62,7 +62,7 @@ test_that("wrong inputs passed to lapply_plot_repulsive_tags() get noticed", {
     suppressWarnings(
       map_tag(
         vft,
-        site_name = "my site",
+        title_quad = "my site",
         point_shape = c(1, 2),
         # next line is wrong input
         point_size = "a",
@@ -74,7 +74,7 @@ test_that("wrong inputs passed to lapply_plot_repulsive_tags() get noticed", {
     suppressWarnings(
       map_tag(
         vft,
-        site_name = "my site",
+        title_quad = "my site",
         point_shape = c(1, 2),
         point_size = 1,
         # next line is wrong input
@@ -209,7 +209,7 @@ prep_df_list <- split(prep_df, prep_df$split)
 test_that("outputs a ggplot", {
   plot_list <- prep_df_list %>%
       lapply_plot_repulsive_tags(
-        site_name = "my site",
+        title_quad = "my site",
         x_q = 20, x_sq = 5
       )
   expect_true(
