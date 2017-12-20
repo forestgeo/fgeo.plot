@@ -1,1 +1,1 @@
-#' @param theme A valid [ggplot2::theme()] (see [themes]).
+#' @param theme An object of class theme.

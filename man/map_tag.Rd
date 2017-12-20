@@ -38,7 +38,7 @@ under the section entitled \emph{'pch' values}).}
 
 \item{header}{A string to use as a header (see [headers]).}
 
-\item{theme}{A valid [ggplot2::theme()] (see [themes]).}
+\item{theme}{An object of class theme.}
 
 \item{extend_grid}{A number to adjust the extension of the grid lines beyond
 the plot limits.}

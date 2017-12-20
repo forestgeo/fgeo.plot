@@ -15,7 +15,7 @@ map_quad(vft, title_quad = "Site Name, YYYY, Quadrat:",
 
 \item{header}{A string to use as a header (see [headers]).}
 
-\item{theme}{A valid [ggplot2::theme()] (see [themes]).}
+\item{theme}{An object of class theme.}
 
 \item{lim_min, lim_max}{Minimum and maximum limits of the plot area.}
 
