@@ -33,3 +33,17 @@ check_single_censusid <- function(x) {
     )
   }
 }
+
+#' Test if an object existe in the namespace of a package.
+#'
+#' @param object String giving the object to find.
+#' @param package String giving the package which namespace to search.
+#'
+#' @return Logical.
+#'
+#' @examples
+#' exists_in_pkg("cars", "datasets")
+#' @noRd
+exists_in_pkg <- function(object, package){
+  any(grepl(object, ls(paste0("package:", package))))
+}
