@@ -18,7 +18,8 @@ context("test-map_tag.R")
 # Redo once the plot is stable
 test_that("outputs same as satisfactory reference", {
   plots <- suppressWarnings(map_tag(vft)[1])
-  expect_equal_to_reference(plots, "ref-map_tag.rds")
+  reference <- plots[[1]][["data"]]
+  expect_known_output(reference, "ref_map_tag.csv")
 })
 
 

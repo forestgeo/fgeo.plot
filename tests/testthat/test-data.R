@@ -5,5 +5,5 @@ test_that("exists", {
 })
 
 test_that("remains unchanged", {
-  expect_known_output(four_quadrats, "four_quadrats.csv")
+  expect_known_output(four_quadrats, "ref_four_quadrats.csv")
 })

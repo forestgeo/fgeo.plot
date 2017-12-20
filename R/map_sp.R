@@ -51,7 +51,7 @@
 #' # Print to .pdf -- one species per page of a single file
 #' pdf()
 #' map_sp(census, c("hybapr", "faraoc"))
-#' dev.off
+#' dev.off()
 #'
 #' # Add elevation data
 #' elev <- bciex::bci_elevation
