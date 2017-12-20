@@ -5,7 +5,7 @@
 \title{Map trees within a quadrat.}
 \usage{
 map_quad(vft, lim_min = 0, lim_max = 20, subquadrat_side = 5,
-  size_label = 2, extend_grid = 1,
+  size_label = 2, extend_grid = 0,
   title_quad = "Site Name, YYYY, Quadrat:", header = header_map_quad(),
   theme = theme_map_quad())
 }

@@ -1,6 +1,6 @@
 # map_quad() --------------------------------------------------------------
 
-map_quad(four_quadrats)[[1]]
+map_quad(four_quadrats, extend_grid = 0)[[1]]
 
 
 

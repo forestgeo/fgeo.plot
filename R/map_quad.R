@@ -19,7 +19,7 @@ map_quad <- function(vft,
                      lim_max = 20,
                      subquadrat_side = 5,
                      size_label = 2,
-                     extend_grid = 1,
+                     extend_grid = 0,
                      title_quad = "Site Name, YYYY, Quadrat:",
                      header = header_map_quad(),
                      theme = theme_map_quad()) {
@@ -81,6 +81,10 @@ map_quad_each <- function(df,
                           title_quad,
                           header,
                           theme) {
+  # ggplots come with a default extention
+  default_extention <- 1
+  grid_adjust <- default_extention - extend_grid
+
   title_quad <- paste(title_quad, unique(df$quadratname), sep = " ")
   ggplot(df, aes(x = qx, y = qy)) +
     geom_text_repel(aes(label = tagged_tag), size = size_label) +
@@ -95,8 +99,8 @@ map_quad_each <- function(df,
       linetype = "dashed"
     ) +
     coord_fixed(
-      xlim = c(lim_min + extend_grid, lim_max - extend_grid),
-      ylim = c(lim_min + extend_grid, lim_max - extend_grid)
+      xlim = c(lim_min + grid_adjust, lim_max - grid_adjust),
+      ylim = c(lim_min + grid_adjust, lim_max - grid_adjust)
     ) +
     scale_x_continuous(breaks = lim_min:lim_max, sec.axis = dup_axis()) +
     scale_y_continuous(breaks = lim_min:lim_max, sec.axis = dup_axis()) +
