@@ -109,27 +109,29 @@ dev.off()
 
 # Common customization (printing only 1 map to screen)
 map_tag(vft1_rnm,
-        site_name = "BCI 2012", point_size = 3, point_shape = c(17, 6), tag_size = 5
+  site_name = "BCI 2012", point_size = 3, point_shape = c(17, 6), tag_size = 5
 )[1]
 
 # Custom header
 map_tag(vft1_rnm, site_name = "BCI 2012",
-        header = "Line 1: _________\\nLine 2:\\nLine 3:....................."
+  header = "Line 1: _________\\nLine 2:\\nLine 3:....................."
 )[1]
 
 # Or use a pre-made header
 map_tag(vft1_rnm, site_name = "BCI 2012", header = header_map_tag())[1]
 
-# Custom theme: using a pre-made theme
-# Allow using pre-made themes (e.g. ggplot2::theme_bw()) and building custom
-# themes (with ggplot::theme()).
-library(ggplot2)
+# Themes
 
+# Using a pre-made theme from ggplot2
+library(ggplot2)
 map_tag(vft1_rnm, site_name = "BCI 2012", theme = theme_gray())[1]
 
-# Custom theme: using a pre-made theme
-# An extreeme example to show that themes are extreemely flexible
-your_theme <- ggplot2::theme(
+# Customizing the default theme of map_tag()
+theme_small_change <- get_theme(legend.position = "bottom")
+map_tag(vft1_rnm, site_name = "BCI 2012", theme = theme_small_change)[1]
+
+# Customizing the default theme extreemely, to show flexibility
+theme_extreeme_change <- ggplot2::theme(
   legend.position = "bottom",
   legend.title = element_blank(),
   legend.text = element_text(size = 8, colour = "red"),
@@ -143,7 +145,7 @@ your_theme <- ggplot2::theme(
   panel.grid.minor = element_line(colour = "black", linetype = "dotted"),
   panel.grid.major = element_line(colour = "black")
 )
-map_tag(vft1_rnm, site_name = "BCI 2012", theme = your_theme)[1]
+map_tag(vft1_rnm, site_name = "BCI 2012", theme = theme_extreeme_change)[1]
 
 # Adapting the dimensions of quadrat and subquadrat to the range of qx and qy
 # Creating new data set with qx and qy ranging 0-100
