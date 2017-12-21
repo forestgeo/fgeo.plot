@@ -6,7 +6,7 @@ one_map <- map_quad(one_quadrat)
 context("map_quad")
 
 test_that("passes with default arguments", {
-  expect_silent(
+  expect_message(
     map_quad(
       one_quadrat,
       title_quad = "Site Name, YYYY, Quadrat:",

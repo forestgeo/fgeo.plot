@@ -1,8 +1,48 @@
+f <- function(x) {
+  ggplot2::ggplot(data.frame(x)) + ggplot2::geom_point(ggplot2::aes(x, 1))
+  # invisible(x)
+}
+
+map_f <- function(.x){
+  p <- lapply(.x, f)
+  print_first(p)
+  invisible(.x)
+}
+
+map_f(1:3)
+
+
+
+
+x <- map_f(1:3)
+pdf()
+x
+dev.off()
+
+
+
+
+
+
+# map_sp ------------------------------------------------------------------
+
+# For easier data manipulation
+library(dplyr)
+# Print only a few rows of tibbles (modern dataframes) to save space
+options(dplyr.print_min = 6, dplyr.print_max = 6)
+
+# Example data. Converting dataframe to tibble for better printing
+census <- as_tibble(bciex::bci12t7mini)
+
+map_sp(census, "hybapr")
+x <- map_sp(census, "hybapr")
+x
+
+
+
 # map_quad() --------------------------------------------------------------
 
-p <- map_quad(four_quadrats, extend_grid = 0)[[1]]
-class(p)
-class(p[[1]])
+p <- map_quad(four_quadrats, extend_grid = 0)
 p
 
 # map_tag() ---------------------------------------------------------------

@@ -37,7 +37,7 @@ map_quad <- function(vft,
   vft_checked <- .vft[crucial_vars]
 
   df_list <- split(vft_checked, vft_checked$quadratname)
-  lapply(
+  p <- lapply(
     df_list, map_quad_each,
     lim_min = lim_min,
     lim_max = lim_max,
@@ -48,6 +48,9 @@ map_quad <- function(vft,
     header = header,
     theme = theme
   )
+  sort(print(unique(vft_checked$quadratname)))
+  print_first(p, "plot")
+  invisible(p)
 }
 
 check_map_quad <- function(crucial_vars,

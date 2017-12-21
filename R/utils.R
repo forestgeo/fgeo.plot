@@ -79,6 +79,3 @@ print_first <- function(.x, element = "element") {
   print(.x[1])
   invisible(.x)
 }
-
-
-print_first(list(1, 2))
