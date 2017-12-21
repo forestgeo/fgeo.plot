@@ -2,18 +2,13 @@
 
 #' Map the distribution of one, some or all species in a census data set.
 #'
-#' Only the first two arguments are strictly necessary and the defaults are set
-#' to cover most common cases. All other arguments let you customize your map:
-#' they let you customize the points; the plot theme; add your elevation data,
-#' and customize the elevation lines.
-#'
 #' @param census Census data.
 #' @param species A string of the species codes to plot (`sp`).
 #' @param xlim,ylim A vector giving the limits of x, y axes, for example
 #'   `xlim = c(0, 1000), ylim = c(0, 500)`. Default limits should be OK -- they
 #'   are set to be c(0, max), where max is the maximum value of `gx` or `gy`
 #'   in the data set.
-#' @param theme A ggplot2 theme to customize the looks of the map.
+#' @template theme
 #' @param elevation A dataframe with variables gx, gy, and elev giving the
 #'   elevation of the site.
 #' @param line_size A number to customize the width of the elevation lines.
@@ -23,7 +18,6 @@
 #'   #132B43).
 #' @param bins A number. Setting bins creates evenly spaced contours in the
 #'   range of the data. Integers
-#' @param file A character string giving the name of the file.
 #' @param ... Arguments passed to [ggplot2::geom_point()] to customize, for
 #'   example, the size, shape, or colour of the points.
 #'
@@ -33,9 +27,7 @@
 #' @section Acknowledgement:
 #' Thanks to Gabriel Arellano and David Kenfack for ideas and feedback.
 #'
-#' @return Both functions return a list of plots. `map_sp()` returns it visibly;
-#'   `map_sp_pdf()` returns it invisibly so it can be reused, but its main
-#'   output is a .pdf file.
+#' @return A list of which each element is a plot of class ggplot.
 #' @export
 #'
 #' @examples
@@ -56,9 +48,9 @@
 #' map_sp(census, "hybapr")
 #'
 #' # Print to .pdf -- one species per page of a single file
-#' p <- map_sp_pdf(census, c("hybapr", "faraoc"))
-#' # Also print to screen -- navigate the plot's panel to view each species
-#' p
+#' pdf()
+#' map_sp(census, c("hybapr", "faraoc"))
+#' dev.off()
 #'
 #' # Add elevation data
 #' elev <- bciex::bci_elevation
@@ -105,13 +97,6 @@
 #' # For more options see ?ggplot2::theme_bw()
 #'
 #' # Less common changes -----------------------------------------------------
-#'
-#' # Customizing name of .pdf file. Saving to default -- working directory ("./")
-#' map_sp_pdf(census, "hybapr", elevation = elev, file = "./custom-name.pdf")
-#' # Same
-#' suppressMessages(
-#'   map_sp_pdf(census, "hybapr", elevation = elev, file = "custom-name.pdf")
-#' )
 #'
 #' # Changing limits
 #' map_sp(census, "hybapr", xlim = c(0, 1500), ylim = c(0, 1000))
@@ -171,83 +156,20 @@ map_sp <- function(census,
                    high = "#56B1F7",
                    bins = NULL,
                    ...) {
-  p <- map_sp_invisible(
-    census = census, species = species, xlim = xlim, ylim = ylim,
-    theme = theme, elevation = elevation, line_size = line_size, low = low,
-    high = high, bins = bins, ...
-  )
+  check_map_sp(census = census, species = species, xlim = xlim, ylim = ylim)
+
+  p <- lapply(X = species, FUN = map_one_sp, census = census, ...)
+  names(p) <- species
   p
 }
 
-#' @export
-#' @rdname map_sp
-map_sp_pdf <- function(census,
-                       species,
-                       xlim = NULL,
-                       ylim = NULL,
-                       theme = ggplot2::theme_bw(),
-                       elevation = NULL,
-                       line_size = 0.5,
-                       low = "#132B43",
-                       high = "#56B1F7",
-                       bins = NULL,
-                       file = "map.pdf",
-                       ...) {
-  check_map_sp(census, species)
-  file <- check_file_extension(file)
-  message("Saving as ", file)
-
-  plots <- map_sp_invisible(census = census, species = species,
-    xlim = xlim, ylim = ylim, theme = theme,
-    elevation = elevation, line_size = line_size, low = low, high = high,
-    bins = bins, ...)
-  grDevices::pdf(file = file)
-  on.exit(grDevices::dev.off())
-  invisible(lapply(plots, print))
-
-  invisible(plots)
+check_map_sp <- function(census, species, xlim, ylim) {
+  stopifnot(is.data.frame(census))
+  stopifnot(is.character(species))
+  if (length(species) == 0) {stop("The vector `sp` is empty.")}
+  check_crucial_names(census, c("gx", "gy", "sp"))
 }
 
-#' Wrap multiple checks in map_sp() and map_sp_pdf() for clarity.
-#' @noRd
-check_map_sp <- function(cns, sp) {
-  stopifnot(is.data.frame(cns))
-  check_crucial_names(x = cns, nms = c("gx", "gy", "sp"))
-  stopifnot(is.character(sp))
-  if (length(sp) == 0) {stop("The vector `sp` is empty.")}
-}
-
-#' If file extension is not .pdf, ignore the given file-name
-#' @noRd
-check_file_extension <- function(file) {
-  is_extension_ok <- grepl("*.\\.pdf", file)
-  if (is_extension_ok) {
-    return(file)
-  } else {
-    warning("File extension should be .pdf.\n",
-      "  * Replacing given file name by default file name")
-    file <- "map.pdf"
-  }
-  file
-}
-
-
-#' Do the heavy lifting and return invisible.
-#'
-#' Allows the map to be printed visibly with map_sp() or invisibly with
-#' map_sp_pdf().
-#'
-#' @noRd
-map_sp_invisible <- function(census, species, ...) {
-  check_map_sp(census, species)
-
-  # `...` passess all args to all funs; So pass args matched only in one fun.
-  plots <- lapply(X = species, FUN = map_one_sp, census = census, ...)
-  names(plots) <- species
-  invisible(plots)
-}
-
-#' Standarized plot for each species (fixed ratio and limits).
 #' @noRd
 map_one_sp <- function(census,
                        one_sp,
@@ -278,13 +200,6 @@ map_one_sp <- function(census,
 #' General plot of gx by gy faceted by species.
 #' @noRd
 map_basic <- function(census, xlim, ylim, theme = ggplot2::theme_bw(), ...) {
-  check_crucial_names(census, c("gx", "gy"))
-  xlim_contains_no_NA <- !is.na(xlim)
-  stopifnot(xlim_contains_no_NA)
-  ylim_contains_no_NA <- !is.na(ylim)
-  stopifnot(ylim_contains_no_NA)
-
-
   ggplot(data = census, aes(x = gx, y = gy)) +
     geom_point(...) +
     labs(x = NULL, y = NULL, title = unique(census$sp)) +

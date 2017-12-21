@@ -1,3 +1,7 @@
+# map 0.0.00.9100
+
+* Refactor themes to use arguments from `ggplot2::theme()`.
+
 # map 0.0.00.9007
 
 * Add `map_sp()` from __forestr__ to keep all mapping functions in __map__.

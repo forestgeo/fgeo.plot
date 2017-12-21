@@ -2,16 +2,11 @@
 % Please edit documentation in R/map_sp.R
 \name{map_sp}
 \alias{map_sp}
-\alias{map_sp_pdf}
 \title{Map the distribution of one, some or all species in a census data set.}
 \usage{
 map_sp(census, species, xlim = NULL, ylim = NULL,
   theme = ggplot2::theme_bw(), elevation = NULL, line_size = 0.5,
   low = "#132B43", high = "#56B1F7", bins = NULL, ...)
-
-map_sp_pdf(census, species, xlim = NULL, ylim = NULL,
-  theme = ggplot2::theme_bw(), elevation = NULL, line_size = 0.5,
-  low = "#132B43", high = "#56B1F7", bins = NULL, file = "map.pdf", ...)
 }
 \arguments{
 \item{census}{Census data.}
@@ -23,7 +18,7 @@ map_sp_pdf(census, species, xlim = NULL, ylim = NULL,
 are set to be c(0, max), where max is the maximum value of \code{gx} or \code{gy}
 in the data set.}
 
-\item{theme}{A ggplot2 theme to customize the looks of the map.}
+\item{theme}{An object of class theme.}
 
 \item{elevation}{A dataframe with variables gx, gy, and elev giving the
 elevation of the site.}
@@ -40,19 +35,12 @@ range of the data. Integers}
 
 \item{...}{Arguments passed to \code{\link[ggplot2:geom_point]{ggplot2::geom_point()}} to customize, for
 example, the size, shape, or colour of the points.}
-
-\item{file}{A character string giving the name of the file.}
 }
 \value{
-Both functions return a list of plots. \code{map_sp()} returns it visibly;
-\code{map_sp_pdf()} returns it invisibly so it can be reused, but its main
-output is a .pdf file.
+A list of which each element is a plot of class ggplot.
 }
 \description{
-Only the first two arguments are strictly necessary and the defaults are set
-to cover most common cases. All other arguments let you customize your map:
-they let you customize the points; the plot theme; add your elevation data,
-and customize the elevation lines.
+Map the distribution of one, some or all species in a census data set.
 }
 \section{Acknowledgement}{
 
@@ -77,9 +65,9 @@ census <- as_tibble(bciex::bci12t7mini)
 map_sp(census, "hybapr")
 
 # Print to .pdf -- one species per page of a single file
-p <- map_sp_pdf(census, c("hybapr", "faraoc"))
-# Also print to screen -- navigate the plot's panel to view each species
-p
+pdf()
+map_sp(census, c("hybapr", "faraoc"))
+dev.off()
 
 # Add elevation data
 elev <- bciex::bci_elevation
@@ -126,13 +114,6 @@ map_sp(census, "hybapr", theme = ggplot2::theme_dark())
 # For more options see ?ggplot2::theme_bw()
 
 # Less common changes -----------------------------------------------------
-
-# Customizing name of .pdf file. Saving to default -- working directory ("./")
-map_sp_pdf(census, "hybapr", elevation = elev, file = "./custom-name.pdf")
-# Same
-suppressMessages(
-  map_sp_pdf(census, "hybapr", elevation = elev, file = "custom-name.pdf")
-)
 
 # Changing limits
 map_sp(census, "hybapr", xlim = c(0, 1500), ylim = c(0, 1000))

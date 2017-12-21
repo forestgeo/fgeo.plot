@@ -17,8 +17,9 @@ context("test-map_tag.R")
 
 # Redo once the plot is stable
 test_that("outputs same as satisfactory reference", {
-  plots <- suppressWarnings(map_tag(vft))
-  expect_equal_to_reference(plots, "ref-map_tag.rds")
+  plots <- suppressWarnings(map_tag(vft)[1])
+  reference <- plots[[1]][["data"]]
+  expect_known_output(reference, "ref_map_tag.csv")
 })
 
 
@@ -39,7 +40,7 @@ test_that("wrong inputs passed to lapply_plot_repulsive_tags() get noticed", {
       map_tag(
        vft,
        # next line is wrong input
-       site_name = 1,
+       title_quad = 1,
        point_shape = c(0, 2),
        point_size = 6,
        tag_size = 10
@@ -50,7 +51,7 @@ test_that("wrong inputs passed to lapply_plot_repulsive_tags() get noticed", {
     suppressWarnings(
       map_tag(
         vft,
-        site_name = "my site",
+        title_quad = "my site",
         # next line is wrong input
         point_shape = c("a", "b"),
         point_size = 6,
@@ -62,7 +63,7 @@ test_that("wrong inputs passed to lapply_plot_repulsive_tags() get noticed", {
     suppressWarnings(
       map_tag(
         vft,
-        site_name = "my site",
+        title_quad = "my site",
         point_shape = c(1, 2),
         # next line is wrong input
         point_size = "a",
@@ -74,7 +75,7 @@ test_that("wrong inputs passed to lapply_plot_repulsive_tags() get noticed", {
     suppressWarnings(
       map_tag(
         vft,
-        site_name = "my site",
+        title_quad = "my site",
         point_shape = c(1, 2),
         point_size = 1,
         # next line is wrong input
@@ -102,23 +103,12 @@ test_that("plots all unique tags in data", {
 
 
 test_that("plots the same with all or just the minimum needed vars in data", {
-  all <- suppressWarnings(map_tag(vft))
+  all <- suppressWarnings(map_tag(vft)[1])
   vft_with_min_vars <- vft %>%
     select(Tag, Status, QX, QY, QuadratName, DBHID, CensusID, PlotID)
-  min <- suppressWarnings(map_tag(vft_with_min_vars))
+  min <- suppressWarnings(map_tag(vft_with_min_vars)[1])
 
   expect_equal(all, min)
-
-  # # Visual confirmation
-  all_multipaged <- marrangeGrob(all, nrow = 1, ncol = 1)
-  ggplot2::ggsave("all_multipaged.pdf", all_multipaged,
-    paper = "letter", width = 8, height = 10.5
-  )
-  min_multipaged <- marrangeGrob(min, nrow = 1, ncol = 1)
-  ggplot2::ggsave(
-    "min_multipaged.pdf", min_multipaged,
-    paper = "letter", width = 8, height = 10.5
-  )
 })
 
 
@@ -133,7 +123,7 @@ test_that("errs with uppercase names", {
 })
 
 test_that("outputs a ggplot", {
-  result <- suppressWarnings(map_tag(vft))
+  result <- suppressWarnings(map_tag(vft)[1])
   expect_true(
     any(grepl("ggplot", class(result[[1]])))
   )
@@ -209,7 +199,7 @@ prep_df_list <- split(prep_df, prep_df$split)
 test_that("outputs a ggplot", {
   plot_list <- prep_df_list %>%
       lapply_plot_repulsive_tags(
-        site_name = "my site",
+        title_quad = "my site",
         x_q = 20, x_sq = 5
       )
   expect_true(

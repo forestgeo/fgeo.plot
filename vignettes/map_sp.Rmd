@@ -35,7 +35,7 @@ update_geom_defaults("text", list(size = 14.5))
 
 # Overview
 
-This vignette shows you how to map species distribution with `map_sp()` and `map_sp_pdf()` from the __map__ package.
+This vignette shows you how to map species distribution with `map_sp()`from the __map__ package.
 
 ```{r}
 # To install from a private repo, generate a personal access token (PAT) in
@@ -74,12 +74,8 @@ The next section shows you how to explore data quickly. You will produce good qu
 
 ## Mapping Species Distribution
 
-Although the output of `map_sp()` and `map_sp_pdf()` is printed to different devices -- i.e, the screen or a .pdf file --  those functions are almost identical. They are documented jointly and share the same arguments (except for the `file` argument that only belongs to `map_sp_pdf()`. (These functions are not merge into a single function because their outputs are different; functions that produce different output tend to cause more problems that those which output is consistently the same).
-
 ```
 ?map_sp
-# Or
-?map_sp_pdf
 ```
 
 Notice that only the first two arguments of these functions are strictly necessary.
@@ -87,18 +83,6 @@ Notice that only the first two arguments of these functions are strictly necessa
 ```{r}
 # Print to screen
 map_sp(census, c("hybapr", "faraoc"))
-```
-
-```{r}
-# Defaults to save in working directory. Returns invisibly.
-map_sp_pdf(census, c("hybapr", "faraoc"))
-```
-
-```{r fig.align="default", out.width="45%", fig.widh=(6 * 0.45 / 0.7)}
-# Force printing the invisible output
-print(map_sp_pdf(census, c("hybapr", "faraoc")))
-
-# (Printing side by side to save space)
 ```
 
 Keep in mind that your census data must have specific variable-names:
@@ -177,7 +161,7 @@ You may want to customize your maps. For example, you may want to change some pr
 
 ### Changing Points' Properties
 
-Both `map_sp()` and `map_sp_pdf()` have the argument `...`, which lets you pass arguments to `ggplot2::geom_point()` to change points' properties such as the shape, size, fill, colour, and stroke. Read `?ggplot2::geom_point()` to learn all your options; here you can see some common ones:
+The argument `...`, which lets you pass arguments to `ggplot2::geom_point()` to change points' properties such as the shape, size, fill, colour, and stroke. Read `?ggplot2::geom_point()` to learn all your options; here you can see some common ones:
 
 ```{r}
 map_sp(census, "hybapr",
@@ -213,32 +197,6 @@ map_sp(census, "hybapr", theme = ggplot2::theme_dark())
 ## Less Common Changes
 
 Here are some changes that you may need less often but are still good to keep in mind.
-
-### Change File Name
-
-When printing to .pdf, you can provide a custom file name (including the path to a directory); but note the file name must end in _.pdf_ or it will be replaced by a default name:
-
-```{r, error=TRUE}
-spp <- c("hybapr", "faraoc")
-
-map_sp_pdf(census, spp, elevation = elev, file = "bad-name1")
-
-map_sp_pdf(census, spp, elevation = elev, file = "bad-name2.png")
-
-```
-
-This is OK. (Note that you can suppress messages)
-
-```{r}
-map_sp_pdf(census, spp, elevation = elev, file = "good-name.pdf")
-
-# Same without any message
-suppressMessages(
-  map_sp_pdf(census, spp, elevation = elev, file = "good-name.pdf")
-)
-```
-
-
 
 ### Change x and y Limits
 
@@ -302,7 +260,7 @@ dev.off()
 
 ## Customizing the Theme
 
-Before, you used a pre-made theme. But you can create your own theme with `ggplot2::theme()`, save it as an object, and pass that object to `map_sp()` or `map_sp_pdf()`. 
+Before, you used a pre-made theme. But you can create your own theme with `ggplot2::theme()`, save it as an object, and pass that object to `map_sp()`.
 
 ```{r}
 # Showing only a few options; see all the options with ?ggplot2::theme()
@@ -322,7 +280,7 @@ map_sp(census, "hybapr", theme = my_theme)
 
 ## Extending with ggplot2
 
-Finally, you can also use the output of `map_sp()` and `map_pdf()` as the starting point for further customization with __ggplot2__ (the next section provides resources to learn __ggplot2__). That may be convenient for minor extensions; for larger ones you may prefer to start from scratch. Note that `map_sp()` and `map_sp_pdf()` output not just one plot but a list of plots. That is important to keep in mind if you want to iterate over all the plot-elements of the output list. For example, this is how you would add a new layer to one element of the plots' list:
+Finally, you can also use the output of `map_sp()` and `map_pdf()` as the starting point for further customization with __ggplot2__ (the next section provides resources to learn __ggplot2__). That may be convenient for minor extensions; for larger ones you may prefer to start from scratch. Note that `map_sp()` outputs not just one plot but a list of plots. That is important to keep in mind if you want to iterate over all the plot-elements of the output list. For example, this is how you would add a new layer to one element of the plots' list:
 
 ```{r}
 p0 <- map_sp(census, c("hybapr", "faraoc"))
@@ -345,4 +303,4 @@ p2
 
 ## Learning More
 
-There are many visualization systems in R. The system built in `map_sp()` and `map_sp_pdf()` is that of the __ggplot2__ package. __ggplot2__ is not an arbitrary collection of functions; it is one implementation of [The Grammar of Graphics](https://goo.gl/E514ar). Good places to learn __ggplot2__ include [this website](https://goo.gl/tVvLQZ); this specialized, paid book: [ggplot2: Elegant Graphics for Data Analysis](https://goo.gl/R6wJk9); and this general, free book [R for Data Science](http://r4ds.had.co.nz/).
+There are many visualization systems in R. The system built in `map_sp()` is that of the __ggplot2__ package. __ggplot2__ is not an arbitrary collection of functions; it is one implementation of [The Grammar of Graphics](https://goo.gl/E514ar). Good places to learn __ggplot2__ include [this website](https://goo.gl/tVvLQZ); this specialized, paid book: [ggplot2: Elegant Graphics for Data Analysis](https://goo.gl/R6wJk9); and this general, free book [R for Data Science](http://r4ds.had.co.nz/).

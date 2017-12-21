@@ -5,12 +5,12 @@
 \title{Map tree tags by status, showing four subquadrats per plot-page.}
 \usage{
 map_tag(vft, x_q = 20, x_sq = 5, y_q = x_q, y_sq = x_sq,
-  site_name = "Site Name, YYYY", point_shape = c(19, 4), point_size = 1.5,
-  tag_size = 3, header = get_header(), theme = get_theme(),
-  extend_grid = 0)
+  title_quad = "Site Name, YYYY. Quadrat:", point_shape = c(19, 4),
+  point_size = 1.5, tag_size = 3, header = header_map_tag(),
+  theme = theme_map_tag(), extend_grid = 0)
 }
 \arguments{
-\item{vft}{A ViewFullTable.}
+\item{vft}{A dataframe -- specifically, a ForestGEO ViewFullTable.}
 
 \item{x_q}{Size in meters of a quadrat's side. For ForestGEO sites, a
 common value is 20.}
@@ -24,7 +24,7 @@ common value is 20.}
 \item{y_sq}{Size in meters of a subquadrat's side. For ForestGEO-CTFS sites, a
 common value is 5.}
 
-\item{site_name}{A string to use as a title.}
+\item{title_quad}{A string to use as a title.}
 
 \item{point_shape}{A vector of two numbers giving the shape of the points to
 plot (see possible shapes in the documentation of ?\code{\link[graphics:points]{graphics::points()}},
@@ -33,16 +33,15 @@ under the section entitled \emph{'pch' values}).}
 \item{point_size}{A number giving points size. Passed to
 \code{\link[ggplot2:geom_point]{ggplot2::geom_point()}}.}
 
-\item{tag_size}{A number giving tag size. Passed to \code{\link[ggplot2:geom_point]{ggplot2::geom_point()}}.}
+\item{tag_size}{A number giving tag size. Passed to
+[ggrepel::geom_text_repel].}
 
-\item{header}{A string to use as a header (subtitle). To conveniently create
-this header use \code{\link[=get_header]{get_header()}}.}
+\item{header}{A string to use as a header (see [headers]).}
 
-\item{theme}{A \code{\link[ggplot2:theme]{ggplot2::theme()}}. To conveniently create this theme
-use \code{\link[=get_theme]{get_theme()}}.}
+\item{theme}{An object of class theme.}
 
-\item{extend_grid}{A number to adjust the extension of the minor and major
-grid lines beyond the plot limits.}
+\item{extend_grid}{A number to adjust the extension of the grid lines beyond
+the plot limits.}
 }
 \value{
 A list of ggplots, where each element of the list is a map of tree
@@ -81,6 +80,7 @@ the algorithm to calculate subquadrats.
 library(dplyr)
 library(ggplot2)
 library(map)
+library(bciex)
 
 # Subset of a public ViewFullTable from BCI (source:
 # https://repository.si.edu/handle/10088/20925).
@@ -109,32 +109,29 @@ dev.off()
 
 # Common customization (printing only 1 map to screen)
 map_tag(vft1_rnm,
-        site_name = "BCI 2012", point_size = 3, point_shape = c(17, 6), tag_size = 5
+  title_quad = "BCI 2012", point_size = 3, point_shape = c(17, 6), tag_size = 5
 )[1]
 
 # Custom header
-map_tag(vft1_rnm, site_name = "BCI 2012",
-        header = "Line 1: _________\\nLine 2:\\nLine 3:....................."
+map_tag(vft1_rnm, title_quad = "BCI 2012",
+  header = "Line 1: _________\\nLine 2:\\nLine 3:....................."
 )[1]
 
-# Maybe easier
-your_header <- get_header(
-  line1 = "Your header-line 1: _____________________________",
-  line2 = "Your header-line 3: _____________________________",
-  line3 = "Your header-line 2: _____________________________"
-)
-map_tag(vft1_rnm, site_name = "BCI 2012", header = your_header)[1]
+# Or use a pre-made header
+map_tag(vft1_rnm, title_quad = "BCI 2012", header = header_map_tag())[1]
 
-# Custom theme: using a pre-made theme
-# Allow using pre-made themes (e.g. ggplot2::theme_bw()) and building custom
-# themes (with ggplot::theme()).
+# Themes
+
+# Using a pre-made theme from ggplot2
 library(ggplot2)
+map_tag(vft1_rnm, title_quad = "BCI 2012", theme = theme_gray())[1]
 
-map_tag(vft1_rnm, site_name = "BCI 2012", theme = theme_gray())[1]
+# Customizing the default theme of map_tag()
+theme_small_change <- theme_map_tag(legend.position = "bottom")
+map_tag(vft1_rnm, title_quad = "BCI 2012", theme = theme_small_change)[1]
 
-# Custom theme: using a pre-made theme
-# An extreeme example to show that themes are extreemely flexible
-your_theme <- ggplot2::theme(
+# Customizing the default theme extreemely, to show flexibility
+theme_extreeme_change <- ggplot2::theme(
   legend.position = "bottom",
   legend.title = element_blank(),
   legend.text = element_text(size = 8, colour = "red"),
@@ -148,7 +145,7 @@ your_theme <- ggplot2::theme(
   panel.grid.minor = element_line(colour = "black", linetype = "dotted"),
   panel.grid.major = element_line(colour = "black")
 )
-map_tag(vft1_rnm, site_name = "BCI 2012", theme = your_theme)[1]
+map_tag(vft1_rnm, title_quad = "BCI 2012", theme = theme_extreeme_change)[1]
 
 # Adapting the dimensions of quadrat and subquadrat to the range of qx and qy
 # Creating new data set with qx and qy ranging 0-100
@@ -164,5 +161,6 @@ map_tag(smaller, x_q = 10, x_sq = 2.5, extend_grid = 0.25)[1]
 }
 \seealso{
 \code{\link[graphics:points]{graphics::points()}}, \code{\link[ggplot2:geom_point]{ggplot2::geom_point()}}, \code{\link[ggplot2:theme]{ggplot2::theme()}}
-\code{\link[=get_header]{get_header()}}, \code{\link[=get_theme]{get_theme()}}, \code{\link[=add_subquadrat]{add_subquadrat()}}.
+\code{\link[=header_map_tag]{header_map_tag()}}, \code{\link[=theme_map_tag]{theme_map_tag()}}, \code{\link[=add_subquadrat]{add_subquadrat()}},
+\link[ggrepel:geom_text_repel]{ggrepel::geom_text_repel}.
 }
