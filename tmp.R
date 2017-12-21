@@ -1,29 +1,3 @@
-f <- function(x) {
-  ggplot2::ggplot(data.frame(x)) + ggplot2::geom_point(ggplot2::aes(x, 1))
-  # invisible(x)
-}
-
-map_f <- function(.x){
-  p <- lapply(.x, f)
-  print_first(p)
-  invisible(.x)
-}
-
-map_f(1:3)
-
-
-
-
-x <- map_f(1:3)
-pdf()
-x
-dev.off()
-
-
-
-
-
-
 # map_sp ------------------------------------------------------------------
 
 # For easier data manipulation
