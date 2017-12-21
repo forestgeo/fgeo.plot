@@ -40,9 +40,7 @@ check_single_censusid <- function(x) {
 #' @param package String giving the package which namespace to search.
 #'
 #' @return Logical.
-#'
-#' @examples
-#' exists_in_pkg("cars", "datasets")
+#' @nord
 exists_in_pkg <- function(object, package){
   any(grepl(object, ls(paste0("package:", package))))
 }
@@ -71,9 +69,9 @@ print_first <- function(.x, element = "element") {
   stopifnot(is.character(element))
 
   message(
-    crayon::red("Output is a list of", length(.x), "\n"),
-    crayon::black("* Showing only the first", element, "\n"),
-    crayon::black("* Returning the entire list invisibly")
+    "Output is a list of", length(.x), "\n",
+    "* Showing only the first", element, "\n",
+    "* Returning the entire list invisibly"
   )
 
   print(.x[1])

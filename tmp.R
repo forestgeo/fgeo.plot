@@ -40,9 +40,10 @@ x
 
 
 
-# map_quad() --------------------------------------------------------------
+# map_quad() -------------------------------------------------------------
 
-p <- map_quad(four_quadrats, extend_grid = 0)
+x <- mutate(four_quadrats, QuadratName = letters[QuadratName])
+p <- map_quad(x, extend_grid = 0)
 p
 
 # map_tag() ---------------------------------------------------------------

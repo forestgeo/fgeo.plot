@@ -17,6 +17,3 @@ Logical.
 \description{
 Test if an object existe in the namespace of a package.
 }
-\examples{
-exists_in_pkg("cars", "datasets")
-}
