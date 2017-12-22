@@ -17,7 +17,7 @@
 #' p <- map_quad(four_quadrats)
 #' dplyr::first(p)
 #'
-#' # Printing only maps 1-4 to a .pdf
+#' # Printing to .pdf optimized for size letter
 #' pdf("default-map.pdf", paper = "letter", height = 10.5, width = 8)
 #' p
 #' dev.off()
@@ -37,7 +37,7 @@ map_quad <- function(vft,
   )
   crucial <- .vft[core]
   check_map_quad(
-    .vft = crucial,
+    vft = crucial,
     core = core,
     lim_min = lim_min,
     lim_max = lim_max,
@@ -54,7 +54,6 @@ map_quad <- function(vft,
   crucial$tagged_tag <- tag_dead(crucial$tag, crucial$status)
   message("* Standarizing `dbh` by the count of `dbh` measurements")
   crucial$dbh_standarized <- crucial$dbh / length(crucial$dbh)
-
 
   df_list <- split(crucial, crucial$quadratname)
   p <- lapply(
@@ -74,7 +73,7 @@ map_quad <- function(vft,
   p
 }
 
-check_map_quad <- function(.vft,
+check_map_quad <- function(vft,
                            core,
                            lim_min,
                            lim_max,
@@ -84,8 +83,8 @@ check_map_quad <- function(.vft,
                            title_quad,
                            header,
                            theme) {
-  if (missing(.vft)) stop("`vft` can't be missing")
-  if (!is.data.frame(.vft)) stop("`vft` should be a dataframe")
+  if (missing(vft)) stop("`vft` can't be missing")
+  if (!is.data.frame(vft)) stop("`vft` should be a dataframe")
   stopifnot(
     is.numeric(lim_min), is.numeric(lim_max), is.numeric(subquadrat_side),
     is.numeric(tag_size), is.numeric(extend_grid)
@@ -93,9 +92,9 @@ check_map_quad <- function(.vft,
   arg_theme_has_class_theme <- any(grepl("theme", class(theme)))
   stopifnot(arg_theme_has_class_theme)
   stopifnot(is.character(title_quad), is.character(header))
-  check_crucial_names(.vft, core)
-  check_single_plotid(.vft)
-  check_single_censusid(.vft)
+  check_crucial_names(vft, core)
+  check_single_plotid(vft)
+  check_single_censusid(vft)
 }
 
 map_quad_each <- function(.df,

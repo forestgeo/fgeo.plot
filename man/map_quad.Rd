@@ -34,5 +34,13 @@ A list which each element is a plot of class ggplot.
 Map trees within a quadrat.
 }
 \examples{
+\dontrun{
 p <- map_quad(four_quadrats)
+dplyr::first(p)
+
+# Printing only maps 1-4 to a .pdf
+pdf("default-map.pdf", paper = "letter", height = 10.5, width = 8)
+p
+dev.off()
+}
 }

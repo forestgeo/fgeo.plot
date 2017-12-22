@@ -1,8 +1,12 @@
 # map_quad() -------------------------------------------------------------
 
-x <- mutate(bciex::bci12vft_mini, QuadratName = letters[QuadratName])
-p <- map_quad(x, extend_grid = 0)
+p <- map_quad(four_quadrats)
+dplyr::first(p)
+
+# Printing only maps 1-4 to a .pdf
+pdf("default-map.pdf", paper = "letter", height = 10.5, width = 8)
 p
+dev.off()
 
 # map_sp ------------------------------------------------------------------
 

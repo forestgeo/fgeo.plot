@@ -22,12 +22,9 @@ A dataframe with the additional variable \code{subquadrat}.
 Add a quadrat variable to a dataframe based based on qx and qy coordinates.
 }
 \examples{
-\dontrun{
-# bciex::bci12vft_mini is included in this package
-df <- bciex::bci12vft_mini
-with_subquadrat <- add_subquadrat(df, 20, 20, 5, 5)
-head(with_subquadrat[c("qx", "qy", "subquadrat")])
-}
+vft <- dplyr::rename(bciex::bci12vft_mini, QX = x, QY = y)
+with_subquadrat <- add_subquadrat(vft, 20, 20, 5, 5)
+with_subquadrat[c("subquadrat", "qx", "qy")]
 }
 \author{
 Anudeep Singh.
