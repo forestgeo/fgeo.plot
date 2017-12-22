@@ -2,18 +2,18 @@
 % Please edit documentation in R/map_fun_settings.R
 \name{headers}
 \alias{headers}
-\alias{header_map_tag}
-\alias{header_map_quad}
+\alias{map_tag_header}
+\alias{map_quad_header}
 \title{Pre-made headers.}
 \usage{
-header_map_tag()
+map_tag_header()
 
-header_map_quad()
+map_quad_header()
 }
 \description{
 Pre-made headers.
 }
 \examples{
-header_map_tag()
-header_map_quad()
+cat(map_tag_header())
+cat(map_quad_header())
 }

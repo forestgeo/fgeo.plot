@@ -1,6 +1,6 @@
 # map_quad() -------------------------------------------------------------
 
-p <- map_quad(four_quadrats)
+p <- map_quad(one_quadrat)
 dplyr::first(p)
 
 # Printing only maps 1-4 to a .pdf

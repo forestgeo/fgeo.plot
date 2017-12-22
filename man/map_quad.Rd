@@ -5,7 +5,7 @@
 \title{Map trees within a quadrat.}
 \usage{
 map_quad(vft, title_quad = "Site Name, YYYY, Quadrat:",
-  header = header_map_quad(), theme = theme_map_quad(), lim_min = 0,
+  header = map_quad_header(), theme = theme_map_quad(), lim_min = 0,
   lim_max = 20, subquadrat_side = 5, tag_size = 2, extend_grid = 0)
 }
 \arguments{
@@ -38,7 +38,7 @@ Map trees within a quadrat.
 p <- map_quad(four_quadrats)
 dplyr::first(p)
 
-# Printing only maps 1-4 to a .pdf
+# Printing to .pdf optimized for size letter
 pdf("default-map.pdf", paper = "letter", height = 10.5, width = 8)
 p
 dev.off()
