@@ -1,3 +1,9 @@
+# map_quad() -------------------------------------------------------------
+
+x <- mutate(bciex::bci12vft_mini, QuadratName = letters[QuadratName])
+p <- map_quad(x, extend_grid = 0)
+p
+
 # map_sp ------------------------------------------------------------------
 
 # For easier data manipulation
@@ -14,11 +20,6 @@ x
 
 
 
-# map_quad() -------------------------------------------------------------
-
-x <- mutate(four_quadrats, QuadratName = letters[QuadratName])
-p <- map_quad(x, extend_grid = 0)
-p
 
 # map_tag() ---------------------------------------------------------------
 

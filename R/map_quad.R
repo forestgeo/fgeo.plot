@@ -13,9 +13,7 @@
 #' @export
 #'
 #' @examples
-#' p <- map_quad(four_quadrats, extend_grid = 0)[[1]]
-#' class(p)
-#' class(p[[1]])
+#' p <- map_quad(four_quadrats)
 map_quad <- function(vft,
                      title_quad = "Site Name, YYYY, Quadrat:",
                      header = header_map_quad(),
@@ -26,17 +24,31 @@ map_quad <- function(vft,
                      tag_size = 2,
                      extend_grid = 0) {
   .vft <- stats::setNames(vft, tolower(names(vft)))
-  crucial_vars <- c("quadratname", "qx", "qy", "tagged_tag", "dbh_standarized")
+  core <- c(
+    "plotid", "censusid", "tag", "dbh", "status", "quadratname", "qx", "qy"
+  )
+  crucial <- .vft[core]
   check_map_quad(
-    crucial_vars = crucial_vars, .vft = .vft, lim_min = lim_min,
-    lim_max = lim_max, subquadrat_side = subquadrat_side, tag_size =
-    tag_size, extend_grid = extend_grid, title_quad = title_quad, header = header,
+    .vft = crucial,
+    core = core,
+    lim_min = lim_min,
+    lim_max = lim_max,
+    subquadrat_side = subquadrat_side,
+    tag_size = tag_size,
+    extend_grid = extend_grid,
+    title_quad = title_quad,
+    header = header,
     theme = theme
   )
-  # Remove useless vars
-  vft_checked <- .vft[crucial_vars]
 
-  df_list <- split(vft_checked, vft_checked$quadratname)
+  # Prepare
+  message("* Appending tags of dead trees with the suffix '.d'")
+  crucial$tagged_tag <- tag_dead(crucial$tag, crucial$status)
+  message("* Standarizing `dbh` by the count of `dbh` measurements")
+  crucial$dbh_standarized <- crucial$dbh / length(crucial$dbh)
+
+
+  df_list <- split(crucial, crucial$quadratname)
   p <- lapply(
     df_list,
     map_quad_each,
@@ -49,14 +61,14 @@ map_quad <- function(vft,
     header = header,
     theme = theme
   )
-  nms <- sort(unique(as.character(vft_checked$quadratname)))
+  nms <- sort(unique(as.character(crucial$quadratname)))
   names(p) <- nms
   print_first(p, "plot")
   invisible(p)
 }
 
-check_map_quad <- function(crucial_vars,
-                           .vft,
+check_map_quad <- function(.vft,
+                           core,
                            lim_min,
                            lim_max,
                            subquadrat_side,
@@ -74,7 +86,7 @@ check_map_quad <- function(crucial_vars,
   arg_theme_has_class_theme <- any(grepl("theme", class(theme)))
   stopifnot(arg_theme_has_class_theme)
   stopifnot(is.character(title_quad), is.character(header))
-  check_crucial_names(.vft, crucial_vars)
+  check_crucial_names(.vft, core)
   check_single_plotid(.vft)
   check_single_censusid(.vft)
 }
@@ -139,4 +151,3 @@ tag_dead <- function(x, y) {
   x[is_dead] <- paste0(x[is_dead], ".", sub("^(.).*$", "\\1", y[is_dead]))
   x
 }
-

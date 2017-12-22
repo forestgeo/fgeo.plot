@@ -28,7 +28,7 @@ check_single_plotid <- function(x) {
 check_single_censusid <- function(x) {
   if (length(unique(x$censusid)) > 1) {
     warning(
-      "Multiple censuses were detected",
+      "Multiple censuses were detected\n",
       "  * Likely you should filter the data to keep only the last `CensusID`"
     )
   }
@@ -40,7 +40,7 @@ check_single_censusid <- function(x) {
 #' @param package String giving the package which namespace to search.
 #'
 #' @return Logical.
-#' @nord
+#' @noRd
 exists_in_pkg <- function(object, package){
   any(grepl(object, ls(paste0("package:", package))))
 }
@@ -69,9 +69,9 @@ print_first <- function(.x, element = "element") {
   stopifnot(is.character(element))
 
   message(
-    "Output is a list of", length(.x), "\n",
-    "* Showing only the first", element, "\n",
-    "* Returning the entire list invisibly"
+    "* Output is a list of ", length(.x), "\n",
+    "  * Showing only the first ", element, "\n",
+    "  * Returning the entire list invisibly"
   )
 
   print(.x[1])

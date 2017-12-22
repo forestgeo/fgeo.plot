@@ -34,7 +34,5 @@ A list which each element is a plot of class ggplot.
 Map trees within a quadrat.
 }
 \examples{
-p <- map_quad(four_quadrats, extend_grid = 0)[[1]]
-class(p)
-class(p[[1]])
+p <- map_quad(four_quadrats)
 }

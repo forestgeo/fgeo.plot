@@ -1,40 +1,43 @@
-one_quadrat <- dplyr::filter(four_quadrats, QuadratName == 1)
-one_map <- map_quad(one_quadrat)
-
+one_quadrat_sub <- dplyr::sample_n(one_quadrat, 5)
 
 
 context("map_quad")
 
 test_that("passes with default arguments", {
-  expect_message(
-    map_quad(
-      one_quadrat,
-      title_quad = "Site Name, YYYY, Quadrat:",
-      header = header_map_quad(),
-      theme = theme_map_quad(),
-      lim_min = 0,
-      lim_max = 20,
-      subquadrat_side = 5,
-      tag_size = 2,
-      extend_grid = 0
-    )[[1]]
+  # Warns because dataset has no dead trees
+  expect_warning(
+    expect_message(
+      map_quad(
+        one_quadrat_sub,
+        title_quad = "Site Name, YYYY, Quadrat:",
+        header = header_map_quad(),
+        theme = theme_map_quad(),
+        lim_min = 0,
+        lim_max = 20,
+        subquadrat_side = 5,
+        tag_size = 2,
+        extend_grid = 0
+      )
+    )
   )
 })
 
 test_that("wrong inputs to are rejected", {
   expect_error(map_quad())
   expect_error(map_quad(1))
-  expect_error(map_quad(one_quadrat, lim_min = "a"))
-  expect_error(map_quad(one_quadrat, lim_max = "a"))
-  expect_error(map_quad(one_quadrat, subquadrat_side = "a"))
-  expect_error(map_quad(one_quadrat, tag_size = "a"))
-  expect_error(map_quad(one_quadrat, extend_grid = "a"))
-  expect_error(map_quad(one_quadrat, header = 1))
-  expect_error(map_quad(one_quadrat, title_quad = 1))
-  expect_error(map_quad(one_quadrat, theme = 1))
+  expect_error(map_quad(one_quadrat_sub, lim_min = "a"))
+  expect_error(map_quad(one_quadrat_sub, lim_max = "a"))
+  expect_error(map_quad(one_quadrat_sub, subquadrat_side = "a"))
+  expect_error(map_quad(one_quadrat_sub, tag_size = "a"))
+  expect_error(map_quad(one_quadrat_sub, extend_grid = "a"))
+  expect_error(map_quad(one_quadrat_sub, header = 1))
+  expect_error(map_quad(one_quadrat_sub, title_quad = 1))
+  expect_error(map_quad(one_quadrat_sub, theme = 1))
 })
 
 test_that("returns a list of ggplots", {
+  # Warns because dataset has no dead trees
+  expect_warning(one_map <- map_quad(one_quadrat_sub))
   expect_type(one_map, "list")
   expect_s3_class(one_map[[1]], "ggplot")
 })

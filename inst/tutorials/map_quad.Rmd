@@ -211,14 +211,7 @@ The requirements are quoted below; they come from a private email (via [@](https
 ### Map
 
 ```{r params}
-one_quadrat <- dplyr::mutate(
-  one_quadrat, 
-  # Tag dead trees
-  tagged_tag = tag_dead(Tag, Status),
-  # Standarize the size of the points by the total number of trees
-  dbh_standarized = DBH / length(DBH)
-)
-map_quad(one_quadrat)
+map_quad(map::one_quadrat)
 ```
 
 ## Observe potential problem
