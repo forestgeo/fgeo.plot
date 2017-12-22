@@ -13,7 +13,15 @@
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' p <- map_quad(four_quadrats)
+#' dplyr::first(p)
+#'
+#' # Printing only maps 1-4 to a .pdf
+#' pdf("default-map.pdf", paper = "letter", height = 10.5, width = 8)
+#' p
+#' dev.off()
+#' }
 map_quad <- function(vft,
                      title_quad = "Site Name, YYYY, Quadrat:",
                      header = header_map_quad(),
@@ -63,8 +71,7 @@ map_quad <- function(vft,
   )
   nms <- sort(unique(as.character(crucial$quadratname)))
   names(p) <- nms
-  print_first(p, "plot")
-  invisible(p)
+  p
 }
 
 check_map_quad <- function(.vft,
