@@ -1,16 +1,16 @@
 context("test-header")
 
-test_that("header_map_tag outputs the expected string", {
-  x <- header_map_tag()
+test_that("map_tag_header outputs the expected string", {
+  x <- map_tag_header()
   expect_type(x, "character")
   expect_true(grepl("Checking", x))
   x <- NULL
 
 })
 
-test_that("header_map_quad outputs the expected string", {
-  x <- header_map_quad()
-  expect_true(grepl("Nombres y fecha", x))
+test_that("map_quad_header outputs the expected string", {
+  x <- map_quad_header()
+  expect_true(grepl("Nombres y Fecha", x))
   expect_type(x, "character")
   x <- NULL
 })

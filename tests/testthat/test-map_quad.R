@@ -10,7 +10,7 @@ test_that("passes with default arguments", {
       map_quad(
         one_quadrat_sub,
         title_quad = "Site Name, YYYY, Quadrat:",
-        header = header_map_quad(),
+        header = map_quad_header(),
         theme = theme_map_quad(),
         lim_min = 0,
         lim_max = 20,

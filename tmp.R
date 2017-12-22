@@ -1,12 +1,83 @@
+# Trees that were found dead for the first time in the last census --------
+
+#' Exclude trees that were found dead in the last and previous last censuses.
+#'
+#' Excludes trees that were found dead in the last and previous last censuses.
+#' Said another way, this function keeps trees that were found in one of the
+#' last two censuses.
+#'
+#' @param x
+#' @param cns
+#'
+#' @return
+#' @export
+#'
+#' @examples
+rm_dead_twice <- function(x, cns = "plotcensusnumber") {
+  stopifnot(is.data.frame(x))
+  stopifnot(is.character(cns))
+  check_crucial_names(x, c(cns, "tag", "status"))
+
+  # xxx rethink about this because I'm unsure if the status of a tree here is
+  # not considering that there are more then one census
+  x <-  add_status_tree(x)
+  x$cns <- x[[cns]]
+  last <- max(x$cns, na.rm = TRUE)
+  if (last <= 1) {
+    warning("`x` has less than two censuses. Returning `x` as is")
+  }
+  last2 <- x[x$cns %in% c(last, last - 1), ]
+  by_tag <- dplyr::group_by(last2, tag)
+  smry <- dplyr::summarize(by_tag, keep = !identical(status_tree, c("dead", "dead")))
+  rm_dead_twice <- smry[smry$keep, ]$tag
+  x$cns <- NULL
+  x[x$tag %in% rm_dead_twice, ]
+}
+
+x <- bciex::bci12vft_mini %>%
+  dplyr::rename(QX = x, QY = y) %>%
+  rlang::set_names(tolower) %>%
+  check_single_plotid()
+
+rm_dead_twice(x, cns = "plotcensusnumber")
+
+
+
+
+
+
+
 # map_quad() -------------------------------------------------------------
 
-p <- map_quad(four_quadrats)
-dplyr::first(p)
+library(dplyr)
 
-# Printing only maps 1-4 to a .pdf
+# Fixing wrong names
+vft <- rename(bciex::bci12vft_mini, QX = x, QY = y)
+
+# Filter the data you want
+filtered <- dplyr::filter(
+  vft,
+  PlotID == 1,
+  CensusID == max(CensusID, na.rm = TRUE),
+  DBH > 10,
+)
+
+# Save time by viewing the output of only one quadrat
+one_quadrat <- top(filtered, QuadratID)
+map_quad(one_quadrat)
+
+# Storing in `p` all the maps
+p <- map_quad(filtered)
+
+# Visualizing the first plot
+first(p)
+
+# Printing to .pdf with parameters optimized for size letter
 pdf("default-map.pdf", paper = "letter", height = 10.5, width = 8)
 p
 dev.off()
+
+
 
 # map_sp ------------------------------------------------------------------
 

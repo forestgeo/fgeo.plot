@@ -79,13 +79,13 @@ theme_map_quad <- function(axis.text = element_blank(),
 #'
 #' @name headers
 #' @examples
-#' header_map_tag()
-#' header_map_quad()
+#' cat(map_tag_header())
+#' cat(map_quad_header())
 NULL
 
 #' @rdname headers
 #' @export
-header_map_tag <- function() {
+map_tag_header <- function() {
   paste(
     "",
     "Checking: _______________ Checked date: _______________",
@@ -97,14 +97,25 @@ header_map_tag <- function() {
 
 #' @rdname headers
 #' @export
-header_map_quad <- function() {
-  fill_blank <- "__________________  __________________  __________________"
+map_quad_header <- function() {
+  description <- enter_line(
+    "Nombres y Fecha:", "Revisado por:       ", "Entrado en PC por:", times = 25
+  )
+  blank <- enter_line(rep("_________________________", 3))
+
   paste(
-    "Nombres y fecha:           Revisado por:                Entrado en PC por:",
     "",
-    fill_blank,
-    fill_blank,
-    fill_blank,
+    description,
+    "",
+    blank,
+    blank,
+    blank,
+    "",
     sep = "\n"
   )
+}
+
+
+enter_line <- function(..., sep = " ", times = 4) {
+  paste(c(...), collapse = paste(rep(sep, times), collapse = ""))
 }

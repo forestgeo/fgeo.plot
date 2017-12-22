@@ -169,10 +169,10 @@ map_tag(bci_vft1_rnm, title_quad = "BCI 2012",
 )[1]
 ```
 
-The second way is to use `header_map_tag()` (see `?header_map_tag()`).
+The second way is to use `map_tag_header()` (see `?map_tag_header()`).
 
 ```{r header-via-helper}
-map_tag(bci_vft1_rnm, title_quad = "BCI 2012", header = header_map_tag())[1]
+map_tag(bci_vft1_rnm, title_quad = "BCI 2012", header = map_tag_header())[1]
 ```
 
 ## Using Pre-Made and Custom Themes

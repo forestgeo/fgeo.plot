@@ -31,7 +31,7 @@
 #' @inheritParams add_subquadrat
 #'
 #' @seealso [graphics::points()], [ggplot2::geom_point()], [ggplot2::theme()]
-#'   [header_map_tag()], [theme_map_tag()], [add_subquadrat()],
+#'   [map_tag_header()], [theme_map_tag()], [add_subquadrat()],
 #'   [ggrepel::geom_text_repel].
 #'
 #' @section Acknowledgements:
@@ -86,7 +86,7 @@
 #' )[1]
 #'
 #' # Or use a pre-made header
-#' map_tag(vft1_rnm, title_quad = "BCI 2012", header = header_map_tag())[1]
+#' map_tag(vft1_rnm, title_quad = "BCI 2012", header = map_tag_header())[1]
 #'
 #' # Themes
 #'
@@ -135,7 +135,7 @@ map_tag <- function(vft,
                     point_shape = c(19, 4),
                     point_size = 1.5,
                     tag_size = 3,
-                    header = header_map_tag(),
+                    header = map_tag_header(),
                     theme = theme_map_tag(),
                     extend_grid = 0) {
   # Lowercase names: avoid errors due to confusing upper- and lower-case
@@ -345,7 +345,7 @@ lapply_plot_repulsive_tags <- function(list_of_data_to_plot,
                                        point_shape = c(19, 4),
                                        point_size = 1.5,
                                        tag_size = 3,
-                                       header = header_map_tag(),
+                                       header = map_tag_header(),
                                        theme = theme_map_tag()) {
   check_lapply_plot_repulsive_tags(
     list_of_data_to_plot = list_of_data_to_plot, title_quad = title_quad,

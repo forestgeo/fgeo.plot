@@ -6,7 +6,7 @@
 \usage{
 map_tag(vft, x_q = 20, x_sq = 5, y_q = x_q, y_sq = x_sq,
   title_quad = "Site Name, YYYY. Quadrat:", point_shape = c(19, 4),
-  point_size = 1.5, tag_size = 3, header = header_map_tag(),
+  point_size = 1.5, tag_size = 3, header = map_tag_header(),
   theme = theme_map_tag(), extend_grid = 0)
 }
 \arguments{
@@ -118,7 +118,7 @@ map_tag(vft1_rnm, title_quad = "BCI 2012",
 )[1]
 
 # Or use a pre-made header
-map_tag(vft1_rnm, title_quad = "BCI 2012", header = header_map_tag())[1]
+map_tag(vft1_rnm, title_quad = "BCI 2012", header = map_tag_header())[1]
 
 # Themes
 
@@ -161,6 +161,6 @@ map_tag(smaller, x_q = 10, x_sq = 2.5, extend_grid = 0.25)[1]
 }
 \seealso{
 \code{\link[graphics:points]{graphics::points()}}, \code{\link[ggplot2:geom_point]{ggplot2::geom_point()}}, \code{\link[ggplot2:theme]{ggplot2::theme()}}
-\code{\link[=header_map_tag]{header_map_tag()}}, \code{\link[=theme_map_tag]{theme_map_tag()}}, \code{\link[=add_subquadrat]{add_subquadrat()}},
+\code{\link[=map_tag_header]{map_tag_header()}}, \code{\link[=theme_map_tag]{theme_map_tag()}}, \code{\link[=add_subquadrat]{add_subquadrat()}},
 \link[ggrepel:geom_text_repel]{ggrepel::geom_text_repel}.
 }

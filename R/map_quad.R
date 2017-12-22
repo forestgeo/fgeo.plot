@@ -13,18 +13,35 @@
 #' @export
 #'
 #' @examples
-#' \dontrun{
-#' p <- map_quad(four_quadrats)
-#' dplyr::first(p)
+#' library(dplyr)
 #'
-#' # Printing to .pdf optimized for size letter
-#' pdf("default-map.pdf", paper = "letter", height = 10.5, width = 8)
+#' # Fixing wrong names
+#' vft <- rename(bciex::bci12vft_mini, QX = x, QY = y)
+#'
+#' # Filter the data you want
+#' wanted <- dplyr::filter(
+#'   vft,
+#'   PlotID == 1,
+#'   CensusID == max(CensusID, na.rm = TRUE),
+#'   DBH > 10,
+#' )
+#'
+#' # Saving time by filtering only a few quadrats
+#' few_quadrats <- top(wanted, QuadratID, 2)
+#' p <- map_quad(few_quadrats)
+#'
+#' # Visualizing the first plot
+#' first(p)
+#'
+#' # Printing to .pdf with parameters optimized for size letter
+#' tmp <- tempfile()
+#'
+#' pdf(tmp, paper = "letter", height = 10.5, width = 8)
 #' p
 #' dev.off()
-#' }
 map_quad <- function(vft,
                      title_quad = "Site Name, YYYY, Quadrat:",
-                     header = header_map_quad(),
+                     header = map_quad_header(),
                      theme = theme_map_quad(),
                      lim_min = 0,
                      lim_max = 20,
