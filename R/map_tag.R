@@ -144,7 +144,7 @@ map_tag <- function(vft,
     "tag", "qx", "qy", "status", "quadratname", "censusid", "plotid"
   )
   check_crucial_names(vft_lower_nms, crucial_vars)
-  check_single_plotid(vft_lower_nms)
+  check_unique_plotid(vft_lower_nms)
   check_subquadrat_dimensions(
     df = vft_lower_nms, x_q = x_q, y_q = y_q, x_sq = x_sq, y_sq = y_sq
   )

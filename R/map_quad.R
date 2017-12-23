@@ -110,8 +110,8 @@ check_map_quad <- function(vft,
   stopifnot(arg_theme_has_class_theme)
   stopifnot(is.character(title_quad), is.character(header))
   check_crucial_names(vft, core)
-  check_single_plotid(vft)
-  check_single_censusid(vft)
+  check_unique_plotid(vft)
+  check_unique_censusid(vft)
 }
 
 map_quad_each <- function(.df,

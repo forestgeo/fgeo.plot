@@ -11,28 +11,72 @@ check_crucial_names <- function(x, nms) {
   }
 }
 
-check_single_plotid <- function(x) {
-  plots <- unique(x$plotid)
-  number_of_plots <- length(plots)
-  if (number_of_plots > 1) {
-    stop(
-      "`plotid` contains these plots: ", paste(plots, collapse = ", "), "\n",
-      "  * Filter your data to keep a single plot; then try again",
-      call. = FALSE
-    )
-  }
+
+
+#' Report if a vector or a variable of a dataframe is duplicated.
+#'
+#' @param x A dataframe.
+#' @param x_var String; the name of a variable of `x`.
+#' @param v A vector.
+#' @param cond String; the name of a function that outputs a condition: one of
+#'   "warning", "stop", "message".
+#' @param msg String; a custom message.
+#'
+#' @return Invisible `v` or a condition and a message.
+#' @export
+#'
+#' @examples
+#' # On a vector
+#' unique_v <- rep(1, 3)
+#' num <- c(1:3)
+#' chr <- c(letters[1:3])
+#' check_unique_vector(unique_v, "warning")
+#' check_unique_vector(num, "warning")
+#' check_unique_vector(chr, "message", "Do something")
+#'
+#' # On a dataframe
+#' .df <- data.frame(a = 1:3, b = 1, stringsAsFactors = FALSE)
+#'
+#' check_unique(.df, "a")
+#' check_unique(.df, "a", "message", "do this")
+#' # Silent
+#' check_unique(.df, "b", "warning", "do this")
+check_unique <- function(x, x_var, cond = "warning", msg = NULL) {
+  stopifnot(is.data.frame(x))
+  if (!x_var  %in% names(x)) stop(x_var, " is an invalid name")
+
+  x_var <- x[[x_var]]
+  check_unique_vector(v = x_var, cond = cond, msg = msg)
   invisible(x)
 }
 
-check_single_censusid <- function(x) {
-  if (length(unique(x$censusid)) > 1) {
-    warning(
-      "Multiple censuses were detected\n",
-      "  * Likely you should filter the data to keep only the last `CensusID`"
-    )
+#' @rdname check_duplicated
+#' @export
+check_unique_vector <- function(v, cond, msg = NULL) {
+  stopifnot(length(cond) == 1)
+  stopifnot(cond %in% c("warning", "stop", "message"))
+
+  customized <- c("The variable is not unique\n", msg)
+  if (length(unique(v)) > 1) {
+    do.call(cond, list(customized))
   }
+  invisible(v)
+}
+
+check_unique_plotid <- function(x) {
+  msg <- "  * Filter your data to keep a single plot; then try again"
+  check_unique(x, "plotid", "stop", msg)
   invisible(x)
 }
+
+check_unique_censusid <- function(x) {
+  msg <- "  * Likely you should have filtered only the last `censusid`"
+  check_unique(x, "censusid", "warning", msg)
+  invisible(x)
+}
+
+
+
 
 #' Test if an object existe in the namespace of a package.
 #'

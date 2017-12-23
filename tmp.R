@@ -37,7 +37,7 @@ rm_dead_twice <- function(x, cns = "plotcensusnumber") {
 x <- bciex::bci12vft_mini %>%
   dplyr::rename(QX = x, QY = y) %>%
   rlang::set_names(tolower) %>%
-  check_single_plotid()
+  check_unique_plotid()
 
 rm_dead_twice(x, cns = "plotcensusnumber")
 
