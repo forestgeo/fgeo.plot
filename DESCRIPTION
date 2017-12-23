@@ -27,7 +27,6 @@ Suggests:
     rmarkdown,
     testthat,
     tibble,
-    vetr,
     purrr
 VignetteBuilder: knitr
 Encoding: UTF-8
