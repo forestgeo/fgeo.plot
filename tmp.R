@@ -50,6 +50,8 @@ rm_dead_twice(x, cns = "plotcensusnumber")
 # map_quad() -------------------------------------------------------------
 
 library(dplyr)
+p <- map_quad(one_quadrat)
+dplyr::first(p)
 
 # Fixing wrong names
 vft <- rename(bciex::bci12vft_mini, QX = x, QY = y)
