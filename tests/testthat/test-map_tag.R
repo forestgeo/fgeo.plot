@@ -175,19 +175,10 @@ test_that("throws error with wrong inputs to add_subquadrat", {
 
 
 
-context("test-add_status_tree")
+context("test-lapply_plot_repulsive_tags")
 
 # reusing
 with_status_tree <- add_status_tree(with_sq)
-
-test_that("outputs a dataframe with new expected variable", {
-  expect_true(vet("status_tree" %in% ., names(with_status_tree)))
-  expect_is(with_status_tree, "data.frame")
-})
-
-
-
-context("test-lapply_plot_repulsive_tags")
 
 prep_df <- unique(
   add_status_tree_page_x1_x2_y1_y2_split_quad_id(
@@ -208,34 +199,3 @@ test_that("outputs a ggplot", {
     )
   )
 })
-
-
-
-context("test-add_status_tree")
-
-test_that("the tree status is dead only if one stem is dead", {
-  one_dead <- tibble(
-    tag = c(
-      1, 1,
-      2, 2,
-      3, 3
-    ),
-    status = c(
-      "alive", "dead",
-      "dead", "dead",
-      "broken below", "missing"
-    )
-  )
-  expected <- c(rep("alive", 2), rep("dead", 2), rep("alive", 2))
-  expect_equal(add_status_tree(one_dead)$status_tree, expected)
-})
-
-
-add_status_tree <- function(df) {
-  grouped <- dplyr::group_by(df, .data$tag)
-  mutated_grouped <- dplyr::mutate(
-    grouped,
-    status_tree = ifelse(all(.data$status == "dead"), "dead", "alive")
-  )
-  dplyr::ungroup(mutated_grouped)
-}

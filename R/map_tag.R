@@ -267,18 +267,6 @@ check_subquadrat_dimensions <- function(df,
 }
 
 #' Help map_tag()
-#' Ensure that the status refers to the tree, not to the stem.
-#' @noRd
-add_status_tree <- function(df) {
-  grouped <- dplyr::group_by(df, .data$tag)
-  mutated_grouped <- dplyr::mutate(
-    grouped,
-    status_tree = ifelse(all(.data$status == "dead"), "dead", "alive")
-  )
-  dplyr::ungroup(mutated_grouped)
-}
-
-#' Help map_tag()
 #' Prepare dataset for plotting, by adding a number of useful variables
 #' @noRd
 add_status_tree_page_x1_x2_y1_y2_split_quad_id <- function(with_subquadrat,

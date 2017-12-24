@@ -2,9 +2,12 @@
 % Please edit documentation in R/utils.R
 \name{check_unique}
 \alias{check_unique}
+\alias{check_unique_vector}
 \title{Report if a vector or a variable of a dataframe is duplicated.}
 \usage{
 check_unique(x, x_var, cond = "warning", msg = NULL)
+
+check_unique_vector(v, cond, msg = NULL)
 }
 \arguments{
 \item{x}{A dataframe.}

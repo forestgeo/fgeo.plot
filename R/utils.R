@@ -50,13 +50,13 @@ check_unique <- function(x, x_var, cond = "warning", msg = NULL) {
   invisible(x)
 }
 
-#' @rdname check_duplicated
+#' @rdname check_unique
 #' @export
 check_unique_vector <- function(v, cond, msg = NULL) {
   stopifnot(length(cond) == 1)
   stopifnot(cond %in% c("warning", "stop", "message"))
 
-  customized <- c("The variable is not unique\n", msg)
+  customized <- c("Duplicated values were detected\n", msg)
   if (length(unique(v)) > 1) {
     do.call(cond, list(customized))
   }
@@ -131,4 +131,113 @@ top <- function(.data, var, n = 1) {
   }
   .data[pulled %in% to_match, ]
 }
+
+
+
+
+#' Ensure that the status refers to the tree, not to the stem.
+#'
+#' @param df A ViewFullTable or a fgeo table.
+#'
+#' @return The input data set with lowercase names, and with the additional
+#'   variable status_tree.
+#' @export
+#'
+#' @examples
+add_status_tree <- function(df) {
+  df <- rlang::set_names(df, tolower)
+  check_add_status_tree(df)
+  grouped <- dplyr::group_by(df, .data$censusid, .data$tag)
+  mutated_grouped <- dplyr::mutate(
+    grouped,
+    status_tree = ifelse(all(.data$status == "dead"), "dead", "alive")
+  )
+  dplyr::ungroup(mutated_grouped)
+}
+
+check_add_status_tree <- function(x) {
+  is_vft <- "plotid"  %in% names(x)
+  if (is_vft) check_unique_plotid(x)
+  crucial_vars <- c("tag", "status", "censusid")
+  check_crucial_names(x, crucial_vars)
+  invisible(x)
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Trees that were found dead for the first time in the last census --------
+
+#' Exclude trees that were found dead in the last and previous last censuses.
+#'
+#' Excludes trees that were found dead in the last and previous last censuses.
+#' Said another way, this function keeps trees that were found in one of the
+#' last two censuses.
+#'
+#' @param x Dataframe; ViewFullTable with at least two censuses.
+#' @param "censusid String; name of variable giving census
+#'
+#' @return
+#' @export
+#'
+#' @examples
+#' x <- tibble::tribble(
+#'   ~censusid, ~tag,  ~status,
+#'           1,    1,   "alive",
+#'           1,    1,    "dead",
+#'           1,    2,   "alive",
+#'           1,    2,   "alive",
+#'
+#'           2,    1,   "alive",
+#'           2,    1,    "dead",
+#'           2,    2,    "dead",
+#'           2,    2,    "dead",
+#'
+#'           3,    1,   "alive",
+#'           3,    1,    "dead",
+#'           3,    2,    "dead",
+#'           3,    2,    "dead"
+#' )
+#'
+#' Removes all but the last two censuses, and removes
+#' add_status_tree(x)
+#' # Tag 2 is dead both in census 2 and 3
+#' rm_dead_twice(x)
+#'
+rm_dead_twice <- function(x) {
+  x <- rlang::set_names(x, tolower)
+  stopifnot(is.data.frame(x))
+  check_crucial_names(x, c("censusid", "tag", "status"))
+
+  if (!length(unique(x$censusid)) >= 2) {
+    warning("`The data set has less than two censuses; Keeping all trees")
+    return(x)
+  }
+
+  last <- max(x$censusid, na.rm = TRUE)
+  last2 <- x[x$censusid %in% c(last, last - 1), ]
+  last2 <-  add_status_tree(last2)
+  grouped <- dplyr::group_by(last2, .data$censusid, .data$tag)
+  to_filter <- dplyr::ungroup(
+    dplyr::mutate(
+      grouped, is_to_keep = !identical(.data$status_tree, c("dead", "dead"))
+    )
+  )
+  to_filter[to_filter$is_to_keep, ]
+}
+
+
+
+
 
