@@ -1,3 +1,12 @@
+
+
+
+
+
+
+
+
+
 # map_quad() -------------------------------------------------------------
 
 library(dplyr)
@@ -49,7 +58,7 @@ x
 
 
 
-# map_tag() ---------------------------------------------------------------
+# map_Tag() ---------------------------------------------------------------
 
 library(dplyr)
 library(ggplot2)
@@ -67,9 +76,9 @@ vft
 vft1 <- dplyr::filter(vft, PlotID == 1)
 
 
-# This data set has two wrong names that need to be fixed before using map_tag()
+# This data set has two wrong names that need to be fixed before using map_Tag()
 vft1_rnm <- dplyr::rename(vft1, qx = x, qy = y)
-maps <- map_tag(vft1_rnm)
+maps <- map_Tag(vft1_rnm)
 
 # Plotting only one map to screen
 maps[1]

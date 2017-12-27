@@ -44,7 +44,7 @@ test_that("works as expected", {
 context("add_status_tree")
 
 test_that("the tree status is dead only if one stem is dead", {
-  one_dead <- tibble(
+  one_dead <- tibble::tibble(
     tag = c(
       1, 1,
       2, 2,
@@ -65,7 +65,7 @@ test_that("the tree status is dead only if one stem is dead", {
 })
 
 .df <- tibble::tribble(
-  ~censusid, ~tag,  ~status,
+  ~CensusID, ~Tag,  ~Status,
           1,    1,   "alive",
           1,    1,    "dead",
           1,    2,    "dead",
@@ -77,13 +77,21 @@ test_that("the tree status is dead only if one stem is dead", {
           2,    2,    "dead"
 )
 
+test_that("works even if data already contains the variable `status_tree`", {
+  expect_silent(add_status_tree(add_status_tree(.df)))
+})
+
 test_that("outputs the correct variable status_tree", {
   exp <- c("alive", "alive", "dead", "dead", "alive", "alive", "alive", "alive")
   expect_identical(add_status_tree(.df)$status_tree, exp)
 })
 
+
+
+context("rm_dead_twice")
+
 cns3 <- tibble::tribble(
-  ~censusid, ~tag,  ~status,
+  ~CensusID, ~Tag,  ~Status,
           3,    1,   "alive",
           3,    1,   "alive",
           3,    2,    "dead",
@@ -91,12 +99,12 @@ cns3 <- tibble::tribble(
 )
 
 test_that("returns equal  to a known object", {
-  expect_known_output(rm_dead_twice(.df), "ref_rm_dead_twicce.csv")
+  expect_known_output(rm_dead_twice(.df), "ref_rm_dead_twice.csv")
 })
 
 test_that("adding a third census removes a first census", {
   with_cns3 <- dplyr::bind_rows(.df, cns3)
   out <- rm_dead_twice(with_cns3)
-  expect_false(any(grepl(1, out$censusid)))
+  expect_false(any(grepl(1, out$CensusID)))
 })
 

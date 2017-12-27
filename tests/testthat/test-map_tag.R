@@ -177,12 +177,10 @@ test_that("throws error with wrong inputs to add_subquadrat", {
 
 context("test-lapply_plot_repulsive_tags")
 
-# reusing
-with_status_tree <- add_status_tree(with_sq)
-
 prep_df <- unique(
   add_status_tree_page_x1_x2_y1_y2_split_quad_id(
-    with_status_tree, quad_size = 20, extend_grid = 0.45
+    with_sq, quad_size = 20, extend_grid = 0.45
+    # with_status_tree, quad_size = 20, extend_grid = 0.45
   )
 )
 prep_df_list <- split(prep_df, prep_df$split)

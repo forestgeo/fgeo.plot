@@ -2,17 +2,49 @@
 % Please edit documentation in R/utils.R
 \name{rm_dead_twice}
 \alias{rm_dead_twice}
-\title{Exclude trees that were found dead in the last and previous last censuses.}
+\title{Remove trees found dead in both the last and previous last censuses.}
 \usage{
-rm_dead_twice(x, cns_var = "censusid")
+rm_dead_twice(vft)
 }
 \arguments{
-\item{x}{Dataframe; ViewFullTable with at least two censuses.}
-
-\item{cns_var}{String; name of variable giving census}
+\item{vft}{A dataframe -- specifically, a ForestGEO ViewFullTable.}
+}
+\value{
+A modified version of the input data set:
+* With an additional variable indicating the status of each tree.
+* With the rows removed of all censuses except the last two.
+* With the rows removed of trees found dead on both the last and previous
+last censuses.
 }
 \description{
-Excludes trees that were found dead in the last and previous last censuses.
-Said another way, this function keeps trees that were found in one of the
-last two censuses.
+Removes trees that were found dead both in the last and previous last
+censuses. Thus the resulting data set contains trees that in the last census
+were found either alive or dead for the first time.
+}
+\examples{
+vft <- tibble::tribble(
+  ~censusid, ~tag,  ~status,
+  1,    1,   "alive",
+  1,    1,    "dead",
+  1,    2,   "alive",
+  1,    2,   "alive",
+
+  2,    1,   "alive",
+  2,    1,    "dead",
+  2,    2,    "dead",
+  2,    2,    "dead",
+
+  3,    1,   "alive",
+  3,    1,    "dead",
+  3,    2,    "dead",
+  3,    2,    "dead"
+)
+
+# Notice the rows where `status_tree` in census 3 and 2 is "dead"
+# (The variable `status` refers to stems, while `status_tree` refers to trees.)
+add_status_tree(vft)
+
+#' * Remove all censuses except the last two.
+#' * Remove trees found dead on both the last and previous last censuses.
+rm_dead_twice(vft)
 }

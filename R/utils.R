@@ -145,14 +145,20 @@ top <- function(.data, var, n = 1) {
 #'
 #' @examples
 add_status_tree <- function(df) {
+  old <- names(df)
   df <- rlang::set_names(df, tolower)
   check_add_status_tree(df)
   grouped <- dplyr::group_by(df, .data$censusid, .data$tag)
-  mutated_grouped <- dplyr::mutate(
+  mutated <- dplyr::mutate(
     grouped,
     status_tree = ifelse(all(.data$status == "dead"), "dead", "alive")
   )
-  dplyr::ungroup(mutated_grouped)
+  # Restoring names
+  if (any(grepl("status_tree", old))) {
+    rlang::set_names(dplyr::ungroup(mutated), old)
+  } else {
+    rlang::set_names(dplyr::ungroup(mutated), c(old, "status_tree"))
+  }
 }
 
 check_add_status_tree <- function(x) {
@@ -166,78 +172,67 @@ check_add_status_tree <- function(x) {
 
 
 
+# rm_dead_twice -----------------------------------------------------------
 
-
-
-
-
-
-
-
-
-
-
-# Trees that were found dead for the first time in the last census --------
-
-#' Exclude trees that were found dead in the last and previous last censuses.
+#' Remove trees found dead in both the last and previous last censuses.
 #'
-#' Excludes trees that were found dead in the last and previous last censuses.
-#' Said another way, this function keeps trees that were found in one of the
-#' last two censuses.
+#' Removes trees that were found dead both in the last and previous last
+#' censuses. Thus the resulting data set contains trees that in the last census
+#' were found either alive or dead for the first time.
 #'
-#' @param x Dataframe; ViewFullTable with at least two censuses.
-#' @param "censusid String; name of variable giving census
+#' @template vft
 #'
-#' @return
+#' @return A modified version of the input data set:
+#'     * With an additional variable indicating the status of each tree.
+#'     * With the rows removed of all censuses except the last two.
+#'     * With the rows removed of trees found dead on both the last and previous
+#'       last censuses.
 #' @export
 #'
 #' @examples
-#' x <- tibble::tribble(
-#'   ~censusid, ~tag,  ~status,
-#'           1,    1,   "alive",
-#'           1,    1,    "dead",
-#'           1,    2,   "alive",
-#'           1,    2,   "alive",
+#' vft <- tibble::tribble(
+#'    ~CensusID, ~Tag,  ~Status,
+#'    1,    1,   "alive",
+#'    1,    1,    "dead",
+#'    1,    2,   "alive",
+#'    1,    2,   "alive",
 #'
-#'           2,    1,   "alive",
-#'           2,    1,    "dead",
-#'           2,    2,    "dead",
-#'           2,    2,    "dead",
+#'    2,    1,   "alive",
+#'    2,    1,    "dead",
+#'    2,    2,    "dead",
+#'    2,    2,    "dead",
 #'
-#'           3,    1,   "alive",
-#'           3,    1,    "dead",
-#'           3,    2,    "dead",
-#'           3,    2,    "dead"
-#' )
+#'    3,    1,   "alive",
+#'    3,    1,    "dead",
+#'    3,    2,    "dead",
+#'    3,    2,    "dead"
+#'  )
 #'
-#' Removes all but the last two censuses, and removes
-#' add_status_tree(x)
-#' # Tag 2 is dead both in census 2 and 3
-#' rm_dead_twice(x)
+#'  # Notice the rows where `status_tree` in census 3 and 2 is "dead"
+#'  # (The variable `status` refers to stems, while `status_tree` refers to trees.)
+#'  add_status_tree(vft)
 #'
-rm_dead_twice <- function(x) {
-  x <- rlang::set_names(x, tolower)
-  stopifnot(is.data.frame(x))
-  check_crucial_names(x, c("censusid", "tag", "status"))
+#'  #' * Remove all censuses except the last two.
+#'  #' * Remove trees found dead on both the last and previous last censuses.
+#'  rm_dead_twice(vft)
+rm_dead_twice <- function(vft) {
+  stopifnot(is.data.frame(vft))
+  check_crucial_names(vft, c("CensusID", "Tag", "Status"))
 
-  if (!length(unique(x$censusid)) >= 2) {
+  if (!length(unique(vft$CensusID)) >= 2) {
     warning("`The data set has less than two censuses; Keeping all trees")
-    return(x)
+    return(vft)
   }
 
-  last <- max(x$censusid, na.rm = TRUE)
-  last2 <- x[x$censusid %in% c(last, last - 1), ]
+  last <- max(vft$CensusID, na.rm = TRUE)
+  last2 <- vft[vft$CensusID %in% c(last, last - 1), ]
   last2 <-  add_status_tree(last2)
-  grouped <- dplyr::group_by(last2, .data$censusid, .data$tag)
+  grouped <- dplyr::group_by(last2, .data$CensusID, .data$Tag)
   to_filter <- dplyr::ungroup(
     dplyr::mutate(
       grouped, is_to_keep = !identical(.data$status_tree, c("dead", "dead"))
     )
   )
-  to_filter[to_filter$is_to_keep, ]
+  to_filter[to_filter$is_to_keep, setdiff(names(to_filter), "is_to_keep")]
 }
-
-
-
-
 
