@@ -141,7 +141,7 @@ map_tag <- function(vft,
   # Lowercase names: avoid errors due to confusing upper- and lower-case
   vft_lower_nms <- stats::setNames(vft, tolower(names(vft)))
   crucial_vars <- c(
-    "tag", "qx", "qy", "status", "quadratname", "censusid", "plotid"
+    "tag", "qx", "qy", "status", "quadratname", "plotcensusnumber", "plotid"
   )
   check_crucial_names(vft_lower_nms, crucial_vars)
   check_unique_plotid(vft_lower_nms)
@@ -150,14 +150,14 @@ map_tag <- function(vft,
   )
 
   # Keep only rows of last census
-  if (length(unique(vft_lower_nms$censusid)) > 1) {
+  if (length(unique(vft_lower_nms$plotcensusnumber)) > 1) {
     warning(
       "Multiple censuses were detected\n",
       "  * Filtering only the greatest `CensusID`"
     )
   }
-  last_census <- max(unique(vft_lower_nms$censusid))
-  is_last_census <- vft_lower_nms$censusid == last_census
+  last_census <- max(unique(vft_lower_nms$plotcensusnumber))
+  is_last_census <- vft_lower_nms$plotcensusnumber == last_census
 
   # Keep only variables that are important
   subset_with_lower_nms <- vft_lower_nms[is_last_census, crucial_vars]
@@ -272,7 +272,7 @@ check_subquadrat_dimensions <- function(df,
 add_status_tree_page_x1_x2_y1_y2_split_quad_id <- function(with_subquadrat,
                                                            quad_size,
                                                            extend_grid) {
-    with_status_tree <- add_status_tree(df = with_subquadrat)
+    with_status_tree <- add_status_tree(with_subquadrat)
     paginated <- dplyr::ungroup(  # restore flat data
       paginate(dplyr::group_by(with_status_tree, .data$quadratname))
     )

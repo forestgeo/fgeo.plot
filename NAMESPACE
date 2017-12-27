@@ -2,8 +2,10 @@
 
 export(add_status_tree)
 export(add_subquadrat)
+export(check_crucial_names)
 export(check_unique)
 export(check_unique_vector)
+export(exists_in_pkg)
 export(map_quad)
 export(map_quad_header)
 export(map_sp)

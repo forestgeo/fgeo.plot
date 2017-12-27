@@ -105,7 +105,7 @@ test_that("plots all unique tags in data", {
 test_that("plots the same with all or just the minimum needed vars in data", {
   all <- suppressWarnings(map_tag(vft)[1])
   vft_with_min_vars <- vft %>%
-    select(Tag, Status, QX, QY, QuadratName, DBHID, CensusID, PlotID)
+    select(Tag, Status, QX, QY, QuadratName, DBHID, PlotCensusNumber, PlotID)
   min <- suppressWarnings(map_tag(vft_with_min_vars)[1])
 
   expect_equal(all, min)

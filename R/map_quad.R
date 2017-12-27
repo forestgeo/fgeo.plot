@@ -50,7 +50,8 @@ map_quad <- function(vft,
                      extend_grid = 0) {
   .vft <- stats::setNames(vft, tolower(names(vft)))
   core <- c(
-    "plotid", "censusid", "tag", "dbh", "status", "quadratname", "qx", "qy"
+    "plotid", "plotcensusnumber", "tag", "dbh", "status", "quadratname",
+    "qx", "qy"
   )
   crucial <- .vft[core]
   check_map_quad(
@@ -111,7 +112,7 @@ check_map_quad <- function(vft,
   stopifnot(is.character(title_quad), is.character(header))
   check_crucial_names(vft, core)
   check_unique_plotid(vft)
-  check_unique_censusid(vft)
+  check_unique_plotcensusnumber(vft)
 }
 
 map_quad_each <- function(.df,

@@ -25,6 +25,9 @@ names and column positions).}
 
 \item{n}{Number of values used for matching, from the head (or tail) of \code{var}.}
 }
+\value{
+A filtered version of the input dataset.
+}
 \description{
 Filters a data frame by matching \code{n} values from the head (or tail) of the
 unique values of a variable.
@@ -52,4 +55,6 @@ top(df, y, n = -2)
 }
 \seealso{
 \link[dplyr:pull]{dplyr::pull}, \link[dplyr:top_n]{dplyr::top_n}, \code{\link[utils:head]{utils::head()}}, \code{\link[utils:tail]{utils::tail()}}.
+
+Other Functions to filter dataframes.: \code{\link{rm_dead_twice}}
 }

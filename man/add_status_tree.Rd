@@ -2,17 +2,32 @@
 % Please edit documentation in R/utils.R
 \name{add_status_tree}
 \alias{add_status_tree}
-\title{Ensure that the status refers to the tree, not to the stem.}
+\title{Define the status of a tree based on the status of its stems.}
 \usage{
-add_status_tree(df)
+add_status_tree(x)
 }
 \arguments{
-\item{df}{A ViewFullTable or a fgeo table.}
+\item{x}{A ViewFullTable or a fgeo table.}
 }
 \value{
 The input data set with lowercase names, and with the additional
 variable status_tree.
 }
 \description{
-Ensure that the status refers to the tree, not to the stem.
+Define the status of a tree based on the status of its stems.
+}
+\examples{
+df <- tibble::tribble(
+  ~PlotCensusNumber, ~Tag,  ~Status,
+  1,    1,   "alive",
+  1,    1,    "dead",
+  1,    2,    "dead",
+  1,    2,    "dead",
+
+  2,    1,   "alive",
+  2,    1,   "alive",
+  2,    2,   "alive",
+  2,    2,    "dead"
+)
+add_status_tree(df)
 }

@@ -28,13 +28,15 @@ test_that("works as expected", {
 
 
 
-context("check_unique_censusid")
+context("check_unique_plotcensusnumber")
 
 test_that("works as expected", {
-  expect_silent(check_unique_censusid(data.frame(censusid = c(1, 1))))
+  expect_silent(
+    check_unique_plotcensusnumber(data.frame(plotcensusnumber = c(1, 1)))
+  )
   expect_warning(
-    check_unique_censusid(
-      data.frame(censusid = c(1, 2))
+    check_unique_plotcensusnumber(
+      data.frame(plotcensusnumber = c(1, 2))
     )
   )
 })
@@ -55,7 +57,7 @@ test_that("the tree status is dead only if one stem is dead", {
       "dead", "dead",
       "broken below", "missing"
     ),
-    censusid = 1,
+    plotcensusnumber = 1,
     plotid = 1
   )
   expected <- c(rep("alive", 2), rep("dead", 2), rep("alive", 2))
@@ -65,7 +67,7 @@ test_that("the tree status is dead only if one stem is dead", {
 })
 
 .df <- tibble::tribble(
-  ~CensusID, ~Tag,  ~Status,
+  ~PlotCensusNumber, ~Tag,  ~Status,
           1,    1,   "alive",
           1,    1,    "dead",
           1,    2,    "dead",
@@ -91,20 +93,20 @@ test_that("outputs the correct variable status_tree", {
 context("rm_dead_twice")
 
 cns3 <- tibble::tribble(
-  ~CensusID, ~Tag,  ~Status,
+  ~PlotCensusNumber, ~Tag,  ~Status,
           3,    1,   "alive",
           3,    1,   "alive",
           3,    2,    "dead",
           3,    2,    "dead"
 )
 
-test_that("returns equal  to a known object", {
+test_that("returns equal to a known object", {
   expect_known_output(rm_dead_twice(.df), "ref_rm_dead_twice.csv")
 })
 
 test_that("adding a third census removes a first census", {
   with_cns3 <- dplyr::bind_rows(.df, cns3)
   out <- rm_dead_twice(with_cns3)
-  expect_false(any(grepl(1, out$CensusID)))
+  expect_false(any(grepl(1, out$PlotCensusNumber)))
 })
 

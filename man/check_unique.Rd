@@ -44,3 +44,9 @@ check_unique(.df, "a", "message", "do this")
 # Silent
 check_unique(.df, "b", "warning", "do this")
 }
+\seealso{
+Other Functions to check inputs.: \code{\link{check_crucial_names}}
+
+Other Functions for developers.: \code{\link{check_crucial_names}},
+  \code{\link{exists_in_pkg}}
+}
