@@ -78,6 +78,7 @@ theme_map_quad <- function(axis.text = element_blank(),
 #' Pre-made headers.
 #'
 #' @name headers
+#' @param lang = String; Langage of the header: Either "english" or "spanish".
 #' @examples
 #' cat(map_tag_header())
 #' cat(map_quad_header())
@@ -97,10 +98,20 @@ map_tag_header <- function() {
 
 #' @rdname headers
 #' @export
-map_quad_header <- function() {
-  description <- enter_line(
-    "Nombres y Fecha:", "Revisado por:       ", "Entrado en PC por:", times = 25
-  )
+map_quad_header <- function(lang = "english") {
+  stopifnot(lang  %in% c("english", "spanish"))
+  stopifnot(length(lang) == 1)
+
+  if (lang == "english") {
+    description <- enter_line(
+      "Names and date: ", "Reviewed by:        ", "Entered on PC by: ", times = 25
+    )
+  }
+  if (lang == "spanish") {
+    description <- enter_line(
+      "Nombres y Fecha:", "Revisado por:       ", "Entrado en PC por:", times = 25
+    )
+  }
   blank <- enter_line(rep("_________________________", 3))
 
   paste(
