@@ -9,7 +9,7 @@ test_that("map_tag_header outputs the expected string", {
 })
 
 test_that("map_quad_header outputs the expected string", {
-  x <- map_quad_header()
+  x <- map_quad_header(lang = "spanish")
   expect_true(grepl("Nombres y Fecha", x))
   expect_type(x, "character")
   x <- NULL
