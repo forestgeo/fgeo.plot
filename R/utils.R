@@ -179,7 +179,8 @@ check_add_status_tree <- function(x) {
 #' @return Logical.
 #' @export
 #' @family Functions for developers.
-#' @example
+#' @examples
+#' library(map)
 #' exists_in_pkg("one_quadrat", "map")
 exists_in_pkg <- function(object, package){
   any(grepl(object, ls(paste0("package:", package))))
