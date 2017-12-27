@@ -8,7 +8,10 @@
 \usage{
 map_tag_header()
 
-map_quad_header()
+map_quad_header(lang = "english")
+}
+\arguments{
+\item{lang}{= String; Langage of the header: Either "english" or "spanish".}
 }
 \description{
 Pre-made headers.
