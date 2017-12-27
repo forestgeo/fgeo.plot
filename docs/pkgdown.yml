@@ -2,7 +2,6 @@ urls:
   reference: https://forestgeo.github.io/map//reference
   article: https://forestgeo.github.io/map//articles
 articles:
-  map_quad: map_quad.html
   map_sp: map_sp.html
   map_tag: map_tag.html
 

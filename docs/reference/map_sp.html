@@ -105,19 +105,12 @@
     </div>
 
     
-    <p>Only the first two arguments are strictly necessary and the defaults are set
-to cover most common cases. All other arguments let you customize your map:
-they let you customize the points; the plot theme; add your elevation data,
-and customize the elevation lines.</p>
+    <p>Map the distribution of one, some or all species in a census data set.</p>
     
 
     <pre class="usage"><span class='fu'>map_sp</span>(<span class='no'>census</span>, <span class='no'>species</span>, <span class='kw'>xlim</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>ylim</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>theme</span> <span class='kw'>=</span> <span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/ggtheme'>theme_bw</a></span>(), <span class='kw'>elevation</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>line_size</span> <span class='kw'>=</span> <span class='fl'>0.5</span>,
-  <span class='kw'>low</span> <span class='kw'>=</span> <span class='st'>"#132B43"</span>, <span class='kw'>high</span> <span class='kw'>=</span> <span class='st'>"#56B1F7"</span>, <span class='kw'>bins</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)
-
-<span class='fu'>map_sp_pdf</span>(<span class='no'>census</span>, <span class='no'>species</span>, <span class='kw'>xlim</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>ylim</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>theme</span> <span class='kw'>=</span> <span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/ggtheme'>theme_bw</a></span>(), <span class='kw'>elevation</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>line_size</span> <span class='kw'>=</span> <span class='fl'>0.5</span>,
-  <span class='kw'>low</span> <span class='kw'>=</span> <span class='st'>"#132B43"</span>, <span class='kw'>high</span> <span class='kw'>=</span> <span class='st'>"#56B1F7"</span>, <span class='kw'>bins</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>file</span> <span class='kw'>=</span> <span class='st'>"map.pdf"</span>, <span class='no'>...</span>)</pre>
+  <span class='kw'>low</span> <span class='kw'>=</span> <span class='st'>"#132B43"</span>, <span class='kw'>high</span> <span class='kw'>=</span> <span class='st'>"#56B1F7"</span>, <span class='kw'>bins</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -139,7 +132,7 @@ in the data set.</p></td>
     </tr>
     <tr>
       <th>theme</th>
-      <td><p>A ggplot2 theme to customize the looks of the map.</p></td>
+      <td><p>An object of class theme.</p></td>
     </tr>
     <tr>
       <th>elevation</th>
@@ -167,17 +160,11 @@ range of the data. Integers</p></td>
       <td><p>Arguments passed to <code><a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_point'>ggplot2::geom_point()</a></code> to customize, for
 example, the size, shape, or colour of the points.</p></td>
     </tr>
-    <tr>
-      <th>file</th>
-      <td><p>A character string giving the name of the file.</p></td>
-    </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Both functions return a list of plots. <code>map_sp()</code> returns it visibly;
-<code>map_sp_pdf()</code> returns it invisibly so it can be reused, but its main
-output is a .pdf file.</p>
+    <p>A list of which each element is a plot of class ggplot.</p>
     
     <h2 class="hasAnchor" id="acknowledgement"><a class="anchor" href="#acknowledgement"></a>Acknowledgement</h2>
 
@@ -208,9 +195,9 @@ output is a .pdf file.</p>
 <span class='fu'>map_sp</span>(<span class='no'>census</span>, <span class='st'>"hybapr"</span>)
 
 <span class='co'># Print to .pdf -- one species per page of a single file</span>
-<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'>map_sp_pdf</span>(<span class='no'>census</span>, <span class='fu'>c</span>(<span class='st'>"hybapr"</span>, <span class='st'>"faraoc"</span>))
-<span class='co'># Also print to screen -- navigate the plot's panel to view each species</span>
-<span class='no'>p</span>
+<span class='fu'>pdf</span>()
+<span class='fu'>map_sp</span>(<span class='no'>census</span>, <span class='fu'>c</span>(<span class='st'>"hybapr"</span>, <span class='st'>"faraoc"</span>))
+<span class='fu'>dev.off</span>()
 
 <span class='co'># Add elevation data</span>
 <span class='no'>elev</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>bciex</span><span class='kw ns'>::</span><span class='no'><a href='http://www.rdocumentation.org/packages/bciex/topics/bci_elevation'>bci_elevation</a></span>
@@ -257,13 +244,6 @@ output is a .pdf file.</p>
 <span class='co'># For more options see ?ggplot2::theme_bw()</span>
 
 <span class='co'># Less common changes -----------------------------------------------------</span>
-
-<span class='co'># Customizing name of .pdf file. Saving to default -- working directory ("./")</span>
-<span class='fu'>map_sp_pdf</span>(<span class='no'>census</span>, <span class='st'>"hybapr"</span>, <span class='kw'>elevation</span> <span class='kw'>=</span> <span class='no'>elev</span>, <span class='kw'>file</span> <span class='kw'>=</span> <span class='st'>"./custom-name.pdf"</span>)
-<span class='co'># Same</span>
-<span class='fu'>suppressMessages</span>(
-  <span class='fu'>map_sp_pdf</span>(<span class='no'>census</span>, <span class='st'>"hybapr"</span>, <span class='kw'>elevation</span> <span class='kw'>=</span> <span class='no'>elev</span>, <span class='kw'>file</span> <span class='kw'>=</span> <span class='st'>"custom-name.pdf"</span>)
-)
 
 <span class='co'># Changing limits</span>
 <span class='fu'>map_sp</span>(<span class='no'>census</span>, <span class='st'>"hybapr"</span>, <span class='kw'>xlim</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>0</span>, <span class='fl'>1500</span>), <span class='kw'>ylim</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>0</span>, <span class='fl'>1000</span>))

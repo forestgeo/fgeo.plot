@@ -49,19 +49,33 @@ navbar:
 
 
 reference:
-
   - title: "Main functions"
     contents:
-      - map_tag
+      - map_quad
       - map_sp
-      - map_sp_pdf
+      - map_tag
 
   - title: "Helpers"
     contents:
       - add_subquadrat
-      - get_header
-      - get_theme
-      - pad
+      - matches("header")
+      - tag_dead
+      - matches("theme")
+
+  - title: "Datasets"
+    contents:
+      - datasets
+      - one_quadrat
+      - four_quadrats
+
+  - title: "Utils"
+    contents:
+      - add_status_tree
+      - starts_with("check_")
+      - exists_in_pkg
+      - rm_dead_twice
+      - top
+
 
 articles:
 

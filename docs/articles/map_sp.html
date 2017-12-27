@@ -81,7 +81,7 @@
       <h1>Mapping species distribution</h1>
                         <h4 class="author">Mauro Lepore</h4>
             
-            <h4 class="date">2017-12-13</h4>
+            <h4 class="date">2017-12-27</h4>
           </div>
 
     
@@ -90,7 +90,7 @@
 <div id="overview" class="section level1">
 <h1 class="hasAnchor">
 <a href="#overview" class="anchor"></a>Overview</h1>
-<p>This vignette shows you how to map species distribution with <code><a href="../reference/map_sp.html">map_sp()</a></code> and <code><a href="../reference/map_sp.html">map_sp_pdf()</a></code> from the <strong>map</strong> package.</p>
+<p>This vignette shows you how to map species distribution with <code><a href="../reference/map_sp.html">map_sp()</a></code>from the <strong>map</strong> package.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># To install from a private repo, generate a personal access token (PAT) in</span>
 <span class="co"># https://github.com/settings/tokens and supply to this argument.</span>
 GITHUB_PAT &lt;-<span class="st"> "your token"</span>
@@ -136,10 +136,7 @@ census
 <div id="mapping-species-distribution" class="section level2">
 <h2 class="hasAnchor">
 <a href="#mapping-species-distribution" class="anchor"></a>Mapping Species Distribution</h2>
-<p>Although the output of <code><a href="../reference/map_sp.html">map_sp()</a></code> and <code><a href="../reference/map_sp.html">map_sp_pdf()</a></code> is printed to different devices – i.e, the screen or a .pdf file – those functions are almost identical. They are documented jointly and share the same arguments (except for the <code>file</code> argument that only belongs to <code><a href="../reference/map_sp.html">map_sp_pdf()</a></code>. (These functions are not merge into a single function because their outputs are different; functions that produce different output tend to cause more problems that those which output is consistently the same).</p>
-<pre><code>?map_sp
-# Or
-?map_sp_pdf</code></pre>
+<pre><code><a href="../reference/map_sp.html">?map_sp</a></code></pre>
 <p>Notice that only the first two arguments of these functions are strictly necessary.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Print to screen</span>
 <span class="kw"><a href="../reference/map_sp.html">map_sp</a></span>(census, <span class="kw">c</span>(<span class="st">"hybapr"</span>, <span class="st">"faraoc"</span>))
@@ -147,18 +144,6 @@ census
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $faraoc</span></code></pre></div>
 <p><img src="map_sp_files/figure-html/unnamed-chunk-3-1.png" width="70%" style="display: block; margin: auto;"><img src="map_sp_files/figure-html/unnamed-chunk-3-2.png" width="70%" style="display: block; margin: auto;"></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Defaults to save in working directory. Returns invisibly.</span>
-<span class="kw"><a href="../reference/map_sp.html">map_sp_pdf</a></span>(census, <span class="kw">c</span>(<span class="st">"hybapr"</span>, <span class="st">"faraoc"</span>))
-<span class="co">#&gt; Saving as map.pdf</span></code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Force printing the invisible output</span>
-<span class="kw">print</span>(<span class="kw"><a href="../reference/map_sp.html">map_sp_pdf</a></span>(census, <span class="kw">c</span>(<span class="st">"hybapr"</span>, <span class="st">"faraoc"</span>)))
-<span class="co">#&gt; Saving as map.pdf</span>
-<span class="co">#&gt; $hybapr</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $faraoc</span>
-
-<span class="co"># (Printing side by side to save space)</span></code></pre></div>
-<p><img src="map_sp_files/figure-html/unnamed-chunk-5-1.png" width="45%"><img src="map_sp_files/figure-html/unnamed-chunk-5-2.png" width="45%"></p>
 <p>Keep in mind that your census data must have specific variable-names:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Show behaviour with wrong name</span>
 with_wrong_name &lt;-<span class="st"> </span><span class="kw">rename</span>(census, <span class="dt">SP =</span> sp)
@@ -175,20 +160,26 @@ with_wrong_name &lt;-<span class="st"> </span><span class="kw">rename</span>(cen
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">my_elev &lt;-<span class="st"> </span>bciex<span class="op">::</span>bci_elevation
 my_elev
 <span class="co">#&gt; # A tibble: 20,301 x 3</span>
-<span class="co">#&gt;       x     y  elev</span>
-<span class="co">#&gt; * &lt;int&gt; &lt;int&gt; &lt;dbl&gt;</span>
-<span class="co">#&gt; 1     0     0   121</span>
-<span class="co">#&gt; 2     0     5   121</span>
-<span class="co">#&gt; 3     0    10   121</span>
-<span class="co">#&gt; 4     0    15   121</span>
-<span class="co">#&gt; 5     0    20   121</span>
-<span class="co">#&gt; 6     0    25   123</span>
-<span class="co">#&gt; # ... with 2.03e+04 more rows</span></code></pre></div>
+<span class="co">#&gt;        x     y  elev</span>
+<span class="co">#&gt;  * &lt;int&gt; &lt;int&gt; &lt;dbl&gt;</span>
+<span class="co">#&gt;  1     0     0   121</span>
+<span class="co">#&gt;  2     0     5   121</span>
+<span class="co">#&gt;  3     0    10   121</span>
+<span class="co">#&gt;  4     0    15   121</span>
+<span class="co">#&gt;  5     0    20   121</span>
+<span class="co">#&gt;  6     0    25   123</span>
+<span class="co">#&gt;  7     0    30   125</span>
+<span class="co">#&gt;  8     0    35   127</span>
+<span class="co">#&gt;  9     0    40   127</span>
+<span class="co">#&gt; 10     0    45   128</span>
+<span class="co">#&gt; # ... with 20,291 more rows</span></code></pre></div>
 <p>Note that the elevation data set must have very specific variable names; or it will fail:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># This will fail because the names of `my_elev` are not correct</span>
 <span class="kw"><a href="../reference/map_sp.html">map_sp</a></span>(census, <span class="kw">c</span>(<span class="st">"hybapr"</span>, <span class="st">"faraoc"</span>), <span class="dt">elevation =</span> my_elev)
-<span class="co">#&gt; Error: Ensure your data set has these variables (regardles of the case):</span>
-<span class="co">#&gt; gx, gy, elev</span></code></pre></div>
+<span class="co">#&gt; $hybapr</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $faraoc</span></code></pre></div>
+<p><img src="map_sp_files/figure-html/unnamed-chunk-6-1.png" width="70%" style="display: block; margin: auto;"><img src="map_sp_files/figure-html/unnamed-chunk-6-2.png" width="70%" style="display: block; margin: auto;"></p>
 <p>If necessary, rename your variables:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Renaming data and trying again</span>
 elev &lt;-<span class="st"> </span><span class="kw">rename</span>(my_elev, <span class="dt">gx =</span> x, <span class="dt">gy =</span> y)
@@ -196,7 +187,7 @@ elev &lt;-<span class="st"> </span><span class="kw">rename</span>(my_elev, <span
 <span class="co">#&gt; $hybapr</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $faraoc</span></code></pre></div>
-<p><img src="map_sp_files/figure-html/unnamed-chunk-9-1.png" width="70%" style="display: block; margin: auto;"><img src="map_sp_files/figure-html/unnamed-chunk-9-2.png" width="70%" style="display: block; margin: auto;"></p>
+<p><img src="map_sp_files/figure-html/unnamed-chunk-7-1.png" width="70%" style="display: block; margin: auto;"><img src="map_sp_files/figure-html/unnamed-chunk-7-2.png" width="70%" style="display: block; margin: auto;"></p>
 </div>
 </div>
 <div id="dealing-with-overplotting" class="section level1">
@@ -211,7 +202,7 @@ crowded &lt;-<span class="st"> </span>dplyr<span class="op">::</span><span class
 )
 <span class="kw"><a href="../reference/map_sp.html">map_sp</a></span>(crowded, <span class="kw">c</span>(<span class="st">"species1"</span>))
 <span class="co">#&gt; $species1</span></code></pre></div>
-<p><img src="map_sp_files/figure-html/unnamed-chunk-10-1.png" width="70%" style="display: block; margin: auto;"></p>
+<p><img src="map_sp_files/figure-html/unnamed-chunk-8-1.png" width="70%" style="display: block; margin: auto;"></p>
 <p>To reduce overplotting, you can do a number of things. First, you can try reducing the size or opacity of the points, or changing their shape.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># smaller and semi transparent</span>
 <span class="kw"><a href="../reference/map_sp.html">map_sp</a></span>(crowded, <span class="kw">c</span>(<span class="st">"species1"</span>), <span class="dt">size =</span> <span class="dv">1</span>, <span class="dt">alpha =</span> <span class="dv">2</span><span class="op">/</span><span class="dv">10</span>)
@@ -222,13 +213,13 @@ crowded &lt;-<span class="st"> </span>dplyr<span class="op">::</span><span class
 <span class="co">#&gt; $species1</span>
 
 <span class="co"># (Printing side by side to save space)</span></code></pre></div>
-<p><img src="map_sp_files/figure-html/unnamed-chunk-11-1.png" width="45%"><img src="map_sp_files/figure-html/unnamed-chunk-11-2.png" width="45%"></p>
+<p><img src="map_sp_files/figure-html/unnamed-chunk-9-1.png" width="45%"><img src="map_sp_files/figure-html/unnamed-chunk-9-2.png" width="45%"></p>
 <p>If your research question allows, you can try subsampling your data.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># A random sample of 2000 stems</span>
 smaller &lt;-<span class="st"> </span><span class="kw">sample_n</span>(crowded, <span class="dv">2000</span>)
 <span class="kw"><a href="../reference/map_sp.html">map_sp</a></span>(smaller, <span class="kw">c</span>(<span class="st">"species1"</span>), <span class="dt">shape =</span> <span class="dv">21</span>)
 <span class="co">#&gt; $species1</span></code></pre></div>
-<p><img src="map_sp_files/figure-html/unnamed-chunk-12-1.png" width="70%" style="display: block; margin: auto;"></p>
+<p><img src="map_sp_files/figure-html/unnamed-chunk-10-1.png" width="70%" style="display: block; margin: auto;"></p>
 </div>
 <div id="customizing-your-maps" class="section level1">
 <h1 class="hasAnchor">
@@ -240,12 +231,12 @@ smaller &lt;-<span class="st"> </span><span class="kw">sample_n</span>(crowded, 
 <div id="changing-points-properties" class="section level3">
 <h3 class="hasAnchor">
 <a href="#changing-points-properties" class="anchor"></a>Changing Points’ Properties</h3>
-<p>Both <code><a href="../reference/map_sp.html">map_sp()</a></code> and <code><a href="../reference/map_sp.html">map_sp_pdf()</a></code> have the argument <code>...</code>, which lets you pass arguments to <code><a href="http://www.rdocumentation.org/packages/ggplot2/topics/geom_point">ggplot2::geom_point()</a></code> to change points’ properties such as the shape, size, fill, colour, and stroke. Read <code>?ggplot2::geom_point()</code> to learn all your options; here you can see some common ones:</p>
+<p>The argument <code>...</code>, which lets you pass arguments to <code><a href="http://www.rdocumentation.org/packages/ggplot2/topics/geom_point">ggplot2::geom_point()</a></code> to change points’ properties such as the shape, size, fill, colour, and stroke. Read <code>?ggplot2::geom_point()</code> to learn all your options; here you can see some common ones:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/map_sp.html">map_sp</a></span>(census, <span class="st">"hybapr"</span>,
   <span class="co"># Arguments passed to ggplot2::geom_point()</span>
   <span class="dt">size =</span> <span class="dv">4</span>, <span class="dt">shape =</span> <span class="dv">22</span>, <span class="dt">fill =</span> <span class="st">"green"</span>, <span class="dt">colour =</span> <span class="st">"black"</span>, <span class="dt">stroke =</span> <span class="dv">2</span>)
 <span class="co">#&gt; $hybapr</span></code></pre></div>
-<p><img src="map_sp_files/figure-html/unnamed-chunk-13-1.png" width="70%" style="display: block; margin: auto;"></p>
+<p><img src="map_sp_files/figure-html/unnamed-chunk-11-1.png" width="70%" style="display: block; margin: auto;"></p>
 </div>
 <div id="changing-properties-of-the-elevation-lines" class="section level3">
 <h3 class="hasAnchor">
@@ -259,7 +250,7 @@ smaller &lt;-<span class="st"> </span><span class="kw">sample_n</span>(crowded, 
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/map_sp.html">map_sp</a></span>(census, <span class="st">"hybapr"</span>, 
   <span class="dt">elevation =</span> elev, <span class="dt">line_size =</span> <span class="dv">1</span>, <span class="dt">low =</span> <span class="st">"red"</span>, <span class="dt">high =</span> <span class="st">"blue"</span>, <span class="dt">bins =</span> <span class="dv">4</span>)
 <span class="co">#&gt; $hybapr</span></code></pre></div>
-<p><img src="map_sp_files/figure-html/unnamed-chunk-14-1.png" width="70%" style="display: block; margin: auto;"></p>
+<p><img src="map_sp_files/figure-html/unnamed-chunk-12-1.png" width="70%" style="display: block; margin: auto;"></p>
 </div>
 <div id="changing-the-theme" class="section level3">
 <h3 class="hasAnchor">
@@ -271,37 +262,13 @@ smaller &lt;-<span class="st"> </span><span class="kw">sample_n</span>(crowded, 
 <span class="co">#&gt; $hybapr</span>
 
 <span class="co"># (Printing side by side to save space)</span></code></pre></div>
-<p><img src="map_sp_files/figure-html/unnamed-chunk-15-1.png" width="45%"><img src="map_sp_files/figure-html/unnamed-chunk-15-2.png" width="45%"></p>
+<p><img src="map_sp_files/figure-html/unnamed-chunk-13-1.png" width="45%"><img src="map_sp_files/figure-html/unnamed-chunk-13-2.png" width="45%"></p>
 </div>
 </div>
 <div id="less-common-changes" class="section level2">
 <h2 class="hasAnchor">
 <a href="#less-common-changes" class="anchor"></a>Less Common Changes</h2>
 <p>Here are some changes that you may need less often but are still good to keep in mind.</p>
-<div id="change-file-name" class="section level3">
-<h3 class="hasAnchor">
-<a href="#change-file-name" class="anchor"></a>Change File Name</h3>
-<p>When printing to .pdf, you can provide a custom file name (including the path to a directory); but note the file name must end in <em>.pdf</em> or it will be replaced by a default name:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">spp &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">"hybapr"</span>, <span class="st">"faraoc"</span>)
-
-<span class="kw"><a href="../reference/map_sp.html">map_sp_pdf</a></span>(census, spp, <span class="dt">elevation =</span> elev, <span class="dt">file =</span> <span class="st">"bad-name1"</span>)
-<span class="co">#&gt; Warning in check_file_extension(file): File extension should be .pdf.</span>
-<span class="co">#&gt;   * Replacing given file name by default file name</span>
-<span class="co">#&gt; Saving as map.pdf</span>
-
-<span class="kw"><a href="../reference/map_sp.html">map_sp_pdf</a></span>(census, spp, <span class="dt">elevation =</span> elev, <span class="dt">file =</span> <span class="st">"bad-name2.png"</span>)
-<span class="co">#&gt; Warning in check_file_extension(file): File extension should be .pdf.</span>
-<span class="co">#&gt;   * Replacing given file name by default file name</span>
-<span class="co">#&gt; Saving as map.pdf</span></code></pre></div>
-<p>This is OK. (Note that you can suppress messages)</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/map_sp.html">map_sp_pdf</a></span>(census, spp, <span class="dt">elevation =</span> elev, <span class="dt">file =</span> <span class="st">"good-name.pdf"</span>)
-<span class="co">#&gt; Saving as good-name.pdf</span>
-
-<span class="co"># Same without any message</span>
-<span class="kw">suppressMessages</span>(
-  <span class="kw"><a href="../reference/map_sp.html">map_sp_pdf</a></span>(census, spp, <span class="dt">elevation =</span> elev, <span class="dt">file =</span> <span class="st">"good-name.pdf"</span>)
-)</code></pre></div>
-</div>
 <div id="change-x-and-y-limits" class="section level3">
 <h3 class="hasAnchor">
 <a href="#change-x-and-y-limits" class="anchor"></a>Change x and y Limits</h3>
@@ -316,7 +283,7 @@ two_species &lt;-<span class="st"> </span><span class="kw">unique</span>(odd_dat
 <span class="co">#&gt; $faraoc</span>
 
 <span class="co"># (Printing side by side to save space)</span></code></pre></div>
-<p><img src="map_sp_files/figure-html/unnamed-chunk-18-1.png" width="45%"><img src="map_sp_files/figure-html/unnamed-chunk-18-2.png" width="45%"></p>
+<p><img src="map_sp_files/figure-html/unnamed-chunk-14-1.png" width="45%"><img src="map_sp_files/figure-html/unnamed-chunk-14-2.png" width="45%"></p>
 <p>You can overwrite the default limits with the arguments <code>xlim</code> and <code>ylim</code>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/map_sp.html">map_sp</a></span>(odd_data, two_species, <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1000</span>), <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">500</span>))
 <span class="co">#&gt; $hybapr</span>
@@ -324,7 +291,7 @@ two_species &lt;-<span class="st"> </span><span class="kw">unique</span>(odd_dat
 <span class="co">#&gt; $faraoc</span>
 
 <span class="co"># (Printing side by side to save space)</span></code></pre></div>
-<p><img src="map_sp_files/figure-html/unnamed-chunk-19-1.png" width="45%"><img src="map_sp_files/figure-html/unnamed-chunk-19-2.png" width="45%"></p>
+<p><img src="map_sp_files/figure-html/unnamed-chunk-15-1.png" width="45%"><img src="map_sp_files/figure-html/unnamed-chunk-15-2.png" width="45%"></p>
 </div>
 </div>
 </div>
@@ -342,7 +309,7 @@ all_species &lt;-<span class="st"> </span><span class="kw">unique</span>(census<
 maps &lt;-<span class="st"> </span><span class="kw"><a href="../reference/map_sp.html">map_sp</a></span>(census, all_species)
 multipaged &lt;-<span class="st"> </span><span class="kw">marrangeGrob</span>(maps, <span class="dt">nrow =</span> <span class="dv">1</span>, <span class="dt">ncol =</span> <span class="dv">2</span>)
 multipaged</code></pre></div>
-<p><img src="map_sp_files/figure-html/unnamed-chunk-20-1.png" width="70%" style="display: block; margin: auto;"><img src="map_sp_files/figure-html/unnamed-chunk-20-2.png" width="70%" style="display: block; margin: auto;"></p>
+<p><img src="map_sp_files/figure-html/unnamed-chunk-16-1.png" width="70%" style="display: block; margin: auto;"><img src="map_sp_files/figure-html/unnamed-chunk-16-2.png" width="70%" style="display: block; margin: auto;"></p>
 <p>The multi-paged maps can also be saved to a .pdf.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Saving to .pdf: Option 1</span>
 ggplot2<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/ggsave">ggsave</a></span>(<span class="st">"multi-paged.pdf"</span>, multipaged)
@@ -365,7 +332,7 @@ multipaged
 <div id="customizing-the-theme" class="section level2">
 <h2 class="hasAnchor">
 <a href="#customizing-the-theme" class="anchor"></a>Customizing the Theme</h2>
-<p>Before, you used a pre-made theme. But you can create your own theme with <code><a href="http://www.rdocumentation.org/packages/ggplot2/topics/theme">ggplot2::theme()</a></code>, save it as an object, and pass that object to <code><a href="../reference/map_sp.html">map_sp()</a></code> or <code><a href="../reference/map_sp.html">map_sp_pdf()</a></code>.</p>
+<p>Before, you used a pre-made theme. But you can create your own theme with <code><a href="http://www.rdocumentation.org/packages/ggplot2/topics/theme">ggplot2::theme()</a></code>, save it as an object, and pass that object to <code><a href="../reference/map_sp.html">map_sp()</a></code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Showing only a few options; see all the options with ?ggplot2::theme()</span>
 my_theme &lt;-<span class="st"> </span>ggplot2<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/theme">theme</a></span>(
   <span class="dt">text =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">25</span>, <span class="dt">face =</span> <span class="st">"bold.italic"</span>, <span class="dt">colour =</span> <span class="st">"white"</span>),
@@ -380,17 +347,17 @@ my_theme &lt;-<span class="st"> </span>ggplot2<span class="op">::</span><span cl
 )
 <span class="kw"><a href="../reference/map_sp.html">map_sp</a></span>(census, <span class="st">"hybapr"</span>, <span class="dt">theme =</span> my_theme)
 <span class="co">#&gt; $hybapr</span></code></pre></div>
-<p><img src="map_sp_files/figure-html/unnamed-chunk-23-1.png" width="70%" style="display: block; margin: auto;"></p>
+<p><img src="map_sp_files/figure-html/unnamed-chunk-19-1.png" width="70%" style="display: block; margin: auto;"></p>
 </div>
 <div id="extending-with-ggplot2" class="section level2">
 <h2 class="hasAnchor">
 <a href="#extending-with-ggplot2" class="anchor"></a>Extending with ggplot2</h2>
-<p>Finally, you can also use the output of <code><a href="../reference/map_sp.html">map_sp()</a></code> and <code>map_pdf()</code> as the starting point for further customization with <strong>ggplot2</strong> (the next section provides resources to learn <strong>ggplot2</strong>). That may be convenient for minor extensions; for larger ones you may prefer to start from scratch. Note that <code><a href="../reference/map_sp.html">map_sp()</a></code> and <code><a href="../reference/map_sp.html">map_sp_pdf()</a></code> output not just one plot but a list of plots. That is important to keep in mind if you want to iterate over all the plot-elements of the output list. For example, this is how you would add a new layer to one element of the plots’ list:</p>
+<p>Finally, you can also use the output of <code><a href="../reference/map_sp.html">map_sp()</a></code> and <code>map_pdf()</code> as the starting point for further customization with <strong>ggplot2</strong> (the next section provides resources to learn <strong>ggplot2</strong>). That may be convenient for minor extensions; for larger ones you may prefer to start from scratch. Note that <code><a href="../reference/map_sp.html">map_sp()</a></code> outputs not just one plot but a list of plots. That is important to keep in mind if you want to iterate over all the plot-elements of the output list. For example, this is how you would add a new layer to one element of the plots’ list:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p0 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/map_sp.html">map_sp</a></span>(census, <span class="kw">c</span>(<span class="st">"hybapr"</span>, <span class="st">"faraoc"</span>))
 
 <span class="co"># Adding a new layer to one element of the plots' list</span>
 p0[[<span class="st">"hybapr"</span>]] <span class="op">+</span><span class="st"> </span><span class="kw">geom_vline</span>(<span class="kw">aes</span>(<span class="dt">xintercept =</span> <span class="dv">300</span>), <span class="dt">colour =</span> <span class="st">"red"</span>)</code></pre></div>
-<p><img src="map_sp_files/figure-html/unnamed-chunk-24-1.png" width="70%" style="display: block; margin: auto;"></p>
+<p><img src="map_sp_files/figure-html/unnamed-chunk-20-1.png" width="70%" style="display: block; margin: auto;"></p>
 <p>And this is how you can apply new layers to all the plot-elements of a list (note that the function <code>+</code> is applied to each item of the plots’ list):</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p1 &lt;-<span class="st"> </span><span class="kw">lapply</span>(p0, <span class="st">`</span><span class="dt">+</span><span class="st">`</span>, <span class="kw">geom_vline</span>(<span class="kw">aes</span>(<span class="dt">xintercept =</span> <span class="dv">300</span>), <span class="dt">colour =</span> <span class="st">"red"</span>))
 p1
@@ -405,12 +372,12 @@ p2
 <span class="co">#&gt; $faraoc</span>
 
 <span class="co"># (Printing side by side to save space)</span></code></pre></div>
-<p><img src="map_sp_files/figure-html/unnamed-chunk-25-1.png" width="45%"><img src="map_sp_files/figure-html/unnamed-chunk-25-2.png" width="45%"><img src="map_sp_files/figure-html/unnamed-chunk-25-3.png" width="45%"><img src="map_sp_files/figure-html/unnamed-chunk-25-4.png" width="45%"></p>
+<p><img src="map_sp_files/figure-html/unnamed-chunk-21-1.png" width="45%"><img src="map_sp_files/figure-html/unnamed-chunk-21-2.png" width="45%"><img src="map_sp_files/figure-html/unnamed-chunk-21-3.png" width="45%"><img src="map_sp_files/figure-html/unnamed-chunk-21-4.png" width="45%"></p>
 </div>
 <div id="learning-more" class="section level2">
 <h2 class="hasAnchor">
 <a href="#learning-more" class="anchor"></a>Learning More</h2>
-<p>There are many visualization systems in R. The system built in <code><a href="../reference/map_sp.html">map_sp()</a></code> and <code><a href="../reference/map_sp.html">map_sp_pdf()</a></code> is that of the <strong>ggplot2</strong> package. <strong>ggplot2</strong> is not an arbitrary collection of functions; it is one implementation of <a href="https://goo.gl/E514ar">The Grammar of Graphics</a>. Good places to learn <strong>ggplot2</strong> include <a href="https://goo.gl/tVvLQZ">this website</a>; this specialized, paid book: <a href="https://goo.gl/R6wJk9">ggplot2: Elegant Graphics for Data Analysis</a>; and this general, free book <a href="http://r4ds.had.co.nz/">R for Data Science</a>.</p>
+<p>There are many visualization systems in R. The system built in <code><a href="../reference/map_sp.html">map_sp()</a></code> is that of the <strong>ggplot2</strong> package. <strong>ggplot2</strong> is not an arbitrary collection of functions; it is one implementation of <a href="https://goo.gl/E514ar">The Grammar of Graphics</a>. Good places to learn <strong>ggplot2</strong> include <a href="https://goo.gl/tVvLQZ">this website</a>; this specialized, paid book: <a href="https://goo.gl/R6wJk9">ggplot2: Elegant Graphics for Data Analysis</a>; and this general, free book <a href="http://r4ds.had.co.nz/">R for Data Science</a>.</p>
 </div>
 </div>
 </div>

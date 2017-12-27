@@ -25,8 +25,8 @@ dfm <- data.frame(x = 1)
 check_crucial_names(dfm, "x")
 }
 \seealso{
-Other Functions to check inputs.: \code{\link{check_unique}}
+Other functions to check inputs.: \code{\link{check_unique}}
 
-Other Functions for developers.: \code{\link{check_unique}},
+Other functions for developers.: \code{\link{check_unique}},
   \code{\link{exists_in_pkg}}
 }

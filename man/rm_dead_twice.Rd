@@ -50,5 +50,5 @@ add_status_tree(vft)
 rm_dead_twice(vft)
 }
 \seealso{
-Other Functions to filter dataframes.: \code{\link{top}}
+Other functions to filter dataframes.: \code{\link{top}}
 }

@@ -23,6 +23,6 @@ library(map)
 exists_in_pkg("one_quadrat", "map")
 }
 \seealso{
-Other Functions for developers.: \code{\link{check_crucial_names}},
+Other functions for developers.: \code{\link{check_crucial_names}},
   \code{\link{check_unique}}
 }

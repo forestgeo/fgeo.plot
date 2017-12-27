@@ -124,16 +124,16 @@ rm_dead_twice <- function(vft) {
 #'
 #' @examples
 #' df <- tibble::tribble(
-#'   ~PlotCensusNumber, ~Tag,  ~Status,
-#'   1,    1,   "alive",
-#'   1,    1,    "dead",
-#'   1,    2,    "dead",
-#'   1,    2,    "dead",
+#'   ~PlotCensusNumber, ~Tag, ~Status,
+#'                   1,    1, "alive",
+#'                   1,    1,  "dead",
+#'                   1,    2,  "dead",
+#'                   1,    2,  "dead",
 #'
-#'   2,    1,   "alive",
-#'   2,    1,   "alive",
-#'   2,    2,   "alive",
-#'   2,    2,    "dead"
+#'                   2,    1, "alive",
+#'                   2,    1, "alive",
+#'                   2,    2, "alive",
+#'                   2,    2,  "dead"
 #' )
 #' add_status_tree(df)
 add_status_tree <- function(x) {

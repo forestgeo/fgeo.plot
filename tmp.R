@@ -1,4 +1,48 @@
 
+# Dev ---------------------------------------------------------------------
+
+### Infrastructure
+
+#### Travis
+
+* Activate travis at https://github.com/forestgeo/<PKG>/settings/installations
+* Run use_travis()
+* Paste badge in readme
+* Turn on travis for your repo at https://travis-ci.org/forestgeo/map
+* If necessary, update badge by clicking on badge (on Travis) and get markdown link
+
+
+#### codecov
+
+* Add repo to codecov at https://codecov.io/gh/forestgeo
+
+#### pkgdown
+
+* Use/update snippet pkgdown
+
+#### README
+
+* use_readme_rmd()
+* follow model README
+* https://github.com/forestgeo/fgeo/blob/master/README.Rmd
+* https://github.com/forestgeo/map/blob/master/README.Rmd
+* Use/update snippet logo
+* use badges
+* travis
+* codecov
+* cran
+
+### Adding a new package to fgeo
+
+* Add to fgeo.R in right section
+* Add to `Imports:` or Suggests:` with `use_package()`
+* Add to remotes
+* Add to _pkgdown.yml under:
+  * references (package index)
+* articles (tutorials menu)
+
+
+
 
 
 

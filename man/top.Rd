@@ -56,5 +56,5 @@ top(df, y, n = -2)
 \seealso{
 \link[dplyr:pull]{dplyr::pull}, \link[dplyr:top_n]{dplyr::top_n}, \code{\link[utils:head]{utils::head()}}, \code{\link[utils:tail]{utils::tail()}}.
 
-Other Functions to filter dataframes.: \code{\link{rm_dead_twice}}
+Other functions to filter dataframes.: \code{\link{rm_dead_twice}}
 }

@@ -49,16 +49,6 @@ census
 # Print to screen
 map_sp(census, c("hybapr", "faraoc"))
 
-## ------------------------------------------------------------------------
-# Defaults to save in working directory. Returns invisibly.
-map_sp_pdf(census, c("hybapr", "faraoc"))
-
-## ----fig.align="default", out.width="45%", fig.widh=(6 * 0.45 / 0.7)-----
-# Force printing the invisible output
-print(map_sp_pdf(census, c("hybapr", "faraoc")))
-
-# (Printing side by side to save space)
-
 ## ---- error=TRUE---------------------------------------------------------
 # Show behaviour with wrong name
 with_wrong_name <- rename(census, SP = sp)
@@ -116,22 +106,6 @@ map_sp(census, "hybapr", theme = ggplot2::theme_classic())
 map_sp(census, "hybapr", theme = ggplot2::theme_dark())
 
 # (Printing side by side to save space)
-
-## ---- error=TRUE---------------------------------------------------------
-spp <- c("hybapr", "faraoc")
-
-map_sp_pdf(census, spp, elevation = elev, file = "bad-name1")
-
-map_sp_pdf(census, spp, elevation = elev, file = "bad-name2.png")
-
-
-## ------------------------------------------------------------------------
-map_sp_pdf(census, spp, elevation = elev, file = "good-name.pdf")
-
-# Same without any message
-suppressMessages(
-  map_sp_pdf(census, spp, elevation = elev, file = "good-name.pdf")
-)
 
 ## ---- fig.align="default", out.width="45%", fig.widh=(6 * 0.45 / 0.7)----
 # Fake case: The maximum-limits of the site's plot are gx = 1000 and gy = 500;

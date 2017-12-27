@@ -110,16 +110,16 @@ within a quadrat.</p>
     
 
     <pre class="usage"><span class='fu'>map_tag</span>(<span class='no'>vft</span>, <span class='kw'>x_q</span> <span class='kw'>=</span> <span class='fl'>20</span>, <span class='kw'>x_sq</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>y_q</span> <span class='kw'>=</span> <span class='no'>x_q</span>, <span class='kw'>y_sq</span> <span class='kw'>=</span> <span class='no'>x_sq</span>,
-  <span class='kw'>site_name</span> <span class='kw'>=</span> <span class='st'>"Site Name, YYYY"</span>, <span class='kw'>point_shape</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>19</span>, <span class='fl'>4</span>), <span class='kw'>point_size</span> <span class='kw'>=</span> <span class='fl'>1.5</span>,
-  <span class='kw'>tag_size</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>header</span> <span class='kw'>=</span> <span class='fu'><a href='get_header.html'>get_header</a></span>(), <span class='kw'>theme</span> <span class='kw'>=</span> <span class='fu'><a href='get_theme.html'>get_theme</a></span>(),
-  <span class='kw'>extend_grid</span> <span class='kw'>=</span> <span class='fl'>0</span>)</pre>
+  <span class='kw'>title_quad</span> <span class='kw'>=</span> <span class='st'>"Site Name, YYYY. Quadrat:"</span>, <span class='kw'>point_shape</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>19</span>, <span class='fl'>4</span>),
+  <span class='kw'>point_size</span> <span class='kw'>=</span> <span class='fl'>1.5</span>, <span class='kw'>tag_size</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>header</span> <span class='kw'>=</span> <span class='fu'><a href='headers.html'>map_tag_header</a></span>(),
+  <span class='kw'>theme</span> <span class='kw'>=</span> <span class='fu'><a href='themes.html'>theme_map_tag</a></span>(), <span class='kw'>extend_grid</span> <span class='kw'>=</span> <span class='fl'>0</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>vft</th>
-      <td><p>A ViewFullTable.</p></td>
+      <td><p>A dataframe -- specifically, a ForestGEO ViewFullTable.</p></td>
     </tr>
     <tr>
       <th>x_q</th>
@@ -142,7 +142,7 @@ common value is 20.</p></td>
 common value is 5.</p></td>
     </tr>
     <tr>
-      <th>site_name</th>
+      <th>title_quad</th>
       <td><p>A string to use as a title.</p></td>
     </tr>
     <tr>
@@ -158,22 +158,21 @@ under the section entitled <em>'pch' values</em>).</p></td>
     </tr>
     <tr>
       <th>tag_size</th>
-      <td><p>A number giving tag size. Passed to <code><a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_point'>ggplot2::geom_point()</a></code>.</p></td>
+      <td><p>A number giving tag size. Passed to
+[ggrepel::geom_text_repel].</p></td>
     </tr>
     <tr>
       <th>header</th>
-      <td><p>A string to use as a header (subtitle). To conveniently create
-this header use <code><a href='get_header.html'>get_header()</a></code>.</p></td>
+      <td><p>A string to use as a header (see [headers]).</p></td>
     </tr>
     <tr>
       <th>theme</th>
-      <td><p>A <code><a href='http://www.rdocumentation.org/packages/ggplot2/topics/theme'>ggplot2::theme()</a></code>. To conveniently create this theme
-use <code><a href='get_theme.html'>get_theme()</a></code>.</p></td>
+      <td><p>An object of class theme.</p></td>
     </tr>
     <tr>
       <th>extend_grid</th>
-      <td><p>A number to adjust the extension of the minor and major
-grid lines beyond the plot limits.</p></td>
+      <td><p>A number to adjust the extension of the grid lines beyond
+the plot limits.</p></td>
     </tr>
     </table>
     
@@ -208,7 +207,8 @@ the algorithm to calculate subquadrats.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <p><code><a href='http://www.rdocumentation.org/packages/graphics/topics/points'>graphics::points()</a></code>, <code><a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_point'>ggplot2::geom_point()</a></code>, <code><a href='http://www.rdocumentation.org/packages/ggplot2/topics/theme'>ggplot2::theme()</a></code>
-<code><a href='get_header.html'>get_header()</a></code>, <code><a href='get_theme.html'>get_theme()</a></code>, <code><a href='add_subquadrat.html'>add_subquadrat()</a></code>.</p>
+<code><a href='headers.html'>map_tag_header()</a></code>, <code><a href='themes.html'>theme_map_tag()</a></code>, <code><a href='add_subquadrat.html'>add_subquadrat()</a></code>,
+<a href='http://www.rdocumentation.org/packages/ggrepel/topics/geom_text_repel'>ggrepel::geom_text_repel</a>.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -216,6 +216,7 @@ the algorithm to calculate subquadrats.</p>
 <span class='fu'>library</span>(<span class='no'>dplyr</span>)
 <span class='fu'>library</span>(<span class='no'>ggplot2</span>)
 <span class='fu'>library</span>(<span class='no'>map</span>)
+<span class='fu'>library</span>(<span class='no'>bciex</span>)
 
 <span class='co'># Subset of a public ViewFullTable from BCI (source:</span>
 <span class='co'># https://repository.si.edu/handle/10088/20925).</span>
@@ -244,32 +245,29 @@ the algorithm to calculate subquadrats.</p>
 
 <span class='co'># Common customization (printing only 1 map to screen)</span>
 <span class='fu'>map_tag</span>(<span class='no'>vft1_rnm</span>,
-        <span class='kw'>site_name</span> <span class='kw'>=</span> <span class='st'>"BCI 2012"</span>, <span class='kw'>point_size</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>point_shape</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>17</span>, <span class='fl'>6</span>), <span class='kw'>tag_size</span> <span class='kw'>=</span> <span class='fl'>5</span>
+  <span class='kw'>title_quad</span> <span class='kw'>=</span> <span class='st'>"BCI 2012"</span>, <span class='kw'>point_size</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>point_shape</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>17</span>, <span class='fl'>6</span>), <span class='kw'>tag_size</span> <span class='kw'>=</span> <span class='fl'>5</span>
 )[<span class='fl'>1</span>]
 
 <span class='co'># Custom header</span>
-<span class='fu'>map_tag</span>(<span class='no'>vft1_rnm</span>, <span class='kw'>site_name</span> <span class='kw'>=</span> <span class='st'>"BCI 2012"</span>,
-        <span class='kw'>header</span> <span class='kw'>=</span> <span class='st'>"Line 1: _________\nLine 2:\nLine 3:....................."</span>
+<span class='fu'>map_tag</span>(<span class='no'>vft1_rnm</span>, <span class='kw'>title_quad</span> <span class='kw'>=</span> <span class='st'>"BCI 2012"</span>,
+  <span class='kw'>header</span> <span class='kw'>=</span> <span class='st'>"Line 1: _________\nLine 2:\nLine 3:....................."</span>
 )[<span class='fl'>1</span>]
 
-<span class='co'># Maybe easier</span>
-<span class='no'>your_header</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='get_header.html'>get_header</a></span>(
-  <span class='kw'>line1</span> <span class='kw'>=</span> <span class='st'>"Your header-line 1: _____________________________"</span>,
-  <span class='kw'>line2</span> <span class='kw'>=</span> <span class='st'>"Your header-line 3: _____________________________"</span>,
-  <span class='kw'>line3</span> <span class='kw'>=</span> <span class='st'>"Your header-line 2: _____________________________"</span>
-)
-<span class='fu'>map_tag</span>(<span class='no'>vft1_rnm</span>, <span class='kw'>site_name</span> <span class='kw'>=</span> <span class='st'>"BCI 2012"</span>, <span class='kw'>header</span> <span class='kw'>=</span> <span class='no'>your_header</span>)[<span class='fl'>1</span>]
+<span class='co'># Or use a pre-made header</span>
+<span class='fu'>map_tag</span>(<span class='no'>vft1_rnm</span>, <span class='kw'>title_quad</span> <span class='kw'>=</span> <span class='st'>"BCI 2012"</span>, <span class='kw'>header</span> <span class='kw'>=</span> <span class='fu'><a href='headers.html'>map_tag_header</a></span>())[<span class='fl'>1</span>]
 
-<span class='co'># Custom theme: using a pre-made theme</span>
-<span class='co'># Allow using pre-made themes (e.g. ggplot2::theme_bw()) and building custom</span>
-<span class='co'># themes (with ggplot::theme()).</span>
+<span class='co'># Themes</span>
+
+<span class='co'># Using a pre-made theme from ggplot2</span>
 <span class='fu'>library</span>(<span class='no'>ggplot2</span>)
+<span class='fu'>map_tag</span>(<span class='no'>vft1_rnm</span>, <span class='kw'>title_quad</span> <span class='kw'>=</span> <span class='st'>"BCI 2012"</span>, <span class='kw'>theme</span> <span class='kw'>=</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/ggtheme'>theme_gray</a></span>())[<span class='fl'>1</span>]
 
-<span class='fu'>map_tag</span>(<span class='no'>vft1_rnm</span>, <span class='kw'>site_name</span> <span class='kw'>=</span> <span class='st'>"BCI 2012"</span>, <span class='kw'>theme</span> <span class='kw'>=</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/ggtheme'>theme_gray</a></span>())[<span class='fl'>1</span>]
+<span class='co'># Customizing the default theme of map_tag()</span>
+<span class='no'>theme_small_change</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='themes.html'>theme_map_tag</a></span>(<span class='kw'>legend.position</span> <span class='kw'>=</span> <span class='st'>"bottom"</span>)
+<span class='fu'>map_tag</span>(<span class='no'>vft1_rnm</span>, <span class='kw'>title_quad</span> <span class='kw'>=</span> <span class='st'>"BCI 2012"</span>, <span class='kw'>theme</span> <span class='kw'>=</span> <span class='no'>theme_small_change</span>)[<span class='fl'>1</span>]
 
-<span class='co'># Custom theme: using a pre-made theme</span>
-<span class='co'># An extreeme example to show that themes are extreemely flexible</span>
-<span class='no'>your_theme</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/theme'>theme</a></span>(
+<span class='co'># Customizing the default theme extreemely, to show flexibility</span>
+<span class='no'>theme_extreeme_change</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/theme'>theme</a></span>(
   <span class='kw'>legend.position</span> <span class='kw'>=</span> <span class='st'>"bottom"</span>,
   <span class='kw'>legend.title</span> <span class='kw'>=</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/element'>element_blank</a></span>(),
   <span class='kw'>legend.text</span> <span class='kw'>=</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/element'>element_text</a></span>(<span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>8</span>, <span class='kw'>colour</span> <span class='kw'>=</span> <span class='st'>"red"</span>),
@@ -283,7 +281,7 @@ the algorithm to calculate subquadrats.</p>
   <span class='kw'>panel.grid.minor</span> <span class='kw'>=</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/element'>element_line</a></span>(<span class='kw'>colour</span> <span class='kw'>=</span> <span class='st'>"black"</span>, <span class='kw'>linetype</span> <span class='kw'>=</span> <span class='st'>"dotted"</span>),
   <span class='kw'>panel.grid.major</span> <span class='kw'>=</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/element'>element_line</a></span>(<span class='kw'>colour</span> <span class='kw'>=</span> <span class='st'>"black"</span>)
 )
-<span class='fu'>map_tag</span>(<span class='no'>vft1_rnm</span>, <span class='kw'>site_name</span> <span class='kw'>=</span> <span class='st'>"BCI 2012"</span>, <span class='kw'>theme</span> <span class='kw'>=</span> <span class='no'>your_theme</span>)[<span class='fl'>1</span>]
+<span class='fu'>map_tag</span>(<span class='no'>vft1_rnm</span>, <span class='kw'>title_quad</span> <span class='kw'>=</span> <span class='st'>"BCI 2012"</span>, <span class='kw'>theme</span> <span class='kw'>=</span> <span class='no'>theme_extreeme_change</span>)[<span class='fl'>1</span>]
 
 <span class='co'># Adapting the dimensions of quadrat and subquadrat to the range of qx and qy</span>
 <span class='co'># Creating new data set with qx and qy ranging 0-100</span>
