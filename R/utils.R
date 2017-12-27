@@ -1,4 +1,4 @@
-# Functions to filter dataframes. -----------------------------------------
+# functions to filter dataframes. -----------------------------------------
 
 #' Filter a data set by matching n values from the head (or tail) of a variable.
 #'
@@ -15,7 +15,7 @@
 #'
 #' @return A filtered version of the input dataset.
 #' @export
-#' @family Functions to filter dataframes.
+#' @family functions to filter dataframes.
 #'
 #' @examples
 #' df <- data.frame(x = 1:9, y = letters[1:3], stringsAsFactors = FALSE)
@@ -60,7 +60,7 @@ top <- function(.data, var, n = 1) {
 #'     * With the rows removed of trees found dead on both the last and previous
 #'       last censuses.
 #' @export
-#' @family Functions to filter dataframes.
+#' @family functions to filter dataframes.
 #'
 #' @examples
 #' vft <- tibble::tribble(
@@ -166,7 +166,7 @@ check_add_status_tree <- function(x) {
 
 
 
-# Functions for developers ------------------------------------------------
+# functions for developers ------------------------------------------------
 
 #' Test if an object exists in the namespace of a package.
 #'
@@ -178,7 +178,7 @@ check_add_status_tree <- function(x) {
 #'
 #' @return Logical.
 #' @export
-#' @family Functions for developers.
+#' @family functions for developers.
 #' @examples
 #' library(map)
 #' exists_in_pkg("one_quadrat", "map")
@@ -188,15 +188,15 @@ exists_in_pkg <- function(object, package){
 
 
 
-# Functions to check inputs -----------------------------------------------
+# functions to check inputs -----------------------------------------------
 
 #' Check if an object contains specific names.
 #'
 #' @param x A named object.
 #' @param nms String; names expected to be found in `x`.
 #'
-#' @family Functions to check inputs.
-#' @family Functions for developers.
+#' @family functions to check inputs.
+#' @family functions for developers.
 #' @return Invisible `x`, or an error with informative message.
 #' @export
 #'
@@ -234,8 +234,8 @@ check_crucial_names <- function(x, nms) {
 #' @param msg String; a custom message.
 #'
 #' @return Invisible `v` or a condition and a message.
-#' @family Functions to check inputs.
-#' @family Functions for developers.
+#' @family functions to check inputs.
+#' @family functions for developers.
 #' @export
 #'
 #' @examples
