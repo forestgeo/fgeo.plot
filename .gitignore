@@ -15,7 +15,15 @@ README.html
 rsconnect
 
 docs/articles/map_tag_cache
+<<<<<<< HEAD
 docs/articles/map_quad_cache
+=======
+docs/articles/map_tag_files
+
+docs/articles/map_quad_cache
+docs/articles/map_quad_files
+
+>>>>>>> d048996f280055c6c408157edc9b962d4047d16a
 docs/articles/map_sp_cache
 
 docs/articles/map_tag_files
