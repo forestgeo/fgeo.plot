@@ -60,21 +60,14 @@ reference:
       - add_subquadrat
       - matches("header")
       - tag_dead
-      - matches("theme")
+      - starts_with("theme")
 
   - title: "Datasets"
     contents:
       - datasets
-      - one_quadrat
       - four_quadrats
+      - one_quadrat
 
-  - title: "Utils"
-    contents:
-      - add_status_tree
-      - starts_with("check_")
-      - exists_in_pkg
-      - rm_dead_twice
-      - top
 
 
 articles:

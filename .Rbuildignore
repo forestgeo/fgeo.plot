@@ -21,3 +21,4 @@
 ^vignettes/map_tag_cache$
 ^inst/figures$
 ^man-roxygen$
+^docs$

@@ -12,27 +12,27 @@ BugReports: https://github.com/forestgeo/map/issues
 Depends: 
     R (>= 3.1.2)
 Imports: 
+    bciex,
+    directlabels,
     dplyr,
+    fgeo.utils,
     ggplot2,
     ggrepel,
-    rlang,
-    stats,
-    directlabels,
     grDevices,
-    bciex,
-    fgeo.utils
+    rlang,
+    stats
 Suggests: 
     covr,
     gridExtra,
     knitr,
+    purrr,
     rmarkdown,
     testthat,
-    tibble,
-    purrr
+    tibble
 VignetteBuilder: knitr
 Encoding: UTF-8
 LazyData: true
-Roxygen: list(markdown = TRUE)
-RoxygenNote: 6.0.1
 Remotes: forestgeo/bciex,
     forestgeo/fgeo.utils
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 6.0.1
