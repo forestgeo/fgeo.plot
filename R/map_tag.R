@@ -143,7 +143,7 @@ map_tag <- function(vft,
   crucial_vars <- c(
     "tag", "qx", "qy", "status", "quadratname", "plotcensusnumber", "plotid"
   )
-  check_crucial_names(vft_lower_nms, crucial_vars)
+  fgeo.utils::check_crucial_names(vft_lower_nms, crucial_vars)
   check_unique_plotid(vft_lower_nms)
   check_subquadrat_dimensions(
     df = vft_lower_nms, x_q = x_q, y_q = y_q, x_sq = x_sq, y_sq = y_sq
@@ -202,7 +202,7 @@ map_tag <- function(vft,
 add_subquadrat <- function(df, x_q, y_q = x_q, x_sq, y_sq = x_sq) {
   message("Lowering names case")
   df <- stats::setNames(df, tolower(names(df)))
-  check_crucial_names(df, c("qx", "qy"))
+  fgeo.utils::check_crucial_names(df, c("qx", "qy"))
   check_subquadrat_dimensions(
     df = df, x_q = x_q, y_q = y_q, x_sq = x_sq, y_sq = y_sq
   )
@@ -272,7 +272,7 @@ check_subquadrat_dimensions <- function(df,
 add_status_tree_page_x1_x2_y1_y2_split_quad_id <- function(with_subquadrat,
                                                            quad_size,
                                                            extend_grid) {
-    with_status_tree <- add_status_tree(with_subquadrat)
+    with_status_tree <- fgeo.utils::add_status_tree(with_subquadrat)
     paginated <- dplyr::ungroup(  # restore flat data
       paginate(dplyr::group_by(with_status_tree, .data$quadratname))
     )

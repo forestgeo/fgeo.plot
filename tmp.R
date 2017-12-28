@@ -1,36 +1,43 @@
 
 # Dev ---------------------------------------------------------------------
 
-### Infrastructure
+library(devtools)
 
-#### Travis
+# create("pkg")
+use_git()
+use_github()
 
-* Activate travis at https://github.com/forestgeo/<PKG>/settings/installations
-* Run use_travis()
-* Paste badge in readme
-* Turn on travis for your repo at https://travis-ci.org/forestgeo/map
-* If necessary, update badge by clicking on badge (on Travis) and get markdown link
+library(devtools)
 
+use_gpl3_license()
 
-#### codecov
+use_github_links()
 
-* Add repo to codecov at https://codecov.io/gh/forestgeo
+use_roxygen_md()
 
-#### pkgdown
+use_package_doc()
 
-* Use/update snippet pkgdown
+use_readme_rmd()
+# then
+# * Shortly describe pkg name
+# * Next to short description paste code of snippet logo
+# * paste badges under
+use_travis()
+# then at https://travis-ci.org/profile/forestgeo sync, search and activate pkg
+use_coverage("coveralls")
+# then at https://coveralls.io/repos/new sync, search and activate pkg
+use_cran_badge()
 
-#### README
+use_news_md()
 
-* use_readme_rmd()
-* follow model README
-* https://github.com/forestgeo/fgeo/blob/master/README.Rmd
-* https://github.com/forestgeo/map/blob/master/README.Rmd
-* Use/update snippet logo
-* use badges
-* travis
-* codecov
-* cran
+* Use/update snippet pkgdown. Save as `./_pkgdown.yml`
+
+DESCRIPTION
+
+Authors@R: use snippet author
+
+Depends:
+  R (>= 3.1.2)
 
 ### Adding a new package to fgeo
 
@@ -54,6 +61,8 @@
 # map_quad() -------------------------------------------------------------
 
 library(dplyr)
+library(fgeo.utils)
+
 p <- map_quad(one_quadrat)
 dplyr::first(p)
 

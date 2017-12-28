@@ -14,6 +14,7 @@
 #'
 #' @examples
 #' library(dplyr)
+#' library(fgeo.utils)
 #'
 #' # Fixing wrong names
 #' vft <- rename(bciex::bci12vft_mini, QX = x, QY = y)
@@ -21,7 +22,7 @@
 #' # Filter the data you want. For example:
 #'
 #' # Filtering trees of diameter greater than 10 cm from the last census of plot 1
-#' # (see also ?rm_dead_twice)
+#' # (see also ?fgeo.utils::rm_dead_twice)
 #' want <- dplyr::filter(
 #'   vft,
 #'   DBH > 10,
@@ -148,9 +149,21 @@ check_map_quad <- function(vft,
   arg_theme_has_class_theme <- any(grepl("theme", class(theme)))
   stopifnot(arg_theme_has_class_theme)
   stopifnot(is.character(title_quad), is.character(header))
-  check_crucial_names(vft, core)
+  fgeo.utils::check_crucial_names(vft, core)
   check_unique_plotid(vft)
   check_unique_plotcensusnumber(vft)
+}
+
+check_unique_plotid <- function(x) {
+  msg <- "  * Filter your data to keep a single plot; then try again"
+  fgeo.utils::check_unique(x, "plotid", "stop", msg)
+  invisible(x)
+}
+
+check_unique_plotcensusnumber <- function(x) {
+  msg <- "  * Likely you should have filtered only the last `plotcensusnumber`"
+  fgeo.utils::check_unique(x, "plotcensusnumber", "warning", msg)
+  invisible(x)
 }
 
 map_quad_each <- function(.df,
@@ -187,8 +200,6 @@ map_quad_each <- function(.df,
     scale_y_continuous(breaks = lim_min:lim_max, sec.axis = dup_axis()) +
     theme
 }
-
-# Helpers -----------------------------------------------------------------
 
 #' Add the ending ".d" to the `Tag` of dead stems.
 #'

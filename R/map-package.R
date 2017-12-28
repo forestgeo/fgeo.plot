@@ -1,6 +1,5 @@
 #' @keywords internal
 #' @import ggplot2
-#' @importFrom rlang .data enquo
 #' @importFrom utils head tail
 #' @importFrom ggrepel geom_text_repel
 "_PACKAGE"

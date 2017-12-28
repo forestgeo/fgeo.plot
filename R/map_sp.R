@@ -167,7 +167,7 @@ check_map_sp <- function(census, species, xlim, ylim) {
   stopifnot(is.data.frame(census))
   stopifnot(is.character(species))
   if (length(species) == 0) {stop("The vector `sp` is empty.")}
-  check_crucial_names(census, c("gx", "gy", "sp"))
+  fgeo.utils::check_crucial_names(census, c("gx", "gy", "sp"))
 }
 
 #' @noRd
@@ -222,7 +222,7 @@ add_elevation <- function(ggplot,
   stopifnot(base_plot_is_class_ggplot)
   elevation_is_dataframe <- any(grepl("data.frame", class(elevation)))
   stopifnot(elevation_is_dataframe)
-  check_crucial_names(elevation, c("gx", "gy", "elev"))
+  fgeo.utils::check_crucial_names(elevation, c("gx", "gy", "elev"))
 
   p <- ggplot +
     stat_contour(data = elevation,

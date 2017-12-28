@@ -19,7 +19,8 @@ Imports:
     stats,
     directlabels,
     grDevices,
-    bciex
+    bciex,
+    fgeo.utils
 Suggests: 
     covr,
     gridExtra,

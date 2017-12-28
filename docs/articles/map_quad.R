@@ -10,7 +10,7 @@ knitr::opts_chunk$set(
   cache = TRUE,
   out.width = "98%",
   fig.align = "center",
-  fig.width = 7.5, 
+  fig.width = 7.5,
   fig.asp = 0.9,
   fig.show = "hold"
 )
@@ -26,7 +26,7 @@ vft <- rename(bciex::bci12vft_mini, QX = x, QY = y)
 # Filter the data you want. For example:
 
 # Filtering trees of diameter greater than 10 cm from the last census of plot 1
-# (see also ?rm_dead_twice)
+# (see also ?fgeo.utils::rm_dead_twice)
 want <- dplyr::filter(
   vft,
   DBH > 10,
@@ -70,7 +70,7 @@ map_quad(one_quad, title_quad = "My Site, 2018. Quad:", header = myheader)
 library(ggplot2)
 
 map_quad(
-  one_quad, 
+  one_quad,
   title_quad = "My Site, 2018. Quad:",
   header = map_quad_header("spanish"),
   tag_size = 3,

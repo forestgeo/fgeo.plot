@@ -1,7 +1,7 @@
 context("four_quadrat")
 
 test_that("exists", {
-  expect_true(exists_in_pkg("four_quadrats", "map"))
+  expect_true(fgeo.utils::exists_in_pkg("four_quadrats", "map"))
 })
 
 test_that("remains unchanged", {
@@ -9,7 +9,7 @@ test_that("remains unchanged", {
 })
 
 test_that("exists", {
-  expect_true(exists_in_pkg("one_quadrat", "map"))
+  expect_true(fgeo.utils::exists_in_pkg("one_quadrat", "map"))
 })
 
 test_that("remains unchanged", {

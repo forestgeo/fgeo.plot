@@ -35,6 +35,7 @@ Map trees within a quadrat.
 }
 \examples{
 library(dplyr)
+library(fgeo.utils)
 
 # Fixing wrong names
 vft <- rename(bciex::bci12vft_mini, QX = x, QY = y)
@@ -42,7 +43,7 @@ vft <- rename(bciex::bci12vft_mini, QX = x, QY = y)
 # Filter the data you want. For example:
 
 # Filtering trees of diameter greater than 10 cm from the last census of plot 1
-# (see also ?rm_dead_twice)
+# (see also ?fgeo.utils::rm_dead_twice)
 want <- dplyr::filter(
   vft,
   DBH > 10,

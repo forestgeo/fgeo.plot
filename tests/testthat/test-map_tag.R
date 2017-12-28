@@ -1,7 +1,7 @@
-library(rlang)
 library(dplyr)
 library(purrr)
 library(gridExtra)
+library(fgeo.utils)
 
 # Minimal data
 
@@ -136,7 +136,7 @@ context("test-add_subquadrat")
 lower_names_then_check <- function(x, nms) {
   # check names
   x <- setNames(vft, tolower(names(vft)))
-  check_crucial_names(x, nms)
+  fgeo.utils::check_crucial_names(x, nms)
   x
 }
 
