@@ -1,6 +1,5 @@
 #' @keywords internal
 #' @import ggplot2
-#' @importFrom utils head tail
 #' @importFrom ggrepel geom_text_repel
 "_PACKAGE"
 
