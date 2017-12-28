@@ -120,29 +120,37 @@
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'>library</span>(<span class='no'>tibble</span>)
 <span class='no'>one_quadrat</span></div><div class='output co'>#&gt; # A tibble: 143 x 28
-#&gt;   MeasureID PlotID  Plot        Family            GenusSpecies         Genus
-#&gt;       &lt;int&gt;  &lt;int&gt; &lt;chr&gt;         &lt;chr&gt;                   &lt;chr&gt;         &lt;chr&gt;
-#&gt; 1         1      1   bci Lecythidaceae        Gustavia superba      Gustavia
-#&gt; 2         2      1   bci Myristicaceae     Virola surinamensis        Virola
-#&gt; 3         3      1   bci     Malvaceae  Quararibea asterolepis    Quararibea
-#&gt; 4      8501      1   bci   Burseraceae    Trattinnickia aspera Trattinnickia
-#&gt; 5     11627      1   bci  Bignoniaceae        Jacaranda copaia     Jacaranda
-#&gt; 6     11628      1   bci    Sapotaceae Chrysophyllum argenteum Chrysophyllum
-#&gt; # ... with 137 more rows, and 22 more variables: SpeciesName &lt;chr&gt;,
-#&gt; #   SubSpeciesName &lt;chr&gt;, SpeciesID &lt;int&gt;, Mnemonic &lt;chr&gt;, QuadratID &lt;int&gt;,
-#&gt; #   QuadratName &lt;chr&gt;, QX &lt;dbl&gt;, QY &lt;dbl&gt;, gx &lt;dbl&gt;, gy &lt;dbl&gt;, TreeID &lt;int&gt;,
-#&gt; #   Tag &lt;chr&gt;, StemID &lt;int&gt;, StemTag &lt;chr&gt;, PrimaryStem &lt;chr&gt;, CensusID &lt;int&gt;,
-#&gt; #   PlotCensusNumber &lt;int&gt;, DBH &lt;int&gt;, HOM &lt;dbl&gt;, ExactDate &lt;date&gt;,
-#&gt; #   ListOfTSM &lt;chr&gt;, Status &lt;chr&gt;</div><div class='input'><span class='no'>four_quadrats</span></div><div class='output co'>#&gt; # A tibble: 696 x 28
-#&gt;   MeasureID PlotID  Plot        Family           GenusSpecies      Genus
-#&gt;       &lt;int&gt;  &lt;int&gt; &lt;chr&gt;         &lt;chr&gt;                  &lt;chr&gt;      &lt;chr&gt;
-#&gt; 1         1      1   bci Lecythidaceae       Gustavia superba   Gustavia
-#&gt; 2         2      1   bci Myristicaceae    Virola surinamensis     Virola
-#&gt; 3         3      1   bci     Malvaceae Quararibea asterolepis Quararibea
-#&gt; 4         4      1   bci   Burseraceae    Protium tenuifolium    Protium
-#&gt; 5         5      1   bci      Moraceae    Brosimum alicastrum   Brosimum
-#&gt; 6         7      1   bci     Malvaceae Quararibea asterolepis Quararibea
-#&gt; # ... with 690 more rows, and 22 more variables: SpeciesName &lt;chr&gt;,
+#&gt;    MeasureID PlotID  Plot           Family            GenusSpecies
+#&gt;        &lt;int&gt;  &lt;int&gt; &lt;chr&gt;            &lt;chr&gt;                   &lt;chr&gt;
+#&gt;  1         1      1   bci    Lecythidaceae        Gustavia superba
+#&gt;  2         2      1   bci    Myristicaceae     Virola surinamensis
+#&gt;  3         3      1   bci        Malvaceae  Quararibea asterolepis
+#&gt;  4      8501      1   bci      Burseraceae    Trattinnickia aspera
+#&gt;  5     11627      1   bci     Bignoniaceae        Jacaranda copaia
+#&gt;  6     11628      1   bci       Sapotaceae Chrysophyllum argenteum
+#&gt;  7     11630      1   bci        Violaceae   Hybanthus prunifolius
+#&gt;  8     11632      1   bci        Violaceae   Hybanthus prunifolius
+#&gt;  9     11633      1   bci       Salicaceae          Laetia thamnia
+#&gt; 10     11635      1   bci Chrysobalanaceae       Hirtella triandra
+#&gt; # ... with 133 more rows, and 23 more variables: Genus &lt;chr&gt;,
+#&gt; #   SpeciesName &lt;chr&gt;, SubSpeciesName &lt;chr&gt;, SpeciesID &lt;int&gt;, Mnemonic &lt;chr&gt;,
+#&gt; #   QuadratID &lt;int&gt;, QuadratName &lt;chr&gt;, QX &lt;dbl&gt;, QY &lt;dbl&gt;, gx &lt;dbl&gt;, gy &lt;dbl&gt;,
+#&gt; #   TreeID &lt;int&gt;, Tag &lt;chr&gt;, StemID &lt;int&gt;, StemTag &lt;chr&gt;, PrimaryStem &lt;chr&gt;,
+#&gt; #   CensusID &lt;int&gt;, PlotCensusNumber &lt;int&gt;, DBH &lt;int&gt;, HOM &lt;dbl&gt;,
+#&gt; #   ExactDate &lt;date&gt;, ListOfTSM &lt;chr&gt;, Status &lt;chr&gt;</div><div class='input'><span class='no'>four_quadrats</span></div><div class='output co'>#&gt; # A tibble: 696 x 28
+#&gt;    MeasureID PlotID  Plot        Family           GenusSpecies      Genus
+#&gt;        &lt;int&gt;  &lt;int&gt; &lt;chr&gt;         &lt;chr&gt;                  &lt;chr&gt;      &lt;chr&gt;
+#&gt;  1         1      1   bci Lecythidaceae       Gustavia superba   Gustavia
+#&gt;  2         2      1   bci Myristicaceae    Virola surinamensis     Virola
+#&gt;  3         3      1   bci     Malvaceae Quararibea asterolepis Quararibea
+#&gt;  4         4      1   bci   Burseraceae    Protium tenuifolium    Protium
+#&gt;  5         5      1   bci      Moraceae    Brosimum alicastrum   Brosimum
+#&gt;  6         7      1   bci     Malvaceae Quararibea asterolepis Quararibea
+#&gt;  7         8      1   bci     Malvaceae Quararibea asterolepis Quararibea
+#&gt;  8        11      1   bci Anacardiaceae    Anacardium excelsum Anacardium
+#&gt;  9        12      1   bci     Meliaceae  Trichilia tuberculata  Trichilia
+#&gt; 10        13      1   bci      Moraceae       Poulsenia armata  Poulsenia
+#&gt; # ... with 686 more rows, and 22 more variables: SpeciesName &lt;chr&gt;,
 #&gt; #   SubSpeciesName &lt;chr&gt;, SpeciesID &lt;int&gt;, Mnemonic &lt;chr&gt;, QuadratID &lt;int&gt;,
 #&gt; #   QuadratName &lt;chr&gt;, QX &lt;dbl&gt;, QY &lt;dbl&gt;, gx &lt;dbl&gt;, gy &lt;dbl&gt;, TreeID &lt;int&gt;,
 #&gt; #   Tag &lt;chr&gt;, StemID &lt;int&gt;, StemTag &lt;chr&gt;, PrimaryStem &lt;chr&gt;, CensusID &lt;int&gt;,

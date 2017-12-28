@@ -81,7 +81,7 @@
       <h1>Mapping Latest Tree-Status in Subquadrats</h1>
                         <h4 class="author">Mauro Lepore</h4>
             
-            <h4 class="date">2017-12-27</h4>
+            <h4 class="date">2017-12-28</h4>
           </div>
 
     
@@ -209,7 +209,7 @@ bci_vft &lt;-<span class="st"> </span><span class="kw">as_tibble</span>(bciex<sp
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Fails</span>
 <span class="kw"><a href="../reference/map_tag.html">map_tag</a></span>(bci_vft1)
 <span class="co">#&gt; Error: Ensure your data set has these variables (regardles of the case):</span>
-<span class="co">#&gt; tag, qx, qy, status, quadratname, censusid, plotid</span></code></pre></div>
+<span class="co">#&gt; tag, qx, qy, status, quadratname, plotcensusnumber, plotid</span></code></pre></div>
 <p>Reading the error message will help you identify which variables you need to rename.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bci_vft1_rnm &lt;-<span class="st"> </span>dplyr<span class="op">::</span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/select.html">rename</a></span>(bci_vft1, <span class="dt">qx =</span> x, <span class="dt">qy =</span> y)
 <span class="co"># Using lowercase names for simiplicity</span>
@@ -433,16 +433,16 @@ data_combined &lt;-<span class="st"> </span>purrr<span class="op">::</span><span
   subquadrat, qx, qy, <span class="kw">everything</span>()
 )
 <span class="co">#&gt; # A tibble: 2,018 x 15</span>
-<span class="co">#&gt;   subquadrat    qx    qy    tag status censusid plotid status_tree  page</span>
-<span class="co">#&gt;        &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;chr&gt;  &lt;chr&gt;    &lt;int&gt;  &lt;int&gt;       &lt;chr&gt; &lt;dbl&gt;</span>
-<span class="co">#&gt; 1         11   2.7   1.7 124872   dead      171      1        dead     1</span>
-<span class="co">#&gt; 2         11   0.9   0.2 127645  alive      171      1       alive     1</span>
-<span class="co">#&gt; 3         11   1.1   0.3 127646  alive      171      1       alive     1</span>
-<span class="co">#&gt; 4         11   2.8   1.5 127647  alive      171      1       alive     1</span>
-<span class="co">#&gt; 5         11   4.3   0.2 127649   dead      171      1        dead     1</span>
-<span class="co">#&gt; 6         11   4.9   0.7 127651  alive      171      1       alive     1</span>
-<span class="co">#&gt; # ... with 2,012 more rows, and 6 more variables: x1 &lt;dbl&gt;, x2 &lt;dbl&gt;,</span>
-<span class="co">#&gt; #   y1 &lt;dbl&gt;, y2 &lt;dbl&gt;, split &lt;chr&gt;, quad_id &lt;chr&gt;</span></code></pre></div>
+<span class="co">#&gt;   subquadrat    qx    qy    tag status plotcensusnumber plotid status_tree</span>
+<span class="co">#&gt;        &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;chr&gt;  &lt;chr&gt;            &lt;int&gt;  &lt;int&gt;       &lt;chr&gt;</span>
+<span class="co">#&gt; 1         11   2.7   1.7 124872   dead                7      1        dead</span>
+<span class="co">#&gt; 2         11   0.9   0.2 127645  alive                7      1       alive</span>
+<span class="co">#&gt; 3         11   1.1   0.3 127646  alive                7      1       alive</span>
+<span class="co">#&gt; 4         11   2.8   1.5 127647  alive                7      1       alive</span>
+<span class="co">#&gt; 5         11   4.3   0.2 127649   dead                7      1        dead</span>
+<span class="co">#&gt; 6         11   4.9   0.7 127651  alive                7      1       alive</span>
+<span class="co">#&gt; # ... with 2,012 more rows, and 7 more variables: page &lt;dbl&gt;, x1 &lt;dbl&gt;,</span>
+<span class="co">#&gt; #   x2 &lt;dbl&gt;, y1 &lt;dbl&gt;, y2 &lt;dbl&gt;, split &lt;chr&gt;, quad_id &lt;chr&gt;</span></code></pre></div>
 </div>
 <div id="acknowledgements" class="section level1">
 <h1 class="hasAnchor">

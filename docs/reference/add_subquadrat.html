@@ -137,15 +137,19 @@ common value is 5.</p></td>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='no'>vft</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='http://dplyr.tidyverse.org/reference/select.html'>rename</a></span>(<span class='kw pkg'>bciex</span><span class='kw ns'>::</span><span class='no'><a href='http://www.rdocumentation.org/packages/bciex/topics/bci12vft_mini'>bci12vft_mini</a></span>, <span class='kw'>QX</span> <span class='kw'>=</span> <span class='no'>x</span>, <span class='kw'>QY</span> <span class='kw'>=</span> <span class='no'>y</span>)
 <span class='no'>with_subquadrat</span> <span class='kw'>&lt;-</span> <span class='fu'>add_subquadrat</span>(<span class='no'>vft</span>, <span class='fl'>20</span>, <span class='fl'>20</span>, <span class='fl'>5</span>, <span class='fl'>5</span>)</div><div class='output co'>#&gt; <span class='message'>Lowering names case</span></div><div class='input'><span class='no'>with_subquadrat</span>[<span class='fu'>c</span>(<span class='st'>"subquadrat"</span>, <span class='st'>"qx"</span>, <span class='st'>"qy"</span>)]</div><div class='output co'>#&gt; # A tibble: 4,374 x 3
-#&gt;   subquadrat    qx    qy
-#&gt;        &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;
-#&gt; 1         32  14.1   8.3
-#&gt; 2         32  10.5   8.9
-#&gt; 3         34  13.5  18.3
-#&gt; 4         32  12.7   9.3
-#&gt; 5         13   1.9  13.5
-#&gt; 6         14   3.7  16.5
-#&gt; # ... with 4,368 more rows</div></pre>
+#&gt;    subquadrat    qx    qy
+#&gt;         &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;
+#&gt;  1         32  14.1   8.3
+#&gt;  2         32  10.5   8.9
+#&gt;  3         34  13.5  18.3
+#&gt;  4         32  12.7   9.3
+#&gt;  5         13   1.9  13.5
+#&gt;  6         14   3.7  16.5
+#&gt;  7         13   3.0  12.6
+#&gt;  8         13   3.0  12.6
+#&gt;  9         42  15.5   7.4
+#&gt; 10         21   5.9   2.5
+#&gt; # ... with 4,364 more rows</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
