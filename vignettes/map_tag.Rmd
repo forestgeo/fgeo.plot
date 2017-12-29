@@ -15,6 +15,7 @@ vignette: >
 ```{r pkg-hide, echo = FALSE, message=FALSE, warning=FALSE}
 # install_github("forestgeo/map")
 library(map)
+library(fgeo.utils)
 library(dplyr)
 
 # Print only a few rows of data framed to save time and space
@@ -99,9 +100,9 @@ OK, that was the bad news -- `map_tag()` won't let you change the values of the 
 
 # Preparation: Packages and Data
 
-The packages you will use are __map__, __ggplot2__ and __dplyr__. __map__ contains the function `map_tag()`, and __ggplot2__ and __dplyr__ provide powerful tools for vizualizing and wrangling data. (These packages are part of the tidyverse (https://www.tidyverse.org/) -- a collection of R packages designed for data science. All packages share an underlying philosophy and common APIs.)
+The packages you will use are __map__, __fgeo.utils__, __ggplot2__ and __dplyr__. __map__ contains the function `map_tag()`;  __fgeo.utils__ contains utility functions; and __ggplot2__ and __dplyr__ provide powerful tools for vizualizing and wrangling data. (These packages are part of the tidyverse (https://www.tidyverse.org/) -- a collection of R packages designed for data science. All packages share an underlying philosophy and common APIs.)
 
-```{r sho-chunk-that-was-hidden-above}
+```{r show-chunk-that-was-hidden-above}
 <<pkg-hide>>
 ```
 
@@ -292,12 +293,12 @@ smaller$qy <- sample(0:10, n, replace = TRUE)
 map_tag(smaller, x_q = 10, x_sq = 2.5, extend_grid = 0.25)[1]
 ```
 
-# Calling `add_subquadrat()` Directly
+# Calling `fgeo.utils::add_subquad()` Directly
 
-If you want to only calculate the variable `subquadrat`, you don't need to use `map_tag()` -- can directly call `add_subquadrat()`.
+If you want to only calculate the variable `subquadrat`, you don't need to use `map_tag()` -- can directly call `fgeo.utils::add_subquad()`.
 
 ```{r}
-with_subquadrat <- add_subquadrat(bci_vft1_rnm, x_q = 20, x_sq = 5)
+with_subquadrat <- fgeo.utils::add_subquad(bci_vft1_rnm, x_q = 20, x_sq = 5)
 select(
   with_subquadrat, 
   # reorder variables to show first what's new 
@@ -319,4 +320,4 @@ select(
 
 # Acknowledgements
 
-I thank for ideas and guidance to Suzanne Lao, Stuart Davis, Shameema Jafferjee Esufa, David Kenfack and Anudeep Singh. Andudeep also wrote the algorithm of `add_subquadrat()` (which I translated from SQL to R).
+I thank for ideas and guidance to Suzanne Lao, Stuart Davis, Shameema Jafferjee Esufa, David Kenfack and Anudeep Singh. Andudeep also wrote the algorithm of `fgeo.utils::add_subquad()` (which I translated from SQL to R).

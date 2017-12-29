@@ -131,51 +131,14 @@ test_that("outputs a ggplot", {
 
 
 
-context("test-add_subquadrat")
-
-lower_names_then_check <- function(x, nms) {
-  # check names
-  x <- setNames(vft, tolower(names(vft)))
-  fgeo.utils::check_crucial_names(x, nms)
-  x
-}
-
-# reusing
-vft2 <- lower_names_then_check(vft, nms = c("tag", "qx", "qy", "status"))
-with_sq <- add_subquadrat(df = vft2, 20, 20, 5, 5)
-
-test_that("outputs a dataframe with new expected variable", {
-  expect_named(with_sq, c(names(vft2), "subquadrat"))
-  expect_is(with_sq, "data.frame")
-})
-
-
-
-context("test-check_subquadrat_dimensions")
-
-
-
-
-
-test_that("throws error with wrong inputs to add_subquadrat", {
-  df <- minivft[1:5, c("QX", "QY")]
-  # check that works
-  expect_message(add_subquadrat(df, 20, 20, 5, 5))
-  expect_message(add_subquadrat(df, 40, 50, 5, 5))
-
-  # Fails
-  expect_error(suppressMessages(add_subquadrat(1, 20, 20, 5, 5)))
-  expect_error(suppressMessages(add_subquadrat(df, "a", 20, 5, 5)))
-  expect_error(suppressMessages(add_subquadrat(df, 20, c(20, 20), 5, 5)))
-  expect_error(suppressMessages(add_subquadrat(df, 20, 20, "a", 5)))
-  expect_error(suppressMessages(add_subquadrat(df, 20, 20, 5, c(5, 5))))
-  expect_error(suppressMessages(add_subquadrat(df, -1, 20, 5, 5)))
-  expect_error(suppressMessages(add_subquadrat(df, 20, Inf, 5, 5)))
-})
-
-
-
 context("test-lapply_plot_repulsive_tags")
+
+vft <- bciex::bci12vft_mini %>%
+  rename(QX = x, QY = y) %>%
+  sample_n(10) %>%
+  rlang::set_names(tolower)
+
+with_sq <- vft %>% fgeo.utils::add_subquad(x_q = 20, x_sq = 5)
 
 prep_df <- unique(
   add_status_tree_page_x1_x2_y1_y2_split_quad_id(

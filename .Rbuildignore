@@ -14,7 +14,7 @@
 ^NEWS\.md$
 ^README\.Rmd$
 ^README\.html$
-^README-example-map-1\.png$
+^README-.*\.png$
 ^rsconnect$
 ^tmp\.R$
 ^vignettes/rsconnect$

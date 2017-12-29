@@ -15,14 +15,14 @@ map_tag(vft, x_q = 20, x_sq = 5, y_q = x_q, y_sq = x_sq,
 \item{x_q}{Size in meters of a quadrat's side. For ForestGEO sites, a
 common value is 20.}
 
-\item{x_sq}{Size in meters of a subquadrat's side. For ForestGEO-CTFS sites, a
-common value is 5.}
+\item{x_sq}{Size in meters of a subquadrat's side. For ForestGEO-CTFS
+sites, a common value is 5.}
 
 \item{y_q}{Size in meters of a quadrat's side. For ForestGEO sites, a
 common value is 20.}
 
-\item{y_sq}{Size in meters of a subquadrat's side. For ForestGEO-CTFS sites, a
-common value is 5.}
+\item{y_sq}{Size in meters of a subquadrat's side. For ForestGEO-CTFS
+sites, a common value is 5.}
 
 \item{title_quad}{A string to use as a title.}
 
@@ -161,6 +161,6 @@ map_tag(smaller, x_q = 10, x_sq = 2.5, extend_grid = 0.25)[1]
 }
 \seealso{
 \code{\link[graphics:points]{graphics::points()}}, \code{\link[ggplot2:geom_point]{ggplot2::geom_point()}}, \code{\link[ggplot2:theme]{ggplot2::theme()}}
-\code{\link[=map_tag_header]{map_tag_header()}}, \code{\link[=theme_map_tag]{theme_map_tag()}}, \code{\link[=add_subquadrat]{add_subquadrat()}},
+\code{\link[=map_tag_header]{map_tag_header()}}, \code{\link[=theme_map_tag]{theme_map_tag()}}, \code{\link[fgeo.utils:add_subquad]{fgeo.utils::add_subquad()}},
 \link[ggrepel:geom_text_repel]{ggrepel::geom_text_repel}.
 }

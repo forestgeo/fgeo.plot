@@ -28,10 +28,10 @@
 #' @template header
 #' @template theme
 #' @template extend_grid
-#' @inheritParams add_subquadrat
+#' @inheritParams fgeo.utils::add_subquad
 #'
 #' @seealso [graphics::points()], [ggplot2::geom_point()], [ggplot2::theme()]
-#'   [map_tag_header()], [theme_map_tag()], [add_subquadrat()],
+#'   [map_tag_header()], [theme_map_tag()], [fgeo.utils::add_subquad()],
 #'   [ggrepel::geom_text_repel].
 #'
 #' @section Acknowledgements:
@@ -139,38 +139,25 @@ map_tag <- function(vft,
                     theme = theme_map_tag(),
                     extend_grid = 0) {
   # Lowercase names: avoid errors due to confusing upper- and lower-case
-  vft_lower_nms <- setNames(vft, tolower(names(vft)))
-  crucial_vars <- c(
-    "tag", "qx", "qy", "status", "quadratname", "censusid", "plotid"
-  )
-  fgeo.utils::check_crucial_names(vft_lower_nms, crucial_vars)
-  check_unique_plotid(vft_lower_nms)
-  check_subquadrat_dimensions(
-    df = vft_lower_nms, x_q = x_q, y_q = y_q, x_sq = x_sq, y_sq = y_sq
+  .vft <- setNames(vft, tolower(names(vft)))
+  crucial <- c("tag", "qx", "qy", "status", "quadratname", "censusid", "plotid")
+  fgeo.utils::check_crucial_names(.vft, crucial)
+  check_unique_plotid(.vft)
+  fgeo.utils::check_unique(
+    .vft, "censusid",
+    "warning", "* Likely you should filter only one CensusID and retry."
   )
 
-  # Keep only rows of last census
-  if (length(unique(vft_lower_nms$censusid)) > 1) {
-    warning(
-      "Multiple censuses were detected\n",
-      "  * Filtering only the greatest `CensusID`"
-    )
-  }
-  last_census <- max(unique(vft_lower_nms$censusid))
-  is_last_census <- vft_lower_nms$censusid == last_census
-
-  # Keep only variables that are important
-  subset_with_lower_nms <- vft_lower_nms[is_last_census, crucial_vars]
+  # Reduce size of data: Keep only crucial variables
+  sbst <- .vft[ , crucial]
 
   # Prepare data to plot: add important variables and remove duplicated tags
-  with_subquadrat <- add_sbqd(
-    df = subset_with_lower_nms,
-    x_q = x_q, y_q = y_q, x_sq = x_sq, y_sq = y_sq
+  w_sbqd <- fgeo.utils::add_subquad(
+    sbst, x_q = x_q, y_q = y_q, x_sq = x_sq, y_sq = y_sq
   )
-  with_crucial_vars <- add_status_tree_page_x1_x2_y1_y2_split_quad_id(
-    with_subquadrat, quad_size = x_q, extend_grid = extend_grid
-  )
-  data_to_plot <- unique(with_crucial_vars)
+  prep <- add_status_tree_page_x1_x2_y1_y2_split_quad_id(
+    w_sbqd, quad_size = x_q, extend_grid = extend_grid)
+  data_to_plot <- unique(prep)
 
   # Iterate over each quadrat to produce one map per page (4 subquadrats/page)
   list_of_data_to_plot <- split(data_to_plot, data_to_plot$split)
@@ -181,89 +168,6 @@ map_tag <- function(vft,
     tag_size = tag_size, header = header, theme = theme
   )
   list_of_plots
-}
-
-#' Add a quadrat variable to a dataframe based based on qx and qy coordinates.
-#'
-#' @param df A ViewFullTable dataframe.
-#' @param x_q,y_q Size in meters of a quadrat's side. For ForestGEO sites, a
-#'   common value is 20.
-#' @param x_sq,y_sq Size in meters of a subquadrat's side. For ForestGEO-CTFS sites, a
-#'   common value is 5.
-#' @return A dataframe with the additional variable `subquadrat`.
-#' @author Anudeep Singh.
-#' @export
-#'
-#' @examples
-# Fixing wrong names
-#' vft <- dplyr::rename(bciex::bci12vft_mini, QX = x, QY = y)
-#' with_subquadrat <- add_subquadrat(vft, 20, 20, 5, 5)
-#' with_subquadrat[c("subquadrat", "qx", "qy")]
-add_subquadrat <- function(df, x_q, y_q = x_q, x_sq, y_sq = x_sq) {
-  message("Lowering names case")
-  df <- setNames(df, tolower(names(df)))
-  fgeo.utils::check_crucial_names(df, c("qx", "qy"))
-  check_subquadrat_dimensions(
-    df = df, x_q = x_q, y_q = y_q, x_sq = x_sq, y_sq = y_sq
-  )
-  add_sbqd(df = df, x_q = x_q, y_q = y_q, x_sq = x_sq, y_sq = y_sq)
-}
-
-#' Help map_tag()
-#'
-#' This function is to be called by map_tag(); it has no checks, which saves
-#' checking again and again the data of each quadrat that was checked once at
-#' the start of map_tag(). For using directly, use add_subquadrat()
-#' @noRd
-add_sbqd <- function(df, x_q, y_q, x_sq, y_sq) {
-  # Simplify nested parentheses
-  x_q_mns.1 <- x_q - 0.1
-  y_q_mns.1 <- y_q - 0.1
-
-  # Conditions (odd means that the coordinate goes beyond normal limits)
-  is_odd_both <- df$qx >=  x_q & df$qy >=  y_q
-  is_odd_x <- df$qx >=  x_q
-  is_odd_y <- df$qy >=  y_q
-  is_not_odd <- TRUE
-
-  # Cases
-  with_subquadrat <- dplyr::mutate(df,
-    subquadrat = dplyr::case_when(
-      is_odd_both ~ paste0(
-        (1 + floor((x_q_mns.1 - x_q * floor(x_q_mns.1 / x_q)) / x_sq)),
-        (1 + floor((y_q_mns.1- y_q * floor(y_q_mns.1/ y_q)) / y_sq))
-      ),
-      is_odd_x ~ paste0(
-        (1 + floor((x_q_mns.1 - x_q * floor(x_q_mns.1 / x_q)) / x_sq)),
-        (1 + floor((df$qy - y_q * floor(df$qy/ y_q)) / y_sq))
-      ),
-      is_odd_y ~ paste0(
-        (1 + floor((df$qx - x_q * floor(df$qx/ x_q)) / x_sq)),
-        (1 + floor((y_q_mns.1- y_q * floor(y_q_mns.1 / y_q)) / y_sq))
-      ),
-      is_not_odd ~ paste0(
-        (1 + floor((df$qx - x_q * floor(df$qx/ x_q)) / x_sq)),
-        (1 + floor((df$qy - y_q * floor(df$qy/ y_q)) / y_sq))
-      )
-    )
-  )
-  with_subquadrat
-}
-
-#' Help add_subquadrat()
-#' @noRd
-check_subquadrat_dimensions <- function(df,
-                                        x_q,
-                                        y_q,
-                                        x_sq,
-                                        y_sq) {
-  stopifnot(is.data.frame(df))
-  remaining_args <- list(x_q, y_q, x_sq, y_sq)
-
-  lapply(remaining_args, function(x) stopifnot(is.numeric(x)))
-  lapply(remaining_args, function(x) stopifnot(length(x) == 1))
-  lapply(remaining_args, function(x) stopifnot(all(x >= 0)))
-  lapply(remaining_args, function(x) stopifnot(all(abs(x) != Inf)))
 }
 
 #' Help map_tag()
@@ -453,7 +357,7 @@ plot_repulsive_tags <- function(prep_df,
 #' @noRd
 df_labels <- function(...) {
   pos <- position_labels(...)
-  add_sbqd(df = pos, ...)
+  fgeo.utils::add_subquad(df = pos, ...)
 }
 
 #' Help df_labels()
