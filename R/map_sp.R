@@ -149,7 +149,7 @@ map_sp <- function(census,
                    species,
                    xlim = NULL,
                    ylim = NULL,
-                   theme = ggplot2::theme_bw(),
+                   theme = theme_map_sp(),
                    elevation = NULL,
                    line_size = 0.5,
                    low = "#132B43",
@@ -158,9 +158,28 @@ map_sp <- function(census,
                    ...) {
   check_map_sp(census = census, species = species, xlim = xlim, ylim = ylim)
 
-  p <- lapply(X = species, FUN = map_sp_each, census = census, ...)
-  names(p) <- species
-  p
+  # If plot limits are not given by the user, set limits based on entire dataset
+  if (is.null(xlim)) {xlim <- c(0, max(census$gx, na.rm = TRUE))}
+  if (is.null(ylim)) {ylim <- c(0, max(census$gy, na.rm = TRUE))}
+
+  # Focus on given species
+  cns <- census[census$sp %in% species, ]
+  cns_list <- split(cns, cns$sp)
+  p <- lapply(
+    cns_list,
+    map_sp_each,
+    xlim = xlim,
+    ylim = ylim,
+    theme = theme,
+    elevation =
+      elevation,
+    line_size = line_size,
+    low = low,
+    high = high,
+    bins = bins,
+    ...
+  )
+  setNames(p, sort(species))
 }
 
 check_map_sp <- function(census, species, xlim, ylim) {
@@ -171,33 +190,27 @@ check_map_sp <- function(census, species, xlim, ylim) {
 }
 
 #' @noRd
-map_sp_each <- function(census,
-                       one_sp,
-                       xlim = NULL,
-                       ylim = NULL,
-                       theme = ggplot2::theme_bw(),
-                       elevation = NULL,
-                       line_size = 0.5,
-                       low = "#132B43",
-                       high = "#56B1F7",
-                       bins = NULL,
+map_sp_each <- function(cns,
+                       xlim,
+                       ylim,
+                       theme,
+                       elevation,
+                       line_size,
+                       low,
+                       high,
+                       bins,
                        ...) {
-  if (is.null(xlim)) {xlim <- c(0, max(census$gx, na.rm = TRUE))}
-  if (is.null(ylim)) {ylim <- c(0, max(census$gy, na.rm = TRUE))}
-  filtered_census <- census[census$sp %in% one_sp, ]
-  # p <- map_basic(filtered_census, xlim, ylim, theme = theme, ...)
-  p <- ggplot(filtered_census, aes(gx, gy)) +
+  p <- ggplot(cns, aes(gx, gy)) +
     geom_point(...) +
-    labs(x = NULL, y = NULL, title = unique(census$sp)) +
+    labs(x = NULL, y = NULL, title = unique(cns$sp)) +
     coord_fixed(xlim = xlim, ylim = ylim) +
     scale_x_continuous(minor_breaks = seq(xlim[1], xlim[2], 20)) +
     scale_y_continuous(minor_breaks = seq(ylim[1], ylim[2], 20)) +
-    theme +
-    theme(panel.grid.minor = element_line(linetype = "dashed"))
-
+    theme
   if (!is.null(elevation)) {
-    p <- add_elevation(ggplot = p, elevation = elevation, line_size = line_size,
-      low = low, high = high, bins = bins)
+    p <- add_elevation(
+      p, elev = elev, line_size = line_size, low = low, high = high, bins = bins
+    )
   }
   p
 }
@@ -205,19 +218,19 @@ map_sp_each <- function(census,
 #' Add elevation lines to a ggplot.
 #' @noRd
 add_elevation <- function(ggplot,
-                          elevation,
+                          elev,
                           line_size = 0.5,
                           low = "#132B43",
                           high = "#56B1F7",
                           bins = NULL) {
   base_plot_is_class_ggplot <- any(grepl("ggplot", class(ggplot)))
   stopifnot(base_plot_is_class_ggplot)
-  elevation_is_dataframe <- any(grepl("data.frame", class(elevation)))
+  elevation_is_dataframe <- any(grepl("data.frame", class(elev)))
   stopifnot(elevation_is_dataframe)
-  fgeo.utils::check_crucial_names(elevation, c("gx", "gy", "elev"))
+  fgeo.utils::check_crucial_names(elev, c("gx", "gy", "elev"))
 
   p <- ggplot +
-    stat_contour(data = elevation,
+    stat_contour(data = elev,
       aes(x = gx, y = gy, z = elev, colour = ..level..),
       size = line_size, bins = bins) +
     scale_colour_continuous(low = low, high = high)

@@ -87,7 +87,7 @@ map_quad <- function(vft,
                      subquadrat_side = 5,
                      tag_size = 2,
                      extend_grid = 0) {
-  .vft <- stats::setNames(vft, tolower(names(vft)))
+  .vft <- setNames(vft, tolower(names(vft)))
   core <- c(
     "plotid", "censusid", "tag", "dbh", "status", "quadratname",
     "qx", "qy"
@@ -126,8 +126,7 @@ map_quad <- function(vft,
     theme = theme
   )
   nms <- sort(unique(as.character(crucial$quadratname)))
-  names(p) <- nms
-  p
+  setNames(p, sort(nms))
 }
 
 check_map_quad <- function(vft,

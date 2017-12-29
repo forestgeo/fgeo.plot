@@ -4,9 +4,9 @@
 \alias{map_sp}
 \title{Map the distribution of one, some or all species in a census data set.}
 \usage{
-map_sp(census, species, xlim = NULL, ylim = NULL,
-  theme = ggplot2::theme_bw(), elevation = NULL, line_size = 0.5,
-  low = "#132B43", high = "#56B1F7", bins = NULL, ...)
+map_sp(census, species, xlim = NULL, ylim = NULL, theme = theme_map_sp(),
+  elevation = NULL, line_size = 0.5, low = "#132B43", high = "#56B1F7",
+  bins = NULL, ...)
 }
 \arguments{
 \item{census}{Census data.}

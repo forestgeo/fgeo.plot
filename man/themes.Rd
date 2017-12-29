@@ -4,6 +4,7 @@
 \alias{themes}
 \alias{theme_map_tag}
 \alias{theme_map_quad}
+\alias{theme_map_sp}
 \title{Themes.}
 \usage{
 theme_map_tag(panel.grid.major = element_line(colour = "black"),
@@ -20,6 +21,8 @@ theme_map_quad(axis.text = element_blank(),
   plot.subtitle = element_text(size = 12),
   panel.border = element_rect(colour = "black", fill = NA),
   axis.ticks.length = unit(-0.1, "cm"), ...)
+
+theme_map_sp(panel.grid.minor = element_line(linetype = "dashed"), ...)
 }
 \arguments{
 \item{panel.grid.major}{major grid lines (\code{element_line}; inherits from

@@ -19,18 +19,18 @@ NULL
 #' @rdname themes
 #' @export
 theme_map_tag <- function(panel.grid.major = element_line(colour =  "black"),
-                      panel.grid.minor = element_line(
-                        colour =  "black",
-                        linetype = "dotted"
-                      ),
-                      panel.background = element_rect(fill = "white"),
-                      plot.title = element_text(size = 20),
-                      plot.subtitle = element_text(size = 12),
-                      legend.position = "top",
-                      legend.title = element_blank(),
-                      axis.ticks = element_blank(),
-                      axis.text = element_text(size = 12),
-                      ...){
+                          panel.grid.minor = element_line(
+                            colour =  "black",
+                            linetype = "dotted"
+                          ),
+                          panel.background = element_rect(fill = "white"),
+                          plot.title = element_text(size = 20),
+                          plot.subtitle = element_text(size = 12),
+                          legend.position = "top",
+                          legend.title = element_blank(),
+                          axis.ticks = element_blank(),
+                          axis.text = element_text(size = 12),
+                          ...){
   theme(
     panel.grid.major = panel.grid.major,
     panel.grid.minor = panel.grid.minor,
@@ -48,15 +48,17 @@ theme_map_tag <- function(panel.grid.major = element_line(colour =  "black"),
 #' @rdname themes
 #' @export
 theme_map_quad <- function(axis.text = element_blank(),
-  panel.background = element_rect(fill = "white"),
-  panel.grid.minor = element_blank(),
-  panel.grid.major = element_blank(),
-  legend.position = "none",
-  plot.title = element_text(size = 20),
-  plot.subtitle = element_text(size = 12),
-  panel.border = element_rect(colour = "black", fill = NA),
-  axis.ticks.length = unit(-0.1, "cm"),
-  ...) {
+                           panel.background = element_rect(fill = "white"),
+                           panel.grid.minor = element_blank(),
+                           panel.grid.major = element_blank(),
+                           legend.position = "none",
+                           plot.title = element_text(size = 20),
+                           plot.subtitle = element_text(size = 12),
+                           panel.border = element_rect(
+                             colour = "black", fill = NA
+                           ),
+                           axis.ticks.length = unit(-0.1, "cm"),
+                           ...) {
   theme(
     panel.background = panel.background,
     panel.grid.minor = panel.grid.minor,
@@ -69,6 +71,14 @@ theme_map_quad <- function(axis.text = element_blank(),
     axis.ticks.length = axis.ticks.length,
     ...
   )
+}
+
+#' @rdname themes
+#' @export
+theme_map_sp <- function(panel.grid.minor = element_line(linetype = "dashed"),
+                         ...) {
+  theme_bw() +
+    theme(panel.grid.minor = panel.grid.minor, ...)
 }
 
 

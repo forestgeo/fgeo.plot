@@ -36,6 +36,6 @@ test_that("outputs a non empty list", {
 
 test_that("output is a named list with names equal to species codes in sp", {
   result <- map_sp(census = census, species = all_species)
-  expect_named(result, all_species)
+  expect_named(result, sort(all_species))
 })
 

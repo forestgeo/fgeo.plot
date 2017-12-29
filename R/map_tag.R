@@ -139,7 +139,7 @@ map_tag <- function(vft,
                     theme = theme_map_tag(),
                     extend_grid = 0) {
   # Lowercase names: avoid errors due to confusing upper- and lower-case
-  vft_lower_nms <- stats::setNames(vft, tolower(names(vft)))
+  vft_lower_nms <- setNames(vft, tolower(names(vft)))
   crucial_vars <- c(
     "tag", "qx", "qy", "status", "quadratname", "censusid", "plotid"
   )
@@ -201,7 +201,7 @@ map_tag <- function(vft,
 #' with_subquadrat[c("subquadrat", "qx", "qy")]
 add_subquadrat <- function(df, x_q, y_q = x_q, x_sq, y_sq = x_sq) {
   message("Lowering names case")
-  df <- stats::setNames(df, tolower(names(df)))
+  df <- setNames(df, tolower(names(df)))
   fgeo.utils::check_crucial_names(df, c("qx", "qy"))
   check_subquadrat_dimensions(
     df = df, x_q = x_q, y_q = y_q, x_sq = x_sq, y_sq = y_sq
