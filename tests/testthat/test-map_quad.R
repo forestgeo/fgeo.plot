@@ -88,15 +88,15 @@ test_that("works as expected", {
 
 
 
-context("check_unique_plotcensusnumber")
+context("check_unique_censusid")
 
 test_that("works as expected", {
   expect_silent(
-    check_unique_plotcensusnumber(data.frame(plotcensusnumber = c(1, 1)))
+    check_unique_censusid(data.frame(censusid = c(1, 1)))
   )
   expect_warning(
-    check_unique_plotcensusnumber(
-      data.frame(plotcensusnumber = c(1, 2))
+    check_unique_censusid(
+      data.frame(censusid = c(1, 2))
     )
   )
 })

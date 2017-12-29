@@ -26,7 +26,7 @@
 #' want <- dplyr::filter(
 #'   vft,
 #'   DBH > 10,
-#'   PlotCensusNumber == max(PlotCensusNumber, na.rm = TRUE),
+#'   CensusID == max(CensusID, na.rm = TRUE),
 #'   PlotID == 1
 #' )
 #'
@@ -89,7 +89,7 @@ map_quad <- function(vft,
                      extend_grid = 0) {
   .vft <- stats::setNames(vft, tolower(names(vft)))
   core <- c(
-    "plotid", "plotcensusnumber", "tag", "dbh", "status", "quadratname",
+    "plotid", "censusid", "tag", "dbh", "status", "quadratname",
     "qx", "qy"
   )
   crucial <- .vft[core]
@@ -151,7 +151,7 @@ check_map_quad <- function(vft,
   stopifnot(is.character(title_quad), is.character(header))
   fgeo.utils::check_crucial_names(vft, core)
   check_unique_plotid(vft)
-  check_unique_plotcensusnumber(vft)
+  check_unique_censusid(vft)
 }
 
 check_unique_plotid <- function(x) {
@@ -160,9 +160,9 @@ check_unique_plotid <- function(x) {
   invisible(x)
 }
 
-check_unique_plotcensusnumber <- function(x) {
-  msg <- "  * Likely you should have filtered only the last `plotcensusnumber`"
-  fgeo.utils::check_unique(x, "plotcensusnumber", "warning", msg)
+check_unique_censusid <- function(x) {
+  msg <- "  * Likely you should have filtered only the last `censusid`"
+  fgeo.utils::check_unique(x, "censusid", "warning", msg)
   invisible(x)
 }
 

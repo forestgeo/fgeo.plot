@@ -47,7 +47,7 @@ vft <- rename(bciex::bci12vft_mini, QX = x, QY = y)
 want <- dplyr::filter(
   vft,
   DBH > 10,
-  PlotCensusNumber == max(PlotCensusNumber, na.rm = TRUE),
+  CensusID == max(CensusID, na.rm = TRUE),
   PlotID == 1
 )
 
