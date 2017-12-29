@@ -182,25 +182,11 @@ map_sp_each <- function(census,
                        high = "#56B1F7",
                        bins = NULL,
                        ...) {
-  stopifnot(is.character(one_sp))
-  if (length(one_sp) != 1) {stop("`one_sp` is not of length 1.")}
-
   if (is.null(xlim)) {xlim <- c(0, max(census$gx, na.rm = TRUE))}
   if (is.null(ylim)) {ylim <- c(0, max(census$gy, na.rm = TRUE))}
-
   filtered_census <- census[census$sp %in% one_sp, ]
-  p <- map_basic(filtered_census, xlim, ylim, theme = theme, ...)
-  if (!is.null(elevation)) {
-    p <- add_elevation(ggplot = p, elevation = elevation, line_size = line_size,
-      low = low, high = high, bins = bins)
-  }
-  p
-}
-
-#' General plot of gx by gy faceted by species.
-#' @noRd
-map_basic <- function(census, xlim, ylim, theme = ggplot2::theme_bw(), ...) {
-  ggplot(data = census, aes(x = gx, y = gy)) +
+  # p <- map_basic(filtered_census, xlim, ylim, theme = theme, ...)
+  p <- ggplot(filtered_census, aes(gx, gy)) +
     geom_point(...) +
     labs(x = NULL, y = NULL, title = unique(census$sp)) +
     coord_fixed(xlim = xlim, ylim = ylim) +
@@ -208,6 +194,12 @@ map_basic <- function(census, xlim, ylim, theme = ggplot2::theme_bw(), ...) {
     scale_y_continuous(minor_breaks = seq(ylim[1], ylim[2], 20)) +
     theme +
     theme(panel.grid.minor = element_line(linetype = "dashed"))
+
+  if (!is.null(elevation)) {
+    p <- add_elevation(ggplot = p, elevation = elevation, line_size = line_size,
+      low = low, high = high, bins = bins)
+  }
+  p
 }
 
 #' Add elevation lines to a ggplot.
