@@ -185,7 +185,7 @@ map_sp(census, "hybapr",
 
 ### Changing the Theme
 
-You can change the general look of your map by changing its theme. A number of pre-set themes are available in the __ggplot2__ package (see `?ggplot2::theme_bw()`).
+You can change the general look of your map by changing its theme. A number of pre-set themes are available via __ggplot2__ (see `?ggplot2::theme_bw()`).
 
 ```{r, fig.align="default", out.width="45%", fig.widh=(6 * 0.45 / 0.7)}
 map_sp(census, "hybapr", theme = ggplot2::theme_classic())
@@ -260,7 +260,17 @@ dev.off()
 
 ## Customizing the Theme
 
-Before, you used a pre-made theme. But you can create your own theme with `ggplot2::theme()`, save it as an object, and pass that object to `map_sp()`.
+Before you used a pre-made theme. But you can also customize the theme by either tweaking the specialized `theme_map_sp()` or by creating your own theme from scratch with `ggplot2::theme()`.
+
+Tweaking `theme_map_sp()`.
+
+```{r, fig.align="default", out.width="45%", fig.widh=(6 * 0.45 / 0.7)}
+map_sp(
+  census, "hybapr", theme = theme_map_sp(panel.grid.minor = element_blank())
+)
+```
+
+Creating a theme from scratch via __ggplot2__.
 
 ```{r}
 # Showing only a few options; see all the options with ?ggplot2::theme()

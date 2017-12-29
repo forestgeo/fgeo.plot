@@ -191,15 +191,15 @@ check_map_sp <- function(census, species, xlim, ylim) {
 
 #' @noRd
 map_sp_each <- function(cns,
-                       xlim,
-                       ylim,
-                       theme,
-                       elevation,
-                       line_size,
-                       low,
-                       high,
-                       bins,
-                       ...) {
+                        xlim,
+                        ylim,
+                        theme,
+                        elevation,
+                        line_size,
+                        low,
+                        high,
+                        bins,
+                        ...) {
   p <- ggplot(cns, aes(gx, gy)) +
     geom_point(...) +
     labs(x = NULL, y = NULL, title = unique(cns$sp)) +
