@@ -158,7 +158,7 @@ map_sp <- function(census,
                    ...) {
   check_map_sp(census = census, species = species, xlim = xlim, ylim = ylim)
 
-  p <- lapply(X = species, FUN = map_one_sp, census = census, ...)
+  p <- lapply(X = species, FUN = map_sp_each, census = census, ...)
   names(p) <- species
   p
 }
@@ -171,7 +171,7 @@ check_map_sp <- function(census, species, xlim, ylim) {
 }
 
 #' @noRd
-map_one_sp <- function(census,
+map_sp_each <- function(census,
                        one_sp,
                        xlim = NULL,
                        ylim = NULL,
