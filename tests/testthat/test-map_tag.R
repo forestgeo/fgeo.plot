@@ -30,63 +30,6 @@ test_that("map_tag() stops if data has more than one PlotID", {
   expect_error(map_tag(vft_with_new_row))
 })
 
-
-
-
-test_that("wrong inputs passed to lapply_plot_repulsive_tags() get noticed", {
-
-  expect_error(
-    suppressWarnings(
-      map_tag(
-       vft,
-       # next line is wrong input
-       title_quad = 1,
-       point_shape = c(0, 2),
-       point_size = 6,
-       tag_size = 10
-      )
-    )
-  )
-  expect_error(
-    suppressWarnings(
-      map_tag(
-        vft,
-        title_quad = "my site",
-        # next line is wrong input
-        point_shape = c("a", "b"),
-        point_size = 6,
-        tag_size = 10
-      )
-    )
-  )
-  expect_error(
-    suppressWarnings(
-      map_tag(
-        vft,
-        title_quad = "my site",
-        point_shape = c(1, 2),
-        # next line is wrong input
-        point_size = "a",
-        tag_size = 10
-      )
-    )
-  )
-  expect_error(
-    suppressWarnings(
-      map_tag(
-        vft,
-        title_quad = "my site",
-        point_shape = c(1, 2),
-        point_size = 1,
-        # next line is wrong input
-        tag_size = "a"
-      )
-    )
-  )
-})
-
-
-
 test_that("plots all unique tags in data", {
   plots <- suppressWarnings(map_tag(vft))
   unique_tags_in_plot_n <- plots %>%
@@ -131,32 +74,68 @@ test_that("outputs a ggplot", {
 
 
 
-context("test-lapply_plot_repulsive_tags")
+
+
+
+
+
+
+# Updated tests -----------------------------------------------------------
+
+context("map_tag")
 
 vft <- bciex::bci12vft_mini %>%
-  rename(QX = x, QY = y) %>%
-  sample_n(10) %>%
-  rlang::set_names(tolower)
-
-with_sq <- vft %>% fgeo.utils::add_subquad(x_q = 20, x_sq = 5)
-
-prep_df <- unique(
-  add_status_tree_page_x1_x2_y1_y2_split_quad_id(
-    with_sq, quad_size = 20, extend_grid = 0.45
-    # with_status_tree, quad_size = 20, extend_grid = 0.45
-  )
-)
-prep_df_list <- split(prep_df, prep_df$split)
+  dplyr::rename(QX = x, QY = y) %>%
+  fgeo.utils::top(QuadratID) %>%
+  fgeo.utils::top(CensusID) %>%
+  dplyr::sample_n(100)
 
 test_that("outputs a ggplot", {
-  plot_list <- prep_df_list %>%
-      lapply_plot_repulsive_tags(
-        title_quad = "my site",
-        x_q = 20, x_sq = 5
-      )
+  first_map <- map_tag(vft)[[1]]
   expect_true(
-    any(
-      grepl("ggplot", class(plot_list[[1]]))
+    any(grepl("ggplot", class(first_map)))
+  )
+})
+
+test_that("wrong inputs get noticed", {
+  expect_error(
+    map_tag(
+     vft,
+     # next line is wrong input
+     title_quad = 1,
+     point_shape = c(0, 2),
+     point_size = 6,
+     tag_size = 10
+    )
+  )
+  expect_error(
+    map_tag(
+      vft,
+      title_quad = "my site",
+      # next line is wrong input
+      point_shape = c("a", "b"),
+      point_size = 6,
+      tag_size = 10
+    )
+  )
+  expect_error(
+    map_tag(
+      vft,
+      title_quad = "my site",
+      point_shape = c(1, 2),
+      # next line is wrong input
+      point_size = "a",
+      tag_size = 10
+    )
+  )
+  expect_error(
+    map_tag(
+      vft,
+      title_quad = "my site",
+      point_shape = c(1, 2),
+      point_size = 1,
+      # next line is wrong input
+      tag_size = "a"
     )
   )
 })

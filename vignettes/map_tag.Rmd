@@ -216,10 +216,10 @@ map_tag(bci_vft1_rnm, title_quad = "BCI 2012", theme = theme_extreeme_change)[1]
 
 ## Extending The Grid Beyond the Plot Limits
 
-Although they shouldn't, trees sometimes are located beyond the limits of a quadrat. For example, if the side of your quadrats is 20 meters, some trees may plot at, say, `qx = 20.5`, or `qy = 21`. In such cases you may want to extend the plot grid to encompass those odd trees. To extend the grid use the argument `shrink`. (The example below has no trees beyond the quadrat limits, but hopefully you'll still understand when to use `extend_grid`.)
+Although they shouldn't, trees sometimes are located beyond the limits of a quadrat. For example, if the side of your quadrats is 20 meters, some trees may plot at, say, `qx = 20.5`, or `qy = 21`. In such cases you may want to extend the plot grid to encompass those odd trees. To extend the grid use the argument `shrink`. (The example below has no trees beyond the quadrat limits, but hopefully you'll still understand when to use `move_edge`.)
 
 ```{r}
-map_tag(bci_vft1_rnm, title_quad = "BCI 2012", extend_grid = 0.4)[4]
+map_tag(bci_vft1_rnm, title_quad = "BCI 2012", move_edge = 0.4)[4]
 ```
 
 ## Customizing the Dimension of Quadrats and Subquadrats
@@ -248,7 +248,7 @@ The following two examples demonstrate the use wrong dimensions. Let's first use
 map_tag(bci_vft1_rnm, 
   title_quad = "BCI 2012", x_q = 10, x_sq = 2.5, 
   # if not extended, the lines surrounding the map won't plot
-  extend_grid = 0.25
+  move_edge = 0.25
 )[1]
 ```
 
@@ -277,7 +277,7 @@ bigger$qy <- sample(0:100, n, replace = TRUE)
 map_tag(
   bigger, 
   x_q = 100, x_sq = 25, 
-  extend_grid = -1.75
+  move_edge = -1.75
 )[1]
 ```
 
@@ -290,7 +290,7 @@ n <- nrow(smaller)
 smaller$qx <- sample(0:10, n, replace = TRUE)
 smaller$qy <- sample(0:10, n, replace = TRUE)
 
-map_tag(smaller, x_q = 10, x_sq = 2.5, extend_grid = 0.25)[1]
+map_tag(smaller, x_q = 10, x_sq = 2.5, move_edge = 0.25)[1]
 ```
 
 # Calling `fgeo.utils::add_subquad()` Directly

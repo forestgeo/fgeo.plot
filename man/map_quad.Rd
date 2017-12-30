@@ -6,7 +6,7 @@
 \usage{
 map_quad(vft, title_quad = "Site Name, YYYY, Quadrat:",
   header = map_quad_header(), theme = theme_map_quad(), lim_min = 0,
-  lim_max = 20, subquadrat_side = 5, tag_size = 2, extend_grid = 0)
+  lim_max = 20, subquadrat_side = 5, tag_size = 2, move_edge = 0)
 }
 \arguments{
 \item{vft}{A dataframe -- specifically, a ForestGEO ViewFullTable.}
@@ -24,7 +24,7 @@ map_quad(vft, title_quad = "Site Name, YYYY, Quadrat:",
 \item{tag_size}{A number giving tag size. Passed to
 [ggrepel::geom_text_repel].}
 
-\item{extend_grid}{A number to adjust the extension of the grid lines beyond
+\item{move_edge}{A number to adjust the extension of the grid lines beyond
 the plot limits.}
 }
 \value{

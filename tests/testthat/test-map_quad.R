@@ -16,7 +16,7 @@ test_that("passes with default arguments", {
         lim_max = 20,
         subquadrat_side = 5,
         tag_size = 2,
-        extend_grid = 0
+        move_edge = 0
       )
     )
   )
@@ -29,7 +29,7 @@ test_that("wrong inputs to are rejected", {
   expect_error(map_quad(one_quadrat_sub, lim_max = "a"))
   expect_error(map_quad(one_quadrat_sub, subquadrat_side = "a"))
   expect_error(map_quad(one_quadrat_sub, tag_size = "a"))
-  expect_error(map_quad(one_quadrat_sub, extend_grid = "a"))
+  expect_error(map_quad(one_quadrat_sub, move_edge = "a"))
   expect_error(map_quad(one_quadrat_sub, header = 1))
   expect_error(map_quad(one_quadrat_sub, title_quad = 1))
   expect_error(map_quad(one_quadrat_sub, theme = 1))

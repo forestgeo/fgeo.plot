@@ -7,7 +7,7 @@
 #' @param lim_min,lim_max Minimum and maximum limits of the plot area.
 #' @param subquadrat_side Length in meters of the side of a subquadrat.
 #' @template tag_size
-#' @template extend_grid
+#' @template move_edge
 #'
 #' @return A list which each element is a plot of class ggplot.
 #' @export
@@ -86,7 +86,7 @@ map_quad <- function(vft,
                      lim_max = 20,
                      subquadrat_side = 5,
                      tag_size = 2,
-                     extend_grid = 0) {
+                     move_edge = 0) {
   .vft <- setNames(vft, tolower(names(vft)))
   core <- c(
     "plotid", "censusid", "tag", "dbh", "status", "quadratname",
@@ -100,7 +100,7 @@ map_quad <- function(vft,
     lim_max = lim_max,
     subquadrat_side = subquadrat_side,
     tag_size = tag_size,
-    extend_grid = extend_grid,
+    move_edge = move_edge,
     title_quad = title_quad,
     header = header,
     theme = theme
@@ -113,6 +113,7 @@ map_quad <- function(vft,
   crucial$dbh_standarized <- crucial$dbh / length(crucial$dbh)
 
   df_list <- split(crucial, crucial$quadratname)
+  nms <- sort(unique(as.character(crucial$quadratname)))
   p <- lapply(
     df_list,
     map_quad_each,
@@ -120,13 +121,12 @@ map_quad <- function(vft,
     lim_max = lim_max,
     subquadrat_side = subquadrat_side,
     tag_size = tag_size,
-    extend_grid = extend_grid,
+    move_edge = move_edge,
     title_quad = title_quad,
     header = header,
     theme = theme
   )
-  nms <- sort(unique(as.character(crucial$quadratname)))
-  setNames(p, sort(nms))
+  setNames(p, nms)
 }
 
 check_map_quad <- function(vft,
@@ -135,7 +135,7 @@ check_map_quad <- function(vft,
                            lim_max,
                            subquadrat_side,
                            tag_size,
-                           extend_grid,
+                           move_edge,
                            title_quad,
                            header,
                            theme) {
@@ -143,7 +143,7 @@ check_map_quad <- function(vft,
   if (!is.data.frame(vft)) stop("`vft` should be a dataframe")
   stopifnot(
     is.numeric(lim_min), is.numeric(lim_max), is.numeric(subquadrat_side),
-    is.numeric(tag_size), is.numeric(extend_grid)
+    is.numeric(tag_size), is.numeric(move_edge)
   )
   arg_theme_has_class_theme <- any(grepl("theme", class(theme)))
   stopifnot(arg_theme_has_class_theme)
@@ -170,13 +170,13 @@ map_quad_each <- function(.df,
                           lim_max,
                           subquadrat_side,
                           tag_size,
-                          extend_grid,
+                          move_edge,
                           title_quad,
                           header,
                           theme) {
   # ggplots come with a default extention
   default_extention <- 1
-  grid_adjust <- default_extention - extend_grid
+  grid_adjust <- default_extention - move_edge
 
   title_quad <- paste(title_quad, unique(.df$quadratname), sep = " ")
   ggplot(.df, aes(x = qx, y = qy)) +

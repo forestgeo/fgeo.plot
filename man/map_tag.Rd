@@ -7,7 +7,7 @@
 map_tag(vft, x_q = 20, x_sq = 5, y_q = x_q, y_sq = x_sq,
   title_quad = "Site Name, YYYY. Quadrat:", point_shape = c(19, 4),
   point_size = 1.5, tag_size = 3, header = map_tag_header(),
-  theme = theme_map_tag(), extend_grid = 0)
+  theme = theme_map_tag(), move_edge = 0)
 }
 \arguments{
 \item{vft}{A dataframe -- specifically, a ForestGEO ViewFullTable.}
@@ -40,7 +40,7 @@ under the section entitled \emph{'pch' values}).}
 
 \item{theme}{An object of class theme.}
 
-\item{extend_grid}{A number to adjust the extension of the grid lines beyond
+\item{move_edge}{A number to adjust the extension of the grid lines beyond
 the plot limits.}
 }
 \value{
@@ -156,7 +156,7 @@ smaller$qy <- sample(0:10, n, replace = TRUE)
 
 map_tag(smaller, x_q = 10, x_sq = 2.5)[1]
 # If limit-lines aren't visible, try extending the grid a little
-map_tag(smaller, x_q = 10, x_sq = 2.5, extend_grid = 0.25)[1]
+map_tag(smaller, x_q = 10, x_sq = 2.5, move_edge = 0.25)[1]
 }
 }
 \seealso{

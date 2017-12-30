@@ -25,6 +25,7 @@ Suggests:
     covr,
     gridExtra,
     knitr,
+    magrittr,
     purrr,
     rmarkdown,
     testthat,
