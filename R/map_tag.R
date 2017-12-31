@@ -144,6 +144,10 @@ map_tag <- function(vft,
   check_map_tag(
     .vft = .vft,
     crucial = crucial,
+    x_q = x_q,
+    x_sq = x_sq,
+    y_q = y_q,
+    y_sq = y_sq,
     title_quad = title_quad,
     point_shape = point_shape,
     point_size = point_size,
@@ -173,16 +177,25 @@ map_tag <- function(vft,
 }
 
 check_map_tag <- function(.vft,
-                            crucial,
-                            title_quad,
-                            point_shape,
-                            point_size,
-                            tag_size,
-                            header,
-                            theme,
-                            move_edge) {
+                          crucial,
+                          x_q,
+                          x_sq,
+                          y_q,
+                          y_sq,
+                          title_quad,
+                          point_shape,
+                          point_size,
+                          tag_size,
+                          header,
+                          theme,
+                          move_edge) {
   stopifnot(is.data.frame(.vft))
+  if (dim(.vft)[1] == 0) {stop("Data can't have cero rows")}
   fgeo.utils::check_crucial_names(.vft, crucial)
+  stopifnot(is.numeric(x_q))
+  stopifnot(is.numeric(x_sq))
+  stopifnot(is.numeric(y_q))
+  stopifnot(is.numeric(y_sq))
   stopifnot(is.character(title_quad))
   stopifnot(is.numeric(point_shape))
   stopifnot(length(point_shape) == 2)
