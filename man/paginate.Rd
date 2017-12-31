@@ -33,7 +33,8 @@ Each map corresponds to one page and includes four subquadrats. There are a
 total of four maps per quadrat (i.e. a total of 16 subquadrats per quadrat).
 }
 \examples{
-viewfulltable <- tibble::tribble(
+library(dplyr)
+viewfulltable <- tribble(
    ~QX,  ~QY,
   17.9,    0,
    4.1,   15,

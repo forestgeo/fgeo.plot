@@ -2,24 +2,27 @@
 % Please edit documentation in R/map_quad.R
 \name{tag_dead}
 \alias{tag_dead}
-\title{Add the ending ".d" to the \code{Tag} of dead stems.}
+\title{Add the ending ".d" to dead stems.}
 \usage{
-tag_dead(x, y)
+tag_dead(x, status)
 }
 \arguments{
-\item{x}{A character vector.}
+\item{x}{A character vector, giving the tag of a stem.}
 
-\item{y}{A character vector giving the variable Status of a fgeo-table.}
+\item{status}{A character vector giving the status of a stem.}
 }
 \value{
-A character vector.
+A modified version of \code{x}.
 }
 \description{
-Add the ending ".d" to the \code{Tag} of dead stems.
+Add the ending ".d" to dead stems.
 }
 \examples{
-tag_dead(
-  x = c("tag1", "tag2"),
-  y = c("dead", "whatever")
+library(dplyr)
+vft <- tribble(
+  ~Tag, ~Status,
+  "01", "dead",
+  "02", "alive"
 )
+mutate(vft, tagged = tag_dead(Tag, Status))
 }

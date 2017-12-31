@@ -48,8 +48,8 @@ context("tag_dead")
 
 test_that("tags a vector", {
   actual <- tag_dead(
-    x = c("tag1", "tag2"),
-    y = c("dead", "whatever")
+    c("tag1", "tag2"),
+    c("dead", "whatever")
   )
   expected <- c("tag1.d", "tag2")
   expect_equal(actual, expected)
@@ -58,8 +58,8 @@ test_that("tags a vector", {
 test_that("warns if no stem is dead", {
   expect_warning(
     tag_dead(
-      x = c("tag1", "tag2"),
-      y = c("not-dead", "not-dead")
+      c("tag1", "tag2"),
+      c("not-dead", "not-dead")
     )
   )
 })

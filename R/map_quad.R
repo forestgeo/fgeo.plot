@@ -200,26 +200,29 @@ map_quad_each <- function(.df,
     theme
 }
 
-#' Add the ending ".d" to the `Tag` of dead stems.
+#' Add the ending ".d" to dead stems.
 #'
-#' @param x A character vector.
-#' @param y A character vector giving the variable Status of a fgeo-table.
+#' @param x A character vector, giving the tag of a stem.
+#' @param status A character vector giving the status of a stem.
 #'
-#' @return A character vector.
+#' @return A modified version of `x`.
 #' @export
 #'
 #' @examples
-#' tag_dead(
-#'   x = c("tag1", "tag2"),
-#'   y = c("dead", "whatever")
+#' library(dplyr)
+#' vft <- tribble(
+#'   ~Tag, ~Status,
+#'   "01", "dead",
+#'   "02", "alive"
 #' )
-tag_dead <- function(x, y) {
-  if (!all(is.character(x), is.character(y))) {
+#' mutate(vft, tagged = tag_dead(Tag, Status))
+tag_dead <- function(x, status) {
+  if (!all(is.character(x), is.character(status))) {
     stop("Both `x` and `y` must be character vectors", call. = FALSE)
   }
-  if (!"dead" %in% y) {warning("No stem is dead. Is that what you expect?")}
+  if (!"dead" %in% status) {warning("No stem is dead. Is that what you expect?")}
 
-  is_dead <- y == "dead"
-  x[is_dead] <- paste0(x[is_dead], ".", sub("^(.).*$", "\\1", y[is_dead]))
+  is_dead <- status == "dead"
+  x[is_dead] <- paste0(x[is_dead], ".", sub("^(.).*$", "\\1", status[is_dead]))
   x
 }

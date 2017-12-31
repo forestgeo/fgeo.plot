@@ -255,7 +255,8 @@ prep_map_tag <- function(sbst, x_q, x_sq, y_q, y_sq, move_edge) {
 #' @seealso [fgeo.utils::add_subquad()].
 #' @export
 #' @examples
-#' viewfulltable <- tibble::tribble(
+#' library(dplyr)
+#' viewfulltable <- tribble(
 #'    ~QX,  ~QY,
 #'   17.9,    0,
 #'    4.1,   15,
