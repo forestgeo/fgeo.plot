@@ -18,7 +18,10 @@
 #' same value of `CensusID`. Then feed `map_tag()` with the filtered data set.
 #'
 #' @template vft
+#' @inheritParams fgeo.utils::add_subquad
+#' @param bl,br,tr,tl Label each of the four maps of a quadrat. See [paginate()].
 #' @template title_quad
+#' @param paginate Locigal; `FALSE` removes the page label from the map title.
 #' @param point_shape A vector of two numbers giving the shape of the points to
 #'   plot (see possible shapes in the documentation of ?[graphics::points()],
 #'   under the section entitled _'pch' values_).
@@ -28,11 +31,10 @@
 #' @template header
 #' @template theme
 #' @template move_edge
-#' @inheritParams fgeo.utils::add_subquad
 #'
 #' @seealso [graphics::points()], [ggplot2::geom_point()], [ggplot2::theme()]
 #'   [map_tag_header()], [theme_map_tag()], [fgeo.utils::add_subquad()],
-#'   [ggrepel::geom_text_repel].
+#'   [paginate()], [ggrepel::geom_text_repel].
 #'
 #' @section Acknowledgements:
 #' Useful ideas and guidance came from Suzanne Lao, Stuart Davis, Shameema
@@ -131,7 +133,12 @@ map_tag <- function(vft,
                     x_sq = 5,
                     y_q = x_q,
                     y_sq = x_sq,
+                    bl = 1,
+                    br = 2,
+                    tr = 3,
+                    tl = 4,
                     title_quad = "Site Name, YYYY. Quadrat:",
+                    paginate = TRUE,
                     point_shape = c(19, 4),
                     point_size = 1.5,
                     tag_size = 3,
@@ -148,7 +155,12 @@ map_tag <- function(vft,
     x_sq = x_sq,
     y_q = y_q,
     y_sq = y_sq,
+    bl = bl,
+    br = br,
+    tr = tr,
+    tl = tl,
     title_quad = title_quad,
+    paginate = paginate,
     point_shape = point_shape,
     point_size = point_size,
     tag_size = tag_size,
@@ -160,17 +172,20 @@ map_tag <- function(vft,
   # Prepare
   sbst <- .vft[ , crucial]
   prepared <- prep_map_tag(
-    sbst, x_q = x_q, x_sq = x_sq, y_q = y_q, y_sq = y_sq, move_edge = move_edge
+    sbst,
+    x_q = x_q, x_sq = x_sq, y_q = y_q, y_sq = y_sq,
+    bl = bl, br = br, tr = tr, tl = tl,
+    move_edge = move_edge
   )
 
   # Plot
   df_list <- split(prepared, prepared$split)
-  nms <- sort(unique(as.character(prepared$quadratname)))
+  nms <- sort(unique(as.character(prepared$split)))
   p <- lapply(
     X = df_list,
     FUN = map_tag_each,
-    x_q = x_q, x_sq = x_sq, y_q = y_q, y_sq = y_sq,
-    title_quad = title_quad, point_shape = point_shape, point_size = point_size,
+    x_q = x_q, x_sq = x_sq, y_q = y_q, y_sq = y_sq, title_quad = title_quad,
+    paginate = paginate, point_shape = point_shape, point_size = point_size,
     tag_size = tag_size, header = header, theme = theme
   )
   setNames(p, nms)
@@ -182,7 +197,12 @@ check_map_tag <- function(.vft,
                           x_sq,
                           y_q,
                           y_sq,
+                          bl,
+                          br,
+                          tr,
+                          tl,
                           title_quad,
+                          paginate,
                           point_shape,
                           point_size,
                           tag_size,
@@ -196,7 +216,12 @@ check_map_tag <- function(.vft,
   stopifnot(is.numeric(x_sq))
   stopifnot(is.numeric(y_q))
   stopifnot(is.numeric(y_sq))
+  stopifnot(length(bl) == 1)
+  stopifnot(length(br) == 1)
+  stopifnot(length(tr) == 1)
+  stopifnot(length(tl) == 1)
   stopifnot(is.character(title_quad))
+  stopifnot(is.logical(paginate))
   stopifnot(is.numeric(point_shape))
   stopifnot(length(point_shape) == 2)
   stopifnot(is.numeric(point_size))
@@ -212,16 +237,31 @@ check_map_tag <- function(.vft,
     .vft, "censusid",
     "warning", "* Likely you should filter only one CensusID and retry."
   )
+  invisible(.vft)
 }
 
-prep_map_tag <- function(sbst, x_q, x_sq, y_q, y_sq, move_edge) {
+prep_map_tag <- function(sbst,
+                         x_q,
+                         x_sq,
+                         y_q,
+                         y_sq,
+                         bl,
+                         br,
+                         tr,
+                         tl,
+                         move_edge
+                         ) {
   # Using the pipe (%>%) to avoid meaningless temporary-variables
   sbst %>%
     fgeo.utils::add_status_tree() %>%
     fgeo.utils::add_subquad(x_q = x_q, x_sq = x_sq, y_q = y_q, y_sq = y_sq) %>%
     group_by(.data$quadratname) %>%
-    paginate() %>%
-    add_subquad_lims(x_q = x_q, move_edge = move_edge) %>%
+    paginate(bl = bl, br = br, tr = tr, tl = tl) %>%
+    add_subquad_lims(
+      x_q = x_q,
+      bl = bl, br = br, tr = tr, tl = tl,
+      move_edge = move_edge
+    ) %>%
     mutate(split = paste(.data$quadratname, .data$page, sep = "_")) %>%
     ungroup() %>%
     unique()
@@ -307,42 +347,44 @@ paginate <- function(x, bl = 1, br = 2, tr = 3, tl = 4) {
 #' @noRd
 #' @param paged A dataframe with the variable `page`.
 #' @param x_q Integer; the size in meters of a (squared) quadrat.
+#' @param bl,br,tr,tl See `paginate()`.
 #' @param move_edge A positive or negative number to move the edge lines of each map.
-add_subquad_lims <- function(paged, x_q = 20, move_edge = 0) {
+add_subquad_lims <- function(paged, x_q = 20, bl, br, tr, tl, move_edge = 0) {
   # ggplots come with a default extention
   default_extention <- 0.45
   mv_edge <- default_extention - move_edge
 
   mutate(paged,
     x1 = dplyr::case_when(
-      page == 1 ~ 0 + mv_edge,
-      page == 2 ~ (x_q / 2) + mv_edge,
-      page == 3 ~ (x_q / 2) + mv_edge,
-      page == 4 ~ 0 + mv_edge
+      page == bl ~ 0 + mv_edge,
+      page == br ~ (x_q / 2) + mv_edge,
+      page == tr ~ (x_q / 2) + mv_edge,
+      page == tl ~ 0 + mv_edge
     ),
     x2 = dplyr::case_when(
-      page == 1 ~ (x_q / 2) - mv_edge,
-      page == 2 ~ x_q - mv_edge,
-      page == 3 ~ x_q - mv_edge,
-      page == 4 ~ (x_q / 2) - mv_edge
+      page == bl ~ (x_q / 2) - mv_edge,
+      page == br ~ x_q - mv_edge,
+      page == tr ~ x_q - mv_edge,
+      page == tl ~ (x_q / 2) - mv_edge
     ),
     y1 = dplyr::case_when(
-      page == 1 ~ 0 + mv_edge,
-      page == 2 ~ 0 + mv_edge,
-      page == 3 ~ (x_q / 2) + mv_edge,
-      page == 4 ~ (x_q / 2) + mv_edge
+      page == bl ~ 0 + mv_edge,
+      page == br ~ 0 + mv_edge,
+      page == tr ~ (x_q / 2) + mv_edge,
+      page == tl ~ (x_q / 2) + mv_edge
     ),
     y2 = dplyr::case_when(
-      page == 1 ~ (x_q / 2) - mv_edge,
-      page == 2 ~ (x_q / 2) - mv_edge,
-      page == 3 ~ x_q  - mv_edge,
-      page == 4 ~ x_q - mv_edge
+      page == bl ~ (x_q / 2) - mv_edge,
+      page == br ~ (x_q / 2) - mv_edge,
+      page == tr ~ x_q  - mv_edge,
+      page == tl ~ x_q - mv_edge
     )
   )
 }
 
 map_tag_each <- function(prep_df,
                          title_quad,
+                         paginate,
                          point_shape,
                          point_size,
                          tag_size,
@@ -385,11 +427,17 @@ map_tag_each <- function(prep_df,
       ylim = c(unique(prep_df$y1), unique(prep_df$y2))
     ) +
     labs(
-      title =  paste(title_quad, unique(prep_df$quadratname), sep = " "),
+      title = entitle_map(prep_df, title_quad, paginate = paginate),
       subtitle = header,
       x = NULL, y = NULL
     ) +
     theme
+}
+
+entitle_map <- function(x, chr, paginate = TRUE) {
+  chr_quad <- paste0(chr, " ", unique(x$quadratname))
+  page <- paste0(" (", unique(x$page), ")")
+  if (paginate) {paste0(chr_quad, page)} else {chr_quad}
 }
 
 #' Create data to plot labels in each subquadrat.

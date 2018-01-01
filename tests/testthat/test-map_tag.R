@@ -63,6 +63,12 @@ test_that("wrong inputs get noticed", {
   expect_error(map_tag(one_quadrat, y_q = "a"))
   expect_error(map_tag(one_quadrat, y_sq = "a"))
 
+  # wrong length
+  expect_error(map_tag(one_quadrat, bl = 1:2))
+  expect_error(map_tag(one_quadrat, br = 1:2))
+  expect_error(map_tag(one_quadrat, tr = 1:2))
+  expect_error(map_tag(one_quadrat, tl = 1:2))
+
   expect_error(
     map_tag(
      one_quadrat,
@@ -70,6 +76,8 @@ test_that("wrong inputs get noticed", {
      title_quad = 1
     )
   )
+
+  expect_error(map_tag(one_quadrat, paginate = "not logical"))
 
   expect_error(
     map_tag(
@@ -132,3 +140,14 @@ test_that("wrong inputs get noticed", {
   expect_warning(x <- map_tag(w_dup_cnsid), "Likely")
 })
 
+test_that("page labels can be changed", {
+  plots <- 1:2
+  expect_silent(
+    maps <- map_tag(four_quadrats,
+      bl = "a", br = "b", tr = "c", tl = "d",
+      paginate = FALSE
+    )[plots]
+  )
+  page <- unique(purrr::map_df(maps, "data")$page)
+  expect_equal(page, letters[plots])
+})

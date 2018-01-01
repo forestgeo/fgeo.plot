@@ -4,10 +4,11 @@
 \alias{map_tag}
 \title{Map tree tags by status, showing four subquadrats per plot-page.}
 \usage{
-map_tag(vft, x_q = 20, x_sq = 5, y_q = x_q, y_sq = x_sq,
-  title_quad = "Site Name, YYYY. Quadrat:", point_shape = c(19, 4),
-  point_size = 1.5, tag_size = 3, header = map_tag_header(),
-  theme = theme_map_tag(), move_edge = 0)
+map_tag(vft, x_q = 20, x_sq = 5, y_q = x_q, y_sq = x_sq, bl = 1,
+  br = 2, tr = 3, tl = 4, title_quad = "Site Name, YYYY. Quadrat:",
+  paginate = TRUE, point_shape = c(19, 4), point_size = 1.5,
+  tag_size = 3, header = map_tag_header(), theme = theme_map_tag(),
+  move_edge = 0)
 }
 \arguments{
 \item{vft}{A dataframe -- specifically, a ForestGEO ViewFullTable.}
@@ -24,7 +25,11 @@ common value is 20.}
 \item{y_sq}{Size in meters of a subquadrat's side. For ForestGEO-CTFS
 sites, a common value is 5.}
 
+\item{bl, br, tr, tl}{Label each of the four maps of a quadrat. See \code{\link[=paginate]{paginate()}}.}
+
 \item{title_quad}{A string to use as a title.}
+
+\item{paginate}{Locigal; \code{FALSE} removes the page label from the map title.}
 
 \item{point_shape}{A vector of two numbers giving the shape of the points to
 plot (see possible shapes in the documentation of ?\code{\link[graphics:points]{graphics::points()}},
@@ -162,5 +167,5 @@ map_tag(smaller, x_q = 10, x_sq = 2.5, move_edge = 0.25)[1]
 \seealso{
 \code{\link[graphics:points]{graphics::points()}}, \code{\link[ggplot2:geom_point]{ggplot2::geom_point()}}, \code{\link[ggplot2:theme]{ggplot2::theme()}}
 \code{\link[=map_tag_header]{map_tag_header()}}, \code{\link[=theme_map_tag]{theme_map_tag()}}, \code{\link[fgeo.utils:add_subquad]{fgeo.utils::add_subquad()}},
-\link[ggrepel:geom_text_repel]{ggrepel::geom_text_repel}.
+\code{\link[=paginate]{paginate()}}, \link[ggrepel:geom_text_repel]{ggrepel::geom_text_repel}.
 }

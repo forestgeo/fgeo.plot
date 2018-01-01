@@ -151,6 +151,7 @@ check_map_quad <- function(vft,
   fgeo.utils::check_crucial_names(vft, core)
   check_unique_plotid(vft)
   check_unique_censusid(vft)
+  invisible(vft)
 }
 
 check_unique_plotid <- function(x) {

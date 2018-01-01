@@ -187,6 +187,7 @@ check_map_sp <- function(census, species, xlim, ylim) {
   stopifnot(is.character(species))
   if (length(species) == 0) {stop("The vector `sp` is empty.")}
   fgeo.utils::check_crucial_names(census, c("gx", "gy", "sp"))
+  invisible(census)
 }
 
 map_sp_each <- function(cns,
