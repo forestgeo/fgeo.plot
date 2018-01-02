@@ -6,9 +6,9 @@
 \usage{
 map_tag(vft, x_q = 20, x_sq = 5, y_q = x_q, y_sq = x_sq, bl = 1,
   br = 2, tr = 3, tl = 4, title_quad = "Site Name, YYYY. Quadrat:",
-  paginate = TRUE, point_shape = c(19, 4), point_size = 1.5,
-  tag_size = 3, header = map_tag_header(), theme = theme_map_tag(),
-  move_edge = 0)
+  show_page = TRUE, show_subquad = TRUE, point_shape = c(19, 4),
+  point_size = 1.5, tag_size = 3, header = map_tag_header(),
+  theme = theme_map_tag(), move_edge = 0)
 }
 \arguments{
 \item{vft}{A dataframe -- specifically, a ForestGEO ViewFullTable.}
@@ -29,7 +29,9 @@ sites, a common value is 5.}
 
 \item{title_quad}{A string to use as a title.}
 
-\item{paginate}{Locigal; \code{FALSE} removes the page label from the map title.}
+\item{show_page}{Logical; \code{FALSE} removes the page label from the map title.}
+
+\item{show_subquad}{Logical; \code{FALSE} removes subquadrat labels on each map.}
 
 \item{point_shape}{A vector of two numbers giving the shape of the points to
 plot (see possible shapes in the documentation of ?\code{\link[graphics:points]{graphics::points()}},

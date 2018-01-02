@@ -21,7 +21,7 @@
 #' @inheritParams fgeo.utils::add_subquad
 #' @param bl,br,tr,tl Label each of the four maps of a quadrat. See [paginate()].
 #' @template title_quad
-#' @param paginate Logical; `FALSE` removes the page label from the map title.
+#' @param show_page Logical; `FALSE` removes the page label from the map title.
 #' @param show_subquad Logical; `FALSE` removes subquadrat labels on each map.
 #' @param point_shape A vector of two numbers giving the shape of the points to
 #'   plot (see possible shapes in the documentation of ?[graphics::points()],
@@ -139,7 +139,7 @@ map_tag <- function(vft,
                     tr = 3,
                     tl = 4,
                     title_quad = "Site Name, YYYY. Quadrat:",
-                    paginate = TRUE,
+                    show_page = TRUE,
                     show_subquad = TRUE,
                     point_shape = c(19, 4),
                     point_size = 1.5,
@@ -162,7 +162,7 @@ map_tag <- function(vft,
     tr = tr,
     tl = tl,
     title_quad = title_quad,
-    paginate = paginate,
+    show_page = show_page,
     show_subquad = show_subquad,
     point_shape = point_shape,
     point_size = point_size,
@@ -188,7 +188,7 @@ map_tag <- function(vft,
     X = df_list,
     FUN = map_tag_each,
     x_q = x_q, x_sq = x_sq, y_q = y_q, y_sq = y_sq, title_quad = title_quad,
-    paginate = paginate, show_subquad = show_subquad, point_shape =
+    show_page = show_page, show_subquad = show_subquad, point_shape =
     point_shape, point_size = point_size, tag_size = tag_size, header =
     header, theme = theme
   )
@@ -206,7 +206,7 @@ check_map_tag <- function(.vft,
                           tr,
                           tl,
                           title_quad,
-                          paginate,
+                          show_page,
                           show_subquad,
                           point_shape,
                           point_size,
@@ -226,7 +226,7 @@ check_map_tag <- function(.vft,
   stopifnot(length(tr) == 1)
   stopifnot(length(tl) == 1)
   stopifnot(is.character(title_quad))
-  stopifnot(is.logical(paginate))
+  stopifnot(is.logical(show_page))
   stopifnot(is.logical(show_subquad))
   stopifnot(is.numeric(point_shape))
   stopifnot(length(point_shape) == 2)
@@ -390,7 +390,7 @@ add_subquad_lims <- function(paged, x_q = 20, bl, br, tr, tl, move_edge = 0) {
 
 map_tag_each <- function(prep_df,
                          title_quad,
-                         paginate,
+                         show_page,
                          show_subquad,
                          point_shape,
                          point_size,
@@ -435,17 +435,17 @@ map_tag_each <- function(prep_df,
       ylim = c(unique(prep_df$y1), unique(prep_df$y2))
     ) +
     labs(
-      title = entitle_map(prep_df, title_quad, paginate = paginate),
+      title = entitle_map(prep_df, title_quad, show_page = show_page),
       subtitle = header,
       x = NULL, y = NULL
     ) +
     theme
 }
 
-entitle_map <- function(x, chr, paginate = TRUE) {
+entitle_map <- function(x, chr, show_page = TRUE) {
   chr_quad <- paste0(chr, " ", unique(x$quadratname))
   page <- paste0(" (", unique(x$page), ")")
-  if (paginate) {paste0(chr_quad, page)} else {chr_quad}
+  if (show_page) {paste0(chr_quad, page)} else {chr_quad}
 }
 
 #' Create data to plot labels in each subquadrat.

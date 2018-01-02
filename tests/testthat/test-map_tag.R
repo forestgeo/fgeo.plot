@@ -77,7 +77,7 @@ test_that("wrong inputs get noticed", {
     )
   )
 
-  expect_error(map_tag(one_quadrat, paginate = "not logical"))
+  expect_error(map_tag(one_quadrat, show_page = "not logical"))
 
   expect_error(map_tag(one_quadrat, show_subquad = "not logical"))
 
@@ -147,7 +147,7 @@ test_that("page labels can be changed", {
   expect_silent(
     maps <- map_tag(four_quadrats,
       bl = "a", br = "b", tr = "c", tl = "d",
-      paginate = FALSE
+      show_page = FALSE
     )[plots]
   )
   page <- unique(purrr::map_df(maps, "data")$page)
