@@ -62,6 +62,9 @@ test_that("wrong inputs get noticed", {
   expect_error(map_tag(one_quadrat, x_sq = "a"))
   expect_error(map_tag(one_quadrat, y_q = "a"))
   expect_error(map_tag(one_quadrat, y_sq = "a"))
+  expect_error(map_tag(one_quadrat, start_with0 = "not logical"))
+
+  expect_error(map_tag(one_quadrat, subquad_offset = 0))
 
   # wrong length
   expect_error(map_tag(one_quadrat, bl = 1:2))
@@ -152,4 +155,10 @@ test_that("page labels can be changed", {
   )
   page <- unique(purrr::map_df(maps, "data")$page)
   expect_equal(page, letters[plots])
+})
+
+test_that("argument subquad_offset works as expected", {
+  x <- map_tag(one_quadrat, subquad_offset = -1)
+  subquads <- unique(purrr::map_df(x, "data")$subquadrat)
+  expect_true("01" %in% subquads)
 })

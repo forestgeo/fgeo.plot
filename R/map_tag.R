@@ -19,6 +19,16 @@
 #'
 #' @template vft
 #' @inheritParams fgeo.utils::add_subquad
+#' @param subquad_offset `NULL` or `-1`. `NULL` defines the first column of
+#'   subquadrats as 1.  `-1` defines the first column of subquadrats as 0.
+#'   ```R
+#'  subquad_offset = NULL    subquad_offset = -1
+#'  ---------------------    -------------------
+#'        14 24 34 44             04 14 24 34
+#'        13 23 33 43             03 13 23 33
+#'        12 22 32 42             02 12 22 32
+#'        11 21 31 41             01 11 21 31
+#'   ```
 #' @param bl,br,tr,tl Label each of the four maps of a quadrat. See [paginate()].
 #' @template title_quad
 #' @param show_page Logical; `FALSE` removes the page label from the map title.
@@ -134,6 +144,7 @@ map_tag <- function(vft,
                     x_sq = 5,
                     y_q = x_q,
                     y_sq = x_sq,
+                    subquad_offset = NULL,
                     bl = 1,
                     br = 2,
                     tr = 3,
@@ -157,6 +168,7 @@ map_tag <- function(vft,
     x_sq = x_sq,
     y_q = y_q,
     y_sq = y_sq,
+    subquad_offset = subquad_offset,
     bl = bl,
     br = br,
     tr = tr,
@@ -175,10 +187,8 @@ map_tag <- function(vft,
   # Prepare
   sbst <- .vft[ , crucial]
   prepared <- prep_map_tag(
-    sbst,
-    x_q = x_q, x_sq = x_sq, y_q = y_q, y_sq = y_sq,
-    bl = bl, br = br, tr = tr, tl = tl,
-    move_edge = move_edge
+    sbst, x_q = x_q, x_sq = x_sq, y_q = y_q, y_sq = y_sq, subquad_offset =
+    subquad_offset, bl = bl, br = br, tr = tr, tl = tl, move_edge = move_edge
   )
 
   # Plot
@@ -187,10 +197,10 @@ map_tag <- function(vft,
   p <- lapply(
     X = df_list,
     FUN = map_tag_each,
-    x_q = x_q, x_sq = x_sq, y_q = y_q, y_sq = y_sq, title_quad = title_quad,
-    show_page = show_page, show_subquad = show_subquad, point_shape =
-    point_shape, point_size = point_size, tag_size = tag_size, header =
-    header, theme = theme
+    x_q = x_q, x_sq = x_sq, y_q = y_q, y_sq = y_sq, subquad_offset =
+    subquad_offset, title_quad = title_quad, show_page = show_page,
+    show_subquad = show_subquad, point_shape = point_shape, point_size =
+    point_size, tag_size = tag_size, header = header, theme = theme
   )
   setNames(p, nms)
 }
@@ -201,6 +211,7 @@ check_map_tag <- function(.vft,
                           x_sq,
                           y_q,
                           y_sq,
+                          subquad_offset,
                           bl,
                           br,
                           tr,
@@ -221,6 +232,7 @@ check_map_tag <- function(.vft,
   stopifnot(is.numeric(x_sq))
   stopifnot(is.numeric(y_q))
   stopifnot(is.numeric(y_sq))
+  if (!is.null(subquad_offset)) stopifnot(subquad_offset == -1)
   stopifnot(length(bl) == 1)
   stopifnot(length(br) == 1)
   stopifnot(length(tr) == 1)
@@ -251,6 +263,7 @@ prep_map_tag <- function(sbst,
                          x_sq,
                          y_q,
                          y_sq,
+                         subquad_offset,
                          bl,
                          br,
                          tr,
@@ -260,9 +273,15 @@ prep_map_tag <- function(sbst,
   # Using the pipe (%>%) to avoid meaningless temporary-variables
   sbst %>%
     fgeo.utils::add_status_tree() %>%
-    fgeo.utils::add_subquad(x_q = x_q, x_sq = x_sq, y_q = y_q, y_sq = y_sq) %>%
+    fgeo.utils::add_subquad(
+      x_q = x_q, x_sq = x_sq, y_q = y_q, y_sq = y_sq,
+      subquad_offset = subquad_offset
+    ) %>%
     group_by(.data$quadratname) %>%
-    paginate(bl = bl, br = br, tr = tr, tl = tl) %>%
+    paginate(
+      bl = bl, br = br, tr = tr, tl = tl,
+      subquad_offset = subquad_offset
+    ) %>%
     add_subquad_lims(
       x_q = x_q,
       bl = bl, br = br, tr = tr, tl = tl,
@@ -283,6 +302,10 @@ prep_map_tag <- function(sbst,
 #' @param bl,br,tr,tl Number or character giving the label of the four
 #'   subquadrats on each or the four divisions of a quadrat: bottom left (bl),
 #'   bottom right (br), top right (tr), and top left (tl).
+#' @param subquad_offset `NULL` or `-1`. This argument is for internal use. It
+#'   helps paginate to use the same code for data with two different types of
+#'   labels for the subquadrat variable: (1) that with subquadrat-columns
+#'   starting at 1; and (2) that with subquadrat-columns starting at 0.
 #'
 #' ```R
 #' The four divisions of a quadrat (bl, br, tr, tl), each with four subquadrats:
@@ -299,31 +322,32 @@ prep_map_tag <- function(sbst,
 #' ```
 #' @return A modified version of the input with the additional variable `page`.
 #' @seealso [fgeo.utils::add_subquad()].
-#' @export
+#' @keywords internal
 #' @examples
+#' \dontrun{
 #' library(dplyr)
 #' viewfulltable <- tribble(
 #'    ~QX,  ~QY,
 #'   17.9,    0,
 #'    4.1,   15,
-#'    6.1, 17.3,
-#'    3.8,  5.9,
-#'    4.5, 12.4,
-#'    4.9,  9.3,
-#'    9.8,  3.2,
-#'   18.6,  1.1,
-#'   17.3,  4.1,
-#'    1.5, 16.3
+#'    6.1, 17.3
 #' )
 #' with_subquad <- fgeo.utils::add_subquad(viewfulltable, 20, 20, 5, 5)
-#' paginate(with_subquad)
-#' paginate(with_subquad, "a", "b", "c", "d")
-#' paginate(with_subquad, "bottom left", "bottom right", "top left", "top right")
-paginate <- function(x, bl = 1, br = 2, tr = 3, tl = 4) {
+#'
+#' # Warning: Internal function
+#' map:::paginate(with_subquad)
+#' map:::paginate(with_subquad, "a", "b", "c", "d")
+#' }
+paginate <- function(x, bl = 1, br = 2, tr = 3, tl = 4, subquad_offset = NULL) {
   stopifnot(is.data.frame(x))
   fgeo.utils::check_crucial_names(x, "subquadrat")
 
-  mutate(
+  if (!is.null(subquad_offset)) {
+    stopifnot(subquad_offset == -1)
+    # If first column of subquadrats is not 1 (but 0): recode; run; recode back
+    x <- fgeo.utils::recode_subquad(x, offset = 1)
+  }
+  w_page <- mutate(
     x,
     page = dplyr::case_when(
         subquadrat == 11 ~ bl,
@@ -347,6 +371,11 @@ paginate <- function(x, bl = 1, br = 2, tr = 3, tl = 4) {
         subquadrat == 23 ~ tl,
       )
     )
+
+  if (!is.null(subquad_offset)) {
+    w_page <- fgeo.utils::recode_subquad(w_page, offset = -1)
+  }
+  w_page
 }
 
 #' Add plot limits to a dataframe with the variable `subquadrat`.
@@ -389,6 +418,7 @@ add_subquad_lims <- function(paged, x_q = 20, bl, br, tr, tl, move_edge = 0) {
 }
 
 map_tag_each <- function(prep_df,
+                         subquad_offset,
                          title_quad,
                          show_page,
                          show_subquad,
@@ -402,7 +432,10 @@ map_tag_each <- function(prep_df,
                          x_sq,
                          y_sq) {
   # Data to plot labels on map
-  lab_df <- df_subquad_labs(x_q = x_q, y_q = y_q, x_sq = x_sq, y_sq = y_sq)
+  lab_df <- df_subquad_labs(
+    x_q = x_q, y_q = y_q, x_sq = x_sq, y_sq = y_sq,
+    subquad_offset = subquad_offset
+  )
   # Allow plotting labels with `shape` mapping to `status_tree`
   lab_df$status_tree <- NA
 
@@ -466,7 +499,7 @@ entitle_map <- function(x, chr, show_page = TRUE) {
 #'   geom_label(data = df_labs, aes(qx, qy, label = subquadrat),
 #'     colour = "white", fill = "grey", fontface = "bold") +
 #'   ggrepel::geom_text_repel(aes(label = tag))
-df_subquad_labs <- function(x_q, x_sq, y_q, y_sq, ...) {
+df_subquad_labs <- function(x_q, x_sq, y_q, y_sq, subquad_offset, ...) {
   # Center labels in each subquadrat
   # x
   xoffset <- x_sq / 2
@@ -479,6 +512,10 @@ df_subquad_labs <- function(x_q, x_sq, y_q, y_sq, ...) {
 
   pos <- expand.grid(qx = xtrimed, qy = ytrimed, stringsAsFactors = FALSE)
 
-  fgeo.utils::add_subquad(pos, x_q = x_q, x_sq = x_sq, y_q = y_q, y_sq = y_sq)
+  fgeo.utils::add_subquad(
+    pos,
+    x_q = x_q, x_sq = x_sq, y_q = y_q, y_sq = y_sq,
+    subquad_offset = subquad_offset
+  )
 }
 

@@ -4,14 +4,19 @@
 \alias{paginate}
 \title{Label the four divisions of a quadrat -- each with four subquadrats.}
 \usage{
-paginate(x, bl = 1, br = 2, tr = 3, tl = 4)
+paginate(x, bl = 1, br = 2, tr = 3, tl = 4, subquad_offset = NULL)
 }
 \arguments{
 \item{x}{A dataframe with the variable \code{subquadrat}.}
 
 \item{bl, br, tr, tl}{Number or character giving the label of the four
 subquadrats on each or the four divisions of a quadrat: bottom left (bl),
-bottom right (br), top right (tr), and top left (tl).\preformatted{The four divisions of a quadrat (bl, br, tr, tl), each with four subquadrats:
+bottom right (br), top right (tr), and top left (tl).}
+
+\item{subquad_offset}{\code{NULL} or \code{-1}. This argument is for internal use. It
+helps paginate to use the same code for data with two different types of
+labels for the subquadrat variable: (1) that with subquadrat-columns
+starting at 1; and (2) that with subquadrat-columns starting at 0.\preformatted{The four divisions of a quadrat (bl, br, tr, tl), each with four subquadrats:
 
 tl       tr
 ----     -----
@@ -33,25 +38,20 @@ Each map corresponds to one page and includes four subquadrats. There are a
 total of four maps per quadrat (i.e. a total of 16 subquadrats per quadrat).
 }
 \examples{
+\dontrun{
 library(dplyr)
 viewfulltable <- tribble(
    ~QX,  ~QY,
   17.9,    0,
    4.1,   15,
-   6.1, 17.3,
-   3.8,  5.9,
-   4.5, 12.4,
-   4.9,  9.3,
-   9.8,  3.2,
-  18.6,  1.1,
-  17.3,  4.1,
-   1.5, 16.3
+   6.1, 17.3
 )
 with_subquad <- fgeo.utils::add_subquad(viewfulltable, 20, 20, 5, 5)
 paginate(with_subquad)
 paginate(with_subquad, "a", "b", "c", "d")
-paginate(with_subquad, "bottom left", "bottom right", "top left", "top right")
+}
 }
 \seealso{
 \code{\link[fgeo.utils:add_subquad]{fgeo.utils::add_subquad()}}.
 }
+\keyword{internal}

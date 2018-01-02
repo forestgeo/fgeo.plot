@@ -4,11 +4,12 @@
 \alias{map_tag}
 \title{Map tree tags by status, showing four subquadrats per plot-page.}
 \usage{
-map_tag(vft, x_q = 20, x_sq = 5, y_q = x_q, y_sq = x_sq, bl = 1,
-  br = 2, tr = 3, tl = 4, title_quad = "Site Name, YYYY. Quadrat:",
-  show_page = TRUE, show_subquad = TRUE, point_shape = c(19, 4),
-  point_size = 1.5, tag_size = 3, header = map_tag_header(),
-  theme = theme_map_tag(), move_edge = 0)
+map_tag(vft, x_q = 20, x_sq = 5, y_q = x_q, y_sq = x_sq,
+  subquad_offset = NULL, bl = 1, br = 2, tr = 3, tl = 4,
+  title_quad = "Site Name, YYYY. Quadrat:", show_page = TRUE,
+  show_subquad = TRUE, point_shape = c(19, 4), point_size = 1.5,
+  tag_size = 3, header = map_tag_header(), theme = theme_map_tag(),
+  move_edge = 0)
 }
 \arguments{
 \item{vft}{A dataframe -- specifically, a ForestGEO ViewFullTable.}
@@ -24,6 +25,15 @@ common value is 20.}
 
 \item{y_sq}{Size in meters of a subquadrat's side. For ForestGEO-CTFS
 sites, a common value is 5.}
+
+\item{subquad_offset}{\code{NULL} or \code{-1}. \code{NULL} defines the first column of
+subquadrats as 1.  \code{-1} defines the first column of subquadrats as 0.\preformatted{subquad_offset = NULL    subquad_offset = -1
+---------------------    -------------------
+     14 24 34 44             04 14 24 34
+     13 23 33 43             03 13 23 33
+     12 22 32 42             02 12 22 32
+     11 21 31 41             01 11 21 31
+}}
 
 \item{bl, br, tr, tl}{Label each of the four maps of a quadrat. See \code{\link[=paginate]{paginate()}}.}
 
