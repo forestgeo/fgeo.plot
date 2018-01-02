@@ -21,7 +21,8 @@
 #' @inheritParams fgeo.utils::add_subquad
 #' @param bl,br,tr,tl Label each of the four maps of a quadrat. See [paginate()].
 #' @template title_quad
-#' @param paginate Locigal; `FALSE` removes the page label from the map title.
+#' @param paginate Logical; `FALSE` removes the page label from the map title.
+#' @param show_subquad Logical; `FALSE` removes subquadrat labels on each map.
 #' @param point_shape A vector of two numbers giving the shape of the points to
 #'   plot (see possible shapes in the documentation of ?[graphics::points()],
 #'   under the section entitled _'pch' values_).
@@ -139,6 +140,7 @@ map_tag <- function(vft,
                     tl = 4,
                     title_quad = "Site Name, YYYY. Quadrat:",
                     paginate = TRUE,
+                    show_subquad = TRUE,
                     point_shape = c(19, 4),
                     point_size = 1.5,
                     tag_size = 3,
@@ -161,6 +163,7 @@ map_tag <- function(vft,
     tl = tl,
     title_quad = title_quad,
     paginate = paginate,
+    show_subquad = show_subquad,
     point_shape = point_shape,
     point_size = point_size,
     tag_size = tag_size,
@@ -185,8 +188,9 @@ map_tag <- function(vft,
     X = df_list,
     FUN = map_tag_each,
     x_q = x_q, x_sq = x_sq, y_q = y_q, y_sq = y_sq, title_quad = title_quad,
-    paginate = paginate, point_shape = point_shape, point_size = point_size,
-    tag_size = tag_size, header = header, theme = theme
+    paginate = paginate, show_subquad = show_subquad, point_shape =
+    point_shape, point_size = point_size, tag_size = tag_size, header =
+    header, theme = theme
   )
   setNames(p, nms)
 }
@@ -203,6 +207,7 @@ check_map_tag <- function(.vft,
                           tl,
                           title_quad,
                           paginate,
+                          show_subquad,
                           point_shape,
                           point_size,
                           tag_size,
@@ -222,6 +227,7 @@ check_map_tag <- function(.vft,
   stopifnot(length(tl) == 1)
   stopifnot(is.character(title_quad))
   stopifnot(is.logical(paginate))
+  stopifnot(is.logical(show_subquad))
   stopifnot(is.numeric(point_shape))
   stopifnot(length(point_shape) == 2)
   stopifnot(is.numeric(point_size))
@@ -385,6 +391,7 @@ add_subquad_lims <- function(paged, x_q = 20, bl, br, tr, tl, move_edge = 0) {
 map_tag_each <- function(prep_df,
                          title_quad,
                          paginate,
+                         show_subquad,
                          point_shape,
                          point_size,
                          tag_size,
@@ -399,21 +406,22 @@ map_tag_each <- function(prep_df,
   # Allow plotting labels with `shape` mapping to `status_tree`
   lab_df$status_tree <- NA
 
-  ggplot(
-    data = prep_df,
-    # /* ********************************************************************
-    # If in this chunk I refer to `var` as `df$var` I get this error:
-    #   Error: Aesthetics must be either length 1 or the same as the data (16):
-    #   x, y, label, shape
-    aes(x = qx, y = qy, shape = status_tree)
-  ) +
-    scale_shape_manual(values = point_shape) +
-    geom_label(
-      data = lab_df,
-      aes(qx, qy, label = subquadrat),
-      colour = "white", fill = "#f4f2f2", fontface = "bold", size = 12
-    ) +
-    # */ ********************************************************************
+  # >>>
+  # If in this chunk I refer to `var` as `df$var` I get this error:
+  #   Error: Aesthetics must be either length 1 or the same as the data (16):
+  #   x, y, label, shape
+  base <- ggplot(data = prep_df, aes(x = qx, y = qy, shape = status_tree)) +
+    scale_shape_manual(values = point_shape)
+  if (show_subquad) {
+    base <- base +
+      geom_label(
+        data = lab_df,
+        aes(qx, qy, label = subquadrat),
+        colour = "white", fill = "#f4f2f2", fontface = "bold", size = 12
+      )
+  }
+  # <<<
+  base +
     geom_point(size = point_size) +
     ggrepel::geom_text_repel(aes(label = prep_df$tag), size = tag_size) +
     scale_x_continuous(

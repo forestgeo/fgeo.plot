@@ -79,6 +79,8 @@ test_that("wrong inputs get noticed", {
 
   expect_error(map_tag(one_quadrat, paginate = "not logical"))
 
+  expect_error(map_tag(one_quadrat, show_subquad = "not logical"))
+
   expect_error(
     map_tag(
       one_quadrat,
