@@ -64,10 +64,8 @@ reference:
   - title: "Datasets"
     contents:
       - datasets
-      - four_quadrats
-      - one_quadrat
-
-
+      - top1quad
+      - top4quad
 
 articles:
 

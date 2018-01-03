@@ -159,7 +159,7 @@ p <- map_tag(
   header = "Line 1: _________\\nLine 2:\\nLine 3:.....................",
   subquad_offset = -1,
   point_size = 3, point_shape = c(17, 6),
-  tag_size = 5,
+  tag_size = 2,
   move_edge = 0.5
 )
 first(p)

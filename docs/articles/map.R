@@ -1,28 +1,11 @@
----
-title: "Mapping Functions"
-author: "Mauro Lepore"
-date: "`r Sys.Date()`"
-output:
-  rmarkdown::html_vignette:
-    toc: true
-    toc_depth: 6
-vignette: >
-  %\VignetteIndexEntry{Mapping Functions}
-  %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding{UTF-8}
----
-
-This vignette shows the same code that you can find in the help files of `map_sp()`, `map_quad()` and `map_tag()`, but here (not in in the help files) you can see the output.
-
-```{r}
+## ------------------------------------------------------------------------
 library(map)
 library(fgeo.utils)
 library(dplyr)
 # Avoid conflict with `stats::filter()`
 filter <- dplyr::filter
-```
 
-```{r setup, echo = FALSE, message=FALSE, warning=FALSE}
+## ----setup, echo = FALSE, message=FALSE, warning=FALSE-------------------
 # hadley's settings
 set.seed(1014)
 options(digits = 3)
@@ -35,14 +18,11 @@ knitr::opts_chunk$set(
   out.width = "98%",
   fig.align = "center",
   fig.width = 7.5, 
-  # fig.show = "hold",
-  fig.asp = 0.9
+  fig.asp = 0.9,
+  fig.show = "hold"
 )
-```
 
-# `map_sp()`: Map species' distribution
-
-```{r}
+## ------------------------------------------------------------------------
 # Example data
 census <- bciex::bci12t7mini
 species <- c("hybapr", "faraoc")
@@ -138,13 +118,8 @@ marrangeGrob(p1, nrow = 2, ncol = 1)
 # * Also adding a horizontal line
 p2 <- lapply(p1, `+`, geom_hline(aes(yintercept = 400), colour = "blue"))
 marrangeGrob(p2, nrow = 2, ncol = 1)
-```
 
-
-
-# `map_quad()`: Map trees within a quadrat
-
-```{r}
+## ------------------------------------------------------------------------
 # Filter the data you want. For example:
 # (see ?top4quad)
 want <- filter(
@@ -214,13 +189,8 @@ map_quad(
     panel.background = element_rect(fill = "grey")
   )
 )
-```
 
-
-
-# `map_tag()`: Map tree tags by status
-
-```{r}
+## ------------------------------------------------------------------------
 # Filtering the data to map -----------------------------------------------
 
 # Filter the data you want. For example:
@@ -280,7 +250,7 @@ p <- map_tag(
   header = "Line 1: _________\nLine 2:\nLine 3:.....................",
   subquad_offset = -1,
   point_size = 3, point_shape = c(17, 6),
-  tag_size = 2,
+  tag_size = 5,
   move_edge = 0.5
 )
 first(p)
@@ -334,5 +304,4 @@ first(p)
 # If limit-lines aren't visible, try extending the grid a little
 p <- map_tag(smaller, x_q = 10, x_sq = 2.5, move_edge = 0.25)[1]
 first(p)
-```
 
