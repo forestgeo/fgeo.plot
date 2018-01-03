@@ -178,7 +178,7 @@ the plot limits.</p></td>
 <span class='no'>two_quadrats</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/fgeo.utils/topics/top'>top</a></span>(<span class='no'>want</span>, <span class='no'>QuadratID</span>, <span class='fl'>2</span>)
 <span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'>map_quad</span>(<span class='no'>two_quadrats</span>)</div><div class='output co'>#&gt; <span class='message'>* Appending tags of dead trees with the suffix '.d'</span></div><div class='output co'>#&gt; <span class='warning'>Warning: No stem is dead. Is that what you expect?</span></div><div class='output co'>#&gt; <span class='message'>* Standarizing `dbh` by the count of `dbh` measurements</span></div><div class='input'>
 <span class='co'># Visualizing only the first plot of `p`</span>
-<span class='fu'><a href='http://dplyr.tidyverse.org/reference/nth.html'>first</a></span>(<span class='no'>p</span>)</div><div class='img'><img src='map_quad-1.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
+<span class='fu'><a href='http://dplyr.tidyverse.org/reference/nth.html'>first</a></span>(<span class='no'>p</span>)</div><div class='img'><img src='map_quad-8.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
 <span class='co'># Printing all plots pf `p` to .pdf, with parameters optimized for size letter</span>
 <span class='no'>tmp</span> <span class='kw'>&lt;-</span> <span class='fu'>tempfile</span>()  <span class='co'># Remplace this by somehtihing like "maps.pdf"</span>
 
@@ -189,7 +189,7 @@ the plot limits.</p></td>
 <span class='co'># Customizing the maps ----------------------------------------------------</span>
 
 <span class='co'># Filtering only one quadrat to save time</span>
-<span class='no'>one_quad</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/fgeo.utils/topics/top'>top</a></span>(<span class='no'>want</span>, <span class='no'>QuadratID</span>)</div><div class='img'><img src='map_quad-2.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
+<span class='no'>one_quad</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/fgeo.utils/topics/top'>top</a></span>(<span class='no'>want</span>, <span class='no'>QuadratID</span>)</div><div class='img'><img src='map_quad-9.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
 <span class='co'># A custom title and header</span>
 <span class='no'>myheader</span> <span class='kw'>&lt;-</span> <span class='fu'>paste</span>(
   <span class='st'>" "</span>,
@@ -199,7 +199,7 @@ the plot limits.</p></td>
   <span class='st'>" ........................................................................"</span>,
   <span class='kw'>sep</span> <span class='kw'>=</span> <span class='st'>"\n"</span>
 )
-<span class='fu'>map_quad</span>(<span class='no'>one_quad</span>, <span class='kw'>title_quad</span> <span class='kw'>=</span> <span class='st'>"My Site, 2018. Quad:"</span>, <span class='kw'>header</span> <span class='kw'>=</span> <span class='no'>myheader</span>)</div><div class='output co'>#&gt; <span class='message'>* Appending tags of dead trees with the suffix '.d'</span></div><div class='output co'>#&gt; <span class='warning'>Warning: No stem is dead. Is that what you expect?</span></div><div class='output co'>#&gt; <span class='message'>* Standarizing `dbh` by the count of `dbh` measurements</span></div><div class='output co'>#&gt; $`4915`</div><div class='img'><img src='map_quad-3.png' alt='' width='700' height='432.632880098887' /></div><div class='output co'>#&gt; </div><div class='input'>
+<span class='fu'>map_quad</span>(<span class='no'>one_quad</span>, <span class='kw'>title_quad</span> <span class='kw'>=</span> <span class='st'>"My Site, 2018. Quad:"</span>, <span class='kw'>header</span> <span class='kw'>=</span> <span class='no'>myheader</span>)</div><div class='output co'>#&gt; <span class='message'>* Appending tags of dead trees with the suffix '.d'</span></div><div class='output co'>#&gt; <span class='warning'>Warning: No stem is dead. Is that what you expect?</span></div><div class='output co'>#&gt; <span class='message'>* Standarizing `dbh` by the count of `dbh` measurements</span></div><div class='output co'>#&gt; $`4915`</div><div class='img'><img src='map_quad-10.png' alt='' width='700' height='432.632880098887' /></div><div class='output co'>#&gt; </div><div class='input'>
 <span class='co'># Many more tweaks are possible</span>
 
 <span class='co'># Use functions from ggplot to tweak theme</span>
@@ -216,7 +216,7 @@ the plot limits.</p></td>
     <span class='kw'>plot.subtitle</span> <span class='kw'>=</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/element'>element_text</a></span>(<span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>5</span>),
     <span class='kw'>panel.background</span> <span class='kw'>=</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/element'>element_rect</a></span>(<span class='kw'>fill</span> <span class='kw'>=</span> <span class='st'>"grey"</span>)
   )
-)</div><div class='output co'>#&gt; <span class='message'>* Appending tags of dead trees with the suffix '.d'</span></div><div class='output co'>#&gt; <span class='warning'>Warning: No stem is dead. Is that what you expect?</span></div><div class='output co'>#&gt; <span class='message'>* Standarizing `dbh` by the count of `dbh` measurements</span></div><div class='output co'>#&gt; $`4915`</div><div class='img'><img src='map_quad-4.png' alt='' width='700' height='432.632880098887' /></div><div class='output co'>#&gt; </div><div class='input'>
+)</div><div class='output co'>#&gt; <span class='message'>* Appending tags of dead trees with the suffix '.d'</span></div><div class='output co'>#&gt; <span class='warning'>Warning: No stem is dead. Is that what you expect?</span></div><div class='output co'>#&gt; <span class='message'>* Standarizing `dbh` by the count of `dbh` measurements</span></div><div class='output co'>#&gt; $`4915`</div><div class='img'><img src='map_quad-11.png' alt='' width='700' height='432.632880098887' /></div><div class='output co'>#&gt; </div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
