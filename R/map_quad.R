@@ -13,41 +13,55 @@
 #' @export
 #'
 #' @examples
-#' library(dplyr)
+#' library(map)
 #' library(fgeo.utils)
-#'
-#' # Fixing wrong names
-#' vft <- rename(bciex::bci12vft_mini, QX = x, QY = y)
+#' library(dplyr)
+#' # Avoid conflict with `stats::filter()`
+#' filter <- dplyr::filter
 #'
 #' # Filter the data you want. For example:
-#'
-#' # Filtering trees of diameter greater than 10 cm from the last census of plot 1
-#' # (see also ?fgeo.utils::rm_dead_twice)
-#' want <- dplyr::filter(
-#'   vft,
-#'   DBH > 10,
-#'   CensusID == max(CensusID, na.rm = TRUE),
+#' # (see ?top4quad)
+#' want <- filter(
+#'   top4quad,
+#'   CensusID == 6,
 #'   PlotID == 1
 #' )
-#'
-#' # Filtering only two quadrats to save time
-#' two_quadrats <- top(want, QuadratID, 2)
-#' p <- map_quad(two_quadrats)
-#'
+#' p <- map_quad(want)
 #' # Visualizing only the first plot of `p`
 #' first(p)
-#'
-#' # Printing all plots pf `p` to .pdf, with parameters optimized for size letter
+#' # Printing all plots of `p` to .pdf, with parameters optimized for size letter
 #' tmp <- tempfile()  # Remplace this by somehtihing like "maps.pdf"
-#'
 #' pdf(tmp, paper = "letter", height = 10.5, width = 8)
 #' p
 #' dev.off()
+#' unlink(tmp)
+#'
+#' # Be careful if filtering by DBH: You may unintentionally remove dead trees.
+#' # * Confirm this dataset has dead trees:
+#' # (see `?top4quad`)
+#' dead <- top4quad %>%
+#'   add_status_tree() %>%
+#'   top(QuadratID) %>%
+#'   filter(status_tree == "dead")
+#' select(dead, Tag, Status, status_tree, DBH)
+#' map_quad(dead)
+#' # * If you filter by `DBH`, you loose the dead trees becaue their `DBH = NA`
+#' wrong <- filter(dead, DBH > 10)
+#' map_quad(wrong)
+#' # * The right way to do it is to explicietly inlcude rows where DBH = NA
+#' right <- filter(dead, DBH > 10 | is.na(DBH))
+#' map_quad(right)
+#'
+#' # Keeping dead trees with `is.na(DBH)` (e.g. tag 127885.d on the bottom right)
+#' p <- filter(top4quad, DBH > 20 | is.na(DBH))
+#' first(map_quad(p))
+#'
+#' # For more complex filtering, see also ?fgeo.utils::rm_dead_twice)
+#' multiple_censuses <- bciex::bci12vft_mini
+#' nrow(multiple_censuses)
+#' nrow(rm_dead_twice(multiple_censuses))
 #'
 #' # Customizing the maps ----------------------------------------------------
-#'
-#' # Filtering only one quadrat to save time
-#' one_quad <- top(want, QuadratID)
 #'
 #' # A custom title and header
 #' myheader <- paste(
@@ -58,15 +72,14 @@
 #'   " ........................................................................",
 #'   sep = "\n"
 #' )
-#' map_quad(one_quad, title_quad = "My Site, 2018. Quad:", header = myheader)
+#' # See ?top1quad
+#' map_quad(top1quad, title_quad = "My Site, 2018. Quad:", header = myheader)
 #'
-#' # Many more tweaks are possible
-#'
-#' # Use functions from ggplot to tweak theme
+#' # Tweak the theme with ggplot
 #' library(ggplot2)
 #'
 #' map_quad(
-#'   one_quad,
+#'   top1quad,
 #'   title_quad = "My Site, 2018. Quad:",
 #'   header = map_quad_header("spanish"),
 #'   tag_size = 3,
@@ -77,16 +90,15 @@
 #'     panel.background = element_rect(fill = "grey")
 #'   )
 #' )
-#'
 map_quad <- function(vft,
-                     title_quad = "Site Name, YYYY, Quadrat:",
-                     header = map_quad_header(),
-                     theme = theme_map_quad(),
-                     lim_min = 0,
-                     lim_max = 20,
-                     subquadrat_side = 5,
-                     tag_size = 2,
-                     move_edge = 0) {
+  title_quad = "Site Name, YYYY, Quadrat:",
+  header = map_quad_header(),
+  theme = theme_map_quad(),
+  lim_min = 0,
+  lim_max = 20,
+  subquadrat_side = 5,
+  tag_size = 2,
+  move_edge = 0) {
   .vft <- setNames(vft, tolower(names(vft)))
   core <- c(
     "plotid", "censusid", "tag", "dbh", "status", "quadratname",

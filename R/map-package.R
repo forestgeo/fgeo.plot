@@ -1,8 +1,6 @@
 #' @keywords internal
 "_PACKAGE"
 
-
-
 # Import external functions and avoid R CMD check note --------------------
 
 # Not importing dplyr::filter() because it may conflict with stats::filter()

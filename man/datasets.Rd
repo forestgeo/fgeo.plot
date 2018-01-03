@@ -5,19 +5,35 @@
 \alias{datasets}
 \alias{one_quadrat}
 \alias{four_quadrats}
+\alias{top4quad}
+\alias{top1quad}
 \title{Data sets for examples; adapted from \link[bciex:bci12vft_mini]{bciex::bci12vft_mini}.}
 \format{An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 143 rows and 28 columns.}
 \usage{
 one_quadrat
 
 four_quadrats
+
+top4quad
+
+top1quad
 }
 \description{
 Data sets for examples; adapted from \link[bciex:bci12vft_mini]{bciex::bci12vft_mini}.
 }
 \examples{
-library(tibble)
-one_quadrat
-four_quadrats
+library(dplyr)
+all_quad <- bciex::bci12vft_mini \%>\%
+  dplyr::rename(QX = x, QY = y) \%>\%
+  dplyr::filter(PlotID == 1) \%>\%
+  fgeo.utils::top(CensusID)
+
+top4quad <- all_quad \%>\% fgeo.utils::top(QuadratID, 4)
+identical(top4quad, map::top4quad)
+
+top1quad <- all_quad \%>\% fgeo.utils::top(QuadratID, 1)
+identical(top1quad, map::top4quad)
+
+top1quad
 }
 \keyword{datasets}

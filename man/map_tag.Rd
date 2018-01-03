@@ -93,62 +93,94 @@ the algorithm to calculate subquadrats.
 }
 
 \examples{
-\dontrun{
-library(dplyr)
-library(ggplot2)
 library(map)
-library(bciex)
+library(fgeo.utils)
+library(dplyr)
+# Avoid conflict with `stats::filter()`
+filter <- dplyr::filter
 
-# Subset of a public ViewFullTable from BCI (source:
-# https://repository.si.edu/handle/10088/20925).
+# Filtering the data to map -----------------------------------------------
 
-# Improve printing method
-vft <- as_tibble(bci12vft_mini)
-vft
-
-# Filter the plot you want to map
-vft1 <- dplyr::filter(vft, PlotID == 1)
-
-# Another look
-glimpse(vft1)
-
-# This data set has two wrong names that need to be fixed before using map_tag()
-vft1_rnm <- dplyr::rename(vft1, qx = x, qy = y)
-maps <- map_tag(vft1_rnm)
-
-# Plotting only one map to screen
-maps[1]
-
-# Printing only maps 1-4 to a .pdf
-pdf("default-map.pdf", paper = "letter", height = 10.5, width = 8)
-maps[1:4]
+# Filter the data you want. For example:
+# (see ?top1quad)
+want <- filter(
+  top1quad,
+  CensusID == 6,
+  PlotID == 1
+)
+p <- map_tag(want)
+# Visualizing only the first plot of `p`
+first(p)
+# Printing all plots of `p` to .pdf, with parameters optimized for size letter
+tmp <- tempfile()  # Remplace this by somehtihing like "maps.pdf"
+pdf(tmp, paper = "letter", height = 10.5, width = 8)
+p
 dev.off()
+unlink(tmp)
 
-# Common customization (printing only 1 map to screen)
-map_tag(vft1_rnm,
-  title_quad = "BCI 2012", point_size = 3, point_shape = c(17, 6), tag_size = 5
-)[1]
+# Be careful if filtering by DBH: You may unintentionally remove dead trees.
+# * Confirm this dataset has dead trees:
+# (see `?top4quad`)
+dead <- top4quad \%>\%
+  add_status_tree() \%>\%
+  top(QuadratID) \%>\%
+  filter(status_tree == "dead")
+select(dead, Tag, Status, status_tree, DBH)
+first(map_tag(dead))
+# * If you filter by `DBH`, you loose the dead trees becaue their `DBH = NA`
+wrong <- filter(dead, DBH > 10)
+wrong
+# * The right way to do it is to explicietly inlcude rows where DBH = NA
+right <- filter(dead, DBH > 10 | is.na(DBH))
+right
+first(map_quad(right))
 
-# Custom header
-map_tag(vft1_rnm, title_quad = "BCI 2012",
-  header = "Line 1: _________\\nLine 2:\\nLine 3:....................."
-)[1]
+# Keeping dead trees with `is.na(DBH)` (e.g. tag 127885.d on the bottom right)
+p <- filter(top4quad, DBH > 20 | is.na(DBH))
+first(map_tag(p))
 
-# Or use a pre-made header
-map_tag(vft1_rnm, title_quad = "BCI 2012", header = map_tag_header())[1]
+# For more complex filtering, see also ?fgeo.utils::rm_dead_twice
+multiple_censuses <- bciex::bci12vft_mini
+nrow(multiple_censuses)
+nrow(rm_dead_twice(multiple_censuses))
+
+
+
+# Customizing the maps ----------------------------------------------------
+
+# Common tweaks
+
+p <- map_tag(top1quad, show_page = FALSE, show_subquad = FALSE)
+first(p)
+
+p <- map_tag(
+  top1quad,
+  title_quad = "BCI 2012. Quadrat: ",
+  bl = "bottom-left", br = "bottom-right", tr = "top-right", tl = "top-left",
+  header = "Line 1: _________\\nLine 2:\\nLine 3:.....................",
+  subquad_offset = -1,
+  point_size = 3, point_shape = c(17, 6),
+  tag_size = 5,
+  move_edge = 0.5
+)
+first(p)
+
+
 
 # Themes
 
-# Using a pre-made theme from ggplot2
 library(ggplot2)
-map_tag(vft1_rnm, title_quad = "BCI 2012", theme = theme_gray())[1]
 
-# Customizing the default theme of map_tag()
-theme_small_change <- theme_map_tag(legend.position = "bottom")
-map_tag(vft1_rnm, title_quad = "BCI 2012", theme = theme_small_change)[1]
+p <- map_tag(top1quad, theme = theme_gray())
+first(p)
 
-# Customizing the default theme extreemely, to show flexibility
-theme_extreeme_change <- ggplot2::theme(
+# Tweaking the default theme of map_tag()
+
+small_tweak <- theme_map_tag(legend.position = "bottom")
+p <- map_tag(top1quad, theme = small_tweak)
+first(p)
+
+large_tweak <- theme(
   legend.position = "bottom",
   legend.title = element_blank(),
   legend.text = element_text(size = 8, colour = "red"),
@@ -162,19 +194,27 @@ theme_extreeme_change <- ggplot2::theme(
   panel.grid.minor = element_line(colour = "black", linetype = "dotted"),
   panel.grid.major = element_line(colour = "black")
 )
-map_tag(vft1_rnm, title_quad = "BCI 2012", theme = theme_extreeme_change)[1]
+p <- map_tag(top1quad, theme = large_tweak)
+first(p)
+
+
+
+# Quadrat and subquadrat dimensitons
 
 # Adapting the dimensions of quadrat and subquadrat to the range of qx and qy
-# Creating new data set with qx and qy ranging 0-100
-smaller <- vft1_rnm
+# Creating new data set with QX and QY ranging 0-100
+smaller <- top1quad
 n <- nrow(smaller)
-smaller$qx <- sample(0:10, n, replace = TRUE)
-smaller$qy <- sample(0:10, n, replace = TRUE)
+smaller$QX <- sample(0:10, n, replace = TRUE)
+smaller$QY <- sample(0:10, n, replace = TRUE)
 
-map_tag(smaller, x_q = 10, x_sq = 2.5)[1]
+p <- map_tag(smaller, x_q = 10, x_sq = 2.5)
+first(p)
+
 # If limit-lines aren't visible, try extending the grid a little
-map_tag(smaller, x_q = 10, x_sq = 2.5, move_edge = 0.25)[1]
-}
+p <- map_tag(smaller, x_q = 10, x_sq = 2.5, move_edge = 0.25)[1]
+first(p)
+
 }
 \seealso{
 \code{\link[graphics:points]{graphics::points()}}, \code{\link[ggplot2:geom_point]{ggplot2::geom_point()}}, \code{\link[ggplot2:theme]{ggplot2::theme()}}

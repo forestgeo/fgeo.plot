@@ -161,4 +161,8 @@ test_that("argument subquad_offset works as expected", {
   x <- map_tag(one_quadrat, subquad_offset = -1)
   subquads <- unique(purrr::map_df(x, "data")$subquadrat)
   expect_true("01" %in% subquads)
+
+  x <- map_tag(top1quad, subquad_offset = -1)
+  subquads <- unique(purrr::map_df(x, "data")$subquadrat)
+  expect_true("01" %in% subquads)
 })

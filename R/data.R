@@ -1,9 +1,19 @@
 #' Data sets for examples; adapted from [bciex::bci12vft_mini].
 #' @name datasets
 #' @examples
-#' library(tibble)
-#' one_quadrat
-#' four_quadrats
+#' library(dplyr)
+#' all_quad <- bciex::bci12vft_mini %>%
+#'   dplyr::rename(QX = x, QY = y) %>%
+#'   dplyr::filter(PlotID == 1) %>%
+#'   fgeo.utils::top(CensusID)
+#'
+#' top4quad <- all_quad %>% fgeo.utils::top(QuadratID, 4)
+#' identical(top4quad, map::top4quad)
+#'
+#' top1quad <- all_quad %>% fgeo.utils::top(QuadratID, 1)
+#' identical(top1quad, map::top4quad)
+#'
+#' top1quad
 NULL
 
 #' @rdname datasets
@@ -12,3 +22,8 @@ NULL
 #' @rdname datasets
 "four_quadrats"
 
+#' @rdname datasets
+"top4quad"
+
+#' @rdname datasets
+"top1quad"

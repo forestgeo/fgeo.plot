@@ -48,120 +48,111 @@ Thanks to Gabriel Arellano and David Kenfack for ideas and feedback.
 }
 
 \examples{
-\dontrun{
-# Setup -------------------------------------------------------------------
-
-# For easier data manipulation
+library(map)
+library(fgeo.utils)
 library(dplyr)
-# Print only a few rows of tibbles (modern dataframes) to save space
-options(dplyr.print_min = 6, dplyr.print_max = 6)
+# Avoid conflict with `stats::filter()`
+filter <- dplyr::filter
 
-# Quick exploration with defaults -----------------------------------------
+# Example data
+census <- bciex::bci12t7mini
+species <- c("hybapr", "faraoc")
 
-# Example data. Converting dataframe to tibble for better printing
-census <- as_tibble(bciex::bci12t7mini)
-
-# Print to screen
-map_sp(census, "hybapr")
-
-# Print to .pdf -- one species per page of a single file
-pdf()
-map_sp(census, c("hybapr", "faraoc"))
+# Defaults
+p <- map_sp(census, species)
+# Visualizing only the first plot of `p`
+first(p)
+# Printing all plots of `p` to .pdf, with parameters optimized for size letter
+tmp <- tempfile()  # Remplace this by somehtihing like "maps.pdf"
+pdf(tmp, paper = "letter", height = 10.5, width = 8)
+p
 dev.off()
+unlink(tmp)
 
-# Add elevation data
-elev <- bciex::bci_elevation
-
-# Not the right names
-names(elev)
-elev <- rename(elev, gx = x, gy = y)
-# OK now
-elev
-
-# Common changes ----------------------------------------------------------
-
-# Changing points' properties
-map_sp(
-  census, "hybapr",
+# Simple tweaks
+p <- map_sp(
+  census, species,
   # Passed to ggplot2::geom_point()
   size = 4, shape = 22, fill = "green", colour = "black", stroke = 2
 )
+first(p)
 
-# Changing lines' properties
-map_sp(
-  census, "hybapr",
-  elevation = elev, line_size = 1, low = "red", high = "blue", bins = 10
+# Add elevation and tweak lines
+# Fixing wrong names of elevation data
+elevation <- rename(bciex::bci_elevation, gx = x, gy = y)
+p <- map_sp(
+  census, species,
+  elevation = elevation, line_size = 1, low = "red", high = "blue", bins = 10
 )
+first(p)
 
 # Dealing with overplotting
-crowded <- dplyr::tibble(
+crowded <- tibble(
   sp = sample(c("species1"), 10000, replace = TRUE),
   gx = sample.int(1000, 10000, replace = TRUE),
   gy = sample.int(500, 10000, replace = TRUE)
 )
-# Too crowded
 map_sp(crowded, c("species1"))
-# Less crowded
-map_sp(
-  crowded, c("species1"),
-  # passing arguments to ggplot2::geom_point()
-  size = 1, alpha = 5/10, shape = 21
-)
+# Less overplotting
+map_sp(crowded, c("species1"), size = 1, alpha = 5/10, shape = 21)
 
-# Changing theme
-map_sp(census, "hybapr", theme = ggplot2::theme_classic())
-map_sp(census, "hybapr", theme = ggplot2::theme_dark())
-# For more options see ?ggplot2::theme_bw()
+# Limits
+p <- map_sp(census, species, xlim = c(0, 1500), ylim = c(0, 1000))
+first(p)
 
-# Less common changes -----------------------------------------------------
-
-# Changing limits
-map_sp(census, "hybapr", xlim = c(0, 1500), ylim = c(0, 1000))
-
-# Fine tunning ------------------------------------------------------------
-
+# Themes
 library(ggplot2)
-library(gridExtra)
-
-# Multiple maps per page
-three_species <- c("hybapr", "faraoc", "des2pa")
-maps <- map_sp(census, three_species)
-multipaged <- marrangeGrob(maps, nrow = 1, ncol = 2)
-multipaged
-# Saving to .pdf: Option 1
-ggplot2::ggsave("my_multipaged.pdf", multipaged)
-# Saving to .pdf: Option 2
-pdf()
-multipaged
-dev.off()
-
-# Custom theme; see all the options with ?ggplot2::theme()
-my_theme <- ggplot2::theme(
-  text = element_text(size = 25, face = "bold.italic", colour = "white"),
+# Using pre-made themes
+p <- map_sp(census, species, theme = ggplot2::theme_classic())
+first(p)
+# Tweaking the default theme of map_sp()
+small_tweak <- theme_map_sp(
+  text = element_text(size = 30, face = "bold.italic")
+)
+p <- map_sp(census, species, theme = small_tweak)
+first(p)
+large_tweak <- theme(
+  legend.position = "bottom",
+  legend.title = element_blank(),
+  legend.text = element_text(size = 8, colour = "red"),
+  text = element_text(size = 11, face = "bold.italic", colour = "white"),
   plot.background = element_rect(fill = "black"),
   plot.margin = margin(2, 2, 2, 2, "cm"),
   strip.background = element_rect(fill = "darkgreen"),
   strip.text = element_text(colour = "white"),
-  # make grid dissapear by matching background colour
   panel.background = element_rect(fill = "lightgreen"),
-  panel.grid.minor = element_line(colour = "lightgreen"),
-  panel.grid.major = element_line(colour = "lightgreen")
+  panel.grid.minor = element_line(colour = "black", linetype = "dotted"),
+  panel.grid.major = element_line(colour = "black")
 )
-map_sp(census, "hybapr", theme = my_theme)
+p <- map_sp(census, species, theme = large_tweak)
+first(p)
 
+# Multiple maps per page
+library(gridExtra)
+four_species <- c("hybapr", "faraoc", "des2pa", "tri2tu")
+p <- map_sp(census, four_species)
+multipaged <- marrangeGrob(p, nrow = 1, ncol = 2)
+# Printing all plots of `p` to .pdf, with parameters optimized for size letter
+tmp <- tempfile()
+# Option 1
+pdf(tmp, paper = "letter", height = 10.5, width = 8)
+multipaged
+dev.off()
+unlink(tmp)
+# Option 2
+ggsave("map.pdf", multipaged, height = 10.5, width = 8)
 
-# Extending with ggplot2 --------------------------------------------------
-
-# Adding new layers
-p0 <- map_sp(census, c("hybapr", "faraoc"))
-# To one element of the plots' list
+# Extending with ggplot2
+p0 <- map_sp(census, species)
+#  Adding new layer to one element of the plots' list
 p0[["hybapr"]] + geom_vline(aes(xintercept = 300), colour = "red")
-# To all elements of the plots' list
+# Adding new layer to all elements of the plots' list
+# * Adding a vertical line
 p1 <- lapply(p0, `+`, geom_vline(aes(xintercept = 300), colour = "red"))
-p1
+marrangeGrob(p1, nrow = 2, ncol = 1)
+# * Also adding a horizontal line
 p2 <- lapply(p1, `+`, geom_hline(aes(yintercept = 400), colour = "blue"))
-p2
-#' }
+marrangeGrob(p2, nrow = 2, ncol = 1)
 }
 \seealso{
 \code{\link[grDevices:pdf]{grDevices::pdf()}}, \code{\link[grDevices:png]{grDevices::png()}},
