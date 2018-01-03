@@ -3,17 +3,11 @@
 \docType{data}
 \name{datasets}
 \alias{datasets}
-\alias{one_quadrat}
-\alias{four_quadrats}
 \alias{top4quad}
 \alias{top1quad}
 \title{Data sets for examples; adapted from \link[bciex:bci12vft_mini]{bciex::bci12vft_mini}.}
-\format{An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 143 rows and 28 columns.}
+\format{An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 964 rows and 28 columns.}
 \usage{
-one_quadrat
-
-four_quadrats
-
 top4quad
 
 top1quad

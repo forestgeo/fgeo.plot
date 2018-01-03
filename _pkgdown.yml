@@ -71,7 +71,6 @@ reference:
 
 articles:
 
-  - title: "All tutorials"
+  - title: "Mapping Functions"
     contents:
-      - map_tag
-      - map_sp
+      - map

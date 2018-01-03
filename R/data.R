@@ -17,12 +17,6 @@
 NULL
 
 #' @rdname datasets
-"one_quadrat"
-
-#' @rdname datasets
-"four_quadrats"
-
-#' @rdname datasets
 "top4quad"
 
 #' @rdname datasets
