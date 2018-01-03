@@ -14,6 +14,6 @@ Rplots.pdf
 README.html
 rsconnect
 
-docs/articles/map_tag_cache
-docs/articles/map_quad_cache
-docs/articles/map_sp_cache
+docs/articles/map_cache
+vignettes/map_cache
+
