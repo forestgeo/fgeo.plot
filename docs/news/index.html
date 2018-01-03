@@ -110,7 +110,24 @@
 <h1 class="hasAnchor">
 <a href="#map-0-0-00-9100" class="anchor"></a>map 0.0.00.9100</h1>
 <ul>
-<li>Refactor themes to use arguments from <code><a href="http://www.rdocumentation.org/packages/ggplot2/topics/theme">ggplot2::theme()</a></code>.</li>
+<li>Refactor all functions <code>theme_*()</code> for consistency.</li>
+<li>Refactor all functions <code>*_header()</code> for consistency.</li>
+<li>Refactor all functions <code>map_*()</code> for consistency (internal and arguments)</li>
+<li>Rewrite help file of all functions <code>map_*()</code> for consistency.</li>
+<li>
+<code><a href="../reference/map_tag.html">map_tag()</a></code> gains arguments <code>show_page</code> and <code>show_subquad</code>.</li>
+<li>
+<code><a href="../reference/map_tag.html">map_tag()</a></code> gains arguments <code>bl, br, tr, tl</code> to change page labels.</li>
+<li>
+<code><a href="../reference/map_tag.html">map_tag()</a></code> gains argument <code>subquad_offset</code> to change origin-subquadrat to 01.</li>
+<li>New data sets: <code>top1quad</code> and <code>top4quad</code> avoid fixing wrong names in examples.</li>
+<li>New vignette <a href="https://forestgeo.github.io/map/articles/map.html">Mapping Functions</a> shows output of all <code>map_*()</code> functions.</li>
+<li>New function <code><a href="../reference/map_quad.html">map_quad()</a></code> maps trees within a quadrat standarized by <code>DBH</code>.</li>
+</ul>
+<p>RELEVANT IMPROVEMENTS FROM OTHER PACKAGES</p>
+<ul>
+<li>New package <a href="https://forestgeo.github.io/fgeo/reference/fgeo.utils.html"><strong>fgeo.utils</strong></a> inlcudes helpers <code>top()</code> and <code>rm_dead_twice()</code>.</li>
+<li>New package <a href="https://forestgeo.github.io/fgeo/index.html"><strong>fgeo</strong></a> makes it easy to load all functions with a single call.</li>
 </ul>
 </div>
     <div id="map-0-0-00-9007" class="section level1">

@@ -1,6 +1,20 @@
 # map 0.0.00.9100
 
-* Refactor themes to use arguments from `ggplot2::theme()`.
+* Refactor all functions `theme_*()` for consistency.
+* Refactor all functions `*_header()` for consistency.
+* Refactor all functions `map_*()` for consistency (internal and arguments)
+* Rewrite help file of all functions `map_*()` for consistency.
+* `map_tag()` gains arguments `show_page` and `show_subquad`.
+* `map_tag()` gains arguments `bl, br, tr, tl` to change page labels.
+* `map_tag()` gains argument `subquad_offset` to change origin-subquadrat to 01.
+* New data sets: `top1quad` and `top4quad` avoid fixing wrong names in examples.
+* New vignette [Mapping Functions](https://forestgeo.github.io/map/articles/map.html) shows output of all `map_*()` functions.
+* New function `map_quad()` maps trees within a quadrat standarized by `DBH`.
+
+RELEVANT IMPROVEMENTS FROM OTHER PACKAGES
+
+* New package [__fgeo.utils__](https://forestgeo.github.io/fgeo/reference/fgeo.utils.html) inlcudes helpers `top()` and `rm_dead_twice()`.
+* New package [__fgeo__](https://forestgeo.github.io/fgeo/index.html) makes it easy to load all functions with a single call.
 
 # map 0.0.00.9007
 
