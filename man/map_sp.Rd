@@ -48,6 +48,7 @@ Thanks to Gabriel Arellano and David Kenfack for ideas and feedback.
 }
 
 \examples{
+\dontrun{
 library(map)
 library(fgeo.utils)
 library(dplyr)
@@ -63,11 +64,9 @@ p <- map_sp(census, species)
 # Visualizing only the first plot of `p`
 first(p)
 # Printing all plots of `p` to .pdf, with parameters optimized for size letter
-tmp <- tempfile()  # Remplace this by somehtihing like "maps.pdf"
-pdf(tmp, paper = "letter", height = 10.5, width = 8)
+pdf("map.pdf", paper = "letter", height = 10.5, width = 8)
 p
 dev.off()
-unlink(tmp)
 
 # Simple tweaks
 p <- map_sp(
@@ -133,12 +132,10 @@ four_species <- c("hybapr", "faraoc", "des2pa", "tri2tu")
 p <- map_sp(census, four_species)
 multipaged <- marrangeGrob(p, nrow = 1, ncol = 2)
 # Printing all plots of `p` to .pdf, with parameters optimized for size letter
-tmp <- tempfile()
 # Option 1
-pdf(tmp, paper = "letter", height = 10.5, width = 8)
+pdf("map.pdf", paper = "letter", height = 10.5, width = 8)
 multipaged
 dev.off()
-unlink(tmp)
 # Option 2
 ggsave("map.pdf", multipaged, height = 10.5, width = 8)
 
@@ -153,6 +150,7 @@ marrangeGrob(p1, nrow = 2, ncol = 1)
 # * Also adding a horizontal line
 p2 <- lapply(p1, `+`, geom_hline(aes(yintercept = 400), colour = "blue"))
 marrangeGrob(p2, nrow = 2, ncol = 1)
+}
 }
 \seealso{
 \code{\link[grDevices:pdf]{grDevices::pdf()}}, \code{\link[grDevices:png]{grDevices::png()}},

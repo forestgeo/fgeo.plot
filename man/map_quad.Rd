@@ -34,6 +34,7 @@ A list which each element is a plot of class ggplot.
 Map trees within a quadrat.
 }
 \examples{
+\dontrun{
 library(map)
 library(fgeo.utils)
 library(dplyr)
@@ -51,11 +52,9 @@ p <- map_quad(want)
 # Visualizing only the first plot of `p`
 first(p)
 # Printing all plots of `p` to .pdf, with parameters optimized for size letter
-tmp <- tempfile()  # Remplace this by somehtihing like "maps.pdf"
-pdf(tmp, paper = "letter", height = 10.5, width = 8)
+pdf("map.pdf", paper = "letter", height = 10.5, width = 8)
 p
 dev.off()
-unlink(tmp)
 
 # Be careful if filtering by DBH: You may unintentionally remove dead trees.
 # * Confirm this dataset has dead trees:
@@ -111,4 +110,5 @@ map_quad(
     panel.background = element_rect(fill = "grey")
   )
 )
+}
 }

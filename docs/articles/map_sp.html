@@ -81,7 +81,7 @@
       <h1>Mapping species distribution</h1>
                         <h4 class="author">Mauro Lepore</h4>
             
-            <h4 class="date">2018-01-02</h4>
+            <h4 class="date">2018-01-03</h4>
           </div>
 
     
@@ -172,7 +172,8 @@ my_elev
 <p>Note that the elevation data set must have very specific variable names; or it will fail:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># This will fail because the names of `my_elev` are not correct</span>
 <span class="kw"><a href="../reference/map_sp.html">map_sp</a></span>(census, <span class="kw">c</span>(<span class="st">"hybapr"</span>, <span class="st">"faraoc"</span>), <span class="dt">elevation =</span> my_elev)
-<span class="co">#&gt; Error in add_elevation(p, elev = elev, line_size = line_size, low = low, : object 'elev' not found</span></code></pre></div>
+<span class="co">#&gt; Error: Ensure your data set has these variables:</span>
+<span class="co">#&gt; gx, gy, elev</span></code></pre></div>
 <p>If necessary, rename your variables:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Renaming data and trying again</span>
 elev &lt;-<span class="st"> </span><span class="kw">rename</span>(my_elev, <span class="dt">gx =</span> x, <span class="dt">gy =</span> y)

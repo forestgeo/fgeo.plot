@@ -238,61 +238,92 @@ the algorithm to calculate subquadrats.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='co'># NOT RUN {</span>
-<span class='fu'>library</span>(<span class='no'>dplyr</span>)
-<span class='fu'>library</span>(<span class='no'>ggplot2</span>)
 <span class='fu'>library</span>(<span class='no'>map</span>)
-<span class='fu'>library</span>(<span class='no'>bciex</span>)
+<span class='fu'>library</span>(<span class='no'>fgeo.utils</span>)
+<span class='fu'>library</span>(<span class='no'>dplyr</span>)
+<span class='co'># Avoid conflict with `stats::filter()`</span>
+<span class='no'>filter</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='no'><a href='http://dplyr.tidyverse.org/reference/filter.html'>filter</a></span>
 
-<span class='co'># Subset of a public ViewFullTable from BCI (source:</span>
-<span class='co'># https://repository.si.edu/handle/10088/20925).</span>
+<span class='co'># Filtering the data to map -----------------------------------------------</span>
 
-<span class='co'># Improve printing method</span>
-<span class='no'>vft</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://dplyr.tidyverse.org/reference/reexports.html'>as_tibble</a></span>(<span class='no'>bci12vft_mini</span>)
-<span class='no'>vft</span>
-
-<span class='co'># Filter the plot you want to map</span>
-<span class='no'>vft1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='http://dplyr.tidyverse.org/reference/filter.html'>filter</a></span>(<span class='no'>vft</span>, <span class='no'>PlotID</span> <span class='kw'>==</span> <span class='fl'>1</span>)
-
-<span class='co'># Another look</span>
-<span class='fu'><a href='http://dplyr.tidyverse.org/reference/reexports.html'>glimpse</a></span>(<span class='no'>vft1</span>)
-
-<span class='co'># This data set has two wrong names that need to be fixed before using map_tag()</span>
-<span class='no'>vft1_rnm</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='http://dplyr.tidyverse.org/reference/select.html'>rename</a></span>(<span class='no'>vft1</span>, <span class='kw'>qx</span> <span class='kw'>=</span> <span class='no'>x</span>, <span class='kw'>qy</span> <span class='kw'>=</span> <span class='no'>y</span>)
-<span class='no'>maps</span> <span class='kw'>&lt;-</span> <span class='fu'>map_tag</span>(<span class='no'>vft1_rnm</span>)
-
-<span class='co'># Plotting only one map to screen</span>
-<span class='no'>maps</span>[<span class='fl'>1</span>]
-
-<span class='co'># Printing only maps 1-4 to a .pdf</span>
-<span class='fu'>pdf</span>(<span class='st'>"default-map.pdf"</span>, <span class='kw'>paper</span> <span class='kw'>=</span> <span class='st'>"letter"</span>, <span class='kw'>height</span> <span class='kw'>=</span> <span class='fl'>10.5</span>, <span class='kw'>width</span> <span class='kw'>=</span> <span class='fl'>8</span>)
-<span class='no'>maps</span>[<span class='fl'>1</span>:<span class='fl'>4</span>]
+<span class='co'># Filter the data you want. For example:</span>
+<span class='co'># (see ?top1quad)</span>
+<span class='no'>want</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://dplyr.tidyverse.org/reference/filter.html'>filter</a></span>(
+  <span class='no'>top1quad</span>,
+  <span class='no'>CensusID</span> <span class='kw'>==</span> <span class='fl'>6</span>,
+  <span class='no'>PlotID</span> <span class='kw'>==</span> <span class='fl'>1</span>
+)
+<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'>map_tag</span>(<span class='no'>want</span>)
+<span class='co'># Visualizing only the first plot of `p`</span>
+<span class='fu'><a href='http://dplyr.tidyverse.org/reference/nth.html'>first</a></span>(<span class='no'>p</span>)
+<span class='co'># Printing all plots of `p` to .pdf, with parameters optimized for size letter</span>
+<span class='fu'>pdf</span>(<span class='st'>"map.pdf"</span>, <span class='kw'>paper</span> <span class='kw'>=</span> <span class='st'>"letter"</span>, <span class='kw'>height</span> <span class='kw'>=</span> <span class='fl'>10.5</span>, <span class='kw'>width</span> <span class='kw'>=</span> <span class='fl'>8</span>)
+<span class='no'>p</span>
 <span class='fu'>dev.off</span>()
 
-<span class='co'># Common customization (printing only 1 map to screen)</span>
-<span class='fu'>map_tag</span>(<span class='no'>vft1_rnm</span>,
-  <span class='kw'>title_quad</span> <span class='kw'>=</span> <span class='st'>"BCI 2012"</span>, <span class='kw'>point_size</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>point_shape</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>17</span>, <span class='fl'>6</span>), <span class='kw'>tag_size</span> <span class='kw'>=</span> <span class='fl'>5</span>
-)[<span class='fl'>1</span>]
+<span class='co'># Be careful if filtering by DBH: You may unintentionally remove dead trees.</span>
+<span class='co'># * Confirm this dataset has dead trees:</span>
+<span class='co'># (see `?top4quad`)</span>
+<span class='no'>dead</span> <span class='kw'>&lt;-</span> <span class='no'>top4quad</span> <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='http://www.rdocumentation.org/packages/fgeo.utils/topics/add_status_tree'>add_status_tree</a></span>() <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='http://www.rdocumentation.org/packages/fgeo.utils/topics/top'>top</a></span>(<span class='no'>QuadratID</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='http://dplyr.tidyverse.org/reference/filter.html'>filter</a></span>(<span class='no'>status_tree</span> <span class='kw'>==</span> <span class='st'>"dead"</span>)
+<span class='fu'><a href='http://dplyr.tidyverse.org/reference/select.html'>select</a></span>(<span class='no'>dead</span>, <span class='no'>Tag</span>, <span class='no'>Status</span>, <span class='no'>status_tree</span>, <span class='no'>DBH</span>)
+<span class='fu'><a href='http://dplyr.tidyverse.org/reference/nth.html'>first</a></span>(<span class='fu'>map_tag</span>(<span class='no'>dead</span>))
+<span class='co'># * If you filter by `DBH`, you loose the dead trees becaue their `DBH = NA`</span>
+<span class='no'>wrong</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://dplyr.tidyverse.org/reference/filter.html'>filter</a></span>(<span class='no'>dead</span>, <span class='no'>DBH</span> <span class='kw'>&gt;</span> <span class='fl'>10</span>)
+<span class='no'>wrong</span>
+<span class='co'># * The right way to do it is to explicietly inlcude rows where DBH = NA</span>
+<span class='no'>right</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://dplyr.tidyverse.org/reference/filter.html'>filter</a></span>(<span class='no'>dead</span>, <span class='no'>DBH</span> <span class='kw'>&gt;</span> <span class='fl'>10</span> <span class='kw'>|</span> <span class='fu'>is.na</span>(<span class='no'>DBH</span>))
+<span class='no'>right</span>
+<span class='fu'><a href='http://dplyr.tidyverse.org/reference/nth.html'>first</a></span>(<span class='fu'><a href='map_quad.html'>map_quad</a></span>(<span class='no'>right</span>))
 
-<span class='co'># Custom header</span>
-<span class='fu'>map_tag</span>(<span class='no'>vft1_rnm</span>, <span class='kw'>title_quad</span> <span class='kw'>=</span> <span class='st'>"BCI 2012"</span>,
-  <span class='kw'>header</span> <span class='kw'>=</span> <span class='st'>"Line 1: _________\nLine 2:\nLine 3:....................."</span>
-)[<span class='fl'>1</span>]
+<span class='co'># Keeping dead trees with `is.na(DBH)` (e.g. tag 127885.d on the bottom right)</span>
+<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://dplyr.tidyverse.org/reference/filter.html'>filter</a></span>(<span class='no'>top4quad</span>, <span class='no'>DBH</span> <span class='kw'>&gt;</span> <span class='fl'>20</span> <span class='kw'>|</span> <span class='fu'>is.na</span>(<span class='no'>DBH</span>))
+<span class='fu'><a href='http://dplyr.tidyverse.org/reference/nth.html'>first</a></span>(<span class='fu'>map_tag</span>(<span class='no'>p</span>))
 
-<span class='co'># Or use a pre-made header</span>
-<span class='fu'>map_tag</span>(<span class='no'>vft1_rnm</span>, <span class='kw'>title_quad</span> <span class='kw'>=</span> <span class='st'>"BCI 2012"</span>, <span class='kw'>header</span> <span class='kw'>=</span> <span class='fu'><a href='headers.html'>map_tag_header</a></span>())[<span class='fl'>1</span>]
+<span class='co'># For more complex filtering, see also ?fgeo.utils::rm_dead_twice</span>
+<span class='no'>multiple_censuses</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>bciex</span><span class='kw ns'>::</span><span class='no'><a href='http://www.rdocumentation.org/packages/bciex/topics/bci12vft_mini'>bci12vft_mini</a></span>
+<span class='fu'>nrow</span>(<span class='no'>multiple_censuses</span>)
+<span class='fu'>nrow</span>(<span class='fu'><a href='http://www.rdocumentation.org/packages/fgeo.utils/topics/rm_dead_twice'>rm_dead_twice</a></span>(<span class='no'>multiple_censuses</span>))
+
+
+
+<span class='co'># Customizing the maps ----------------------------------------------------</span>
+
+<span class='co'># Common tweaks</span>
+
+<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'>map_tag</span>(<span class='no'>top1quad</span>, <span class='kw'>show_page</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>show_subquad</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+<span class='fu'><a href='http://dplyr.tidyverse.org/reference/nth.html'>first</a></span>(<span class='no'>p</span>)
+
+<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'>map_tag</span>(
+  <span class='no'>top1quad</span>,
+  <span class='kw'>title_quad</span> <span class='kw'>=</span> <span class='st'>"BCI 2012. Quadrat: "</span>,
+  <span class='kw'>bl</span> <span class='kw'>=</span> <span class='st'>"bottom-left"</span>, <span class='kw'>br</span> <span class='kw'>=</span> <span class='st'>"bottom-right"</span>, <span class='kw'>tr</span> <span class='kw'>=</span> <span class='st'>"top-right"</span>, <span class='kw'>tl</span> <span class='kw'>=</span> <span class='st'>"top-left"</span>,
+  <span class='kw'>header</span> <span class='kw'>=</span> <span class='st'>"Line 1: _________\nLine 2:\nLine 3:....................."</span>,
+  <span class='kw'>subquad_offset</span> <span class='kw'>=</span> -<span class='fl'>1</span>,
+  <span class='kw'>point_size</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>point_shape</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>17</span>, <span class='fl'>6</span>),
+  <span class='kw'>tag_size</span> <span class='kw'>=</span> <span class='fl'>5</span>,
+  <span class='kw'>move_edge</span> <span class='kw'>=</span> <span class='fl'>0.5</span>
+)
+<span class='fu'><a href='http://dplyr.tidyverse.org/reference/nth.html'>first</a></span>(<span class='no'>p</span>)
+
+
 
 <span class='co'># Themes</span>
 
-<span class='co'># Using a pre-made theme from ggplot2</span>
 <span class='fu'>library</span>(<span class='no'>ggplot2</span>)
-<span class='fu'>map_tag</span>(<span class='no'>vft1_rnm</span>, <span class='kw'>title_quad</span> <span class='kw'>=</span> <span class='st'>"BCI 2012"</span>, <span class='kw'>theme</span> <span class='kw'>=</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/ggtheme'>theme_gray</a></span>())[<span class='fl'>1</span>]
 
-<span class='co'># Customizing the default theme of map_tag()</span>
-<span class='no'>theme_small_change</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='themes.html'>theme_map_tag</a></span>(<span class='kw'>legend.position</span> <span class='kw'>=</span> <span class='st'>"bottom"</span>)
-<span class='fu'>map_tag</span>(<span class='no'>vft1_rnm</span>, <span class='kw'>title_quad</span> <span class='kw'>=</span> <span class='st'>"BCI 2012"</span>, <span class='kw'>theme</span> <span class='kw'>=</span> <span class='no'>theme_small_change</span>)[<span class='fl'>1</span>]
+<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'>map_tag</span>(<span class='no'>top1quad</span>, <span class='kw'>theme</span> <span class='kw'>=</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/ggtheme'>theme_gray</a></span>())
+<span class='fu'><a href='http://dplyr.tidyverse.org/reference/nth.html'>first</a></span>(<span class='no'>p</span>)
 
-<span class='co'># Customizing the default theme extreemely, to show flexibility</span>
-<span class='no'>theme_extreeme_change</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/theme'>theme</a></span>(
+<span class='co'># Tweaking the default theme of map_tag()</span>
+
+<span class='no'>small_tweak</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='themes.html'>theme_map_tag</a></span>(<span class='kw'>legend.position</span> <span class='kw'>=</span> <span class='st'>"bottom"</span>)
+<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'>map_tag</span>(<span class='no'>top1quad</span>, <span class='kw'>theme</span> <span class='kw'>=</span> <span class='no'>small_tweak</span>)
+<span class='fu'><a href='http://dplyr.tidyverse.org/reference/nth.html'>first</a></span>(<span class='no'>p</span>)
+
+<span class='no'>large_tweak</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/theme'>theme</a></span>(
   <span class='kw'>legend.position</span> <span class='kw'>=</span> <span class='st'>"bottom"</span>,
   <span class='kw'>legend.title</span> <span class='kw'>=</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/element'>element_blank</a></span>(),
   <span class='kw'>legend.text</span> <span class='kw'>=</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/element'>element_text</a></span>(<span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>8</span>, <span class='kw'>colour</span> <span class='kw'>=</span> <span class='st'>"red"</span>),
@@ -306,18 +337,26 @@ the algorithm to calculate subquadrats.</p>
   <span class='kw'>panel.grid.minor</span> <span class='kw'>=</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/element'>element_line</a></span>(<span class='kw'>colour</span> <span class='kw'>=</span> <span class='st'>"black"</span>, <span class='kw'>linetype</span> <span class='kw'>=</span> <span class='st'>"dotted"</span>),
   <span class='kw'>panel.grid.major</span> <span class='kw'>=</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/element'>element_line</a></span>(<span class='kw'>colour</span> <span class='kw'>=</span> <span class='st'>"black"</span>)
 )
-<span class='fu'>map_tag</span>(<span class='no'>vft1_rnm</span>, <span class='kw'>title_quad</span> <span class='kw'>=</span> <span class='st'>"BCI 2012"</span>, <span class='kw'>theme</span> <span class='kw'>=</span> <span class='no'>theme_extreeme_change</span>)[<span class='fl'>1</span>]
+<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'>map_tag</span>(<span class='no'>top1quad</span>, <span class='kw'>theme</span> <span class='kw'>=</span> <span class='no'>large_tweak</span>)
+<span class='fu'><a href='http://dplyr.tidyverse.org/reference/nth.html'>first</a></span>(<span class='no'>p</span>)
+
+
+
+<span class='co'># Quadrat and subquadrat dimensitons</span>
 
 <span class='co'># Adapting the dimensions of quadrat and subquadrat to the range of qx and qy</span>
-<span class='co'># Creating new data set with qx and qy ranging 0-100</span>
-<span class='no'>smaller</span> <span class='kw'>&lt;-</span> <span class='no'>vft1_rnm</span>
+<span class='co'># Creating new data set with QX and QY ranging 0-100</span>
+<span class='no'>smaller</span> <span class='kw'>&lt;-</span> <span class='no'>top1quad</span>
 <span class='no'>n</span> <span class='kw'>&lt;-</span> <span class='fu'>nrow</span>(<span class='no'>smaller</span>)
-<span class='no'>smaller</span>$<span class='no'>qx</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://dplyr.tidyverse.org/reference/sample.html'>sample</a></span>(<span class='fl'>0</span>:<span class='fl'>10</span>, <span class='no'>n</span>, <span class='kw'>replace</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
-<span class='no'>smaller</span>$<span class='no'>qy</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://dplyr.tidyverse.org/reference/sample.html'>sample</a></span>(<span class='fl'>0</span>:<span class='fl'>10</span>, <span class='no'>n</span>, <span class='kw'>replace</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+<span class='no'>smaller</span>$<span class='no'>QX</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://dplyr.tidyverse.org/reference/sample.html'>sample</a></span>(<span class='fl'>0</span>:<span class='fl'>10</span>, <span class='no'>n</span>, <span class='kw'>replace</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+<span class='no'>smaller</span>$<span class='no'>QY</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://dplyr.tidyverse.org/reference/sample.html'>sample</a></span>(<span class='fl'>0</span>:<span class='fl'>10</span>, <span class='no'>n</span>, <span class='kw'>replace</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 
-<span class='fu'>map_tag</span>(<span class='no'>smaller</span>, <span class='kw'>x_q</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>x_sq</span> <span class='kw'>=</span> <span class='fl'>2.5</span>)[<span class='fl'>1</span>]
+<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'>map_tag</span>(<span class='no'>smaller</span>, <span class='kw'>x_q</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>x_sq</span> <span class='kw'>=</span> <span class='fl'>2.5</span>)
+<span class='fu'><a href='http://dplyr.tidyverse.org/reference/nth.html'>first</a></span>(<span class='no'>p</span>)
+
 <span class='co'># If limit-lines aren't visible, try extending the grid a little</span>
-<span class='fu'>map_tag</span>(<span class='no'>smaller</span>, <span class='kw'>x_q</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>x_sq</span> <span class='kw'>=</span> <span class='fl'>2.5</span>, <span class='kw'>move_edge</span> <span class='kw'>=</span> <span class='fl'>0.25</span>)[<span class='fl'>1</span>]
+<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'>map_tag</span>(<span class='no'>smaller</span>, <span class='kw'>x_q</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>x_sq</span> <span class='kw'>=</span> <span class='fl'>2.5</span>, <span class='kw'>move_edge</span> <span class='kw'>=</span> <span class='fl'>0.25</span>)[<span class='fl'>1</span>]
+<span class='fu'><a href='http://dplyr.tidyverse.org/reference/nth.html'>first</a></span>(<span class='no'>p</span>)
 <span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

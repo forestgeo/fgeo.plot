@@ -157,39 +157,55 @@ the plot limits.</p></td>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>library</span>(<span class='no'>dplyr</span>)
+    <pre class="examples"><span class='co'># NOT RUN {</span>
+<span class='fu'>library</span>(<span class='no'>map</span>)
 <span class='fu'>library</span>(<span class='no'>fgeo.utils</span>)
-
-<span class='co'># Fixing wrong names</span>
-<span class='no'>vft</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://dplyr.tidyverse.org/reference/select.html'>rename</a></span>(<span class='kw pkg'>bciex</span><span class='kw ns'>::</span><span class='no'><a href='http://www.rdocumentation.org/packages/bciex/topics/bci12vft_mini'>bci12vft_mini</a></span>, <span class='kw'>QX</span> <span class='kw'>=</span> <span class='no'>x</span>, <span class='kw'>QY</span> <span class='kw'>=</span> <span class='no'>y</span>)
+<span class='fu'>library</span>(<span class='no'>dplyr</span>)
+<span class='co'># Avoid conflict with `stats::filter()`</span>
+<span class='no'>filter</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='no'><a href='http://dplyr.tidyverse.org/reference/filter.html'>filter</a></span>
 
 <span class='co'># Filter the data you want. For example:</span>
-
-<span class='co'># Filtering trees of diameter greater than 10 cm from the last census of plot 1</span>
-<span class='co'># (see also ?fgeo.utils::rm_dead_twice)</span>
-<span class='no'>want</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='http://dplyr.tidyverse.org/reference/filter.html'>filter</a></span>(
-  <span class='no'>vft</span>,
-  <span class='no'>DBH</span> <span class='kw'>&gt;</span> <span class='fl'>10</span>,
-  <span class='no'>CensusID</span> <span class='kw'>==</span> <span class='fu'>max</span>(<span class='no'>CensusID</span>, <span class='kw'>na.rm</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>),
+<span class='co'># (see ?top4quad)</span>
+<span class='no'>want</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://dplyr.tidyverse.org/reference/filter.html'>filter</a></span>(
+  <span class='no'>top4quad</span>,
+  <span class='no'>CensusID</span> <span class='kw'>==</span> <span class='fl'>6</span>,
   <span class='no'>PlotID</span> <span class='kw'>==</span> <span class='fl'>1</span>
 )
-
-<span class='co'># Filtering only two quadrats to save time</span>
-<span class='no'>two_quadrats</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/fgeo.utils/topics/top'>top</a></span>(<span class='no'>want</span>, <span class='no'>QuadratID</span>, <span class='fl'>2</span>)
-<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'>map_quad</span>(<span class='no'>two_quadrats</span>)</div><div class='output co'>#&gt; <span class='message'>* Appending tags of dead trees with the suffix '.d'</span></div><div class='output co'>#&gt; <span class='warning'>Warning: No stem is dead. Is that what you expect?</span></div><div class='output co'>#&gt; <span class='message'>* Standarizing `dbh` by the count of `dbh` measurements</span></div><div class='input'>
+<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'>map_quad</span>(<span class='no'>want</span>)
 <span class='co'># Visualizing only the first plot of `p`</span>
-<span class='fu'><a href='http://dplyr.tidyverse.org/reference/nth.html'>first</a></span>(<span class='no'>p</span>)</div><div class='img'><img src='map_quad-8.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
-<span class='co'># Printing all plots pf `p` to .pdf, with parameters optimized for size letter</span>
-<span class='no'>tmp</span> <span class='kw'>&lt;-</span> <span class='fu'>tempfile</span>()  <span class='co'># Remplace this by somehtihing like "maps.pdf"</span>
+<span class='fu'><a href='http://dplyr.tidyverse.org/reference/nth.html'>first</a></span>(<span class='no'>p</span>)
+<span class='co'># Printing all plots of `p` to .pdf, with parameters optimized for size letter</span>
+<span class='fu'>pdf</span>(<span class='st'>"map.pdf"</span>, <span class='kw'>paper</span> <span class='kw'>=</span> <span class='st'>"letter"</span>, <span class='kw'>height</span> <span class='kw'>=</span> <span class='fl'>10.5</span>, <span class='kw'>width</span> <span class='kw'>=</span> <span class='fl'>8</span>)
+<span class='no'>p</span>
+<span class='fu'>dev.off</span>()
 
-<span class='fu'>pdf</span>(<span class='no'>tmp</span>, <span class='kw'>paper</span> <span class='kw'>=</span> <span class='st'>"letter"</span>, <span class='kw'>height</span> <span class='kw'>=</span> <span class='fl'>10.5</span>, <span class='kw'>width</span> <span class='kw'>=</span> <span class='fl'>8</span>)
-<span class='no'>p</span></div><div class='output co'>#&gt; $`4915`</div><div class='output co'>#&gt; 
-#&gt; $`4916`</div><div class='output co'>#&gt; </div><div class='input'><span class='fu'>dev.off</span>()</div><div class='output co'>#&gt; RStudioGD 
-#&gt;         2 </div><div class='input'>
+<span class='co'># Be careful if filtering by DBH: You may unintentionally remove dead trees.</span>
+<span class='co'># * Confirm this dataset has dead trees:</span>
+<span class='co'># (see `?top4quad`)</span>
+<span class='no'>dead</span> <span class='kw'>&lt;-</span> <span class='no'>top4quad</span> <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='http://www.rdocumentation.org/packages/fgeo.utils/topics/add_status_tree'>add_status_tree</a></span>() <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='http://www.rdocumentation.org/packages/fgeo.utils/topics/top'>top</a></span>(<span class='no'>QuadratID</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='http://dplyr.tidyverse.org/reference/filter.html'>filter</a></span>(<span class='no'>status_tree</span> <span class='kw'>==</span> <span class='st'>"dead"</span>)
+<span class='fu'><a href='http://dplyr.tidyverse.org/reference/select.html'>select</a></span>(<span class='no'>dead</span>, <span class='no'>Tag</span>, <span class='no'>Status</span>, <span class='no'>status_tree</span>, <span class='no'>DBH</span>)
+<span class='fu'>map_quad</span>(<span class='no'>dead</span>)
+<span class='co'># * If you filter by `DBH`, you loose the dead trees becaue their `DBH = NA`</span>
+<span class='no'>wrong</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://dplyr.tidyverse.org/reference/filter.html'>filter</a></span>(<span class='no'>dead</span>, <span class='no'>DBH</span> <span class='kw'>&gt;</span> <span class='fl'>10</span>)
+<span class='fu'>map_quad</span>(<span class='no'>wrong</span>)
+<span class='co'># * The right way to do it is to explicietly inlcude rows where DBH = NA</span>
+<span class='no'>right</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://dplyr.tidyverse.org/reference/filter.html'>filter</a></span>(<span class='no'>dead</span>, <span class='no'>DBH</span> <span class='kw'>&gt;</span> <span class='fl'>10</span> <span class='kw'>|</span> <span class='fu'>is.na</span>(<span class='no'>DBH</span>))
+<span class='fu'>map_quad</span>(<span class='no'>right</span>)
+
+<span class='co'># Keeping dead trees with `is.na(DBH)` (e.g. tag 127885.d on the bottom right)</span>
+<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://dplyr.tidyverse.org/reference/filter.html'>filter</a></span>(<span class='no'>top4quad</span>, <span class='no'>DBH</span> <span class='kw'>&gt;</span> <span class='fl'>20</span> <span class='kw'>|</span> <span class='fu'>is.na</span>(<span class='no'>DBH</span>))
+<span class='fu'><a href='http://dplyr.tidyverse.org/reference/nth.html'>first</a></span>(<span class='fu'>map_quad</span>(<span class='no'>p</span>))
+
+<span class='co'># For more complex filtering, see also ?fgeo.utils::rm_dead_twice)</span>
+<span class='no'>multiple_censuses</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>bciex</span><span class='kw ns'>::</span><span class='no'><a href='http://www.rdocumentation.org/packages/bciex/topics/bci12vft_mini'>bci12vft_mini</a></span>
+<span class='fu'>nrow</span>(<span class='no'>multiple_censuses</span>)
+<span class='fu'>nrow</span>(<span class='fu'><a href='http://www.rdocumentation.org/packages/fgeo.utils/topics/rm_dead_twice'>rm_dead_twice</a></span>(<span class='no'>multiple_censuses</span>))
+
 <span class='co'># Customizing the maps ----------------------------------------------------</span>
 
-<span class='co'># Filtering only one quadrat to save time</span>
-<span class='no'>one_quad</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/fgeo.utils/topics/top'>top</a></span>(<span class='no'>want</span>, <span class='no'>QuadratID</span>)</div><div class='img'><img src='map_quad-9.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
 <span class='co'># A custom title and header</span>
 <span class='no'>myheader</span> <span class='kw'>&lt;-</span> <span class='fu'>paste</span>(
   <span class='st'>" "</span>,
@@ -199,14 +215,14 @@ the plot limits.</p></td>
   <span class='st'>" ........................................................................"</span>,
   <span class='kw'>sep</span> <span class='kw'>=</span> <span class='st'>"\n"</span>
 )
-<span class='fu'>map_quad</span>(<span class='no'>one_quad</span>, <span class='kw'>title_quad</span> <span class='kw'>=</span> <span class='st'>"My Site, 2018. Quad:"</span>, <span class='kw'>header</span> <span class='kw'>=</span> <span class='no'>myheader</span>)</div><div class='output co'>#&gt; <span class='message'>* Appending tags of dead trees with the suffix '.d'</span></div><div class='output co'>#&gt; <span class='warning'>Warning: No stem is dead. Is that what you expect?</span></div><div class='output co'>#&gt; <span class='message'>* Standarizing `dbh` by the count of `dbh` measurements</span></div><div class='output co'>#&gt; $`4915`</div><div class='img'><img src='map_quad-10.png' alt='' width='700' height='432.632880098887' /></div><div class='output co'>#&gt; </div><div class='input'>
-<span class='co'># Many more tweaks are possible</span>
+<span class='co'># See ?top1quad</span>
+<span class='fu'>map_quad</span>(<span class='no'>top1quad</span>, <span class='kw'>title_quad</span> <span class='kw'>=</span> <span class='st'>"My Site, 2018. Quad:"</span>, <span class='kw'>header</span> <span class='kw'>=</span> <span class='no'>myheader</span>)
 
-<span class='co'># Use functions from ggplot to tweak theme</span>
+<span class='co'># Tweak the theme with ggplot</span>
 <span class='fu'>library</span>(<span class='no'>ggplot2</span>)
 
 <span class='fu'>map_quad</span>(
-  <span class='no'>one_quad</span>,
+  <span class='no'>top1quad</span>,
   <span class='kw'>title_quad</span> <span class='kw'>=</span> <span class='st'>"My Site, 2018. Quad:"</span>,
   <span class='kw'>header</span> <span class='kw'>=</span> <span class='fu'><a href='headers.html'>map_quad_header</a></span>(<span class='st'>"spanish"</span>),
   <span class='kw'>tag_size</span> <span class='kw'>=</span> <span class='fl'>3</span>,
@@ -216,8 +232,8 @@ the plot limits.</p></td>
     <span class='kw'>plot.subtitle</span> <span class='kw'>=</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/element'>element_text</a></span>(<span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>5</span>),
     <span class='kw'>panel.background</span> <span class='kw'>=</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/element'>element_rect</a></span>(<span class='kw'>fill</span> <span class='kw'>=</span> <span class='st'>"grey"</span>)
   )
-)</div><div class='output co'>#&gt; <span class='message'>* Appending tags of dead trees with the suffix '.d'</span></div><div class='output co'>#&gt; <span class='warning'>Warning: No stem is dead. Is that what you expect?</span></div><div class='output co'>#&gt; <span class='message'>* Standarizing `dbh` by the count of `dbh` measurements</span></div><div class='output co'>#&gt; $`4915`</div><div class='img'><img src='map_quad-11.png' alt='' width='700' height='432.632880098887' /></div><div class='output co'>#&gt; </div><div class='input'>
-</div></pre>
+)
+<span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

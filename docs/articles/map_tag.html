@@ -81,7 +81,7 @@
       <h1>Mapping Latest Tree-Status in Subquadrats</h1>
                         <h4 class="author">Mauro Lepore</h4>
             
-            <h4 class="date">2018-01-02</h4>
+            <h4 class="date">2018-01-03</h4>
           </div>
 
     
@@ -135,18 +135,18 @@ maps &lt;-<span class="st"> </span><span class="kw"><a href="../reference/map_ta
 <span class="co">#&gt; * Likely you should filter only one CensusID and retry.</span></code></pre></div>
 <p>Here is the first set of four subquadrats.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">maps[<span class="dv">1</span>]
-<span class="co">#&gt; $`4924`</span></code></pre></div>
+<span class="co">#&gt; $`4924_1`</span></code></pre></div>
 <p><img src="map_tag_files/figure-html/yose-print-screen-1.png" width="98%" style="display: block; margin: auto;"></p>
 <p>You can output a .pdf with <code>pdf()</code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pdf</span>(<span class="st">"example-some_site.pdf"</span>, <span class="dt">paper =</span> <span class="st">"a4"</span>)
 maps
-<span class="co">#&gt; $`4924`</span>
+<span class="co">#&gt; $`4924_1`</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; $&lt;NA&gt;</span>
+<span class="co">#&gt; $`4924_2`</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; $&lt;NA&gt;</span>
+<span class="co">#&gt; $`4924_3`</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; $&lt;NA&gt;</span>
+<span class="co">#&gt; $`4924_4`</span>
 <span class="kw">dev.off</span>()
 <span class="co">#&gt; png </span>
 <span class="co">#&gt;   2</span></code></pre></div>
@@ -245,7 +245,7 @@ bci_vft &lt;-<span class="st"> </span><span class="kw">as_tibble</span>(bciex<sp
 <span class="co">#&gt; Warning in do.call(cond, list(customized)): Duplicated values were detected</span>
 <span class="co">#&gt; * Likely you should filter only one CensusID and retry.</span>
 maps[<span class="dv">1</span>]
-<span class="co">#&gt; $`4915`</span></code></pre></div>
+<span class="co">#&gt; $`4915_1`</span></code></pre></div>
 <p><img src="map_tag_files/figure-html/custom-title-point-shape-1.png" width="98%" style="display: block; margin: auto;"></p>
 <div id="customizing-the-header" class="section level2">
 <h2 class="hasAnchor">
@@ -254,7 +254,7 @@ maps[<span class="dv">1</span>]
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/map_tag.html">map_tag</a></span>(bci_vft1_rnm, <span class="dt">title_quad =</span> <span class="st">"BCI 2012"</span>, <span class="dt">header =</span> <span class="st">"My header"</span>)[<span class="dv">1</span>]
 <span class="co">#&gt; Warning in do.call(cond, list(customized)): Duplicated values were detected</span>
 <span class="co">#&gt; * Likely you should filter only one CensusID and retry.</span>
-<span class="co">#&gt; $`4915`</span></code></pre></div>
+<span class="co">#&gt; $`4915_1`</span></code></pre></div>
 <p><img src="map_tag_files/figure-html/custom-header-1.png" width="98%" style="display: block; margin: auto;"></p>
 <p>The string can be multi-lined; to insert line brakes, use “\n”.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/map_tag.html">map_tag</a></span>(bci_vft1_rnm, <span class="dt">title_quad =</span> <span class="st">"BCI 2012"</span>, 
@@ -262,13 +262,13 @@ maps[<span class="dv">1</span>]
 )[<span class="dv">1</span>]
 <span class="co">#&gt; Warning in do.call(cond, list(customized)): Duplicated values were detected</span>
 <span class="co">#&gt; * Likely you should filter only one CensusID and retry.</span>
-<span class="co">#&gt; $`4915`</span></code></pre></div>
+<span class="co">#&gt; $`4915_1`</span></code></pre></div>
 <p><img src="map_tag_files/figure-html/header-basic-1.png" width="98%" style="display: block; margin: auto;"></p>
 <p>The second way is to use <code><a href="../reference/headers.html">map_tag_header()</a></code> (see <code>?map_tag_header()</code>).</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/map_tag.html">map_tag</a></span>(bci_vft1_rnm, <span class="dt">title_quad =</span> <span class="st">"BCI 2012"</span>, <span class="dt">header =</span> <span class="kw"><a href="../reference/headers.html">map_tag_header</a></span>())[<span class="dv">1</span>]
 <span class="co">#&gt; Warning in do.call(cond, list(customized)): Duplicated values were detected</span>
 <span class="co">#&gt; * Likely you should filter only one CensusID and retry.</span>
-<span class="co">#&gt; $`4915`</span></code></pre></div>
+<span class="co">#&gt; $`4915_1`</span></code></pre></div>
 <p><img src="map_tag_files/figure-html/header-via-helper-1.png" width="98%" style="display: block; margin: auto;"></p>
 </div>
 <div id="using-pre-made-and-custom-themes" class="section level2">
@@ -282,7 +282,7 @@ maps[<span class="dv">1</span>]
 <span class="kw"><a href="../reference/map_tag.html">map_tag</a></span>(bci_vft1_rnm, <span class="dt">title_quad =</span> <span class="st">"BCI 2012"</span>, <span class="dt">theme =</span> <span class="kw">theme_gray</span>())[<span class="dv">1</span>]
 <span class="co">#&gt; Warning in do.call(cond, list(customized)): Duplicated values were detected</span>
 <span class="co">#&gt; * Likely you should filter only one CensusID and retry.</span>
-<span class="co">#&gt; $`4915`</span></code></pre></div>
+<span class="co">#&gt; $`4915_1`</span></code></pre></div>
 <p><img src="map_tag_files/figure-html/pre-made-theme-1.png" width="98%" style="display: block; margin: auto;"></p>
 <p>And this is how you can use a custom theme (see <code>?ggplot2::theme()</code>).</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Customizing the default theme of map_tag()</span>
@@ -290,7 +290,7 @@ theme_small_change &lt;-<span class="st"> </span><span class="kw"><a href="../re
 <span class="kw"><a href="../reference/map_tag.html">map_tag</a></span>(bci_vft1_rnm, <span class="dt">title_quad =</span> <span class="st">"BCI 2012"</span>, <span class="dt">theme =</span> theme_small_change)[<span class="dv">1</span>]
 <span class="co">#&gt; Warning in do.call(cond, list(customized)): Duplicated values were detected</span>
 <span class="co">#&gt; * Likely you should filter only one CensusID and retry.</span>
-<span class="co">#&gt; $`4915`</span>
+<span class="co">#&gt; $`4915_1`</span>
 
 <span class="co"># Customizing the default theme extreemely, to show flexibility</span>
 theme_extreeme_change &lt;-<span class="st"> </span>ggplot2<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/theme">theme</a></span>(
@@ -310,7 +310,7 @@ theme_extreeme_change &lt;-<span class="st"> </span>ggplot2<span class="op">::</
 <span class="kw"><a href="../reference/map_tag.html">map_tag</a></span>(bci_vft1_rnm, <span class="dt">title_quad =</span> <span class="st">"BCI 2012"</span>, <span class="dt">theme =</span> theme_extreeme_change)[<span class="dv">1</span>]
 <span class="co">#&gt; Warning in do.call(cond, list(customized)): Duplicated values were detected</span>
 <span class="co">#&gt; * Likely you should filter only one CensusID and retry.</span>
-<span class="co">#&gt; $`4915`</span></code></pre></div>
+<span class="co">#&gt; $`4915_1`</span></code></pre></div>
 <p><img src="map_tag_files/figure-html/custom-theme-1.png" width="98%" style="display: block; margin: auto;"><img src="map_tag_files/figure-html/custom-theme-2.png" width="98%" style="display: block; margin: auto;"></p>
 </div>
 <div id="extending-the-grid-beyond-the-plot-limits" class="section level2">
@@ -320,7 +320,7 @@ theme_extreeme_change &lt;-<span class="st"> </span>ggplot2<span class="op">::</
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/map_tag.html">map_tag</a></span>(bci_vft1_rnm, <span class="dt">title_quad =</span> <span class="st">"BCI 2012"</span>, <span class="dt">move_edge =</span> <span class="fl">0.4</span>)[<span class="dv">4</span>]
 <span class="co">#&gt; Warning in do.call(cond, list(customized)): Duplicated values were detected</span>
 <span class="co">#&gt; * Likely you should filter only one CensusID and retry.</span>
-<span class="co">#&gt; $`4918`</span></code></pre></div>
+<span class="co">#&gt; $`4915_4`</span></code></pre></div>
 <p><img src="map_tag_files/figure-html/unnamed-chunk-6-1.png" width="98%" style="display: block; margin: auto;"></p>
 </div>
 <div id="customizing-the-dimension-of-quadrats-and-subquadrats" class="section level2">
@@ -341,7 +341,7 @@ theme_extreeme_change &lt;-<span class="st"> </span>ggplot2<span class="op">::</
 )[<span class="dv">1</span>]
 <span class="co">#&gt; Warning in do.call(cond, list(customized)): Duplicated values were detected</span>
 <span class="co">#&gt; * Likely you should filter only one CensusID and retry.</span>
-<span class="co">#&gt; $`4915`</span></code></pre></div>
+<span class="co">#&gt; $`4915_1`</span></code></pre></div>
 <p><img src="map_tag_files/figure-html/unnamed-chunk-8-1.png" width="98%" style="display: block; margin: auto;"></p>
 <p>By default, <code>y_q</code> will be the same as <code>x_q</code> – so you don’t have to provide both (only <code>x_q</code> is mandatory). And the same is true for <code>y_sq</code> and <code>x_sq</code>. With this data – with <code>qx</code> and <code>qy</code> ranging 0-20 meters – the quadrat and subquadrat dimensions used above are the right ones. But <code><a href="../reference/map_tag.html">map_tag()</a></code> won’t complain if you choose different parameters; so you have to be careful not to shoot yourself on the foot.</p>
 <p>The following two examples demonstrate the use wrong dimensions. Let’s first use dimensions that are smaller than the range of <code>qx</code> and <code>qy</code>.</p>
@@ -352,7 +352,7 @@ theme_extreeme_change &lt;-<span class="st"> </span>ggplot2<span class="op">::</
 )[<span class="dv">1</span>]
 <span class="co">#&gt; Warning in do.call(cond, list(customized)): Duplicated values were detected</span>
 <span class="co">#&gt; * Likely you should filter only one CensusID and retry.</span>
-<span class="co">#&gt; $`4915`</span></code></pre></div>
+<span class="co">#&gt; $`4915_1`</span></code></pre></div>
 <p><img src="map_tag_files/figure-html/unnamed-chunk-9-1.png" width="98%" style="display: block; margin: auto;"></p>
 <p>And now let’s use dimensions that are larger than the range of the data.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Using </span>
@@ -361,7 +361,7 @@ theme_extreeme_change &lt;-<span class="st"> </span>ggplot2<span class="op">::</
 )[<span class="dv">1</span>]
 <span class="co">#&gt; Warning in do.call(cond, list(customized)): Duplicated values were detected</span>
 <span class="co">#&gt; * Likely you should filter only one CensusID and retry.</span>
-<span class="co">#&gt; $`4915`</span></code></pre></div>
+<span class="co">#&gt; $`4915_1`</span></code></pre></div>
 <p><img src="map_tag_files/figure-html/unnamed-chunk-10-1.png" width="98%" style="display: block; margin: auto;"></p>
 <p>This image should flag that you have this kind of problem – by which the range of data is smaller than the dimensions you set for your quadrat and subquadrat. Notice that the points (the actual positions of the trees) are all between <code>qx</code> and <code>qy</code> ranging 0-20. The tags, however, go beyond 20 because they automatically repel themselves to avoid overlapping.</p>
 </div>
@@ -382,7 +382,7 @@ bigger<span class="op">$</span>qy &lt;-<span class="st"> </span><span class="kw"
 )[<span class="dv">1</span>]
 <span class="co">#&gt; Warning in do.call(cond, list(customized)): Duplicated values were detected</span>
 <span class="co">#&gt; * Likely you should filter only one CensusID and retry.</span>
-<span class="co">#&gt; $`4915`</span></code></pre></div>
+<span class="co">#&gt; $`4915_1`</span></code></pre></div>
 <p><img src="map_tag_files/figure-html/bigger-1.png" width="98%" style="display: block; margin: auto;"></p>
 <p>And if <code>qx</code> and <code>qy</code> of your data range 0-10, then the appropriate quadrat dimension to use would be 10 and 2.5.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Creating new data set with qx and qy ranging 0-100</span>
@@ -394,7 +394,7 @@ smaller<span class="op">$</span>qy &lt;-<span class="st"> </span><span class="kw
 <span class="kw"><a href="../reference/map_tag.html">map_tag</a></span>(smaller, <span class="dt">x_q =</span> <span class="dv">10</span>, <span class="dt">x_sq =</span> <span class="fl">2.5</span>, <span class="dt">move_edge =</span> <span class="fl">0.25</span>)[<span class="dv">1</span>]
 <span class="co">#&gt; Warning in do.call(cond, list(customized)): Duplicated values were detected</span>
 <span class="co">#&gt; * Likely you should filter only one CensusID and retry.</span>
-<span class="co">#&gt; $`4915`</span></code></pre></div>
+<span class="co">#&gt; $`4915_1`</span></code></pre></div>
 <p><img src="map_tag_files/figure-html/smaller-1.png" width="98%" style="display: block; margin: auto;"></p>
 </div>
 </div>

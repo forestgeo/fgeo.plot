@@ -93,6 +93,7 @@ the algorithm to calculate subquadrats.
 }
 
 \examples{
+\dontrun{
 library(map)
 library(fgeo.utils)
 library(dplyr)
@@ -112,11 +113,9 @@ p <- map_tag(want)
 # Visualizing only the first plot of `p`
 first(p)
 # Printing all plots of `p` to .pdf, with parameters optimized for size letter
-tmp <- tempfile()  # Remplace this by somehtihing like "maps.pdf"
-pdf(tmp, paper = "letter", height = 10.5, width = 8)
+pdf("map.pdf", paper = "letter", height = 10.5, width = 8)
 p
 dev.off()
-unlink(tmp)
 
 # Be careful if filtering by DBH: You may unintentionally remove dead trees.
 # * Confirm this dataset has dead trees:
@@ -214,7 +213,7 @@ first(p)
 # If limit-lines aren't visible, try extending the grid a little
 p <- map_tag(smaller, x_q = 10, x_sq = 2.5, move_edge = 0.25)[1]
 first(p)
-
+}
 }
 \seealso{
 \code{\link[graphics:points]{graphics::points()}}, \code{\link[ggplot2:geom_point]{ggplot2::geom_point()}}, \code{\link[ggplot2:theme]{ggplot2::theme()}}
