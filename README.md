@@ -65,6 +65,8 @@ vft <- filter(viewfulltable, PlotID == 1, CensusID == 6)
 
 # All maps
 p2 <- map_tag(vft)
+#> Warning in check_valid_status(x, .status = c(status_d, status_a), "status"): No observation has .status = D, A
+#>   * Valid values: alive, dead
 length(p2)
 #> [1] 40
 

@@ -81,7 +81,7 @@
       <h1>Mapping Functions</h1>
                         <h4 class="author">Mauro Lepore</h4>
             
-            <h4 class="date">2018-01-05</h4>
+            <h4 class="date">2018-01-09</h4>
           </div>
 
     
@@ -260,33 +260,33 @@ p
 <span class="co"># * Confirm this dataset has dead trees:</span>
 <span class="co"># (see `?top4quad`)</span>
 dead &lt;-<span class="st"> </span>top4quad <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">add_status_tree</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">add_status_tree</span>(<span class="dt">status_a =</span> <span class="st">"alive"</span>, <span class="dt">status_d =</span> <span class="st">"dead"</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">top</span>(QuadratID) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">filter</span>(status_tree <span class="op">==</span><span class="st"> "dead"</span>)
 <span class="kw">select</span>(dead, Tag, Status, status_tree, DBH)
 <span class="co">#&gt; # A tibble: 20 x 4</span>
-<span class="co">#&gt;       Tag Status status_tree   DBH</span>
-<span class="co">#&gt;     &lt;chr&gt;  &lt;chr&gt;       &lt;chr&gt; &lt;int&gt;</span>
-<span class="co">#&gt;  1 127653   dead        dead    NA</span>
-<span class="co">#&gt;  2 127667   dead        dead    NA</span>
-<span class="co">#&gt;  3 127697   dead        dead    NA</span>
-<span class="co">#&gt;  4 127698   dead        dead    NA</span>
-<span class="co">#&gt;  5 127704   dead        dead    NA</span>
-<span class="co">#&gt;  6 127721   dead        dead    NA</span>
-<span class="co">#&gt;  7 127732   dead        dead    NA</span>
-<span class="co">#&gt;  8 127735   dead        dead    NA</span>
-<span class="co">#&gt;  9 127740   dead        dead    NA</span>
-<span class="co">#&gt; 10 127826   dead        dead    NA</span>
-<span class="co">#&gt; 11 127842   dead        dead    NA</span>
-<span class="co">#&gt; 12 127849   dead        dead    NA</span>
-<span class="co">#&gt; 13 127850   dead        dead    NA</span>
-<span class="co">#&gt; 14 127872   dead        dead    NA</span>
-<span class="co">#&gt; 15 127885   dead        dead    NA</span>
-<span class="co">#&gt; 16 314361   dead        dead    NA</span>
-<span class="co">#&gt; 17 314384   dead        dead    NA</span>
-<span class="co">#&gt; 18 449436   dead        dead    NA</span>
-<span class="co">#&gt; 19 449446   dead        dead    NA</span>
-<span class="co">#&gt; 20 549206   dead        dead    NA</span>
+<span class="co">#&gt;    Tag    Status status_tree   DBH</span>
+<span class="co">#&gt;    &lt;chr&gt;  &lt;chr&gt;  &lt;chr&gt;       &lt;int&gt;</span>
+<span class="co">#&gt;  1 127653 dead   dead           NA</span>
+<span class="co">#&gt;  2 127667 dead   dead           NA</span>
+<span class="co">#&gt;  3 127697 dead   dead           NA</span>
+<span class="co">#&gt;  4 127698 dead   dead           NA</span>
+<span class="co">#&gt;  5 127704 dead   dead           NA</span>
+<span class="co">#&gt;  6 127721 dead   dead           NA</span>
+<span class="co">#&gt;  7 127732 dead   dead           NA</span>
+<span class="co">#&gt;  8 127735 dead   dead           NA</span>
+<span class="co">#&gt;  9 127740 dead   dead           NA</span>
+<span class="co">#&gt; 10 127826 dead   dead           NA</span>
+<span class="co">#&gt; 11 127842 dead   dead           NA</span>
+<span class="co">#&gt; 12 127849 dead   dead           NA</span>
+<span class="co">#&gt; 13 127850 dead   dead           NA</span>
+<span class="co">#&gt; 14 127872 dead   dead           NA</span>
+<span class="co">#&gt; 15 127885 dead   dead           NA</span>
+<span class="co">#&gt; 16 314361 dead   dead           NA</span>
+<span class="co">#&gt; 17 314384 dead   dead           NA</span>
+<span class="co">#&gt; 18 449436 dead   dead           NA</span>
+<span class="co">#&gt; 19 449446 dead   dead           NA</span>
+<span class="co">#&gt; 20 549206 dead   dead           NA</span>
 <span class="kw"><a href="../reference/map_quad.html">map_quad</a></span>(dead)
 <span class="co">#&gt; * Appending tags of dead trees with the suffix '.d'</span>
 <span class="co">#&gt; * Standarizing `dbh` by the count of `dbh` measurements</span>
@@ -378,6 +378,8 @@ want &lt;-<span class="st"> </span><span class="kw">filter</span>(
   PlotID <span class="op">==</span><span class="st"> </span><span class="dv">1</span>
 )
 p &lt;-<span class="st"> </span><span class="kw"><a href="../reference/map_tag.html">map_tag</a></span>(want)
+<span class="co">#&gt; Warning in check_valid_status(x, .status = c(status_d, status_a), "status"): No observation has .status = D, A</span>
+<span class="co">#&gt;   * Valid values: alive, dead</span>
 <span class="co"># Visualizing only the first plot of `p`</span>
 <span class="kw">first</span>(p)</code></pre></div>
 <p><img src="map_files/figure-html/unnamed-chunk-4-1.png" width="98%" style="display: block; margin: auto;"></p>
@@ -399,80 +401,79 @@ p
 <span class="co"># * Confirm this dataset has dead trees:</span>
 <span class="co"># (see `?top4quad`)</span>
 dead &lt;-<span class="st"> </span>top4quad <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">add_status_tree</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">add_status_tree</span>(<span class="dt">status_a =</span> <span class="st">"alive"</span>, <span class="dt">status_d =</span> <span class="st">"dead"</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">top</span>(QuadratID) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">filter</span>(status_tree <span class="op">==</span><span class="st"> "dead"</span>)
 <span class="kw">select</span>(dead, Tag, Status, status_tree, DBH)
 <span class="co">#&gt; # A tibble: 20 x 4</span>
-<span class="co">#&gt;       Tag Status status_tree   DBH</span>
-<span class="co">#&gt;     &lt;chr&gt;  &lt;chr&gt;       &lt;chr&gt; &lt;int&gt;</span>
-<span class="co">#&gt;  1 127653   dead        dead    NA</span>
-<span class="co">#&gt;  2 127667   dead        dead    NA</span>
-<span class="co">#&gt;  3 127697   dead        dead    NA</span>
-<span class="co">#&gt;  4 127698   dead        dead    NA</span>
-<span class="co">#&gt;  5 127704   dead        dead    NA</span>
-<span class="co">#&gt;  6 127721   dead        dead    NA</span>
-<span class="co">#&gt;  7 127732   dead        dead    NA</span>
-<span class="co">#&gt;  8 127735   dead        dead    NA</span>
-<span class="co">#&gt;  9 127740   dead        dead    NA</span>
-<span class="co">#&gt; 10 127826   dead        dead    NA</span>
-<span class="co">#&gt; 11 127842   dead        dead    NA</span>
-<span class="co">#&gt; 12 127849   dead        dead    NA</span>
-<span class="co">#&gt; 13 127850   dead        dead    NA</span>
-<span class="co">#&gt; 14 127872   dead        dead    NA</span>
-<span class="co">#&gt; 15 127885   dead        dead    NA</span>
-<span class="co">#&gt; 16 314361   dead        dead    NA</span>
-<span class="co">#&gt; 17 314384   dead        dead    NA</span>
-<span class="co">#&gt; 18 449436   dead        dead    NA</span>
-<span class="co">#&gt; 19 449446   dead        dead    NA</span>
-<span class="co">#&gt; 20 549206   dead        dead    NA</span>
-<span class="kw">first</span>(<span class="kw"><a href="../reference/map_tag.html">map_tag</a></span>(dead))</code></pre></div>
+<span class="co">#&gt;    Tag    Status status_tree   DBH</span>
+<span class="co">#&gt;    &lt;chr&gt;  &lt;chr&gt;  &lt;chr&gt;       &lt;int&gt;</span>
+<span class="co">#&gt;  1 127653 dead   dead           NA</span>
+<span class="co">#&gt;  2 127667 dead   dead           NA</span>
+<span class="co">#&gt;  3 127697 dead   dead           NA</span>
+<span class="co">#&gt;  4 127698 dead   dead           NA</span>
+<span class="co">#&gt;  5 127704 dead   dead           NA</span>
+<span class="co">#&gt;  6 127721 dead   dead           NA</span>
+<span class="co">#&gt;  7 127732 dead   dead           NA</span>
+<span class="co">#&gt;  8 127735 dead   dead           NA</span>
+<span class="co">#&gt;  9 127740 dead   dead           NA</span>
+<span class="co">#&gt; 10 127826 dead   dead           NA</span>
+<span class="co">#&gt; 11 127842 dead   dead           NA</span>
+<span class="co">#&gt; 12 127849 dead   dead           NA</span>
+<span class="co">#&gt; 13 127850 dead   dead           NA</span>
+<span class="co">#&gt; 14 127872 dead   dead           NA</span>
+<span class="co">#&gt; 15 127885 dead   dead           NA</span>
+<span class="co">#&gt; 16 314361 dead   dead           NA</span>
+<span class="co">#&gt; 17 314384 dead   dead           NA</span>
+<span class="co">#&gt; 18 449436 dead   dead           NA</span>
+<span class="co">#&gt; 19 449446 dead   dead           NA</span>
+<span class="co">#&gt; 20 549206 dead   dead           NA</span>
+<span class="kw">first</span>(<span class="kw"><a href="../reference/map_tag.html">map_tag</a></span>(dead))
+<span class="co">#&gt; Warning in check_valid_status(x, .status = c(status_d, status_a), "status"): No observation has .status = D, A</span>
+<span class="co">#&gt;   * Valid values: dead</span></code></pre></div>
 <p><img src="map_files/figure-html/unnamed-chunk-4-2.png" width="98%" style="display: block; margin: auto;"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># * If you filter by `DBH`, you loose the dead trees becaue their `DBH = NA`</span>
 wrong &lt;-<span class="st"> </span><span class="kw">filter</span>(dead, DBH <span class="op">&gt;</span><span class="st"> </span><span class="dv">10</span>)
 wrong
 <span class="co">#&gt; # A tibble: 0 x 29</span>
-<span class="co">#&gt; # ... with 29 variables: MeasureID &lt;int&gt;, PlotID &lt;int&gt;, Plot &lt;chr&gt;,</span>
-<span class="co">#&gt; #   Family &lt;chr&gt;, GenusSpecies &lt;chr&gt;, Genus &lt;chr&gt;, SpeciesName &lt;chr&gt;,</span>
-<span class="co">#&gt; #   SubSpeciesName &lt;chr&gt;, SpeciesID &lt;int&gt;, Mnemonic &lt;chr&gt;,</span>
-<span class="co">#&gt; #   QuadratID &lt;int&gt;, QuadratName &lt;chr&gt;, QX &lt;dbl&gt;, QY &lt;dbl&gt;, gx &lt;dbl&gt;,</span>
-<span class="co">#&gt; #   gy &lt;dbl&gt;, TreeID &lt;int&gt;, Tag &lt;chr&gt;, StemID &lt;int&gt;, StemTag &lt;chr&gt;,</span>
-<span class="co">#&gt; #   PrimaryStem &lt;chr&gt;, CensusID &lt;int&gt;, PlotCensusNumber &lt;int&gt;, DBH &lt;int&gt;,</span>
-<span class="co">#&gt; #   HOM &lt;dbl&gt;, ExactDate &lt;date&gt;, ListOfTSM &lt;chr&gt;, Status &lt;chr&gt;,</span>
-<span class="co">#&gt; #   status_tree &lt;chr&gt;</span>
+<span class="co">#&gt; # ... with 29 variables: MeasureID &lt;int&gt;, PlotID &lt;int&gt;, Plot &lt;chr&gt;, Family</span>
+<span class="co">#&gt; #   &lt;chr&gt;, GenusSpecies &lt;chr&gt;, Genus &lt;chr&gt;, SpeciesName &lt;chr&gt;,</span>
+<span class="co">#&gt; #   SubSpeciesName &lt;chr&gt;, SpeciesID &lt;int&gt;, Mnemonic &lt;chr&gt;, QuadratID</span>
+<span class="co">#&gt; #   &lt;int&gt;, QuadratName &lt;chr&gt;, QX &lt;dbl&gt;, QY &lt;dbl&gt;, gx &lt;dbl&gt;, gy &lt;dbl&gt;,</span>
+<span class="co">#&gt; #   TreeID &lt;int&gt;, Tag &lt;chr&gt;, StemID &lt;int&gt;, StemTag &lt;chr&gt;, PrimaryStem</span>
+<span class="co">#&gt; #   &lt;chr&gt;, CensusID &lt;int&gt;, PlotCensusNumber &lt;int&gt;, DBH &lt;int&gt;, HOM &lt;dbl&gt;,</span>
+<span class="co">#&gt; #   ExactDate &lt;date&gt;, ListOfTSM &lt;chr&gt;, Status &lt;chr&gt;, status_tree &lt;chr&gt;</span>
 <span class="co"># * The right way to do it is to explicietly inlcude rows where DBH = NA</span>
 right &lt;-<span class="st"> </span><span class="kw">filter</span>(dead, DBH <span class="op">&gt;</span><span class="st"> </span><span class="dv">10</span> <span class="op">|</span><span class="st"> </span><span class="kw">is.na</span>(DBH))
 right
 <span class="co">#&gt; # A tibble: 20 x 29</span>
-<span class="co">#&gt;    MeasureID PlotID  Plot                  Family</span>
-<span class="co">#&gt;        &lt;int&gt;  &lt;int&gt; &lt;chr&gt;                   &lt;chr&gt;</span>
-<span class="co">#&gt;  1     79602      1   bci               Meliaceae</span>
-<span class="co">#&gt;  2     79613      1   bci         Melastomataceae</span>
-<span class="co">#&gt;  3     79636      1   bci             Capparaceae</span>
-<span class="co">#&gt;  4     79637      1   bci               Ochnaceae</span>
-<span class="co">#&gt;  5     79639      1   bci             Burseraceae</span>
-<span class="co">#&gt;  6     79650      1   bci             Capparaceae</span>
-<span class="co">#&gt;  7     79660      1   bci        Chrysobalanaceae</span>
-<span class="co">#&gt;  8     79663      1   bci               Violaceae</span>
-<span class="co">#&gt;  9     79666      1   bci               Violaceae</span>
-<span class="co">#&gt; 10     79708      1   bci               Violaceae</span>
-<span class="co">#&gt; 11     79720      1   bci Fabaceae-papilionoideae</span>
-<span class="co">#&gt; 12     79727      1   bci               Violaceae</span>
-<span class="co">#&gt; 13     79728      1   bci Fabaceae-papilionoideae</span>
-<span class="co">#&gt; 14     79743      1   bci              Clusiaceae</span>
-<span class="co">#&gt; 15     79750      1   bci               Violaceae</span>
-<span class="co">#&gt; 16    192560      1   bci              Sapotaceae</span>
-<span class="co">#&gt; 17    192575      1   bci               Violaceae</span>
-<span class="co">#&gt; 18    223605      1   bci             Burseraceae</span>
-<span class="co">#&gt; 19    223613      1   bci               Rubiaceae</span>
-<span class="co">#&gt; 20    242691      1   bci         Melastomataceae</span>
-<span class="co">#&gt; # ... with 25 more variables: GenusSpecies &lt;chr&gt;, Genus &lt;chr&gt;,</span>
-<span class="co">#&gt; #   SpeciesName &lt;chr&gt;, SubSpeciesName &lt;chr&gt;, SpeciesID &lt;int&gt;,</span>
-<span class="co">#&gt; #   Mnemonic &lt;chr&gt;, QuadratID &lt;int&gt;, QuadratName &lt;chr&gt;, QX &lt;dbl&gt;,</span>
-<span class="co">#&gt; #   QY &lt;dbl&gt;, gx &lt;dbl&gt;, gy &lt;dbl&gt;, TreeID &lt;int&gt;, Tag &lt;chr&gt;, StemID &lt;int&gt;,</span>
-<span class="co">#&gt; #   StemTag &lt;chr&gt;, PrimaryStem &lt;chr&gt;, CensusID &lt;int&gt;,</span>
-<span class="co">#&gt; #   PlotCensusNumber &lt;int&gt;, DBH &lt;int&gt;, HOM &lt;dbl&gt;, ExactDate &lt;date&gt;,</span>
-<span class="co">#&gt; #   ListOfTSM &lt;chr&gt;, Status &lt;chr&gt;, status_tree &lt;chr&gt;</span>
+<span class="co">#&gt;    Measur~ PlotID Plot  Family  Genus~ Genus Spec~ SubS~ Spec~ Mnem~ Quad~</span>
+<span class="co">#&gt;      &lt;int&gt;  &lt;int&gt; &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;int&gt; &lt;chr&gt; &lt;int&gt;</span>
+<span class="co">#&gt;  1   79602      1 bci   Meliac~ Trich~ Tric~ tube~ NULL   1169 tri2~  1241</span>
+<span class="co">#&gt;  2   79613      1 bci   Melast~ Mouri~ Mour~ myrt~ NULL    671 mour~  1241</span>
+<span class="co">#&gt;  3   79636      1 bci   Cappar~ Cappa~ Capp~ fron~ NULL    149 capp~  1241</span>
+<span class="co">#&gt;  4   79637      1 bci   Ochnac~ Ourat~ Oura~ luce~ NULL    729 oura~  1241</span>
+<span class="co">#&gt;  5   79639      1 bci   Burser~ Tetra~ Tetr~ pana~ NULL   1007 tet2~  1241</span>
+<span class="co">#&gt;  6   79650      1 bci   Cappar~ Cappa~ Capp~ fron~ NULL    149 capp~  1241</span>
+<span class="co">#&gt;  7   79660      1 bci   Chryso~ Hirte~ Hirt~ tria~ NULL    487 hirt~  1241</span>
+<span class="co">#&gt;  8   79663      1 bci   Violac~ Hyban~ Hyba~ prun~ NULL    494 hyba~  1241</span>
+<span class="co">#&gt;  9   79666      1 bci   Violac~ Hyban~ Hyba~ prun~ NULL    494 hyba~  1241</span>
+<span class="co">#&gt; 10   79708      1 bci   Violac~ Hyban~ Hyba~ prun~ NULL    494 hyba~  1241</span>
+<span class="co">#&gt; 11   79720      1 bci   Fabace~ Lonch~ Lonc~ hept~ NULL   1134 lonc~  1241</span>
+<span class="co">#&gt; 12   79727      1 bci   Violac~ Hyban~ Hyba~ prun~ NULL    494 hyba~  1241</span>
+<span class="co">#&gt; 13   79728      1 bci   Fabace~ Platy~ Plat~ eleg~ NULL    791 pla2~  1241</span>
+<span class="co">#&gt; 14   79743      1 bci   Clusia~ Garci~ Garc~ inte~ NULL   1125 gar2~  1241</span>
+<span class="co">#&gt; 15   79750      1 bci   Violac~ Hyban~ Hyba~ prun~ NULL    494 hyba~  1241</span>
+<span class="co">#&gt; 16  192560      1 bci   Sapota~ Poute~ Pout~ reti~ NULL   1155 pout~  1241</span>
+<span class="co">#&gt; 17  192575      1 bci   Violac~ Hyban~ Hyba~ prun~ NULL    494 hyba~  1241</span>
+<span class="co">#&gt; 18  223605      1 bci   Burser~ Proti~ Prot~ tenu~ NULL    828 prot~  1241</span>
+<span class="co">#&gt; 19  223613      1 bci   Rubiac~ Psych~ Psyc~ hori~ NULL    850 psyc~  1241</span>
+<span class="co">#&gt; 20  242691      1 bci   Melast~ Mouri~ Mour~ myrt~ NULL    671 mour~  1241</span>
+<span class="co">#&gt; # ... with 18 more variables: QuadratName &lt;chr&gt;, QX &lt;dbl&gt;, QY &lt;dbl&gt;, gx</span>
+<span class="co">#&gt; #   &lt;dbl&gt;, gy &lt;dbl&gt;, TreeID &lt;int&gt;, Tag &lt;chr&gt;, StemID &lt;int&gt;, StemTag &lt;chr&gt;,</span>
+<span class="co">#&gt; #   PrimaryStem &lt;chr&gt;, CensusID &lt;int&gt;, PlotCensusNumber &lt;int&gt;, DBH &lt;int&gt;,</span>
+<span class="co">#&gt; #   HOM &lt;dbl&gt;, ExactDate &lt;date&gt;, ListOfTSM &lt;chr&gt;, Status &lt;chr&gt;,</span>
+<span class="co">#&gt; #   status_tree &lt;chr&gt;</span>
 <span class="kw">first</span>(<span class="kw"><a href="../reference/map_quad.html">map_quad</a></span>(right))
 <span class="co">#&gt; * Appending tags of dead trees with the suffix '.d'</span>
 <span class="co">#&gt; * Standarizing `dbh` by the count of `dbh` measurements</span>
@@ -481,7 +482,9 @@ right
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
 <span class="co"># Keeping dead trees with `is.na(DBH)` (e.g. tag 127885.d on the bottom right)</span>
 p &lt;-<span class="st"> </span><span class="kw">filter</span>(top4quad, DBH <span class="op">&gt;</span><span class="st"> </span><span class="dv">20</span> <span class="op">|</span><span class="st"> </span><span class="kw">is.na</span>(DBH))
-<span class="kw">first</span>(<span class="kw"><a href="../reference/map_tag.html">map_tag</a></span>(p))</code></pre></div>
+<span class="kw">first</span>(<span class="kw"><a href="../reference/map_tag.html">map_tag</a></span>(p))
+<span class="co">#&gt; Warning in check_valid_status(x, .status = c(status_d, status_a), "status"): No observation has .status = D, A</span>
+<span class="co">#&gt;   * Valid values: alive, dead</span></code></pre></div>
 <p><img src="map_files/figure-html/unnamed-chunk-4-4.png" width="98%" style="display: block; margin: auto;"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
 <span class="co"># For more complex filtering, see also ?fgeo.utils::rm_dead_twice</span>
@@ -498,6 +501,8 @@ multiple_censuses &lt;-<span class="st"> </span>bciex<span class="op">::</span>b
 <span class="co"># Common tweaks</span>
 
 p &lt;-<span class="st"> </span><span class="kw"><a href="../reference/map_tag.html">map_tag</a></span>(top1quad, <span class="dt">show_page =</span> <span class="ot">FALSE</span>, <span class="dt">show_subquad =</span> <span class="ot">FALSE</span>)
+<span class="co">#&gt; Warning in check_valid_status(x, .status = c(status_d, status_a), "status"): No observation has .status = D, A</span>
+<span class="co">#&gt;   * Valid values: alive, dead</span>
 <span class="kw">first</span>(p)</code></pre></div>
 <p><img src="map_files/figure-html/unnamed-chunk-4-5.png" width="98%" style="display: block; margin: auto;"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
@@ -511,6 +516,8 @@ p &lt;-<span class="st"> </span><span class="kw"><a href="../reference/map_tag.h
   <span class="dt">tag_size =</span> <span class="dv">2</span>,
   <span class="dt">move_edge =</span> <span class="fl">0.5</span>
 )
+<span class="co">#&gt; Warning in check_valid_status(x, .status = c(status_d, status_a), "status"): No observation has .status = D, A</span>
+<span class="co">#&gt;   * Valid values: alive, dead</span>
 <span class="kw">first</span>(p)</code></pre></div>
 <p><img src="map_files/figure-html/unnamed-chunk-4-6.png" width="98%" style="display: block; margin: auto;"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
@@ -521,6 +528,8 @@ p &lt;-<span class="st"> </span><span class="kw"><a href="../reference/map_tag.h
 <span class="kw">library</span>(ggplot2)
 
 p &lt;-<span class="st"> </span><span class="kw"><a href="../reference/map_tag.html">map_tag</a></span>(top1quad, <span class="dt">theme =</span> <span class="kw">theme_gray</span>())
+<span class="co">#&gt; Warning in check_valid_status(x, .status = c(status_d, status_a), "status"): No observation has .status = D, A</span>
+<span class="co">#&gt;   * Valid values: alive, dead</span>
 <span class="kw">first</span>(p)</code></pre></div>
 <p><img src="map_files/figure-html/unnamed-chunk-4-7.png" width="98%" style="display: block; margin: auto;"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
@@ -528,6 +537,8 @@ p &lt;-<span class="st"> </span><span class="kw"><a href="../reference/map_tag.h
 
 small_tweak &lt;-<span class="st"> </span><span class="kw"><a href="../reference/themes.html">theme_map_tag</a></span>(<span class="dt">legend.position =</span> <span class="st">"bottom"</span>)
 p &lt;-<span class="st"> </span><span class="kw"><a href="../reference/map_tag.html">map_tag</a></span>(top1quad, <span class="dt">theme =</span> small_tweak)
+<span class="co">#&gt; Warning in check_valid_status(x, .status = c(status_d, status_a), "status"): No observation has .status = D, A</span>
+<span class="co">#&gt;   * Valid values: alive, dead</span>
 <span class="kw">first</span>(p)</code></pre></div>
 <p><img src="map_files/figure-html/unnamed-chunk-4-8.png" width="98%" style="display: block; margin: auto;"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
@@ -546,6 +557,8 @@ large_tweak &lt;-<span class="st"> </span><span class="kw">theme</span>(
   <span class="dt">panel.grid.major =</span> <span class="kw">element_line</span>(<span class="dt">colour =</span> <span class="st">"black"</span>)
 )
 p &lt;-<span class="st"> </span><span class="kw"><a href="../reference/map_tag.html">map_tag</a></span>(top1quad, <span class="dt">theme =</span> large_tweak)
+<span class="co">#&gt; Warning in check_valid_status(x, .status = c(status_d, status_a), "status"): No observation has .status = D, A</span>
+<span class="co">#&gt;   * Valid values: alive, dead</span>
 <span class="kw">first</span>(p)</code></pre></div>
 <p><img src="map_files/figure-html/unnamed-chunk-4-9.png" width="98%" style="display: block; margin: auto;"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
@@ -561,11 +574,15 @@ smaller<span class="op">$</span>QX &lt;-<span class="st"> </span><span class="kw
 smaller<span class="op">$</span>QY &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dv">0</span><span class="op">:</span><span class="dv">10</span>, n, <span class="dt">replace =</span> <span class="ot">TRUE</span>)
 
 p &lt;-<span class="st"> </span><span class="kw"><a href="../reference/map_tag.html">map_tag</a></span>(smaller, <span class="dt">x_q =</span> <span class="dv">10</span>, <span class="dt">x_sq =</span> <span class="fl">2.5</span>)
+<span class="co">#&gt; Warning in check_valid_status(x, .status = c(status_d, status_a), "status"): No observation has .status = D, A</span>
+<span class="co">#&gt;   * Valid values: alive, dead</span>
 <span class="kw">first</span>(p)</code></pre></div>
 <p><img src="map_files/figure-html/unnamed-chunk-4-10.png" width="98%" style="display: block; margin: auto;"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
 <span class="co"># If limit-lines aren't visible, try extending the grid a little</span>
 p &lt;-<span class="st"> </span><span class="kw"><a href="../reference/map_tag.html">map_tag</a></span>(smaller, <span class="dt">x_q =</span> <span class="dv">10</span>, <span class="dt">x_sq =</span> <span class="fl">2.5</span>, <span class="dt">move_edge =</span> <span class="fl">0.25</span>)[<span class="dv">1</span>]
+<span class="co">#&gt; Warning in check_valid_status(x, .status = c(status_d, status_a), "status"): No observation has .status = D, A</span>
+<span class="co">#&gt;   * Valid values: alive, dead</span>
 <span class="kw">first</span>(p)</code></pre></div>
 <p><img src="map_files/figure-html/unnamed-chunk-4-11.png" width="98%" style="display: block; margin: auto;"></p>
 </div>
