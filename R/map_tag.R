@@ -311,7 +311,7 @@ prep_map_tag <- function(sbst,
                          ) {
   # Using the pipe (%>%) to avoid meaningless temporary-variables
   sbst %>%
-    fgeo.utils::add_status_tree() %>%
+    fgeo.utils::add_status_tree(status_a = "alive", status_d = "dead") %>%
     fgeo.utils::add_subquad(
       x_q = x_q, x_sq = x_sq, y_q = y_q, y_sq = y_sq,
       subquad_offset = subquad_offset
