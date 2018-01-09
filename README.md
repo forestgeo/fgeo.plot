@@ -1,32 +1,32 @@
 
 <!-- Don't edit README.md; instead, edit README.Rmd -->
-map: map ForestGEO's data <img src="https://i.imgur.com/39pvr4n.png" align="right" height=44 />
-===============================================================================================
+fgeo.map: map ForestGEO's data <img src="https://i.imgur.com/39pvr4n.png" align="right" height=44 />
+====================================================================================================
 
-[![Build Status](https://travis-ci.org/forestgeo/map.svg?branch=master)](https://travis-ci.org/forestgeo/map) [![Coverage status](https://codecov.io/gh/forestgeo/map/branch/master/graph/badge.svg)](https://codecov.io/github/forestgeo/map?branch=master) [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/map)](https://cran.r-project.org/package=map)
+[![Build Status](https://travis-ci.org/forestgeo/fgeo.map.svg?branch=master)](https://travis-ci.org/forestgeo/fgeo.map) [![Coverage status](https://codecov.io/gh/forestgeo/fgeo.map/branch/master/graph/badge.svg)](https://codecov.io/github/forestgeo/fgeo.map?branch=master) [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/fgeo.map)](https://cran.r-project.org/package=fgeo.map)
 
 Installation
 ------------
 
-Install **map** from GitHub with:
+Install **fgeo.map** from GitHub with:
 
 ``` r
 # install.packages("remotes")
-remotes::install_github(repo = "forestgeo/map")
-library(map)
+remotes::install_github(repo = "forestgeo/fgeo.map")
+library(fgeo.map)
 ```
 
 Or with:
 
 ``` r
-source("https://install-github.me/forestgeo/map")
+source("https://install-github.me/forestgeo/fgeo.map")
 ```
 
 Example
 -------
 
 ``` r
-library(map)
+library(fgeo.map)
 library(bciex)
 library(fgeo.utils)
 library(dplyr)
@@ -52,7 +52,7 @@ p <- map_sp(census, c("faraoc", "hybapr"))
 first(p)
 ```
 
-<img src="README-map-sp-1.png" width="98%" style="display: block; margin: auto;" />
+<img src="README-fgeo.map-sp-1.png" width="98%" style="display: block; margin: auto;" />
 
 Map tree tags by status, showing four subquadrats per plot-page.
 
@@ -65,8 +65,6 @@ vft <- filter(viewfulltable, PlotID == 1, CensusID == 6)
 
 # All maps
 p2 <- map_tag(vft)
-#> Warning in check_valid_status(x, .status = c(status_d, status_a), "status"): No observation has .status = D, A
-#>   * Valid values: alive, dead
 length(p2)
 #> [1] 40
 

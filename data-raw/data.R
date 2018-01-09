@@ -2,7 +2,7 @@
 
 library(bciex)
 library(fgeo.utils)
-library(map)
+library(fgeo.map)
 library(dplyr)
 filter <- dplyr::filter
 

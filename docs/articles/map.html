@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mapping Functions • map</title>
+<title>Mapping Functions • fgeo.map</title>
 <!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/united/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 <!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
@@ -24,7 +24,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">map</a>
+      <a class="navbar-brand" href="../index.html">fgeo.map</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
@@ -58,7 +58,7 @@
   </a>
 </li>
 <li>
-  <a href="https://github.com/forestgeo/map">
+  <a href="https://github.com/forestgeo/fgeo.map">
     <span class="fa fa-github"></span>
      
   </a>
@@ -88,7 +88,7 @@
     
 <div class="contents">
 <p>This vignette shows the same code that you can find in the help files of <code><a href="../reference/map_sp.html">map_sp()</a></code>, <code><a href="../reference/map_quad.html">map_quad()</a></code> and <code><a href="../reference/map_tag.html">map_tag()</a></code>, but here (not in in the help files) you can see the output.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(map)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(fgeo.map)
 <span class="kw">library</span>(fgeo.utils)
 <span class="kw">library</span>(dplyr)</code></pre></div>
 <pre><code>## 
@@ -193,6 +193,11 @@ p &lt;-<span class="st"> </span><span class="kw"><a href="../reference/map_sp.ht
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
 <span class="co"># Multiple maps per page</span>
 <span class="kw">library</span>(gridExtra)
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Attaching package: 'gridExtra'</span>
+<span class="co">#&gt; The following object is masked from 'package:dplyr':</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;     combine</span>
 four_species &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">"hybapr"</span>, <span class="st">"faraoc"</span>, <span class="st">"des2pa"</span>, <span class="st">"tri2tu"</span>)
 p &lt;-<span class="st"> </span><span class="kw"><a href="../reference/map_sp.html">map_sp</a></span>(census, four_species)
 multipaged &lt;-<span class="st"> </span><span class="kw">marrangeGrob</span>(p, <span class="dt">nrow =</span> <span class="dv">1</span>, <span class="dt">ncol =</span> <span class="dv">2</span>)
@@ -378,8 +383,6 @@ want &lt;-<span class="st"> </span><span class="kw">filter</span>(
   PlotID <span class="op">==</span><span class="st"> </span><span class="dv">1</span>
 )
 p &lt;-<span class="st"> </span><span class="kw"><a href="../reference/map_tag.html">map_tag</a></span>(want)
-<span class="co">#&gt; Warning in check_valid_status(x, .status = c(status_d, status_a), "status"): No observation has .status = D, A</span>
-<span class="co">#&gt;   * Valid values: alive, dead</span>
 <span class="co"># Visualizing only the first plot of `p`</span>
 <span class="kw">first</span>(p)</code></pre></div>
 <p><img src="map_files/figure-html/unnamed-chunk-4-1.png" width="98%" style="display: block; margin: auto;"></p>
@@ -429,7 +432,7 @@ dead &lt;-<span class="st"> </span>top4quad <span class="op">%&gt;%</span>
 <span class="co">#&gt; 19 449446 dead   dead           NA</span>
 <span class="co">#&gt; 20 549206 dead   dead           NA</span>
 <span class="kw">first</span>(<span class="kw"><a href="../reference/map_tag.html">map_tag</a></span>(dead))
-<span class="co">#&gt; Warning in check_valid_status(x, .status = c(status_d, status_a), "status"): No observation has .status = D, A</span>
+<span class="co">#&gt; Warning in check_valid_status(x, .status = c(status_d, status_a), "status"): No observation has .status = alive</span>
 <span class="co">#&gt;   * Valid values: dead</span></code></pre></div>
 <p><img src="map_files/figure-html/unnamed-chunk-4-2.png" width="98%" style="display: block; margin: auto;"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># * If you filter by `DBH`, you loose the dead trees becaue their `DBH = NA`</span>
@@ -482,9 +485,7 @@ right
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
 <span class="co"># Keeping dead trees with `is.na(DBH)` (e.g. tag 127885.d on the bottom right)</span>
 p &lt;-<span class="st"> </span><span class="kw">filter</span>(top4quad, DBH <span class="op">&gt;</span><span class="st"> </span><span class="dv">20</span> <span class="op">|</span><span class="st"> </span><span class="kw">is.na</span>(DBH))
-<span class="kw">first</span>(<span class="kw"><a href="../reference/map_tag.html">map_tag</a></span>(p))
-<span class="co">#&gt; Warning in check_valid_status(x, .status = c(status_d, status_a), "status"): No observation has .status = D, A</span>
-<span class="co">#&gt;   * Valid values: alive, dead</span></code></pre></div>
+<span class="kw">first</span>(<span class="kw"><a href="../reference/map_tag.html">map_tag</a></span>(p))</code></pre></div>
 <p><img src="map_files/figure-html/unnamed-chunk-4-4.png" width="98%" style="display: block; margin: auto;"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
 <span class="co"># For more complex filtering, see also ?fgeo.utils::rm_dead_twice</span>
@@ -501,8 +502,6 @@ multiple_censuses &lt;-<span class="st"> </span>bciex<span class="op">::</span>b
 <span class="co"># Common tweaks</span>
 
 p &lt;-<span class="st"> </span><span class="kw"><a href="../reference/map_tag.html">map_tag</a></span>(top1quad, <span class="dt">show_page =</span> <span class="ot">FALSE</span>, <span class="dt">show_subquad =</span> <span class="ot">FALSE</span>)
-<span class="co">#&gt; Warning in check_valid_status(x, .status = c(status_d, status_a), "status"): No observation has .status = D, A</span>
-<span class="co">#&gt;   * Valid values: alive, dead</span>
 <span class="kw">first</span>(p)</code></pre></div>
 <p><img src="map_files/figure-html/unnamed-chunk-4-5.png" width="98%" style="display: block; margin: auto;"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
@@ -516,8 +515,6 @@ p &lt;-<span class="st"> </span><span class="kw"><a href="../reference/map_tag.h
   <span class="dt">tag_size =</span> <span class="dv">2</span>,
   <span class="dt">move_edge =</span> <span class="fl">0.5</span>
 )
-<span class="co">#&gt; Warning in check_valid_status(x, .status = c(status_d, status_a), "status"): No observation has .status = D, A</span>
-<span class="co">#&gt;   * Valid values: alive, dead</span>
 <span class="kw">first</span>(p)</code></pre></div>
 <p><img src="map_files/figure-html/unnamed-chunk-4-6.png" width="98%" style="display: block; margin: auto;"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
@@ -528,8 +525,6 @@ p &lt;-<span class="st"> </span><span class="kw"><a href="../reference/map_tag.h
 <span class="kw">library</span>(ggplot2)
 
 p &lt;-<span class="st"> </span><span class="kw"><a href="../reference/map_tag.html">map_tag</a></span>(top1quad, <span class="dt">theme =</span> <span class="kw">theme_gray</span>())
-<span class="co">#&gt; Warning in check_valid_status(x, .status = c(status_d, status_a), "status"): No observation has .status = D, A</span>
-<span class="co">#&gt;   * Valid values: alive, dead</span>
 <span class="kw">first</span>(p)</code></pre></div>
 <p><img src="map_files/figure-html/unnamed-chunk-4-7.png" width="98%" style="display: block; margin: auto;"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
@@ -537,8 +532,6 @@ p &lt;-<span class="st"> </span><span class="kw"><a href="../reference/map_tag.h
 
 small_tweak &lt;-<span class="st"> </span><span class="kw"><a href="../reference/themes.html">theme_map_tag</a></span>(<span class="dt">legend.position =</span> <span class="st">"bottom"</span>)
 p &lt;-<span class="st"> </span><span class="kw"><a href="../reference/map_tag.html">map_tag</a></span>(top1quad, <span class="dt">theme =</span> small_tweak)
-<span class="co">#&gt; Warning in check_valid_status(x, .status = c(status_d, status_a), "status"): No observation has .status = D, A</span>
-<span class="co">#&gt;   * Valid values: alive, dead</span>
 <span class="kw">first</span>(p)</code></pre></div>
 <p><img src="map_files/figure-html/unnamed-chunk-4-8.png" width="98%" style="display: block; margin: auto;"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
@@ -557,8 +550,6 @@ large_tweak &lt;-<span class="st"> </span><span class="kw">theme</span>(
   <span class="dt">panel.grid.major =</span> <span class="kw">element_line</span>(<span class="dt">colour =</span> <span class="st">"black"</span>)
 )
 p &lt;-<span class="st"> </span><span class="kw"><a href="../reference/map_tag.html">map_tag</a></span>(top1quad, <span class="dt">theme =</span> large_tweak)
-<span class="co">#&gt; Warning in check_valid_status(x, .status = c(status_d, status_a), "status"): No observation has .status = D, A</span>
-<span class="co">#&gt;   * Valid values: alive, dead</span>
 <span class="kw">first</span>(p)</code></pre></div>
 <p><img src="map_files/figure-html/unnamed-chunk-4-9.png" width="98%" style="display: block; margin: auto;"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
@@ -574,15 +565,11 @@ smaller<span class="op">$</span>QX &lt;-<span class="st"> </span><span class="kw
 smaller<span class="op">$</span>QY &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dv">0</span><span class="op">:</span><span class="dv">10</span>, n, <span class="dt">replace =</span> <span class="ot">TRUE</span>)
 
 p &lt;-<span class="st"> </span><span class="kw"><a href="../reference/map_tag.html">map_tag</a></span>(smaller, <span class="dt">x_q =</span> <span class="dv">10</span>, <span class="dt">x_sq =</span> <span class="fl">2.5</span>)
-<span class="co">#&gt; Warning in check_valid_status(x, .status = c(status_d, status_a), "status"): No observation has .status = D, A</span>
-<span class="co">#&gt;   * Valid values: alive, dead</span>
 <span class="kw">first</span>(p)</code></pre></div>
 <p><img src="map_files/figure-html/unnamed-chunk-4-10.png" width="98%" style="display: block; margin: auto;"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
 <span class="co"># If limit-lines aren't visible, try extending the grid a little</span>
 p &lt;-<span class="st"> </span><span class="kw"><a href="../reference/map_tag.html">map_tag</a></span>(smaller, <span class="dt">x_q =</span> <span class="dv">10</span>, <span class="dt">x_sq =</span> <span class="fl">2.5</span>, <span class="dt">move_edge =</span> <span class="fl">0.25</span>)[<span class="dv">1</span>]
-<span class="co">#&gt; Warning in check_valid_status(x, .status = c(status_d, status_a), "status"): No observation has .status = D, A</span>
-<span class="co">#&gt;   * Valid values: alive, dead</span>
 <span class="kw">first</span>(p)</code></pre></div>
 <p><img src="map_files/figure-html/unnamed-chunk-4-11.png" width="98%" style="display: block; margin: auto;"></p>
 </div>

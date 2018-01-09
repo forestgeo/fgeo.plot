@@ -1,5 +1,5 @@
 ## ------------------------------------------------------------------------
-library(map)
+library(fgeo.map)
 library(fgeo.utils)
 library(dplyr)
 # Avoid conflict with `stats::filter()`

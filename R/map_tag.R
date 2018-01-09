@@ -58,7 +58,7 @@
 #'
 #' @examples
 #' \dontrun{
-#' library(map)
+#' library(fgeo.map)
 #' library(fgeo.utils)
 #' library(dplyr)
 #' # Avoid conflict with `stats::filter()`
@@ -374,8 +374,8 @@ prep_map_tag <- function(sbst,
 #' with_subquad <- fgeo.utils::add_subquad(viewfulltable, 20, 20, 5, 5)
 #'
 #' # Warning: Internal function
-#' map:::paginate(with_subquad)
-#' map:::paginate(with_subquad, "a", "b", "c", "d")
+#' fgeo.map:::paginate(with_subquad)
+#' fgeo.map:::paginate(with_subquad, "a", "b", "c", "d")
 #' }
 paginate <- function(x, bl = 1, br = 2, tr = 3, tl = 4, subquad_offset = NULL) {
   stopifnot(is.data.frame(x))

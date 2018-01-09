@@ -23,10 +23,10 @@ all_quad <- bciex::bci12vft_mini \%>\%
   fgeo.utils::top(CensusID)
 
 top4quad <- all_quad \%>\% fgeo.utils::top(QuadratID, 4)
-identical(top4quad, map::top4quad)
+identical(top4quad, fgeo.map::top4quad)
 
 top1quad <- all_quad \%>\% fgeo.utils::top(QuadratID, 1)
-identical(top1quad, map::top4quad)
+identical(top1quad, fgeo.map::top4quad)
 
 top1quad
 }

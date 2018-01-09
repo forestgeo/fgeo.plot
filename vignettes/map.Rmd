@@ -15,7 +15,7 @@ vignette: >
 This vignette shows the same code that you can find in the help files of `map_sp()`, `map_quad()` and `map_tag()`, but here (not in in the help files) you can see the output.
 
 ```{r}
-library(map)
+library(fgeo.map)
 library(fgeo.utils)
 library(dplyr)
 # Avoid conflict with `stats::filter()`

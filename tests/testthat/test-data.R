@@ -1,8 +1,8 @@
 context("datasets")
 
 test_that("exists", {
-  expect_true(fgeo.utils::exists_in_pkg("top4quad", "map"))
-  expect_true(fgeo.utils::exists_in_pkg("top1quad", "map"))
+  expect_true(fgeo.utils::exists_in_pkg("top4quad", "fgeo.map"))
+  expect_true(fgeo.utils::exists_in_pkg("top1quad", "fgeo.map"))
 })
 
 test_that("remains unchanged", {

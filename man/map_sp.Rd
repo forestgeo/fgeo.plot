@@ -49,7 +49,7 @@ Thanks to Gabriel Arellano and David Kenfack for ideas and feedback.
 
 \examples{
 \dontrun{
-library(map)
+library(fgeo.map)
 library(fgeo.utils)
 library(dplyr)
 # Avoid conflict with `stats::filter()`

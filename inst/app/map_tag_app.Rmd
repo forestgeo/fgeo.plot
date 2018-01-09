@@ -21,7 +21,7 @@ output:
 
 ```{r global, include=FALSE}
 library(flexdashboard)
-library(map)
+library(fgeo.map)
 library(dplyr)
 library(ggplot2)
 library(icon)

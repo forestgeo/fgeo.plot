@@ -1,4 +1,4 @@
 library(testthat)
-library(map)
+library(fgeo.map)
 
-test_check("map")
+test_check("fgeo.map")

@@ -20,32 +20,32 @@ knitr::opts_chunk$set(
 )
 ```
 
-# map: map ForestGEO's data <img src="https://i.imgur.com/39pvr4n.png" align="right" height=44 />
+# fgeo.map: map ForestGEO's data <img src="https://i.imgur.com/39pvr4n.png" align="right" height=44 />
 
-[![Build Status](https://travis-ci.org/forestgeo/map.svg?branch=master)](https://travis-ci.org/forestgeo/map)
-[![Coverage status](https://codecov.io/gh/forestgeo/map/branch/master/graph/badge.svg)](https://codecov.io/github/forestgeo/map?branch=master)
-[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/map)](https://cran.r-project.org/package=map)
+[![Build Status](https://travis-ci.org/forestgeo/fgeo.map.svg?branch=master)](https://travis-ci.org/forestgeo/fgeo.map)
+[![Coverage status](https://codecov.io/gh/forestgeo/fgeo.map/branch/master/graph/badge.svg)](https://codecov.io/github/forestgeo/fgeo.map?branch=master)
+[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/fgeo.map)](https://cran.r-project.org/package=fgeo.map)
 
 ## Installation
 
-Install __map__ from GitHub with:
+Install __fgeo.map__ from GitHub with:
 
 ```R
 # install.packages("remotes")
-remotes::install_github(repo = "forestgeo/map")
-library(map)
+remotes::install_github(repo = "forestgeo/fgeo.map")
+library(fgeo.map)
 ```
 
 Or with:
 
 ```R
-source("https://install-github.me/forestgeo/map")
+source("https://install-github.me/forestgeo/fgeo.map")
 ```
 
 ## Example
 
 ```{r pkg}
-library(map)
+library(fgeo.map)
 library(bciex)
 library(fgeo.utils)
 library(dplyr)
@@ -53,7 +53,7 @@ library(dplyr)
 
 Map species' distribution.
 
-```{r map-sp}
+```{r fgeo.map-sp}
 census <- bci12t7mini
 
 # All maps

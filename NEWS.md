@@ -1,3 +1,7 @@
+# map 0.0.00.9200
+
+* Rename to __fgeo.map__
+
 # map 0.0.00.9100
 
 * Refactor all functions `theme_*()` for consistency.
