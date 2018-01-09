@@ -121,7 +121,7 @@ dev.off()
 # * Confirm this dataset has dead trees:
 # (see `?top4quad`)
 dead <- top4quad \%>\%
-  add_status_tree() \%>\%
+  add_status_tree(status_a = "alive", status_d = "dead") \%>\%
   top(QuadratID) \%>\%
   filter(status_tree == "dead")
 select(dead, Tag, Status, status_tree, DBH)
