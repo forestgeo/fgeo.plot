@@ -19,12 +19,14 @@ knitr::opts_chunk$set(
   comment = "#>",
   collapse = TRUE,
   cache = TRUE,
-  out.width = "98%",
+  out.width = "98%", 
   fig.align = "center",
-  fig.width = 7.5, 
-  # fig.show = "hold",
-  fig.asp = 0.2
+  fig.show = "hold",
+  fig.width = 9.5, 
+  fig.asp = 0.7
 )
+
+fig.asp = 0.7
 ```
 
 ```{r}
@@ -56,7 +58,7 @@ unique(vft_q1$QuadratName)
 
 Notice that the quadrat name on the map is not "0" but "0000".
 
-```{r, out.width = "98%", fig.width = 9.5, fig.asp = 0.7}
+```{r}
 first(map_tag(vft_q1))
 ```
 
