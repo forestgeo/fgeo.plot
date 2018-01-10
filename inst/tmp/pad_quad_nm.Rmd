@@ -1,5 +1,5 @@
 ---
-title: "map_quad() now pads quadrat name with 0 up to a width of four digits"
+title: "`map_quad()` now pads quadrat name with 0 up to a width of four digits"
 resource_files:
 - pad_quad_nm.nb.html
 output: 
@@ -9,7 +9,7 @@ output:
 
 These two packages automatically load many other useful packages, including __dplyr__ and __fgeo.map()__.
 
-```{r}
+```{r, include=FALSE}
 # hadley's settings
 set.seed(1014)
 options(digits = 3)
@@ -23,10 +23,9 @@ knitr::opts_chunk$set(
   fig.align = "center",
   fig.width = 7.5, 
   # fig.show = "hold",
-  fig.asp = 0.5
+  fig.asp = 0.2
 )
 ```
-
 
 ```{r}
 library(tidyverse)
@@ -53,9 +52,11 @@ vft_q1$QuadratName <- "0"
 unique(vft_q1$QuadratName)
 ```
 
+
+
 Notice that the quadrat name on the map is not "0" but "0000".
 
-```{r}
+```{r, out.width = "98%", fig.width = 9.5, fig.asp = 0.7}
 first(map_tag(vft_q1))
 ```
 

@@ -20,7 +20,8 @@ Imports:
     ggrepel,
     grDevices,
     rlang,
-    stats
+    stats,
+    stringr
 Suggests: 
     covr,
     gridExtra,
