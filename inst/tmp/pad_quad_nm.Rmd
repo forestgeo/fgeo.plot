@@ -1,0 +1,40 @@
+---
+title: "map_quad() now pads quadrat name with 0 up to a width of four digits"
+resource_files:
+- pad_quad_nm.nb.html
+output: html_notebook
+---
+
+These two packages automatically load many other useful packages, including __dplyr__ and __fgeo.map()__.
+
+```{r}
+library(tidyverse)
+library(fgeo)
+```
+
+Get some data.
+
+```{r}
+vft <- as_tibble(sinharaja::sinh_vft)
+```
+
+Subset only one quadrat and one census (the top ones).
+
+```{r}
+vft_q1 <- top(vft, QuadratName) %>% top(CensusID)
+vft_q1
+```
+
+To show this feature, force quadrat to have only one digit.
+
+```{r}
+vft_q1$QuadratName <- "0"
+unique(vft_q1$QuadratName)
+```
+
+Notice that the quadrat name on the map is not "0" but "0000".
+
+```{r}
+first(map_tag(vft_q1))
+```
+

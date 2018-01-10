@@ -515,7 +515,8 @@ map_tag_each <- function(prep_df,
 }
 
 entitle_map <- function(x, chr, show_page = TRUE) {
-  chr_quad <- paste0(chr, " ", unique(x$quadratname))
+  quad <- stringr::str_pad(unique(x$quadratname), width = 4, pad = 0)
+  chr_quad <- paste0(chr, " ", quad)
   page <- paste0(" (", unique(x$page), ")")
   if (show_page) {paste0(chr_quad, page)} else {chr_quad}
 }

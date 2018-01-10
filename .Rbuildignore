@@ -20,4 +20,4 @@
 ^vignettes/rsconnect$
 ^vignettes/map_tag_cache$
 ^man-roxygen$
-^docs$
+^inst/tmp$

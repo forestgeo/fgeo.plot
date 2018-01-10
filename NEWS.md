@@ -2,6 +2,8 @@
 
 * Rename to __fgeo.map__
 
+* Refactor `map_tag()` to pad quadrat names with "0" up to four digits.
+
 # map 0.0.00.9100
 
 * Refactor all functions `theme_*()` for consistency.
