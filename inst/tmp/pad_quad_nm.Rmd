@@ -2,10 +2,31 @@
 title: "map_quad() now pads quadrat name with 0 up to a width of four digits"
 resource_files:
 - pad_quad_nm.nb.html
-output: html_notebook
+output: 
+  rmarkdown::html_notebook:
+    theme: united
 ---
 
 These two packages automatically load many other useful packages, including __dplyr__ and __fgeo.map()__.
+
+```{r}
+# hadley's settings
+set.seed(1014)
+options(digits = 3)
+
+knitr::opts_chunk$set(
+  echo = TRUE,
+  comment = "#>",
+  collapse = TRUE,
+  cache = TRUE,
+  out.width = "98%",
+  fig.align = "center",
+  fig.width = 7.5, 
+  # fig.show = "hold",
+  fig.asp = 0.5
+)
+```
+
 
 ```{r}
 library(tidyverse)
