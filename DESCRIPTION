@@ -1,6 +1,6 @@
 Package: fgeo.map
 Title: Map ForestGEO's Data
-Version: 0.0.00.9200
+Version: 0.0.00.9201
 Authors@R: c(
     person("Mauro", "Lepore", , "leporem@si.edu", role = c("aut", "ctr", "cre")),
     person("CTFS-ForestGEO", , , "ForestGEO@si.edu", role = c("cph", "fnd"))
@@ -15,7 +15,7 @@ Imports:
     bciex,
     directlabels,
     dplyr,
-    fgeo.utils,
+    fgeo.tool,
     ggplot2,
     ggrepel,
     grDevices,
@@ -35,6 +35,6 @@ VignetteBuilder: knitr
 Encoding: UTF-8
 LazyData: true
 Remotes: forestgeo/bciex,
-    forestgeo/fgeo.utils
+    forestgeo/fgeo.tool
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.0.1

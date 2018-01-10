@@ -28,7 +28,7 @@ Example
 ``` r
 library(fgeo.map)
 library(bciex)
-library(fgeo.utils)
+library(fgeo.tool)
 library(dplyr)
 #> 
 #> Attaching package: 'dplyr'

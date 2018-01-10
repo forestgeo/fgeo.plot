@@ -50,7 +50,7 @@ Thanks to Gabriel Arellano and David Kenfack for ideas and feedback.
 \examples{
 \dontrun{
 library(fgeo.map)
-library(fgeo.utils)
+library(fgeo.tool)
 library(dplyr)
 # Avoid conflict with `stats::filter()`
 filter <- dplyr::filter

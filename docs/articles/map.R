@@ -1,6 +1,6 @@
 ## ------------------------------------------------------------------------
 library(fgeo.map)
-library(fgeo.utils)
+library(fgeo.tool)
 library(dplyr)
 # Avoid conflict with `stats::filter()`
 filter <- dplyr::filter
@@ -58,7 +58,7 @@ map_quad(right)
 p <- filter(top4quad, DBH > 20 | is.na(DBH))
 first(map_quad(p))
 
-# For more complex filtering, see also ?fgeo.utils::rm_dead_twice)
+# For more complex filtering, see also ?fgeo.tool::rm_dead_twice)
 multiple_censuses <- bciex::bci12vft_mini
 nrow(multiple_censuses)
 nrow(rm_dead_twice(multiple_censuses))
@@ -132,7 +132,7 @@ first(map_quad(right))
 p <- filter(top4quad, DBH > 20 | is.na(DBH))
 first(map_tag(p))
 
-# For more complex filtering, see also ?fgeo.utils::rm_dead_twice
+# For more complex filtering, see also ?fgeo.tool::rm_dead_twice
 multiple_censuses <- bciex::bci12vft_mini
 nrow(multiple_censuses)
 nrow(rm_dead_twice(multiple_censuses))

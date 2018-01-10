@@ -47,7 +47,7 @@ source("https://install-github.me/forestgeo/fgeo.map")
 ```{r pkg}
 library(fgeo.map)
 library(bciex)
-library(fgeo.utils)
+library(fgeo.tool)
 library(dplyr)
 ```
 

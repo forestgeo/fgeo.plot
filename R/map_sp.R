@@ -33,7 +33,7 @@
 #' @examples
 #' \dontrun{
 #' library(fgeo.map)
-#' library(fgeo.utils)
+#' library(fgeo.tool)
 #' library(dplyr)
 #' # Avoid conflict with `stats::filter()`
 #' filter <- dplyr::filter
@@ -174,7 +174,7 @@ check_map_sp <- function(census, species, xlim, ylim) {
   stopifnot(is.data.frame(census))
   stopifnot(is.character(species))
   if (length(species) == 0) {stop("The vector `sp` is empty.")}
-  fgeo.utils::check_crucial_names(census, c("gx", "gy", "sp"))
+  fgeo.tool::check_crucial_names(census, c("gx", "gy", "sp"))
   invisible(census)
 }
 
@@ -216,7 +216,7 @@ add_elevation <- function(ggplot,
   stopifnot(base_plot_is_class_ggplot)
   elevation_is_dataframe <- any(grepl("data.frame", class(elevation)))
   stopifnot(elevation_is_dataframe)
-  fgeo.utils::check_crucial_names(elevation, c("gx", "gy", "elev"))
+  fgeo.tool::check_crucial_names(elevation, c("gx", "gy", "elev"))
 
   p <- ggplot +
     stat_contour(data = elevation,

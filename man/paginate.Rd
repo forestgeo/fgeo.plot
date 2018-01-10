@@ -46,7 +46,7 @@ viewfulltable <- tribble(
    4.1,   15,
    6.1, 17.3
 )
-with_subquad <- fgeo.utils::add_subquad(viewfulltable, 20, 20, 5, 5)
+with_subquad <- fgeo.tool::add_subquad(viewfulltable, 20, 20, 5, 5)
 
 # Warning: Internal function
 fgeo.map:::paginate(with_subquad)
@@ -54,6 +54,6 @@ fgeo.map:::paginate(with_subquad, "a", "b", "c", "d")
 }
 }
 \seealso{
-\code{\link[fgeo.utils:add_subquad]{fgeo.utils::add_subquad()}}.
+\code{\link[fgeo.tool:add_subquad]{fgeo.tool::add_subquad()}}.
 }
 \keyword{internal}

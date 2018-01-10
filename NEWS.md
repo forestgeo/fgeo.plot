@@ -1,3 +1,7 @@
+# map 0.0.00.9201
+
+* Update to account for change in name from __fgeo.utils__ to __fgeo.tool__.
+
 # map 0.0.00.9200
 
 * Rename to __fgeo.map__

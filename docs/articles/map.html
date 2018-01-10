@@ -89,7 +89,7 @@
 <div class="contents">
 <p>This vignette shows the same code that you can find in the help files of <code><a href="../reference/map_sp.html">map_sp()</a></code>, <code><a href="../reference/map_quad.html">map_quad()</a></code> and <code><a href="../reference/map_tag.html">map_tag()</a></code>, but here (not in in the help files) you can see the output.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(fgeo.map)
-<span class="kw">library</span>(fgeo.utils)
+<span class="kw">library</span>(fgeo.tool)
 <span class="kw">library</span>(dplyr)</code></pre></div>
 <pre><code>## 
 ## Attaching package: 'dplyr'</code></pre>
@@ -323,7 +323,7 @@ p &lt;-<span class="st"> </span><span class="kw">filter</span>(top4quad, DBH <sp
 <span class="co">#&gt; Warning: Removed 34 rows containing missing values (geom_point).</span></code></pre></div>
 <p><img src="map_files/figure-html/unnamed-chunk-3-4.png" width="98%" style="display: block; margin: auto;"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
-<span class="co"># For more complex filtering, see also ?fgeo.utils::rm_dead_twice)</span>
+<span class="co"># For more complex filtering, see also ?fgeo.tool::rm_dead_twice)</span>
 multiple_censuses &lt;-<span class="st"> </span>bciex<span class="op">::</span>bci12vft_mini
 <span class="kw">nrow</span>(multiple_censuses)
 <span class="co">#&gt; [1] 4374</span>
@@ -488,7 +488,7 @@ p &lt;-<span class="st"> </span><span class="kw">filter</span>(top4quad, DBH <sp
 <span class="kw">first</span>(<span class="kw"><a href="../reference/map_tag.html">map_tag</a></span>(p))</code></pre></div>
 <p><img src="map_files/figure-html/unnamed-chunk-4-4.png" width="98%" style="display: block; margin: auto;"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
-<span class="co"># For more complex filtering, see also ?fgeo.utils::rm_dead_twice</span>
+<span class="co"># For more complex filtering, see also ?fgeo.tool::rm_dead_twice</span>
 multiple_censuses &lt;-<span class="st"> </span>bciex<span class="op">::</span>bci12vft_mini
 <span class="kw">nrow</span>(multiple_censuses)
 <span class="co">#&gt; [1] 4374</span>

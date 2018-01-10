@@ -18,7 +18,7 @@
 #' same value of `CensusID`. Then feed `map_tag()` with the filtered data set.
 #'
 #' @template vft
-#' @inheritParams fgeo.utils::add_subquad
+#' @inheritParams fgeo.tool::add_subquad
 #' @param subquad_offset `NULL` or `-1`. `NULL` defines the first column of
 #'   subquadrats as 1.  `-1` defines the first column of subquadrats as 0.
 #'   ```R
@@ -44,7 +44,7 @@
 #' @template move_edge
 #'
 #' @seealso [graphics::points()], [ggplot2::geom_point()], [ggplot2::theme()]
-#'   [map_tag_header()], [theme_map_tag()], [fgeo.utils::add_subquad()],
+#'   [map_tag_header()], [theme_map_tag()], [fgeo.tool::add_subquad()],
 #'   [paginate()], [ggrepel::geom_text_repel].
 #'
 #' @section Acknowledgements:
@@ -59,7 +59,7 @@
 #' @examples
 #' \dontrun{
 #' library(fgeo.map)
-#' library(fgeo.utils)
+#' library(fgeo.tool)
 #' library(dplyr)
 #' # Avoid conflict with `stats::filter()`
 #' filter <- dplyr::filter
@@ -102,7 +102,7 @@
 #' p <- filter(top4quad, DBH > 20 | is.na(DBH))
 #' first(map_tag(p))
 #'
-#' # For more complex filtering, see also ?fgeo.utils::rm_dead_twice
+#' # For more complex filtering, see also ?fgeo.tool::rm_dead_twice
 #' multiple_censuses <- bciex::bci12vft_mini
 #' nrow(multiple_censuses)
 #' nrow(rm_dead_twice(multiple_censuses))
@@ -266,7 +266,7 @@ check_map_tag <- function(.vft,
                           move_edge) {
   stopifnot(is.data.frame(.vft))
   if (dim(.vft)[1] == 0) {stop("Data can't have cero rows")}
-  fgeo.utils::check_crucial_names(.vft, crucial)
+  fgeo.tool::check_crucial_names(.vft, crucial)
   stopifnot(is.numeric(x_q))
   stopifnot(is.numeric(x_sq))
   stopifnot(is.numeric(y_q))
@@ -290,7 +290,7 @@ check_map_tag <- function(.vft,
   stopifnot(arg_theme_is_of_class_theme)
   stopifnot(is.numeric(move_edge))
   check_unique_plotid(.vft)
-  fgeo.utils::check_unique(
+  fgeo.tool::check_unique(
     .vft, "censusid",
     "warning", "* Likely you should filter only one CensusID and retry."
   )
@@ -311,8 +311,8 @@ prep_map_tag <- function(sbst,
                          ) {
   # Using the pipe (%>%) to avoid meaningless temporary-variables
   sbst %>%
-    fgeo.utils::add_status_tree(status_a = "alive", status_d = "dead") %>%
-    fgeo.utils::add_subquad(
+    fgeo.tool::add_status_tree(status_a = "alive", status_d = "dead") %>%
+    fgeo.tool::add_subquad(
       x_q = x_q, x_sq = x_sq, y_q = y_q, y_sq = y_sq,
       subquad_offset = subquad_offset
     ) %>%
@@ -360,7 +360,7 @@ prep_map_tag <- function(sbst,
 #' 11 21    31 41
 #' ```
 #' @return A modified version of the input with the additional variable `page`.
-#' @seealso [fgeo.utils::add_subquad()].
+#' @seealso [fgeo.tool::add_subquad()].
 #' @keywords internal
 #' @examples
 #' \dontrun{
@@ -371,7 +371,7 @@ prep_map_tag <- function(sbst,
 #'    4.1,   15,
 #'    6.1, 17.3
 #' )
-#' with_subquad <- fgeo.utils::add_subquad(viewfulltable, 20, 20, 5, 5)
+#' with_subquad <- fgeo.tool::add_subquad(viewfulltable, 20, 20, 5, 5)
 #'
 #' # Warning: Internal function
 #' fgeo.map:::paginate(with_subquad)
@@ -379,12 +379,12 @@ prep_map_tag <- function(sbst,
 #' }
 paginate <- function(x, bl = 1, br = 2, tr = 3, tl = 4, subquad_offset = NULL) {
   stopifnot(is.data.frame(x))
-  fgeo.utils::check_crucial_names(x, "subquadrat")
+  fgeo.tool::check_crucial_names(x, "subquadrat")
 
   if (!is.null(subquad_offset)) {
     stopifnot(subquad_offset == -1)
     # If first column of subquadrats is not 1 (but 0): recode; run; recode back
-    x <- fgeo.utils::recode_subquad(x, offset = 1)
+    x <- fgeo.tool::recode_subquad(x, offset = 1)
   }
   w_page <- mutate(
     x,
@@ -412,7 +412,7 @@ paginate <- function(x, bl = 1, br = 2, tr = 3, tl = 4, subquad_offset = NULL) {
     )
 
   if (!is.null(subquad_offset)) {
-    w_page <- fgeo.utils::recode_subquad(w_page, offset = -1)
+    w_page <- fgeo.tool::recode_subquad(w_page, offset = -1)
   }
   w_page
 }
@@ -552,7 +552,7 @@ df_subquad_labs <- function(x_q, x_sq, y_q, y_sq, subquad_offset, ...) {
 
   pos <- expand.grid(qx = xtrimed, qy = ytrimed, stringsAsFactors = FALSE)
 
-  fgeo.utils::add_subquad(
+  fgeo.tool::add_subquad(
     pos,
     x_q = x_q, x_sq = x_sq, y_q = y_q, y_sq = y_sq,
     subquad_offset = subquad_offset

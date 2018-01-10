@@ -15,7 +15,7 @@
 #' @examples
 #' \dontrun{
 #' library(fgeo.map)
-#' library(fgeo.utils)
+#' library(fgeo.tool)
 #' library(dplyr)
 #' # Avoid conflict with `stats::filter()`
 #' filter <- dplyr::filter
@@ -55,7 +55,7 @@
 #' p <- filter(top4quad, DBH > 20 | is.na(DBH))
 #' first(map_quad(p))
 #'
-#' # For more complex filtering, see also ?fgeo.utils::rm_dead_twice)
+#' # For more complex filtering, see also ?fgeo.tool::rm_dead_twice)
 #' multiple_censuses <- bciex::bci12vft_mini
 #' nrow(multiple_censuses)
 #' nrow(rm_dead_twice(multiple_censuses))
@@ -160,7 +160,7 @@ check_map_quad <- function(vft,
   arg_theme_has_class_theme <- any(grepl("theme", class(theme)))
   stopifnot(arg_theme_has_class_theme)
   stopifnot(is.character(title_quad), is.character(header))
-  fgeo.utils::check_crucial_names(vft, core)
+  fgeo.tool::check_crucial_names(vft, core)
   check_unique_plotid(vft)
   check_unique_censusid(vft)
   invisible(vft)
@@ -168,13 +168,13 @@ check_map_quad <- function(vft,
 
 check_unique_plotid <- function(x) {
   msg <- "  * Filter your data to keep a single plot; then try again"
-  fgeo.utils::check_unique(x, "plotid", "stop", msg)
+  fgeo.tool::check_unique(x, "plotid", "stop", msg)
   invisible(x)
 }
 
 check_unique_censusid <- function(x) {
   msg <- "  * Likely you should have filtered only the last `censusid`"
-  fgeo.utils::check_unique(x, "censusid", "warning", msg)
+  fgeo.tool::check_unique(x, "censusid", "warning", msg)
   invisible(x)
 }
 

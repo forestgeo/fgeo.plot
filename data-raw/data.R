@@ -1,7 +1,7 @@
 # Few quadrats based on BCI ----------------------------------------------
 
 library(bciex)
-library(fgeo.utils)
+library(fgeo.tool)
 library(fgeo.map)
 library(dplyr)
 filter <- dplyr::filter

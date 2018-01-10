@@ -95,7 +95,7 @@ the algorithm to calculate subquadrats.
 \examples{
 \dontrun{
 library(fgeo.map)
-library(fgeo.utils)
+library(fgeo.tool)
 library(dplyr)
 # Avoid conflict with `stats::filter()`
 filter <- dplyr::filter
@@ -138,7 +138,7 @@ first(map_quad(right))
 p <- filter(top4quad, DBH > 20 | is.na(DBH))
 first(map_tag(p))
 
-# For more complex filtering, see also ?fgeo.utils::rm_dead_twice
+# For more complex filtering, see also ?fgeo.tool::rm_dead_twice
 multiple_censuses <- bciex::bci12vft_mini
 nrow(multiple_censuses)
 nrow(rm_dead_twice(multiple_censuses))
@@ -217,6 +217,6 @@ first(p)
 }
 \seealso{
 \code{\link[graphics:points]{graphics::points()}}, \code{\link[ggplot2:geom_point]{ggplot2::geom_point()}}, \code{\link[ggplot2:theme]{ggplot2::theme()}}
-\code{\link[=map_tag_header]{map_tag_header()}}, \code{\link[=theme_map_tag]{theme_map_tag()}}, \code{\link[fgeo.utils:add_subquad]{fgeo.utils::add_subquad()}},
+\code{\link[=map_tag_header]{map_tag_header()}}, \code{\link[=theme_map_tag]{theme_map_tag()}}, \code{\link[fgeo.tool:add_subquad]{fgeo.tool::add_subquad()}},
 \code{\link[=paginate]{paginate()}}, \link[ggrepel:geom_text_repel]{ggrepel::geom_text_repel}.
 }
