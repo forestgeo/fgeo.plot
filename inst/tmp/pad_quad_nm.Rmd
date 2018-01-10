@@ -60,3 +60,9 @@ Notice that the quadrat name on the map is not "0" but "0000".
 first(map_tag(vft_q1))
 ```
 
+Same here.
+
+```{r}
+map_quad(vft_q1)
+```
+

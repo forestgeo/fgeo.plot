@@ -122,7 +122,7 @@ map_quad <- function(vft,
   message("* Appending tags of dead trees with the suffix '.d'")
   crucial$tagged_tag <- tag_dead(crucial$tag, crucial$status)
   message("* Standarizing `dbh` by the count of `dbh` measurements")
-  crucial$dbh_standarized <- crucial$dbh / length(crucial$dbh)
+  crucial$dbh_standarized <- as.numeric(crucial$dbh) / length(crucial$dbh)
 
   df_list <- split(crucial, crucial$quadratname)
   nms <- sort(unique(as.character(crucial$quadratname)))
@@ -190,8 +190,8 @@ map_quad_each <- function(.df,
   # ggplots come with a default extention
   default_extention <- 1
   grid_adjust <- default_extention - move_edge
-
-  title_quad <- paste(title_quad, unique(.df$quadratname), sep = " ")
+  quads <- stringr::str_pad(unique(.df$quadratname), width = 4, pad = 0)
+  title_quad <- paste(title_quad, quads, sep = " ")
   ggplot(.df, aes(x = qx, y = qy)) +
     geom_text_repel(aes(label = .df$tagged_tag), size = tag_size) +
     geom_point(aes(size = .df$dbh_standarized), shape = 1) +
