@@ -5,19 +5,17 @@ context("map_quad")
 
 test_that("passes with default arguments", {
   # Warns because dataset has no dead trees
-  expect_warning(
-    expect_message(
-      map_quad(
-        top1quad_sub,
-        title_quad = "Site Name, YYYY, Quadrat:",
-        header = map_quad_header(),
-        theme = theme_map_quad(),
-        lim_min = 0,
-        lim_max = 20,
-        subquadrat_side = 5,
-        tag_size = 2,
-        move_edge = 0
-      )
+  expect_message(
+    map_quad(
+      top1quad_sub,
+      title_quad = "Site Name, YYYY, Quadrat:",
+      header = map_quad_header(),
+      theme = theme_map_quad(),
+      lim_min = 0,
+      lim_max = 20,
+      subquadrat_side = 5,
+      tag_size = 2,
+      move_edge = 0
     )
   )
 })
@@ -37,7 +35,7 @@ test_that("wrong inputs to are rejected", {
 
 test_that("returns a list of ggplots", {
   # Warns because dataset has no dead trees
-  expect_warning(one_map <- map_quad(top1quad_sub))
+  one_map <- map_quad(top1quad_sub)
   expect_type(one_map, "list")
   expect_s3_class(one_map[[1]], "ggplot")
 })
