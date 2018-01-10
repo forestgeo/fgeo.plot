@@ -2,7 +2,7 @@
 
 * Rename to __fgeo.map__
 
-* Refactor `map_tag()` to pad quadrat names with "0" up to four digits.
+* `map_tag()` and `map_quad()` pad quadrat names with "0" up to four digits.
 
 # map 0.0.00.9100
 
