@@ -49,7 +49,7 @@ suffix_edgy_dead <- function(x,
     are_to_tag <- assert_are_to_tag(x = x, x_q = x_q, y_q = y_q)
     to_tag <- x[are_to_tag, ]
     # Suffix edgy tags
-    x[are_to_tag, .tag] <- str_suffix_match(
+    x[are_to_tag, .tag] <- fgeo.tool::str_suffix_match(
       string = to_tag[[.tag]], 
       to_match = to_tag[[.status]], 
       .match = status_d,
@@ -89,55 +89,8 @@ assert_are_to_tag <- function(x, x_q, y_q) {
   # Account for x or ly
   .x <- find_coordinate(x, "x")
   .y <- find_coordinate(x, "y")
+
   edgy_x <- x[[.x]] > x_q
   edgy_y <- x[[.y]] > y_q
   (edgy_x + edgy_y) != 0
-}
-
-
-
-#' Suffix a strings where a vector exactly matches one specific string.
-#' 
-#' @keywords internal
-#' # Examples
-#' str_suffix_match(
-#'   string = c("tag1", "tag2"),
-#'   c("dead", "not-dead"),
-#'   "dead",
-#'   ".d"
-#' )
-#' 
-#' library(dplyr)
-#' vft <- tribble(
-#'   ~Tag, ~Status,
-#'   "01", "dead",
-#'   "02", "alive"
-#' )
-#' mutate(vft, tagged = str_suffix_match(Tag, Status, "dead", ".d"))
-str_suffix_match <- function(string, to_match, .match, suffix) {
-  check_str_suffix_match(
-    string = string, to_match = to_match, .match = .match, suffix = suffix
-  )
-  
-  if (!.match %in% to_match) {
-    warning("No stem has status `", .match, "`. Is this what you expect?")
-  }
-  
-  is_dead <- to_match == .match
-  string[is_dead] <- paste0(string[is_dead], suffix)
-  string
-}
-
-check_str_suffix_match <- function(string, to_match, .match, suffix) {
-  not_all_inputs_are_characters <- !all(
-    is.character(string),
-    is.character(to_match),
-    is.character(.match),
-    is.character(suffix)
-  )
-  if (not_all_inputs_are_characters) {
-    stop("Inputs must be characters", call. = FALSE)
-  } else {
-    invisible(string)
-  }
 }
