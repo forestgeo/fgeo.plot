@@ -1,0 +1,6 @@
+urls:
+  reference: https://forestgeo.github.io/fgeo.map//reference
+  article: https://forestgeo.github.io/fgeo.map//articles
+articles:
+  map: map.html
+

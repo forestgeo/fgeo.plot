@@ -57,8 +57,8 @@ reference:
 
   - title: "Helpers"
     contents:
-      - tag_dead
       - matches("header")
+      - suffix_edgy_dead
       - starts_with("theme")
 
   - title: "Datasets"

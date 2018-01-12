@@ -91,8 +91,8 @@ vft2 <- filter(
 # All maps
 p3 <- map_quad(vft2)
 #> * Appending tags of dead trees with the suffix '.d'
-#> Warning in tag_dead(crucial$tag, crucial$status): No stem is dead. Is that
-#> what you expect?
+#> Warning in fgeo.tool::str_suffix_match(crucial$tag, crucial$status,
+#> status_d, : No stem has status `dead`. Is this what you expect?
 #> * Standarizing `dbh` by the count of `dbh` measurements
 length(p3)
 #> [1] 10
