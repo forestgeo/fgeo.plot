@@ -62,8 +62,39 @@ test_that("warns if no stem is dead", {
   )
 })
 
-test_that("fails if x, y are not character vectors", {
-  expect_error(tag_dead(1, "dead"))
+test_that("fails if x, status, and suffix are not character vectors", {
+  # Passes
+  expect_equal(
+    tag_dead(
+      c("tag1", "tag2"),
+      c("dead", "whatever"),
+      "_suffix"
+    ), 
+    c("tag1_suffix", "tag2")
+  )
+  
+  # Fails
+  expect_error(
+    tag_dead(
+      1,
+      c("dead", "whatever"),
+      "_suffix"
+    )
+  )
+  expect_error(
+    tag_dead(
+      c("tag1", "tag2"),
+      1,
+      "_suffix"
+    )
+  )
+  expect_error(
+    tag_dead(
+      c("tag1", "tag2"),
+      c("dead", "whatever"),
+      1
+    )
+  )
 })
 
 

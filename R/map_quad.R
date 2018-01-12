@@ -229,13 +229,28 @@ map_quad_each <- function(.df,
 #'   "02", "alive"
 #' )
 #' mutate(vft, tagged = tag_dead(Tag, Status))
-tag_dead <- function(x, status) {
-  if (!all(is.character(x), is.character(status))) {
-    stop("Both `x` and `y` must be character vectors", call. = FALSE)
+tag_dead <- function(x, status, suffix = ".d") {
+  if (!all(is.character(x), is.character(status), is.character(suffix))) {
+    stop("Inputs must be characters", call. = FALSE)
   }
   if (!"dead" %in% status) {warning("No stem is dead. Is that what you expect?")}
 
   is_dead <- status == "dead"
-  x[is_dead] <- paste0(x[is_dead], ".", sub("^(.).*$", "\\1", status[is_dead]))
+  
+  if (suffix == ".d") {
+    x[is_dead] <- paste0(x[is_dead], ".", sub("^(.).*$", "\\1", status[is_dead]))
+  } else {
+    x[is_dead] <- paste0(x[is_dead], suffix)
+  }
   x
 }
+# tag_dead <- function(x, status) {
+#   if (!all(is.character(x), is.character(status))) {
+#     stop("Both `x` and `y` must be character vectors", call. = FALSE)
+#   }
+#   if (!"dead" %in% status) {warning("No stem is dead. Is that what you expect?")}
+# 
+#   is_dead <- status == "dead"
+#   x[is_dead] <- paste0(x[is_dead], ".", sub("^(.).*$", "\\1", status[is_dead]))
+#   x
+# }
