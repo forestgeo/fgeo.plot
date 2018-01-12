@@ -8,6 +8,7 @@
 #' @param subquadrat_side Length in meters of the side of a subquadrat.
 #' @template tag_size
 #' @template move_edge
+#' @template status_d
 #'
 #' @return A list which each element is a plot of class ggplot.
 #' @export
@@ -91,14 +92,15 @@
 #' )
 #' }
 map_quad <- function(vft,
-  title_quad = "Site Name, YYYY, Quadrat:",
-  header = map_quad_header(),
-  theme = theme_map_quad(),
-  lim_min = 0,
-  lim_max = 20,
-  subquadrat_side = 5,
-  tag_size = 2,
-  move_edge = 0) {
+                     title_quad = "Site Name, YYYY, Quadrat:",
+                     header = map_quad_header(),
+                     theme = theme_map_quad(),
+                     lim_min = 0,
+                     lim_max = 20,
+                     subquadrat_side = 5,
+                     tag_size = 2,
+                     move_edge = 0,
+                     status_d = "dead") {
   .vft <- setNames(vft, tolower(names(vft)))
   core <- c(
     "plotid", "censusid", "tag", "dbh", "status", "quadratname",
@@ -120,7 +122,9 @@ map_quad <- function(vft,
 
   # Prepare
   message("* Appending tags of dead trees with the suffix '.d'")
-  crucial$tagged_tag <- tag_dead(crucial$tag, crucial$status)
+  crucial$tagged_tag <- str_suffix_match(
+    crucial$tag, crucial$status, status_d, ".d"
+  )
   message("* Standarizing `dbh` by the count of `dbh` measurements")
   crucial$dbh_standarized <- as.numeric(crucial$dbh) / length(crucial$dbh)
 
@@ -213,44 +217,3 @@ map_quad_each <- function(.df,
     theme
 }
 
-#' Add the ending ".d" to dead stems.
-#'
-#' @param x A character vector, giving the tag of a stem.
-#' @param status A character vector giving the status of a stem.
-#'
-#' @return A modified version of `x`.
-#' @export
-#'
-#' @examples
-#' library(dplyr)
-#' vft <- tribble(
-#'   ~Tag, ~Status,
-#'   "01", "dead",
-#'   "02", "alive"
-#' )
-#' mutate(vft, tagged = tag_dead(Tag, Status))
-tag_dead <- function(x, status, suffix = ".d") {
-  if (!all(is.character(x), is.character(status), is.character(suffix))) {
-    stop("Inputs must be characters", call. = FALSE)
-  }
-  if (!"dead" %in% status) {warning("No stem is dead. Is that what you expect?")}
-
-  is_dead <- status == "dead"
-  
-  if (suffix == ".d") {
-    x[is_dead] <- paste0(x[is_dead], ".", sub("^(.).*$", "\\1", status[is_dead]))
-  } else {
-    x[is_dead] <- paste0(x[is_dead], suffix)
-  }
-  x
-}
-# tag_dead <- function(x, status) {
-#   if (!all(is.character(x), is.character(status))) {
-#     stop("Both `x` and `y` must be character vectors", call. = FALSE)
-#   }
-#   if (!"dead" %in% status) {warning("No stem is dead. Is that what you expect?")}
-# 
-#   is_dead <- status == "dead"
-#   x[is_dead] <- paste0(x[is_dead], ".", sub("^(.).*$", "\\1", status[is_dead]))
-#   x
-# }

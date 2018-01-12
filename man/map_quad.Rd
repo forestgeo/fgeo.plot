@@ -6,7 +6,8 @@
 \usage{
 map_quad(vft, title_quad = "Site Name, YYYY, Quadrat:",
   header = map_quad_header(), theme = theme_map_quad(), lim_min = 0,
-  lim_max = 20, subquadrat_side = 5, tag_size = 2, move_edge = 0)
+  lim_max = 20, subquadrat_side = 5, tag_size = 2, move_edge = 0,
+  status_d = "dead")
 }
 \arguments{
 \item{vft}{A dataframe -- specifically, a ForestGEO ViewFullTable.}
@@ -26,6 +27,9 @@ map_quad(vft, title_quad = "Site Name, YYYY, Quadrat:",
 
 \item{move_edge}{A number to adjust the extension of the grid lines beyond
 the plot limits.}
+
+\item{status_d}{A character string indicaing the value of the variable 
+status that corresponds to dead stems.}
 }
 \value{
 A list which each element is a plot of class ggplot.
