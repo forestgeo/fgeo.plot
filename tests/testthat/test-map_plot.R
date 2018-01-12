@@ -1,14 +1,20 @@
 library(ggplot2)
 
-context("map_base.R")
-
 bad_nms_elev <- bciex::bci_elevation
 bci_elev <- dplyr::rename(bad_nms_elev, gx = x, gy = y)
+context("map_plot")
+
+# Tests are in map_base
+
+context("map_base.R")
 
 test_that("outputs as a ggplot", {
-  expect_silent(x <- map_base(bci_elev))
+  # Just in case, calling map_plot()
+  expect_silent(p <- map_plot(bci_elev))
+  
+  expect_silent(p <- map_base(bci_elev))
   expect_true(
-    any(grepl("ggplot", class(x)))
+    any(grepl("ggplot", class(p)))
   )
 })
 

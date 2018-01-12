@@ -4,20 +4,7 @@
 #'
 #' @param census Census data.
 #' @param species A string of the species codes to plot (`sp`).
-#' @param xlim,ylim A vector giving the limits of x, y axes, for example
-#'   `xlim = c(0, 1000), ylim = c(0, 500)`. Default limits should be OK -- they
-#'   are set to be c(0, max), where max is the maximum value of `gx` or `gy`
-#'   in the data set.
-#' @template theme
-#' @param elevation A dataframe with variables gx, gy, and elev giving the
-#'   elevation of the site.
-#' @param line_size A number to customize the width of the elevation lines.
-#' @param low,high Colours to represent the range between low and high
-#'   elevation. Use colour names like `low = "black", high = "red"` or HEX
-#'   colours like `low = "#132B43", high = "#56B1F7"` (for more colours google
-#'   #132B43).
-#' @param bins A number. Setting bins creates evenly spaced contours in the
-#'   range of the data. Integers
+#' @inheritParams map_plot
 #' @param ... Arguments passed to [ggplot2::geom_point()] to customize, for
 #'   example, the size, shape, or colour of the points.
 #'

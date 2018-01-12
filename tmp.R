@@ -1,22 +1,3 @@
-
-
-
-
-
-
-
-
-
-
-
-point_fill_sp <- function(shape = 21, ...){
-  geom_point(aes(gx, gy, fill = sp), shape = shape, ...)
-}
-
-contour_colour_range <- function(low, high) {
-  scale_colour_continuous(low = low, high = high)
-}
-
 map_sp_each <- function(cns,
                         xlim,
                         ylim,

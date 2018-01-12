@@ -13,7 +13,12 @@ map_sp(census, species, xlim = NULL, ylim = NULL, theme = theme_map_sp(),
 
 \item{species}{A string of the species codes to plot (\code{sp}).}
 
-\item{xlim, ylim}{A vector giving the limits of x, y axes, for example
+\item{xlim}{A vector giving the limits of x, y axes, for example
+\code{xlim = c(0, 1000), ylim = c(0, 500)}. Default limits should be OK -- they
+are set to be c(0, max), where max is the maximum value of \code{gx} or \code{gy}
+in the data set.}
+
+\item{ylim}{A vector giving the limits of x, y axes, for example
 \code{xlim = c(0, 1000), ylim = c(0, 500)}. Default limits should be OK -- they
 are set to be c(0, max), where max is the maximum value of \code{gx} or \code{gy}
 in the data set.}
@@ -25,7 +30,12 @@ elevation of the site.}
 
 \item{line_size}{A number to customize the width of the elevation lines.}
 
-\item{low, high}{Colours to represent the range between low and high
+\item{low}{Colours to represent the range between low and high
+elevation. Use colour names like \code{low = "black", high = "red"} or HEX
+colours like \code{low = "#132B43", high = "#56B1F7"} (for more colours google
+#132B43).}
+
+\item{high}{Colours to represent the range between low and high
 elevation. Use colour names like \code{low = "black", high = "red"} or HEX
 colours like \code{low = "#132B43", high = "#56B1F7"} (for more colours google
 #132B43).}
