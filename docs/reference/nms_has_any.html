@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Suffix tags of dead stems that map beyond the quadrat's edge. — suffix_edgy_dead â€¢ fgeo.map</title>
+<title>Functions to detect and extract names. — nms_has_any â€¢ fgeo.map</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -101,67 +101,52 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Suffix tags of dead stems that map beyond the quadrat's edge.</h1>
+    <h1>Functions to detect and extract names.</h1>
     </div>
 
     
-    <p>Suffix tags of dead stems that map beyond the quadrat's edge.</p>
+    <p>These functions are handy to work with fgeo's data structures because the
+same variablel may be named differently in different data sets. For example,
+the variable status is called <code>Status</code> or <code>status</code> in viewfull or census
+(tree and stem) tables.</p>
     
 
-    <pre class="usage"><span class='fu'>suffix_edgy_dead</span>(<span class='no'>x</span>, <span class='no'>status_d</span>, <span class='no'>suffix</span>, <span class='kw'>x_q</span> <span class='kw'>=</span> <span class='fl'>20</span>, <span class='kw'>y_q</span> <span class='kw'>=</span> <span class='no'>x_q</span>)</pre>
+    <pre class="usage"><span class='fu'>nms_has_any</span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>A ViewFullTable.</p></td>
+      <td><p>A named object.</p></td>
     </tr>
     <tr>
-      <th>status_d</th>
-      <td><p>A character string indicaing the value of the variable 
-status that corresponds to dead stems.</p></td>
-    </tr>
-    <tr>
-      <th>suffix</th>
-      <td><p>A character string to suffix tree tags with.</p></td>
-    </tr>
-    <tr>
-      <th>x_q, y_q</th>
-      <td><p>Integer; the x and y size in meters of a quadrat.</p></td>
+      <th>...</th>
+      <td><p>Strings; each of the names that need to be checked.</p></td>
     </tr>
     </table>
     
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>A modified version of <code>x</code>.</p>
+    <p><code>nms_has_any()</code>: Checks if an object has any of the provided names.</p><ul>
+<li><p>Returns a logical value.
+<code>nms_detect()</code>: Checks if an object has the provided names.</p></li>
+<li><p>Returns a logical vector.
+<code>nms_extract_all()</code>: Finds the names that match the provided names.</p></li>
+<li><p>Returns a character vector.
+<code>nms_extract1()</code>: Finds the first name that matchs the provided names.</p></li>
+<li><p>Returns a character string.</p></li>
+</ul>
     
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>vft</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>tibble</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/tibble/topics/tibble'>tibble</a></span>(<span class='kw'>QX</span> <span class='kw'>=</span> <span class='fl'>21</span>, <span class='kw'>QY</span> <span class='kw'>=</span> <span class='fl'>21</span>, <span class='kw'>Tag</span> <span class='kw'>=</span> <span class='st'>"01"</span>, <span class='kw'>Status</span> <span class='kw'>=</span> <span class='st'>"dead"</span>)
-<span class='no'>vft</span></div><div class='output co'>#&gt; # A tibble: 1 x 4
-#&gt;      QX    QY Tag   Status
-#&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
-#&gt; 1  21.0  21.0 01    dead  </div><div class='input'>
-<span class='fu'>suffix_edgy_dead</span>(
-  <span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>vft</span>,
-  <span class='kw'>status_d</span> <span class='kw'>=</span> <span class='st'>"dead"</span>,
-  <span class='kw'>suffix</span> <span class='kw'>=</span> <span class='st'>"_d"</span>,
-  <span class='kw'>x_q</span> <span class='kw'>=</span> <span class='fl'>20</span>
-)</div><div class='output co'>#&gt; <span class='message'>One or more trees spillover.</span></div><div class='output co'>#&gt; # A tibble: 1 x 4
-#&gt;      QX    QY Tag   Status
-#&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
-#&gt; 1  21.0  21.0 01_d  dead  </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       
-      <li><a href="#value">Value</a></li>
-      
-      <li><a href="#examples">Examples</a></li>
-    </ul>
+      <li><a href="#details">Details</a></li>
+          </ul>
 
   </div>
 </div>

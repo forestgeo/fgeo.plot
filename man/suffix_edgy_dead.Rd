@@ -7,7 +7,7 @@
 suffix_edgy_dead(x, status_d, suffix, x_q = 20, y_q = x_q)
 }
 \arguments{
-\item{x}{A ForestGEO table, either a ViewFullTable or a census table.}
+\item{x}{A ViewFullTable.}
 
 \item{status_d}{A character string indicaing the value of the variable 
 status that corresponds to dead stems.}
@@ -23,20 +23,13 @@ A modified version of \code{x}.
 Suffix tags of dead stems that map beyond the quadrat's edge.
 }
 \examples{
-stem <- bciex::bci12s7mini
-# Add x and y coordinates relative to each quadrat
-with_lxly <- fgeo.tool::add_lxly(stem)
-# Focus on dead stems
-dead <- with_lxly[with_lxly$status == "D", ]
+vft <- tibble::tibble(QX = 21, QY = 21, Tag = "01", Status = "dead")
+vft
 
-# Suffix only dead trees that spillover beyond `10`
-spillover <- 10
-relevant_vars <- c("tag", "lx", "ly")
-suffixed_over10 <- suffix_edgy_dead(dead, "D", "*", x_q = spillover)
-suffixed_over10[1:10, relevant_vars]
-
-# To tag all dead trees, set spillover to 0
-spillover <- 0
-suffixed_all <- suffix_edgy_dead(dead, "D", "*", x_q = spillover)
-suffixed_all[1:10, relevant_vars]
+suffix_edgy_dead(
+  x = vft, 
+  status_d = "dead",
+  suffix = "_d", 
+  x_q = 20
+) 
 }
