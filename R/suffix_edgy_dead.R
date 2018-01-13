@@ -36,7 +36,7 @@ suffix_edgy_dead <- function(x,
     is.numeric(x_q),
     is.numeric(y_q)
   )
-  fgeo.tool::check_crucial_names(x, c("status", "tag"))
+  # fgeo.tool::check_crucial_names(x, c("status", "tag"))
   
   spillover_status <- assert_spillover(x = x, x_q = x_q, y_q = y_q)
   if (spillover_status == FALSE) {

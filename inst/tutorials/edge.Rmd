@@ -1,5 +1,5 @@
 ---
-title: "Title"
+title: "Dealing with edgy trees"
 output: html_notebook
 ---
 
@@ -15,18 +15,90 @@ knitr::opts_chunk$set(
   out.width = "70%",
   fig.align = "center",
   fig.width = 6,
-  fig.asp = 0.618,  # 1 / phi
+  fig.asp = 0.618,	# 1 / phi
   fig.show = "hold"
 )
 ```
 
 ```{r}
 library(tidyverse)
-library(fgeo.map)
+library(fgeo)
+```
+
+```{r}
+raw <- sinharaja::sinh_vft
+
+quad_max_n_spillover <- raw %>% 
+  filter(Status == "dead") %>% 
+  select(matches("x|y"), everything()) %>% 
+  filter(any(QX > 20, QY > 20)) %>% 
+  group_by(QuadratID) %>% 
+  count(Tag, sort = TRUE) %>% 
+  top(n, -1) %>% 
+  pull(QuadratID)
+```
+
+```{r}
+vft_top1spillover <- filter(raw, QuadratID == quad_max_n_spillover)
+xy <- mutate(vft_top1spillover, x = QX, y = QY)
+vft <- xy %>% 
+  select(QX, QY, Status, Tag, everything()) %>%
+  arrange(desc(x), desc(y))
 ```
 
 
-```{r}
+The dataset `vft` is a small subset of all the data with `R nrow(vft)` rows.
 
+```{r}
+nrow(vft)
+```
+
+Notice that it contains data from multiple censuses.
+
+```{r}
+unique(vft$CensusID)
+```
+
+Not all those data are relevant for a recensus. The trees we want to keep are those that are either alive or that appear dead in only one of the two last censuses. That is the job of the function `rm_dead_twice()`.
+
+```{r}
+want <- vft %>% 
+  rm_dead_twice() %>%
+  dplyr::filter(PlotID == 1)
+```
+
+Now we are left with data from the last two censuses, and only `r nrow(want)` rows.
+
+```{r}
+unique(want$CensusID)
+```
+
+This is what the data looks like.
+
+```{r}
+want
+```
+
+Notice above that some trees spillover (focus on the first row). Those trees would map beyond the quadrat limits. The problem with that is that the information about the tree status (alive or dead) is given by the symbol that plots at the actual position of each tree. If we cut the map limits at 20m, we won't see the symbols and therefore we won't know the tree status. But we have two solutions.
+
+### Solution 1:  Suffix dead trees beyond quadrat edge
+
+
+To miminize clutter, we can specifically suffix that meet this conditions:
+1. They are dead.
+2. They map beyond the quadrat limits.
+
+That is the job of the function `suffix_edgy_dead()`:
+
+```{r}
+suffixed <- suffix_edgy_dead(vft, status_d = "dead", suffix = ".d")
+suffixed
+
+suffixed %>% nrow()
+suffixed %>% unique() %>% nrow()
+```
+
+```{r, out.width = "98%", fig.width = 9.5, fig.asp = 0.7}
+map_tag(suffixed)[[3]]
 ```
 
