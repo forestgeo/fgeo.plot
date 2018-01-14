@@ -1,5 +1,5 @@
 collapse <- function(...) {
-paste0(..., collapse = ", ")
+  paste0(..., collapse = ", ")
 }
 
 max0 <- function(...) {

@@ -26,7 +26,7 @@ suffix_edgy_dead <- function(x, status_d, suffix, x_q = 20, y_q = x_q) {
     is.numeric(x_q),
     is.numeric(y_q)
   )
-  x <- fgeo.tool::names_lowercase(x)
+  x <- fgeo.tool::nms_lowercase(x)
   fgeo.tool::check_crucial_names(x, c("status", "tag", "qx", "qy"))
 
   spillover_status <- detect_spillover(x = x, x_q = x_q, y_q = y_q)
@@ -43,7 +43,7 @@ suffix_edgy_dead <- function(x, status_d, suffix, x_q = 20, y_q = x_q) {
       .match = status_d,
       suffix = suffix
     )
-    fgeo.tool::names_restore(x)
+    fgeo.tool::nms_restore(x)
   }
 }
 
