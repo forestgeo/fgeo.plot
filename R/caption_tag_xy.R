@@ -1,5 +1,6 @@
 caption_edge_tag <- function(x, x_q, y_q, max_n = 6) {
-  edgy <- unique(select(dplyr::filter(x, qx > x_q | qy > y_q), tag, qx, qy))
+  edgy <- dplyr::filter(x, qx > x_q | qy > y_q)
+  edgy <- unique(select(edgy, .data$tag, .data$qx, .data$qy))
   if (nrow(edgy) == 0 ) {
     caption <- NULL
   } else {
@@ -7,13 +8,12 @@ caption_edge_tag <- function(x, x_q, y_q, max_n = 6) {
   }
 }
 
-
-
 # caption_tag_xy(letters[1:3], 1:3, 11:13, NULL)
-# caption_tag_xy(letters[1:3], 1:3, 11:13, 2)
-# caption_tag_xy(letters[1:3], 1:3, 11:13, 1)
-# caption_tag_xy(letters[1:3], 1:3, 11:13, 4)
 # caption_tag_xy(letters[1:3], 1:3, 11:13, 0)
+# caption_tag_xy(letters[1:3], 1:3, 11:13, 1)
+# caption_tag_xy(letters[1:3], 1:3, 11:13, 2)
+# caption_tag_xy(letters[1:3], 1:3, 11:13, 3)
+# caption_tag_xy(letters[1:3], 1:3, 11:13, 4)
 caption_tag_xy <- function(x, x_coord, y_coord, max_n = NULL) {
   info <- inform_more(x = x, max_n = max_n)
   x <- info$x
