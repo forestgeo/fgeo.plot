@@ -58,7 +58,7 @@ reference:
   - title: "Helpers"
     contents:
       - matches("header")
-      - suffix_edgy_dead
+      - suffix_edge_tag
       - starts_with("theme")
 
   - title: "Datasets"

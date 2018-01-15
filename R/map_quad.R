@@ -8,7 +8,8 @@
 #' @param subquadrat_side Length in meters of the side of a subquadrat.
 #' @template tag_size
 #' @template move_edge
-#' @template status_d
+#' @param status_d A character string indicaing the value of the variable 
+#'   status that corresponds to dead stems.
 #'
 #' @return A list which each element is a plot of class ggplot.
 #' @export

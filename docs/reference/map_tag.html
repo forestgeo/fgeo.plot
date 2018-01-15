@@ -242,20 +242,20 @@ the algorithm to calculate subquadrats.</p>
 <span class='fu'>library</span>(<span class='no'>fgeo.tool</span>)
 <span class='fu'>library</span>(<span class='no'>dplyr</span>)
 <span class='co'># Avoid conflict with `stats::filter()`</span>
-<span class='no'>filter</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='no'><a href='http://dplyr.tidyverse.org/reference/filter.html'>filter</a></span>
+<span class='no'>filter</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='no'><a href='http://www.rdocumentation.org/packages/dplyr/topics/filter'>filter</a></span>
 
 <span class='co'># Filtering the data to map -----------------------------------------------</span>
 
 <span class='co'># Filter the data you want. For example:</span>
 <span class='co'># (see ?top1quad)</span>
-<span class='no'>want</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://dplyr.tidyverse.org/reference/filter.html'>filter</a></span>(
+<span class='no'>want</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/dplyr/topics/filter'>filter</a></span>(
   <span class='no'>top1quad</span>,
   <span class='no'>CensusID</span> <span class='kw'>==</span> <span class='fl'>6</span>,
   <span class='no'>PlotID</span> <span class='kw'>==</span> <span class='fl'>1</span>
 )
 <span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'>map_tag</span>(<span class='no'>want</span>)
 <span class='co'># Visualizing only the first plot of `p`</span>
-<span class='fu'><a href='http://dplyr.tidyverse.org/reference/nth.html'>first</a></span>(<span class='no'>p</span>)
+<span class='fu'><a href='http://www.rdocumentation.org/packages/dplyr/topics/nth'>first</a></span>(<span class='no'>p</span>)
 <span class='co'># Printing all plots of `p` to .pdf, with parameters optimized for size letter</span>
 <span class='fu'>pdf</span>(<span class='st'>"map.pdf"</span>, <span class='kw'>paper</span> <span class='kw'>=</span> <span class='st'>"letter"</span>, <span class='kw'>height</span> <span class='kw'>=</span> <span class='fl'>10.5</span>, <span class='kw'>width</span> <span class='kw'>=</span> <span class='fl'>8</span>)
 <span class='no'>p</span>
@@ -267,20 +267,20 @@ the algorithm to calculate subquadrats.</p>
 <span class='no'>dead</span> <span class='kw'>&lt;-</span> <span class='no'>top4quad</span> <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='http://www.rdocumentation.org/packages/fgeo.tool/topics/add_status_tree'>add_status_tree</a></span>(<span class='kw'>status_a</span> <span class='kw'>=</span> <span class='st'>"alive"</span>, <span class='kw'>status_d</span> <span class='kw'>=</span> <span class='st'>"dead"</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='http://www.rdocumentation.org/packages/fgeo.tool/topics/top'>top</a></span>(<span class='no'>QuadratID</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='http://dplyr.tidyverse.org/reference/filter.html'>filter</a></span>(<span class='no'>status_tree</span> <span class='kw'>==</span> <span class='st'>"dead"</span>)
-<span class='fu'><a href='http://dplyr.tidyverse.org/reference/select.html'>select</a></span>(<span class='no'>dead</span>, <span class='no'>Tag</span>, <span class='no'>Status</span>, <span class='no'>status_tree</span>, <span class='no'>DBH</span>)
-<span class='fu'><a href='http://dplyr.tidyverse.org/reference/nth.html'>first</a></span>(<span class='fu'>map_tag</span>(<span class='no'>dead</span>))
+  <span class='fu'><a href='http://www.rdocumentation.org/packages/dplyr/topics/filter'>filter</a></span>(<span class='no'>status_tree</span> <span class='kw'>==</span> <span class='st'>"dead"</span>)
+<span class='fu'><a href='http://www.rdocumentation.org/packages/dplyr/topics/select'>select</a></span>(<span class='no'>dead</span>, <span class='no'>Tag</span>, <span class='no'>Status</span>, <span class='no'>status_tree</span>, <span class='no'>DBH</span>)
+<span class='fu'><a href='http://www.rdocumentation.org/packages/dplyr/topics/nth'>first</a></span>(<span class='fu'>map_tag</span>(<span class='no'>dead</span>))
 <span class='co'># * If you filter by `DBH`, you loose the dead trees becaue their `DBH = NA`</span>
-<span class='no'>wrong</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://dplyr.tidyverse.org/reference/filter.html'>filter</a></span>(<span class='no'>dead</span>, <span class='no'>DBH</span> <span class='kw'>&gt;</span> <span class='fl'>10</span>)
+<span class='no'>wrong</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/dplyr/topics/filter'>filter</a></span>(<span class='no'>dead</span>, <span class='no'>DBH</span> <span class='kw'>&gt;</span> <span class='fl'>10</span>)
 <span class='no'>wrong</span>
 <span class='co'># * The right way to do it is to explicietly inlcude rows where DBH = NA</span>
-<span class='no'>right</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://dplyr.tidyverse.org/reference/filter.html'>filter</a></span>(<span class='no'>dead</span>, <span class='no'>DBH</span> <span class='kw'>&gt;</span> <span class='fl'>10</span> <span class='kw'>|</span> <span class='fu'>is.na</span>(<span class='no'>DBH</span>))
+<span class='no'>right</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/dplyr/topics/filter'>filter</a></span>(<span class='no'>dead</span>, <span class='no'>DBH</span> <span class='kw'>&gt;</span> <span class='fl'>10</span> <span class='kw'>|</span> <span class='fu'>is.na</span>(<span class='no'>DBH</span>))
 <span class='no'>right</span>
-<span class='fu'><a href='http://dplyr.tidyverse.org/reference/nth.html'>first</a></span>(<span class='fu'><a href='map_quad.html'>map_quad</a></span>(<span class='no'>right</span>))
+<span class='fu'><a href='http://www.rdocumentation.org/packages/dplyr/topics/nth'>first</a></span>(<span class='fu'><a href='map_quad.html'>map_quad</a></span>(<span class='no'>right</span>))
 
 <span class='co'># Keeping dead trees with `is.na(DBH)` (e.g. tag 127885.d on the bottom right)</span>
-<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://dplyr.tidyverse.org/reference/filter.html'>filter</a></span>(<span class='no'>top4quad</span>, <span class='no'>DBH</span> <span class='kw'>&gt;</span> <span class='fl'>20</span> <span class='kw'>|</span> <span class='fu'>is.na</span>(<span class='no'>DBH</span>))
-<span class='fu'><a href='http://dplyr.tidyverse.org/reference/nth.html'>first</a></span>(<span class='fu'>map_tag</span>(<span class='no'>p</span>))
+<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/dplyr/topics/filter'>filter</a></span>(<span class='no'>top4quad</span>, <span class='no'>DBH</span> <span class='kw'>&gt;</span> <span class='fl'>20</span> <span class='kw'>|</span> <span class='fu'>is.na</span>(<span class='no'>DBH</span>))
+<span class='fu'><a href='http://www.rdocumentation.org/packages/dplyr/topics/nth'>first</a></span>(<span class='fu'>map_tag</span>(<span class='no'>p</span>))
 
 <span class='co'># For more complex filtering, see also ?fgeo.tool::rm_dead_twice</span>
 <span class='no'>multiple_censuses</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>bciex</span><span class='kw ns'>::</span><span class='no'><a href='http://www.rdocumentation.org/packages/bciex/topics/bci12vft_mini'>bci12vft_mini</a></span>
@@ -294,7 +294,7 @@ the algorithm to calculate subquadrats.</p>
 <span class='co'># Common tweaks</span>
 
 <span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'>map_tag</span>(<span class='no'>top1quad</span>, <span class='kw'>show_page</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>show_subquad</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
-<span class='fu'><a href='http://dplyr.tidyverse.org/reference/nth.html'>first</a></span>(<span class='no'>p</span>)
+<span class='fu'><a href='http://www.rdocumentation.org/packages/dplyr/topics/nth'>first</a></span>(<span class='no'>p</span>)
 
 <span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'>map_tag</span>(
   <span class='no'>top1quad</span>,
@@ -306,7 +306,7 @@ the algorithm to calculate subquadrats.</p>
   <span class='kw'>tag_size</span> <span class='kw'>=</span> <span class='fl'>2</span>,
   <span class='kw'>move_edge</span> <span class='kw'>=</span> <span class='fl'>0.5</span>
 )
-<span class='fu'><a href='http://dplyr.tidyverse.org/reference/nth.html'>first</a></span>(<span class='no'>p</span>)
+<span class='fu'><a href='http://www.rdocumentation.org/packages/dplyr/topics/nth'>first</a></span>(<span class='no'>p</span>)
 
 
 
@@ -315,13 +315,13 @@ the algorithm to calculate subquadrats.</p>
 <span class='fu'>library</span>(<span class='no'>ggplot2</span>)
 
 <span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'>map_tag</span>(<span class='no'>top1quad</span>, <span class='kw'>theme</span> <span class='kw'>=</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/ggtheme'>theme_gray</a></span>())
-<span class='fu'><a href='http://dplyr.tidyverse.org/reference/nth.html'>first</a></span>(<span class='no'>p</span>)
+<span class='fu'><a href='http://www.rdocumentation.org/packages/dplyr/topics/nth'>first</a></span>(<span class='no'>p</span>)
 
 <span class='co'># Tweaking the default theme of map_tag()</span>
 
 <span class='no'>small_tweak</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='themes.html'>theme_map_tag</a></span>(<span class='kw'>legend.position</span> <span class='kw'>=</span> <span class='st'>"bottom"</span>)
 <span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'>map_tag</span>(<span class='no'>top1quad</span>, <span class='kw'>theme</span> <span class='kw'>=</span> <span class='no'>small_tweak</span>)
-<span class='fu'><a href='http://dplyr.tidyverse.org/reference/nth.html'>first</a></span>(<span class='no'>p</span>)
+<span class='fu'><a href='http://www.rdocumentation.org/packages/dplyr/topics/nth'>first</a></span>(<span class='no'>p</span>)
 
 <span class='no'>large_tweak</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/theme'>theme</a></span>(
   <span class='kw'>legend.position</span> <span class='kw'>=</span> <span class='st'>"bottom"</span>,
@@ -338,7 +338,7 @@ the algorithm to calculate subquadrats.</p>
   <span class='kw'>panel.grid.major</span> <span class='kw'>=</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/element'>element_line</a></span>(<span class='kw'>colour</span> <span class='kw'>=</span> <span class='st'>"black"</span>)
 )
 <span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'>map_tag</span>(<span class='no'>top1quad</span>, <span class='kw'>theme</span> <span class='kw'>=</span> <span class='no'>large_tweak</span>)
-<span class='fu'><a href='http://dplyr.tidyverse.org/reference/nth.html'>first</a></span>(<span class='no'>p</span>)
+<span class='fu'><a href='http://www.rdocumentation.org/packages/dplyr/topics/nth'>first</a></span>(<span class='no'>p</span>)
 
 
 
@@ -348,15 +348,15 @@ the algorithm to calculate subquadrats.</p>
 <span class='co'># Creating new data set with QX and QY ranging 0-100</span>
 <span class='no'>smaller</span> <span class='kw'>&lt;-</span> <span class='no'>top1quad</span>
 <span class='no'>n</span> <span class='kw'>&lt;-</span> <span class='fu'>nrow</span>(<span class='no'>smaller</span>)
-<span class='no'>smaller</span>$<span class='no'>QX</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://dplyr.tidyverse.org/reference/sample.html'>sample</a></span>(<span class='fl'>0</span>:<span class='fl'>10</span>, <span class='no'>n</span>, <span class='kw'>replace</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
-<span class='no'>smaller</span>$<span class='no'>QY</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://dplyr.tidyverse.org/reference/sample.html'>sample</a></span>(<span class='fl'>0</span>:<span class='fl'>10</span>, <span class='no'>n</span>, <span class='kw'>replace</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+<span class='no'>smaller</span>$<span class='no'>QX</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/dplyr/topics/sample'>sample</a></span>(<span class='fl'>0</span>:<span class='fl'>10</span>, <span class='no'>n</span>, <span class='kw'>replace</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+<span class='no'>smaller</span>$<span class='no'>QY</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/dplyr/topics/sample'>sample</a></span>(<span class='fl'>0</span>:<span class='fl'>10</span>, <span class='no'>n</span>, <span class='kw'>replace</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 
 <span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'>map_tag</span>(<span class='no'>smaller</span>, <span class='kw'>x_q</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>x_sq</span> <span class='kw'>=</span> <span class='fl'>2.5</span>)
-<span class='fu'><a href='http://dplyr.tidyverse.org/reference/nth.html'>first</a></span>(<span class='no'>p</span>)
+<span class='fu'><a href='http://www.rdocumentation.org/packages/dplyr/topics/nth'>first</a></span>(<span class='no'>p</span>)
 
 <span class='co'># If limit-lines aren't visible, try extending the grid a little</span>
 <span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'>map_tag</span>(<span class='no'>smaller</span>, <span class='kw'>x_q</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>x_sq</span> <span class='kw'>=</span> <span class='fl'>2.5</span>, <span class='kw'>move_edge</span> <span class='kw'>=</span> <span class='fl'>0.25</span>)[<span class='fl'>1</span>]
-<span class='fu'><a href='http://dplyr.tidyverse.org/reference/nth.html'>first</a></span>(<span class='no'>p</span>)
+<span class='fu'><a href='http://www.rdocumentation.org/packages/dplyr/topics/nth'>first</a></span>(<span class='no'>p</span>)
 <span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

@@ -28,7 +28,7 @@ map_quad(vft, title_quad = "Site Name, YYYY, Quadrat:",
 \item{move_edge}{A number to adjust the extension of the grid lines beyond
 the plot limits.}
 
-\item{status_d}{A character string indicaing the value of the variable 
+\item{status_d}{A character string indicaing the value of the variable
 status that corresponds to dead stems.}
 }
 \value{

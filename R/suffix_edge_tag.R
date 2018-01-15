@@ -1,7 +1,8 @@
 #' Suffix tags of dead stems that map beyond the quadrat's edge.
 #'
 #' @param x A ViewFullTable.
-#' @template status_d
+#' @param .match A character string indicaing the matching value of the variable
+#'   status to suffix.
 #' @param suffix A character string to suffix tree tags with.
 #' @param x_q,y_q Integer; the x and y size in meters of a quadrat.
 #'
@@ -9,19 +10,30 @@
 #' @export
 #'
 #' @examples
-#' vft <- tibble::tibble(QX = 21, QY = 21, Tag = "01", Status = "dead")
+#' vft <- tibble::tibble(
+#'   QX = 21:22,
+#'   QY = 21:22,
+#'   Tag = c("01", "02"),
+#'   Status = c("dead", "alive")
+#' )
 #' vft
 #' 
-#' suffix_edgy_dead(
-#'   x = vft, 
-#'   status_d = "dead",
-#'   suffix = "_d", 
+#' suffix_edge_tag(
+#'   x = vft,
+#'   .match = "dead",
+#'   suffix = "_d",
 #'   x_q = 20
-#' ) 
-suffix_edgy_dead <- function(x, status_d, suffix, x_q = 20, y_q = x_q) {
+#' )
+#' suffix_edge_tag(
+#'   x = vft,
+#'   .match = "alive",
+#'   suffix = "_a",
+#'   x_q = 20
+#' )
+suffix_edge_tag <- function(x, .match, suffix, x_q = 20, y_q = x_q) {
   stopifnot(
     is.data.frame(x), 
-    is.character(status_d),
+    is.character(.match),
     is.character(suffix),
     is.numeric(x_q),
     is.numeric(y_q)
@@ -40,7 +52,7 @@ suffix_edgy_dead <- function(x, status_d, suffix, x_q = 20, y_q = x_q) {
     x[are_to_tag, "tag"] <- fgeo.tool::str_suffix_match(
       string = to_tag[["tag"]], 
       to_match = to_tag[["status"]], 
-      .match = status_d,
+      .match = .match,
       suffix = suffix
     )
     fgeo.tool::nms_restore(x)
