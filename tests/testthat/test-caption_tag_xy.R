@@ -1,9 +1,3 @@
-context("caption_edge_tags.R")
-
-test_that("multiplication works", {
-  expect_equal(2 * 2, 4)
-})
-
 context("caption_tag_xy.R")
 
 test_that("returns expected string", {
@@ -31,6 +25,3 @@ test_that("returns expected string", {
     caption_tag_xy(1:3, 1:3, 1:3, NA)
   )
 })
-
-
-
