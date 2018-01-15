@@ -493,6 +493,7 @@ map_tag_each <- function(prep_df,
       )
   }
   # <<<
+  .caption <- caption_edge_tag(prep_df, x_q = x_q, y_q = y_q)
   base +
     geom_point(size = point_size) +
     ggrepel::geom_text_repel(aes(label = prep_df$tag), size = tag_size) +
@@ -510,7 +511,7 @@ map_tag_each <- function(prep_df,
       title = entitle_map(prep_df, title_quad, show_page = show_page),
       subtitle = header,
       x = NULL, y = NULL,
-      caption = paste0("\n\nSpillover: ", caption_edge_tag(prep_df))
+      caption = paste0("\n\nSpillover: ", .caption)
     ) +
     theme
 }

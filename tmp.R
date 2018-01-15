@@ -23,5 +23,5 @@ demo <- vft %>% dplyr::filter(QuadratID == quad_spillover)
 p <- map_tag(demo)
 
 pdf("map.pdf", paper = "letter", height = 10.5, width = 8)
-p[1]
+p[2]
 dev.off()

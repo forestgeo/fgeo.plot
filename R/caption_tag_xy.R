@@ -1,5 +1,5 @@
-caption_edge_tag <- function(x, max_n = 6) {
-  edgy <- unique(select(dplyr::filter(x, qx > 20 | qy > 20), tag, qx, qy))
+caption_edge_tag <- function(x, x_q, y_q, max_n = 6) {
+  edgy <- unique(select(dplyr::filter(x, qx > x_q | qy > y_q), tag, qx, qy))
   if (nrow(edgy) == 0 ) {
     caption <- NULL
   } else {

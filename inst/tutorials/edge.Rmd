@@ -7,8 +7,7 @@ output:
     theme: united
 ---
 
-# xxx fix `rm_dead_twice()`
-
+Some trees may map beyond the edge of a quadrat. This document shows how to deal with those trees: How to know their status and how to locate them.
 
 ```{r setup, include=FALSE}
 set.seed(1014)
@@ -51,102 +50,56 @@ xy <- mutate(vft_top1spillover, x = QX, y = QY)
 vft <- xy %>% 
   select(QX, QY, Status, Tag, everything()) %>%
   arrange(desc(x), desc(y))
-```
 
-The dataset `vft` is a small subset of a ViewFullTable. Let's start by filtering the data to keep only those from the plot we want to work with.
-
-```{r}
 vft1 <-   dplyr::filter(vft, PlotID == 1)
+vft_data <- top(vft1, CensusID, -1)
+
+# Let's confirm that the data we `want` has only the last census.
+unique(vft_data$CensusID)
+# Great! This is what the data we `want` looks like.
 ```
 
-Now the data has `R nrow(vft)` rows.
+The dataset we'll use is one quadrat from a ViewFullTable from Sinharaja. I chose this quadrat because it has a particularly high number of trees that map beyond the quadrat edge.
 
 ```{r}
-nrow(vft1)
+vft_data
 ```
-
-Notice that this dataset has data from multiple censuses.
 
 ```{r}
-unique(vft1$CensusID)
+# Showing only one map (page 3)
+map_tag(vft_data)[[3]]
 ```
 
-Not all those data are relevant for a re-census. The trees we want to keep are those that are either alive or that appear dead in only one of the two last censuses. That is the job of the function `rm_dead_twice()`.
+Notice above that some trees spillover beyond the quadrat edge (`QX` or `QY` greater than 20m). `map_tag()` will print a small caption giving the coordinates of the trees that spillover (if the caption is too long it will be truncated).
 
-```{r}
-not_dead_twice <- rm_dead_twice(vft1)
-```
+The problem with the map above is that it lacks information about the status of the trees that spillover because the status is encoded by the point symbol. To solve that problem we can add a suffix to the tree tag. To keep the maps as clean as possible, we can suffix only the few tags of the trees that are dead AND beyond the quadrat edge.
 
-`rm_dead_twic()` appends the data with the column `.matchead`.
-
-```{r}
-tail(names(not_dead_twice))
-```
-
-`rm_dead_twic()` also removes irrelevant censuses. 
-
-```{r}
-unique(not_dead_twice$CensusID)
-```
-
-Now we are left with data from the last two censuses which is all we need:
-* If a tree was alive in the last censuses, we want to re-census it.
-* If a tree was alive in the previous last censuses but dead in the last census, we also want to re-census it.
-* If a tree was dead in the last two censuses, we consider it dead and we don't want to re-census it.
-
-But still the data has one census too many. We already removed the trees that are "really" dead. So the information of the last census is enough to label a tree as either _alive_ or "possibly" _dead_. So we can further filter the data to keep only the last census.
-
-```{r}
-want <- top(not_dead_twice, CensusID, -1)
-```
-
-Let's confirm that the data we `want` has only the last census.
-
-```{r}
-unique(want$CensusID)
-```
-
-Great! This is what the data we `want` looks like.
-
-```{r}
-want
-```
-
-Notice above that some trees spillover (focus on the first row). Those trees would map beyond the quadrat limits. The problem with that is that the information about the tree status (alive or dead) is given by the symbol that plots at the actual position of each tree. If we cut the map limits at 20m, we won't see the symbols and therefore we won't know the tree status. We can fix that in two (non exclusive) ways.
-
-__1. Label dead trees beyond quadrat edge__
-
-One subtle solution is to suffix dead trees beyond quadrat edge -- specifically. Because this labeling is so specific, the clutter we add to the plot is minimum.
+__1. Suffix dead trees beyond quadrat edge__
 
 ```{r}
 suffixed <- suffix_edge_tag(
-  x = want,            # What data?
-  .match = "dead",   # Trees of what status?
+  x = vft_data,            # What data?
+  .match = "dead",     # Trees of what status?
   suffix = ".d",       # What suffix to add?
   x_q = 20             # What is the limit beyond which we want to add a suffix?
 )
 suffixed
 ```
 
-And now we are ready to map.
+And now we map again.
 
 ```{r}
-p <- map_tag(suffixed)
-# Showing only one quarter of the entire quadrat.
-p[[3]]
+map_tag(suffixed)[[3]]
 ```
 
-Notice `Tag = 073246.d` at `QX = 20.20` and `QY = 13.25`: It is beyond the edge and is dead; therefore its tag has the suffix ".d".
-Notice `Tag = 073247` at `QX = 20.20` and `QY = 13.60`: It is beyond the edge but is alive; therefore its tag has no suffix.
+Notice `Tag = 073246.d` at `QX = 20.20` and `QY = 13.25`.
 
-__2. Show quadrat beyond the edge__
+__2. Extend the quadrat edge__
 
 Another way to help solve this problem is to move the quadrat edge a little beyond its limit.
 
 ```{r}
-p1 <- map_tag(suffixed, move_edge = 1)
-# Showing only one quarter of the entire quadrat.
-p1[[3]]
+map_tag(suffixed, move_edge = 1)[[3]]
 ```
 
 Now we can see the position of the tree 073246, and therefore we can see the symbol "x" indicating that it is dead.
@@ -156,8 +109,8 @@ __Suffix all dead trees__
 If you want to suffix all dead trees, simply choose `x_q = 0`.
 
 ```{r}
-suffix_all <- suffix_edge_tag(
-  x = want,            # What data?
+suffix_all_dead <- suffix_edge_tag(
+  x = vft_data,            # What data?
   .match = "dead",   # Trees of what status?
   suffix = ".d",       # What suffix to add?
   x_q = 0              # What is the limit beyond which we want to add a suffix?
@@ -167,10 +120,8 @@ suffix_all <- suffix_edge_tag(
 Now notice that -- regardless of their position --all dead trees have the suffix ".d".
 
 ```{r}
-filter(suffix_all, Status == "dead")
+filter(suffix_all_dead, Status == "dead")
 ```
 
-```{r}
-map_tag(suffix_all)[[3]]
-```
+
 

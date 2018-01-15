@@ -11,8 +11,9 @@ theme_map_tag(panel.grid.major = element_line(colour = "black"),
   panel.grid.minor = element_line(colour = "black", linetype = "dotted"),
   panel.background = element_rect(fill = "white"),
   plot.title = element_text(size = 20), plot.subtitle = element_text(size =
-  12), legend.position = "top", legend.title = element_blank(),
-  axis.ticks = element_blank(), axis.text = element_text(size = 12), ...)
+  12), plot.caption = element_text(size = 8), legend.position = "top",
+  legend.title = element_blank(), axis.ticks = element_blank(),
+  axis.text = element_text(size = 12), ...)
 
 theme_map_quad(axis.text = element_blank(),
   panel.background = element_rect(fill = "white"),
@@ -39,6 +40,9 @@ from \code{title}) left-aligned by default}
 
 \item{plot.subtitle}{plot subtitle (text appearance) (\code{element_text};
 inherits from \code{title}) left-aligned by default}
+
+\item{plot.caption}{caption below the plot (text appearance)
+(\code{element_text}; inherits from \code{title}) right-aligned by default}
 
 \item{legend.position}{the position of legends ("none", "left", "right",
 "bottom", "top", or two-element numeric vector)}
