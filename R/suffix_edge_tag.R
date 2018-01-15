@@ -78,3 +78,28 @@ detect_to_tag <- function(x, x_q, y_q) {
   (edgy_x + edgy_y) != 0
 }
 
+# Output a caption locating each tree beyond the edge
+caption_edge_tree <- function() {
+  # given a vector of tags, output this:
+  # spillover: tag1 (qx1, qy1); tag2 (qx2, qy2); ... and x more tags.
+}
+
+caption_var_xy <- function(x, x_coord, y_coord, max_n = NULL) {
+  if (is.na(max_n)) {rlang::abort("`max_n` must not be NA")}
+  
+  and_more <- NULL
+
+  if (all(!is.null(max_n), length(x) > max_n)) {
+    n <- length(x) - max_n
+    and_more <- paste0("; ... and ", n, " more.")
+    x <- x[1:max_n]
+  }
+  n_to_show <- length(x)
+  to_show <- list(x, x_coord, y_coord) %>% 
+    purrr::map(~.[1:n_to_show]) %>%
+    purrr::pmap_chr(~paste0(..1, ":", "(", ..2, ", ", ..3, ")")) %>% 
+    paste0(collapse = "; ")
+  
+  if (all(!is.null(max_n), max_n == 0)) {to_show <- NULL}
+  paste0(to_show, and_more)
+}

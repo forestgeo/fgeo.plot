@@ -1,11 +1,14 @@
 ---
-title: "Dealing with edgy trees"
+title: "Locating trees beyond the quadrat edge"
 output: 
   rmarkdown::html_notebook:
     toc: true
     toc_depth: 6
     theme: united
 ---
+
+# xxx fix `rm_dead_twice()`
+
 
 ```{r setup, include=FALSE}
 set.seed(1014)
@@ -74,7 +77,7 @@ Not all those data are relevant for a re-census. The trees we want to keep are t
 not_dead_twice <- rm_dead_twice(vft1)
 ```
 
-`rm_dead_twic()` appends the data with the column `status_dead`.
+`rm_dead_twic()` appends the data with the column `.matchead`.
 
 ```{r}
 tail(names(not_dead_twice))
@@ -116,9 +119,9 @@ __1. Label dead trees beyond quadrat edge__
 One subtle solution is to suffix dead trees beyond quadrat edge -- specifically. Because this labeling is so specific, the clutter we add to the plot is minimum.
 
 ```{r}
-suffixed <- suffix_edgy_dead(
+suffixed <- suffix_edge_tag(
   x = want,            # What data?
-  status_d = "dead",   # Trees of what status?
+  .match = "dead",   # Trees of what status?
   suffix = ".d",       # What suffix to add?
   x_q = 20             # What is the limit beyond which we want to add a suffix?
 )
@@ -153,9 +156,9 @@ __Suffix all dead trees__
 If you want to suffix all dead trees, simply choose `x_q = 0`.
 
 ```{r}
-suffix_all <- suffix_edgy_dead(
+suffix_all <- suffix_edge_tag(
   x = want,            # What data?
-  status_d = "dead",   # Trees of what status?
+  .match = "dead",   # Trees of what status?
   suffix = ".d",       # What suffix to add?
   x_q = 0              # What is the limit beyond which we want to add a suffix?
 )
