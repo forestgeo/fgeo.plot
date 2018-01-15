@@ -1,7 +1,10 @@
-# Output a caption locating each tree beyond the edge
-caption_edge_tree <- function() {
-  # given a vector of tags, output this:
-  # spillover: tag1 (qx1, qy1); tag2 (qx2, qy2); ... and x more tags.
+caption_edge_tag <- function(x, max_n = 6) {
+  edgy <- unique(select(dplyr::filter(x, qx > 20 | qy > 20), tag, qx, qy))
+  if (nrow(edgy) == 0 ) {
+    caption <- NULL
+  } else {
+    caption_tag_xy(edgy$tag, edgy$qx, edgy$qy, max_n = max_n)
+  }
 }
 
 

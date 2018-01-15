@@ -1,23 +1,27 @@
 library(tidyverse)
-fgeo <- tibble(
-  tag = str_pad(as.character(1:10), 4, pad = "0"),
-  qx = 1:10, 
-  qy = 1:10
-)
-fgeo
+library(fgeo)
 
-x_coord <- fgeo$qx
-y_coord <- fgeo$qy
-x <- fgeo$tag
-max_n = 5
+vft <- sinharaja::sinh_vft %>% 
+  as_tibble() %>% 
+  top(PlotID) %>% 
+  top(CensusID, -2) %>% 
+  filter(Status == "dead") %>% 
+  filter(QX > 20 | QY > 20) %>% 
+  arrange(QuadratID, QX, QY) %>% 
+  select(QuadratID, QX, QY, Tag, Status, everything())
+vft
 
+quad_spillover <- vft %>% 
+  count(QuadratID) %>%
+  arrange(desc(n)) %>% 
+  .[1, ] %>% 
+  pull(QuadratID)
+  pull(QuadratID)[[1]]
+  filter(QuadratID == 489) 
 
+demo <- vft %>% dplyr::filter(QuadratID == quad_spillover)
+p <- map_tag(demo)
 
-caption_var_xy(x, x_coord, y_coord, 5)
-
-
-
-
-ggplot(x, aes(qx, qy)) +
-  geom_point() +
-  labs(caption = "hi")
+pdf("map.pdf", paper = "letter", height = 10.5, width = 8)
+p[1]
+dev.off()

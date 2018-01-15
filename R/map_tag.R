@@ -509,7 +509,8 @@ map_tag_each <- function(prep_df,
     labs(
       title = entitle_map(prep_df, title_quad, show_page = show_page),
       subtitle = header,
-      x = NULL, y = NULL
+      x = NULL, y = NULL,
+      caption = paste0("\n\nSpillover: ", caption_edge_tag(prep_df))
     ) +
     theme
 }
