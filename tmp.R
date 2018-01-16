@@ -1,3 +1,28 @@
+x <- tibble::tribble(
+  ~CensusID, ~Tag, ~Status,
+          1,    1, "alive",
+          1,    1,  "dead",
+          1,    2,  "dead",
+          1,    2,  "dead",
+          2,    1, "alive",
+          2,    1, "alive",
+          2,    2, "alive",
+          2,    2,  "dead"
+)
+add_status_tree(x, status_a = "alive", status_d ="dead") %>%
+  mutate(CensusID = collapse(unique(CensusID))) %>% 
+  unique()
+
+
+
+
+
+
+
+
+
+
+
 library(tidyverse)
 library(fgeo)
 
@@ -12,16 +37,6 @@ vft %>%
   first()
 
 
-sbst %>%
-  fgeo.tool::add_status_tree(status_a = "alive", status_d = "dead") %>% 
-  select(-status) %>% 
-  # top(censusid, -1) %>% 
-  unique() %>%
-  group_by(tag) %>% 
-  mutate(n = length(tag)) %>% 
-  filter(n > 1)
-  
-  
-  
-  check_unique_censusid() %>% 
-  check_unique_tag()
+
+
+

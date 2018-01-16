@@ -284,10 +284,14 @@ check_map_tag <- function(.vft,
   stopifnot(arg_theme_is_of_class_theme)
   stopifnot(is.numeric(move_edge))
   check_unique_plotid(.vft)
-  check_unique_censusid(.vft)
   
-  check_unique_tag(.vft)
-  
+  msg_cnsid <- paste0(
+    "* Likely you want only the last 2 censuses\n",
+    "* Detected censuses: ", collapse(unique(.vft$censusid)),
+    collapse = ""
+  )
+  fgeo.tool::check_unique(.vft, "censusid", "warning", msg_cnsid)
+
   invisible(.vft)
 }
 
@@ -306,7 +310,9 @@ prep_map_tag <- function(sbst,
   # Using the pipe (%>%) to avoid meaningless temporary-variables
   sbst %>%
     fgeo.tool::add_status_tree(status_a = "alive", status_d = "dead") %>%
+    collapse_status_tree(status_a = "alive", status_d = "dead") %>% 
     select(-status) %>% 
+    unique() %>% 
     fgeo.tool::add_subquad(
       x_q = x_q, x_sq = x_sq, y_q = y_q, y_sq = y_sq,
       subquad_offset = subquad_offset
