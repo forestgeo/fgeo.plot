@@ -171,18 +171,6 @@ check_map_quad <- function(vft,
   invisible(vft)
 }
 
-check_unique_plotid <- function(x) {
-  msg <- "  * Filter your data to keep a single plot; then try again"
-  fgeo.tool::check_unique(x, "plotid", "stop", msg)
-  invisible(x)
-}
-
-check_unique_censusid <- function(x) {
-  msg <- "  * Likely you should have filtered only the last `censusid`"
-  fgeo.tool::check_unique(x, "censusid", "warning", msg)
-  invisible(x)
-}
-
 map_quad_each <- function(.df,
                           lim_min,
                           lim_max,

@@ -2,20 +2,14 @@
 #'
 #' This function maps tree tags by status. Each map shows four subquadrats
 #' within a quadrat.
-#'
-#' `map_tag()` plots a status that refers to the tree -- not to each individual
-#' stem. For a tree to plot as "dead", all its stems must be dead (for the
-#' selected census); else the tree will plot as "alive".
-#'
-#' From all censuses, this function will filter the one with greater numeric
-#' value, and it will warn of such filtering. That is because most likely you
-#' want information of the tree `Status` from the last census only. If this is
-#' not what you want, here are some solutions:
-#' * If you want to map a different census: filter the census you want and feed
-#'  `map_tag()` with the filtered data set.
-#' * If you want to lump trees accross multiple censuses, filter all the threes
-#' that you want and change the value of `CensusID` so that all trees have the
-#' same value of `CensusID`. Then feed `map_tag()` with the filtered data set.
+#' * The symbols on the map represent the status of each tree -- not the status
+#' of each stem. 
+#' * This function maps all the censuses in the data but you likely want to map
+#' only the last or the last-two censuses. It is up to you to filter the data
+#' you want before you pass it to this function. If you pass data of only the
+#' last two censuses (the most common case), the same tag should only be
+#' repeated in the few cases when the same tree was found dead in one of those
+#' two censuses but was found alive in the other.
 #'
 #' @template vft
 #' @inheritParams fgeo.tool::add_subquad
@@ -290,10 +284,10 @@ check_map_tag <- function(.vft,
   stopifnot(arg_theme_is_of_class_theme)
   stopifnot(is.numeric(move_edge))
   check_unique_plotid(.vft)
-  fgeo.tool::check_unique(
-    .vft, "censusid",
-    "warning", "* Likely you should filter only one CensusID and retry."
-  )
+  check_unique_censusid(.vft)
+  
+  check_unique_tag(.vft)
+  
   invisible(.vft)
 }
 
@@ -312,6 +306,7 @@ prep_map_tag <- function(sbst,
   # Using the pipe (%>%) to avoid meaningless temporary-variables
   sbst %>%
     fgeo.tool::add_status_tree(status_a = "alive", status_d = "dead") %>%
+    select(-status) %>% 
     fgeo.tool::add_subquad(
       x_q = x_q, x_sq = x_sq, y_q = y_q, y_sq = y_sq,
       subquad_offset = subquad_offset

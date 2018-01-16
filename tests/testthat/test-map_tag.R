@@ -147,12 +147,10 @@ test_that("wrong inputs get noticed", {
 
 test_that("page labels can be changed", {
   plots <- 1:2
-  expect_silent(
-    maps <- map_tag(top4quad,
-      bl = "a", br = "b", tr = "c", tl = "d",
-      show_page = FALSE
-    )[plots]
-  )
+  maps <- map_tag(top4quad,
+    bl = "a", br = "b", tr = "c", tl = "d",
+    show_page = FALSE
+  )[plots]
   page <- unique(purrr::map_df(maps, "data")$page)
   expect_equal(page, letters[plots])
 })
