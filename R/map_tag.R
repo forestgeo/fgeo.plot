@@ -1,15 +1,17 @@
 #' Map tree tags by status, showing four subquadrats per plot-page.
 #'
 #' This function maps tree tags by status. Each map shows four subquadrats
-#' within a quadrat.
-#' * The symbols on the map represent the status of each tree -- not the status
-#' of each stem. 
-#' * This function maps all the censuses in the data but you likely want to map
-#' only the last or the last-two censuses. It is up to you to filter the data
-#' you want before you pass it to this function. If you pass data of only the
-#' last two censuses (the most common case), the same tag should only be
-#' repeated in the few cases when the same tree was found dead in one of those
-#' two censuses but was found alive in the other.
+#' within a quadrat. The symbols on the map represent the status of each tree --
+#' not the status of each stem. Although you should likely provide data of only
+#' one or two censuses, `map_tag()` will summarize the data to reduce
+#' overplotting. The data on the map summarizes the history of each stem accross
+#' all censuses provided. Each tag will appear in the map only once or twice:
+#' * A tag will appear once if it belongs to a tree which status was unique 
+#' accross all censuses provided -- either "alive" or "dead".
+#' * A tag will appear twice if it belongs to a tree which status was "alive"
+#' in at least one census, and also "dead" in at least one other census.
+#' This feature avoids unintentional overplotting and makes interpreting the map
+#' easier. 
 #'
 #' @template vft
 #' @inheritParams fgeo.tool::add_subquad
@@ -310,9 +312,8 @@ prep_map_tag <- function(sbst,
   # Using the pipe (%>%) to avoid meaningless temporary-variables
   sbst %>%
     fgeo.tool::add_status_tree(status_a = "alive", status_d = "dead") %>%
-    collapse_status_tree(status_a = "alive", status_d = "dead") %>% 
-    select(-status) %>% 
-    unique() %>% 
+    select(-.data$status) %>% 
+    collapse_censusid() %>% 
     fgeo.tool::add_subquad(
       x_q = x_q, x_sq = x_sq, y_q = y_q, y_sq = y_sq,
       subquad_offset = subquad_offset

@@ -66,16 +66,18 @@ tags by status, showing four subquadrats.
 }
 \description{
 This function maps tree tags by status. Each map shows four subquadrats
-within a quadrat.
+within a quadrat. The symbols on the map represent the status of each tree --
+not the status of each stem. Although you should likely provide data of only
+one or two censuses, \code{map_tag()} will summarize the data to reduce
+overplotting. The data on the map summarizes the history of each stem accross
+all censuses provided. Each tag will appear in the map only once or twice:
 \itemize{
-\item The symbols on the map represent the status of each tree -- not the status
-of each stem.
-\item This function maps all the censuses in the data but you likely want to map
-only the last or the last-two censuses. It is up to you to filter the data
-you want before you pass it to this function. If you pass data of only the
-last two censuses (the most common case), the same tag should only be
-repeated in the few cases when the same tree was found dead in one of those
-two censuses but was found alive in the other.
+\item A tag will appear once if it belongs to a tree which status was unique
+accross all censuses provided -- either "alive" or "dead".
+\item A tag will appear twice if it belongs to a tree which status was "alive"
+in at least one census, and also "dead" in at least one other census.
+This feature avoids unintentional overplotting and makes interpreting the map
+easier.
 }
 }
 \section{Acknowledgements}{

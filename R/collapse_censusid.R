@@ -9,16 +9,18 @@
 #' @export
 #'
 #' @examples
+#' library(dplyr)
+#' 
 #' x <- tibble::tribble(
 #'   ~CensusID, ~Tag, ~Status,
-#'   1,    1, "alive",
-#'   1,    1,  "dead",
-#'   1,    2,  "dead",
-#'   1,    2,  "dead",
-#'   2,    1, "alive",
-#'   2,    1, "alive",
-#'   2,    2, "alive",
-#'   2,    2,  "dead"
+#'           1,    1, "alive",
+#'           1,    1,  "dead",
+#'           1,    2,  "dead",
+#'           1,    2,  "dead",
+#'           2,    1, "alive",
+#'           2,    1, "alive",
+#'           2,    2, "alive",
+#'           2,    2,  "dead"
 #' )
 #' 
 #' collapse_censusid(x)
