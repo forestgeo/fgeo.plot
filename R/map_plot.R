@@ -84,6 +84,9 @@ map_plot <- function(data = NULL,
                      low = "#132B43",
                      high = "#56B1F7",
                      bins = NULL) {
+  msg <- "One of `data` or `elevation` must be not null."
+  if (all(is.null(data), is.null(elevation))) rlang::abort(msg)
+  if (is.null(data)) {data <- elevation}
   check_map_plot(
     data = data, elevation = elevation, xlim = xlim, ylim = ylim, theme = theme
   )
@@ -95,7 +98,8 @@ map_plot <- function(data = NULL,
   if (is.null(elevation)) {
     base <- ggplot(data, aes(gx, gy))
   } else {
-    base <- ggplot(data, aes(gx, gy, z = elevation$elev))
+    data <- elevation
+    base <- ggplot(data, aes(gx, gy, z = elev))
   }
   p <- base +
     coord_fixed(xlim = xlim, ylim = ylim) +
@@ -190,12 +194,7 @@ reference_elev_on_map <- function(p) {
 # Check -------------------------------------------------------------------
 
 check_map_plot <- function(data, elevation, xlim, ylim, theme) {
-  if (all(is.null(data), is.null(elevation))) rlang::abort(
-    "One of `data` or `elevation` must be not null."
-  )
-  if (!is.null(data)) {
-    stopifnot(is.data.frame(data))
-  }
+  stopifnot(is.data.frame(data))
   if (!is.null(elevation)) {
     stopifnot(is.data.frame(elevation))
   }

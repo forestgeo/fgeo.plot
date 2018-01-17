@@ -8,11 +8,17 @@ context("map_plot.R")
 test_that("outputs as a ggplot", {
   # Just in case, calling map_plot()
   expect_silent(
-    p <- map_plot(bci_elev)
+    p <- map_plot(bci_elev, NULL)
   )
-
   expect_true(
     any(grepl("ggplot", class(p)))
+  )
+
+  expect_silent(
+    p <- map_plot(NULL, bci_elev)
+  )
+  expect_silent(
+    p <- map_plot(NULL, bci_elev)
   )
 })
 
