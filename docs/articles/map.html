@@ -81,7 +81,7 @@
       <h1>Mapping Functions</h1>
                         <h4 class="author">Mauro Lepore</h4>
             
-            <h4 class="date">2018-01-10</h4>
+            <h4 class="date">2018-01-14</h4>
           </div>
 
     
@@ -302,8 +302,8 @@ dead &lt;-<span class="st"> </span>top4quad <span class="op">%&gt;%</span>
 wrong &lt;-<span class="st"> </span><span class="kw">filter</span>(dead, DBH <span class="op">&gt;</span><span class="st"> </span><span class="dv">10</span>)
 <span class="kw"><a href="../reference/map_quad.html">map_quad</a></span>(wrong)
 <span class="co">#&gt; * Appending tags of dead trees with the suffix '.d'</span>
-<span class="co">#&gt; Warning in tag_dead(crucial$tag, crucial$status): No stem is dead. Is that</span>
-<span class="co">#&gt; what you expect?</span>
+<span class="co">#&gt; Warning in fgeo.tool::str_suffix_match(crucial$tag, crucial$status,</span>
+<span class="co">#&gt; status_d, : No stem has status `dead`. Is this what you expect?</span>
 <span class="co">#&gt; * Standarizing `dbh` by the count of `dbh` measurements</span>
 <span class="co">#&gt; named list()</span>
 <span class="co"># * The right way to do it is to explicietly inlcude rows where DBH = NA</span>
@@ -450,33 +450,34 @@ wrong
 right &lt;-<span class="st"> </span><span class="kw">filter</span>(dead, DBH <span class="op">&gt;</span><span class="st"> </span><span class="dv">10</span> <span class="op">|</span><span class="st"> </span><span class="kw">is.na</span>(DBH))
 right
 <span class="co">#&gt; # A tibble: 20 x 29</span>
-<span class="co">#&gt;    Measur~ PlotID Plot  Family  Genus~ Genus Spec~ SubS~ Spec~ Mnem~ Quad~</span>
-<span class="co">#&gt;      &lt;int&gt;  &lt;int&gt; &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;int&gt; &lt;chr&gt; &lt;int&gt;</span>
-<span class="co">#&gt;  1   79602      1 bci   Meliac~ Trich~ Tric~ tube~ NULL   1169 tri2~  1241</span>
-<span class="co">#&gt;  2   79613      1 bci   Melast~ Mouri~ Mour~ myrt~ NULL    671 mour~  1241</span>
-<span class="co">#&gt;  3   79636      1 bci   Cappar~ Cappa~ Capp~ fron~ NULL    149 capp~  1241</span>
-<span class="co">#&gt;  4   79637      1 bci   Ochnac~ Ourat~ Oura~ luce~ NULL    729 oura~  1241</span>
-<span class="co">#&gt;  5   79639      1 bci   Burser~ Tetra~ Tetr~ pana~ NULL   1007 tet2~  1241</span>
-<span class="co">#&gt;  6   79650      1 bci   Cappar~ Cappa~ Capp~ fron~ NULL    149 capp~  1241</span>
-<span class="co">#&gt;  7   79660      1 bci   Chryso~ Hirte~ Hirt~ tria~ NULL    487 hirt~  1241</span>
-<span class="co">#&gt;  8   79663      1 bci   Violac~ Hyban~ Hyba~ prun~ NULL    494 hyba~  1241</span>
-<span class="co">#&gt;  9   79666      1 bci   Violac~ Hyban~ Hyba~ prun~ NULL    494 hyba~  1241</span>
-<span class="co">#&gt; 10   79708      1 bci   Violac~ Hyban~ Hyba~ prun~ NULL    494 hyba~  1241</span>
-<span class="co">#&gt; 11   79720      1 bci   Fabace~ Lonch~ Lonc~ hept~ NULL   1134 lonc~  1241</span>
-<span class="co">#&gt; 12   79727      1 bci   Violac~ Hyban~ Hyba~ prun~ NULL    494 hyba~  1241</span>
-<span class="co">#&gt; 13   79728      1 bci   Fabace~ Platy~ Plat~ eleg~ NULL    791 pla2~  1241</span>
-<span class="co">#&gt; 14   79743      1 bci   Clusia~ Garci~ Garc~ inte~ NULL   1125 gar2~  1241</span>
-<span class="co">#&gt; 15   79750      1 bci   Violac~ Hyban~ Hyba~ prun~ NULL    494 hyba~  1241</span>
-<span class="co">#&gt; 16  192560      1 bci   Sapota~ Poute~ Pout~ reti~ NULL   1155 pout~  1241</span>
-<span class="co">#&gt; 17  192575      1 bci   Violac~ Hyban~ Hyba~ prun~ NULL    494 hyba~  1241</span>
-<span class="co">#&gt; 18  223605      1 bci   Burser~ Proti~ Prot~ tenu~ NULL    828 prot~  1241</span>
-<span class="co">#&gt; 19  223613      1 bci   Rubiac~ Psych~ Psyc~ hori~ NULL    850 psyc~  1241</span>
-<span class="co">#&gt; 20  242691      1 bci   Melast~ Mouri~ Mour~ myrt~ NULL    671 mour~  1241</span>
-<span class="co">#&gt; # ... with 18 more variables: QuadratName &lt;chr&gt;, QX &lt;dbl&gt;, QY &lt;dbl&gt;, gx</span>
-<span class="co">#&gt; #   &lt;dbl&gt;, gy &lt;dbl&gt;, TreeID &lt;int&gt;, Tag &lt;chr&gt;, StemID &lt;int&gt;, StemTag &lt;chr&gt;,</span>
-<span class="co">#&gt; #   PrimaryStem &lt;chr&gt;, CensusID &lt;int&gt;, PlotCensusNumber &lt;int&gt;, DBH &lt;int&gt;,</span>
-<span class="co">#&gt; #   HOM &lt;dbl&gt;, ExactDate &lt;date&gt;, ListOfTSM &lt;chr&gt;, Status &lt;chr&gt;,</span>
-<span class="co">#&gt; #   status_tree &lt;chr&gt;</span>
+<span class="co">#&gt;    MeasureID PlotID Plot  Family      GenusSpecies     Genus   SpeciesName</span>
+<span class="co">#&gt;        &lt;int&gt;  &lt;int&gt; &lt;chr&gt; &lt;chr&gt;       &lt;chr&gt;            &lt;chr&gt;   &lt;chr&gt;      </span>
+<span class="co">#&gt;  1     79602      1 bci   Meliaceae   Trichilia tuber~ Trichi~ tuberculata</span>
+<span class="co">#&gt;  2     79613      1 bci   Melastomat~ Mouriri myrtill~ Mouriri myrtilloid~</span>
+<span class="co">#&gt;  3     79636      1 bci   Capparaceae Capparis frondo~ Cappar~ frondosa   </span>
+<span class="co">#&gt;  4     79637      1 bci   Ochnaceae   Ouratea lucens   Ouratea lucens     </span>
+<span class="co">#&gt;  5     79639      1 bci   Burseraceae Tetragastris pa~ Tetrag~ panamensis </span>
+<span class="co">#&gt;  6     79650      1 bci   Capparaceae Capparis frondo~ Cappar~ frondosa   </span>
+<span class="co">#&gt;  7     79660      1 bci   Chrysobala~ Hirtella triand~ Hirtel~ triandra   </span>
+<span class="co">#&gt;  8     79663      1 bci   Violaceae   Hybanthus pruni~ Hybant~ prunifolius</span>
+<span class="co">#&gt;  9     79666      1 bci   Violaceae   Hybanthus pruni~ Hybant~ prunifolius</span>
+<span class="co">#&gt; 10     79708      1 bci   Violaceae   Hybanthus pruni~ Hybant~ prunifolius</span>
+<span class="co">#&gt; 11     79720      1 bci   Fabaceae-p~ Lonchocarpus he~ Loncho~ heptaphyll~</span>
+<span class="co">#&gt; 12     79727      1 bci   Violaceae   Hybanthus pruni~ Hybant~ prunifolius</span>
+<span class="co">#&gt; 13     79728      1 bci   Fabaceae-p~ Platypodium ele~ Platyp~ elegans    </span>
+<span class="co">#&gt; 14     79743      1 bci   Clusiaceae  Garcinia interm~ Garcin~ intermedia </span>
+<span class="co">#&gt; 15     79750      1 bci   Violaceae   Hybanthus pruni~ Hybant~ prunifolius</span>
+<span class="co">#&gt; 16    192560      1 bci   Sapotaceae  Pouteria reticu~ Pouter~ reticulata </span>
+<span class="co">#&gt; 17    192575      1 bci   Violaceae   Hybanthus pruni~ Hybant~ prunifolius</span>
+<span class="co">#&gt; 18    223605      1 bci   Burseraceae Protium tenuifo~ Protium tenuifolium</span>
+<span class="co">#&gt; 19    223613      1 bci   Rubiaceae   Psychotria hori~ Psycho~ horizontal~</span>
+<span class="co">#&gt; 20    242691      1 bci   Melastomat~ Mouriri myrtill~ Mouriri myrtilloid~</span>
+<span class="co">#&gt; # ... with 22 more variables: SubSpeciesName &lt;chr&gt;, SpeciesID &lt;int&gt;,</span>
+<span class="co">#&gt; #   Mnemonic &lt;chr&gt;, QuadratID &lt;int&gt;, QuadratName &lt;chr&gt;, QX &lt;dbl&gt;, QY</span>
+<span class="co">#&gt; #   &lt;dbl&gt;, gx &lt;dbl&gt;, gy &lt;dbl&gt;, TreeID &lt;int&gt;, Tag &lt;chr&gt;, StemID &lt;int&gt;,</span>
+<span class="co">#&gt; #   StemTag &lt;chr&gt;, PrimaryStem &lt;chr&gt;, CensusID &lt;int&gt;, PlotCensusNumber</span>
+<span class="co">#&gt; #   &lt;int&gt;, DBH &lt;int&gt;, HOM &lt;dbl&gt;, ExactDate &lt;date&gt;, ListOfTSM &lt;chr&gt;, Status</span>
+<span class="co">#&gt; #   &lt;chr&gt;, status_tree &lt;chr&gt;</span>
 <span class="kw">first</span>(<span class="kw"><a href="../reference/map_quad.html">map_quad</a></span>(right))
 <span class="co">#&gt; * Appending tags of dead trees with the suffix '.d'</span>
 <span class="co">#&gt; * Standarizing `dbh` by the count of `dbh` measurements</span>

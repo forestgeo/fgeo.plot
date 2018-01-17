@@ -1,21 +1,17 @@
 #' Map tree tags by status, showing four subquadrats per plot-page.
 #'
 #' This function maps tree tags by status. Each map shows four subquadrats
-#' within a quadrat.
-#'
-#' `map_tag()` plots a status that refers to the tree -- not to each individual
-#' stem. For a tree to plot as "dead", all its stems must be dead (for the
-#' selected census); else the tree will plot as "alive".
-#'
-#' From all censuses, this function will filter the one with greater numeric
-#' value, and it will warn of such filtering. That is because most likely you
-#' want information of the tree `Status` from the last census only. If this is
-#' not what you want, here are some solutions:
-#' * If you want to map a different census: filter the census you want and feed
-#'  `map_tag()` with the filtered data set.
-#' * If you want to lump trees accross multiple censuses, filter all the threes
-#' that you want and change the value of `CensusID` so that all trees have the
-#' same value of `CensusID`. Then feed `map_tag()` with the filtered data set.
+#' within a quadrat. The symbols on the map represent the status of each tree --
+#' not the status of each stem. Although you should likely provide data of only
+#' one or two censuses, `map_tag()` will summarize the data to reduce
+#' overplotting. The data on the map summarizes the history of each stem accross
+#' all censuses provided. Each tag will appear in the map only once or twice:
+#' * A tag will appear once if it belongs to a tree which status was unique 
+#' accross all censuses provided -- either "alive" or "dead".
+#' * A tag will appear twice if it belongs to a tree which status was "alive"
+#' in at least one census, and also "dead" in at least one other census.
+#' This feature avoids unintentional overplotting and makes interpreting the map
+#' easier. 
 #'
 #' @template vft
 #' @inheritParams fgeo.tool::add_subquad
@@ -290,10 +286,14 @@ check_map_tag <- function(.vft,
   stopifnot(arg_theme_is_of_class_theme)
   stopifnot(is.numeric(move_edge))
   check_unique_plotid(.vft)
-  fgeo.tool::check_unique(
-    .vft, "censusid",
-    "warning", "* Likely you should filter only one CensusID and retry."
+  
+  msg_cnsid <- paste0(
+    "* Likely you want only the last 2 censuses\n",
+    "* Detected censuses: ", collapse(unique(.vft$censusid)),
+    collapse = ""
   )
+  fgeo.tool::check_unique(.vft, "censusid", "warning", msg_cnsid)
+
   invisible(.vft)
 }
 
@@ -312,6 +312,8 @@ prep_map_tag <- function(sbst,
   # Using the pipe (%>%) to avoid meaningless temporary-variables
   sbst %>%
     fgeo.tool::add_status_tree(status_a = "alive", status_d = "dead") %>%
+    select(-.data$status) %>% 
+    fgeo.tool::collapse_censusid() %>% 
     fgeo.tool::add_subquad(
       x_q = x_q, x_sq = x_sq, y_q = y_q, y_sq = y_sq,
       subquad_offset = subquad_offset
@@ -483,7 +485,7 @@ map_tag_each <- function(prep_df,
   #   Error: Aesthetics must be either length 1 or the same as the data (16):
   #   x, y, label, shape
   base <- ggplot(data = prep_df, aes(x = qx, y = qy, shape = status_tree)) +
-    scale_shape_manual(values = point_shape)
+    scale_shape_manual(values = curate_point_shape(prep_df, point_shape))
   if (show_subquad) {
     base <- base +
       geom_label(
@@ -493,6 +495,7 @@ map_tag_each <- function(prep_df,
       )
   }
   # <<<
+  .caption <- caption_edge_tag(prep_df, x_q = x_q, y_q = y_q)
   base +
     geom_point(size = point_size) +
     ggrepel::geom_text_repel(aes(label = prep_df$tag), size = tag_size) +
@@ -509,9 +512,25 @@ map_tag_each <- function(prep_df,
     labs(
       title = entitle_map(prep_df, title_quad, show_page = show_page),
       subtitle = header,
-      x = NULL, y = NULL
+      x = NULL, y = NULL,
+      caption = paste0("\n\nSpillover: ", .caption)
     ) +
     theme
+}
+
+curate_point_shape <- function(x,
+  point_shape,
+  status_a = "alive",
+  status_d = "dead") {
+  if (identical(unique(x$status_tree), c(status_a, status_d))) {
+    return(point_shape)
+  }
+  if (unique(x$status_tree) == status_a) {
+    return(point_shape[[1]])
+  }
+  if (unique(x$status_tree) == status_d) {
+    return(point_shape[[2]])
+  }
 }
 
 entitle_map <- function(x, chr, show_page = TRUE) {

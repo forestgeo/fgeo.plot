@@ -147,12 +147,10 @@ test_that("wrong inputs get noticed", {
 
 test_that("page labels can be changed", {
   plots <- 1:2
-  expect_silent(
-    maps <- map_tag(top4quad,
-      bl = "a", br = "b", tr = "c", tl = "d",
-      show_page = FALSE
-    )[plots]
-  )
+  maps <- map_tag(top4quad,
+    bl = "a", br = "b", tr = "c", tl = "d",
+    show_page = FALSE
+  )[plots]
   page <- unique(purrr::map_df(maps, "data")$page)
   expect_equal(page, letters[plots])
 })
@@ -165,4 +163,23 @@ test_that("argument subquad_offset works as expected", {
   x <- map_tag(top1quad, subquad_offset = -1)
   subquads <- unique(purrr::map_df(x, "data")$subquadrat)
   expect_true("01" %in% subquads)
+})
+
+
+
+context("curate_point_shape")
+
+test_that("outputs the correct element(s) of point_shape", {
+  ps <- c(1, 2)
+  sa <- "alive"
+  sd <- "dead"
+  
+  x <- tibble::tibble(status_tree = c("alive", "dead"))
+  expect_equal(curate_point_shape(x, ps, sa, sd), c(1, 2))
+  
+  x <- tibble::tibble(status_tree = c("alive"))
+  expect_equal(curate_point_shape(x, ps, sa, sd), 1)
+  
+  x <- tibble::tibble(status_tree = c("dead"))
+  expect_equal(curate_point_shape(x, ps, sa, sd), 2)
 })

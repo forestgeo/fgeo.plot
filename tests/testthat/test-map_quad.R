@@ -42,32 +42,6 @@ test_that("returns a list of ggplots", {
 
 
 
-context("tag_dead")
-
-test_that("tags a vector", {
-  actual <- tag_dead(
-    c("tag1", "tag2"),
-    c("dead", "whatever")
-  )
-  expected <- c("tag1.d", "tag2")
-  expect_equal(actual, expected)
-})
-
-test_that("warns if no stem is dead", {
-  expect_warning(
-    tag_dead(
-      c("tag1", "tag2"),
-      c("not-dead", "not-dead")
-    )
-  )
-})
-
-test_that("fails if x, y are not character vectors", {
-  expect_error(tag_dead(1, "dead"))
-})
-
-
-
 context("theme_map_quad")
 
 test_that("returns a valid ggplot2 theme", {
