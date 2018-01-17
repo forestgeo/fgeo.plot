@@ -35,7 +35,9 @@ collapse_censusid <- function(x) {
   x <- fgeo.tool::nms_lowercase(x)
   fgeo.tool::check_crucial_names(x, "censusid")
 
-  x$censusid <- collapse(unique(x$censusid))
+  x$censusid <- collapse(
+    sort(unique(x$censusid))
+  )
 
   unique(fgeo.tool::nms_restore(x))
 }
