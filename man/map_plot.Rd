@@ -2,15 +2,18 @@
 % Please edit documentation in R/map_plot.R
 \name{map_plot}
 \alias{map_plot}
+\alias{map_plot}
 \alias{map_elevation}
 \alias{map_species}
 \title{Map a census plot -- empty or with elevation.}
 \usage{
-map_plot(data, elevation = NULL, xlim = NULL, ylim = NULL,
+map_plot(data = NULL, elevation = NULL, xlim = NULL, ylim = NULL,
   theme = theme_map_sp(), line_size = 0.5, low = "#132B43",
-  high = "#56B1F7", bins = NULL)
+  high = "#f70404", bins = NULL, label_elev = TRUE)
 
-map_elevation(data = NULL, elevation, ...)
+map_elevation(data = NULL, elevation = NULL, xlim = NULL, ylim = NULL,
+  theme = theme_map_sp(), line_size = 0.5, low = "#132B43",
+  high = "#f70404", bins = NULL, label_elev = TRUE)
 
 map_species(data, xlim = NULL, ylim = NULL, theme = theme_map_sp(),
   drop_fill = FALSE, shape = 21, ...)
@@ -35,6 +38,8 @@ colours like \code{low = "#132B43", high = "#56B1F7"} (for more colours google
 
 \item{bins}{A number. Setting bins creates evenly spaced contours in the
 range of the data. Integers}
+
+\item{label_elev}{Logical; \code{FALSE} removes the labels of elevation lines.}
 }
 \value{
 A ggplot.

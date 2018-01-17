@@ -21,6 +21,7 @@
 #'   #132B43).
 #' @param bins A number. Setting bins creates evenly spaced contours in the
 #'   range of the data. Integers
+#' @param label_elev Logical; `FALSE` removes the labels of elevation lines.
 #'
 #' @return A ggplot.
 #' @export
@@ -33,47 +34,9 @@
 #' bad_nms_elev <- bciex::bci_elevation
 #' bci_elev <- dplyr::rename(bad_nms_elev, gx = x, gy = y)
 #' 
-#' map_plot(sp4)
-#' 
-#' # Same
-#' elev1 <- map_plot(sp4, elevation = bci_elev)
-#' # A small wrapper to make it easy to find this function by its name
-#' elev2 <- map_elevation(sp4, elevation = bci_elev)
-#' elev2
-#' all.equal(elev1, elev2)
-#' 
-#' # This works but it is not equal. Nowhere we are giving census data.
-#' elev3 <- map_elevation(elevation = bci_elev)
-#' # This works because we are using the argument `data`
-#' elev3 + geom_point_sp(data = sp4)
-#' # But this fails
-#' # elev3 + geom_point_sp()
-#' # This works because we passed the data before
-#' elev2 + geom_point_sp()
-#' 
-#' # See xlim, ylim at ?ggplot2::coord_fixed())
-#' map_elevation(sp4, elevation = bci_elev, xlim = c(200, 600), ylim = c(0, 400))
-#' 
-#' map_plot(sp4) + geom_point_sp()
-#' # Same: A small wrapper to make it easy to find this function by its name
-#' map_species(sp4)
-#' # See ?ggplot2::geom_point(), ?ggplot2::theme_gray().
-#' map_species(sp4, size = 4, stroke = 2, xlim = c(0, 500), theme = theme_gray())
-#' 
-#' 
-#' # See also ?ggplot2::facet_wrap()
-#' map_species(sp4) + facet_wrap_sp()
-#' # See ?graphics::points
-#' map_species(sp4, drop_fill = TRUE) + facet_wrap_sp()
-#' 
-#' # See also ?ggplot2::facet_grid()
-#' map_elevation(sp4, elevation = bci_elev) +
-#'   geom_point_sp(drop_fill = TRUE) +
-#'   facet_grid_sp_v()
-#' 
-#' map_elevation(sp4, elevation = bci_elev) +
-#'   geom_point_sp(drop_fill = TRUE) +
-#'   facet_grid_sp_h()
+#' map_species(sp4, bci_elev, drop_fill = TRUE, label_elev = FALSE, size = 4) +
+#'   facet_wrap_sp() +
+#'   guides(color = "none")
 #' }
 #' @name map_plot
 NULL
@@ -88,7 +51,8 @@ map_plot <- function(data = NULL,
                      line_size = 0.5,
                      low = "#132B43",
                      high = "#f70404",
-                     bins = NULL) {
+                     bins = NULL,
+                     label_elev = TRUE) {
   msg <- "One of `data` or `elevation` must be not null."
   if (all(is.null(data), is.null(elevation))) rlang::abort(msg)
   if (is.null(data)) {data <- elevation}
@@ -120,7 +84,8 @@ map_plot <- function(data = NULL,
       line_size = line_size,
       low = low,
       high = high,
-      bins = bins
+      bins = bins,
+      label_elev = label_elev
     )
   }
   p
@@ -131,14 +96,16 @@ add_elev <- function(p,
                      line_size = 0.5,
                      low = "#132B43",
                      high = "#56B1F7",
-                     bins = NULL) {
+                     bins = NULL,
+                     label_elev = TRUE) {
   check_add_elev(
     p = p, 
     elevation = elevation,
     line_size = line_size,
     low = low,
     high = high,
-    bins = bins
+    bins = bins,
+    label_elev = label_elev
   )
   
   p_elev <- p +
@@ -149,12 +116,13 @@ add_elev <- function(p,
       bins = bins
     ) +
     scale_colour_continuous(low = low, high = high)
-  label_elevation(p_elev)
+  
+  if (label_elev) label_elev(p_elev) else p_elev
 }
 
-label_elevation <- function(w_elev,
-                            size = 3,
-                            hjust = -0.2,
+label_elev <- function(w_elev,
+                            # size = 3,
+                            xyjust = 1.5,
                             fontface = "italic",
                             color = "grey",
                             ...) {
@@ -165,16 +133,16 @@ label_elevation <- function(w_elev,
   w_elev + 
     text_at_max(
       elev_x, 
-      size = size, 
-      hjust = hjust, 
+      # size = size, 
+      hjust = xyjust, 
       fontface = fontface, 
       color = color,
       ...
     ) + 
     text_at_max(
       elev_y, 
-      size = size, 
-      hjust = hjust, 
+      # size = size, 
+      vjust = xyjust, 
       fontface = fontface, 
       color = color,
       ...
@@ -193,22 +161,51 @@ text_at_max <- function(x, ...) {
 
 #' @rdname map_plot
 #' @export
-map_elevation <- map_plot
+map_elevation <- function(data = NULL,
+                          elevation = NULL,
+                          xlim = NULL,
+                          ylim = NULL,
+                          theme = theme_map_sp(),
+                          line_size = 0.5,
+                          low = "#132B43",
+                          high = "#f70404",
+                          bins = NULL,
+                          label_elev = TRUE) {
+  if (all(is.null(elevation), !grepl("elev", names(data)))) {
+    rlang::inform("Did you forget to provide elevation data?")
+  }
+  map_plot(
+    data = data,
+    elevation = elevation,
+    xlim = xlim,
+    ylim = ylim,
+    theme = theme,
+    line_size = line_size,
+    low = low,
+    high = high,
+    bins = bins,
+    label_elev = label_elev
+  )
+}
 
 #' @rdname map_plot
 #' @export
-map_species <- function(data, 
+map_species <- function(data,
+                        elevation = NULL,
                         xlim = NULL,
                         ylim = NULL,
                         theme = theme_map_sp(),
                         drop_fill = FALSE, 
                         shape = 21, 
+                        label_elev = TRUE,
                         ...) {
   map_plot(
     data = data,
+    elevation = elevation,
     xlim = xlim,
     ylim = ylim,
     theme = theme,
+    label_elev = label_elev
   ) +
     geom_point_sp(data = data, drop_fill = drop_fill, shape = shape, ...)
 }
@@ -227,7 +224,13 @@ check_map_plot <- function(data, elevation, xlim, ylim, theme) {
   stopifnot(theme_has_class_theme)
 }
 
-check_add_elev <- function(p, elevation, line_size, low, high, bins) {
+check_add_elev <- function(p,
+                           elevation,
+                           line_size,
+                           low,
+                           high,
+                           bins,
+                           label_elev) {
   p_has_class_ggplot <- any(grepl("ggplot", class(p)))
   stopifnot(p_has_class_ggplot)
   elevation_is_dataframe <- any(grepl("data.frame", class(elevation)))
@@ -237,6 +240,7 @@ check_add_elev <- function(p, elevation, line_size, low, high, bins) {
   stopifnot(is.character(low))
   stopifnot(is.character(high))
   if (!is.null(bins)) {stopifnot(is.numeric(bins))}
+  stopifnot(is.logical(label_elev))
 }
 
 
@@ -252,9 +256,17 @@ NULL
 #' @export
 geom_point_sp <- function(data = NULL, drop_fill = FALSE, shape = 21, ...){
   if (drop_fill) {
-    geom_point(data = data, aes(gx, gy), shape = shape, ...)
+    suppressWarnings(
+      # Warns that z is NULL
+      geom_point(data = data, aes(gx, gy, z = NULL), shape = shape, ...)
+    )
   } else {
-    geom_point(data = data, aes(gx, gy, fill = sp), shape = shape, ...)
+    suppressWarnings(
+      # Warns that z is NULL
+      geom_point(
+        data = data, aes(gx, gy, z = NULL, fill = sp), shape = shape, ...
+      )
+    )
   }
 }
 
