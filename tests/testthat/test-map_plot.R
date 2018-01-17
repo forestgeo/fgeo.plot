@@ -18,6 +18,9 @@ test_that("outputs as a ggplot", {
 
 test_that("errs with wrong input", {
   expect_error(
+    map_plot(NULL, NULL)
+  )
+  expect_error(
     map_plot(1)
   )
   expect_error(

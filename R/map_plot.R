@@ -75,7 +75,7 @@
 #'   geom_point_sp(drop_fill = TRUE) +
 #'   facet_grid_sp_h()
 #' }
-map_plot <- function(data,
+map_plot <- function(data = NULL,
                      elevation = NULL,
                      xlim = NULL,
                      ylim = NULL,
@@ -84,13 +84,9 @@ map_plot <- function(data,
                      low = "#132B43",
                      high = "#56B1F7",
                      bins = NULL) {
-  # p <- map_base(
-  #   data = data,
-  #   xlim = xlim,
-  #   ylim = ylim,
-  #   theme = theme
-  # )
-  check_map_plot(data = data, xlim = xlim, ylim = ylim, theme = theme)
+  check_map_plot(
+    data = data, elevation = elevation, xlim = xlim, ylim = ylim, theme = theme
+  )
     
   # If limits are not given by the user, set limits based on entire dataset
   if (is.null(xlim)) {xlim <- c(0, max(data$gx, na.rm = TRUE))}
@@ -193,8 +189,16 @@ reference_elev_on_map <- function(p) {
 
 # Check -------------------------------------------------------------------
 
-check_map_plot <- function(data, xlim, ylim, theme) {
-  stopifnot(is.data.frame(data))
+check_map_plot <- function(data, elevation, xlim, ylim, theme) {
+  if (all(is.null(data), is.null(elevation))) rlang::abort(
+    "One of `data` or `elevation` must be not null."
+  )
+  if (!is.null(data)) {
+    stopifnot(is.data.frame(data))
+  }
+  if (!is.null(elevation)) {
+    stopifnot(is.data.frame(elevation))
+  }
   fgeo.tool::check_crucial_names(data, c("gx", "gy"))
   if (!is.null(xlim)) {stopifnot(xlim >= 0)}
   if (!is.null(ylim)) {stopifnot(ylim >= 0)}
