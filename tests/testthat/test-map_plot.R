@@ -14,11 +14,20 @@ test_that("outputs as a ggplot", {
     any(grepl("ggplot", class(p)))
   )
 
+  expect_equal(
+    map_elevation(bci_elev, NULL),
+    map_plot(bci_elev, NULL)
+  )
+
   expect_silent(
     p <- map_plot(NULL, bci_elev)
   )
   expect_silent(
     p <- map_plot(NULL, bci_elev)
+  )
+  expect_equal(
+    map_elevation(NULL, bci_elev),
+    map_plot(NULL, bci_elev)
   )
 })
 

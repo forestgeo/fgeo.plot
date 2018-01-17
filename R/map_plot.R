@@ -75,6 +75,11 @@
 #'   geom_point_sp(drop_fill = TRUE) +
 #'   facet_grid_sp_h()
 #' }
+#' @name map_plot
+NULL
+
+#' @rdname map_plot
+#' @export
 map_plot <- function(data = NULL,
                      elevation = NULL,
                      xlim = NULL,
@@ -82,7 +87,7 @@ map_plot <- function(data = NULL,
                      theme = theme_map_sp(),
                      line_size = 0.5,
                      low = "#132B43",
-                     high = "#56B1F7",
+                     high = "#f70404",
                      bins = NULL) {
   msg <- "One of `data` or `elevation` must be not null."
   if (all(is.null(data), is.null(elevation))) rlang::abort(msg)
@@ -121,20 +126,74 @@ map_plot <- function(data = NULL,
   p
 }
 
+add_elev <- function(p,
+                     elevation,
+                     line_size = 0.5,
+                     low = "#132B43",
+                     high = "#56B1F7",
+                     bins = NULL) {
+  check_add_elev(
+    p = p, 
+    elevation = elevation,
+    line_size = line_size,
+    low = low,
+    high = high,
+    bins = bins
+  )
+  
+  p_elev <- p +
+    stat_contour(
+      data = elevation,
+      aes(x = gx, y = gy, z = elev, colour = ..level..),
+      size = line_size,
+      bins = bins
+    ) +
+    scale_colour_continuous(low = low, high = high)
+  label_elevation(p_elev)
+}
+
+label_elevation <- function(w_elev,
+                            size = 3,
+                            hjust = -0.2,
+                            fontface = "italic",
+                            color = "grey",
+                            ...) {
+  built <- ggplot_build(w_elev)$data[[1]]
+  elev <-  mutate(built, gx = x, gy = y)
+  elev_x <- elev[elev$gx == max0(elev$gx), ]
+  elev_y <- elev[elev$gy == max0(elev$gy), ]
+  w_elev + 
+    text_at_max(
+      elev_x, 
+      size = size, 
+      hjust = hjust, 
+      fontface = fontface, 
+      color = color,
+      ...
+    ) + 
+    text_at_max(
+      elev_y, 
+      size = size, 
+      hjust = hjust, 
+      fontface = fontface, 
+      color = color,
+      ...
+    )
+}
+
+text_at_max <- function(x, ...) {
+  suppressWarnings(
+    # Warns that `z` is not used. This is intentional.
+    geom_text(data = x, aes(label = level, z = NULL), ...)
+  )
+}
+
+
+# Wrappers ----------------------------------------------------------------
+
 #' @rdname map_plot
 #' @export
-map_elevation <- function(data = NULL, elevation, ...) {
-  if (!is.null(data)) {
-    map_plot(data = data, elevation = elevation, ...)
-  } else {
-    warning(
-      "Using elevation as data.\n",
-      "In new layers you may need to pass census data to the argument `data`."
-    )
-    data <- elevation
-    map_plot(data = data, elevation = elevation, ...)
-  }
-}
+map_elevation <- map_plot
 
 #' @rdname map_plot
 #' @export
@@ -153,43 +212,6 @@ map_species <- function(data,
   ) +
     geom_point_sp(data = data, drop_fill = drop_fill, shape = shape, ...)
 }
-
-add_elev <- function(p,
-  elevation,
-  line_size = 0.5,
-  low = "#132B43",
-  high = "#56B1F7",
-  bins = NULL) {
-  check_add_elev(
-    p = p, 
-    elevation = elevation,
-    line_size = line_size,
-    low = low,
-    high = high,
-    bins = bins
-  )
-  
-  p_elev <- p +
-    stat_contour(
-      data = elevation,
-      aes(x = gx, y = gy, z = elev, colour = ..level..),
-      size = line_size,
-      bins = bins
-    ) +
-    scale_colour_continuous(low = low, high = high)
-  # p_elev references elevation on a legend to the right of the plot. Not nice.
-  reference_elev_on_map(p_elev)
-}
-
-reference_elev_on_map <- function(p) {
-  label_properties <-   list(
-    "far.from.others.borders", "calc.boxes",
-    "enlarge.box", box.color = NA, fill = "transparent", "draw.rects"
-  )
-  directlabels::direct.label(p, label_properties)
-}
-
-
 
 # Check -------------------------------------------------------------------
 
