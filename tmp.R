@@ -18,5 +18,5 @@ sbst %>%
   fgeo.tool::add_status_tree(status_a = "alive", status_d = "dead") %>%
   select(-status) %>% 
   unique() %>% 
-  collapse_censusid()
+  fgeo.tool::collapse_censusid()
   
