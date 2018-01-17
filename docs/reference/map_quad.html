@@ -168,18 +168,18 @@ status that corresponds to dead stems.</p></td>
 <span class='fu'>library</span>(<span class='no'>fgeo.tool</span>)
 <span class='fu'>library</span>(<span class='no'>dplyr</span>)
 <span class='co'># Avoid conflict with `stats::filter()`</span>
-<span class='no'>filter</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='no'><a href='http://www.rdocumentation.org/packages/dplyr/topics/filter'>filter</a></span>
+<span class='no'>filter</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='no'><a href='http://dplyr.tidyverse.org/reference/filter.html'>filter</a></span>
 
 <span class='co'># Filter the data you want. For example:</span>
 <span class='co'># (see ?top4quad)</span>
-<span class='no'>want</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/dplyr/topics/filter'>filter</a></span>(
+<span class='no'>want</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://dplyr.tidyverse.org/reference/filter.html'>filter</a></span>(
   <span class='no'>top4quad</span>,
   <span class='no'>CensusID</span> <span class='kw'>==</span> <span class='fl'>6</span>,
   <span class='no'>PlotID</span> <span class='kw'>==</span> <span class='fl'>1</span>
 )
 <span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'>map_quad</span>(<span class='no'>want</span>)
 <span class='co'># Visualizing only the first plot of `p`</span>
-<span class='fu'><a href='http://www.rdocumentation.org/packages/dplyr/topics/nth'>first</a></span>(<span class='no'>p</span>)
+<span class='fu'><a href='http://dplyr.tidyverse.org/reference/nth.html'>first</a></span>(<span class='no'>p</span>)
 <span class='co'># Printing all plots of `p` to .pdf, with parameters optimized for size letter</span>
 <span class='fu'>pdf</span>(<span class='st'>"map.pdf"</span>, <span class='kw'>paper</span> <span class='kw'>=</span> <span class='st'>"letter"</span>, <span class='kw'>height</span> <span class='kw'>=</span> <span class='fl'>10.5</span>, <span class='kw'>width</span> <span class='kw'>=</span> <span class='fl'>8</span>)
 <span class='no'>p</span>
@@ -191,19 +191,19 @@ status that corresponds to dead stems.</p></td>
 <span class='no'>dead</span> <span class='kw'>&lt;-</span> <span class='no'>top4quad</span> <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='http://www.rdocumentation.org/packages/fgeo.tool/topics/add_status_tree'>add_status_tree</a></span>(<span class='kw'>status_a</span> <span class='kw'>=</span> <span class='st'>"alive"</span>, <span class='kw'>status_d</span> <span class='kw'>=</span> <span class='st'>"dead"</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='http://www.rdocumentation.org/packages/fgeo.tool/topics/top'>top</a></span>(<span class='no'>QuadratID</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='http://www.rdocumentation.org/packages/dplyr/topics/filter'>filter</a></span>(<span class='no'>status_tree</span> <span class='kw'>==</span> <span class='st'>"dead"</span>)
-<span class='fu'><a href='http://www.rdocumentation.org/packages/dplyr/topics/select'>select</a></span>(<span class='no'>dead</span>, <span class='no'>Tag</span>, <span class='no'>Status</span>, <span class='no'>status_tree</span>, <span class='no'>DBH</span>)
+  <span class='fu'><a href='http://dplyr.tidyverse.org/reference/filter.html'>filter</a></span>(<span class='no'>status_tree</span> <span class='kw'>==</span> <span class='st'>"dead"</span>)
+<span class='fu'><a href='http://dplyr.tidyverse.org/reference/select.html'>select</a></span>(<span class='no'>dead</span>, <span class='no'>Tag</span>, <span class='no'>Status</span>, <span class='no'>status_tree</span>, <span class='no'>DBH</span>)
 <span class='fu'>map_quad</span>(<span class='no'>dead</span>)
 <span class='co'># * If you filter by `DBH`, you loose the dead trees becaue their `DBH = NA`</span>
-<span class='no'>wrong</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/dplyr/topics/filter'>filter</a></span>(<span class='no'>dead</span>, <span class='no'>DBH</span> <span class='kw'>&gt;</span> <span class='fl'>10</span>)
+<span class='no'>wrong</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://dplyr.tidyverse.org/reference/filter.html'>filter</a></span>(<span class='no'>dead</span>, <span class='no'>DBH</span> <span class='kw'>&gt;</span> <span class='fl'>10</span>)
 <span class='fu'>map_quad</span>(<span class='no'>wrong</span>)
 <span class='co'># * The right way to do it is to explicietly inlcude rows where DBH = NA</span>
-<span class='no'>right</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/dplyr/topics/filter'>filter</a></span>(<span class='no'>dead</span>, <span class='no'>DBH</span> <span class='kw'>&gt;</span> <span class='fl'>10</span> <span class='kw'>|</span> <span class='fu'>is.na</span>(<span class='no'>DBH</span>))
+<span class='no'>right</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://dplyr.tidyverse.org/reference/filter.html'>filter</a></span>(<span class='no'>dead</span>, <span class='no'>DBH</span> <span class='kw'>&gt;</span> <span class='fl'>10</span> <span class='kw'>|</span> <span class='fu'>is.na</span>(<span class='no'>DBH</span>))
 <span class='fu'>map_quad</span>(<span class='no'>right</span>)
 
 <span class='co'># Keeping dead trees with `is.na(DBH)` (e.g. tag 127885.d on the bottom right)</span>
-<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/dplyr/topics/filter'>filter</a></span>(<span class='no'>top4quad</span>, <span class='no'>DBH</span> <span class='kw'>&gt;</span> <span class='fl'>20</span> <span class='kw'>|</span> <span class='fu'>is.na</span>(<span class='no'>DBH</span>))
-<span class='fu'><a href='http://www.rdocumentation.org/packages/dplyr/topics/nth'>first</a></span>(<span class='fu'>map_quad</span>(<span class='no'>p</span>))
+<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://dplyr.tidyverse.org/reference/filter.html'>filter</a></span>(<span class='no'>top4quad</span>, <span class='no'>DBH</span> <span class='kw'>&gt;</span> <span class='fl'>20</span> <span class='kw'>|</span> <span class='fu'>is.na</span>(<span class='no'>DBH</span>))
+<span class='fu'><a href='http://dplyr.tidyverse.org/reference/nth.html'>first</a></span>(<span class='fu'>map_quad</span>(<span class='no'>p</span>))
 
 <span class='co'># For more complex filtering, see also ?fgeo.tool::rm_dead_twice)</span>
 <span class='no'>multiple_censuses</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>bciex</span><span class='kw ns'>::</span><span class='no'><a href='http://www.rdocumentation.org/packages/bciex/topics/bci12vft_mini'>bci12vft_mini</a></span>

@@ -2,7 +2,6 @@
 % Please edit documentation in R/map_plot.R
 \name{map_plot}
 \alias{map_plot}
-\alias{map_plot}
 \alias{map_elevation}
 \alias{map_species}
 \title{Map a census plot -- empty or with elevation.}
@@ -15,10 +14,13 @@ map_elevation(data = NULL, elevation = NULL, xlim = NULL, ylim = NULL,
   theme = theme_map_sp(), line_size = 0.5, low = "#132B43",
   high = "#f70404", bins = NULL, label_elev = TRUE)
 
-map_species(data, xlim = NULL, ylim = NULL, theme = theme_map_sp(),
-  drop_fill = FALSE, shape = 21, ...)
+map_species(data, elevation = NULL, xlim = NULL, ylim = NULL,
+  theme = theme_map_sp(), drop_fill = FALSE, shape = 21,
+  label_elev = TRUE, ...)
 }
 \arguments{
+\item{data}{Dataframe passed to \code{\link[ggplot2:geom_point]{ggplot2::geom_point()}}.}
+
 \item{elevation}{A dataframe with variables gx, gy, and elev giving the
 elevation of the site.}
 
@@ -40,65 +42,64 @@ colours like \code{low = "#132B43", high = "#56B1F7"} (for more colours google
 range of the data. Integers}
 
 \item{label_elev}{Logical; \code{FALSE} removes the labels of elevation lines.}
+
+\item{drop_fill}{Logical; \code{TRUE} drops the fill legend.}
+
+\item{shape}{Numeric; Point shape passed to \code{\link[ggplot2:geom_point]{ggplot2::geom_point()}}.}
+
+\item{...}{Arguments passed to \code{\link[ggplot2:geom_point]{ggplot2::geom_point()}}.}
 }
 \value{
 A ggplot.
 }
 \description{
 \code{map_plot()} produces a base on top of which you can add any \strong{ggplot2}
-layer (e.g. \code{\link[ggplot2:geom_point]{ggplot2::geom_point()}} and \code{\link[ggplot2:facet_wrap_sp]{ggplot2::facet_wrap_sp()}}; also
-\code{\link[=geom_point_sp]{geom_point_sp()}} and \code{\link[=facet_wrap_sp]{facet_wrap_sp()}}). \code{map_elevation()} is a wrapper
-that forces elevation, and has an informative name.
+layer (e.g. \code{\link[ggplot2:geom_point]{ggplot2::geom_point()}} and \code{\link[ggplot2:facet_wrap]{ggplot2::facet_wrap()}}; also
+\code{\link[=geom_point_sp]{geom_point_sp()}} and \code{\link[=facet_wrap_sp]{facet_wrap_sp()}}).
+\code{map_elevation()} and \code{map_species()} are convenient wrappers.
 }
 \examples{
 \dontrun{
 library(ggplot2)
 
-sp4 <- fgeo.tool::top(bciex::bci12s7mini, sp, 4)
+sp2 <- fgeo.tool::top(bciex::bci12s7mini, sp, 2)
 bad_nms_elev <- bciex::bci_elevation
 bci_elev <- dplyr::rename(bad_nms_elev, gx = x, gy = y)
 
-map_plot(sp4)
+# Plot
 
-# Same
-elev1 <- map_plot(sp4, elevation = bci_elev)
-# A small wrapper to make it easy to find this function by its name
-elev2 <- map_elevation(sp4, elevation = bci_elev)
-elev2
-all.equal(elev1, elev2)
+map_plot(sp2)
 
-# This works but it is not equal. Nowhere we are giving census data.
-elev3 <- map_elevation(elevation = bci_elev)
-# This works because we are using the argument `data`
-elev3 + geom_point_sp(data = sp4)
-# But this fails
-# elev3 + geom_point_sp()
-# This works because we passed the data before
-elev2 + geom_point_sp()
+map_plot(sp2, elevation = bci_elev)
 
-# See xlim, ylim at ?ggplot2::coord_fixed())
-map_elevation(sp4, elevation = bci_elev, xlim = c(200, 600), ylim = c(0, 400))
+map_plot(sp2, elevation = bci_elev) +
+  geom_point_sp(data = sp2)
 
-map_plot(sp4) + geom_point_sp()
-# Same: A small wrapper to make it easy to find this function by its name
-map_species(sp4)
-# See ?ggplot2::geom_point(), ?ggplot2::theme_gray().
-map_species(sp4, size = 4, stroke = 2, xlim = c(0, 500), theme = theme_gray())
+# Elevation
 
+map_elevation(NULL, bci_elev)
 
-# See also ?ggplot2::facet_wrap()
-map_species(sp4) + facet_wrap_sp()
-# See ?graphics::points
-map_species(sp4, drop_fill = TRUE) + facet_wrap_sp()
+map_elevation(bci_elev)
 
-# See also ?ggplot2::facet_grid()
-map_elevation(sp4, elevation = bci_elev) +
-  geom_point_sp(drop_fill = TRUE) +
-  facet_grid_sp_v()
+map_elevation(sp2)
 
-map_elevation(sp4, elevation = bci_elev) +
-  geom_point_sp(drop_fill = TRUE) +
+map_elevation(sp2) +
+  geom_point_sp(data = sp2) +
+  facet_wrap_sp()
+
+# Species
+
+map_species(sp2)
+
+map_species(sp2, bci_elev, drop_fill = TRUE, label_elev = FALSE, size = 4) +
+  facet_wrap_sp() +
+  guides(color = "none")
+
+map_species(sp2) +
   facet_grid_sp_h()
+
+map_species(sp2) +
+  facet_grid_sp_v()
 }
 }
 \seealso{

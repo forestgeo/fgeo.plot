@@ -1,19 +1,18 @@
 #' Map a census plot -- empty or with elevation.
 #' 
 #' `map_plot()` produces a base on top of which you can add any __ggplot2__
-#' layer (e.g. [ggplot2::geom_point()] and [ggplot2::facet_wrap_sp()]; also
-#' [geom_point_sp()] and [facet_wrap_sp()]). `map_elevation()` is a wrapper
-#' that forces elevation, and has an informative name.
+#' layer (e.g. [ggplot2::geom_point()] and [ggplot2::facet_wrap()]; also
+#' [geom_point_sp()] and [facet_wrap_sp()]).
+#' `map_elevation()` and `map_species()` are convenient wrappers.
 #' 
-#' @seealso [ggplot2::geom_point()].
-#'
+#' @param data Dataframe passed to [ggplot2::geom_point()].
+#' @param elevation A dataframe with variables gx, gy, and elev giving the
+#'   elevation of the site.
 #' @param xlim,ylim A vector giving the limits of x, y axes, for example
 #'   `xlim = c(0, 1000), ylim = c(0, 500)`. Default limits should be OK -- they
 #'   are set to be c(0, max), where max is the maximum value of `gx` or `gy`
 #'   in the data set.
 #' @template theme
-#' @param elevation A dataframe with variables gx, gy, and elev giving the
-#'   elevation of the site.
 #' @param line_size A number to customize the width of the elevation lines.
 #' @param low,high Colours to represent the range between low and high
 #'   elevation. Use colour names like `low = "black", high = "red"` or HEX
@@ -22,7 +21,10 @@
 #' @param bins A number. Setting bins creates evenly spaced contours in the
 #'   range of the data. Integers
 #' @param label_elev Logical; `FALSE` removes the labels of elevation lines.
-#'
+#' @inheritParams fgeo_geoms
+#' 
+#' @seealso [ggplot2::geom_point()].
+#' 
 #' @return A ggplot.
 #' @export
 #'
@@ -30,19 +32,45 @@
 #' \dontrun{
 #' library(ggplot2)
 #' 
-#' sp4 <- fgeo.tool::top(bciex::bci12s7mini, sp, 4)
+#' sp2 <- fgeo.tool::top(bciex::bci12s7mini, sp, 2)
 #' bad_nms_elev <- bciex::bci_elevation
 #' bci_elev <- dplyr::rename(bad_nms_elev, gx = x, gy = y)
 #' 
-#' map_species(sp4, bci_elev, drop_fill = TRUE, label_elev = FALSE, size = 4) +
+#' # Plot
+#' 
+#' map_plot(sp2)
+#' 
+#' map_plot(sp2, elevation = bci_elev)
+#' 
+#' map_plot(sp2, elevation = bci_elev) +
+#'   geom_point_sp(data = sp2)
+#' 
+#' # Elevation
+#' 
+#' map_elevation(NULL, bci_elev)
+#' 
+#' map_elevation(bci_elev)
+#' 
+#' map_elevation(sp2)
+#' 
+#' map_elevation(sp2) +
+#'   geom_point_sp(data = sp2) +
+#'   facet_wrap_sp()
+#' 
+#' # Species
+#' 
+#' map_species(sp2)
+#' 
+#' map_species(sp2, bci_elev, drop_fill = TRUE, label_elev = FALSE, size = 4) +
 #'   facet_wrap_sp() +
 #'   guides(color = "none")
+#' 
+#' map_species(sp2) +
+#'   facet_grid_sp_h()
+#' 
+#' map_species(sp2) +
+#'   facet_grid_sp_v()
 #' }
-#' @name map_plot
-NULL
-
-#' @rdname map_plot
-#' @export
 map_plot <- function(data = NULL,
                      elevation = NULL,
                      xlim = NULL,
@@ -55,6 +83,13 @@ map_plot <- function(data = NULL,
                      label_elev = TRUE) {
   msg <- "One of `data` or `elevation` must be not null."
   if (all(is.null(data), is.null(elevation))) rlang::abort(msg)
+  
+  if (all(is.null(elevation), any(grepl("elev", names(data))))) {
+    rlang::warn(
+      "You passed an elevation dataset as data (see argument `elevation`)"
+    )
+  }
+  
   if (is.null(data)) {data <- elevation}
   check_map_plot(
     data = data, elevation = elevation, xlim = xlim, ylim = ylim, theme = theme
@@ -67,6 +102,12 @@ map_plot <- function(data = NULL,
   if (is.null(elevation)) {
     base <- ggplot(data, aes(gx, gy))
   } else {
+    msg <- paste0(
+      "Using elevation as base data.\n",
+      "* To plot census data on new layers, use `data` = your-census-data",
+      collapse = ""
+    )
+    rlang::inform(msg)
     data <- elevation
     base <- ggplot(data, aes(gx, gy, z = elev))
   }
@@ -127,7 +168,7 @@ label_elev <- function(w_elev,
                             color = "grey",
                             ...) {
   built <- ggplot_build(w_elev)$data[[1]]
-  elev <-  mutate(built, gx = x, gy = y)
+  elev <-  mutate(built, gx = .data$x, gy = .data$y)
   elev_x <- elev[elev$gx == max0(elev$gx), ]
   elev_y <- elev[elev$gy == max0(elev$gy), ]
   w_elev + 
@@ -152,7 +193,7 @@ label_elev <- function(w_elev,
 text_at_max <- function(x, ...) {
   suppressWarnings(
     # Warns that `z` is not used. This is intentional.
-    geom_text(data = x, aes(label = level, z = NULL), ...)
+    geom_text(data = x, aes(label = x$level, z = NULL), ...)
   )
 }
 
@@ -171,8 +212,8 @@ map_elevation <- function(data = NULL,
                           high = "#f70404",
                           bins = NULL,
                           label_elev = TRUE) {
-  if (all(is.null(elevation), !grepl("elev", names(data)))) {
-    rlang::inform("Did you forget to provide elevation data?")
+  if (all(is.null(elevation), !any(grepl("elev", names(data))))) {
+    rlang::warn("Did you forget to provide elevation data?")
   }
   map_plot(
     data = data,
@@ -248,6 +289,11 @@ check_add_elev <- function(p,
 # Layers ------------------------------------------------------------------
 
 #' Geoms to add on top of ggplots based on ForestGEO's data.
+#' @param data Dataframe passed to [ggplot2::geom_point()].
+#' @param drop_fill Logical; `TRUE` drops the fill legend.
+#' @param shape Numeric; Point shape passed to [ggplot2::geom_point()].
+#' @param ... Arguments passed to [ggplot2::geom_point()].
+#' 
 #' @seealso [ggplot2::geom_point()]
 #' @name fgeo_geoms
 NULL
@@ -255,6 +301,15 @@ NULL
 #' @rdname fgeo_geoms
 #' @export
 geom_point_sp <- function(data = NULL, drop_fill = FALSE, shape = 21, ...){
+  if (is.null(data)) {
+    msg <- paste0(
+      "Did you forget to pass your census data?\n",
+      "* You may need someting like: `geom_point_sp(data = your-census-data)`",
+      collapse = ""
+    )
+    rlang::abort(msg)
+  }
+  
   if (drop_fill) {
     suppressWarnings(
       # Warns that z is NULL
@@ -264,13 +319,16 @@ geom_point_sp <- function(data = NULL, drop_fill = FALSE, shape = 21, ...){
     suppressWarnings(
       # Warns that z is NULL
       geom_point(
-        data = data, aes(gx, gy, z = NULL, fill = sp), shape = shape, ...
+        data = data, aes(gx, gy, z = NULL, fill = data$sp), shape = shape, ...
       )
     )
   }
 }
 
 #' Facets to add on top of ggplots based on ForestGEO's data.
+#' 
+#' @param ... Arguments passed to [ggplot2::facet_wrap()] and 
+#'   [ggplot2::facet_grid()].
 #' @seealso [ggplot2::facet_wrap()], [ggplot2::facet_grid()].
 #' @name fgeo_facets
 NULL

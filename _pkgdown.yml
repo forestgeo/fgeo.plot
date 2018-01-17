@@ -53,7 +53,10 @@ reference:
     contents:
       - map_quad
       - map_sp
+      - map_plot
       - map_tag
+      - fgeo_geoms
+      - fgeo_facets
 
   - title: "Helpers"
     contents:

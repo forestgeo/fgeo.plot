@@ -13,6 +13,10 @@ facet_grid_sp_h(...)
 
 facet_grid_sp_v(...)
 }
+\arguments{
+\item{...}{Arguments passed to \code{\link[ggplot2:facet_wrap]{ggplot2::facet_wrap()}} and
+\code{\link[ggplot2:facet_grid]{ggplot2::facet_grid()}}.}
+}
 \description{
 Facets to add on top of ggplots based on ForestGEO's data.
 }

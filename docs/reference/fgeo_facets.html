@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Label the four divisions of a quadrat -- each with four subquadrats. — paginate â€¢ fgeo.map</title>
+<title>Facets to add on top of ggplots based on ForestGEO's data. — fgeo_facets â€¢ fgeo.map</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -101,86 +101,42 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Label the four divisions of a quadrat -- each with four subquadrats.</h1>
+    <h1>Facets to add on top of ggplots based on ForestGEO's data.</h1>
     </div>
 
     
-    <p>This function makes it possible for <code><a href='map_tag.html'>map_tag()</a></code> to plot each individual map.
-Each map corresponds to one page and includes four subquadrats. There are a
-total of four maps per quadrat (i.e. a total of 16 subquadrats per quadrat).</p>
+    <p>Facets to add on top of ggplots based on ForestGEO's data.</p>
     
 
-    <pre class="usage"><span class='fu'>paginate</span>(<span class='no'>x</span>, <span class='kw'>bl</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>br</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>tr</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>tl</span> <span class='kw'>=</span> <span class='fl'>4</span>, <span class='kw'>subquad_offset</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>facet_wrap_sp</span>(<span class='no'>...</span>)
+
+<span class='fu'>facet_grid_sp_h</span>(<span class='no'>...</span>)
+
+<span class='fu'>facet_grid_sp_v</span>(<span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>x</th>
-      <td><p>A dataframe with the variable <code>subquadrat</code>.</p></td>
-    </tr>
-    <tr>
-      <th>bl, br, tr, tl</th>
-      <td><p>Number or character giving the label of the four
-subquadrats on each or the four divisions of a quadrat: bottom left (bl),
-bottom right (br), top right (tr), and top left (tl).</p></td>
-    </tr>
-    <tr>
-      <th>subquad_offset</th>
-      <td><p><code>NULL</code> or <code>-1</code>. This argument is for internal use. It
-helps paginate to use the same code for data with two different types of
-labels for the subquadrat variable: (1) that with subquadrat-columns
-starting at 1; and (2) that with subquadrat-columns starting at 0.</p><pre>The four divisions of a quadrat (bl, br, tr, tl), each with four subquadrats:
-
-tl       tr
-----     -----
-14 24    34 44
-13 23    33 43
-
-bl       br
-----     -----
-12 22    32 42
-11 21    31 41
-</pre></td>
+      <th>...</th>
+      <td><p>Arguments passed to <code><a href='http://www.rdocumentation.org/packages/ggplot2/topics/facet_wrap'>ggplot2::facet_wrap()</a></code> and
+<code><a href='http://www.rdocumentation.org/packages/ggplot2/topics/facet_grid'>ggplot2::facet_grid()</a></code>.</p></td>
     </tr>
     </table>
     
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
-    <p>A modified version of the input with the additional variable <code>page</code>.</p>
-    
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p><code><a href='http://www.rdocumentation.org/packages/fgeo.tool/topics/add_subquad'>fgeo.tool::add_subquad()</a></code>.</p>
+    <p><code><a href='http://www.rdocumentation.org/packages/ggplot2/topics/facet_wrap'>ggplot2::facet_wrap()</a></code>, <code><a href='http://www.rdocumentation.org/packages/ggplot2/topics/facet_grid'>ggplot2::facet_grid()</a></code>.</p>
     
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='co'># NOT RUN {</span>
-<span class='fu'>library</span>(<span class='no'>dplyr</span>)
-<span class='no'>viewfulltable</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://dplyr.tidyverse.org/reference/reexports.html'>tribble</a></span>(
-   ~<span class='no'>QX</span>,  ~<span class='no'>QY</span>,
-  <span class='fl'>17.9</span>,    <span class='fl'>0</span>,
-   <span class='fl'>4.1</span>,   <span class='fl'>15</span>,
-   <span class='fl'>6.1</span>, <span class='fl'>17.3</span>
-)
-<span class='no'>with_subquad</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>fgeo.tool</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/fgeo.tool/topics/add_subquad'>add_subquad</a></span>(<span class='no'>viewfulltable</span>, <span class='fl'>20</span>, <span class='fl'>20</span>, <span class='fl'>5</span>, <span class='fl'>5</span>)
-
-<span class='co'># Warning: Internal function</span>
-<span class='kw pkg'>fgeo.map</span><span class='kw ns'>:::</span><span class='fu'><a href='https://forestgeo.github.io/fgeo.map//reference/paginate.html'>paginate</a></span>(<span class='no'>with_subquad</span>)
-<span class='kw pkg'>fgeo.map</span><span class='kw ns'>:::</span><span class='fu'><a href='https://forestgeo.github.io/fgeo.map//reference/paginate.html'>paginate</a></span>(<span class='no'>with_subquad</span>, <span class='st'>"a"</span>, <span class='st'>"b"</span>, <span class='st'>"c"</span>, <span class='st'>"d"</span>)
-<span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       
-      <li><a href="#value">Value</a></li>
-
       <li><a href="#see-also">See also</a></li>
-      
-      <li><a href="#examples">Examples</a></li>
-    </ul>
+          </ul>
 
   </div>
 </div>

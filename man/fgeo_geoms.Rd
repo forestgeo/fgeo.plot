@@ -7,6 +7,15 @@
 \usage{
 geom_point_sp(data = NULL, drop_fill = FALSE, shape = 21, ...)
 }
+\arguments{
+\item{data}{Dataframe passed to \code{\link[ggplot2:geom_point]{ggplot2::geom_point()}}.}
+
+\item{drop_fill}{Logical; \code{TRUE} drops the fill legend.}
+
+\item{shape}{Numeric; Point shape passed to \code{\link[ggplot2:geom_point]{ggplot2::geom_point()}}.}
+
+\item{...}{Arguments passed to \code{\link[ggplot2:geom_point]{ggplot2::geom_point()}}.}
+}
 \description{
 Geoms to add on top of ggplots based on ForestGEO's data.
 }

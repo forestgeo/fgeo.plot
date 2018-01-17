@@ -114,8 +114,9 @@ theme by changing the default arguments and also by passing more arguments to
   <span class='kw'>panel.grid.minor</span> <span class='kw'>=</span> <span class='fu'>element_line</span>(<span class='kw'>colour</span> <span class='kw'>=</span> <span class='st'>"black"</span>, <span class='kw'>linetype</span> <span class='kw'>=</span> <span class='st'>"dotted"</span>),
   <span class='kw'>panel.background</span> <span class='kw'>=</span> <span class='fu'>element_rect</span>(<span class='kw'>fill</span> <span class='kw'>=</span> <span class='st'>"white"</span>),
   <span class='kw'>plot.title</span> <span class='kw'>=</span> <span class='fu'>element_text</span>(<span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>20</span>), <span class='kw'>plot.subtitle</span> <span class='kw'>=</span> <span class='fu'>element_text</span>(<span class='kw'>size</span> <span class='kw'>=</span>
-  <span class='fl'>12</span>), <span class='kw'>legend.position</span> <span class='kw'>=</span> <span class='st'>"top"</span>, <span class='kw'>legend.title</span> <span class='kw'>=</span> <span class='fu'>element_blank</span>(),
-  <span class='kw'>axis.ticks</span> <span class='kw'>=</span> <span class='fu'>element_blank</span>(), <span class='kw'>axis.text</span> <span class='kw'>=</span> <span class='fu'>element_text</span>(<span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>12</span>), <span class='no'>...</span>)
+  <span class='fl'>12</span>), <span class='kw'>plot.caption</span> <span class='kw'>=</span> <span class='fu'>element_text</span>(<span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>8</span>), <span class='kw'>legend.position</span> <span class='kw'>=</span> <span class='st'>"top"</span>,
+  <span class='kw'>legend.title</span> <span class='kw'>=</span> <span class='fu'>element_blank</span>(), <span class='kw'>axis.ticks</span> <span class='kw'>=</span> <span class='fu'>element_blank</span>(),
+  <span class='kw'>axis.text</span> <span class='kw'>=</span> <span class='fu'>element_text</span>(<span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>12</span>), <span class='no'>...</span>)
 
 <span class='fu'>theme_map_quad</span>(<span class='kw'>axis.text</span> <span class='kw'>=</span> <span class='fu'>element_blank</span>(),
   <span class='kw'>panel.background</span> <span class='kw'>=</span> <span class='fu'>element_rect</span>(<span class='kw'>fill</span> <span class='kw'>=</span> <span class='st'>"white"</span>),
@@ -154,6 +155,11 @@ from <code>title</code>) left-aligned by default</p></td>
       <th>plot.subtitle</th>
       <td><p>plot subtitle (text appearance) (<code>element_text</code>;
 inherits from <code>title</code>) left-aligned by default</p></td>
+    </tr>
+    <tr>
+      <th>plot.caption</th>
+      <td><p>caption below the plot (text appearance)
+(<code>element_text</code>; inherits from <code>title</code>) right-aligned by default</p></td>
     </tr>
     <tr>
       <th>legend.position</th>
@@ -202,7 +208,7 @@ inherits from <code>title</code>) left-aligned by default</p></td>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>theme_map_tag</span>()</div><div class='output co'>#&gt; List of 9
+    <pre class="examples"><div class='input'><span class='fu'>theme_map_tag</span>()</div><div class='output co'>#&gt; List of 10
 #&gt;  $ axis.text       :List of 11
 #&gt;   ..$ family       : NULL
 #&gt;   ..$ face         : NULL
@@ -262,6 +268,19 @@ inherits from <code>title</code>) left-aligned by default</p></td>
 #&gt;   ..$ face         : NULL
 #&gt;   ..$ colour       : NULL
 #&gt;   ..$ size         : num 12
+#&gt;   ..$ hjust        : NULL
+#&gt;   ..$ vjust        : NULL
+#&gt;   ..$ angle        : NULL
+#&gt;   ..$ lineheight   : NULL
+#&gt;   ..$ margin       : NULL
+#&gt;   ..$ debug        : NULL
+#&gt;   ..$ inherit.blank: logi FALSE
+#&gt;   ..- attr(*, "class")= chr [1:2] "element_text" "element"
+#&gt;  $ plot.caption    :List of 11
+#&gt;   ..$ family       : NULL
+#&gt;   ..$ face         : NULL
+#&gt;   ..$ colour       : NULL
+#&gt;   ..$ size         : num 8
 #&gt;   ..$ hjust        : NULL
 #&gt;   ..$ vjust        : NULL
 #&gt;   ..$ angle        : NULL
