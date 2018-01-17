@@ -84,12 +84,30 @@ map_plot <- function(data,
                      low = "#132B43",
                      high = "#56B1F7",
                      bins = NULL) {
-  p <- map_base(
-    data = data,
-    xlim = xlim,
-    ylim = ylim,
-    theme = theme
-  )
+  # p <- map_base(
+  #   data = data,
+  #   xlim = xlim,
+  #   ylim = ylim,
+  #   theme = theme
+  # )
+  check_map_plot(data = data, xlim = xlim, ylim = ylim, theme = theme)
+    
+  # If limits are not given by the user, set limits based on entire dataset
+  if (is.null(xlim)) {xlim <- c(0, max(data$gx, na.rm = TRUE))}
+  if (is.null(ylim)) {ylim <- c(0, max(data$gy, na.rm = TRUE))}
+  
+  if (is.null(elevation)) {
+    base <- ggplot(data, aes(gx, gy))
+  } else {
+    base <- ggplot(data, aes(gx, gy, z = elevation$elev))
+  }
+  p <- base +
+    coord_fixed(xlim = xlim, ylim = ylim) +
+      scale_x_continuous(minor_breaks = seq(xlim[1], xlim[2], 20)) +
+      scale_y_continuous(minor_breaks = seq(ylim[1], ylim[2], 20)) +
+      labs(x = NULL, y = NULL) +
+      theme
+  
   if (!is.null(elevation)) {
     p <- add_elev(
       p, 
@@ -136,24 +154,6 @@ map_species <- function(data,
     geom_point_sp(data = data, drop_fill = drop_fill, shape = shape, ...)
 }
 
-map_base <- function(data,
-                     xlim = NULL,
-                     ylim = NULL,
-                     theme = theme_map_sp()) {
-  check_map_base(data = data, xlim = xlim, ylim = ylim, theme = theme)
-
-  # If limits are not given by the user, set limits based on entire dataset
-  if (is.null(xlim)) {xlim <- c(0, max(data$gx, na.rm = TRUE))}
-  if (is.null(ylim)) {ylim <- c(0, max(data$gy, na.rm = TRUE))}
-
-  ggplot(data, aes(gx, gy)) +
-    coord_fixed(xlim = xlim, ylim = ylim) +
-    scale_x_continuous(minor_breaks = seq(xlim[1], xlim[2], 20)) +
-    scale_y_continuous(minor_breaks = seq(ylim[1], ylim[2], 20)) +
-    labs(x = NULL, y = NULL) +
-    theme
-}
-
 add_elev <- function(p,
   elevation,
   line_size = 0.5,
@@ -193,7 +193,7 @@ reference_elev_on_map <- function(p) {
 
 # Check -------------------------------------------------------------------
 
-check_map_base <- function(data, xlim, ylim, theme) {
+check_map_plot <- function(data, xlim, ylim, theme) {
   stopifnot(is.data.frame(data))
   fgeo.tool::check_crucial_names(data, c("gx", "gy"))
   if (!is.null(xlim)) {stopifnot(xlim >= 0)}

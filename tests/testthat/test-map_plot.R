@@ -12,7 +12,6 @@ test_that("outputs as a ggplot", {
   # Just in case, calling map_plot()
   expect_silent(p <- map_plot(bci_elev))
   
-  expect_silent(p <- map_base(bci_elev))
   expect_true(
     any(grepl("ggplot", class(p)))
   )
