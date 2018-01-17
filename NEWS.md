@@ -1,5 +1,6 @@
 # map 0.0.00.9201
 
+* `map_tag()` prints no more than 2 tags per tree.
 * `map_tag()` shows a caption of trees that map over quadrat edge.
 * New function `suffix_edge_tag()`.
 * Update to account for change in name from __fgeo.utils__ to __fgeo.tool__.
