@@ -164,3 +164,22 @@ test_that("argument subquad_offset works as expected", {
   subquads <- unique(purrr::map_df(x, "data")$subquadrat)
   expect_true("01" %in% subquads)
 })
+
+
+
+context("curate_point_shape")
+
+test_that("outputs the correct element(s) of point_shape", {
+  ps <- c(1, 2)
+  sa <- "alive"
+  sd <- "dead"
+  
+  x <- tibble::tibble(status_tree = c("alive", "dead"))
+  expect_equal(curate_point_shape(x, ps, sa, sd), c(1, 2))
+  
+  x <- tibble::tibble(status_tree = c("alive"))
+  expect_equal(curate_point_shape(x, ps, sa, sd), 1)
+  
+  x <- tibble::tibble(status_tree = c("dead"))
+  expect_equal(curate_point_shape(x, ps, sa, sd), 2)
+})
