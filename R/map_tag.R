@@ -485,7 +485,7 @@ map_tag_each <- function(prep_df,
   #   Error: Aesthetics must be either length 1 or the same as the data (16):
   #   x, y, label, shape
   base <- ggplot(data = prep_df, aes(x = qx, y = qy, shape = status_tree)) +
-    scale_shape_manual(values = point_shape)
+    scale_shape_manual(values = curate_point_shape(prep_df, point_shape))
   if (show_subquad) {
     base <- base +
       geom_label(
@@ -516,6 +516,21 @@ map_tag_each <- function(prep_df,
       caption = paste0("\n\nSpillover: ", .caption)
     ) +
     theme
+}
+
+curate_point_shape <- function(x,
+  point_shape,
+  status_a = "alive",
+  status_d = "dead") {
+  if (identical(unique(x$status_tree), c(status_a, status_d))) {
+    return(point_shape)
+  }
+  if (unique(x$status_tree) == status_a) {
+    return(point_shape[[1]])
+  }
+  if (unique(x$status_tree) == status_d) {
+    return(point_shape[[2]])
+  }
 }
 
 entitle_map <- function(x, chr, show_page = TRUE) {
