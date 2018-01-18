@@ -1,5 +1,12 @@
 # map 0.0.00.9201
 
+* New functions to map elevation and species distributions:
+    * `map_plot()`
+    * `map_species()`
+    * `map_elevation()`
+    * `facet_grid_sp_v()`
+    * `facet_grid_sp_h()`
+    * `facet_wrap_sp()`
 * `map_tag()` prints no more than 2 tags per tree.
 * `map_tag()` shows a caption of trees that map over quadrat edge.
 * New function `suffix_edge_tag()`.
