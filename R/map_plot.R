@@ -21,6 +21,14 @@
 #' @param bins A number. Setting bins creates evenly spaced contours in the
 #'   range of the data. Integers
 #' @param label_elev Logical; `FALSE` removes the labels of elevation lines.
+#' @param size_elev,color_elev (If `label_elev = TRUE`) Number; size and color
+#'   of the text labeling the elevation lines.
+#' @param xyjust (If `label_elev = TRUE`) Number; Adjust the position of the 
+#'   text labeling the elevation lines: moves vertically the text at the top
+#'   of the map, and horizontally the text at the right of the map.
+#' @param fontface (If `label_elev = TRUE`) Sting; Argument passed to 
+#'   [ggplot2::geom_text()] to indicate the type of font face of the text of
+#'   labeling the elevation lines. E.g. "italic" or "bold".
 #' @inheritParams fgeo_geoms
 #' 
 #' @seealso [ggplot2::geom_point()].
@@ -42,17 +50,26 @@
 #' 
 #' map_plot(sp2, elevation = bci_elev)
 #' 
+#' map_plot(sp2, elevation = bci_elev)
+#' 
 #' map_plot(sp2, elevation = bci_elev) +
 #'   geom_point_sp(data = sp2)
 #' 
 #' # Elevation
 #' 
-#' map_elevation(NULL, bci_elev)
+#' map_elevation(data = bci_elev)
 #' 
-#' map_elevation(bci_elev)
+#' map_elevation(data = sp2)
 #' 
-#' map_elevation(sp2)
+#' map_elevation(data = sp2, elevation = bci_elev)
 #' 
+#' map_elevation(data = sp2, elevation = bci_elev, 
+#'   line_size = 0.3, 
+#'   size_elev = 2, 
+#'   color_elev = "black"
+#' )
+#' 
+#' # You can create a base plot and then add layers to it
 #' map_elevation(sp2) +
 #'   geom_point_sp(data = sp2) +
 #'   facet_wrap_sp()
@@ -60,6 +77,8 @@
 #' # Species
 #' 
 #' map_species(sp2)
+#' 
+#' map_species(sp2, bci_elev, size = 5, size_elev = 5, color_elev = "blue")
 #' 
 #' map_species(sp2, bci_elev, drop_fill = TRUE, label_elev = FALSE, size = 4) +
 #'   facet_wrap_sp() +
@@ -80,7 +99,11 @@ map_plot <- function(data = NULL,
                      low = "#132B43",
                      high = "#f70404",
                      bins = NULL,
-                     label_elev = TRUE) {
+                     label_elev = TRUE,
+                     size_elev = 3,
+                     color_elev = "grey",
+                     xyjust = 1,
+                     fontface = "italic") {
   msg <- "One of `data` or `elevation` must be not null."
   if (all(is.null(data), is.null(elevation))) rlang::abort(msg)
   
@@ -126,7 +149,11 @@ map_plot <- function(data = NULL,
       low = low,
       high = high,
       bins = bins,
-      label_elev = label_elev
+      label_elev = label_elev,
+      size_elev = size_elev,
+      color_elev = color_elev,
+      xyjust = xyjust,
+      fontface = fontface
     )
   }
   p
@@ -134,11 +161,15 @@ map_plot <- function(data = NULL,
 
 add_elev <- function(p,
                      elevation,
-                     line_size = 0.5,
-                     low = "#132B43",
-                     high = "#56B1F7",
-                     bins = NULL,
-                     label_elev = TRUE) {
+                     line_size,
+                     low,
+                     high,
+                     bins,
+                     label_elev,
+                     size_elev,
+                     color_elev,
+                     xyjust,
+                     fontface) {
   check_add_elev(
     p = p, 
     elevation = elevation,
@@ -158,15 +189,24 @@ add_elev <- function(p,
     ) +
     scale_colour_continuous(low = low, high = high)
   
-  if (label_elev) label_elev(p_elev) else p_elev
+  if (label_elev) {
+    label_elev(
+      w_elev = p_elev,
+      size_elev = size_elev,
+      color_elev = color_elev,
+      xyjust = xyjust,
+      fontface = fontface
+    )
+  }  else {
+    p_elev
+  }
 }
 
 label_elev <- function(w_elev,
-                            # size = 3,
-                            xyjust = 1.5,
-                            fontface = "italic",
-                            color = "grey",
-                            ...) {
+                       size_elev = NULL,
+                       color_elev = NULL,
+                       xyjust = NULL,
+                       fontface = NULL) {
   built <- ggplot_build(w_elev)$data[[1]]
   elev <-  mutate(built, gx = .data$x, gy = .data$y)
   elev_x <- elev[elev$gx == max0(elev$gx), ]
@@ -174,29 +214,34 @@ label_elev <- function(w_elev,
   w_elev + 
     text_at_max(
       elev_x, 
-      # size = size, 
-      hjust = xyjust, 
-      fontface = fontface, 
-      color = color,
-      ...
+      size_elev = size_elev,
+      color_elev = color_elev,
+      xyjust = xyjust,
+      fontface = fontface
     ) + 
     text_at_max(
       elev_y, 
-      # size = size, 
-      vjust = xyjust, 
-      fontface = fontface, 
-      color = color,
-      ...
+      size_elev = size_elev,
+      color_elev = color_elev,
+      xyjust = xyjust + 0.5, 
+      fontface = fontface
     )
 }
 
-text_at_max <- function(x, ...) {
+text_at_max <- function(x, size_elev, color_elev, xyjust, fontface) {
   suppressWarnings(
     # Warns that `z` is not used. This is intentional.
-    geom_text(data = x, aes(label = x$level, z = NULL), ...)
+    geom_text(
+      data = x, 
+      aes(label = level, z = NULL),
+      size = size_elev, 
+      color = color_elev,
+      vjust = xyjust,
+      hjust = xyjust,
+      fontface = fontface
+    )
   )
 }
-
 
 # Wrappers ----------------------------------------------------------------
 
@@ -211,7 +256,11 @@ map_elevation <- function(data = NULL,
                           low = "#132B43",
                           high = "#f70404",
                           bins = NULL,
-                          label_elev = TRUE) {
+                          label_elev = TRUE,
+                          size_elev = 3,
+                          color_elev = "grey",
+                          xyjust = 1,
+                          fontface = "italic") {
   if (all(is.null(elevation), !any(grepl("elev", names(data))))) {
     rlang::warn("Did you forget to provide elevation data?")
   }
@@ -225,7 +274,11 @@ map_elevation <- function(data = NULL,
     low = low,
     high = high,
     bins = bins,
-    label_elev = label_elev
+    label_elev = label_elev,
+    size_elev = size_elev,
+    color_elev = color_elev,
+    xyjust = xyjust,
+    fontface = fontface
   )
 }
 
@@ -239,6 +292,10 @@ map_species <- function(data,
                         drop_fill = FALSE, 
                         shape = 21, 
                         label_elev = TRUE,
+                        size_elev = 3,
+                        color_elev = "grey",
+                        xyjust = 1,
+                        fontface = "italic",
                         ...) {
   map_plot(
     data = data,
@@ -246,7 +303,11 @@ map_species <- function(data,
     xlim = xlim,
     ylim = ylim,
     theme = theme,
-    label_elev = label_elev
+    label_elev = label_elev,
+    size_elev = size_elev,
+    color_elev = color_elev,
+    xyjust = xyjust,
+    fontface = fontface
   ) +
     geom_point_sp(data = data, drop_fill = drop_fill, shape = shape, ...)
 }
@@ -319,7 +380,7 @@ geom_point_sp <- function(data = NULL, drop_fill = FALSE, shape = 21, ...){
     suppressWarnings(
       # Warns that z is NULL
       geom_point(
-        data = data, aes(gx, gy, z = NULL, fill = data$sp), shape = shape, ...
+        data = data, aes(gx, gy, z = NULL, fill = sp), shape = shape, ...
       )
     )
   }

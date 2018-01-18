@@ -164,11 +164,12 @@ check_map_sp <- function(census, species, xlim, ylim) {
   fgeo.tool::check_crucial_names(census, c("gx", "gy", "sp"))
   invisible(census)
 }
+
 map_sp_each <- function(cns,
+                        elevation,
                         xlim,
                         ylim,
                         theme,
-                        elevation,
                         line_size,
                         low,
                         high,

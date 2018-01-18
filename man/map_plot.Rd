@@ -8,15 +8,18 @@
 \usage{
 map_plot(data = NULL, elevation = NULL, xlim = NULL, ylim = NULL,
   theme = theme_map_sp(), line_size = 0.5, low = "#132B43",
-  high = "#f70404", bins = NULL, label_elev = TRUE)
+  high = "#f70404", bins = NULL, label_elev = TRUE, size_elev = 3,
+  color_elev = "grey", xyjust = 1, fontface = "italic")
 
 map_elevation(data = NULL, elevation = NULL, xlim = NULL, ylim = NULL,
   theme = theme_map_sp(), line_size = 0.5, low = "#132B43",
-  high = "#f70404", bins = NULL, label_elev = TRUE)
+  high = "#f70404", bins = NULL, label_elev = TRUE, size_elev = 3,
+  color_elev = "grey", xyjust = 1, fontface = "italic")
 
 map_species(data, elevation = NULL, xlim = NULL, ylim = NULL,
   theme = theme_map_sp(), drop_fill = FALSE, shape = 21,
-  label_elev = TRUE, ...)
+  label_elev = TRUE, size_elev = 3, color_elev = "grey", xyjust = 1,
+  fontface = "italic", ...)
 }
 \arguments{
 \item{data}{Dataframe passed to \code{\link[ggplot2:geom_point]{ggplot2::geom_point()}}.}
@@ -42,6 +45,17 @@ colours like \code{low = "#132B43", high = "#56B1F7"} (for more colours google
 range of the data. Integers}
 
 \item{label_elev}{Logical; \code{FALSE} removes the labels of elevation lines.}
+
+\item{size_elev, color_elev}{(If \code{label_elev = TRUE}) Number; size and color
+of the text labeling the elevation lines.}
+
+\item{xyjust}{(If \code{label_elev = TRUE}) Number; Adjust the position of the
+text labeling the elevation lines: moves vertically the text at the top
+of the map, and horizontally the text at the right of the map.}
+
+\item{fontface}{(If \code{label_elev = TRUE}) Sting; Argument passed to
+\code{\link[ggplot2:geom_text]{ggplot2::geom_text()}} to indicate the type of font face of the text of
+labeling the elevation lines. E.g. "italic" or "bold".}
 
 \item{drop_fill}{Logical; \code{TRUE} drops the fill legend.}
 
@@ -72,17 +86,26 @@ map_plot(sp2)
 
 map_plot(sp2, elevation = bci_elev)
 
+map_plot(sp2, elevation = bci_elev)
+
 map_plot(sp2, elevation = bci_elev) +
   geom_point_sp(data = sp2)
 
 # Elevation
 
-map_elevation(NULL, bci_elev)
+map_elevation(data = bci_elev)
 
-map_elevation(bci_elev)
+map_elevation(data = sp2)
 
-map_elevation(sp2)
+map_elevation(data = sp2, elevation = bci_elev)
 
+map_elevation(data = sp2, elevation = bci_elev, 
+  line_size = 0.3, 
+  size_elev = 2, 
+  color_elev = "black"
+)
+
+# You can create a base plot and then add layers to it
 map_elevation(sp2) +
   geom_point_sp(data = sp2) +
   facet_wrap_sp()
@@ -90,6 +113,8 @@ map_elevation(sp2) +
 # Species
 
 map_species(sp2)
+
+map_species(sp2, bci_elev, size = 5, size_elev = 5, color_elev = "blue")
 
 map_species(sp2, bci_elev, drop_fill = TRUE, label_elev = FALSE, size = 4) +
   facet_wrap_sp() +
