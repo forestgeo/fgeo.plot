@@ -496,6 +496,7 @@ map_tag_each <- function(prep_df,
   }
   # <<<
   .caption <- caption_edge_tag(prep_df, x_q = x_q, y_q = y_q)
+  if (is.null(.caption)) .caption <- "None."
   base +
     geom_point(size = point_size) +
     ggrepel::geom_text_repel(aes(label = prep_df$tag), size = tag_size) +
@@ -522,7 +523,7 @@ curate_point_shape <- function(x,
   point_shape,
   status_a = "alive",
   status_d = "dead") {
-  if (identical(unique(x$status_tree), c(status_a, status_d))) {
+  if (identical(sort(unique(x$status_tree)), sort(c(status_a, status_d)))) {
     return(point_shape)
   }
   if (unique(x$status_tree) == status_a) {
