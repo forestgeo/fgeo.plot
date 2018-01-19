@@ -1,0 +1,68 @@
+---
+title: "Mapping quadrats of plot-lines 0-9"
+output:
+  rmarkdown::html_notebook:
+    toc: true
+    toc_depth: 6
+    theme: united
+---
+
+```{r setup, include=FALSE}
+set.seed(1014)
+options(digits = 3)
+
+knitr::opts_chunk$set(
+  echo = TRUE,
+  comment = "#>",
+  collapse = TRUE,
+  cache = TRUE,
+  out.width = "98%", 
+  fig.width = 12, 
+  fig.asp = 0.75,
+  fig.align = "center",
+  fig.show = "hold"
+)
+```
+
+# Package
+
+```{r}
+library(fgeo.map)
+```
+
+# Data
+
+```{r}
+path <- "C:/Users/dora/Downloads/sinharajamapdata/sinharajamapdata.txt"
+vft <- readr::read_delim(path, delim = "\t")
+vft
+```
+
+```{r, eval=FALSE, include=FALSE}
+# `sinharaja::sinh_vft_20180118` is a private dataset. Instead use your data.
+vft <- sinharaja::sinh_vft_20180118
+```
+
+# Suffix dead trees on the quadrat edge
+
+```{r}
+suffixed <- suffix_edge_tag(
+  vft,
+  .match = "dead",
+  suffix = "_d",
+  x_q = 20
+)
+# Confirm that it worked
+dplyr::filter(suffixed, status == "dead", (qx > 20 | qy > 20))
+```
+
+# Map
+
+```{r}
+p <- map_tag(suffixed, title_quad = "Sinharaja, 2018.", move_edge = 0.5)
+
+pdf("Sinharaja_2018_q2213.pdf", paper = "letter", height = 10.5, width = 8)
+p
+dev.off()
+```
+
