@@ -189,6 +189,22 @@ test_that("outputs quadrats in order, even if QuadratName is numeric (#33)", {
   expect_equal(names(not_chr), expect_nms)
 })
 
+test_that("warns if option max.print is not high enough", {
+  old_options <- options()
+  options(max.print = 2)
+  expect_warning(
+    p <- map_tag(top1quad)
+  )
+  options(old_options)
+  
+  old_options <- options()
+  options(max.print = 4)
+  expect_silent(
+    p <- map_tag(top1quad)
+  )
+  options(old_options)
+})
+
 
 
 context("curate_point_shape")

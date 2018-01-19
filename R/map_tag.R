@@ -293,6 +293,8 @@ check_map_tag <- function(.vft,
     collapse = ""
   )
   fgeo.tool::check_unique(.vft, "censusid", "warning", msg_cnsid)
+  
+  check_max_print(.vft, "quadratname", times = 4)
 
   invisible(.vft)
 }
