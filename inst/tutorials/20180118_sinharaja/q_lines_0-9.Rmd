@@ -24,6 +24,8 @@ knitr::opts_chunk$set(
 )
 ```
 
+> LINE number is the y-coordinate of the quadrat coordinates:  LINE “0” includes quadrats: 2400, 2300, 2200, to 0000
+
 # Package
 
 ```{r}
@@ -43,11 +45,39 @@ vft
 vft <- sinharaja::sinh_vft_20180118
 ```
 
+# Filter quadrats on lines 0-9
+
+```{r}
+library(stringr)
+
+rows <- str_pad(0:9, width = 2, pad = "0")
+rows
+```
+
+```{r}
+rows_pattern <- paste0("^..", rows, "$")
+
+vft$lines_0to9 <- str_detect(vft$quadratname, rows_pattern)
+vft_ln_0to9 <- vft[vft$lines_0to9, ]
+
+unique(vft_ln_0to9$quadratname)
+```
+
+# Map quadrats to confirm
+
+```{r}
+all_q <- sinharaja::sinh_vft
+sel_q <- filter(all_q, QuadratName %in% unique(vft_ln_0to9$quadratname)) %>% 
+  select(QuadratName, everything())
+ggplot(all_q, aes(PX, PY)) +
+  geom_text(data = sel_q, aes(label = QuadratName))
+```
+
 # Suffix dead trees on the quadrat edge
 
 ```{r}
 suffixed <- suffix_edge_tag(
-  vft,
+  vft_ln_0to9,
   .match = "dead",
   suffix = "_d",
   x_q = 20
