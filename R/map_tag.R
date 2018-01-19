@@ -309,6 +309,10 @@ prep_map_tag <- function(sbst,
                          tl,
                          move_edge
                          ) {
+  if (!is.character(sbst$quadratname)) {
+    sbst$quadratname <- stringr::str_pad(sbst$quadratname, width = 4, pad = 0)
+    rlang::warn("`quadratname` is not of class character. Pading with '0'.")
+  }
   # Using the pipe (%>%) to avoid meaningless temporary-variables
   sbst %>%
     fgeo.tool::add_status_tree(status_a = "alive", status_d = "dead") %>%
