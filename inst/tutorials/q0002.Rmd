@@ -33,6 +33,12 @@ library(fgeo.map)
 # Data
 
 ```{r}
+path <- "C:/Users/dora/Downloads/sinharajamapdata/sinharajamapdata.txt"
+vft <- readr::read_delim(path, delim = "\t")
+vft
+```
+
+```{r, eval=FALSE, include=FALSE}
 # `sinharaja::sinh_vft_20180118` is a private dataset. Instead use your data.
 vft <- sinharaja::sinh_vft_20180118
 ```
@@ -53,18 +59,9 @@ dplyr::filter(suffixed, status == "dead", (qx > 20 | qy > 20))
 # Map
 
 ```{r}
-# Showing only one quadrat
-vft_q0002 <- dplyr::filter(suffixed, quadratname == "0002")
-p <- map_tag(vft_q0002)
-# Showing only one of the four maps of the quadrat 0002
-p[[3]]
-```
+p <- map_tag(suffixed, title_quad = "Sinharaja, 2018.", move_edge = 0.5)
 
-# Print to .pdf
-
-```{r}
-# Printing all plots of `p` to .pdf, with parameters optimized for size letter
-pdf("map.pdf", paper = "letter", height = 10.5, width = 8)
+pdf("Sinharaja_2018_q2213.pdf", paper = "letter", height = 10.5, width = 8)
 p
 dev.off()
 ```
