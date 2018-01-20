@@ -14,7 +14,8 @@
 #' easier. 
 #'
 #' @template vft
-#' @inheritParams fgeo.tool::add_subquad
+#' @template x_q_y_q
+#' @template x_sq_y_sq
 #' @param subquad_offset `NULL` or `-1`. `NULL` defines the first column of
 #'   subquadrats as 1.  `-1` defines the first column of subquadrats as 0.
 #'   ```R
