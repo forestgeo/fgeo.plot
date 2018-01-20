@@ -14,18 +14,6 @@ map_tag(vft, x_q = 20, x_sq = 5, y_q = x_q, y_sq = x_sq,
 \arguments{
 \item{vft}{A dataframe -- specifically, a ForestGEO ViewFullTable.}
 
-\item{x_q}{Size in meters of a quadrat's side. For ForestGEO sites, a
-common value is 20.}
-
-\item{x_sq}{Size in meters of a subquadrat's side. For ForestGEO-CTFS
-sites, a common value is 5.}
-
-\item{y_q}{Size in meters of a quadrat's side. For ForestGEO sites, a
-common value is 20.}
-
-\item{y_sq}{Size in meters of a subquadrat's side. For ForestGEO-CTFS
-sites, a common value is 5.}
-
 \item{subquad_offset}{\code{NULL} or \code{-1}. \code{NULL} defines the first column of
 subquadrats as 1.  \code{-1} defines the first column of subquadrats as 0.\preformatted{subquad_offset = NULL    subquad_offset = -1
 ---------------------    -------------------
