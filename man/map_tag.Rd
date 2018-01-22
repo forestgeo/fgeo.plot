@@ -127,7 +127,7 @@ first(map_quad(right))
 p <- filter(top4quad, DBH > 20 | is.na(DBH))
 first(map_tag(p))
 
-# For more complex filtering, see also ?fgeo.tool::rm_dead_twice
+# For more complex filtering, see also ?fgeo.tool::discard_dead_twice
 
 # Customizing the maps ----------------------------------------------------
 
