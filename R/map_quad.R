@@ -58,9 +58,6 @@
 #' first(map_quad(p))
 #'
 #' # For more complex filtering, see also ?fgeo.tool::rm_dead_twice)
-#' multiple_censuses <- bciex::bci12vft_mini
-#' nrow(multiple_censuses)
-#' nrow(rm_dead_twice(multiple_censuses))
 #'
 #' # Customizing the maps ----------------------------------------------------
 #'
