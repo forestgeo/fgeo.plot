@@ -394,11 +394,11 @@ geom_point_sp <- function(data = NULL, drop_fill = FALSE, shape = 21, ...){
 #' @name fgeo_facets
 NULL
 
-#' @rdname fgeo_facets
-#' @export
-facet_wrap_sp <- function(...) {
-  facet_wrap(~sp, ...)
-}
+#' #' @rdname fgeo_facets
+#' #' @export
+#' facet_wrap_sp <- function(...) {
+#'   facet_wrap(~sp, ...)
+#' }
 
 #' @rdname fgeo_facets
 #' @export
