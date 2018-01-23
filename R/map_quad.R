@@ -57,10 +57,7 @@
 #' p <- filter(top4quad, DBH > 20 | is.na(DBH))
 #' first(map_quad(p))
 #'
-#' # For more complex filtering, see also ?fgeo.tool::rm_dead_twice)
-#' multiple_censuses <- bciex::bci12vft_mini
-#' nrow(multiple_censuses)
-#' nrow(rm_dead_twice(multiple_censuses))
+#' # For more complex filtering, see also ?fgeo.tool::discard_dead_twice)
 #'
 #' # Customizing the maps ----------------------------------------------------
 #'

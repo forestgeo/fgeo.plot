@@ -14,16 +14,10 @@ map_tag(vft, x_q = 20, x_sq = 5, y_q = x_q, y_sq = x_sq,
 \arguments{
 \item{vft}{A dataframe -- specifically, a ForestGEO ViewFullTable.}
 
-\item{x_q}{Size in meters of a quadrat's side. For ForestGEO sites, a
+\item{x_q, y_q}{Size in meters of a quadrat's side. For ForestGEO sites, a
 common value is 20.}
 
-\item{x_sq}{Size in meters of a subquadrat's side. For ForestGEO-CTFS
-sites, a common value is 5.}
-
-\item{y_q}{Size in meters of a quadrat's side. For ForestGEO sites, a
-common value is 20.}
-
-\item{y_sq}{Size in meters of a subquadrat's side. For ForestGEO-CTFS
+\item{x_sq, y_sq}{Size in meters of a subquadrat's side. For ForestGEO-CTFS
 sites, a common value is 5.}
 
 \item{subquad_offset}{\code{NULL} or \code{-1}. \code{NULL} defines the first column of
@@ -133,12 +127,7 @@ first(map_quad(right))
 p <- filter(top4quad, DBH > 20 | is.na(DBH))
 first(map_tag(p))
 
-# For more complex filtering, see also ?fgeo.tool::rm_dead_twice
-multiple_censuses <- bciex::bci12vft_mini
-nrow(multiple_censuses)
-nrow(rm_dead_twice(multiple_censuses))
-
-
+# For more complex filtering, see also ?fgeo.tool::discard_dead_twice
 
 # Customizing the maps ----------------------------------------------------
 

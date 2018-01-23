@@ -23,6 +23,103 @@ knitr::opts_chunk$set(
 )
 
 ## ------------------------------------------------------------------------
+# Example data
+census <- bciex::bci12t7mini
+species <- c("hybapr", "faraoc")
+
+# Defaults
+p <- map_sp(census, species)
+# Visualizing only the first plot of `p`
+first(p)
+# Printing all plots of `p` to .pdf, with parameters optimized for size letter
+pdf("map.pdf", paper = "letter", height = 10.5, width = 8)
+p
+dev.off()
+
+# Simple tweaks
+p <- map_sp(
+  census, species,
+  # Passed to ggplot2::geom_point()
+  size = 4, shape = 22, fill = "green", colour = "black", stroke = 2
+)
+first(p)
+
+# Add elevation and tweak lines
+# Fixing wrong names of elevation data
+elevation <- rename(bciex::bci_elevation, gx = x, gy = y)
+p <- map_sp(
+  census, species,
+  elevation = elevation, line_size = 1, low = "red", high = "blue", bins = 10
+)
+first(p)
+
+# Dealing with overplotting
+crowded <- tibble(
+  sp = sample(c("species1"), 10000, replace = TRUE),
+  gx = sample.int(1000, 10000, replace = TRUE),
+  gy = sample.int(500, 10000, replace = TRUE)
+)
+map_sp(crowded, c("species1"))
+# Less overplotting
+map_sp(crowded, c("species1"), size = 1, alpha = 5/10, shape = 21)
+
+# Limits
+p <- map_sp(census, species, xlim = c(0, 1500), ylim = c(0, 1000))
+first(p)
+
+# Themes
+library(ggplot2)
+# Using pre-made themes
+p <- map_sp(census, species, theme = ggplot2::theme_classic())
+first(p)
+# Tweaking the default theme of map_sp()
+small_tweak <- theme_map_sp(
+  text = element_text(size = 30, face = "bold.italic")
+)
+p <- map_sp(census, species, theme = small_tweak)
+first(p)
+large_tweak <- theme(
+  legend.position = "bottom",
+  legend.title = element_blank(),
+  legend.text = element_text(size = 8, colour = "red"),
+  text = element_text(size = 11, face = "bold.italic", colour = "white"),
+  plot.background = element_rect(fill = "black"),
+  plot.margin = margin(2, 2, 2, 2, "cm"),
+  strip.background = element_rect(fill = "darkgreen"),
+  strip.text = element_text(colour = "white"),
+  panel.background = element_rect(fill = "lightgreen"),
+  panel.grid.minor = element_line(colour = "black", linetype = "dotted"),
+  panel.grid.major = element_line(colour = "black")
+)
+p <- map_sp(census, species, theme = large_tweak)
+first(p)
+
+# Multiple maps per page
+library(gridExtra)
+four_species <- c("hybapr", "faraoc", "des2pa", "tri2tu")
+p <- map_sp(census, four_species)
+multipaged <- marrangeGrob(p, nrow = 1, ncol = 2)
+# Printing all plots of `p` to .pdf, with parameters optimized for size letter
+# Option 1
+pdf("map.pdf", paper = "letter", height = 10.5, width = 8)
+multipaged
+dev.off()
+# Option 2
+ggsave("map.pdf", multipaged, height = 10.5, width = 8)
+
+# Extending with ggplot2
+p0 <- map_sp(census, species)
+#  Adding new layer to one element of the plots' list
+p0[["hybapr"]] + geom_vline(aes(xintercept = 300), colour = "red")
+# Adding new layer to all elements of the plots' list
+# * Adding a vertical line
+p1 <- lapply(p0, `+`, geom_vline(aes(xintercept = 300), colour = "red"))
+marrangeGrob(p1, nrow = 2, ncol = 1)
+# * Also adding a horizontal line
+p2 <- lapply(p1, `+`, geom_hline(aes(yintercept = 400), colour = "blue"))
+marrangeGrob(p2, nrow = 2, ncol = 1)
+
+## ------------------------------------------------------------------------
 # Filter the data you want. For example:
 # (see ?top4quad)
 want <- filter(
@@ -58,10 +155,7 @@ map_quad(right)
 p <- filter(top4quad, DBH > 20 | is.na(DBH))
 first(map_quad(p))
 
-# For more complex filtering, see also ?fgeo.tool::rm_dead_twice)
-multiple_censuses <- bciex::bci12vft_mini
-nrow(multiple_censuses)
-nrow(rm_dead_twice(multiple_censuses))
+# For more complex filtering, see also ?fgeo.tool::discard_dead_twice)
 
 # Customizing the maps ----------------------------------------------------
 
@@ -132,10 +226,7 @@ first(map_quad(right))
 p <- filter(top4quad, DBH > 20 | is.na(DBH))
 first(map_tag(p))
 
-# For more complex filtering, see also ?fgeo.tool::rm_dead_twice
-multiple_censuses <- bciex::bci12vft_mini
-nrow(multiple_censuses)
-nrow(rm_dead_twice(multiple_censuses))
+# For more complex filtering, see also ?fgeo.tool::discard_dead_twice
 
 
 

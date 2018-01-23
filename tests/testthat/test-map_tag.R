@@ -165,6 +165,46 @@ test_that("argument subquad_offset works as expected", {
   expect_true("01" %in% subquads)
 })
 
+test_that("outputs quadrats in order, even if QuadratName is numeric (#33)", {
+  tricky_quad <- c("0100", "0101", "1000")
+  expect_nms <- map(tricky_quad, paste0, "_", 1:4) %>% reduce(c)
+  
+  # Create some data
+  vft_toy <- fgeo.tool::top(top4quad, QuadratName, 3)
+  vft_toy <- mutate(
+    vft_toy,
+    QuadratName = recode(QuadratName,
+      "4917" = "0100",
+      "4916" = "0101",
+      "4915" = "1000"
+    )
+  )
+  
+  good <- map_tag(vft_toy)
+  expect_equal(names(good), expect_nms)
+  
+  not_chr <- expect_warning(
+    map_tag(mutate(vft_toy, QuadratName = as.numeric(QuadratName)))
+  )
+  expect_equal(names(not_chr), expect_nms)
+})
+
+test_that("warns if option max.print is not high enough", {
+  old_options <- options()
+  options(max.print = 2)
+  expect_warning(
+    p <- map_tag(top1quad)
+  )
+  options(old_options)
+  
+  old_options <- options()
+  options(max.print = 4)
+  expect_silent(
+    p <- map_tag(top1quad)
+  )
+  options(old_options)
+})
+
 
 
 context("curate_point_shape")

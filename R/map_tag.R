@@ -14,7 +14,8 @@
 #' easier. 
 #'
 #' @template vft
-#' @inheritParams fgeo.tool::add_subquad
+#' @template x_q_y_q
+#' @template x_sq_y_sq
 #' @param subquad_offset `NULL` or `-1`. `NULL` defines the first column of
 #'   subquadrats as 1.  `-1` defines the first column of subquadrats as 0.
 #'   ```R
@@ -98,12 +99,7 @@
 #' p <- filter(top4quad, DBH > 20 | is.na(DBH))
 #' first(map_tag(p))
 #'
-#' # For more complex filtering, see also ?fgeo.tool::rm_dead_twice
-#' multiple_censuses <- bciex::bci12vft_mini
-#' nrow(multiple_censuses)
-#' nrow(rm_dead_twice(multiple_censuses))
-#'
-#'
+#' # For more complex filtering, see also ?fgeo.tool::discard_dead_twice
 #'
 #' # Customizing the maps ----------------------------------------------------
 #'
@@ -293,6 +289,8 @@ check_map_tag <- function(.vft,
     collapse = ""
   )
   fgeo.tool::check_unique(.vft, "censusid", "warning", msg_cnsid)
+  
+  check_max_print(.vft, "quadratname", times = 4)
 
   invisible(.vft)
 }
@@ -309,6 +307,10 @@ prep_map_tag <- function(sbst,
                          tl,
                          move_edge
                          ) {
+  if (!is.character(sbst$quadratname)) {
+    sbst$quadratname <- stringr::str_pad(sbst$quadratname, width = 4, pad = 0)
+    rlang::warn("`quadratname` is not of class character. Pading with '0'.")
+  }
   # Using the pipe (%>%) to avoid meaningless temporary-variables
   sbst %>%
     fgeo.tool::add_status_tree(status_a = "alive", status_d = "dead") %>%

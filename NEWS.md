@@ -1,3 +1,7 @@
+# map 0.0.00.9202
+
+* `map_tag()` outputs quadrats in order with non-character `QuadratName` (#33)
+
 # map 0.0.00.9201
 
 * New functions to map elevation and species distributions:

@@ -31,3 +31,30 @@ check_unique_tag <- function(x) {
   fgeo.tool::check_unique(x, "tag", "warning", msg)
   invisible(x)
 }
+
+check_max_print <- function(p) {
+  max_n <- getOption("max.print")
+  if (!max_n >= length(p)) {
+    msg <- paste0(
+      "The option max.print is too low: Printing only ", max_n, " plots",
+      "\n* To allow printing n plots use `options(max.print = n)`."
+    )
+    rlang::warn(msg)
+  }
+}
+
+check_max_print <- function(x, var, times = NULL) {
+  nn <- length(unique(x[[var]]))
+  if (!is.null(times)) nn <- nn * times
+
+  max_n <- getOption("max.print")
+  if (!max_n >= nn) {
+    msg <- paste0(
+      "Option max.print is low: ", max_n, ". Number of unique values of `",
+        var, "`: ", nn, ".\n",
+      "* Consider using `options(max.print = HIGHER-NUMBER)`."
+    )
+    rlang::warn(msg)
+  }
+}
+
