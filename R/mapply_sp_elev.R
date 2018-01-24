@@ -1,11 +1,13 @@
 # Mapper ------------------------------------------------------------------
 
+#' @param fill Character; either a colour or "sp", which maps each species to a
+#'   different color.
+
 mapply_sp_elev <- function(census,
                            elevation = NULL,
                            species = "all",
                            fill = "black",
                            shape = 21,
-                           wrap = TRUE,
                            point_size = 3,
                            contour_size = 0.5,
                            low = "blue",
@@ -20,15 +22,13 @@ mapply_sp_elev <- function(census,
                            xlim = NULL,
                            ylim = NULL,
                            custom_theme = NULL) {
-  # TODO: rename to check_mapply_sp_elev
-  check_map_sp(census = census, species = species, xlim = xlim, ylim = ylim)
-  
+  check_sp(census = census, species = species)
+
   species <- best_species(census, species)
-  
   xlim <- best_lim(xlim, census$gx)
   ylim <- best_lim(ylim, census$gy)
   
-  # Focus on given species
+  # Iterate over each of the given species
   cns <- census[census$sp %in% species, ]
   cns_list <- split(cns, cns$sp)
   p <- lapply(
@@ -36,7 +36,7 @@ mapply_sp_elev <- function(census,
     elevation = elevation,
     fill = fill,
     shape = shape,
-    wrap = wrap,
+    wrap = TRUE,
     point_size = point_size,
     contour_size = contour_size,
     low = low,
@@ -76,7 +76,9 @@ map_sp_elev <- function(census,
                         xlim = NULL,
                         ylim = NULL,
                         custom_theme = NULL) {
-  stopifnot(!is.null(census))
+  stopifnot(is.data.frame(census))
+  fgeo.tool::check_crucial_names(census, c("gx", "gy"))
+  
   
   # User doesn't provide elevation data
   if (is.null(elevation)) {
@@ -118,6 +120,7 @@ map_pure_elev <- function(elevation,
                           xyjust = 1,
                           fontface = "italic") {
   base <- elevation %>% 
+    best_structure_and_nms_elev() %>% 
     map_gx_gy_elev() %>% 
     contour_elev(
       contour_size = contour_size, low = low, high = high, bins = bins
@@ -167,7 +170,58 @@ map_elev <- function(elevation,
     best_theme(custom_theme = custom_theme)
 }
 
+
+
+# Checks ------------------------------------------------------------------
+
+check_sp <- function(census, species) {
+  stopifnot(is.data.frame(census))
+  stopifnot(is.character(species))
+  fgeo.tool::check_crucial_names(census, c("gx", "gy", "sp"))
+  if (length(species) == 0) {
+    rlang::abort("`sp` must be not empty.")
+  }
+  invisible(census)
+}
+
+# Manipulate elevation ----------------------------------------------------
+
+pull_elevation <- function(x) {
+  UseMethod("pull_elevation")
+}
+
+pull_elevation.data.frame <- function(x) {
+  fgeo.tool::check_crucial_names(x, "elev")
+  x
+}
+
+pull_elevation.default <- function(x) {
+  msg <- paste0(
+    "`elevation` must be data.frame or list but its class is: ", class(x)
+  )
+  rlang::abort(msg)
+}
+
+pull_elevation.list <- function(x) {
+  inform("`elevation` is a list.\n* Searching for element `col`.")
+  
+  tryCatch(
+    fgeo.tool::check_crucial_names(x, "col"),
+    finally = abort("Your `elevation` list lacks the element `col`."),
+    call = FALSE
+  )
+  
+  elevation <- x[["col"]]
+  elevation
+}
+
 # Simplify conditions -----------------------------------------------------
+
+best_structure_and_nms_elev <- function(elevation) {
+  pull_elevation(x = elevation) %>% 
+    nms_try_rename(want = "gx", try = "x") %>% 
+    nms_try_rename(want = "gy", try = "y")
+}
 
 best_species <- function(census, species) {
   if (!identical(species, "all")) {
@@ -203,7 +257,10 @@ best_elev_legend <- function(p, hide_legend_elev = FALSE) {
 
 best_lim <- function(lim, coord) {
   if (!is.null(lim)) {
-    stopifnot(length(lim) == 2)
+    # stopifnot(length(lim) == 2)
+    if (length(lim) != 2) {
+      abort("Limits must be in a numeric vector of length 2; e.g. `c(0, 500)`.")
+    }
     return(lim)
   } else {
     lim <- c(0, max0(coord))
@@ -304,7 +361,7 @@ label_elev <- function(p,
       max_elev(p)$y,
       label_size = label_size,
       label_color = label_color,
-      xyjust = xyjust + 0.5,
+      xyjust = xyjust * 1.3,
       fontface = fontface
     )
 }

@@ -3,16 +3,16 @@ library(fgeo.tool)
 load_all()
 
 census <- fgeo.tool::top(bciex::bci12s7mini, sp, 2)
-cns1sp <- top(census, sp)
-elevation <- dplyr::rename(bciex::bci_elevation, gx = x, gy = y)
+elevation <- bciex::bci_elevation
+
 
 map_pure_elev(elevation, hide_legend_elev = TRUE)
-map_elev(elevation, xlim = C(0, 500))
+map_elev(elevation, xlim = c(0, 500))
 
 map_sp_elev(cns1sp, elevation, xlim = c(0, 500))
 
 
-mapply_sp_elev(census, elevation, species = census$sp[[1]])
+mapply_sp_elev(census, elevation, species = census$sp[[1]], xlim = c(0, 500))
 
 
 
