@@ -1,25 +1,25 @@
 # mapper ------------------------------------------------------------------
 
 mapply_sp <- function(census,
-  species,
-  size = 3,
-  shape = 21,
-  wrap = TRUE,
-  fill = "black",
-  xlim = NULL,
-  ylim = NULL,
-  custom_theme = NULL,
-  
-  # elevation = NULL,
-  # line_size = 0.5,
-  # low = "#132B43",
-  # high = "#56B1F7",
-  # bins = NULL,
-  ...) {
+                      species,
+                      size = 3,
+                      shape = 21,
+                      wrap = TRUE,
+                      fill = "black",
+                      xlim = NULL,
+                      ylim = NULL,
+                      custom_theme = NULL,
+                      
+                      # elevation = NULL,
+                      # line_size = 0.5,
+                      # low = "#132B43",
+                      # high = "#56B1F7",
+                      # bins = NULL,
+                      ...) {
   check_map_sp(census = census, species = species, xlim = xlim, ylim = ylim)
   
-  xlim <- pick_lim(xlim, census$gx)
-  ylim <- pick_lim(ylim, census$gy)
+  xlim <- best_lim(xlim, census$gx)
+  ylim <- best_lim(ylim, census$gy)
   
   # Focus on given species
   cns <- census[census$sp %in% species, ]
@@ -46,26 +46,27 @@ mapply_sp <- function(census,
 
 # Wrappers ----------------------------------------------------------------
 
-map_elev <- function(elevation,
+map_elev <- function(data,
                      contour_size = 0.5,
                      low = "blue",
                      high = "red",
                      label_size = 3,
-                     color = "grey",
+                     label_color = "grey",
+                     xyjust = 1,
                      fontface = "italic",
                      xlim = NULL,
                      ylim = NULL,
-                     custom_theme = NULL,
-                     ...) {
-  base <- limit_gx_gy(map_gx_gy_elev(elevation), xlim = xlim, ylim = ylim)
-  if (is.null(custom_theme)) {
-    base <- theme_default(base)
-  } else {
-    base <- base + custom_theme
-  }
+                     custom_theme = NULL) {
+  base <- limit_gx_gy(map_gx_gy_elev(data = data), xlim = xlim, ylim = ylim)
+  base <- best_theme(p = base, custom_theme = custom_theme)
   
-  contour_elev(base, size = contour_size, ...) %>% 
-    label_elev(size = label_size, color = color, fontface = fontface)
+  contour_elev(p = base, size = contour_size, low = low, high = high) %>% 
+    label_elev(
+      label_size = label_size,
+      label_color = label_color,
+      xyjust = xyjust,
+      fontface = fontface
+    )
 }
 
 map_sp2 <- function(census, 
@@ -75,14 +76,9 @@ map_sp2 <- function(census,
                     fill = "sp",
                     xlim = NULL,
                     ylim = NULL,
-                    custom_theme = NULL,
-                    ...) {
+                    custom_theme = NULL) {
   base <- limit_gx_gy(map_gx_gy(census), xlim = xlim, ylim = ylim)
-  if (is.null(custom_theme)) {
-    base <- theme_default(base)
-  } else {
-    base <- base + custom_theme
-  }
+  base <- best_theme(base, custom_theme = custom_theme)
   
   p <- add_sp(base, census, fill = fill, shape = shape, size = size)
   if (!wrap) {
@@ -90,6 +86,15 @@ map_sp2 <- function(census,
   } else {
     facet_wrap_sp(p)
   }
+}
+
+best_theme <- function(p, custom_theme) {
+  if (is.null(custom_theme)) {
+    p <- theme_default(p = p)
+  } else {
+    p <- p + custom_theme
+  }
+  p
 }
 
 # Base maps ---------------------------------------------------------------
@@ -110,8 +115,8 @@ map_gx_gy <- function(data) {
 limit_gx_gy <- function(p, xlim = NULL, ylim = NULL) {
   # If user doesn't provide limits, set limits based on entire dataset
   data <- p[["data"]]
-  xlim <- pick_lim(xlim, data$gx)
-  ylim <- pick_lim(ylim, data$gy)
+  xlim <- best_lim(xlim, data$gx)
+  ylim <- best_lim(ylim, data$gy)
   
   p +
     coord_fixed(xlim = xlim, ylim = ylim) +
@@ -119,7 +124,7 @@ limit_gx_gy <- function(p, xlim = NULL, ylim = NULL) {
     scale_y_continuous(minor_breaks = seq(ylim[1], ylim[2], 20))
 }
 
-pick_lim <- function(lim, coord) {
+best_lim <- function(lim, coord) {
   if (!is.null(lim)) {
     stopifnot(length(lim) == 2)
     return(lim)
@@ -160,11 +165,10 @@ add_sp <- function(p, data = NULL, fill = "sp", shape = 21, size = 3) {
 # bins
 # low, high
 #' @export
-contour_elev <- function(p, size = 1, low = "blue", high = "red", ...) {
+contour_elev <- function(p, size = 1, low = "blue", high = "red") {
    p +
     stat_contour(
-      aes(x = gx, y = gy, z = elev, colour = ..level..), size = size, ...
-    ) +
+      aes(x = gx, y = gy, z = elev, colour = ..level..), size = size) +
     scale_colour_continuous(low = low, high = high)
 }
 
@@ -173,10 +177,26 @@ contour_elev <- function(p, size = 1, low = "blue", high = "red", ...) {
 # color
 # fontface
 #' @export
-label_elev <- function(p, xyjust = 1, ...) {
-  p + 
-    text_at_max(max_elev(p)$x, xyjust = xyjust, ...) + 
-    text_at_max(max_elev(p)$y, xyjust = xyjust + 0.5, ...)
+label_elev <- function(p, 
+                       label_size = 3,
+                       label_color = "grey",
+                       xyjust = 1, 
+                       fontface = "italic") {
+  p +
+    text_at_max(
+      max_elev(p)$x,
+      label_size = label_size,
+      label_color = label_color,
+      xyjust = xyjust,
+      fontface = fontface
+    ) +
+    text_at_max(
+      max_elev(p)$y,
+      label_size = label_size,
+      label_color = label_color,
+      xyjust = xyjust + 0.5,
+      fontface = fontface
+    )
 }
 
 max_elev <- function(p) {
@@ -187,13 +207,21 @@ max_elev <- function(p) {
   list(x = elev_x, y = elev_y)
 }
 
-text_at_max <- function(x, xyjust, ...) {
+text_at_max <- function(x,
+                        xyjust,
+                        label_size = 3,
+                        label_color = "grey",
+                        fontface = "italic") {
   # Mute warning that `z` NULL
   suppressWarnings(
     geom_text(
-      data = x, aes(label = level, z = NULL), 
-      hjust = xyjust, vjust = xyjust,
-      ...
+      data = x,
+      aes(label = level, z = NULL),
+      size = label_size,
+      color =  label_color,
+      hjust = xyjust,
+      vjust = xyjust,
+      fontface =  fontface
     )
   )
 }
@@ -203,6 +231,10 @@ text_at_max <- function(x, xyjust, ...) {
 #' @export
 hide_axis_labels <- function(p) {
   p + labs(x = NULL, y = NULL)
+}
+
+hide_legend_elev <- function(p) {
+  p + guides(color = "none")
 }
 
 # Facets ------------------------------------------------------------------
