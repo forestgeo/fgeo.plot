@@ -1,22 +1,29 @@
-# mapper ------------------------------------------------------------------
+# Mapper ------------------------------------------------------------------
 
-mapply_sp <- function(census,
-                      species,
-                      size = 3,
-                      shape = 21,
-                      wrap = TRUE,
-                      fill = "black",
-                      xlim = NULL,
-                      ylim = NULL,
-                      custom_theme = NULL,
-                      
-                      # elevation = NULL,
-                      # line_size = 0.5,
-                      # low = "#132B43",
-                      # high = "#56B1F7",
-                      # bins = NULL,
-                      ...) {
+mapply_sp_elev <- function(census,
+                           elevation = NULL,
+                           species = "all",
+                           fill = "black",
+                           shape = 21,
+                           wrap = TRUE,
+                           point_size = 3,
+                           contour_size = 0.5,
+                           low = "blue",
+                           high = "red",
+                           hide_legend_elev = FALSE,
+                           bins = NULL,
+                           label_elev = TRUE,
+                           label_size = 3,
+                           label_color = "grey",
+                           xyjust = 1,
+                           fontface = "italic",
+                           xlim = NULL,
+                           ylim = NULL,
+                           custom_theme = NULL) {
+  # TODO: rename to check_mapply_sp_elev
   check_map_sp(census = census, species = species, xlim = xlim, ylim = ylim)
+  
+  species <- best_species(census, species)
   
   xlim <- best_lim(xlim, census$gx)
   ylim <- best_lim(ylim, census$gy)
@@ -24,32 +31,117 @@ mapply_sp <- function(census,
   # Focus on given species
   cns <- census[census$sp %in% species, ]
   cns_list <- split(cns, cns$sp)
-  p <- purrr::map2(
-    .x = cns_list, .y = cns_list, map_sp2,
-    size =  size,
+  p <- lapply(
+    X = cns_list, FUN = map_sp_elev,
+    elevation = elevation,
+    fill = fill,
     shape = shape,
     wrap = wrap,
-    fill = fill,
+    point_size = point_size,
+    contour_size = contour_size,
+    low = low,
+    high = high,
+    hide_legend_elev = hide_legend_elev,
+    bins = bins,
+    label_elev = label_elev,
+    label_size = label_size,
+    label_color = label_color,
+    xyjust = xyjust,
+    fontface = fontface,
     xlim = xlim,
     ylim = ylim,
-    custom_theme = custom_theme,
-    
-    # elevation = elevation,
-    # line_size = line_size,
-    # low = low,
-    # high = high,
-    # bins = bins,
-    ...
+    custom_theme = custom_theme
   )
-  setNames(p, sort(species))
+  setNames(p, species)
 }
 
 # Wrappers ----------------------------------------------------------------
 
-map_elev <- function(data,
+map_sp_elev <- function(census,
+                        elevation = NULL,
+                        fill = "black",
+                        shape = 21,
+                        wrap = TRUE,
+                        point_size = 3,
+                        contour_size = 0.5,
+                        low = "blue",
+                        high = "red",
+                        hide_legend_elev = FALSE,
+                        bins = NULL,
+                        label_elev = TRUE,
+                        label_size = 3,
+                        label_color = "grey",
+                        xyjust = 1,
+                        fontface = "italic",
+                        xlim = NULL,
+                        ylim = NULL,
+                        custom_theme = NULL) {
+  stopifnot(!is.null(census))
+  
+  # User doesn't provide elevation data
+  if (is.null(elevation)) {
+    base <- map_gx_gy(census)
+    
+    # User provides elevation data
+  } else {
+    base <- map_pure_elev(
+      elevation = elevation,
+      contour_size = contour_size,
+      low = low,
+      high = high,
+      hide_legend_elev = hide_legend_elev,
+      bins = bins,
+      label_elev = label_elev,
+      label_size = label_size,
+      label_color = label_color,
+      xyjust = xyjust,
+      fontface = fontface
+    )
+  }
+  
+  base %>% 
+    add_sp(census, fill = fill, shape = shape, point_size = point_size) %>%
+    best_layout(wrap = wrap) %>% 
+    limit_gx_gy(xlim = xlim, ylim = ylim) %>%
+    best_theme(custom_theme = custom_theme)
+}
+
+map_pure_elev <- function(elevation,
+                          contour_size = 0.5,
+                          low = "blue",
+                          high = "red",
+                          hide_legend_elev = FALSE,
+                          bins = NULL,
+                          label_elev = TRUE,
+                          label_size = 3,
+                          label_color = "grey",
+                          xyjust = 1,
+                          fontface = "italic") {
+  base <- elevation %>% 
+    map_gx_gy_elev() %>% 
+    contour_elev(
+      contour_size = contour_size, low = low, high = high, bins = bins
+    ) %>% 
+    best_elev_legend(hide_legend_elev = hide_legend_elev)
+  if (label_elev) {
+    base <- label_elev(
+      base,
+      label_size = label_size,
+      label_color = label_color,
+      xyjust = xyjust,
+      fontface = fontface
+    )
+  }
+  base
+}
+
+map_elev <- function(elevation,
                      contour_size = 0.5,
                      low = "blue",
                      high = "red",
+                     hide_legend_elev = FALSE,
+                     bins = NULL,
+                     label_elev = TRUE,
                      label_size = 3,
                      label_color = "grey",
                      xyjust = 1,
@@ -57,30 +149,43 @@ map_elev <- function(data,
                      xlim = NULL,
                      ylim = NULL,
                      custom_theme = NULL) {
-  base <- limit_gx_gy(map_gx_gy_elev(data = data), xlim = xlim, ylim = ylim)
-  base <- best_theme(p = base, custom_theme = custom_theme)
-  
-  contour_elev(p = base, size = contour_size, low = low, high = high) %>% 
-    label_elev(
-      label_size = label_size,
-      label_color = label_color,
-      xyjust = xyjust,
-      fontface = fontface
-    )
+  base <- map_pure_elev(
+    elevation = elevation,
+    contour_size = contour_size,
+    low = low,
+    high = high,
+    hide_legend_elev = hide_legend_elev,
+    bins = bins,
+    label_elev = label_elev,
+    label_size = label_size,
+    label_color = label_color,
+    xyjust = xyjust,
+    fontface = fontface
+  )
+  base %>% 
+    limit_gx_gy(xlim = xlim, ylim = ylim) %>%
+    best_theme(custom_theme = custom_theme)
 }
 
-map_sp2 <- function(census, 
-                    size = 3,
-                    shape = 21,
-                    wrap = TRUE,
-                    fill = "sp",
-                    xlim = NULL,
-                    ylim = NULL,
-                    custom_theme = NULL) {
-  base <- limit_gx_gy(map_gx_gy(census), xlim = xlim, ylim = ylim)
-  base <- best_theme(base, custom_theme = custom_theme)
-  
-  p <- add_sp(base, census, fill = fill, shape = shape, size = size)
+# Simplify conditions -----------------------------------------------------
+
+best_species <- function(census, species) {
+  if (!identical(species, "all")) {
+    return(sort(species))
+  } else {
+    sort(unique(census$sp))
+  }
+}
+
+best_theme <- function(p, custom_theme) {
+  if (is.null(custom_theme)) {
+    return(theme_default(p))
+  } else {
+    p + custom_theme
+  }
+}
+
+best_layout <- function(p, wrap = FALSE) {
   if (!wrap) {
     return(p)
   } else {
@@ -88,13 +193,22 @@ map_sp2 <- function(census,
   }
 }
 
-best_theme <- function(p, custom_theme) {
-  if (is.null(custom_theme)) {
-    p <- theme_default(p = p)
+best_elev_legend <- function(p, hide_legend_elev = FALSE) {
+  if (!hide_legend_elev) {
+    return(p)
   } else {
-    p <- p + custom_theme
+    hide_legend_elev(p)
   }
-  p
+}
+
+best_lim <- function(lim, coord) {
+  if (!is.null(lim)) {
+    stopifnot(length(lim) == 2)
+    return(lim)
+  } else {
+    lim <- c(0, max0(coord))
+    lim
+  }
 }
 
 # Base maps ---------------------------------------------------------------
@@ -124,27 +238,17 @@ limit_gx_gy <- function(p, xlim = NULL, ylim = NULL) {
     scale_y_continuous(minor_breaks = seq(ylim[1], ylim[2], 20))
 }
 
-best_lim <- function(lim, coord) {
-  if (!is.null(lim)) {
-    stopifnot(length(lim) == 2)
-    return(lim)
-  } else {
-    lim <- c(0, max0(coord))
-    lim
-  }
-}
-
 # Layers ------------------------------------------------------------------
 
 #' @export
-add_sp <- function(p, data = NULL, fill = "sp", shape = 21, size = 3) {
+add_sp <- function(p, data = NULL, fill = "sp", shape = 21, point_size = 3) {
   if (fill != "sp") {
     # `z` = NULL because base may have `z`, e.g.: aes(z = elevation)`
     p <- p + 
       suppressWarnings(
         geom_point(
           data = data, aes(gx, gy, z = NULL), 
-          shape = shape, size = size, fill = fill
+          shape = shape, size = point_size, fill = fill
         )
       )
     return(p)
@@ -154,7 +258,7 @@ add_sp <- function(p, data = NULL, fill = "sp", shape = 21, size = 3) {
         geom_point(
           data = data, 
           aes(gx, gy, z = NULL, fill = sp), 
-          shape = shape, size = size
+          shape = shape, size = point_size
         )
       )
     
@@ -165,10 +269,16 @@ add_sp <- function(p, data = NULL, fill = "sp", shape = 21, size = 3) {
 # bins
 # low, high
 #' @export
-contour_elev <- function(p, size = 1, low = "blue", high = "red") {
+contour_elev <- function(p, 
+                         contour_size = 1, 
+                         low = "blue", 
+                         high = "red", 
+                         bins = bins) {
    p +
     stat_contour(
-      aes(x = gx, y = gy, z = elev, colour = ..level..), size = size) +
+      aes(x = gx, y = gy, z = elev, colour = ..level..), 
+      size = contour_size, bins = bins
+    ) +
     scale_colour_continuous(low = low, high = high)
 }
 

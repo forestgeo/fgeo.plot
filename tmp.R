@@ -6,49 +6,18 @@ census <- fgeo.tool::top(bciex::bci12s7mini, sp, 2)
 cns1sp <- top(census, sp)
 elevation <- dplyr::rename(bciex::bci_elevation, gx = x, gy = y)
 
-# If elevation is null use what I already have in mapply_sp, else:
-# wrap this in a function and pass it to map() or map2(). I may need
-# to change the name of data in map_elev and data in add_sp().
-map_elev_then_sp <- function(elevation, 
-                             census,
-                             contour_size = 0.5,
-                             low = "blue",
-                             high = "red",
-                             label_size = 3,
-                             label_color = "grey",
-                             fontface = "italic",
-                             xlim = NULL,
-                             ylim = NULL,
-                             custom_theme = NULL,
-                             fill = "black",
-                             shape = 21,
-                             size = 3,
-                             hide_elev_legend = FALSE
-                             ) {
-  elev <- map_elev(
-    data = elevation,
-    contour_size = contour_size,
-    low = low,
-    high = high,
-    label_size = label_size,
-    label_color = label_color,
-    fontface = fontface,
-    xlim = xlim,
-    ylim = ylim,
-    custom_theme = custom_theme
-  )
-  p <- facet_wrap_sp(
-    add_sp(elev, data = census, fill = fill, shape = shape, size = size)
-  )
-  
-  if (!hide_elev_legend) {
-    return(p)
-  } else {
-    hide_legend_elev(p)
-  } 
-}
+map_pure_elev(elevation, hide_legend_elev = TRUE)
+map_elev(elevation, xlim = C(0, 500))
 
-map_elev_then_sp(elevation, cns1sp, hide_elev_legend = TRUE)
+map_sp_elev(cns1sp, elevation, xlim = c(0, 500))
+
+
+mapply_sp_elev(census, elevation, species = census$sp[[1]])
+
+
+
+
+
 
 
 
@@ -104,7 +73,7 @@ elev %>%
 
 cns %>% 
   map_gx_gy() %>% 
-  add_sp(cns, size = 5) %>% 
+  add_sp(cns, point_size = 5) %>% 
   facet_v_sp() %>% 
   theme_default() %>% 
   limit_gx_gy() %>% 
@@ -112,5 +81,5 @@ cns %>%
 
 cns %>% 
   map_gx_gy() %>% 
-  add_sp(cns, size = 5, fill = "white") %>% 
+  add_sp(cns, point_size = 5, fill = "white") %>% 
   facet_v_sp()
