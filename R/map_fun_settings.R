@@ -77,13 +77,13 @@ theme_map_quad <- function(axis.text = element_blank(),
 
 #' @rdname themes
 #' @export
-theme_map_sp <- function(panel.grid.minor = element_line(linetype = "dashed"),
-                         ...) {
-  theme_bw() +
+theme_default <- function(p, 
+                          panel.grid.minor = element_line(linetype = "dashed"),
+                          ...) {
+  p + 
+    theme_bw() + 
     theme(panel.grid.minor = panel.grid.minor, ...)
 }
-
-
 
 # Headers -----------------------------------------------------------------
 

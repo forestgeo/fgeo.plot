@@ -42,7 +42,8 @@ test_that("works with elevation parameters", {
       cns, elev, species = spp, fill = "white", shape = 21, point_size = 5,
       contour_size = 1, low = "grey", high = "black", hide_legend_elev = TRUE,
       bins = NULL, label_elev = TRUE, label_color = "black", xyjust = 1,
-      fontface = "bold", xlim = c(0, 500), ylim = c(0, 400)
+      fontface = "bold", xlim = c(0, 500), ylim = c(0, 400), 
+      custom_theme = ggplot2::theme_bw()
     )[[1]]
   )
 })

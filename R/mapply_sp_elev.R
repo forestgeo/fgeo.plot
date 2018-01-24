@@ -1,4 +1,4 @@
-# Mapper ------------------------------------------------------------------
+# Wrappers ----------------------------------------------------------------
 
 #' @param fill Character; either a colour or "sp", which maps each species to a
 #'   different color.
@@ -55,8 +55,8 @@ mapply_sp_elev <- function(census,
   setNames(p, species)
 }
 
-# Wrappers ----------------------------------------------------------------
-
+#' @rdname mapply_sp_elev
+#' @export
 map_sp_elev <- function(census,
                         elevation = NULL,
                         fill = "black",
@@ -108,36 +108,8 @@ map_sp_elev <- function(census,
     best_theme(custom_theme = custom_theme)
 }
 
-map_pure_elev <- function(elevation,
-                          contour_size = 0.5,
-                          low = "blue",
-                          high = "red",
-                          hide_legend_elev = FALSE,
-                          bins = NULL,
-                          label_elev = TRUE,
-                          label_size = 3,
-                          label_color = "grey",
-                          xyjust = 1,
-                          fontface = "italic") {
-  base <- elevation %>% 
-    best_structure_and_nms_elev() %>% 
-    map_gx_gy_elev() %>% 
-    contour_elev(
-      contour_size = contour_size, low = low, high = high, bins = bins
-    ) %>% 
-    best_elev_legend(hide_legend_elev = hide_legend_elev)
-  if (label_elev) {
-    base <- label_elev(
-      base,
-      label_size = label_size,
-      label_color = label_color,
-      xyjust = xyjust,
-      fontface = fontface
-    )
-  }
-  base
-}
-
+#' @rdname mapply_sp_elev
+#' @export
 map_elev <- function(elevation,
                      contour_size = 0.5,
                      low = "blue",
@@ -170,102 +142,34 @@ map_elev <- function(elevation,
     best_theme(custom_theme = custom_theme)
 }
 
-
-
-# Checks ------------------------------------------------------------------
-
-check_sp <- function(census, species) {
-  stopifnot(is.data.frame(census))
-  stopifnot(is.character(species))
-  fgeo.tool::check_crucial_names(census, c("gx", "gy", "sp"))
-  if (length(species) == 0) {
-    rlang::abort("`sp` must be not empty.")
+map_pure_elev <- function(elevation,
+                          contour_size = 0.5,
+                          low = "blue",
+                          high = "red",
+                          hide_legend_elev = FALSE,
+                          bins = NULL,
+                          label_elev = TRUE,
+                          label_size = 3,
+                          label_color = "grey",
+                          xyjust = 1,
+                          fontface = "italic") {
+  base <- elevation %>% 
+    fgeo.tool::clean_structure_elev() %>% 
+    map_gx_gy_elev() %>% 
+    contour_elev(
+      contour_size = contour_size, low = low, high = high, bins = bins
+    ) %>% 
+    best_elev_legend(hide_legend_elev = hide_legend_elev)
+  if (label_elev) {
+    base <- label_elev(
+      base,
+      label_size = label_size,
+      label_color = label_color,
+      xyjust = xyjust,
+      fontface = fontface
+    )
   }
-  invisible(census)
-}
-
-# Manipulate elevation ----------------------------------------------------
-
-pull_elevation <- function(x) {
-  UseMethod("pull_elevation")
-}
-
-pull_elevation.data.frame <- function(x) {
-  fgeo.tool::check_crucial_names(x, "elev")
-  x
-}
-
-pull_elevation.default <- function(x) {
-  msg <- paste0(
-    "`elevation` must be data.frame or list but its class is: ", class(x)
-  )
-  rlang::abort(msg)
-}
-
-pull_elevation.list <- function(x) {
-  inform("`elevation` is a list.\n* Searching for element `col`.")
-  
-  tryCatch(
-    fgeo.tool::check_crucial_names(x, "col"),
-    finally = abort("Your `elevation` list lacks the element `col`."),
-    call = FALSE
-  )
-  
-  elevation <- x[["col"]]
-  elevation
-}
-
-# Simplify conditions -----------------------------------------------------
-
-best_structure_and_nms_elev <- function(elevation) {
-  pull_elevation(x = elevation) %>% 
-    nms_try_rename(want = "gx", try = "x") %>% 
-    nms_try_rename(want = "gy", try = "y")
-}
-
-best_species <- function(census, species) {
-  if (!identical(species, "all")) {
-    return(sort(species))
-  } else {
-    sort(unique(census$sp))
-  }
-}
-
-best_theme <- function(p, custom_theme) {
-  if (is.null(custom_theme)) {
-    return(theme_default(p))
-  } else {
-    p + custom_theme
-  }
-}
-
-best_layout <- function(p, wrap = FALSE) {
-  if (!wrap) {
-    return(p)
-  } else {
-    facet_wrap_sp(p)
-  }
-}
-
-best_elev_legend <- function(p, hide_legend_elev = FALSE) {
-  if (!hide_legend_elev) {
-    return(p)
-  } else {
-    hide_legend_elev(p)
-  }
-}
-
-best_lim <- function(lim, coord) {
-  if (!is.null(lim)) {
-    # stopifnot(length(lim) == 2)
-    if (length(lim) != 2) {
-      abort("Limits must be in a numeric vector of length 2; e.g. `c(0, 500)`.")
-    }
-    return(lim)
-  } else {
-    lim <- c(0, max0(coord))
-    lim
-  }
+  base
 }
 
 # Base maps ---------------------------------------------------------------
@@ -432,14 +336,64 @@ facet_v_sp <- function(p, ...) {
   p + facet_grid(sp~., ...)
 }
 
-# Theme -------------------------------------------------------------------
 
-#' @rdname themes
-#' @export
-theme_default <- function(p, 
-                          panel.grid.minor = element_line(linetype = "dashed"),
-                          ...) {
-  p + 
-    theme_bw() + 
-    theme(panel.grid.minor = panel.grid.minor, ...)
+
+# UTILS ===================================================================
+
+# Simplify conditions -----------------------------------------------------
+
+best_species <- function(census, species) {
+  if (!identical(species, "all")) {
+    return(sort(species))
+  } else {
+    sort(unique(census$sp))
+  }
+}
+
+best_theme <- function(p, custom_theme) {
+  if (is.null(custom_theme)) {
+    return(theme_default(p))
+  } else {
+    p + custom_theme
+  }
+}
+
+best_layout <- function(p, wrap = FALSE) {
+  if (!wrap) {
+    return(p)
+  } else {
+    facet_wrap_sp(p)
+  }
+}
+
+best_elev_legend <- function(p, hide_legend_elev = FALSE) {
+  if (!hide_legend_elev) {
+    return(p)
+  } else {
+    hide_legend_elev(p)
+  }
+}
+
+best_lim <- function(lim, coord) {
+  if (!is.null(lim)) {
+    if (length(lim) != 2) {
+      abort("Limits must be in a numeric vector of length 2; e.g. `c(0, 500)`.")
+    }
+    return(lim)
+  } else {
+    lim <- c(0, max0(coord))
+    lim
+  }
+}
+
+# Checks ------------------------------------------------------------------
+
+check_sp <- function(census, species) {
+  stopifnot(is.data.frame(census))
+  stopifnot(is.character(species))
+  fgeo.tool::check_crucial_names(census, c("gx", "gy", "sp"))
+  if (length(species) == 0) {
+    rlang::abort("`sp` must be not empty.")
+  }
+  invisible(census)
 }

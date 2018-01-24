@@ -25,8 +25,5 @@ test_that("outputs an object of class equal to that of a ggplot2 theme", {
 
   quad <- theme_map_quad()
   expect_equal(class(quad), class(ggplot2::theme()))
-
-  sp <- theme_map_sp()
-  expect_equal(class(sp), class(ggplot2::theme()))
 })
 

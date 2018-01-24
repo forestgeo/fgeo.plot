@@ -62,19 +62,3 @@ check_max_print <- function(x, var, times = NULL) {
   }
 }
 
-# Manipulate names --------------------------------------------------------
-
-# x <- bciex::bci_elevation
-# x %>% 
-#   nms_try_rename("gx", "x") %>% 
-#   nms_try_rename("gy", "y")
-nms_try_rename <- function(x, want, try) {
-  nm <- fgeo.tool::nms_extract1(x = x, want = want, try = try)
-  if (length(nm) == 0) {
-    rlang::abort(
-      paste0("Data must have a column named `", want, "` or `", try, "`")
-    )
-  }
-  names(x)[grepl(nm, names(x))] <- want
-  x
-}
