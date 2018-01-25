@@ -5,7 +5,7 @@
 \alias{facet_wrap_sp}
 \alias{facet_h_sp}
 \alias{facet_v_sp}
-\title{Facets to add on top of ggplots based on ForestGEO's data.}
+\title{Facet maps vertically, hirizontally, or wrap them to fit a page.}
 \usage{
 facet_wrap_sp(p, ...)
 
@@ -18,8 +18,14 @@ facet_v_sp(p, ...)
 \code{\link[ggplot2:facet_grid]{ggplot2::facet_grid()}}.}
 }
 \description{
-Facets to add on top of ggplots based on ForestGEO's data.
+Facet maps vertically, hirizontally, or wrap them to fit a page.
 }
 \seealso{
 \code{\link[ggplot2:facet_wrap]{ggplot2::facet_wrap()}}, \code{\link[ggplot2:facet_grid]{ggplot2::facet_grid()}}.
+
+Other map components.: \code{\link{add_sp}},
+  \code{\link{contour_elev}},
+  \code{\link{hide_axis_labels}},
+  \code{\link{hide_legend_elev}}, \code{\link{label_elev}},
+  \code{\link{limit_gx_gy}}, \code{\link{map_gx_gy_elev}}
 }

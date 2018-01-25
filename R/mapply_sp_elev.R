@@ -1,8 +1,52 @@
 # Wrappers ----------------------------------------------------------------
 
+#' Wrappers to map species and elevation data.
+#' 
+#' These functions wrap a number of map elements for convenience:
+#' * `mapply_sp_elev()` is a mapper. It wraps applies the function `map_sp_elev()`
+#' to each of the given species. It outputs a list of maps, one per species,
+#' that can be printed on a .pdf file.
+#' * `map_sp_elev()` maps species and optionally elevation data. 
+#' * `map_elev()` is a smaller, simpler, wrapper to map only elevation data.
+#' 
+#' @param census A dataframe; specifically, a ForestGEO's census.
+#' @param elevation A list or dataframe giving ForestGEO's elevation-data.
+#' @param species A character vector. Each element of the vector must be the 
+#'   code for one species in the column `sp`. This function will produce as 
+#'   many maps as elements in this vector. The string "all" is a shortcut to 
+#'   map all unique codes in the column `sp`.
 #' @param fill Character; either a colour or "sp", which maps each species to a
 #'   different color.
-
+#' @param shape,point_size A number giving point size and shape (as in
+#'   [graphics::points()]). Passed to [ggplot2::geom_points()].
+#' @param wrap (Not available for `mapply_sp_elev()`) Logical; `TRUE` wraps
+#'   multiple maps within the area of a single graphic plot.
+#' @param contour_size A number giving the size of the contour of elevation
+#'   lines. Passed to [ggplot2::stat_contour()].
+#' @param low,high A string giving a color of the elevation lines representing
+#'   low and high elevation.
+#' @param hide_legend_elev Logical; `TRUE` hides the color legend.
+#' @param bins A number giving the number of elevation lines to map.
+#' @param label_elev Logical. `TRUE` labels the elevation lines with text.
+#' @param label_size,label_color A number (`label_size`) or character string 
+#'   (`label_color` and `fontface`) giving the size, colour and fontface of 
+#'   the text labels for the elevation lines.
+#' @param xyjust A number to adjust the position of the text labels of the 
+#'   elevation lines.
+#' @param xlim,ylim A vector of lenght 2, for example `c(0, 500)`, giving the
+#'   minimum and maximum limits of the vertical and horizontal coordinates.
+#' @param custom_theme A valed [ggplot2::theme()]. `NULL` uses the default
+#'   theme [theme_default()].
+#'
+#' @return 
+#' * `mapply_sp_elev()` returns a list of ggplots
+#' * `map_elev()` and `map_sp_elev()` return a ggoplot.
+#' 
+#' @seealso map_gx_gy_elev
+#' @family map wrappers.
+#' @export 
+#'
+#' @examples
 mapply_sp_elev <- function(census,
                            elevation = NULL,
                            species = "all",
@@ -174,11 +218,19 @@ map_pure_elev <- function(elevation,
 
 # Base maps ---------------------------------------------------------------
 
+#' Map a base over which other map components can later be added.
+#' 
+#' @name map_gx_gy_elev
+#' @family map components.
+NULL
+
 #' @export
+#' @rdname map_gx_gy_elev
 map_gx_gy_elev <- function(data) {
   ggplot(data, aes(gx, gy, z = elev))
 }
 
+#' @rdname map_gx_gy_elev
 #' @export
 map_gx_gy <- function(data) {
   ggplot(data, aes(gx, gy))
@@ -186,6 +238,9 @@ map_gx_gy <- function(data) {
 
 # Limits ------------------------------------------------------------------
 
+#' Set the map limits.
+#' 
+#' @family map components.
 #' @export
 limit_gx_gy <- function(p, xlim = NULL, ylim = NULL) {
   # If user doesn't provide limits, set limits based on entire dataset
@@ -201,6 +256,9 @@ limit_gx_gy <- function(p, xlim = NULL, ylim = NULL) {
 
 # Layers ------------------------------------------------------------------
 
+#' Represent species with points.
+#' 
+#' @family map components.
 #' @export
 add_sp <- function(p, data = NULL, fill = "sp", shape = 21, point_size = 3) {
   if (fill != "sp") {
@@ -226,9 +284,9 @@ add_sp <- function(p, data = NULL, fill = "sp", shape = 21, point_size = 3) {
   }
 }
 
-# Show params
-# bins
-# low, high
+#' Represent elevation with lines.
+#' 
+#' @family map components.
 #' @export
 contour_elev <- function(p, 
                          contour_size = 1, 
@@ -243,10 +301,9 @@ contour_elev <- function(p,
     scale_colour_continuous(low = low, high = high)
 }
 
-# Show params
-# size
-# color
-# fontface
+#' Label elevation lines.
+#' 
+#' @family map components.
 #' @export
 label_elev <- function(p, 
                        label_size = 3,
@@ -299,22 +356,31 @@ text_at_max <- function(x,
 
 # Labs --------------------------------------------------------------------
 
+#' Hide axis labels.
+#' 
+#' @family map components.
 #' @export
 hide_axis_labels <- function(p) {
   p + labs(x = NULL, y = NULL)
 }
 
+#' Hide the color legend of elevation lines.
+#' 
+#' @family map components.
+#' @export
 hide_legend_elev <- function(p) {
   p + guides(color = "none")
 }
 
 # Facets ------------------------------------------------------------------
 
-#' Facets to add on top of ggplots based on ForestGEO's data.
+#' Facet maps vertically, hirizontally, or wrap them to fit a page.
 #' 
 #' @param ... Arguments passed to [ggplot2::facet_wrap()] and 
 #'   [ggplot2::facet_grid()].
 #' @seealso [ggplot2::facet_wrap()], [ggplot2::facet_grid()].
+#' @family map components.
+#' 
 #' @name fgeo_facets
 NULL
 
