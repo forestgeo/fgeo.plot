@@ -282,7 +282,7 @@ control you can use <strong>ggplot2</strong> directly or smaller wrappers in <st
 #&gt; 6     0    25   123</div><div class='input'>
 <span class='co'># Showing first plot only.</span>
 <span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'>maply_sp_elev</span>(<span class='no'>census</span>)
-<span class='no'>p</span><span class='kw'>[[</span><span class='fl'>1</span>]]</div><div class='img'><img src='maply_sp_elev-11.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
+<span class='no'>p</span><span class='kw'>[[</span><span class='fl'>1</span>]]</div><div class='img'><img src='maply_sp_elev-16.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
 
 <span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'>maply_sp_elev</span>(
   <span class='no'>census</span>,
@@ -298,11 +298,11 @@ control you can use <strong>ggplot2</strong> directly or smaller wrappers in <st
   <span class='kw'>bins</span> <span class='kw'>=</span> <span class='fl'>7</span>,
   <span class='kw'>label_elev</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
 )
-<span class='no'>p</span><span class='kw'>[[</span><span class='fl'>1</span>]]</div><div class='img'><img src='maply_sp_elev-12.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
+<span class='no'>p</span><span class='kw'>[[</span><span class='fl'>1</span>]]</div><div class='img'><img src='maply_sp_elev-17.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
 <span class='co'># Same but outputs a plot, not a list of plots</span>
-<span class='fu'>map_sp_elev</span>(<span class='no'>census</span>, <span class='no'>elevation</span>)</div><div class='img'><img src='maply_sp_elev-13.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
+<span class='fu'>map_sp_elev</span>(<span class='no'>census</span>, <span class='no'>elevation</span>)</div><div class='img'><img src='maply_sp_elev-18.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
 <span class='co'># Similar but maps elevation exclusively</span>
-<span class='fu'>map_elev</span>(<span class='no'>elevation</span>)</div><div class='img'><img src='maply_sp_elev-14.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
+<span class='fu'>map_elev</span>(<span class='no'>elevation</span>)</div><div class='img'><img src='maply_sp_elev-19.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
 <span class='co'># For maximum control, you can compose maps as you like</span>
 <span class='fu'>map_gx_gy_elev</span>(<span class='no'>elevation</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='limit_gx_gy.html'>limit_gx_gy</a></span>(<span class='kw'>xlim</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>0</span>, <span class='fl'>1200</span>)) <span class='kw'>%&gt;%</span>
@@ -312,7 +312,7 @@ control you can use <strong>ggplot2</strong> directly or smaller wrappers in <st
   <span class='fu'><a href='hide.html'>hide_legend_color</a></span>() <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='add_sp.html'>add_sp</a></span>(<span class='no'>census</span>, <span class='kw'>point_size</span> <span class='kw'>=</span> <span class='fl'>5</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='wrap.html'>wrap</a></span>(<span class='st'>"sp"</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='themes.html'>theme_default</a></span>(<span class='kw'>legend.position</span> <span class='kw'>=</span> <span class='st'>"top"</span>)</div><div class='img'><img src='maply_sp_elev-15.png' alt='' width='700' height='432.632880098887' /></div></pre>
+  <span class='fu'><a href='themes.html'>theme_default</a></span>(<span class='kw'>legend.position</span> <span class='kw'>=</span> <span class='st'>"top"</span>)</div><div class='img'><img src='maply_sp_elev-20.png' alt='' width='700' height='432.632880098887' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
