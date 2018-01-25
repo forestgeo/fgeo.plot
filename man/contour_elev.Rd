@@ -5,7 +5,7 @@
 \title{Represent elevation with lines.}
 \usage{
 contour_elev(p, contour_size = 1, low = "blue", high = "red",
-  bins = bins)
+  bins = NULL)
 }
 \description{
 Represent elevation with lines.
