@@ -54,15 +54,15 @@
 #' elevation <- fgeo.tool::restructure_elev(bciex::bci_elevation)
 #' head(elevation)
 #' 
-#' # Showing first plot only. 
-#' p <- mapply_sp_elev(census)[[1]]
+#' # Showing first plot only.
+#' p <- mapply_sp_elev(census)
 #' p[[1]]
 #' 
 #' 
 #' p <- mapply_sp_elev(
 #'   census,
 #'   elevation,
-#'   species = spp,
+#'   species = "all",
 #'   fill = "white",
 #'   shape = 21,
 #'   point_size = 5,
@@ -82,14 +82,14 @@
 #' map_elev(elevation)
 #' 
 #' # For maximum control, you can compose maps as you like
-#' map_gx_gy_elev(elevation) %>% 
-#'   limit_gx_gy(xlim = c(0, 1200)) %>% 
-#'   contour_elev(contour_size = 0.5) %>% 
-#'   label_elev(label_color = "red") %>% 
-#'   hide_axis_labels() %>% 
-#'   hide_legend_elev() %>% 
-#'   add_sp(census, point_size = 5) %>% 
-#'   facet_h_sp() %>% 
+#' map_gx_gy_elev(elevation) %>%
+#'   limit_gx_gy(xlim = c(0, 1200)) %>%
+#'   contour_elev(contour_size = 0.5) %>%
+#'   label_elev(label_color = "red") %>%
+#'   hide_axis_labels() %>%
+#'   hide_legend_elev() %>%
+#'   add_sp(census, point_size = 5) %>%
+#'   facet_h_sp() %>%
 #'   theme_default(legend.position = "top")
 mapply_sp_elev <- function(census,
                            elevation = NULL,
