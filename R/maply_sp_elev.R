@@ -3,7 +3,7 @@
 #' Wrappers to map species and elevation data.
 #' 
 #' These functions wrap a number of map elements for convenience:
-#' * `mapply_sp_elev()` is a mapper. It wraps applies the function `map_sp_elev()`
+#' * `maply_sp_elev()` is a mapper. It wraps applies the function `map_sp_elev()`
 #' to each of the given species. It outputs a list of maps, one per species,
 #' that can be printed on a .pdf file.
 #' * `map_sp_elev()` maps species and optionally elevation data. 
@@ -19,7 +19,7 @@
 #'   different color.
 #' @param shape,point_size A number giving point size and shape (as in
 #'   [graphics::points()]). Passed to [ggplot2::geom_point()].
-#' @param wrap (Not available for `mapply_sp_elev()`) Logical; `TRUE` wraps
+#' @param wrap (Not available for `maply_sp_elev()`) Logical; `TRUE` wraps
 #'   multiple maps within the area of a single graphic plot.
 #' @param contour_size A number giving the size of the contour of elevation
 #'   lines. Passed to [ggplot2::stat_contour()].
@@ -39,7 +39,7 @@
 #'   theme [theme_default()].
 #'
 #' @return 
-#' * `mapply_sp_elev()` returns a list of ggplots
+#' * `maply_sp_elev()` returns a list of ggplots
 #' * `map_elev()` and `map_sp_elev()` return a ggoplot.
 #' 
 #' @seealso map_gx_gy_elev
@@ -55,11 +55,11 @@
 #' head(elevation)
 #' 
 #' # Showing first plot only.
-#' p <- mapply_sp_elev(census)
+#' p <- maply_sp_elev(census)
 #' p[[1]]
 #' 
 #' 
-#' p <- mapply_sp_elev(
+#' p <- maply_sp_elev(
 #'   census,
 #'   elevation,
 #'   species = "all",
@@ -91,7 +91,7 @@
 #'   add_sp(census, point_size = 5) %>%
 #'   facet_h_sp() %>%
 #'   theme_default(legend.position = "top")
-mapply_sp_elev <- function(census,
+maply_sp_elev <- function(census,
                            elevation = NULL,
                            species = "all",
                            fill = "black",
@@ -143,7 +143,7 @@ mapply_sp_elev <- function(census,
   setNames(p, species)
 }
 
-#' @rdname mapply_sp_elev
+#' @rdname maply_sp_elev
 #' @export
 map_sp_elev <- function(census,
                         elevation = NULL,
@@ -196,7 +196,7 @@ map_sp_elev <- function(census,
     best_theme(custom_theme = custom_theme)
 }
 
-#' @rdname mapply_sp_elev
+#' @rdname maply_sp_elev
 #' @export
 map_elev <- function(elevation,
                      contour_size = 0.5,

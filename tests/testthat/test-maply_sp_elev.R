@@ -1,14 +1,9 @@
-# library(ggplot2)
-# library(dplyr)
-# library(fgeo.tool)
-# load_all()
-
 census <- fgeo.tool::top(bciex::bci12s7mini, sp, 2)
 elevation <- bciex::bci_elevation
 
 
 
-context("mapply_sp_elev")
+context("maply_sp_elev")
 
 
 test_that("works with species parameters", {
@@ -17,7 +12,7 @@ test_that("works with species parameters", {
   cns <- census
 
   expect_silent(
-    mapply_sp_elev(
+    maply_sp_elev(
       cns, elev, species = spp, fill = "white", shape = 21, point_size = 5
     )[[1]]
   )
@@ -30,7 +25,7 @@ test_that("works with elevation parameters", {
   cns <- census
 
   expect_silent(
-    mapply_sp_elev(
+    maply_sp_elev(
       cns, elev, species = spp, fill = "white", shape = 21, point_size = 5,
       contour_size = 1, low = "grey", high = "black", hide_legend_elev = TRUE,
       bins = 7, label_elev = FALSE
@@ -38,7 +33,7 @@ test_that("works with elevation parameters", {
   )
   
   expect_silent(
-    mapply_sp_elev(
+    maply_sp_elev(
       cns, elev, species = spp, fill = "white", shape = 21, point_size = 5,
       contour_size = 1, low = "grey", high = "black", hide_legend_elev = TRUE,
       bins = NULL, label_elev = TRUE, label_color = "black", xyjust = 1,
@@ -49,23 +44,23 @@ test_that("works with elevation parameters", {
 })
 
 test_that("outputs a list of ggplots", {
-  p <- mapply_sp_elev(census)
+  p <- maply_sp_elev(census)
   expect_type(p, "list")
   expect_true(has_class(p[[1]], "gg"))
 })
 
 test_that("errs with wrong inputs", {
   expect_error(
-    mapply_sp_elev(1)
+    maply_sp_elev(1)
   )
   expect_error(
-    mapply_sp_elev(census, 1)
+    maply_sp_elev(census, 1)
   )
   expect_error(
-    mapply_sp_elev(census, NULL, 1)
+    maply_sp_elev(census, NULL, 1)
   )
   expect_error(
-    mapply_sp_elev(census, xlim = 0)
+    maply_sp_elev(census, xlim = 0)
   )
 })
 
