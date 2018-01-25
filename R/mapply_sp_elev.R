@@ -51,7 +51,7 @@
 #' 
 #' elevation <- bciex::bci_elevation
 #' head(elevation)
-#' elevation <- fgeo.tool::clean_structure_elev(bciex::bci_elevation)
+#' elevation <- fgeo.tool::restructure_elev(bciex::bci_elevation)
 #' head(elevation)
 #' 
 #' # Showing first plot only. 
@@ -242,7 +242,7 @@ map_pure_elev <- function(elevation,
                           xyjust = 1,
                           fontface = "italic") {
   base <- elevation %>% 
-    fgeo.tool::clean_structure_elev() %>% 
+    fgeo.tool::restructure_elev() %>% 
     map_gx_gy_elev() %>% 
     contour_elev(
       contour_size = contour_size, low = low, high = high, bins = bins

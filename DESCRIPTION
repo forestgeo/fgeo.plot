@@ -13,7 +13,6 @@ Depends:
     R (>= 3.1.2)
 Imports: 
     bciex,
-    directlabels,
     dplyr,
     fgeo.tool,
     ggplot2,

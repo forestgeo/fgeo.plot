@@ -88,7 +88,7 @@ census <- fgeo.tool::top(bciex::bci12s7mini, sp, 2)
 
 elevation <- bciex::bci_elevation
 head(elevation)
-elevation <- fgeo.tool::clean_structure_elev(bciex::bci_elevation)
+elevation <- fgeo.tool::restructure_elev(bciex::bci_elevation)
 head(elevation)
 
 # Showing first plot only. 
