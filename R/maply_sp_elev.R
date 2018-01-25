@@ -9,6 +9,10 @@
 #' * `map_sp_elev()` maps species and optionally elevation data. 
 #' * `map_elev()` is a smaller, simpler, wrapper to map only elevation data.
 #' 
+#' All these functions wrap functions from the __ggplot2__ package. For more
+#' control you can use __ggplot2__ directly or smaller wrappers in __fgeo.map__
+#' (see sections See Also and Examples).
+#' 
 #' @param census A dataframe; specifically, a ForestGEO's census.
 #' @param elevation A list or dataframe giving ForestGEO's elevation-data.
 #' @param species A character vector. Each element of the vector must be the 
@@ -20,20 +24,21 @@
 #'   multiple maps within the area of a single graphic plot.
 #' @param label_elev Logical. `TRUE` labels the elevation lines with text.
 #' @inheritParams contour_elev
-#' @param hide_legend_elev Logical; `TRUE` hides the color legend.
+#' @param hide_legend_color Logical; `TRUE` hides the color legend.
 #' @inheritParams label_elev
 #' @inheritParams limit_gx_gy
 #' @param custom_theme A valed [ggplot2::theme()]. `NULL` uses the default
 #'   theme [theme_default()].
 #'
+#' @seealso [map_gx_gy_elev()], [limit_gx_gy()], [add_sp()], [contour_elev()],
+#'   [label_elev()], [hide()], [wrap()]
+#' @family `maply_*` functions.
+#' 
 #' @return 
 #' * `maply_sp_elev()` returns a list of ggplots
 #' * `map_elev()` and `map_sp_elev()` return a ggoplot.
 #' 
-#' @seealso map_gx_gy_elev
-#' @family map wrappers.
 #' @export 
-#'
 #' @examples
 #' census <- fgeo.tool::top(bciex::bci12s7mini, sp, 2)
 #' 
@@ -57,7 +62,7 @@
 #'   contour_size = 1,
 #'   low = "grey",
 #'   high = "black",
-#'   hide_legend_elev = TRUE,
+#'   hide_legend_color = TRUE,
 #'   bins = 7,
 #'   label_elev = FALSE
 #' )
@@ -75,9 +80,9 @@
 #'   contour_elev(contour_size = 0.5) %>%
 #'   label_elev(label_color = "red") %>%
 #'   hide_axis_labels() %>%
-#'   hide_legend_elev() %>%
+#'   hide_legend_color() %>%
 #'   add_sp(census, point_size = 5) %>%
-#'   facet_h_sp() %>%
+#'   wrap("sp") %>%
 #'   theme_default(legend.position = "top")
 maply_sp_elev <- function(census,
                            elevation = NULL,
@@ -88,7 +93,7 @@ maply_sp_elev <- function(census,
                            contour_size = 0.5,
                            low = "blue",
                            high = "red",
-                           hide_legend_elev = FALSE,
+                           hide_legend_color = FALSE,
                            bins = NULL,
                            label_elev = TRUE,
                            label_size = 3,
@@ -117,7 +122,7 @@ maply_sp_elev <- function(census,
     contour_size = contour_size,
     low = low,
     high = high,
-    hide_legend_elev = hide_legend_elev,
+    hide_legend_color = hide_legend_color,
     bins = bins,
     label_elev = label_elev,
     label_size = label_size,
@@ -142,7 +147,7 @@ map_sp_elev <- function(census,
                         contour_size = 0.5,
                         low = "blue",
                         high = "red",
-                        hide_legend_elev = FALSE,
+                        hide_legend_color = FALSE,
                         bins = NULL,
                         label_elev = TRUE,
                         label_size = 3,
@@ -167,7 +172,7 @@ map_sp_elev <- function(census,
       contour_size = contour_size,
       low = low,
       high = high,
-      hide_legend_elev = hide_legend_elev,
+      hide_legend_color = hide_legend_color,
       bins = bins,
       label_elev = label_elev,
       label_size = label_size,
@@ -190,7 +195,7 @@ map_elev <- function(elevation,
                      contour_size = 0.5,
                      low = "blue",
                      high = "red",
-                     hide_legend_elev = FALSE,
+                     hide_legend_color = FALSE,
                      bins = NULL,
                      label_elev = TRUE,
                      label_size = 3,
@@ -205,7 +210,7 @@ map_elev <- function(elevation,
     contour_size = contour_size,
     low = low,
     high = high,
-    hide_legend_elev = hide_legend_elev,
+    hide_legend_color = hide_legend_color,
     bins = bins,
     label_elev = label_elev,
     label_size = label_size,
@@ -222,7 +227,7 @@ map_pure_elev <- function(elevation,
                           contour_size = 0.5,
                           low = "blue",
                           high = "red",
-                          hide_legend_elev = FALSE,
+                          hide_legend_color = FALSE,
                           bins = NULL,
                           label_elev = TRUE,
                           label_size = 3,
@@ -235,7 +240,7 @@ map_pure_elev <- function(elevation,
     contour_elev(
       contour_size = contour_size, low = low, high = high, bins = bins
     ) %>% 
-    best_elev_legend(hide_legend_elev = hide_legend_elev)
+    best_elev_legend(hide_legend_color = hide_legend_color)
   if (label_elev) {
     base <- label_elev(
       base,
@@ -304,6 +309,8 @@ limit_gx_gy <- function(p, xlim = NULL, ylim = NULL) {
 #' @family map components.
 #' @export
 add_sp <- function(p, data = NULL, fill = "sp", shape = 21, point_size = 3) {
+  check_add_sp(p = p, data = data)
+  
   if (fill != "sp") {
     # `z` = NULL because base may have `z`, e.g.: aes(z = elevation)`
     p <- p + 
@@ -364,6 +371,14 @@ label_elev <- function(p,
                        label_color = "grey",
                        xyjust = 1, 
                        fontface = "italic") {
+  check_label_elev(
+    p = p,
+    label_color = label_color,
+    label_size = label_size,
+    xyjust = xyjust,
+    fontface = fontface
+  )
+  
   p +
     text_at_max(
       max_elev(p)$x,
@@ -408,55 +423,66 @@ text_at_max <- function(x,
   )
 }
 
-# Labs --------------------------------------------------------------------
 
-#' Hide axis labels.
+
+# Map components ==========================================================
+
+# Hide --------------------------------------------------------------------
+
+#' Hide elements of a plot.
+#' 
+#' `hide_axis_labels` hides axis labels.
+#' `hide_legend_color` hides the color legend, for example, of elevation lines.
 #' 
 #' @template p
 #' @family map components.
+#' @name hide 
+NULL
+
+#' @rdname hide
 #' @export
 hide_axis_labels <- function(p) {
   p + labs(x = NULL, y = NULL)
 }
 
-#' Hide the color legend of elevation lines.
-#' 
-#' @template p
-#' @family map components.
+#' @rdname hide
 #' @export
-hide_legend_elev <- function(p) {
+hide_legend_color <- function(p) {
   p + guides(color = "none")
 }
 
 # Facets ------------------------------------------------------------------
 
-#' Facet maps vertically, hirizontally, or wrap them to fit a page.
+# @param ... Arguments passed to [ggplot2::facet_wrap()] and 
+#   [ggplot2::facet_grid()].
+
+
+
+#' Facet data by a variable, and wrap multiple plots to fit a single page.
+#' 
+#' This function behaves like [ggplot2::facet_wrap()] but it is designed to 
+#' allow using it as part of a pipe.
 #' 
 #' @template p
-#' @param ... Arguments passed to [ggplot2::facet_wrap()] and 
-#'   [ggplot2::facet_grid()].
+#' @inheritParams ggplot2::facet_wrap
+#' @inheritDotParams ggplot2::facet_wrap
 #' @seealso [ggplot2::facet_wrap()], [ggplot2::facet_grid()].
 #' @family map components.
 #' 
-#' @name facets
-NULL
-
-#' @rdname facets
 #' @export
-facet_wrap_sp <- function(p, ...) {
-  p + facet_wrap(~sp, ...)
-}
-
-#' @rdname facets
-#' @export
-facet_h_sp <- function(p, ...) {
-  p + facet_grid(.~sp, ...)
-}
-
-#' @rdname facets
-#' @export
-facet_v_sp <- function(p, ...) {
-  p + facet_grid(sp~., ...)
+#' @example 
+#' # Choosing a tiny dataset for example
+#' census <- fgeo.tool::top(bciex::bci12s7mini, sp, 2)
+#' 
+#' map_gx_gy(census) %>% 
+#'   add_sp() %>% 
+#'   wrap("sp")
+#' 
+#' map_gx_gy(census) %>% 
+#'   add_sp() %>% 
+#'   wrap(~sp + status)
+wrap <- function(p, facets, ...) {
+  p + facet_wrap(facets, ...)
 }
 
 
@@ -485,15 +511,15 @@ best_layout <- function(p, wrap = FALSE) {
   if (!wrap) {
     return(p)
   } else {
-    facet_wrap_sp(p)
+    wrap(p, "sp")
   }
 }
 
-best_elev_legend <- function(p, hide_legend_elev = FALSE) {
-  if (!hide_legend_elev) {
+best_elev_legend <- function(p, hide_legend_color = FALSE) {
+  if (!hide_legend_color) {
     return(p)
   } else {
-    hide_legend_elev(p)
+    hide_legend_color(p)
   }
 }
 
@@ -520,3 +546,34 @@ check_sp <- function(census, species) {
   }
   invisible(census)
 }
+
+check_add_sp <- function(p, data) {
+  p_data_laks_sp <- !any(grepl("sp", names(p[["data"]])))
+  if (all(is.null(data), p_data_laks_sp)) {
+    msg <- paste0(
+      "The plot fed to `add_sp()` lacks the variable `sp`\n",
+      "* Did you forget to provide census data?"
+    )
+    abort(msg)
+  }
+  invisible(p)
+}
+
+check_label_elev <- function(p, label_color, label_size, xyjust, fontface) {
+  stopifnot(
+    is.character(label_color), 
+    is.numeric(label_size),
+    is.numeric(xyjust),
+    is.character(fontface) 
+  )
+  p_data <- ggplot_build(p)[["data"]][[1]]
+  p_data_lacks_level <- !any(grepl("level", names(p_data)))
+  if (p_data_lacks_level) {
+    msg <- paste0(
+      "The plot fed to `level_elev() lacks the variable `level`\n",
+      "* Did you forget to call `contour_elev()` before `level_elev`?"
+    )
+    abort(msg)
+  }
+}
+

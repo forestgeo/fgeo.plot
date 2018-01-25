@@ -1,17 +1,17 @@
 #' Map tree tags by status, showing four subquadrats per plot-page.
 #'
-#' This function maps tree tags by status. Each map shows four subquadrats
-#' within a quadrat. The symbols on the map represent the status of each tree --
-#' not the status of each stem. Although you should likely provide data of only
-#' one or two censuses, `map_tag()` will summarize the data to reduce
-#' overplotting. The data on the map summarizes the history of each stem accross
-#' all censuses provided. Each tag will appear in the map only once or twice:
-#' * A tag will appear once if it belongs to a tree which status was unique 
-#' accross all censuses provided -- either "alive" or "dead".
-#' * A tag will appear twice if it belongs to a tree which status was "alive"
-#' in at least one census, and also "dead" in at least one other census.
-#' This feature avoids unintentional overplotting and makes interpreting the map
-#' easier. 
+#' This function maps tree tags by status and outputs a list of maps that can be
+#' printed on a .pdf file. Each map shows four subquadrats within a quadrat. The
+#' symbols on the map represent the status of each tree -- not the status of
+#' each stem. Although you should likely provide data of only one or two
+#' censuses, `maply_tag()` will summarize the data to reduce overplotting. The
+#' data on the map summarizes the history of each stem accross all censuses
+#' provided. Each tag will appear in the map only once or twice: * A tag will
+#' appear once if it belongs to a tree which status was unique accross all
+#' censuses provided -- either "alive" or "dead". * A tag will appear twice if
+#' it belongs to a tree which status was "alive" in at least one census, and
+#' also "dead" in at least one other census. This feature avoids unintentional
+#' overplotting and makes interpreting the map easier.
 #'
 #' @template vft
 #' @template x_q_y_q
@@ -40,6 +40,7 @@
 #' @template theme
 #' @template move_edge
 #'
+#' @family `maply_*` functions.
 #' @seealso [graphics::points()], [ggplot2::geom_point()], [ggplot2::theme()]
 #'   [map_tag_header()], [theme_map_tag()], [fgeo.tool::add_subquad()],
 #'   [paginate()], [ggrepel::geom_text_repel].
@@ -58,8 +59,6 @@
 #' library(fgeo.map)
 #' library(fgeo.tool)
 #' library(dplyr)
-#' # Avoid conflict with `stats::filter()`
-#' filter <- dplyr::filter
 #'
 #' # Filtering the data to map -----------------------------------------------
 #'
@@ -170,7 +169,7 @@
 #' p <- map_tag(smaller, x_q = 10, x_sq = 2.5, move_edge = 0.25)[1]
 #' first(p)
 #' }
-map_tag <- function(vft,
+maply_tag <- function(vft,
                     x_q = 20,
                     x_sq = 5,
                     y_q = x_q,

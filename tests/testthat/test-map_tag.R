@@ -1,9 +1,9 @@
 library(dplyr)
 library(purrr)
 
-context("map_tag")
+context("maply_tag")
 
-map_list <- map_tag(top1quad)
+map_list <- maply_tag(top1quad)
 
 # Outputs -----------------------------------------------------------------
 
@@ -13,7 +13,7 @@ test_that("output is correct", {
 
   # Underlying output-data didn't change
   reference <- map_list[[1]][["data"]]
-  expect_known_output(reference, "ref_map_tag.csv")
+  expect_known_output(reference, "ref_maply_tag.csv")
 
   # Plots all unique tags in data
   unique_tags_in_plot_n <- map_list %>%
@@ -30,7 +30,7 @@ test_that("output is correct", {
   all_vars <- map_list[[1]]$data
   min_vars <- top1quad %>%
     select(Tag, QX, QY, Status, QuadratName, CensusID, PlotID) %>%
-    map_tag() %>%
+    maply_tag() %>%
     .[[1]] %>%
     .$data
   expect_equal(all_vars, min_vars)
@@ -42,11 +42,11 @@ test_that("wrong inputs get noticed", {
 
   expect_error(
    # data not a dataframe
-    map_tag(1)
+    maply_tag(1)
   )
 
   expect_error(
-    map_tag(
+    maply_tag(
      # data has cero rows
      filter(top1quad, CensusID == 999)
     )
@@ -55,37 +55,37 @@ test_that("wrong inputs get noticed", {
   # Missing name
   no_qx <- top1quad
   no_qx$QX <- NULL
-  expect_error(map_tag(no_qx), "Ensure")
+  expect_error(maply_tag(no_qx), "Ensure")
 
   # wrong type
-  expect_error(map_tag(top1quad, x_q = "a"))
-  expect_error(map_tag(top1quad, x_sq = "a"))
-  expect_error(map_tag(top1quad, y_q = "a"))
-  expect_error(map_tag(top1quad, y_sq = "a"))
-  expect_error(map_tag(top1quad, start_with0 = "not logical"))
+  expect_error(maply_tag(top1quad, x_q = "a"))
+  expect_error(maply_tag(top1quad, x_sq = "a"))
+  expect_error(maply_tag(top1quad, y_q = "a"))
+  expect_error(maply_tag(top1quad, y_sq = "a"))
+  expect_error(maply_tag(top1quad, start_with0 = "not logical"))
 
-  expect_error(map_tag(top1quad, subquad_offset = 0))
+  expect_error(maply_tag(top1quad, subquad_offset = 0))
 
   # wrong length
-  expect_error(map_tag(top1quad, bl = 1:2))
-  expect_error(map_tag(top1quad, br = 1:2))
-  expect_error(map_tag(top1quad, tr = 1:2))
-  expect_error(map_tag(top1quad, tl = 1:2))
+  expect_error(maply_tag(top1quad, bl = 1:2))
+  expect_error(maply_tag(top1quad, br = 1:2))
+  expect_error(maply_tag(top1quad, tr = 1:2))
+  expect_error(maply_tag(top1quad, tl = 1:2))
 
   expect_error(
-    map_tag(
+    maply_tag(
      top1quad,
      # wrong type
      title_quad = 1
     )
   )
 
-  expect_error(map_tag(top1quad, show_page = "not logical"))
+  expect_error(maply_tag(top1quad, show_page = "not logical"))
 
-  expect_error(map_tag(top1quad, show_subquad = "not logical"))
+  expect_error(maply_tag(top1quad, show_subquad = "not logical"))
 
   expect_error(
-    map_tag(
+    maply_tag(
       top1quad,
       # wrong type
       point_shape = c("a", "b")
@@ -93,7 +93,7 @@ test_that("wrong inputs get noticed", {
   )
 
   expect_error(
-    map_tag(
+    maply_tag(
       top1quad,
       # wrong type
       point_size = "a"
@@ -101,7 +101,7 @@ test_that("wrong inputs get noticed", {
   )
 
   expect_error(
-    map_tag(
+    maply_tag(
       top1quad,
       # wrong type
       tag_size = "a"
@@ -109,7 +109,7 @@ test_that("wrong inputs get noticed", {
   )
 
   expect_error(
-    map_tag(
+    maply_tag(
       top1quad,
       # wrong type
       header = 1
@@ -117,7 +117,7 @@ test_that("wrong inputs get noticed", {
   )
 
   expect_error(
-    map_tag(
+    maply_tag(
       top1quad,
       # wrong type
       theme = 1
@@ -125,7 +125,7 @@ test_that("wrong inputs get noticed", {
   )
 
   expect_error(
-    map_tag(
+    maply_tag(
       top1quad,
       # wrong type
       move_edge = "a"
@@ -136,18 +136,18 @@ test_that("wrong inputs get noticed", {
   dup_plotid <-   top1quad[1, ]
   dup_plotid$PlotID <- 999L
   w_dup_plotid <- dplyr::bind_rows(dup_plotid, top1quad)
-  expect_error(x <- map_tag(w_dup_plotid), "Duplicated")
+  expect_error(x <- maply_tag(w_dup_plotid), "Duplicated")
 
   # warns if data has more than one CensusID"
   dup_cnsid <-   top1quad[1, ]
   dup_cnsid$CensusID <- 999L
   w_dup_cnsid <- dplyr::bind_rows(dup_cnsid, top1quad)
-  expect_warning(x <- map_tag(w_dup_cnsid), "Likely")
+  expect_warning(x <- maply_tag(w_dup_cnsid), "Likely")
 })
 
 test_that("page labels can be changed", {
   plots <- 1:2
-  maps <- map_tag(top4quad,
+  maps <- maply_tag(top4quad,
     bl = "a", br = "b", tr = "c", tl = "d",
     show_page = FALSE
   )[plots]
@@ -156,11 +156,11 @@ test_that("page labels can be changed", {
 })
 
 test_that("argument subquad_offset works as expected", {
-  x <- map_tag(top1quad, subquad_offset = -1)
+  x <- maply_tag(top1quad, subquad_offset = -1)
   subquads <- unique(purrr::map_df(x, "data")$subquadrat)
   expect_true("01" %in% subquads)
 
-  x <- map_tag(top1quad, subquad_offset = -1)
+  x <- maply_tag(top1quad, subquad_offset = -1)
   subquads <- unique(purrr::map_df(x, "data")$subquadrat)
   expect_true("01" %in% subquads)
 })
@@ -180,11 +180,11 @@ test_that("outputs quadrats in order, even if QuadratName is numeric (#33)", {
     )
   )
   
-  good <- map_tag(vft_toy)
+  good <- maply_tag(vft_toy)
   expect_equal(names(good), expect_nms)
   
   not_chr <- expect_warning(
-    map_tag(mutate(vft_toy, QuadratName = as.numeric(QuadratName)))
+    maply_tag(mutate(vft_toy, QuadratName = as.numeric(QuadratName)))
   )
   expect_equal(names(not_chr), expect_nms)
 })
@@ -193,14 +193,14 @@ test_that("warns if option max.print is not high enough", {
   old_options <- options()
   options(max.print = 2)
   expect_warning(
-    p <- map_tag(top1quad)
+    p <- maply_tag(top1quad)
   )
   options(old_options)
   
   old_options <- options()
   options(max.print = 4)
   expect_silent(
-    p <- map_tag(top1quad)
+    p <- maply_tag(top1quad)
   )
   options(old_options)
 })

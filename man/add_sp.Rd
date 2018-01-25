@@ -22,7 +22,7 @@ Represent species with points.
 }
 \seealso{
 Other map components.: \code{\link{contour_elev}},
-  \code{\link{facets}}, \code{\link{hide_axis_labels}},
-  \code{\link{hide_legend_elev}}, \code{\link{label_elev}},
-  \code{\link{limit_gx_gy}}, \code{\link{map_gx_gy_elev}}
+  \code{\link{hide}}, \code{\link{label_elev}},
+  \code{\link{limit_gx_gy}}, \code{\link{map_gx_gy_elev}},
+  \code{\link{wrap}}
 }

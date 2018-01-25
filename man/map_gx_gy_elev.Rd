@@ -18,8 +18,7 @@ Map a base over which other map components can later be added.
 }
 \seealso{
 Other map components.: \code{\link{add_sp}},
-  \code{\link{contour_elev}}, \code{\link{facets}},
-  \code{\link{hide_axis_labels}},
-  \code{\link{hide_legend_elev}}, \code{\link{label_elev}},
-  \code{\link{limit_gx_gy}}
+  \code{\link{contour_elev}}, \code{\link{hide}},
+  \code{\link{label_elev}}, \code{\link{limit_gx_gy}},
+  \code{\link{wrap}}
 }

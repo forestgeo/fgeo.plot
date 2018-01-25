@@ -8,18 +8,18 @@
 \usage{
 maply_sp_elev(census, elevation = NULL, species = "all", fill = "black",
   shape = 21, point_size = 3, contour_size = 0.5, low = "blue",
-  high = "red", hide_legend_elev = FALSE, bins = NULL,
+  high = "red", hide_legend_color = FALSE, bins = NULL,
   label_elev = TRUE, label_size = 3, label_color = "grey", xyjust = 1,
   fontface = "italic", xlim = NULL, ylim = NULL, custom_theme = NULL)
 
 map_sp_elev(census, elevation = NULL, fill = "black", shape = 21,
   wrap = TRUE, point_size = 3, contour_size = 0.5, low = "blue",
-  high = "red", hide_legend_elev = FALSE, bins = NULL,
+  high = "red", hide_legend_color = FALSE, bins = NULL,
   label_elev = TRUE, label_size = 3, label_color = "grey", xyjust = 1,
   fontface = "italic", xlim = NULL, ylim = NULL, custom_theme = NULL)
 
 map_elev(elevation, contour_size = 0.5, low = "blue", high = "red",
-  hide_legend_elev = FALSE, bins = NULL, label_elev = TRUE,
+  hide_legend_color = FALSE, bins = NULL, label_elev = TRUE,
   label_size = 3, label_color = "grey", xyjust = 1, fontface = "italic",
   xlim = NULL, ylim = NULL, custom_theme = NULL)
 }
@@ -51,7 +51,7 @@ low and high elevation.}
 \item{high}{A string giving a color of the elevation lines representing
 low and high elevation.}
 
-\item{hide_legend_elev}{Logical; \code{TRUE} hides the color legend.}
+\item{hide_legend_color}{Logical; \code{TRUE} hides the color legend.}
 
 \item{bins}{A number giving the number of elevation lines to map.}
 
@@ -100,6 +100,11 @@ species, that can be printed on a .pdf file.
 \item \code{map_elev()} is a smaller, simpler, wrapper to map only elevation data.
 }
 }
+\details{
+All these functions wrap functions from the \strong{ggplot2} package. For more
+control you can use \strong{ggplot2} directly or smaller wrappers in \strong{fgeo.map}
+(see sections See Also and Examples).
+}
 \examples{
 census <- fgeo.tool::top(bciex::bci12s7mini, sp, 2)
 
@@ -123,7 +128,7 @@ p <- maply_sp_elev(
   contour_size = 1,
   low = "grey",
   high = "black",
-  hide_legend_elev = TRUE,
+  hide_legend_color = TRUE,
   bins = 7,
   label_elev = FALSE
 )
@@ -141,11 +146,14 @@ map_gx_gy_elev(elevation) \%>\%
   contour_elev(contour_size = 0.5) \%>\%
   label_elev(label_color = "red") \%>\%
   hide_axis_labels() \%>\%
-  hide_legend_elev() \%>\%
+  hide_legend_color() \%>\%
   add_sp(census, point_size = 5) \%>\%
-  facet_h_sp() \%>\%
+  wrap("sp") \%>\%
   theme_default(legend.position = "top")
 }
 \seealso{
-map_gx_gy_elev
+\code{\link[=map_gx_gy_elev]{map_gx_gy_elev()}}, \code{\link[=limit_gx_gy]{limit_gx_gy()}}, \code{\link[=add_sp]{add_sp()}}, \code{\link[=contour_elev]{contour_elev()}},
+\code{\link[=label_elev]{label_elev()}}, \code{\link[=hide]{hide()}}, \code{\link[=wrap]{wrap()}}
+
+Other `maply_*` functions.: \code{\link{maply_tag}}
 }

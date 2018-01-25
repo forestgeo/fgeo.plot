@@ -17,8 +17,7 @@ Set the map limits.
 }
 \seealso{
 Other map components.: \code{\link{add_sp}},
-  \code{\link{contour_elev}}, \code{\link{facets}},
-  \code{\link{hide_axis_labels}},
-  \code{\link{hide_legend_elev}}, \code{\link{label_elev}},
-  \code{\link{map_gx_gy_elev}}
+  \code{\link{contour_elev}}, \code{\link{hide}},
+  \code{\link{label_elev}}, \code{\link{map_gx_gy_elev}},
+  \code{\link{wrap}}
 }
