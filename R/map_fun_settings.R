@@ -76,6 +76,7 @@ theme_map_quad <- function(axis.text = element_blank(),
 }
 
 #' @rdname themes
+#' @template p
 #' @export
 theme_default <- function(p, 
                           panel.grid.minor = element_line(linetype = "dashed"),

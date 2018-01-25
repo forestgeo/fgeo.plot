@@ -1,0 +1,1 @@
+#' @param p A ggplot.

@@ -64,6 +64,8 @@ inherits from \code{title}) left-aligned by default}
 (\code{element_rect}; inherits from \code{rect})}
 
 \item{axis.ticks.length}{length of tick marks (\code{unit})}
+
+\item{p}{A ggplot.}
 }
 \value{
 A \code{\link[ggplot2:theme]{ggplot2::theme()}}.

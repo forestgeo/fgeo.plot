@@ -391,22 +391,22 @@ geom_point_sp <- function(data = NULL, drop_fill = FALSE, shape = 21, ...){
 #' @param ... Arguments passed to [ggplot2::facet_wrap()] and 
 #'   [ggplot2::facet_grid()].
 #' @seealso [ggplot2::facet_wrap()], [ggplot2::facet_grid()].
-#' @name fgeo_facets
+#' @name facets
 NULL
 
-#' #' @rdname fgeo_facets
+#' #' @rdname facets
 #' #' @export
-#' facet_wrap_sp <- function(...) {
-#'   facet_wrap(~sp, ...)
-#' }
+facet_wrap_sp <- function(...) {
+  facet_wrap(~sp, ...)
+}
 
-#' @rdname fgeo_facets
+#' @rdname facets
 #' @export
 facet_grid_sp_h <- function(...) {
   facet_grid(.~sp, ...)
 }
 
-#' @rdname fgeo_facets
+#' @rdname facets
 #' @export
 facet_grid_sp_v <- function(...) {
   facet_grid(sp~., ...)

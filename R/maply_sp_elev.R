@@ -3,9 +3,9 @@
 #' Wrappers to map species and elevation data.
 #' 
 #' These functions wrap a number of map elements for convenience:
-#' * `maply_sp_elev()` is a mapper. It wraps applies the function `map_sp_elev()`
-#' to each of the given species. It outputs a list of maps, one per species,
-#' that can be printed on a .pdf file.
+#' * `maply_sp_elev()` applies the function `map_sp_elev()` to each species in
+#' the census dataset taht you provide. It outputs a list of maps, one per
+#' species, that can be printed on a .pdf file.
 #' * `map_sp_elev()` maps species and optionally elevation data. 
 #' * `map_elev()` is a smaller, simpler, wrapper to map only elevation data.
 #' 
@@ -15,26 +15,14 @@
 #'   code for one species in the column `sp`. This function will produce as 
 #'   many maps as elements in this vector. The string "all" is a shortcut to 
 #'   map all unique codes in the column `sp`.
-#' @param fill Character; either a colour or "sp", which maps each species to a
-#'   different color.
-#' @param shape,point_size A number giving point size and shape (as in
-#'   [graphics::points()]). Passed to [ggplot2::geom_point()].
+#' @inheritParams add_sp
 #' @param wrap (Not available for `maply_sp_elev()`) Logical; `TRUE` wraps
 #'   multiple maps within the area of a single graphic plot.
-#' @param contour_size A number giving the size of the contour of elevation
-#'   lines. Passed to [ggplot2::stat_contour()].
-#' @param low,high A string giving a color of the elevation lines representing
-#'   low and high elevation.
-#' @param hide_legend_elev Logical; `TRUE` hides the color legend.
-#' @param bins A number giving the number of elevation lines to map.
 #' @param label_elev Logical. `TRUE` labels the elevation lines with text.
-#' @param label_size,label_color A number (`label_size`) or character string 
-#'   (`label_color` and `fontface`) giving the size, colour and fontface of 
-#'   the text labels for the elevation lines.
-#' @param xyjust A number to adjust the position of the text labels of the 
-#'   elevation lines.
-#' @param xlim,ylim A vector of lenght 2, for example `c(0, 500)`, giving the
-#'   minimum and maximum limits of the vertical and horizontal coordinates.
+#' @inheritParams contour_elev
+#' @param hide_legend_elev Logical; `TRUE` hides the color legend.
+#' @inheritParams label_elev
+#' @inheritParams limit_gx_gy
 #' @param custom_theme A valed [ggplot2::theme()]. `NULL` uses the default
 #'   theme [theme_default()].
 #'
@@ -264,6 +252,8 @@ map_pure_elev <- function(elevation,
 
 #' Map a base over which other map components can later be added.
 #' 
+#' @template data_ggplot
+#' 
 #' @name map_gx_gy_elev
 #' @family map components.
 NULL
@@ -284,6 +274,9 @@ map_gx_gy <- function(data) {
 
 #' Set the map limits.
 #' 
+#' @template p
+#' @template xlim_ylim
+#' 
 #' @family map components.
 #' @export
 limit_gx_gy <- function(p, xlim = NULL, ylim = NULL) {
@@ -301,6 +294,12 @@ limit_gx_gy <- function(p, xlim = NULL, ylim = NULL) {
 # Layers ------------------------------------------------------------------
 
 #' Represent species with points.
+#' 
+#' @template p
+#' @template data_ggplot
+#' @param fill Character; either a colour or "sp", which maps each species to a
+#'   different color.
+#' @template shape_point_size
 #' 
 #' @family map components.
 #' @export
@@ -330,6 +329,12 @@ add_sp <- function(p, data = NULL, fill = "sp", shape = 21, point_size = 3) {
 
 #' Represent elevation with lines.
 #' 
+#' @template p
+#' @param contour_size A number giving the size of the contour of elevation
+#'   lines. Passed to [ggplot2::stat_contour()].
+#' @template low_high
+#' @param bins A number giving the number of elevation lines to map.
+#' 
 #' @family map components.
 #' @export
 contour_elev <- function(p, 
@@ -346,6 +351,11 @@ contour_elev <- function(p,
 }
 
 #' Label elevation lines.
+#' 
+#' @template p
+#' @template label_size_label_color_fontface
+#' @param xyjust A number to adjust the position of the text labels of the 
+#'   elevation lines.
 #' 
 #' @family map components.
 #' @export
@@ -402,6 +412,7 @@ text_at_max <- function(x,
 
 #' Hide axis labels.
 #' 
+#' @template p
 #' @family map components.
 #' @export
 hide_axis_labels <- function(p) {
@@ -410,6 +421,7 @@ hide_axis_labels <- function(p) {
 
 #' Hide the color legend of elevation lines.
 #' 
+#' @template p
 #' @family map components.
 #' @export
 hide_legend_elev <- function(p) {
@@ -420,27 +432,28 @@ hide_legend_elev <- function(p) {
 
 #' Facet maps vertically, hirizontally, or wrap them to fit a page.
 #' 
+#' @template p
 #' @param ... Arguments passed to [ggplot2::facet_wrap()] and 
 #'   [ggplot2::facet_grid()].
 #' @seealso [ggplot2::facet_wrap()], [ggplot2::facet_grid()].
 #' @family map components.
 #' 
-#' @name fgeo_facets
+#' @name facets
 NULL
 
-#' @rdname fgeo_facets
+#' @rdname facets
 #' @export
 facet_wrap_sp <- function(p, ...) {
   p + facet_wrap(~sp, ...)
 }
 
-#' @rdname fgeo_facets
+#' @rdname facets
 #' @export
 facet_h_sp <- function(p, ...) {
   p + facet_grid(.~sp, ...)
 }
 
-#' @rdname fgeo_facets
+#' @rdname facets
 #' @export
 facet_v_sp <- function(p, ...) {
   p + facet_grid(sp~., ...)
