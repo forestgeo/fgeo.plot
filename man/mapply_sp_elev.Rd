@@ -37,7 +37,7 @@ map all unique codes in the column \code{sp}.}
 different color.}
 
 \item{shape, point_size}{A number giving point size and shape (as in
-\code{\link[graphics:points]{graphics::points()}}). Passed to \code{\link[ggplot2:geom_points]{ggplot2::geom_points()}}.}
+\code{\link[graphics:points]{graphics::points()}}). Passed to \code{\link[ggplot2:geom_point]{ggplot2::geom_point()}}.}
 
 \item{contour_size}{A number giving the size of the contour of elevation
 lines. Passed to \code{\link[ggplot2:stat_contour]{ggplot2::stat_contour()}}.}

@@ -18,7 +18,7 @@
 #' @param fill Character; either a colour or "sp", which maps each species to a
 #'   different color.
 #' @param shape,point_size A number giving point size and shape (as in
-#'   [graphics::points()]). Passed to [ggplot2::geom_points()].
+#'   [graphics::points()]). Passed to [ggplot2::geom_point()].
 #' @param wrap (Not available for `mapply_sp_elev()`) Logical; `TRUE` wraps
 #'   multiple maps within the area of a single graphic plot.
 #' @param contour_size A number giving the size of the contour of elevation
