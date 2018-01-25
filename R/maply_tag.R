@@ -69,7 +69,7 @@
 #'   CensusID == 6,
 #'   PlotID == 1
 #' )
-#' p <- map_tag(want)
+#' p <- maply_tag(want)
 #' # Visualizing only the first plot of `p`
 #' first(p)
 #' # Printing all plots of `p` to .pdf, with parameters optimized for size letter
@@ -85,7 +85,7 @@
 #'   top(QuadratID) %>%
 #'   filter(status_tree == "dead")
 #' select(dead, Tag, Status, status_tree, DBH)
-#' first(map_tag(dead))
+#' first(maply_tag(dead))
 #' # * If you filter by `DBH`, you loose the dead trees becaue their `DBH = NA`
 #' wrong <- filter(dead, DBH > 10)
 #' wrong
@@ -96,7 +96,7 @@
 #'
 #' # Keeping dead trees with `is.na(DBH)` (e.g. tag 127885.d on the bottom right)
 #' p <- filter(top4quad, DBH > 20 | is.na(DBH))
-#' first(map_tag(p))
+#' first(maply_tag(p))
 #'
 #' # For more complex filtering, see also ?fgeo.tool::discard_dead_twice
 #'
@@ -104,10 +104,10 @@
 #'
 #' # Common tweaks
 #'
-#' p <- map_tag(top1quad, show_page = FALSE, show_subquad = FALSE)
+#' p <- maply_tag(top1quad, show_page = FALSE, show_subquad = FALSE)
 #' first(p)
 #'
-#' p <- map_tag(
+#' p <- maply_tag(
 #'   top1quad,
 #'   title_quad = "BCI 2012. Quadrat: ",
 #'   bl = "bottom-left", br = "bottom-right", tr = "top-right", tl = "top-left",
@@ -125,13 +125,13 @@
 #'
 #' library(ggplot2)
 #'
-#' p <- map_tag(top1quad, theme = theme_gray())
+#' p <- maply_tag(top1quad, theme = theme_gray())
 #' first(p)
 #'
-#' # Tweaking the default theme of map_tag()
+#' # Tweaking the default theme of maply_tag()
 #'
-#' small_tweak <- theme_map_tag(legend.position = "bottom")
-#' p <- map_tag(top1quad, theme = small_tweak)
+#' small_tweak <- theme_maply_tag(legend.position = "bottom")
+#' p <- maply_tag(top1quad, theme = small_tweak)
 #' first(p)
 #'
 #' large_tweak <- theme(
@@ -148,7 +148,7 @@
 #'   panel.grid.minor = element_line(colour = "black", linetype = "dotted"),
 #'   panel.grid.major = element_line(colour = "black")
 #' )
-#' p <- map_tag(top1quad, theme = large_tweak)
+#' p <- maply_tag(top1quad, theme = large_tweak)
 #' first(p)
 #'
 #'
@@ -162,11 +162,11 @@
 #' smaller$QX <- sample(0:10, n, replace = TRUE)
 #' smaller$QY <- sample(0:10, n, replace = TRUE)
 #'
-#' p <- map_tag(smaller, x_q = 10, x_sq = 2.5)
+#' p <- maply_tag(smaller, x_q = 10, x_sq = 2.5)
 #' first(p)
 #'
 #' # If limit-lines aren't visible, try extending the grid a little
-#' p <- map_tag(smaller, x_q = 10, x_sq = 2.5, move_edge = 0.25)[1]
+#' p <- maply_tag(smaller, x_q = 10, x_sq = 2.5, move_edge = 0.25)[1]
 #' first(p)
 #' }
 maply_tag <- function(vft,
@@ -191,7 +191,7 @@ maply_tag <- function(vft,
   # Check
   .vft <- setNames(vft, tolower(names(vft)))
   crucial <- c("tag", "qx", "qy", "status", "quadratname", "censusid", "plotid")
-  check_map_tag(
+  check_maply_tag(
     .vft = .vft,
     crucial = crucial,
     x_q = x_q,
@@ -216,7 +216,7 @@ maply_tag <- function(vft,
 
   # Prepare
   sbst <- .vft[ , crucial]
-  prepared <- prep_map_tag(
+  prepared <- prep_maply_tag(
     sbst, x_q = x_q, x_sq = x_sq, y_q = y_q, y_sq = y_sq, subquad_offset =
     subquad_offset, bl = bl, br = br, tr = tr, tl = tl, move_edge = move_edge
   )
@@ -235,7 +235,7 @@ maply_tag <- function(vft,
   setNames(p, nms)
 }
 
-check_map_tag <- function(.vft,
+check_maply_tag <- function(.vft,
                           crucial,
                           x_q,
                           x_sq,
@@ -294,7 +294,7 @@ check_map_tag <- function(.vft,
   invisible(.vft)
 }
 
-prep_map_tag <- function(sbst,
+prep_maply_tag <- function(sbst,
                          x_q,
                          x_sq,
                          y_q,
@@ -336,7 +336,7 @@ prep_map_tag <- function(sbst,
 
 #' Label the four divisions of a quadrat -- each with four subquadrats.
 #'
-#' This function makes it possible for [map_tag()] to plot each individual map.
+#' This function makes it possible for [maply_tag()] to plot each individual map.
 #' Each map corresponds to one page and includes four subquadrats. There are a
 #' total of four maps per quadrat (i.e. a total of 16 subquadrats per quadrat).
 #'

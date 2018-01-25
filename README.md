@@ -44,9 +44,11 @@ Map species' distribution.
 
 ``` r
 census <- bci12t7mini
+# Fix structure of elevation data
+elevation <- restructure_elev(bci_elevation)
 
 # All maps
-p <- map_sp(census, c("faraoc", "hybapr"))
+p <- maply_sp_elev(census, elevation, species = c("faraoc", "hybapr"))
 
 # Show first map
 first(p)
@@ -64,7 +66,7 @@ viewfulltable <- rename(bci12vft_mini, qx = x, qy = y)
 vft <- filter(viewfulltable, PlotID == 1, CensusID == 6)
 
 # All maps
-p2 <- map_tag(vft)
+p2 <- maply_tag(vft)
 length(p2)
 #> [1] 40
 
@@ -89,7 +91,7 @@ vft2 <- filter(
 )
 
 # All maps
-p3 <- map_quad(vft2)
+p3 <- maply_quad(vft2)
 #> * Appending tags of dead trees with the suffix '.d'
 #> Warning in fgeo.tool::str_suffix_match(crucial$tag, crucial$status,
 #> status_d, : No stem has status `dead`. Is this what you expect?

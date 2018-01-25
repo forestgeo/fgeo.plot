@@ -29,7 +29,7 @@
 #'   CensusID == 6,
 #'   PlotID == 1
 #' )
-#' p <- map_quad(want)
+#' p <- maply_quad(want)
 #' # Visualizing only the first plot of `p`
 #' first(p)
 #' # Printing all plots of `p` to .pdf, with parameters optimized for size letter
@@ -45,17 +45,17 @@
 #'   top(QuadratID) %>%
 #'   filter(status_tree == "dead")
 #' select(dead, Tag, Status, status_tree, DBH)
-#' map_quad(dead)
+#' maply_quad(dead)
 #' # * If you filter by `DBH`, you loose the dead trees becaue their `DBH = NA`
 #' wrong <- filter(dead, DBH > 10)
-#' map_quad(wrong)
+#' maply_quad(wrong)
 #' # * The right way to do it is to explicietly inlcude rows where DBH = NA
 #' right <- filter(dead, DBH > 10 | is.na(DBH))
-#' map_quad(right)
+#' maply_quad(right)
 #'
 #' # Keeping dead trees with `is.na(DBH)` (e.g. tag 127885.d on the bottom right)
 #' p <- filter(top4quad, DBH > 20 | is.na(DBH))
-#' first(map_quad(p))
+#' first(maply_quad(p))
 #'
 #' # For more complex filtering, see also ?fgeo.tool::discard_dead_twice)
 #'
@@ -71,12 +71,12 @@
 #'   sep = "\n"
 #' )
 #' # See ?top1quad
-#' map_quad(top1quad, title_quad = "My Site, 2018. Quad:", header = myheader)
+#' maply_quad(top1quad, title_quad = "My Site, 2018. Quad:", header = myheader)
 #'
 #' # Tweak the theme with ggplot
 #' library(ggplot2)
 #'
-#' map_quad(
+#' maply_quad(
 #'   top1quad,
 #'   title_quad = "My Site, 2018. Quad:",
 #'   header = map_quad_header("spanish"),
@@ -89,7 +89,7 @@
 #'   )
 #' )
 #' }
-map_quad <- function(vft,
+maply_quad <- function(vft,
                      title_quad = "Site Name, YYYY, Quadrat:",
                      header = map_quad_header(),
                      theme = theme_map_quad(),
@@ -105,7 +105,7 @@ map_quad <- function(vft,
     "qx", "qy"
   )
   crucial <- .vft[core]
-  check_map_quad(
+  check_maply_quad(
     vft = crucial,
     core = core,
     lim_min = lim_min,
@@ -143,7 +143,7 @@ map_quad <- function(vft,
   setNames(p, nms)
 }
 
-check_map_quad <- function(vft,
+check_maply_quad <- function(vft,
                            core,
                            lim_min,
                            lim_max,

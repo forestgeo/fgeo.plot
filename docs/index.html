@@ -115,9 +115,11 @@ remotes<span class="op">::</span><span class="kw"><a href="http://www.rdocumenta
 <span class="co">#&gt;     intersect, setdiff, setequal, union</span></code></pre></div>
 <p>Map species’ distribution.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">census &lt;-<span class="st"> </span>bci12t7mini
+<span class="co"># Fix structure of elevation data</span>
+elevation &lt;-<span class="st"> </span><span class="kw">restructure_elev</span>(bci_elevation)
 
 <span class="co"># All maps</span>
-p &lt;-<span class="st"> </span><span class="kw"><a href="reference/map_sp.html">map_sp</a></span>(census, <span class="kw">c</span>(<span class="st">"faraoc"</span>, <span class="st">"hybapr"</span>))
+p &lt;-<span class="st"> </span><span class="kw"><a href="reference/maply_sp_elev.html">maply_sp_elev</a></span>(census, elevation, <span class="dt">species =</span> <span class="kw">c</span>(<span class="st">"faraoc"</span>, <span class="st">"hybapr"</span>))
 
 <span class="co"># Show first map</span>
 <span class="kw">first</span>(p)</code></pre></div>
@@ -130,7 +132,7 @@ viewfulltable &lt;-<span class="st"> </span><span class="kw">rename</span>(bci12
 vft &lt;-<span class="st"> </span><span class="kw">filter</span>(viewfulltable, PlotID <span class="op">==</span><span class="st"> </span><span class="dv">1</span>, CensusID <span class="op">==</span><span class="st"> </span><span class="dv">6</span>)
 
 <span class="co"># All maps</span>
-p2 &lt;-<span class="st"> </span><span class="kw"><a href="reference/map_tag.html">map_tag</a></span>(vft)
+p2 &lt;-<span class="st"> </span><span class="kw"><a href="reference/maply_tag.html">maply_tag</a></span>(vft)
 <span class="kw">length</span>(p2)
 <span class="co">#&gt; [1] 40</span>
 
@@ -150,7 +152,7 @@ vft2 &lt;-<span class="st"> </span><span class="kw">filter</span>(
 )
 
 <span class="co"># All maps</span>
-p3 &lt;-<span class="st"> </span><span class="kw"><a href="reference/map_quad.html">map_quad</a></span>(vft2)
+p3 &lt;-<span class="st"> </span><span class="kw"><a href="reference/maply_quad.html">maply_quad</a></span>(vft2)
 <span class="co">#&gt; * Appending tags of dead trees with the suffix '.d'</span>
 <span class="co">#&gt; Warning in fgeo.tool::str_suffix_match(crucial$tag, crucial$status,</span>
 <span class="co">#&gt; status_d, : No stem has status `dead`. Is this what you expect?</span>

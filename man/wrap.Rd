@@ -56,6 +56,18 @@ either of the four sides by setting \code{strip.position = c("top",
 This function behaves like \code{\link[ggplot2:facet_wrap]{ggplot2::facet_wrap()}} but it is designed to
 allow using it as part of a pipe.
 }
+\examples{
+# Choosing a tiny dataset for example
+census <- fgeo.tool::top(bciex::bci12s7mini, sp, 2)
+
+map_gx_gy(census) \%>\% 
+  add_sp() \%>\% 
+  wrap("sp")
+
+map_gx_gy(census) \%>\% 
+  add_sp() \%>\% 
+  wrap(~sp + status)
+}
 \seealso{
 \code{\link[ggplot2:facet_wrap]{ggplot2::facet_wrap()}}, \code{\link[ggplot2:facet_grid]{ggplot2::facet_grid()}}.
 

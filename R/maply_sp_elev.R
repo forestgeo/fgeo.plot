@@ -1,5 +1,3 @@
-# Wrappers ----------------------------------------------------------------
-
 #' Wrappers to map species and elevation data.
 #' 
 #' These functions wrap a number of map elements for convenience:
@@ -272,6 +270,8 @@ map_gx_gy_elev <- function(data) {
 #' @rdname map_gx_gy_elev
 #' @export
 map_gx_gy <- function(data) {
+  check_map_gx_gy(data)
+  
   ggplot(data, aes(gx, gy))
 }
 
@@ -470,7 +470,7 @@ hide_legend_color <- function(p) {
 #' @family map components.
 #' 
 #' @export
-#' @example 
+#' @examples
 #' # Choosing a tiny dataset for example
 #' census <- fgeo.tool::top(bciex::bci12s7mini, sp, 2)
 #' 
@@ -575,5 +575,16 @@ check_label_elev <- function(p, label_color, label_size, xyjust, fontface) {
     )
     abort(msg)
   }
+  invisible(p)
 }
 
+check_map_gx_gy <- function(data) {
+  if (rlang::has_name(data, "elev")) {
+    msg <- paste0(
+      "This function is designed not for elevation but for census data.\n",
+      "* If you plan to map elevation lines, use instead `map_gx_gy_elev()`."
+    )
+    warn(msg)
+  }
+  invisible(data)
+}

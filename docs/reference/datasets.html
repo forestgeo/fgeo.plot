@@ -118,16 +118,8 @@
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>library</span>(<span class='no'>dplyr</span>)</div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Attaching package: ‘dplyr’</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from ‘package:fgeo.map’:</span>
-#&gt; <span class='message'></span>
-#&gt; <span class='message'>    collapse</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from ‘package:stats’:</span>
-#&gt; <span class='message'></span>
-#&gt; <span class='message'>    filter, lag</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from ‘package:testthat’:</span>
-#&gt; <span class='message'></span>
-#&gt; <span class='message'>    matches</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from ‘package:base’:</span>
-#&gt; <span class='message'></span>
-#&gt; <span class='message'>    intersect, setdiff, setequal, union</span></div><div class='input'><span class='no'>all_quad</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>bciex</span><span class='kw ns'>::</span><span class='no'><a href='http://www.rdocumentation.org/packages/bciex/topics/bci12vft_mini'>bci12vft_mini</a></span> <span class='kw'>%&gt;%</span>
+    <pre class="examples"><div class='input'><span class='fu'>library</span>(<span class='no'>dplyr</span>)
+<span class='no'>all_quad</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>bciex</span><span class='kw ns'>::</span><span class='no'><a href='http://www.rdocumentation.org/packages/bciex/topics/bci12vft_mini'>bci12vft_mini</a></span> <span class='kw'>%&gt;%</span>
   <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='http://dplyr.tidyverse.org/reference/select.html'>rename</a></span>(<span class='kw'>QX</span> <span class='kw'>=</span> <span class='no'>x</span>, <span class='kw'>QY</span> <span class='kw'>=</span> <span class='no'>y</span>) <span class='kw'>%&gt;%</span>
   <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='http://dplyr.tidyverse.org/reference/filter.html'>filter</a></span>(<span class='no'>PlotID</span> <span class='kw'>==</span> <span class='fl'>1</span>) <span class='kw'>%&gt;%</span>
   <span class='kw pkg'>fgeo.tool</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/fgeo.tool/topics/top'>top</a></span>(<span class='no'>CensusID</span>)
@@ -149,11 +141,11 @@
 #&gt;  8     77575      1 bci   Sapota~ Pouteria re~ Pout~ reticulata  NULL          
 #&gt;  9     79595      1 bci   Fabace~ Swartzia si~ Swar~ simplex     var.ochnacea  
 #&gt; 10     79596      1 bci   Rubiac~ Faramea occ~ Fara~ occidental~ NULL          
-#&gt; # ... with 230 more rows, and 20 more variables: SpeciesID &lt;int&gt;, Mnemonic
-#&gt; #   &lt;chr&gt;, QuadratID &lt;int&gt;, QuadratName &lt;chr&gt;, QX &lt;dbl&gt;, QY &lt;dbl&gt;, gx &lt;dbl&gt;, gy
-#&gt; #   &lt;dbl&gt;, TreeID &lt;int&gt;, Tag &lt;chr&gt;, StemID &lt;int&gt;, StemTag &lt;chr&gt;, PrimaryStem
-#&gt; #   &lt;chr&gt;, CensusID &lt;int&gt;, PlotCensusNumber &lt;int&gt;, DBH &lt;int&gt;, HOM &lt;dbl&gt;,
-#&gt; #   ExactDate &lt;date&gt;, ListOfTSM &lt;chr&gt;, Status &lt;chr&gt;</div></pre>
+#&gt; # ... with 230 more rows, and 20 more variables: SpeciesID &lt;int&gt;,
+#&gt; #   Mnemonic &lt;chr&gt;, QuadratID &lt;int&gt;, QuadratName &lt;chr&gt;, QX &lt;dbl&gt;, QY &lt;dbl&gt;,
+#&gt; #   gx &lt;dbl&gt;, gy &lt;dbl&gt;, TreeID &lt;int&gt;, Tag &lt;chr&gt;, StemID &lt;int&gt;, StemTag &lt;chr&gt;,
+#&gt; #   PrimaryStem &lt;chr&gt;, CensusID &lt;int&gt;, PlotCensusNumber &lt;int&gt;, DBH &lt;int&gt;,
+#&gt; #   HOM &lt;dbl&gt;, ExactDate &lt;date&gt;, ListOfTSM &lt;chr&gt;, Status &lt;chr&gt;</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

@@ -81,13 +81,13 @@
       <h1>Mapping Functions</h1>
                         <h4 class="author">Mauro Lepore</h4>
             
-            <h4 class="date">2018-01-20</h4>
+            <h4 class="date">2018-01-25</h4>
           </div>
 
     
     
 <div class="contents">
-<p>This vignette shows the same code that you can find in the help files of <code><a href="../reference/map_sp.html">map_sp()</a></code>, <code><a href="../reference/map_quad.html">map_quad()</a></code> and <code><a href="../reference/map_tag.html">map_tag()</a></code>, but here (not in in the help files) you can see the output.</p>
+<p>This vignette shows the same code that you can find in the help files of <code>map_sp()</code>, <code><a href="../reference/maply_quad.html">maply_quad()</a></code> and <code><a href="../reference/maply_tag.html">maply_tag()</a></code>, but here (not in in the help files) you can see the output.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(fgeo.map)
 <span class="kw">library</span>(fgeo.tool)
 <span class="kw">library</span>(dplyr)</code></pre></div>
@@ -101,134 +101,9 @@
 ##     intersect, setdiff, setequal, union</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Avoid conflict with `stats::filter()`</span>
 filter &lt;-<span class="st"> </span>dplyr<span class="op">::</span>filter</code></pre></div>
-<div id="map_sp-map-species-distribution" class="section level1">
+<div id="maply_quad-map-trees-within-a-quadrat" class="section level1">
 <h1 class="hasAnchor">
-<a href="#map_sp-map-species-distribution" class="anchor"></a><code><a href="../reference/map_sp.html">map_sp()</a></code>: Map species’ distribution</h1>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Example data</span>
-census &lt;-<span class="st"> </span>bciex<span class="op">::</span>bci12t7mini
-species &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">"hybapr"</span>, <span class="st">"faraoc"</span>)
-
-<span class="co"># Defaults</span>
-p &lt;-<span class="st"> </span><span class="kw"><a href="../reference/map_sp.html">map_sp</a></span>(census, species)
-<span class="co"># Visualizing only the first plot of `p`</span>
-<span class="kw">first</span>(p)</code></pre></div>
-<p><img src="map_files/figure-html/unnamed-chunk-2-1.png" width="98%" style="display: block; margin: auto;"></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Printing all plots of `p` to .pdf, with parameters optimized for size letter</span>
-<span class="kw">pdf</span>(<span class="st">"map.pdf"</span>, <span class="dt">paper =</span> <span class="st">"letter"</span>, <span class="dt">height =</span> <span class="fl">10.5</span>, <span class="dt">width =</span> <span class="dv">8</span>)
-p
-<span class="co">#&gt; $faraoc</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $hybapr</span>
-<span class="kw">dev.off</span>()
-<span class="co">#&gt; png </span>
-<span class="co">#&gt;   2</span>
-
-<span class="co"># Simple tweaks</span>
-p &lt;-<span class="st"> </span><span class="kw"><a href="../reference/map_sp.html">map_sp</a></span>(
-  census, species,
-  <span class="co"># Passed to ggplot2::geom_point()</span>
-  <span class="dt">size =</span> <span class="dv">4</span>, <span class="dt">shape =</span> <span class="dv">22</span>, <span class="dt">fill =</span> <span class="st">"green"</span>, <span class="dt">colour =</span> <span class="st">"black"</span>, <span class="dt">stroke =</span> <span class="dv">2</span>
-)
-<span class="kw">first</span>(p)</code></pre></div>
-<p><img src="map_files/figure-html/unnamed-chunk-2-2.png" width="98%" style="display: block; margin: auto;"></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
-<span class="co"># Add elevation and tweak lines</span>
-<span class="co"># Fixing wrong names of elevation data</span>
-elevation &lt;-<span class="st"> </span><span class="kw">rename</span>(bciex<span class="op">::</span>bci_elevation, <span class="dt">gx =</span> x, <span class="dt">gy =</span> y)
-p &lt;-<span class="st"> </span><span class="kw"><a href="../reference/map_sp.html">map_sp</a></span>(
-  census, species,
-  <span class="dt">elevation =</span> elevation, <span class="dt">line_size =</span> <span class="dv">1</span>, <span class="dt">low =</span> <span class="st">"red"</span>, <span class="dt">high =</span> <span class="st">"blue"</span>, <span class="dt">bins =</span> <span class="dv">10</span>
-)
-<span class="kw">first</span>(p)</code></pre></div>
-<p><img src="map_files/figure-html/unnamed-chunk-2-3.png" width="98%" style="display: block; margin: auto;"></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
-<span class="co"># Dealing with overplotting</span>
-crowded &lt;-<span class="st"> </span><span class="kw">tibble</span>(
-  <span class="dt">sp =</span> <span class="kw">sample</span>(<span class="kw">c</span>(<span class="st">"species1"</span>), <span class="dv">10000</span>, <span class="dt">replace =</span> <span class="ot">TRUE</span>),
-  <span class="dt">gx =</span> <span class="kw">sample.int</span>(<span class="dv">1000</span>, <span class="dv">10000</span>, <span class="dt">replace =</span> <span class="ot">TRUE</span>),
-  <span class="dt">gy =</span> <span class="kw">sample.int</span>(<span class="dv">500</span>, <span class="dv">10000</span>, <span class="dt">replace =</span> <span class="ot">TRUE</span>)
-)
-<span class="kw"><a href="../reference/map_sp.html">map_sp</a></span>(crowded, <span class="kw">c</span>(<span class="st">"species1"</span>))
-<span class="co">#&gt; $species1</span></code></pre></div>
-<p><img src="map_files/figure-html/unnamed-chunk-2-4.png" width="98%" style="display: block; margin: auto;"></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Less overplotting</span>
-<span class="kw"><a href="../reference/map_sp.html">map_sp</a></span>(crowded, <span class="kw">c</span>(<span class="st">"species1"</span>), <span class="dt">size =</span> <span class="dv">1</span>, <span class="dt">alpha =</span> <span class="dv">5</span><span class="op">/</span><span class="dv">10</span>, <span class="dt">shape =</span> <span class="dv">21</span>)
-<span class="co">#&gt; $species1</span></code></pre></div>
-<p><img src="map_files/figure-html/unnamed-chunk-2-5.png" width="98%" style="display: block; margin: auto;"></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
-<span class="co"># Limits</span>
-p &lt;-<span class="st"> </span><span class="kw"><a href="../reference/map_sp.html">map_sp</a></span>(census, species, <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1500</span>), <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1000</span>))
-<span class="kw">first</span>(p)</code></pre></div>
-<p><img src="map_files/figure-html/unnamed-chunk-2-6.png" width="98%" style="display: block; margin: auto;"></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
-<span class="co"># Themes</span>
-<span class="kw">library</span>(ggplot2)
-<span class="co"># Using pre-made themes</span>
-p &lt;-<span class="st"> </span><span class="kw"><a href="../reference/map_sp.html">map_sp</a></span>(census, species, <span class="dt">theme =</span> ggplot2<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/ggtheme">theme_classic</a></span>())
-<span class="kw">first</span>(p)</code></pre></div>
-<p><img src="map_files/figure-html/unnamed-chunk-2-7.png" width="98%" style="display: block; margin: auto;"></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Tweaking the default theme of map_sp()</span>
-small_tweak &lt;-<span class="st"> </span><span class="kw"><a href="../reference/themes.html">theme_map_sp</a></span>(
-  <span class="dt">text =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">30</span>, <span class="dt">face =</span> <span class="st">"bold.italic"</span>)
-)
-p &lt;-<span class="st"> </span><span class="kw"><a href="../reference/map_sp.html">map_sp</a></span>(census, species, <span class="dt">theme =</span> small_tweak)
-<span class="kw">first</span>(p)</code></pre></div>
-<p><img src="map_files/figure-html/unnamed-chunk-2-8.png" width="98%" style="display: block; margin: auto;"></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">large_tweak &lt;-<span class="st"> </span><span class="kw">theme</span>(
-  <span class="dt">legend.position =</span> <span class="st">"bottom"</span>,
-  <span class="dt">legend.title =</span> <span class="kw">element_blank</span>(),
-  <span class="dt">legend.text =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">8</span>, <span class="dt">colour =</span> <span class="st">"red"</span>),
-  <span class="dt">text =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">11</span>, <span class="dt">face =</span> <span class="st">"bold.italic"</span>, <span class="dt">colour =</span> <span class="st">"white"</span>),
-  <span class="dt">plot.background =</span> <span class="kw">element_rect</span>(<span class="dt">fill =</span> <span class="st">"black"</span>),
-  <span class="dt">plot.margin =</span> <span class="kw">margin</span>(<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="st">"cm"</span>),
-  <span class="dt">strip.background =</span> <span class="kw">element_rect</span>(<span class="dt">fill =</span> <span class="st">"darkgreen"</span>),
-  <span class="dt">strip.text =</span> <span class="kw">element_text</span>(<span class="dt">colour =</span> <span class="st">"white"</span>),
-  <span class="dt">panel.background =</span> <span class="kw">element_rect</span>(<span class="dt">fill =</span> <span class="st">"lightgreen"</span>),
-  <span class="dt">panel.grid.minor =</span> <span class="kw">element_line</span>(<span class="dt">colour =</span> <span class="st">"black"</span>, <span class="dt">linetype =</span> <span class="st">"dotted"</span>),
-  <span class="dt">panel.grid.major =</span> <span class="kw">element_line</span>(<span class="dt">colour =</span> <span class="st">"black"</span>)
-)
-p &lt;-<span class="st"> </span><span class="kw"><a href="../reference/map_sp.html">map_sp</a></span>(census, species, <span class="dt">theme =</span> large_tweak)
-<span class="kw">first</span>(p)</code></pre></div>
-<p><img src="map_files/figure-html/unnamed-chunk-2-9.png" width="98%" style="display: block; margin: auto;"></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
-<span class="co"># Multiple maps per page</span>
-<span class="kw">library</span>(gridExtra)
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Attaching package: 'gridExtra'</span>
-<span class="co">#&gt; The following object is masked from 'package:dplyr':</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;     combine</span>
-four_species &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">"hybapr"</span>, <span class="st">"faraoc"</span>, <span class="st">"des2pa"</span>, <span class="st">"tri2tu"</span>)
-p &lt;-<span class="st"> </span><span class="kw"><a href="../reference/map_sp.html">map_sp</a></span>(census, four_species)
-multipaged &lt;-<span class="st"> </span><span class="kw">marrangeGrob</span>(p, <span class="dt">nrow =</span> <span class="dv">1</span>, <span class="dt">ncol =</span> <span class="dv">2</span>)
-<span class="co"># Printing all plots of `p` to .pdf, with parameters optimized for size letter</span>
-<span class="co"># Option 1</span>
-<span class="kw">pdf</span>(<span class="st">"map.pdf"</span>, <span class="dt">paper =</span> <span class="st">"letter"</span>, <span class="dt">height =</span> <span class="fl">10.5</span>, <span class="dt">width =</span> <span class="dv">8</span>)
-multipaged
-<span class="kw">dev.off</span>()
-<span class="co">#&gt; png </span>
-<span class="co">#&gt;   2</span>
-<span class="co"># Option 2</span>
-<span class="kw">ggsave</span>(<span class="st">"map.pdf"</span>, multipaged, <span class="dt">height =</span> <span class="fl">10.5</span>, <span class="dt">width =</span> <span class="dv">8</span>)
-
-<span class="co"># Extending with ggplot2</span>
-p0 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/map_sp.html">map_sp</a></span>(census, species)
-<span class="co">#  Adding new layer to one element of the plots' list</span>
-p0[[<span class="st">"hybapr"</span>]] <span class="op">+</span><span class="st"> </span><span class="kw">geom_vline</span>(<span class="kw">aes</span>(<span class="dt">xintercept =</span> <span class="dv">300</span>), <span class="dt">colour =</span> <span class="st">"red"</span>)</code></pre></div>
-<p><img src="map_files/figure-html/unnamed-chunk-2-10.png" width="98%" style="display: block; margin: auto;"></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Adding new layer to all elements of the plots' list</span>
-<span class="co"># * Adding a vertical line</span>
-p1 &lt;-<span class="st"> </span><span class="kw">lapply</span>(p0, <span class="st">`</span><span class="dt">+</span><span class="st">`</span>, <span class="kw">geom_vline</span>(<span class="kw">aes</span>(<span class="dt">xintercept =</span> <span class="dv">300</span>), <span class="dt">colour =</span> <span class="st">"red"</span>))
-<span class="kw">marrangeGrob</span>(p1, <span class="dt">nrow =</span> <span class="dv">2</span>, <span class="dt">ncol =</span> <span class="dv">1</span>)</code></pre></div>
-<p><img src="map_files/figure-html/unnamed-chunk-2-11.png" width="98%" style="display: block; margin: auto;"></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># * Also adding a horizontal line</span>
-p2 &lt;-<span class="st"> </span><span class="kw">lapply</span>(p1, <span class="st">`</span><span class="dt">+</span><span class="st">`</span>, <span class="kw">geom_hline</span>(<span class="kw">aes</span>(<span class="dt">yintercept =</span> <span class="dv">400</span>), <span class="dt">colour =</span> <span class="st">"blue"</span>))
-<span class="kw">marrangeGrob</span>(p2, <span class="dt">nrow =</span> <span class="dv">2</span>, <span class="dt">ncol =</span> <span class="dv">1</span>)</code></pre></div>
-<p><img src="map_files/figure-html/unnamed-chunk-2-12.png" width="98%" style="display: block; margin: auto;"></p>
-</div>
-<div id="map_quad-map-trees-within-a-quadrat" class="section level1">
-<h1 class="hasAnchor">
-<a href="#map_quad-map-trees-within-a-quadrat" class="anchor"></a><code><a href="../reference/map_quad.html">map_quad()</a></code>: Map trees within a quadrat</h1>
+<a href="#maply_quad-map-trees-within-a-quadrat" class="anchor"></a><code><a href="../reference/maply_quad.html">maply_quad()</a></code>: Map trees within a quadrat</h1>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Filter the data you want. For example:</span>
 <span class="co"># (see ?top4quad)</span>
 want &lt;-<span class="st"> </span><span class="kw">filter</span>(
@@ -236,13 +111,13 @@ want &lt;-<span class="st"> </span><span class="kw">filter</span>(
   CensusID <span class="op">==</span><span class="st"> </span><span class="dv">6</span>,
   PlotID <span class="op">==</span><span class="st"> </span><span class="dv">1</span>
 )
-p &lt;-<span class="st"> </span><span class="kw"><a href="../reference/map_quad.html">map_quad</a></span>(want)
+p &lt;-<span class="st"> </span><span class="kw"><a href="../reference/maply_quad.html">maply_quad</a></span>(want)
 <span class="co">#&gt; * Appending tags of dead trees with the suffix '.d'</span>
 <span class="co">#&gt; * Standarizing `dbh` by the count of `dbh` measurements</span>
 <span class="co"># Visualizing only the first plot of `p`</span>
 <span class="kw">first</span>(p)
 <span class="co">#&gt; Warning: Removed 34 rows containing missing values (geom_point).</span></code></pre></div>
-<p><img src="map_files/figure-html/unnamed-chunk-3-1.png" width="98%" style="display: block; margin: auto;"></p>
+<p><img src="map_files/figure-html/unnamed-chunk-2-1.png" width="98%" style="display: block; margin: auto;"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Printing all plots of `p` to .pdf, with parameters optimized for size letter</span>
 <span class="kw">pdf</span>(<span class="st">"map.pdf"</span>, <span class="dt">paper =</span> <span class="st">"letter"</span>, <span class="dt">height =</span> <span class="fl">10.5</span>, <span class="dt">width =</span> <span class="dv">8</span>)
 p
@@ -292,15 +167,15 @@ dead &lt;-<span class="st"> </span>top4quad <span class="op">%&gt;%</span>
 <span class="co">#&gt; 18 449436 dead   dead           NA</span>
 <span class="co">#&gt; 19 449446 dead   dead           NA</span>
 <span class="co">#&gt; 20 549206 dead   dead           NA</span>
-<span class="kw"><a href="../reference/map_quad.html">map_quad</a></span>(dead)
+<span class="kw"><a href="../reference/maply_quad.html">maply_quad</a></span>(dead)
 <span class="co">#&gt; * Appending tags of dead trees with the suffix '.d'</span>
 <span class="co">#&gt; * Standarizing `dbh` by the count of `dbh` measurements</span>
 <span class="co">#&gt; $`4915`</span>
 <span class="co">#&gt; Warning: Removed 20 rows containing missing values (geom_point).</span></code></pre></div>
-<p><img src="map_files/figure-html/unnamed-chunk-3-2.png" width="98%" style="display: block; margin: auto;"></p>
+<p><img src="map_files/figure-html/unnamed-chunk-2-2.png" width="98%" style="display: block; margin: auto;"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># * If you filter by `DBH`, you loose the dead trees becaue their `DBH = NA`</span>
 wrong &lt;-<span class="st"> </span><span class="kw">filter</span>(dead, DBH <span class="op">&gt;</span><span class="st"> </span><span class="dv">10</span>)
-<span class="kw"><a href="../reference/map_quad.html">map_quad</a></span>(wrong)
+<span class="kw"><a href="../reference/maply_quad.html">maply_quad</a></span>(wrong)
 <span class="co">#&gt; * Appending tags of dead trees with the suffix '.d'</span>
 <span class="co">#&gt; Warning in fgeo.tool::str_suffix_match(crucial$tag, crucial$status,</span>
 <span class="co">#&gt; status_d, : No stem has status `dead`. Is this what you expect?</span>
@@ -308,27 +183,22 @@ wrong &lt;-<span class="st"> </span><span class="kw">filter</span>(dead, DBH <sp
 <span class="co">#&gt; named list()</span>
 <span class="co"># * The right way to do it is to explicietly inlcude rows where DBH = NA</span>
 right &lt;-<span class="st"> </span><span class="kw">filter</span>(dead, DBH <span class="op">&gt;</span><span class="st"> </span><span class="dv">10</span> <span class="op">|</span><span class="st"> </span><span class="kw">is.na</span>(DBH))
-<span class="kw"><a href="../reference/map_quad.html">map_quad</a></span>(right)
+<span class="kw"><a href="../reference/maply_quad.html">maply_quad</a></span>(right)
 <span class="co">#&gt; * Appending tags of dead trees with the suffix '.d'</span>
 <span class="co">#&gt; * Standarizing `dbh` by the count of `dbh` measurements</span>
 <span class="co">#&gt; $`4915`</span>
 <span class="co">#&gt; Warning: Removed 20 rows containing missing values (geom_point).</span></code></pre></div>
-<p><img src="map_files/figure-html/unnamed-chunk-3-3.png" width="98%" style="display: block; margin: auto;"></p>
+<p><img src="map_files/figure-html/unnamed-chunk-2-3.png" width="98%" style="display: block; margin: auto;"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
 <span class="co"># Keeping dead trees with `is.na(DBH)` (e.g. tag 127885.d on the bottom right)</span>
 p &lt;-<span class="st"> </span><span class="kw">filter</span>(top4quad, DBH <span class="op">&gt;</span><span class="st"> </span><span class="dv">20</span> <span class="op">|</span><span class="st"> </span><span class="kw">is.na</span>(DBH))
-<span class="kw">first</span>(<span class="kw"><a href="../reference/map_quad.html">map_quad</a></span>(p))
+<span class="kw">first</span>(<span class="kw"><a href="../reference/maply_quad.html">maply_quad</a></span>(p))
 <span class="co">#&gt; * Appending tags of dead trees with the suffix '.d'</span>
 <span class="co">#&gt; * Standarizing `dbh` by the count of `dbh` measurements</span>
 <span class="co">#&gt; Warning: Removed 34 rows containing missing values (geom_point).</span></code></pre></div>
-<p><img src="map_files/figure-html/unnamed-chunk-3-4.png" width="98%" style="display: block; margin: auto;"></p>
+<p><img src="map_files/figure-html/unnamed-chunk-2-4.png" width="98%" style="display: block; margin: auto;"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
-<span class="co"># For more complex filtering, see also ?fgeo.tool::rm_dead_twice)</span>
-multiple_censuses &lt;-<span class="st"> </span>bciex<span class="op">::</span>bci12vft_mini
-<span class="kw">nrow</span>(multiple_censuses)
-<span class="co">#&gt; [1] 4374</span>
-<span class="kw">nrow</span>(<span class="kw">rm_dead_twice</span>(multiple_censuses))
-<span class="co">#&gt; [1] 2300</span>
+<span class="co"># For more complex filtering, see also ?fgeo.tool::discard_dead_twice)</span>
 
 <span class="co"># Customizing the maps ----------------------------------------------------</span>
 
@@ -342,17 +212,17 @@ myheader &lt;-<span class="st"> </span><span class="kw">paste</span>(
   <span class="dt">sep =</span> <span class="st">"</span><span class="ch">\n</span><span class="st">"</span>
 )
 <span class="co"># See ?top1quad</span>
-<span class="kw"><a href="../reference/map_quad.html">map_quad</a></span>(top1quad, <span class="dt">title_quad =</span> <span class="st">"My Site, 2018. Quad:"</span>, <span class="dt">header =</span> myheader)
+<span class="kw"><a href="../reference/maply_quad.html">maply_quad</a></span>(top1quad, <span class="dt">title_quad =</span> <span class="st">"My Site, 2018. Quad:"</span>, <span class="dt">header =</span> myheader)
 <span class="co">#&gt; * Appending tags of dead trees with the suffix '.d'</span>
 <span class="co">#&gt; * Standarizing `dbh` by the count of `dbh` measurements</span>
 <span class="co">#&gt; $`4915`</span>
 <span class="co">#&gt; Warning: Removed 34 rows containing missing values (geom_point).</span></code></pre></div>
-<p><img src="map_files/figure-html/unnamed-chunk-3-5.png" width="98%" style="display: block; margin: auto;"></p>
+<p><img src="map_files/figure-html/unnamed-chunk-2-5.png" width="98%" style="display: block; margin: auto;"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
 <span class="co"># Tweak the theme with ggplot</span>
 <span class="kw">library</span>(ggplot2)
 
-<span class="kw"><a href="../reference/map_quad.html">map_quad</a></span>(
+<span class="kw"><a href="../reference/maply_quad.html">maply_quad</a></span>(
   top1quad,
   <span class="dt">title_quad =</span> <span class="st">"My Site, 2018. Quad:"</span>,
   <span class="dt">header =</span> <span class="kw"><a href="../reference/headers.html">map_quad_header</a></span>(<span class="st">"spanish"</span>),
@@ -368,11 +238,11 @@ myheader &lt;-<span class="st"> </span><span class="kw">paste</span>(
 <span class="co">#&gt; * Standarizing `dbh` by the count of `dbh` measurements</span>
 <span class="co">#&gt; $`4915`</span>
 <span class="co">#&gt; Warning: Removed 34 rows containing missing values (geom_point).</span></code></pre></div>
-<p><img src="map_files/figure-html/unnamed-chunk-3-6.png" width="98%" style="display: block; margin: auto;"></p>
+<p><img src="map_files/figure-html/unnamed-chunk-2-6.png" width="98%" style="display: block; margin: auto;"></p>
 </div>
-<div id="map_tag-map-tree-tags-by-status" class="section level1">
+<div id="maply_tag-map-tree-tags-by-status" class="section level1">
 <h1 class="hasAnchor">
-<a href="#map_tag-map-tree-tags-by-status" class="anchor"></a><code><a href="../reference/map_tag.html">map_tag()</a></code>: Map tree tags by status</h1>
+<a href="#maply_tag-map-tree-tags-by-status" class="anchor"></a><code><a href="../reference/maply_tag.html">maply_tag()</a></code>: Map tree tags by status</h1>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Filtering the data to map -----------------------------------------------</span>
 
 <span class="co"># Filter the data you want. For example:</span>
@@ -382,10 +252,10 @@ want &lt;-<span class="st"> </span><span class="kw">filter</span>(
   CensusID <span class="op">==</span><span class="st"> </span><span class="dv">6</span>,
   PlotID <span class="op">==</span><span class="st"> </span><span class="dv">1</span>
 )
-p &lt;-<span class="st"> </span><span class="kw"><a href="../reference/map_tag.html">map_tag</a></span>(want)
+p &lt;-<span class="st"> </span><span class="kw"><a href="../reference/maply_tag.html">maply_tag</a></span>(want)
 <span class="co"># Visualizing only the first plot of `p`</span>
 <span class="kw">first</span>(p)</code></pre></div>
-<p><img src="map_files/figure-html/unnamed-chunk-4-1.png" width="98%" style="display: block; margin: auto;"></p>
+<p><img src="map_files/figure-html/unnamed-chunk-3-1.png" width="98%" style="display: block; margin: auto;"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Printing all plots of `p` to .pdf, with parameters optimized for size letter</span>
 <span class="kw">pdf</span>(<span class="st">"map.pdf"</span>, <span class="dt">paper =</span> <span class="st">"letter"</span>, <span class="dt">height =</span> <span class="fl">10.5</span>, <span class="dt">width =</span> <span class="dv">8</span>)
 p
@@ -431,21 +301,22 @@ dead &lt;-<span class="st"> </span>top4quad <span class="op">%&gt;%</span>
 <span class="co">#&gt; 18 449436 dead   dead           NA</span>
 <span class="co">#&gt; 19 449446 dead   dead           NA</span>
 <span class="co">#&gt; 20 549206 dead   dead           NA</span>
-<span class="kw">first</span>(<span class="kw"><a href="../reference/map_tag.html">map_tag</a></span>(dead))
+<span class="kw">first</span>(<span class="kw"><a href="../reference/maply_tag.html">maply_tag</a></span>(dead))
 <span class="co">#&gt; Warning in check_valid_status(x, .status = c(status_d, status_a), "status"): No observation has .status = alive</span>
 <span class="co">#&gt;   * Valid values: dead</span></code></pre></div>
-<p><img src="map_files/figure-html/unnamed-chunk-4-2.png" width="98%" style="display: block; margin: auto;"></p>
+<p><img src="map_files/figure-html/unnamed-chunk-3-2.png" width="98%" style="display: block; margin: auto;"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># * If you filter by `DBH`, you loose the dead trees becaue their `DBH = NA`</span>
 wrong &lt;-<span class="st"> </span><span class="kw">filter</span>(dead, DBH <span class="op">&gt;</span><span class="st"> </span><span class="dv">10</span>)
 wrong
 <span class="co">#&gt; # A tibble: 0 x 29</span>
-<span class="co">#&gt; # ... with 29 variables: MeasureID &lt;int&gt;, PlotID &lt;int&gt;, Plot &lt;chr&gt;, Family</span>
-<span class="co">#&gt; #   &lt;chr&gt;, GenusSpecies &lt;chr&gt;, Genus &lt;chr&gt;, SpeciesName &lt;chr&gt;,</span>
-<span class="co">#&gt; #   SubSpeciesName &lt;chr&gt;, SpeciesID &lt;int&gt;, Mnemonic &lt;chr&gt;, QuadratID</span>
-<span class="co">#&gt; #   &lt;int&gt;, QuadratName &lt;chr&gt;, QX &lt;dbl&gt;, QY &lt;dbl&gt;, gx &lt;dbl&gt;, gy &lt;dbl&gt;,</span>
-<span class="co">#&gt; #   TreeID &lt;int&gt;, Tag &lt;chr&gt;, StemID &lt;int&gt;, StemTag &lt;chr&gt;, PrimaryStem</span>
-<span class="co">#&gt; #   &lt;chr&gt;, CensusID &lt;int&gt;, PlotCensusNumber &lt;int&gt;, DBH &lt;int&gt;, HOM &lt;dbl&gt;,</span>
-<span class="co">#&gt; #   ExactDate &lt;date&gt;, ListOfTSM &lt;chr&gt;, Status &lt;chr&gt;, status_tree &lt;chr&gt;</span>
+<span class="co">#&gt; # ... with 29 variables: MeasureID &lt;int&gt;, PlotID &lt;int&gt;, Plot &lt;chr&gt;,</span>
+<span class="co">#&gt; #   Family &lt;chr&gt;, GenusSpecies &lt;chr&gt;, Genus &lt;chr&gt;, SpeciesName &lt;chr&gt;,</span>
+<span class="co">#&gt; #   SubSpeciesName &lt;chr&gt;, SpeciesID &lt;int&gt;, Mnemonic &lt;chr&gt;,</span>
+<span class="co">#&gt; #   QuadratID &lt;int&gt;, QuadratName &lt;chr&gt;, QX &lt;dbl&gt;, QY &lt;dbl&gt;, gx &lt;dbl&gt;,</span>
+<span class="co">#&gt; #   gy &lt;dbl&gt;, TreeID &lt;int&gt;, Tag &lt;chr&gt;, StemID &lt;int&gt;, StemTag &lt;chr&gt;,</span>
+<span class="co">#&gt; #   PrimaryStem &lt;chr&gt;, CensusID &lt;int&gt;, PlotCensusNumber &lt;int&gt;, DBH &lt;int&gt;,</span>
+<span class="co">#&gt; #   HOM &lt;dbl&gt;, ExactDate &lt;date&gt;, ListOfTSM &lt;chr&gt;, Status &lt;chr&gt;,</span>
+<span class="co">#&gt; #   status_tree &lt;chr&gt;</span>
 <span class="co"># * The right way to do it is to explicietly inlcude rows where DBH = NA</span>
 right &lt;-<span class="st"> </span><span class="kw">filter</span>(dead, DBH <span class="op">&gt;</span><span class="st"> </span><span class="dv">10</span> <span class="op">|</span><span class="st"> </span><span class="kw">is.na</span>(DBH))
 right
@@ -473,40 +344,33 @@ right
 <span class="co">#&gt; 19    223613      1 bci   Rubiaceae   Psychotria hori~ Psycho~ horizontal~</span>
 <span class="co">#&gt; 20    242691      1 bci   Melastomat~ Mouriri myrtill~ Mouriri myrtilloid~</span>
 <span class="co">#&gt; # ... with 22 more variables: SubSpeciesName &lt;chr&gt;, SpeciesID &lt;int&gt;,</span>
-<span class="co">#&gt; #   Mnemonic &lt;chr&gt;, QuadratID &lt;int&gt;, QuadratName &lt;chr&gt;, QX &lt;dbl&gt;, QY</span>
-<span class="co">#&gt; #   &lt;dbl&gt;, gx &lt;dbl&gt;, gy &lt;dbl&gt;, TreeID &lt;int&gt;, Tag &lt;chr&gt;, StemID &lt;int&gt;,</span>
-<span class="co">#&gt; #   StemTag &lt;chr&gt;, PrimaryStem &lt;chr&gt;, CensusID &lt;int&gt;, PlotCensusNumber</span>
-<span class="co">#&gt; #   &lt;int&gt;, DBH &lt;int&gt;, HOM &lt;dbl&gt;, ExactDate &lt;date&gt;, ListOfTSM &lt;chr&gt;, Status</span>
-<span class="co">#&gt; #   &lt;chr&gt;, status_tree &lt;chr&gt;</span>
-<span class="kw">first</span>(<span class="kw"><a href="../reference/map_quad.html">map_quad</a></span>(right))
+<span class="co">#&gt; #   Mnemonic &lt;chr&gt;, QuadratID &lt;int&gt;, QuadratName &lt;chr&gt;, QX &lt;dbl&gt;,</span>
+<span class="co">#&gt; #   QY &lt;dbl&gt;, gx &lt;dbl&gt;, gy &lt;dbl&gt;, TreeID &lt;int&gt;, Tag &lt;chr&gt;, StemID &lt;int&gt;,</span>
+<span class="co">#&gt; #   StemTag &lt;chr&gt;, PrimaryStem &lt;chr&gt;, CensusID &lt;int&gt;,</span>
+<span class="co">#&gt; #   PlotCensusNumber &lt;int&gt;, DBH &lt;int&gt;, HOM &lt;dbl&gt;, ExactDate &lt;date&gt;,</span>
+<span class="co">#&gt; #   ListOfTSM &lt;chr&gt;, Status &lt;chr&gt;, status_tree &lt;chr&gt;</span>
+<span class="kw">first</span>(<span class="kw"><a href="../reference/maply_quad.html">maply_quad</a></span>(right))
 <span class="co">#&gt; * Appending tags of dead trees with the suffix '.d'</span>
 <span class="co">#&gt; * Standarizing `dbh` by the count of `dbh` measurements</span>
 <span class="co">#&gt; Warning: Removed 20 rows containing missing values (geom_point).</span></code></pre></div>
-<p><img src="map_files/figure-html/unnamed-chunk-4-3.png" width="98%" style="display: block; margin: auto;"></p>
+<p><img src="map_files/figure-html/unnamed-chunk-3-3.png" width="98%" style="display: block; margin: auto;"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
 <span class="co"># Keeping dead trees with `is.na(DBH)` (e.g. tag 127885.d on the bottom right)</span>
 p &lt;-<span class="st"> </span><span class="kw">filter</span>(top4quad, DBH <span class="op">&gt;</span><span class="st"> </span><span class="dv">20</span> <span class="op">|</span><span class="st"> </span><span class="kw">is.na</span>(DBH))
-<span class="kw">first</span>(<span class="kw"><a href="../reference/map_tag.html">map_tag</a></span>(p))</code></pre></div>
-<p><img src="map_files/figure-html/unnamed-chunk-4-4.png" width="98%" style="display: block; margin: auto;"></p>
+<span class="kw">first</span>(<span class="kw"><a href="../reference/maply_tag.html">maply_tag</a></span>(p))</code></pre></div>
+<p><img src="map_files/figure-html/unnamed-chunk-3-4.png" width="98%" style="display: block; margin: auto;"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
-<span class="co"># For more complex filtering, see also ?fgeo.tool::rm_dead_twice</span>
-multiple_censuses &lt;-<span class="st"> </span>bciex<span class="op">::</span>bci12vft_mini
-<span class="kw">nrow</span>(multiple_censuses)
-<span class="co">#&gt; [1] 4374</span>
-<span class="kw">nrow</span>(<span class="kw">rm_dead_twice</span>(multiple_censuses))
-<span class="co">#&gt; [1] 2300</span>
-
-
+<span class="co"># For more complex filtering, see also ?fgeo.tool::discard_dead_twice</span>
 
 <span class="co"># Customizing the maps ----------------------------------------------------</span>
 
 <span class="co"># Common tweaks</span>
 
-p &lt;-<span class="st"> </span><span class="kw"><a href="../reference/map_tag.html">map_tag</a></span>(top1quad, <span class="dt">show_page =</span> <span class="ot">FALSE</span>, <span class="dt">show_subquad =</span> <span class="ot">FALSE</span>)
+p &lt;-<span class="st"> </span><span class="kw"><a href="../reference/maply_tag.html">maply_tag</a></span>(top1quad, <span class="dt">show_page =</span> <span class="ot">FALSE</span>, <span class="dt">show_subquad =</span> <span class="ot">FALSE</span>)
 <span class="kw">first</span>(p)</code></pre></div>
-<p><img src="map_files/figure-html/unnamed-chunk-4-5.png" width="98%" style="display: block; margin: auto;"></p>
+<p><img src="map_files/figure-html/unnamed-chunk-3-5.png" width="98%" style="display: block; margin: auto;"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
-p &lt;-<span class="st"> </span><span class="kw"><a href="../reference/map_tag.html">map_tag</a></span>(
+p &lt;-<span class="st"> </span><span class="kw"><a href="../reference/maply_tag.html">maply_tag</a></span>(
   top1quad,
   <span class="dt">title_quad =</span> <span class="st">"BCI 2012. Quadrat: "</span>,
   <span class="dt">bl =</span> <span class="st">"bottom-left"</span>, <span class="dt">br =</span> <span class="st">"bottom-right"</span>, <span class="dt">tr =</span> <span class="st">"top-right"</span>, <span class="dt">tl =</span> <span class="st">"top-left"</span>,
@@ -517,7 +381,7 @@ p &lt;-<span class="st"> </span><span class="kw"><a href="../reference/map_tag.h
   <span class="dt">move_edge =</span> <span class="fl">0.5</span>
 )
 <span class="kw">first</span>(p)</code></pre></div>
-<p><img src="map_files/figure-html/unnamed-chunk-4-6.png" width="98%" style="display: block; margin: auto;"></p>
+<p><img src="map_files/figure-html/unnamed-chunk-3-6.png" width="98%" style="display: block; margin: auto;"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
 
 
@@ -525,16 +389,16 @@ p &lt;-<span class="st"> </span><span class="kw"><a href="../reference/map_tag.h
 
 <span class="kw">library</span>(ggplot2)
 
-p &lt;-<span class="st"> </span><span class="kw"><a href="../reference/map_tag.html">map_tag</a></span>(top1quad, <span class="dt">theme =</span> <span class="kw">theme_gray</span>())
+p &lt;-<span class="st"> </span><span class="kw"><a href="../reference/maply_tag.html">maply_tag</a></span>(top1quad, <span class="dt">theme =</span> <span class="kw">theme_gray</span>())
 <span class="kw">first</span>(p)</code></pre></div>
-<p><img src="map_files/figure-html/unnamed-chunk-4-7.png" width="98%" style="display: block; margin: auto;"></p>
+<p><img src="map_files/figure-html/unnamed-chunk-3-7.png" width="98%" style="display: block; margin: auto;"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
-<span class="co"># Tweaking the default theme of map_tag()</span>
+<span class="co"># Tweaking the default theme of maply_tag()</span>
 
 small_tweak &lt;-<span class="st"> </span><span class="kw"><a href="../reference/themes.html">theme_map_tag</a></span>(<span class="dt">legend.position =</span> <span class="st">"bottom"</span>)
-p &lt;-<span class="st"> </span><span class="kw"><a href="../reference/map_tag.html">map_tag</a></span>(top1quad, <span class="dt">theme =</span> small_tweak)
+p &lt;-<span class="st"> </span><span class="kw"><a href="../reference/maply_tag.html">maply_tag</a></span>(top1quad, <span class="dt">theme =</span> small_tweak)
 <span class="kw">first</span>(p)</code></pre></div>
-<p><img src="map_files/figure-html/unnamed-chunk-4-8.png" width="98%" style="display: block; margin: auto;"></p>
+<p><img src="map_files/figure-html/unnamed-chunk-3-8.png" width="98%" style="display: block; margin: auto;"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
 large_tweak &lt;-<span class="st"> </span><span class="kw">theme</span>(
   <span class="dt">legend.position =</span> <span class="st">"bottom"</span>,
@@ -550,9 +414,9 @@ large_tweak &lt;-<span class="st"> </span><span class="kw">theme</span>(
   <span class="dt">panel.grid.minor =</span> <span class="kw">element_line</span>(<span class="dt">colour =</span> <span class="st">"black"</span>, <span class="dt">linetype =</span> <span class="st">"dotted"</span>),
   <span class="dt">panel.grid.major =</span> <span class="kw">element_line</span>(<span class="dt">colour =</span> <span class="st">"black"</span>)
 )
-p &lt;-<span class="st"> </span><span class="kw"><a href="../reference/map_tag.html">map_tag</a></span>(top1quad, <span class="dt">theme =</span> large_tweak)
+p &lt;-<span class="st"> </span><span class="kw"><a href="../reference/maply_tag.html">maply_tag</a></span>(top1quad, <span class="dt">theme =</span> large_tweak)
 <span class="kw">first</span>(p)</code></pre></div>
-<p><img src="map_files/figure-html/unnamed-chunk-4-9.png" width="98%" style="display: block; margin: auto;"></p>
+<p><img src="map_files/figure-html/unnamed-chunk-3-9.png" width="98%" style="display: block; margin: auto;"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
 
 
@@ -565,14 +429,14 @@ n &lt;-<span class="st"> </span><span class="kw">nrow</span>(smaller)
 smaller<span class="op">$</span>QX &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dv">0</span><span class="op">:</span><span class="dv">10</span>, n, <span class="dt">replace =</span> <span class="ot">TRUE</span>)
 smaller<span class="op">$</span>QY &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dv">0</span><span class="op">:</span><span class="dv">10</span>, n, <span class="dt">replace =</span> <span class="ot">TRUE</span>)
 
-p &lt;-<span class="st"> </span><span class="kw"><a href="../reference/map_tag.html">map_tag</a></span>(smaller, <span class="dt">x_q =</span> <span class="dv">10</span>, <span class="dt">x_sq =</span> <span class="fl">2.5</span>)
+p &lt;-<span class="st"> </span><span class="kw"><a href="../reference/maply_tag.html">maply_tag</a></span>(smaller, <span class="dt">x_q =</span> <span class="dv">10</span>, <span class="dt">x_sq =</span> <span class="fl">2.5</span>)
 <span class="kw">first</span>(p)</code></pre></div>
-<p><img src="map_files/figure-html/unnamed-chunk-4-10.png" width="98%" style="display: block; margin: auto;"></p>
+<p><img src="map_files/figure-html/unnamed-chunk-3-10.png" width="98%" style="display: block; margin: auto;"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
 <span class="co"># If limit-lines aren't visible, try extending the grid a little</span>
-p &lt;-<span class="st"> </span><span class="kw"><a href="../reference/map_tag.html">map_tag</a></span>(smaller, <span class="dt">x_q =</span> <span class="dv">10</span>, <span class="dt">x_sq =</span> <span class="fl">2.5</span>, <span class="dt">move_edge =</span> <span class="fl">0.25</span>)[<span class="dv">1</span>]
+p &lt;-<span class="st"> </span><span class="kw"><a href="../reference/maply_tag.html">maply_tag</a></span>(smaller, <span class="dt">x_q =</span> <span class="dv">10</span>, <span class="dt">x_sq =</span> <span class="fl">2.5</span>, <span class="dt">move_edge =</span> <span class="fl">0.25</span>)[<span class="dv">1</span>]
 <span class="kw">first</span>(p)</code></pre></div>
-<p><img src="map_files/figure-html/unnamed-chunk-4-11.png" width="98%" style="display: block; margin: auto;"></p>
+<p><img src="map_files/figure-html/unnamed-chunk-3-11.png" width="98%" style="display: block; margin: auto;"></p>
 </div>
 </div>
   </div>
@@ -582,9 +446,8 @@ p &lt;-<span class="st"> </span><span class="kw"><a href="../reference/map_tag.h
       <h2 class="hasAnchor">
 <a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
-<li><a href="#map_sp-map-species-distribution"><code><a href="--/reference/map_sp-html">map_sp()</a></code>: Map species’ distribution</a></li>
-      <li><a href="#map_quad-map-trees-within-a-quadrat"><code><a href="--/reference/map_quad-html">map_quad()</a></code>: Map trees within a quadrat</a></li>
-      <li><a href="#map_tag-map-tree-tags-by-status"><code><a href="--/reference/map_tag-html">map_tag()</a></code>: Map tree tags by status</a></li>
+<li><a href="#maply_quad-map-trees-within-a-quadrat"><code><a href="--/reference/maply_quad-html">maply_quad()</a></code>: Map trees within a quadrat</a></li>
+      <li><a href="#maply_tag-map-tree-tags-by-status"><code><a href="--/reference/maply_tag-html">maply_tag()</a></code>: Map tree tags by status</a></li>
       </ul>
 </div>
       </div>

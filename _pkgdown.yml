@@ -49,14 +49,20 @@ navbar:
 
 
 reference:
-  - title: "Main functions"
+  - title: Functions to map on multiple pages (best for printing on a .pdf file)
     contents:
-      - map_quad
-      - map_sp
-      - map_plot
-      - map_tag
-      - fgeo_geoms
-      - fgeo_facets
+      - maply_tag
+      - maply_quad
+      - maply_sp_elev
+      
+  - title: Functions to map on a single page
+      - map_gx_gy_elev
+      - contour_elev
+      - label_elev
+      - add_sp
+      - wrap
+      - limit_gx_gy
+      - hide
 
   - title: "Helpers"
     contents:
