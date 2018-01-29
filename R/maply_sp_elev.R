@@ -293,7 +293,8 @@ map_pure_elev <- function(elevation,
 #' Map a base over which other map components can later be added.
 #' 
 #' @template data_ggplot
-#' @seealso [map_sp_elev()], [map_elev()], [maply_sp_elev()].
+#' @seealso [map_sp_elev()], [map_elev()], [maply_sp_elev()], 
+#'   [ggplot2::ggplot()].
 #' @family map components.
 #' @export
 #' @examples 
@@ -336,8 +337,18 @@ map_gx_gy <- function(data) {
 #' @template p
 #' @template xlim_ylim
 #' 
+#' @seealso [map_sp_elev()], [maply_sp_elev()], [ggplot2::coord_fixed()].
+#' 
 #' @family map components.
 #' @export
+#' @examples 
+#' census <- bciex::bci12s7mini
+#' map <- map_gx_gy(census)
+#' limit_gx_gy(map, xlim = c(0, 500), c(0, 750))
+#' 
+#' elevation <- bciex::bci_elevation
+#' map <- map_gx_gy_elev(elevation)
+#' limit_gx_gy(map, xlim = c(0, 500), c(0, 750))
 limit_gx_gy <- function(p, xlim = NULL, ylim = NULL) {
   # If user doesn't provide limits, set limits based on entire dataset
   data <- p[["data"]]
@@ -360,8 +371,16 @@ limit_gx_gy <- function(p, xlim = NULL, ylim = NULL) {
 #'   different color.
 #' @template shape_point_size
 #' 
+#' @seealso [map_sp_elev()], [maply_sp_elev()], [ggplot2::geom_point()].
+#' 
 #' @family map components.
 #' @export
+#' @examples 
+#' census <- fgeo.tool::top(bciex::bci12s7mini, sp, 2)
+#' 
+#' add_sp(map_gx_gy(census))
+#' 
+#' add_sp(map_gx_gy(census), fill = "white", shape = 22, point_size = 4)
 add_sp <- function(p, data = NULL, fill = "sp", shape = 21, point_size = 3) {
   check_add_sp(p = p, data = data)
   
@@ -396,7 +415,8 @@ add_sp <- function(p, data = NULL, fill = "sp", shape = 21, point_size = 3) {
 #' @template low_high
 #' @param bins A number giving the number of elevation lines to map.
 #' 
-#' @seealso [maply_sp_elev()], [map_sp_elev()], [map_elev()].
+#' @seealso [maply_sp_elev()], [map_sp_elev()], [map_elev()], 
+#'   [ggplot2::stat_contour()].
 #' 
 #' @family map components.
 #' @export
@@ -432,7 +452,8 @@ contour_elev <- function(p,
 #' @param xyjust A number to adjust the position of the text labels of the 
 #'   elevation lines.
 #'
-#' @seealso [maply_sp_elev()], [map_sp_elev()], [map_elev()].
+#' @seealso [maply_sp_elev()], [map_sp_elev()], [map_elev()], 
+#'   [ggplot2::geom_text()].
 #' 
 #' @family map components.
 #' @export
@@ -517,7 +538,16 @@ text_at_max <- function(x,
 #' `hide_legend_color` hides the color legend, for example, of elevation lines.
 #' 
 #' @template p
+#' 
+#' @seealso [ggplot2::labs()],  [ggplot2::guides()].
 #' @family map components.
+#' @examples 
+#' elevation <- bciex::bci_elevation
+#' map <- map_gx_gy_elev(elevation)
+#' hide_axis_labels(map)
+#' 
+#' with_color_legend <- contour_elev(map_gx_gy_elev(elevation))
+#' hide_legend_color(with_color_legend)
 #' @name hide 
 NULL
 
@@ -553,16 +583,26 @@ hide_legend_color <- function(p) {
 #' 
 #' @export
 #' @examples
-#' # Choosing a tiny dataset for example
-#' census <- fgeo.tool::top(bciex::bci12s7mini, sp, 2)
+#' census <- bciex::bci12s7mini
+#' species <- c("hybapr", "faraoc")
+#' two_sp <- filter(census, sp %in% species)
 #' 
-#' map_gx_gy(census) %>% 
-#'   add_sp() %>% 
+#' add_sp(map_gx_gy(two_sp))
+#' 
+#' add_sp(map_gx_gy(two_sp)) %>% 
 #'   wrap("sp")
+#' # Same
+#' add_sp(map_gx_gy(two_sp)) %>% 
+#'   wrap(~sp)
 #' 
-#' map_gx_gy(census) %>% 
-#'   add_sp() %>% 
-#'   wrap(~sp + status)
+#' add_sp(map_gx_gy(two_sp)) %>% 
+#'   wrap("status")
+#' 
+#' add_sp(map_gx_gy(two_sp)) %>% 
+#'   wrap(c("sp", "status"))
+#' # Same
+#' add_sp(map_gx_gy(two_sp)) %>% 
+#'   wrap(~ sp + status)
 wrap <- function(p, facets, ...) {
   p + facet_wrap(facets, ...)
 }

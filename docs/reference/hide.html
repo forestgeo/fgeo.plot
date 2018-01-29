@@ -124,12 +124,19 @@
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p>Other map components.: <code><a href='add_sp.html'>add_sp</a></code>,
+    <p><code><a href='http://www.rdocumentation.org/packages/ggplot2/topics/labs'>ggplot2::labs()</a></code>,  <code><a href='http://www.rdocumentation.org/packages/ggplot2/topics/guides'>ggplot2::guides()</a></code>.</p>
+<p>Other map components.: <code><a href='add_sp.html'>add_sp</a></code>,
   <code><a href='contour_elev.html'>contour_elev</a></code>, <code><a href='label_elev.html'>label_elev</a></code>,
   <code><a href='limit_gx_gy.html'>limit_gx_gy</a></code>, <code><a href='map_gx_gy_elev.html'>map_gx_gy_elev</a></code>,
   <code><a href='wrap.html'>wrap</a></code></p>
     
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='no'>elevation</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>bciex</span><span class='kw ns'>::</span><span class='no'><a href='http://www.rdocumentation.org/packages/bciex/topics/bci_elevation'>bci_elevation</a></span>
+<span class='no'>map</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='map_gx_gy_elev.html'>map_gx_gy_elev</a></span>(<span class='no'>elevation</span>)
+<span class='fu'>hide_axis_labels</span>(<span class='no'>map</span>)</div><div class='img'><img src='hide-3.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
+<span class='no'>with_color_legend</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='contour_elev.html'>contour_elev</a></span>(<span class='fu'><a href='map_gx_gy_elev.html'>map_gx_gy_elev</a></span>(<span class='no'>elevation</span>))
+<span class='fu'>hide_legend_color</span>(<span class='no'>with_color_legend</span>)</div><div class='img'><img src='hide-4.png' alt='' width='700' height='432.632880098887' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -137,7 +144,9 @@
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#see-also">See also</a></li>
-          </ul>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
 </div>

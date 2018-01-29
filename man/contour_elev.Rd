@@ -33,7 +33,8 @@ contour_elev(
 )
 }
 \seealso{
-\code{\link[=maply_sp_elev]{maply_sp_elev()}}, \code{\link[=map_sp_elev]{map_sp_elev()}}, \code{\link[=map_elev]{map_elev()}}.
+\code{\link[=maply_sp_elev]{maply_sp_elev()}}, \code{\link[=map_sp_elev]{map_sp_elev()}}, \code{\link[=map_elev]{map_elev()}},
+\code{\link[ggplot2:stat_contour]{ggplot2::stat_contour()}}.
 
 Other map components.: \code{\link{add_sp}},
   \code{\link{hide}}, \code{\link{label_elev}},

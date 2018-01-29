@@ -17,7 +17,17 @@ hide_legend_color(p)
 \code{hide_axis_labels} hides axis labels.
 \code{hide_legend_color} hides the color legend, for example, of elevation lines.
 }
+\examples{
+elevation <- bciex::bci_elevation
+map <- map_gx_gy_elev(elevation)
+hide_axis_labels(map)
+
+with_color_legend <- contour_elev(map_gx_gy_elev(elevation))
+hide_legend_color(with_color_legend)
+}
 \seealso{
+\code{\link[ggplot2:labs]{ggplot2::labs()}},  \code{\link[ggplot2:guides]{ggplot2::guides()}}.
+
 Other map components.: \code{\link{add_sp}},
   \code{\link{contour_elev}}, \code{\link{label_elev}},
   \code{\link{limit_gx_gy}}, \code{\link{map_gx_gy_elev}},

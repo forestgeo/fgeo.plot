@@ -20,7 +20,16 @@ different color.}
 \description{
 Represent species with points.
 }
+\examples{
+census <- fgeo.tool::top(bciex::bci12s7mini, sp, 2)
+
+add_sp(map_gx_gy(census))
+
+add_sp(map_gx_gy(census), fill = "white", shape = 22, point_size = 4)
+}
 \seealso{
+\code{\link[=map_sp_elev]{map_sp_elev()}}, \code{\link[=maply_sp_elev]{maply_sp_elev()}}, \code{\link[ggplot2:geom_point]{ggplot2::geom_point()}}.
+
 Other map components.: \code{\link{contour_elev}},
   \code{\link{hide}}, \code{\link{label_elev}},
   \code{\link{limit_gx_gy}}, \code{\link{map_gx_gy_elev}},

@@ -37,7 +37,8 @@ add_sp(base_census)
 contour_elev(base_elev)
 }
 \seealso{
-\code{\link[=map_sp_elev]{map_sp_elev()}}, \code{\link[=map_elev]{map_elev()}}, \code{\link[=maply_sp_elev]{maply_sp_elev()}}.
+\code{\link[=map_sp_elev]{map_sp_elev()}}, \code{\link[=map_elev]{map_elev()}}, \code{\link[=maply_sp_elev]{maply_sp_elev()}},
+\code{\link[ggplot2:ggplot]{ggplot2::ggplot()}}.
 
 Other map components.: \code{\link{add_sp}},
   \code{\link{contour_elev}}, \code{\link{hide}},

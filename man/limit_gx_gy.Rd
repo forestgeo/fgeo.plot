@@ -15,7 +15,18 @@ minimum and maximum limits of the vertical and horizontal coordinates.}
 \description{
 Set the map limits.
 }
+\examples{
+census <- bciex::bci12s7mini
+map <- map_gx_gy(census)
+limit_gx_gy(map, xlim = c(0, 500), c(0, 750))
+
+elevation <- bciex::bci_elevation
+map <- map_gx_gy_elev(elevation)
+limit_gx_gy(map, xlim = c(0, 500), c(0, 750))
+}
 \seealso{
+\code{\link[=map_sp_elev]{map_sp_elev()}}, \code{\link[=maply_sp_elev]{maply_sp_elev()}}, \code{\link[ggplot2:coord_fixed]{ggplot2::coord_fixed()}}.
+
 Other map components.: \code{\link{add_sp}},
   \code{\link{contour_elev}}, \code{\link{hide}},
   \code{\link{label_elev}}, \code{\link{map_gx_gy_elev}},

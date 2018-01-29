@@ -57,16 +57,26 @@ This function behaves like \code{\link[ggplot2:facet_wrap]{ggplot2::facet_wrap()
 allow using it as part of a pipe.
 }
 \examples{
-# Choosing a tiny dataset for example
-census <- fgeo.tool::top(bciex::bci12s7mini, sp, 2)
+census <- bciex::bci12s7mini
+species <- c("hybapr", "faraoc")
+two_sp <- filter(census, sp \%in\% species)
 
-map_gx_gy(census) \%>\% 
-  add_sp() \%>\% 
+add_sp(map_gx_gy(two_sp))
+
+add_sp(map_gx_gy(two_sp)) \%>\% 
   wrap("sp")
+# Same
+add_sp(map_gx_gy(two_sp)) \%>\% 
+  wrap(~sp)
 
-map_gx_gy(census) \%>\% 
-  add_sp() \%>\% 
-  wrap(~sp + status)
+add_sp(map_gx_gy(two_sp)) \%>\% 
+  wrap("status")
+
+add_sp(map_gx_gy(two_sp)) \%>\% 
+  wrap(c("sp", "status"))
+# Same
+add_sp(map_gx_gy(two_sp)) \%>\% 
+  wrap(~ sp + status)
 }
 \seealso{
 \code{\link[ggplot2:facet_wrap]{ggplot2::facet_wrap()}}, \code{\link[ggplot2:facet_grid]{ggplot2::facet_grid()}}.

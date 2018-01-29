@@ -13,6 +13,14 @@
 #' @examples
 #' theme_map_tag()
 #' theme_map_quad()
+#' 
+#' 
+#' # Compose `theme_default()` with `g(f(x))` or `f(x) %>% g()`
+#' # NOT as ggplot2 themes. DONT DO THIS: ` f(x) + g()`.
+#' theme_default(map_gx_gy_elev(bciex::bci_elevation))
+#' 
+#' map_gx_gy(bciex::bci12t7mini) %>% 
+#'   theme_default()
 #' @name themes
 NULL
 
