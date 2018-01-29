@@ -4,7 +4,7 @@
 \alias{maply_sp_elev}
 \alias{map_sp_elev}
 \alias{map_elev}
-\title{Wrappers to map species and elevation data.}
+\title{Map species and elevation data.}
 \usage{
 maply_sp_elev(census, elevation = NULL, species = "all", fill = "black",
   shape = 21, point_size = 3, contour_size = 0.5, low = "blue",
@@ -86,39 +86,59 @@ multiple maps within the area of a single graphic plot.}
 }
 \value{
 \itemize{
-\item \code{maply_sp_elev()} returns a list of ggplots
+\item \code{maply_sp_elev()} returns a list of ggplots.
 \item \code{map_elev()} and \code{map_sp_elev()} return a ggoplot.
 }
 }
 \description{
 These functions wrap a number of map elements for convenience:
 \itemize{
-\item \code{maply_sp_elev()} applies the function \code{map_sp_elev()} to each species in
-the census dataset taht you provide. It outputs a list of maps, one per
+\item Use \code{map_sp_elev()} to map species and optionally elevation data in a
+single page. You can map multiple species on the same plot or you can facet
+the output to map each species on a single plot and all plots in a single
+page.
+\item Use \code{map_elev()} if you want to map only elevation in the sipmlest way.
+\item Use \code{maply_sp_elev()} to apply the function \code{map_sp_elev()} to each species
+in a census dataset. The output is not a map but a list of maps, one per
 species, that can be printed on a .pdf file.
-\item \code{map_sp_elev()} maps species and optionally elevation data.
-\item \code{map_elev()} is a smaller, simpler, wrapper to map only elevation data.
 }
 }
-\details{
-All these functions wrap functions from the \strong{ggplot2} package. For more
-control you can use \strong{ggplot2} directly or smaller wrappers in \strong{fgeo.map}
-(see sections See Also and Examples).
+\section{Comparing ggplot2 and fgeomap}{
+
+These functions wrap functions from the \strong{ggplot2} package. For more
+control you can use \strong{ggplot2} directly or smaller wrappers in
+\strong{fgeo.map} (see the sections See Also and Examples). \strong{ggplot2}
+will give you maximum control and is your best choise if you are already
+familiar with it. The wrapper functions in \strong{fgeo.map} focus on
+ForestGEO's data: For example, their names commonly mention the variable of a
+ForestGEO dataset they work with.
+
+The most important difference between \strong{ggplot2} and \strong{fgeo.map}
+is in the way you compose multiple functions to create complex plots. With
+\strong{ggplot2} you compose multiple functions with \code{+}. For example,
+to apply functions \code{f()} then \code{g()} you do something like this:
+\code{f(data) + g()}. With \strong{fgeo.map} you compose multiple functions
+in the usual way with \code{g(f(data))}, or in the modern way with the pipe:
+\code{f(data)} \code{\%>\%} \code{g()} -- it is up to you. To learn more
+about the pipe see http://r4ds.had.co.nz/pipes.html.
 }
+
 \examples{
 census <- fgeo.tool::top(bciex::bci12s7mini, sp, 2)
-
 elevation <- bciex::bci_elevation
-head(elevation)
-elevation <- fgeo.tool::restructure_elev(bciex::bci_elevation)
-head(elevation)
 
-# Showing first plot only.
-p <- maply_sp_elev(census)
-p[[1]]
+# Map on multiple pages ---------------------------------------------------
 
+p1 <- maply_sp_elev(census)
+# Showing first map only.
+p1[[1]]
 
-p <- maply_sp_elev(
+p2 <- maply_sp_elev(census, elevation)
+# Showing second map only.
+p2[[2]]
+
+# Tweaking
+p3 <- maply_sp_elev(
   census,
   elevation,
   species = "all",
@@ -132,15 +152,49 @@ p <- maply_sp_elev(
   bins = 7,
   label_elev = FALSE
 )
-p[[1]]
+p3[[1]]
 
-# Same but outputs a plot, not a list of plots
-map_sp_elev(census, elevation)
+# Map on a single page (maybe multiple panels) ----------------------------
 
-# Similar but maps elevation exclusively
+# Simplest way to map elevation data only
 map_elev(elevation)
 
+map_sp_elev(census)
+
+map_sp_elev(census, elevation)
+
 # For maximum control, you can compose maps as you like
+
+# Traditional: g(f(x))
+contour_elev(map_gx_gy_elev(elevation))
+
+# With the pipe: f(x) \%>\% g()
+map_gx_gy_elev(elevation) \%>\%
+  contour_elev()
+
+# With traditional sintax: As you add more functions readability decreases.
+theme_default(
+  wrap(
+    add_sp(
+      hide_legend_color(
+        hide_axis_labels(
+          label_elev(
+            contour_elev(
+              limit_gx_gy(
+                map_gx_gy_elev(elevation), 
+                xlim = c(0, 1200)
+              ),
+              contour_size = 0.5
+            ),
+            label_color = "red"
+          )
+        )
+      ), census, point_size = 5
+    ), "sp"
+  ), legend.position = "top"
+)
+
+# Same with the pipe: As you add more functions readability doesn't change
 map_gx_gy_elev(elevation) \%>\%
   limit_gx_gy(xlim = c(0, 1200)) \%>\%
   contour_elev(contour_size = 0.5) \%>\%

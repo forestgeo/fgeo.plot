@@ -1,15 +1,16 @@
-#' Wrappers to map species and elevation data.
+#' Map species and elevation data.
 #' 
 #' These functions wrap a number of map elements for convenience:
-#' * `maply_sp_elev()` applies the function `map_sp_elev()` to each species in
-#' the census dataset taht you provide. It outputs a list of maps, one per
+#' * Use `map_sp_elev()` to map species and optionally elevation data in a 
+#'   single page. You can map multiple species on the same plot or you can facet
+#'   the output to map each species on a single plot and all plots in a single
+#'   page.
+#' * Use `map_elev()` if you want to map only elevation in the sipmlest way.
+#' * Use `maply_sp_elev()` to apply the function `map_sp_elev()` to each species
+#' in a census dataset. The output is not a map but a list of maps, one per
 #' species, that can be printed on a .pdf file.
-#' * `map_sp_elev()` maps species and optionally elevation data. 
-#' * `map_elev()` is a smaller, simpler, wrapper to map only elevation data.
 #' 
-#' All these functions wrap functions from the __ggplot2__ package. For more
-#' control you can use __ggplot2__ directly or smaller wrappers in __fgeo.map__
-#' (see sections See Also and Examples).
+#' @template compare_ggplot2
 #' 
 #' @param census A dataframe; specifically, a ForestGEO's census.
 #' @param elevation A list or dataframe giving ForestGEO's elevation-data.
@@ -33,24 +34,26 @@
 #' @family `maply_*` functions.
 #' 
 #' @return 
-#' * `maply_sp_elev()` returns a list of ggplots
+#' * `maply_sp_elev()` returns a list of ggplots.
 #' * `map_elev()` and `map_sp_elev()` return a ggoplot.
 #' 
 #' @export 
 #' @examples
 #' census <- fgeo.tool::top(bciex::bci12s7mini, sp, 2)
-#' 
 #' elevation <- bciex::bci_elevation
-#' head(elevation)
-#' elevation <- fgeo.tool::restructure_elev(bciex::bci_elevation)
-#' head(elevation)
 #' 
-#' # Showing first plot only.
-#' p <- maply_sp_elev(census)
-#' p[[1]]
+#' # Map on multiple pages ---------------------------------------------------
 #' 
+#' p1 <- maply_sp_elev(census)
+#' # Showing first map only.
+#' p1[[1]]
 #' 
-#' p <- maply_sp_elev(
+#' p2 <- maply_sp_elev(census, elevation)
+#' # Showing second map only.
+#' p2[[2]]
+#' 
+#' # Tweaking
+#' p3 <- maply_sp_elev(
 #'   census,
 #'   elevation,
 #'   species = "all",
@@ -64,15 +67,49 @@
 #'   bins = 7,
 #'   label_elev = FALSE
 #' )
-#' p[[1]]
+#' p3[[1]]
 #' 
-#' # Same but outputs a plot, not a list of plots
-#' map_sp_elev(census, elevation)
+#' # Map on a single page (maybe multiple panels) ----------------------------
 #' 
-#' # Similar but maps elevation exclusively
+#' # Simplest way to map elevation data only
 #' map_elev(elevation)
 #' 
+#' map_sp_elev(census)
+#' 
+#' map_sp_elev(census, elevation)
+#' 
 #' # For maximum control, you can compose maps as you like
+#' 
+#' # Traditional: g(f(x))
+#' contour_elev(map_gx_gy_elev(elevation))
+#' 
+#' # With the pipe: f(x) %>% g()
+#' map_gx_gy_elev(elevation) %>%
+#'   contour_elev()
+#'
+#' # With traditional sintax: As you add more functions readability decreases.
+#' theme_default(
+#'   wrap(
+#'     add_sp(
+#'       hide_legend_color(
+#'         hide_axis_labels(
+#'           label_elev(
+#'             contour_elev(
+#'               limit_gx_gy(
+#'                 map_gx_gy_elev(elevation), 
+#'                 xlim = c(0, 1200)
+#'               ),
+#'               contour_size = 0.5
+#'             ),
+#'             label_color = "red"
+#'           )
+#'         )
+#'       ), census, point_size = 5
+#'     ), "sp"
+#'   ), legend.position = "top"
+#' )
+#'
+#' # Same with the pipe: As you add more functions readability doesn't change
 #' map_gx_gy_elev(elevation) %>%
 #'   limit_gx_gy(xlim = c(0, 1200)) %>%
 #'   contour_elev(contour_size = 0.5) %>%
@@ -232,8 +269,8 @@ map_pure_elev <- function(elevation,
                           label_color = "grey",
                           xyjust = 1,
                           fontface = "italic") {
+  elevation <- fgeo.tool::restructure_elev(elevation)
   base <- elevation %>% 
-    fgeo.tool::restructure_elev() %>% 
     map_gx_gy_elev() %>% 
     contour_elev(
       contour_size = contour_size, low = low, high = high, bins = bins
@@ -256,14 +293,31 @@ map_pure_elev <- function(elevation,
 #' Map a base over which other map components can later be added.
 #' 
 #' @template data_ggplot
-#' 
-#' @name map_gx_gy_elev
+#' @seealso [map_sp_elev()], [map_elev()], [maply_sp_elev()].
 #' @family map components.
-NULL
-
 #' @export
-#' @rdname map_gx_gy_elev
+#' @examples 
+#' census <- fgeo.tool::top(bciex::bci12s7mini, sp, 2)
+#' elevation <- bciex::bci_elevation
+#' 
+#' # Look alike but internally they are not. 
+#' base_elev <- map_gx_gy_elev(elevation)
+#' base_census <- map_gx_gy(census)
+#' 
+#' # Works
+#' contour_elev(base_elev)
+#' 
+#' # # Fails.
+#' # \dontrun{
+#' # add_sp(base_elev)
+#' # contour_elev(base_census)
+#' # }
+#' 
+#' # Supply the correct base
+#' add_sp(base_census)
+#' contour_elev(base_elev)
 map_gx_gy_elev <- function(data) {
+  data <- fgeo.tool::restructure_elev(data)
   ggplot(data, aes(gx, gy, z = elev))
 }
 
@@ -342,13 +396,27 @@ add_sp <- function(p, data = NULL, fill = "sp", shape = 21, point_size = 3) {
 #' @template low_high
 #' @param bins A number giving the number of elevation lines to map.
 #' 
+#' @seealso [maply_sp_elev()], [map_sp_elev()], [map_elev()].
+#' 
 #' @family map components.
 #' @export
+#' @examples 
+#' elevation <- bciex::bci_elevation
+#' 
+#' base_elev <- map_gx_gy_elev(elevation)
+#' 
+#' contour_elev(base_elev)
+#' 
+#' contour_elev(
+#'   base_elev, contour_size = 0.5, low = "grey", high = "black", bins = 4
+#' )
 contour_elev <- function(p, 
                          contour_size = 1, 
                          low = "blue", 
                          high = "red", 
                          bins = NULL) {
+  fgeo.tool::check_crucial_names(p[["data"]], "elev")
+  
    p +
     stat_contour(
       aes(x = gx, y = gy, z = elev, colour = ..level..), 
@@ -363,9 +431,23 @@ contour_elev <- function(p,
 #' @template label_size_label_color_fontface
 #' @param xyjust A number to adjust the position of the text labels of the 
 #'   elevation lines.
+#'
+#' @seealso [maply_sp_elev()], [map_sp_elev()], [map_elev()].
 #' 
 #' @family map components.
 #' @export
+#' @examples 
+#' elevation <- bciex::bci_elevation
+#' 
+#' contour_elev(map_gx_gy_elev(elevation))
+#' 
+#' contour_elev(map_gx_gy_elev(elevation)) %>% 
+#'   # Pusing elevation label out of the plot area and removig color legend
+#'   limit_gx_gy(xlim = c(0, 1010), ylim = c(0, 510)) %>% 
+#'   label_elev(
+#'     label_size = 2, label_color = "black", xyjust = -0.25, fontface = "bold"
+#'   ) %>% 
+#'   hide_legend_color()
 label_elev <- function(p, 
                        label_size = 3,
                        label_color = "grey",

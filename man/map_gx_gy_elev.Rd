@@ -2,7 +2,6 @@
 % Please edit documentation in R/maply_sp_elev.R
 \name{map_gx_gy_elev}
 \alias{map_gx_gy_elev}
-\alias{map_gx_gy_elev}
 \alias{map_gx_gy}
 \title{Map a base over which other map components can later be added.}
 \usage{
@@ -16,7 +15,30 @@ map_gx_gy(data)
 \description{
 Map a base over which other map components can later be added.
 }
+\examples{
+census <- fgeo.tool::top(bciex::bci12s7mini, sp, 2)
+elevation <- bciex::bci_elevation
+
+# Look alike but internally they are not. 
+base_elev <- map_gx_gy_elev(elevation)
+base_census <- map_gx_gy(census)
+
+# Works
+contour_elev(base_elev)
+
+# # Fails.
+# \dontrun{
+# add_sp(base_elev)
+# contour_elev(base_census)
+# }
+
+# Supply the correct base
+add_sp(base_census)
+contour_elev(base_elev)
+}
 \seealso{
+\code{\link[=map_sp_elev]{map_sp_elev()}}, \code{\link[=map_elev]{map_elev()}}, \code{\link[=maply_sp_elev]{maply_sp_elev()}}.
+
 Other map components.: \code{\link{add_sp}},
   \code{\link{contour_elev}}, \code{\link{hide}},
   \code{\link{label_elev}}, \code{\link{limit_gx_gy}},

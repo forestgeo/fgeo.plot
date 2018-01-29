@@ -20,7 +20,22 @@ elevation lines.}
 \description{
 Label elevation lines.
 }
+\examples{
+elevation <- bciex::bci_elevation
+
+contour_elev(map_gx_gy_elev(elevation))
+
+contour_elev(map_gx_gy_elev(elevation)) \%>\% 
+  # Pusing elevation label out of the plot area and removig color legend
+  limit_gx_gy(xlim = c(0, 1010), ylim = c(0, 510)) \%>\% 
+  label_elev(
+    label_size = 2, label_color = "black", xyjust = -0.25, fontface = "bold"
+  ) \%>\% 
+  hide_legend_color()
+}
 \seealso{
+\code{\link[=maply_sp_elev]{maply_sp_elev()}}, \code{\link[=map_sp_elev]{map_sp_elev()}}, \code{\link[=map_elev]{map_elev()}}.
+
 Other map components.: \code{\link{add_sp}},
   \code{\link{contour_elev}}, \code{\link{hide}},
   \code{\link{limit_gx_gy}}, \code{\link{map_gx_gy_elev}},

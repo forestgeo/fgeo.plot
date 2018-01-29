@@ -49,14 +49,19 @@ navbar:
 
 
 reference:
-  - title: Functions to map on multiple pages (best for printing on a .pdf file)
+
+  - title: Create maps with a single function
     contents:
       - maply_tag
       - maply_quad
       - maply_sp_elev
-      
-  - title: Functions to map on a single page
+      - map_sp_elev
+      - map_elev
+
+  - title: Create maps by composing multiple map components
+    contents:
       - map_gx_gy_elev
+      - map_gx_gy
       - contour_elev
       - label_elev
       - add_sp

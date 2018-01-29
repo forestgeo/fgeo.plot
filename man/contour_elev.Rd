@@ -21,7 +21,20 @@ low and high elevation.}
 \description{
 Represent elevation with lines.
 }
+\examples{
+elevation <- bciex::bci_elevation
+
+base_elev <- map_gx_gy_elev(elevation)
+
+contour_elev(base_elev)
+
+contour_elev(
+  base_elev, contour_size = 0.5, low = "grey", high = "black", bins = 4
+)
+}
 \seealso{
+\code{\link[=maply_sp_elev]{maply_sp_elev()}}, \code{\link[=map_sp_elev]{map_sp_elev()}}, \code{\link[=map_elev]{map_elev()}}.
+
 Other map components.: \code{\link{add_sp}},
   \code{\link{hide}}, \code{\link{label_elev}},
   \code{\link{limit_gx_gy}}, \code{\link{map_gx_gy_elev}},

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Wrappers to map species and elevation data. — maply_sp_elev â€¢ fgeo.map</title>
+<title>Map species and elevation data. — maply_sp_elev â€¢ fgeo.map</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -101,16 +101,19 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Wrappers to map species and elevation data.</h1>
+    <h1>Map species and elevation data.</h1>
     </div>
 
     
     <p>These functions wrap a number of map elements for convenience:</p><ul>
-<li><p><code>maply_sp_elev()</code> applies the function <code>map_sp_elev()</code> to each species in
-the census dataset taht you provide. It outputs a list of maps, one per
+<li><p>Use <code>map_sp_elev()</code> to map species and optionally elevation data in a
+single page. You can map multiple species on the same plot or you can facet
+the output to map each species on a single plot and all plots in a single
+page.</p></li>
+<li><p>Use <code>map_elev()</code> if you want to map only elevation in the sipmlest way.</p></li>
+<li><p>Use <code>maply_sp_elev()</code> to apply the function <code>map_sp_elev()</code> to each species
+in a census dataset. The output is not a map but a list of maps, one per
 species, that can be printed on a .pdf file.</p></li>
-<li><p><code>map_sp_elev()</code> maps species and optionally elevation data.</p></li>
-<li><p><code>map_elev()</code> is a smaller, simpler, wrapper to map only elevation data.</p></li>
 </ul>
     
 
@@ -240,51 +243,51 @@ multiple maps within the area of a single graphic plot.</p></td>
 
     
 <ul>
-<li><p><code>maply_sp_elev()</code> returns a list of ggplots</p></li>
+<li><p><code>maply_sp_elev()</code> returns a list of ggplots.</p></li>
 <li><p><code>map_elev()</code> and <code>map_sp_elev()</code> return a ggoplot.</p></li>
 </ul>
 
     
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+    <h2 class="hasAnchor" id="comparing-ggplot-and-fgeomap"><a class="anchor" href="#comparing-ggplot-and-fgeomap"></a>Comparing ggplot2 and fgeomap</h2>
 
-    <p>All these functions wrap functions from the <strong>ggplot2</strong> package. For more
-control you can use <strong>ggplot2</strong> directly or smaller wrappers in <strong>fgeo.map</strong>
-(see sections See Also and Examples).</p>
+    
+    <p>These functions wrap functions from the <strong>ggplot2</strong> package. For more
+control you can use <strong>ggplot2</strong> directly or smaller wrappers in
+<strong>fgeo.map</strong> (see the sections See Also and Examples). <strong>ggplot2</strong>
+will give you maximum control and is your best choise if you are already
+familiar with it. The wrapper functions in <strong>fgeo.map</strong> focus on
+ForestGEO's data: For example, their names commonly mention the variable of a
+ForestGEO dataset they work with.</p>
+<p>The most important difference between <strong>ggplot2</strong> and <strong>fgeo.map</strong>
+is in the way you compose multiple functions to create complex plots. With
+<strong>ggplot2</strong> you compose multiple functions with <code>+</code>. For example,
+to apply functions <code>f()</code> then <code>g()</code> you do something like this:
+<code>f(data) + g()</code>. With <strong>fgeo.map</strong> you compose multiple functions
+in the usual way with <code>g(f(data))</code>, or in the modern way with the pipe:
+<code>f(data)</code> <code>%&gt;%</code> <code>g()</code> -- it is up to you. To learn more
+about the pipe see http://r4ds.had.co.nz/pipes.html.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p><code>map_gx_gy_elev()</code>, <code><a href='limit_gx_gy.html'>limit_gx_gy()</a></code>, <code><a href='add_sp.html'>add_sp()</a></code>, <code><a href='contour_elev.html'>contour_elev()</a></code>,
+    <p><code><a href='map_gx_gy_elev.html'>map_gx_gy_elev()</a></code>, <code><a href='limit_gx_gy.html'>limit_gx_gy()</a></code>, <code><a href='add_sp.html'>add_sp()</a></code>, <code><a href='contour_elev.html'>contour_elev()</a></code>,
 <code><a href='label_elev.html'>label_elev()</a></code>, <code><a href='hide.html'>hide()</a></code>, <code><a href='wrap.html'>wrap()</a></code></p>
 <p>Other `maply_*` functions.: <code><a href='maply_tag.html'>maply_tag</a></code></p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='no'>census</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>fgeo.tool</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/fgeo.tool/topics/top'>top</a></span>(<span class='kw pkg'>bciex</span><span class='kw ns'>::</span><span class='no'><a href='http://www.rdocumentation.org/packages/bciex/topics/bciYYsNmini'>bci12s7mini</a></span>, <span class='no'>sp</span>, <span class='fl'>2</span>)
-
 <span class='no'>elevation</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>bciex</span><span class='kw ns'>::</span><span class='no'><a href='http://www.rdocumentation.org/packages/bciex/topics/bci_elevation'>bci_elevation</a></span>
-<span class='fu'>head</span>(<span class='no'>elevation</span>)</div><div class='output co'>#&gt; # A tibble: 6 x 3
-#&gt;       x     y  elev
-#&gt;   &lt;int&gt; &lt;int&gt; &lt;dbl&gt;
-#&gt; 1     0     0   121
-#&gt; 2     0     5   121
-#&gt; 3     0    10   121
-#&gt; 4     0    15   121
-#&gt; 5     0    20   121
-#&gt; 6     0    25   123</div><div class='input'><span class='no'>elevation</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>fgeo.tool</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/fgeo.tool/topics/restructure_elev'>restructure_elev</a></span>(<span class='kw pkg'>bciex</span><span class='kw ns'>::</span><span class='no'><a href='http://www.rdocumentation.org/packages/bciex/topics/bci_elevation'>bci_elevation</a></span>)
-<span class='fu'>head</span>(<span class='no'>elevation</span>)</div><div class='output co'>#&gt; # A tibble: 6 x 3
-#&gt;      gx    gy  elev
-#&gt;   &lt;int&gt; &lt;int&gt; &lt;dbl&gt;
-#&gt; 1     0     0   121
-#&gt; 2     0     5   121
-#&gt; 3     0    10   121
-#&gt; 4     0    15   121
-#&gt; 5     0    20   121
-#&gt; 6     0    25   123</div><div class='input'>
-<span class='co'># Showing first plot only.</span>
-<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'>maply_sp_elev</span>(<span class='no'>census</span>)
-<span class='no'>p</span><span class='kw'>[[</span><span class='fl'>1</span>]]</div><div class='img'><img src='maply_sp_elev-16.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
 
-<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'>maply_sp_elev</span>(
+<span class='co'># Map on multiple pages ---------------------------------------------------</span>
+
+<span class='no'>p1</span> <span class='kw'>&lt;-</span> <span class='fu'>maply_sp_elev</span>(<span class='no'>census</span>)
+<span class='co'># Showing first map only.</span>
+<span class='no'>p1</span><span class='kw'>[[</span><span class='fl'>1</span>]]</div><div class='img'><img src='maply_sp_elev-11.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
+<span class='no'>p2</span> <span class='kw'>&lt;-</span> <span class='fu'>maply_sp_elev</span>(<span class='no'>census</span>, <span class='no'>elevation</span>)
+<span class='co'># Showing second map only.</span>
+<span class='no'>p2</span><span class='kw'>[[</span><span class='fl'>2</span>]]</div><div class='img'><img src='maply_sp_elev-12.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
+<span class='co'># Tweaking</span>
+<span class='no'>p3</span> <span class='kw'>&lt;-</span> <span class='fu'>maply_sp_elev</span>(
   <span class='no'>census</span>,
   <span class='no'>elevation</span>,
   <span class='kw'>species</span> <span class='kw'>=</span> <span class='st'>"all"</span>,
@@ -298,13 +301,43 @@ control you can use <strong>ggplot2</strong> directly or smaller wrappers in <st
   <span class='kw'>bins</span> <span class='kw'>=</span> <span class='fl'>7</span>,
   <span class='kw'>label_elev</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
 )
-<span class='no'>p</span><span class='kw'>[[</span><span class='fl'>1</span>]]</div><div class='img'><img src='maply_sp_elev-17.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
-<span class='co'># Same but outputs a plot, not a list of plots</span>
-<span class='fu'>map_sp_elev</span>(<span class='no'>census</span>, <span class='no'>elevation</span>)</div><div class='img'><img src='maply_sp_elev-18.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
-<span class='co'># Similar but maps elevation exclusively</span>
-<span class='fu'>map_elev</span>(<span class='no'>elevation</span>)</div><div class='img'><img src='maply_sp_elev-19.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
+<span class='no'>p3</span><span class='kw'>[[</span><span class='fl'>1</span>]]</div><div class='img'><img src='maply_sp_elev-13.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
+<span class='co'># Map on a single page (maybe multiple panels) ----------------------------</span>
+
+<span class='co'># Simplest way to map elevation data only</span>
+<span class='fu'>map_elev</span>(<span class='no'>elevation</span>)</div><div class='img'><img src='maply_sp_elev-14.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
+<span class='fu'>map_sp_elev</span>(<span class='no'>census</span>)</div><div class='img'><img src='maply_sp_elev-15.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
+<span class='fu'>map_sp_elev</span>(<span class='no'>census</span>, <span class='no'>elevation</span>)</div><div class='img'><img src='maply_sp_elev-16.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
 <span class='co'># For maximum control, you can compose maps as you like</span>
-<span class='fu'>map_gx_gy_elev</span>(<span class='no'>elevation</span>) <span class='kw'>%&gt;%</span>
+
+<span class='co'># Traditional: g(f(x))</span>
+<span class='fu'><a href='contour_elev.html'>contour_elev</a></span>(<span class='fu'><a href='map_gx_gy_elev.html'>map_gx_gy_elev</a></span>(<span class='no'>elevation</span>))</div><div class='img'><img src='maply_sp_elev-17.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
+<span class='co'># With the pipe: f(x) %&gt;% g()</span>
+<span class='fu'><a href='map_gx_gy_elev.html'>map_gx_gy_elev</a></span>(<span class='no'>elevation</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='contour_elev.html'>contour_elev</a></span>()</div><div class='img'><img src='maply_sp_elev-18.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
+<span class='co'># With traditional sintax: As you add more functions readability decreases.</span>
+<span class='fu'><a href='themes.html'>theme_default</a></span>(
+  <span class='fu'><a href='wrap.html'>wrap</a></span>(
+    <span class='fu'><a href='add_sp.html'>add_sp</a></span>(
+      <span class='fu'><a href='hide.html'>hide_legend_color</a></span>(
+        <span class='fu'><a href='hide.html'>hide_axis_labels</a></span>(
+          <span class='fu'><a href='label_elev.html'>label_elev</a></span>(
+            <span class='fu'><a href='contour_elev.html'>contour_elev</a></span>(
+              <span class='fu'><a href='limit_gx_gy.html'>limit_gx_gy</a></span>(
+                <span class='fu'><a href='map_gx_gy_elev.html'>map_gx_gy_elev</a></span>(<span class='no'>elevation</span>),
+                <span class='kw'>xlim</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>0</span>, <span class='fl'>1200</span>)
+              ),
+              <span class='kw'>contour_size</span> <span class='kw'>=</span> <span class='fl'>0.5</span>
+            ),
+            <span class='kw'>label_color</span> <span class='kw'>=</span> <span class='st'>"red"</span>
+          )
+        )
+      ), <span class='no'>census</span>, <span class='kw'>point_size</span> <span class='kw'>=</span> <span class='fl'>5</span>
+    ), <span class='st'>"sp"</span>
+  ), <span class='kw'>legend.position</span> <span class='kw'>=</span> <span class='st'>"top"</span>
+)</div><div class='img'><img src='maply_sp_elev-19.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
+<span class='co'># Same with the pipe: As you add more functions readability doesn't change</span>
+<span class='fu'><a href='map_gx_gy_elev.html'>map_gx_gy_elev</a></span>(<span class='no'>elevation</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='limit_gx_gy.html'>limit_gx_gy</a></span>(<span class='kw'>xlim</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>0</span>, <span class='fl'>1200</span>)) <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='contour_elev.html'>contour_elev</a></span>(<span class='kw'>contour_size</span> <span class='kw'>=</span> <span class='fl'>0.5</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='label_elev.html'>label_elev</a></span>(<span class='kw'>label_color</span> <span class='kw'>=</span> <span class='st'>"red"</span>) <span class='kw'>%&gt;%</span>
@@ -321,7 +354,7 @@ control you can use <strong>ggplot2</strong> directly or smaller wrappers in <st
       
       <li><a href="#value">Value</a></li>
 
-      <li><a href="#details">Details</a></li>
+      <li><a href="#comparing-ggplot-and-fgeomap">Comparing ggplot2 and fgeomap</a></li>
 
       <li><a href="#see-also">See also</a></li>
       

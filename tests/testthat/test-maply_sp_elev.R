@@ -108,3 +108,20 @@ test_that("errs with wrong inputs", {
     map_elev(elevation, xlim = 0)
   )
 })
+
+
+
+context("map_gx_gy_elev")
+
+test_that("works with raw elevation data", {
+  expect_silent(map_gx_gy_elev(elevation))
+  expect_silent(
+    map_gx_gy_elev(list(col = elevation))
+  )
+})
+
+test_that("errs if elevation data is confused with elevation data", {
+  expect_error(
+    map_gx_gy_elev(census)
+  )
+})
