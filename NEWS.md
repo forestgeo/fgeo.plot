@@ -1,6 +1,9 @@
 # map 0.0.00.9202
 
-* `map_tag()` outputs quadrats in order with non-character `QuadratName` (#33)
+* New family of map components that wrap __ggplot2__ and allow using the pipe.
+* New functions `maply_sp_elev()` and friends to map species and elevation.
+* Rename functions that return a list of maps as `maply_*()`.
+* `map_tag()` outputs quadrats in order with non-character `QuadratName` (#33).
 
 # map 0.0.00.9201
 
