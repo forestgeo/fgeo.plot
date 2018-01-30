@@ -1,5 +1,9 @@
 # map 0.0.00.9202
 
+
+
+# map 0.0.00.9202
+
 * New family of map components that wrap __ggplot2__ and allow using the pipe.
 * New functions `maply_sp_elev()` and friends to map species and elevation.
 * Rename functions that return a list of maps as `maply_*()`.
