@@ -585,7 +585,7 @@ hide_legend_color <- function(p) {
 #' @examples
 #' census <- bciex::bci12s7mini
 #' species <- c("hybapr", "faraoc")
-#' two_sp <- filter(census, sp %in% species)
+#' two_sp <- dplyr::filter(census, sp %in% species)
 #' 
 #' add_sp(map_gx_gy(two_sp))
 #' 

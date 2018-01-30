@@ -117,7 +117,7 @@ wrong
 # * The right way to do it is to explicietly inlcude rows where DBH = NA
 right <- filter(dead, DBH > 10 | is.na(DBH))
 right
-first(map_quad(right))
+first(maply_quad(right))
 
 # Keeping dead trees with `is.na(DBH)` (e.g. tag 127885.d on the bottom right)
 p <- filter(top4quad, DBH > 20 | is.na(DBH))
@@ -155,7 +155,7 @@ first(p)
 
 # Tweaking the default theme of maply_tag()
 
-small_tweak <- theme_maply_tag(legend.position = "bottom")
+small_tweak <- theme_map_tag(legend.position = "bottom")
 p <- maply_tag(top1quad, theme = small_tweak)
 first(p)
 
