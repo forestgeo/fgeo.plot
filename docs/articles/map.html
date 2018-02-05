@@ -81,13 +81,13 @@
       <h1>Mapping Functions</h1>
                         <h4 class="author">Mauro Lepore</h4>
             
-            <h4 class="date">2018-01-30</h4>
+            <h4 class="date">2018-02-05</h4>
           </div>
 
     
     
 <div class="contents">
-<p>This vignette shows the same code that you can find in the help files of <code>map_sp()</code>, <code><a href="../reference/maply_quad.html">maply_quad()</a></code> and <code><a href="../reference/maply_tag.html">maply_tag()</a></code>, but here (not in in the help files) you can see the output.</p>
+<p>This vignette shows the same code that you can find in the help files of <code><a href="../reference/maply_sp_elev.html">maply_sp_elev()</a></code>, <code><a href="../reference/maply_quad.html">maply_quad()</a></code> and <code><a href="../reference/maply_tag.html">maply_tag()</a></code>, but here you can see the output.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(fgeo.map)
 <span class="kw">library</span>(fgeo.tool)
 <span class="kw">library</span>(dplyr)</code></pre></div>
@@ -103,7 +103,7 @@
 filter &lt;-<span class="st"> </span>dplyr<span class="op">::</span>filter</code></pre></div>
 <div id="maply_quad-map-trees-within-a-quadrat" class="section level1">
 <h1 class="hasAnchor">
-<a href="#maply_quad-map-trees-within-a-quadrat" class="anchor"></a><code><a href="../reference/maply_quad.html">maply_quad()</a></code>: Map trees within a quadrat</h1>
+<a href="#maply_quad-map-trees-within-a-quadrat" class="anchor"></a>maply_quad(): Map trees within a quadrat</h1>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Filter the data you want. For example:</span>
 <span class="co"># (see ?top4quad)</span>
 want &lt;-<span class="st"> </span><span class="kw">filter</span>(
@@ -242,7 +242,7 @@ myheader &lt;-<span class="st"> </span><span class="kw">paste</span>(
 </div>
 <div id="maply_tag-map-tree-tags-by-status" class="section level1">
 <h1 class="hasAnchor">
-<a href="#maply_tag-map-tree-tags-by-status" class="anchor"></a><code><a href="../reference/maply_tag.html">maply_tag()</a></code>: Map tree tags by status</h1>
+<a href="#maply_tag-map-tree-tags-by-status" class="anchor"></a>maply_tag(): Map tree tags by status</h1>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Filtering the data to map -----------------------------------------------</span>
 
 <span class="co"># Filter the data you want. For example:</span>
@@ -438,6 +438,100 @@ p &lt;-<span class="st"> </span><span class="kw"><a href="../reference/maply_tag
 <span class="kw">first</span>(p)</code></pre></div>
 <p><img src="map_files/figure-html/unnamed-chunk-3-11.png" width="98%" style="display: block; margin: auto;"></p>
 </div>
+<div id="maply_sp_elev-map-species-and-elevation-data" class="section level1">
+<h1 class="hasAnchor">
+<a href="#maply_sp_elev-map-species-and-elevation-data" class="anchor"></a>maply_sp_elev(): Map species and elevation data</h1>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">census &lt;-<span class="st"> </span>fgeo.tool<span class="op">::</span><span class="kw">top</span>(bciex<span class="op">::</span>bci12s7mini, sp, <span class="dv">2</span>)
+elevation &lt;-<span class="st"> </span>bciex<span class="op">::</span>bci_elevation
+
+<span class="co"># Map on multiple pages ---------------------------------------------------</span>
+
+p1 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/maply_sp_elev.html">maply_sp_elev</a></span>(census)
+<span class="co"># Showing first map only.</span>
+p1[[<span class="dv">1</span>]]</code></pre></div>
+<p><img src="map_files/figure-html/unnamed-chunk-4-1.png" width="98%" style="display: block; margin: auto;"></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
+p2 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/maply_sp_elev.html">maply_sp_elev</a></span>(census, elevation)
+<span class="co"># Showing second map only.</span>
+p2[[<span class="dv">2</span>]]</code></pre></div>
+<p><img src="map_files/figure-html/unnamed-chunk-4-2.png" width="98%" style="display: block; margin: auto;"></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
+<span class="co"># Tweaking</span>
+p3 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/maply_sp_elev.html">maply_sp_elev</a></span>(
+  census,
+  elevation,
+  <span class="dt">species =</span> <span class="st">"all"</span>,
+  <span class="dt">fill =</span> <span class="st">"white"</span>,
+  <span class="dt">shape =</span> <span class="dv">21</span>,
+  <span class="dt">point_size =</span> <span class="dv">5</span>,
+  <span class="dt">contour_size =</span> <span class="dv">1</span>,
+  <span class="dt">low =</span> <span class="st">"grey"</span>,
+  <span class="dt">high =</span> <span class="st">"black"</span>,
+  <span class="dt">hide_legend_color =</span> <span class="ot">TRUE</span>,
+  <span class="dt">bins =</span> <span class="dv">7</span>,
+  <span class="dt">label_elev =</span> <span class="ot">FALSE</span>
+)
+p3[[<span class="dv">1</span>]]</code></pre></div>
+<p><img src="map_files/figure-html/unnamed-chunk-4-3.png" width="98%" style="display: block; margin: auto;"></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
+<span class="co"># Map on a single page (maybe multiple panels) ----------------------------</span>
+
+<span class="co"># Simplest way to map elevation data only</span>
+<span class="kw"><a href="../reference/maply_sp_elev.html">map_elev</a></span>(elevation)</code></pre></div>
+<p><img src="map_files/figure-html/unnamed-chunk-4-4.png" width="98%" style="display: block; margin: auto;"></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
+<span class="kw"><a href="../reference/maply_sp_elev.html">map_sp_elev</a></span>(census)</code></pre></div>
+<p><img src="map_files/figure-html/unnamed-chunk-4-5.png" width="98%" style="display: block; margin: auto;"></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
+<span class="kw"><a href="../reference/maply_sp_elev.html">map_sp_elev</a></span>(census, elevation)</code></pre></div>
+<p><img src="map_files/figure-html/unnamed-chunk-4-6.png" width="98%" style="display: block; margin: auto;"></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
+<span class="co"># For maximum control, you can compose maps as you like</span>
+
+<span class="co"># Traditional: g(f(x))</span>
+<span class="kw"><a href="../reference/contour_elev.html">contour_elev</a></span>(<span class="kw"><a href="../reference/map_gx_gy_elev.html">map_gx_gy_elev</a></span>(elevation))</code></pre></div>
+<p><img src="map_files/figure-html/unnamed-chunk-4-7.png" width="98%" style="display: block; margin: auto;"></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
+<span class="co"># With the pipe: f(x) %&gt;% g()</span>
+<span class="kw"><a href="../reference/map_gx_gy_elev.html">map_gx_gy_elev</a></span>(elevation) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="../reference/contour_elev.html">contour_elev</a></span>()</code></pre></div>
+<p><img src="map_files/figure-html/unnamed-chunk-4-8.png" width="98%" style="display: block; margin: auto;"></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
+<span class="co"># With traditional sintax: As you add more functions readability decreases.</span>
+<span class="kw"><a href="../reference/themes.html">theme_default</a></span>(
+  <span class="kw"><a href="../reference/wrap.html">wrap</a></span>(
+    <span class="kw"><a href="../reference/add_sp.html">add_sp</a></span>(
+      <span class="kw"><a href="../reference/hide.html">hide_legend_color</a></span>(
+        <span class="kw"><a href="../reference/hide.html">hide_axis_labels</a></span>(
+          <span class="kw"><a href="../reference/label_elev.html">label_elev</a></span>(
+            <span class="kw"><a href="../reference/contour_elev.html">contour_elev</a></span>(
+              <span class="kw"><a href="../reference/limit_gx_gy.html">limit_gx_gy</a></span>(
+                <span class="kw"><a href="../reference/map_gx_gy_elev.html">map_gx_gy_elev</a></span>(elevation),
+                <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1200</span>)
+              ),
+              <span class="dt">contour_size =</span> <span class="fl">0.5</span>
+            ),
+            <span class="dt">label_color =</span> <span class="st">"red"</span>
+          )
+        )
+      ), census, <span class="dt">point_size =</span> <span class="dv">5</span>
+    ), <span class="st">"sp"</span>
+  ), <span class="dt">legend.position =</span> <span class="st">"top"</span>
+)</code></pre></div>
+<p><img src="map_files/figure-html/unnamed-chunk-4-9.png" width="98%" style="display: block; margin: auto;"></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
+<span class="co"># Same with the pipe: As you add more functions readability doesn't change</span>
+<span class="kw"><a href="../reference/map_gx_gy_elev.html">map_gx_gy_elev</a></span>(elevation) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="../reference/limit_gx_gy.html">limit_gx_gy</a></span>(<span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1200</span>)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="../reference/contour_elev.html">contour_elev</a></span>(<span class="dt">contour_size =</span> <span class="fl">0.5</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="../reference/label_elev.html">label_elev</a></span>(<span class="dt">label_color =</span> <span class="st">"red"</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="../reference/hide.html">hide_axis_labels</a></span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="../reference/hide.html">hide_legend_color</a></span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="../reference/add_sp.html">add_sp</a></span>(census, <span class="dt">point_size =</span> <span class="dv">5</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="../reference/wrap.html">wrap</a></span>(<span class="st">"sp"</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="../reference/themes.html">theme_default</a></span>(<span class="dt">legend.position =</span> <span class="st">"top"</span>)</code></pre></div>
+<p><img src="map_files/figure-html/unnamed-chunk-4-10.png" width="98%" style="display: block; margin: auto;"></p>
+</div>
 </div>
   </div>
 
@@ -446,8 +540,9 @@ p &lt;-<span class="st"> </span><span class="kw"><a href="../reference/maply_tag
       <h2 class="hasAnchor">
 <a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
-<li><a href="#maply_quad-map-trees-within-a-quadrat"><code><a href="--/reference/maply_quad-html">maply_quad()</a></code>: Map trees within a quadrat</a></li>
-      <li><a href="#maply_tag-map-tree-tags-by-status"><code><a href="--/reference/maply_tag-html">maply_tag()</a></code>: Map tree tags by status</a></li>
+<li><a href="#maply_quad-map-trees-within-a-quadrat">maply_quad(): Map trees within a quadrat</a></li>
+      <li><a href="#maply_tag-map-tree-tags-by-status">maply_tag(): Map tree tags by status</a></li>
+      <li><a href="#maply_sp_elev-map-species-and-elevation-data">maply_sp_elev(): Map species and elevation data</a></li>
       </ul>
 </div>
       </div>

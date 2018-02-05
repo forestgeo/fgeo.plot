@@ -12,7 +12,7 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-This vignette shows the same code that you can find in the help files of `map_sp()`, `maply_quad()` and `maply_tag()`, but here (not in in the help files) you can see the output.
+This vignette shows the same code that you can find in the help files of `maply_sp_elev()`, `maply_quad()` and `maply_tag()`, but here you can see the output.
 
 ```{r}
 library(fgeo.map)
@@ -40,7 +40,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# `maply_quad()`: Map trees within a quadrat
+# maply\_quad(): Map trees within a quadrat
 
 ```{r}
 # Filter the data you want. For example:
@@ -113,7 +113,7 @@ maply_quad(
 
 
 
-# `maply_tag()`: Map tree tags by status
+# maply\_tag(): Map tree tags by status
 
 ```{r}
 # Filtering the data to map -----------------------------------------------
@@ -224,5 +224,94 @@ first(p)
 # If limit-lines aren't visible, try extending the grid a little
 p <- maply_tag(smaller, x_q = 10, x_sq = 2.5, move_edge = 0.25)[1]
 first(p)
+```
+
+
+
+
+
+# maply\_sp\_elev(): Map species and elevation data
+
+```{r}
+census <- fgeo.tool::top(bciex::bci12s7mini, sp, 2)
+elevation <- bciex::bci_elevation
+
+# Map on multiple pages ---------------------------------------------------
+
+p1 <- maply_sp_elev(census)
+# Showing first map only.
+p1[[1]]
+
+p2 <- maply_sp_elev(census, elevation)
+# Showing second map only.
+p2[[2]]
+
+# Tweaking
+p3 <- maply_sp_elev(
+  census,
+  elevation,
+  species = "all",
+  fill = "white",
+  shape = 21,
+  point_size = 5,
+  contour_size = 1,
+  low = "grey",
+  high = "black",
+  hide_legend_color = TRUE,
+  bins = 7,
+  label_elev = FALSE
+)
+p3[[1]]
+
+# Map on a single page (maybe multiple panels) ----------------------------
+
+# Simplest way to map elevation data only
+map_elev(elevation)
+
+map_sp_elev(census)
+
+map_sp_elev(census, elevation)
+
+# For maximum control, you can compose maps as you like
+
+# Traditional: g(f(x))
+contour_elev(map_gx_gy_elev(elevation))
+
+# With the pipe: f(x) %>% g()
+map_gx_gy_elev(elevation) %>%
+  contour_elev()
+
+# With traditional sintax: As you add more functions readability decreases.
+theme_default(
+  wrap(
+    add_sp(
+      hide_legend_color(
+        hide_axis_labels(
+          label_elev(
+            contour_elev(
+              limit_gx_gy(
+                map_gx_gy_elev(elevation),
+                xlim = c(0, 1200)
+              ),
+              contour_size = 0.5
+            ),
+            label_color = "red"
+          )
+        )
+      ), census, point_size = 5
+    ), "sp"
+  ), legend.position = "top"
+)
+
+# Same with the pipe: As you add more functions readability doesn't change
+map_gx_gy_elev(elevation) %>%
+  limit_gx_gy(xlim = c(0, 1200)) %>%
+  contour_elev(contour_size = 0.5) %>%
+  label_elev(label_color = "red") %>%
+  hide_axis_labels() %>%
+  hide_legend_color() %>%
+  add_sp(census, point_size = 5) %>%
+  wrap("sp") %>%
+  theme_default(legend.position = "top")
 ```
 
