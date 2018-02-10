@@ -16,7 +16,7 @@ map_gx_gy(data)
 Map a base over which other map components can later be added.
 }
 \examples{
-census <- fgeo.tool::top(bciex::bci12s7mini, sp, 2)
+census <- fgeo.tool::row_top(bciex::bci12s7mini, sp, 2)
 elevation <- bciex::bci_elevation
 
 # Look alike but internally they are not. 

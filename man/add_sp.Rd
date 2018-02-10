@@ -21,7 +21,7 @@ different color.}
 Represent species with points.
 }
 \examples{
-census <- fgeo.tool::top(bciex::bci12s7mini, sp, 2)
+census <- fgeo.tool::row_top(bciex::bci12s7mini, sp, 2)
 
 add_sp(map_gx_gy(census))
 

@@ -180,17 +180,17 @@ either of the four sides by setting <code>strip.position = c("top",
 <span class='no'>species</span> <span class='kw'>&lt;-</span> <span class='fu'>c</span>(<span class='st'>"hybapr"</span>, <span class='st'>"faraoc"</span>)
 <span class='no'>two_sp</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='http://dplyr.tidyverse.org/reference/filter.html'>filter</a></span>(<span class='no'>census</span>, <span class='no'>sp</span> <span class='kw'>%in%</span> <span class='no'>species</span>)
 
-<span class='fu'><a href='add_sp.html'>add_sp</a></span>(<span class='fu'><a href='map_gx_gy_elev.html'>map_gx_gy</a></span>(<span class='no'>two_sp</span>))</div><div class='img'><img src='wrap-7.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
+<span class='fu'><a href='add_sp.html'>add_sp</a></span>(<span class='fu'><a href='map_gx_gy_elev.html'>map_gx_gy</a></span>(<span class='no'>two_sp</span>))</div><div class='img'><img src='wrap-1.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
 <span class='fu'><a href='add_sp.html'>add_sp</a></span>(<span class='fu'><a href='map_gx_gy_elev.html'>map_gx_gy</a></span>(<span class='no'>two_sp</span>)) <span class='kw'>%&gt;%</span>
-  <span class='fu'>wrap</span>(<span class='st'>"sp"</span>)</div><div class='img'><img src='wrap-8.png' alt='' width='700' height='432.632880098887' /></div><div class='input'><span class='co'># Same</span>
+  <span class='fu'>wrap</span>(<span class='st'>"sp"</span>)</div><div class='img'><img src='wrap-2.png' alt='' width='700' height='432.632880098887' /></div><div class='input'><span class='co'># Same</span>
 <span class='fu'><a href='add_sp.html'>add_sp</a></span>(<span class='fu'><a href='map_gx_gy_elev.html'>map_gx_gy</a></span>(<span class='no'>two_sp</span>)) <span class='kw'>%&gt;%</span>
-  <span class='fu'>wrap</span>(~<span class='no'>sp</span>)</div><div class='img'><img src='wrap-9.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
+  <span class='fu'>wrap</span>(~<span class='no'>sp</span>)</div><div class='img'><img src='wrap-3.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
 <span class='fu'><a href='add_sp.html'>add_sp</a></span>(<span class='fu'><a href='map_gx_gy_elev.html'>map_gx_gy</a></span>(<span class='no'>two_sp</span>)) <span class='kw'>%&gt;%</span>
-  <span class='fu'>wrap</span>(<span class='st'>"status"</span>)</div><div class='img'><img src='wrap-10.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
+  <span class='fu'>wrap</span>(<span class='st'>"status"</span>)</div><div class='img'><img src='wrap-4.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
 <span class='fu'><a href='add_sp.html'>add_sp</a></span>(<span class='fu'><a href='map_gx_gy_elev.html'>map_gx_gy</a></span>(<span class='no'>two_sp</span>)) <span class='kw'>%&gt;%</span>
-  <span class='fu'>wrap</span>(<span class='fu'>c</span>(<span class='st'>"sp"</span>, <span class='st'>"status"</span>))</div><div class='img'><img src='wrap-11.png' alt='' width='700' height='432.632880098887' /></div><div class='input'><span class='co'># Same</span>
+  <span class='fu'>wrap</span>(<span class='fu'>c</span>(<span class='st'>"sp"</span>, <span class='st'>"status"</span>))</div><div class='img'><img src='wrap-5.png' alt='' width='700' height='432.632880098887' /></div><div class='input'><span class='co'># Same</span>
 <span class='fu'><a href='add_sp.html'>add_sp</a></span>(<span class='fu'><a href='map_gx_gy_elev.html'>map_gx_gy</a></span>(<span class='no'>two_sp</span>)) <span class='kw'>%&gt;%</span>
-  <span class='fu'>wrap</span>(~ <span class='no'>sp</span> + <span class='no'>status</span>)</div><div class='img'><img src='wrap-12.png' alt='' width='700' height='432.632880098887' /></div></pre>
+  <span class='fu'>wrap</span>(~ <span class='no'>sp</span> + <span class='no'>status</span>)</div><div class='img'><img src='wrap-6.png' alt='' width='700' height='432.632880098887' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
