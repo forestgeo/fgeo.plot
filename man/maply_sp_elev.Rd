@@ -124,7 +124,7 @@ about the pipe see http://r4ds.had.co.nz/pipes.html.
 }
 
 \examples{
-census <- fgeo.tool::top(bciex::bci12s7mini, sp, 2)
+census <- fgeo.tool::row_top(bciex::bci12s7mini, sp, 2)
 elevation <- bciex::bci_elevation
 
 # Map on multiple pages ---------------------------------------------------

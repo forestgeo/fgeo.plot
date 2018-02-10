@@ -132,7 +132,7 @@
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>census</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>fgeo.tool</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/fgeo.tool/topics/top'>top</a></span>(<span class='kw pkg'>bciex</span><span class='kw ns'>::</span><span class='no'><a href='http://www.rdocumentation.org/packages/bciex/topics/bciYYsNmini'>bci12s7mini</a></span>, <span class='no'>sp</span>, <span class='fl'>2</span>)
+    <pre class="examples"><div class='input'><span class='no'>census</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>fgeo.tool</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/fgeo.tool/topics/row_top'>row_top</a></span>(<span class='kw pkg'>bciex</span><span class='kw ns'>::</span><span class='no'><a href='http://www.rdocumentation.org/packages/bciex/topics/bciYYsNmini'>bci12s7mini</a></span>, <span class='no'>sp</span>, <span class='fl'>2</span>)
 <span class='no'>elevation</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>bciex</span><span class='kw ns'>::</span><span class='no'><a href='http://www.rdocumentation.org/packages/bciex/topics/bci_elevation'>bci_elevation</a></span>
 
 <span class='co'># Look alike but internally they are not. </span>
@@ -140,7 +140,7 @@
 <span class='no'>base_census</span> <span class='kw'>&lt;-</span> <span class='fu'>map_gx_gy</span>(<span class='no'>census</span>)
 
 <span class='co'># Works</span>
-<span class='fu'><a href='contour_elev.html'>contour_elev</a></span>(<span class='no'>base_elev</span>)</div><div class='img'><img src='map_gx_gy_elev-4.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
+<span class='fu'><a href='contour_elev.html'>contour_elev</a></span>(<span class='no'>base_elev</span>)</div><div class='img'><img src='map_gx_gy_elev-1.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
 <span class='co'># # Fails.</span>
 <span class='co'># \dontrun{</span>
 <span class='co'># add_sp(base_elev)</span>
@@ -148,7 +148,7 @@
 <span class='co'># }</span>
 
 <span class='co'># Supply the correct base</span>
-<span class='fu'><a href='add_sp.html'>add_sp</a></span>(<span class='no'>base_census</span>)</div><div class='img'><img src='map_gx_gy_elev-5.png' alt='' width='700' height='432.632880098887' /></div><div class='input'><span class='fu'><a href='contour_elev.html'>contour_elev</a></span>(<span class='no'>base_elev</span>)</div><div class='img'><img src='map_gx_gy_elev-6.png' alt='' width='700' height='432.632880098887' /></div></pre>
+<span class='fu'><a href='add_sp.html'>add_sp</a></span>(<span class='no'>base_census</span>)</div><div class='img'><img src='map_gx_gy_elev-2.png' alt='' width='700' height='432.632880098887' /></div><div class='input'><span class='fu'><a href='contour_elev.html'>contour_elev</a></span>(<span class='no'>base_elev</span>)</div><div class='img'><img src='map_gx_gy_elev-3.png' alt='' width='700' height='432.632880098887' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
