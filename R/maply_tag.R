@@ -284,7 +284,7 @@ check_maply_tag <- function(.vft,
   
   msg_cnsid <- paste0(
     "* Likely you want only the last 2 censuses\n",
-    "* Detected censuses: ", collapse(unique(.vft$censusid)),
+    "* Detected censuses: ", commas(unique(.vft$censusid)),
     collapse = ""
   )
   fgeo.tool::check_unique(.vft, "censusid", "warning", msg_cnsid)

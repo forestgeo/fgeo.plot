@@ -1,6 +1,6 @@
 # Common functions --------------------------------------------------------
 
-collapse <- function(...) {
+commas <- function(...) {
   paste0(..., collapse = ", ")
 }
 
