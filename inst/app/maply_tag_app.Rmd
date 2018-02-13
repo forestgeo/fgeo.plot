@@ -6,20 +6,18 @@ runtime: shiny
 output:
   flexdashboard::flex_dashboard:
     theme: united
+    orientation: columns
+    social: menu
+    source_code: embed
+    navbar:
+      - {href: "https://github.com/maurolepore", align: right, icon: fa-gavel}
 ---
 
 ```{r, include=FALSE}
-    # orientation: columns
-    # social: menu
-    # source_code: embed
-    # navbar:
-    #   - {href: "https://github.com/maurolepore", align: right, icon: fa-user}
-    #   - {title: "Tutorial", 
-    #     href: "https://bookdown.org/forestgeoguest/map_tag/map_tag.nb.html",
-    #     align: left, icon: fa-file-text}
 ```
 
 ```{r global, include=FALSE}
+library(shiny)
 library(flexdashboard)
 library(fgeo.map)
 library(dplyr)
