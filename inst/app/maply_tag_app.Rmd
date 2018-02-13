@@ -27,7 +27,7 @@ library(icon)
 vft <- readr::read_csv("vft.csv")
 ```
 
-Adjust the arguments, and preview the effect
+Adjust the arguments and preview the effect
 =======================================================================
 
 --- SIGNATURE {data-width=270}

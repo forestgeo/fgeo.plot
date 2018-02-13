@@ -32,7 +32,7 @@ navbar:
     - text: Apps
       menu:
       - text: Map tree tags for fieldwork
-        href: https://bookdown.org/forestgeoguest/map_tag_app
+        href: https://bookdown.org/fgeocomm/maply_tag_app/
 
     - text: News
       href: news/index.html
