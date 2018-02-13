@@ -1,6 +1,6 @@
 # map 0.0.00.9203
 
-* Work in progress.
+* In maply_tag(), `ensure_type()` of crucial variables (#39).
 
 # map 0.0.00.9202
 
