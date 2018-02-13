@@ -188,9 +188,9 @@ maply_tag <- function(vft,
                     header = map_tag_header(),
                     theme = theme_map_tag(),
                     move_edge = 0) {
-  # Check
   .vft <- setNames(vft, tolower(names(vft)))
-  crucial <- c("tag", "qx", "qy", "status", "quadratname", "censusid", "plotid")
+  
+  crucial <- c("tag", "status", "quadratname", "qx", "qy", "censusid", "plotid")
   check_maply_tag(
     .vft = .vft,
     crucial = crucial,
@@ -306,15 +306,25 @@ prep_maply_tag <- function(sbst,
                          tl,
                          move_edge
                          ) {
+  # `ensure_type()` fails to pad with 0. This is a special kind of coersion
   if (!is.character(sbst$quadratname)) {
     sbst$quadratname <- stringr::str_pad(sbst$quadratname, width = 4, pad = 0)
     rlang::warn("`quadratname` is not of class character. Pading with '0'.")
   }
+  
+  # Ensure type
+  chr_var <- c("tag", "status", "quadratname")
+  sbst <- fgeo.tool::ensure_type(sbst, chr_var, "character")
+  dbl_var <- c("qx", "qy")
+  sbst <- fgeo.tool::ensure_type(sbst, dbl_var, "double")
+  int_var <- c("censusid", "plotid")
+  sbst <- fgeo.tool::ensure_type(sbst, int_var, "integer")
+  
   # Using the pipe (%>%) to avoid meaningless temporary-variables
   sbst %>%
     fgeo.tool::add_status_tree(status_a = "alive", status_d = "dead") %>%
     select(-.data$status) %>% 
-    fgeo.tool::collapse_censusid() %>% 
+    fgeo.tool::row_collapse_censusid() %>% 
     fgeo.tool::add_subquad(
       x_q = x_q, x_sq = x_sq, y_q = y_q, y_sq = y_sq,
       subquad_offset = subquad_offset

@@ -38,6 +38,18 @@ test_that("output is correct", {
 
 # Inputs ------------------------------------------------------------------
 
+test_that("handles wrong type", {
+  crucial <- c("tag", "qx", "qy", "status", "quadratname", "censusid", "plotid")
+  crucial_nms <- paste0(crucial, collapse = "|")
+  x <- top1quad %>% 
+    select(matches(crucial_nms)) 
+  
+  x <- map_df(x, as.character)
+  expect_warning(maply_tag(x))
+})
+
+
+
 test_that("wrong inputs get noticed", {
 
   expect_error(
@@ -62,7 +74,7 @@ test_that("wrong inputs get noticed", {
   expect_error(maply_tag(top1quad, x_sq = "a"))
   expect_error(maply_tag(top1quad, y_q = "a"))
   expect_error(maply_tag(top1quad, y_sq = "a"))
-  expect_error(maply_tag(top1quad, start_with0 = "not logical"))
+  expect_error(maply_tag(top1quad, subquad_offset = "not -1"))
 
   expect_error(maply_tag(top1quad, subquad_offset = 0))
 
