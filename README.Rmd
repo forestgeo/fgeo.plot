@@ -27,19 +27,18 @@ knitr::opts_chunk$set(
 
 ## Installation
 
-Install __fgeo.map__ from GitHub with:
+To install __fgeo.map__ run the following code in R:
 
-```R
-# install.packages("remotes")
-remotes::install_github(repo = "forestgeo/fgeo.map")
-library(fgeo.map)
+```
+missing_remotes <- !require(remotes)
+if (missing_remotes) {
+  install.packages("remotes")
+}
+
+remotes::install_github("forestgeo/fgeo.map")
 ```
 
-Or with:
-
-```R
-source("https://install-github.me/forestgeo/fgeo.map")
-```
+To learn the details about how to install packages from GitHub, read [this blog post](https://goo.gl/dQKEeg).
 
 ## Example
 

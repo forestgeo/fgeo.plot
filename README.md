@@ -8,19 +8,16 @@ fgeo.map: map ForestGEO's data <img src="https://i.imgur.com/39pvr4n.png" align=
 Installation
 ------------
 
-Install **fgeo.map** from GitHub with:
+To install **fgeo.map** run the following code in R:
 
-``` r
-# install.packages("remotes")
-remotes::install_github(repo = "forestgeo/fgeo.map")
-library(fgeo.map)
-```
+    missing_remotes <- !require(remotes)
+    if (missing_remotes) {
+      install.packages("remotes")
+    }
 
-Or with:
+    remotes::install_github("forestgeo/fgeo.map")
 
-``` r
-source("https://install-github.me/forestgeo/fgeo.map")
-```
+To learn the details about how to install packages from GitHub, read [this blog post](https://goo.gl/dQKEeg).
 
 Example
 -------

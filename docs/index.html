@@ -91,12 +91,14 @@
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
-<p>Install <strong>fgeo.map</strong> from GitHub with:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># install.packages("remotes")</span>
-remotes<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/remotes/topics/install_github">install_github</a></span>(<span class="dt">repo =</span> <span class="st">"forestgeo/fgeo.map"</span>)
-<span class="kw">library</span>(fgeo.map)</code></pre></div>
-<p>Or with:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">source</span>(<span class="st">"https://install-github.me/forestgeo/fgeo.map"</span>)</code></pre></div>
+<p>To install <strong>fgeo.map</strong> run the following code in R:</p>
+<pre><code>missing_remotes &lt;- !require(remotes)
+if (missing_remotes) {
+  install.packages("remotes")
+}
+
+remotes::install_github("forestgeo/fgeo.map")</code></pre>
+<p>To learn the details about how to install packages from GitHub, read <a href="https://goo.gl/dQKEeg">this blog post</a>.</p>
 </div>
 <div id="example" class="section level2">
 <h2 class="hasAnchor">
