@@ -125,12 +125,14 @@ map_quad_header <- function(lang = "english") {
 
   if (lang == "english") {
     description <- enter_line(
-      "Names and date: ", "Reviewed by:        ", "Entered on PC by: ", times = 25
+      "Names and date: ", "Reviewed by:        ", "Entered on PC by: ", 
+      times = 25
     )
   }
   if (lang == "spanish") {
     description <- enter_line(
-      "Nombres y Fecha:", "Revisado por:       ", "Entrado en PC por:", times = 25
+      "Nombres y Fecha:", "Revisado por:       ", "Entrado en PC por:", 
+      times = 25
     )
   }
   blank <- enter_line(rep("_________________________", 3))
