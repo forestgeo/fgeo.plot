@@ -38,6 +38,34 @@ test_that("output is correct", {
 
 # Inputs ------------------------------------------------------------------
 
+test_that("works with all defaults given in usage", {
+  expect_silent(
+    maply_tag(
+      top1quad,
+      x_q = 20,
+      x_sq = 5,
+      y_q = 20,
+      y_sq = 5,
+      subquad_offset = NULL,
+      bl = 1,
+      br = 2,
+      tr = 3,
+      tl = 4,
+      title_quad = "Site Name, YYYY. Quadrat:",
+      show_page = TRUE,
+      show_subquad = TRUE,
+      point_shape = c(19, 4),
+      point_size = 1.5,
+      tag_size = 3,
+      header = map_tag_header(),
+      theme = theme_map_tag(),
+      move_edge = 0
+    )
+  )
+})
+
+
+
 test_that("handles wrong type", {
   crucial <- c("tag", "qx", "qy", "status", "quadratname", "censusid", "plotid")
   crucial_nms <- paste0(crucial, collapse = "|")
@@ -47,8 +75,6 @@ test_that("handles wrong type", {
   x <- map_df(x, as.character)
   expect_warning(maply_tag(x))
 })
-
-
 
 test_that("wrong inputs get noticed", {
 

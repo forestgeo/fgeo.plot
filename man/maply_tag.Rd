@@ -4,7 +4,7 @@
 \alias{maply_tag}
 \title{Map tree tags by status, showing four subquadrats per plot-page.}
 \usage{
-maply_tag(vft, x_q = 20, x_sq = 5, y_q = x_q, y_sq = x_sq,
+maply_tag(vft, x_q = 20, x_sq = 5, y_q = 20, y_sq = 5,
   subquad_offset = NULL, bl = 1, br = 2, tr = 3, tl = 4,
   title_quad = "Site Name, YYYY. Quadrat:", show_page = TRUE,
   show_subquad = TRUE, point_shape = c(19, 4), point_size = 1.5,
