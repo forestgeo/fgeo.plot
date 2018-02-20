@@ -306,7 +306,7 @@ prep_maply_tag <- function(sbst,
                          tl,
                          move_edge
                          ) {
-  # `ensure_type()` fails to pad with 0. This is a special kind of coersion
+  # `type_ensure()` fails to pad with 0. This is a special kind of coersion
   if (!is.character(sbst$quadratname)) {
     sbst$quadratname <- stringr::str_pad(sbst$quadratname, width = 4, pad = 0)
     rlang::warn("`quadratname` is not of class character. Pading with '0'.")
@@ -314,11 +314,11 @@ prep_maply_tag <- function(sbst,
   
   # Ensure type
   chr_var <- c("tag", "status", "quadratname")
-  sbst <- fgeo.tool::ensure_type(sbst, chr_var, "character")
+  sbst <- fgeo.tool::type_ensure(sbst, chr_var, "character")
   dbl_var <- c("qx", "qy")
-  sbst <- fgeo.tool::ensure_type(sbst, dbl_var, "double")
+  sbst <- fgeo.tool::type_ensure(sbst, dbl_var, "double")
   int_var <- c("censusid", "plotid")
-  sbst <- fgeo.tool::ensure_type(sbst, int_var, "integer")
+  sbst <- fgeo.tool::type_ensure(sbst, int_var, "integer")
   
   # Using the pipe (%>%) to avoid meaningless temporary-variables
   sbst %>%
