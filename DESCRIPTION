@@ -1,11 +1,11 @@
 Package: fgeo.map
-Title: Map ForestGEO's Data
+Title: Map Species, Trees and Topography
 Version: 0.0.00.9203
 Authors@R: c(
     person("Mauro", "Lepore", , "leporem@si.edu", role = c("aut", "ctr", "cre")),
     person("CTFS-ForestGEO", , , "ForestGEO@si.edu", role = c("cph", "fnd"))
     )
-Description: Map ForestGEO's data.
+Description: Map species, trees and topography.
 License: GPL-3
 URL: https://github.com/forestgeo/fgeo.map, https://forestgeo.github.io/fgeo.map/
 BugReports: https://github.com/forestgeo/fgeo.map/issues

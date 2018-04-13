@@ -20,7 +20,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# fgeo.map: map ForestGEO's data <img src="https://i.imgur.com/39pvr4n.png" align="right" height=44 />
+# <img src="https://i.imgur.com/m8FNhQR.png" align="right" height=88 /> fgeo.map: Map species, trees and topography. 
 
 [![Build Status](https://travis-ci.org/forestgeo/fgeo.map.svg?branch=master)](https://travis-ci.org/forestgeo/fgeo.map)
 [![Coverage status](https://codecov.io/gh/forestgeo/fgeo.map/branch/master/graph/badge.svg)](https://codecov.io/github/forestgeo/fgeo.map?branch=master)

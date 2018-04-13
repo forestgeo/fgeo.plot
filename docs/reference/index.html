@@ -18,13 +18,16 @@
 <!-- Font Awesome icons -->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 
+<!-- clipboard.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-  
-  
+<meta property="og:title" content="Function reference" />
+
+
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -32,6 +35,8 @@
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
+
+
 
 
   </head>
@@ -47,8 +52,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">fgeo.map</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">fgeo.map</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.0.0.9203</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
@@ -91,6 +100,7 @@
   <a href="https://forestgeo.github.io/fgeo/">fgeo</a>
 </li>
       </ul>
+      
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -101,10 +111,7 @@
       <div class="row">
   <div class="col-md-9">
     <div class="page-header">
-      <h1>
-        Reference
-        <small>version&nbsp;0.0.00.9203</small>
-      </h1>
+      <h1>Reference</h1>
     </div>
 
     <div class="contents">
@@ -125,19 +132,19 @@
         <tr>
           <!--  -->
           <td>
-            <p><code><a href="maply_tag.html">maply_tag</a></code> </p>
+            <p><code><a href="maply_tag.html">maply_tag()</a></code> </p>
           </td>
           <td><p>Map tree tags by status, showing four subquadrats per plot-page.</p></td>
         </tr><tr>
           <!--  -->
           <td>
-            <p><code><a href="maply_quad.html">maply_quad</a></code> </p>
+            <p><code><a href="maply_quad.html">maply_quad()</a></code> </p>
           </td>
           <td><p>Map trees within a quadrat.</p></td>
         </tr><tr>
           <!--  -->
           <td>
-            <p><code><a href="maply_sp_elev.html">maply_sp_elev</a></code> <code><a href="maply_sp_elev.html">map_sp_elev</a></code> <code><a href="maply_sp_elev.html">map_elev</a></code> </p>
+            <p><code><a href="maply_sp_elev.html">maply_sp_elev()</a></code> <code><a href="maply_sp_elev.html">map_sp_elev()</a></code> <code><a href="maply_sp_elev.html">map_elev()</a></code> </p>
           </td>
           <td><p>Map species and elevation data.</p></td>
         </tr>
@@ -151,43 +158,43 @@
         <tr>
           <!--  -->
           <td>
-            <p><code><a href="map_gx_gy_elev.html">map_gx_gy_elev</a></code> <code><a href="map_gx_gy_elev.html">map_gx_gy</a></code> </p>
+            <p><code><a href="map_gx_gy_elev.html">map_gx_gy_elev()</a></code> <code><a href="map_gx_gy_elev.html">map_gx_gy()</a></code> </p>
           </td>
           <td><p>Map a base over which other map components can later be added.</p></td>
         </tr><tr>
           <!--  -->
           <td>
-            <p><code><a href="contour_elev.html">contour_elev</a></code> </p>
+            <p><code><a href="contour_elev.html">contour_elev()</a></code> </p>
           </td>
           <td><p>Represent elevation with lines.</p></td>
         </tr><tr>
           <!--  -->
           <td>
-            <p><code><a href="label_elev.html">label_elev</a></code> </p>
+            <p><code><a href="label_elev.html">label_elev()</a></code> </p>
           </td>
           <td><p>Label elevation lines.</p></td>
         </tr><tr>
           <!--  -->
           <td>
-            <p><code><a href="add_sp.html">add_sp</a></code> </p>
+            <p><code><a href="add_sp.html">add_sp()</a></code> </p>
           </td>
           <td><p>Represent species with points.</p></td>
         </tr><tr>
           <!--  -->
           <td>
-            <p><code><a href="wrap.html">wrap</a></code> </p>
+            <p><code><a href="wrap.html">wrap()</a></code> </p>
           </td>
           <td><p>Facet data by a variable, and wrap multiple plots to fit a single page.</p></td>
         </tr><tr>
           <!--  -->
           <td>
-            <p><code><a href="limit_gx_gy.html">limit_gx_gy</a></code> </p>
+            <p><code><a href="limit_gx_gy.html">limit_gx_gy()</a></code> </p>
           </td>
           <td><p>Set the map limits.</p></td>
         </tr><tr>
           <!--  -->
           <td>
-            <p><code><a href="hide.html">hide_axis_labels</a></code> <code><a href="hide.html">hide_legend_color</a></code> </p>
+            <p><code><a href="hide.html">hide_axis_labels()</a></code> <code><a href="hide.html">hide_legend_color()</a></code> </p>
           </td>
           <td><p>Hide elements of a plot.</p></td>
         </tr>
@@ -201,19 +208,19 @@
         <tr>
           <!--  -->
           <td>
-            <p><code><a href="headers.html">map_tag_header</a></code> <code><a href="headers.html">map_quad_header</a></code> </p>
+            <p><code><a href="headers.html">map_tag_header()</a></code> <code><a href="headers.html">map_quad_header()</a></code> </p>
           </td>
           <td><p>Pre-made headers.</p></td>
         </tr><tr>
           <!--  -->
           <td>
-            <p><code><a href="suffix_edge_tag.html">suffix_edge_tag</a></code> </p>
+            <p><code><a href="suffix_edge_tag.html">suffix_edge_tag()</a></code> </p>
           </td>
           <td><p>Suffix tags of dead stems that map beyond the quadrat's edge.</p></td>
         </tr><tr>
           <!--  -->
           <td>
-            <p><code><a href="themes.html">theme_map_tag</a></code> <code><a href="themes.html">theme_map_quad</a></code> <code><a href="themes.html">theme_default</a></code> </p>
+            <p><code><a href="themes.html">theme_map_tag()</a></code> <code><a href="themes.html">theme_map_quad()</a></code> <code><a href="themes.html">theme_default()</a></code> </p>
           </td>
           <td><p>Themes.</p></td>
         </tr>
@@ -253,11 +260,14 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built with <a href="http://pkgdown.r-lib.org/">pkgdown</a>.</p>
 </div>
 
       </footer>
    </div>
 
+  
+
   </body>
 </html>
+

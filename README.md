@@ -1,12 +1,14 @@
 
 <!-- Don't edit README.md; instead, edit README.Rmd -->
-fgeo.map: map ForestGEO's data <img src="https://i.imgur.com/39pvr4n.png" align="right" height=44 />
-====================================================================================================
 
-[![Build Status](https://travis-ci.org/forestgeo/fgeo.map.svg?branch=master)](https://travis-ci.org/forestgeo/fgeo.map) [![Coverage status](https://codecov.io/gh/forestgeo/fgeo.map/branch/master/graph/badge.svg)](https://codecov.io/github/forestgeo/fgeo.map?branch=master)
+# <img src="https://i.imgur.com/m8FNhQR.png" align="right" height=88 /> fgeo.map: Map species, trees and topography.
 
-Installation
-------------
+[![Build
+Status](https://travis-ci.org/forestgeo/fgeo.map.svg?branch=master)](https://travis-ci.org/forestgeo/fgeo.map)
+[![Coverage
+status](https://codecov.io/gh/forestgeo/fgeo.map/branch/master/graph/badge.svg)](https://codecov.io/github/forestgeo/fgeo.map?branch=master)
+
+## Installation
 
 To install **fgeo.map** run the following code in R:
 
@@ -14,13 +16,13 @@ To install **fgeo.map** run the following code in R:
     if (missing_remotes) {
       install.packages("remotes")
     }
-
+    
     remotes::install_github("forestgeo/fgeo.map")
 
-To learn the details about how to install packages from GitHub, read [this blog post](https://goo.gl/dQKEeg).
+To learn the details about how to install packages from GitHub, read
+[this blog post](https://goo.gl/dQKEeg).
 
-Example
--------
+## Example
 
 ``` r
 library(fgeo.map)
@@ -37,7 +39,7 @@ library(dplyr)
 #>     intersect, setdiff, setequal, union
 ```
 
-Map species' distribution.
+Map species’ distribution.
 
 ``` r
 census <- bci12t7mini
