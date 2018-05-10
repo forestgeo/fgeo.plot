@@ -193,7 +193,7 @@ map_sp_elev <- function(census,
                         ylim = NULL,
                         custom_theme = NULL) {
   stopifnot(is.data.frame(census))
-  fgeo.tool::check_crucial_names(census, c("gx", "gy"))
+  fgeo.base::check_crucial_names(census, c("gx", "gy"))
   
   
   # User doesn't provide elevation data
@@ -435,7 +435,7 @@ contour_elev <- function(p,
                          low = "blue", 
                          high = "red", 
                          bins = NULL) {
-  fgeo.tool::check_crucial_names(p[["data"]], "elev")
+  fgeo.base::check_crucial_names(p[["data"]], "elev")
   
    p +
     stat_contour(
@@ -662,7 +662,7 @@ best_lim <- function(lim, coord) {
 check_sp <- function(census, species) {
   stopifnot(is.data.frame(census))
   stopifnot(is.character(species))
-  fgeo.tool::check_crucial_names(census, c("gx", "gy", "sp"))
+  fgeo.base::check_crucial_names(census, c("gx", "gy", "sp"))
   if (length(species) == 0) {
     rlang::abort("`sp` must be not empty.")
   }

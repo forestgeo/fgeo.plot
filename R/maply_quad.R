@@ -162,7 +162,7 @@ check_maply_quad <- function(vft,
   arg_theme_has_class_theme <- any(grepl("theme", class(theme)))
   stopifnot(arg_theme_has_class_theme)
   stopifnot(is.character(title_quad), is.character(header))
-  fgeo.tool::check_crucial_names(vft, core)
+  fgeo.base::check_crucial_names(vft, core)
   check_unique_plotid(vft)
   check_unique_censusid(vft)
   invisible(vft)

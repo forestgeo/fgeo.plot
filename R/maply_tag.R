@@ -257,7 +257,7 @@ check_maply_tag <- function(.vft,
                           move_edge) {
   stopifnot(is.data.frame(.vft))
   if (dim(.vft)[1] == 0) {stop("Data can't have cero rows")}
-  fgeo.tool::check_crucial_names(.vft, crucial)
+  fgeo.base::check_crucial_names(.vft, crucial)
   stopifnot(is.numeric(x_q))
   stopifnot(is.numeric(x_sq))
   stopifnot(is.numeric(y_q))
@@ -392,7 +392,7 @@ prep_maply_tag <- function(sbst,
 #' }
 paginate <- function(x, bl = 1, br = 2, tr = 3, tl = 4, subquad_offset = NULL) {
   stopifnot(is.data.frame(x))
-  fgeo.tool::check_crucial_names(x, "subquadrat")
+  fgeo.base::check_crucial_names(x, "subquadrat")
 
   if (!is.null(subquad_offset)) {
     stopifnot(subquad_offset == -1)
