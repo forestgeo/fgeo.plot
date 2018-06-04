@@ -269,7 +269,7 @@ map_pure_elev <- function(elevation,
                           label_color = "grey",
                           xyjust = 1,
                           fontface = "italic") {
-  elevation <- fgeo.tool::fgeo_elev(elevation)
+  elevation <- fgeo.tool::fgeo_elevation(elevation)
   base <- elevation %>% 
     map_gx_gy_elev() %>% 
     contour_elev(
@@ -318,7 +318,7 @@ map_pure_elev <- function(elevation,
 #' add_sp(base_census)
 #' contour_elev(base_elev)
 map_gx_gy_elev <- function(data) {
-  data <- fgeo.tool::fgeo_elev(data)
+  data <- fgeo.tool::fgeo_elevation(data)
   ggplot(data, aes(gx, gy, z = elev))
 }
 
