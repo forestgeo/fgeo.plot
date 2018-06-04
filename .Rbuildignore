@@ -21,3 +21,4 @@
 ^vignettes/map_tag_cache$
 ^man-roxygen$
 ^inst/tmp$
+^\.github$
