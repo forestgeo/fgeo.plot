@@ -287,7 +287,7 @@ check_maply_tag <- function(.vft,
     "* Detected censuses: ", commas(unique(.vft$censusid)),
     collapse = ""
   )
-  fgeo.tool::check_unique(.vft, "censusid", "warning", msg_cnsid)
+  fgeo.base::check_unique(.vft, "censusid", "warning", msg_cnsid)
   
   check_max_print(.vft, "quadratname", times = 4)
 
