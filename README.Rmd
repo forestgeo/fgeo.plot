@@ -54,7 +54,7 @@ Map species' distribution.
 ```{r fgeo.map-sp}
 census <- bci12t7mini
 # Fix structure of elevation data
-elevation <- restructure_elev(bci_elevation)
+elevation <- fgeo_elevation(bci_elevation)
 
 # All maps
 p <- maply_sp_elev(census, elevation, species = c("faraoc", "hybapr"))

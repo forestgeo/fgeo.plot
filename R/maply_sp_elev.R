@@ -39,7 +39,7 @@
 #' 
 #' @export 
 #' @examples
-#' census <- fgeo.tool::row_top(bciex::bci12s7mini, sp, 2)
+#' census <- fgeo.tool::pick_top(bciex::bci12s7mini, sp, 2)
 #' elevation <- bciex::bci_elevation
 #' 
 #' # Map on multiple pages ---------------------------------------------------
@@ -298,7 +298,7 @@ map_pure_elev <- function(elevation,
 #' @family map components.
 #' @export
 #' @examples 
-#' census <- fgeo.tool::row_top(bciex::bci12s7mini, sp, 2)
+#' census <- fgeo.tool::pick_top(bciex::bci12s7mini, sp, 2)
 #' elevation <- bciex::bci_elevation
 #' 
 #' # Look alike but internally they are not. 
@@ -376,7 +376,7 @@ limit_gx_gy <- function(p, xlim = NULL, ylim = NULL) {
 #' @family map components.
 #' @export
 #' @examples 
-#' census <- fgeo.tool::row_top(bciex::bci12s7mini, sp, 2)
+#' census <- fgeo.tool::pick_top(bciex::bci12s7mini, sp, 2)
 #' 
 #' add_sp(map_gx_gy(census))
 #' 

@@ -44,7 +44,7 @@ Map species’ distribution.
 ``` r
 census <- bci12t7mini
 # Fix structure of elevation data
-elevation <- restructure_elev(bci_elevation)
+elevation <- fgeo_elevation(bci_elevation)
 
 # All maps
 p <- maply_sp_elev(census, elevation, species = c("faraoc", "hybapr"))
@@ -92,8 +92,8 @@ vft2 <- filter(
 # All maps
 p3 <- maply_quad(vft2)
 #> * Appending tags of dead trees with the suffix '.d'
-#> Warning in fgeo.tool::str_suffix_match(crucial$tag, crucial$status,
-#> status_d, : No stem has status `dead`. Is this what you expect?
+#> Warning in fgeo.base::str_suffix_match(crucial$tag, crucial$status,
+#> status_d, : No `string` matches `dead`. Is this what you expect?
 #> * Standarizing `dbh` by the count of `dbh` measurements
 length(p3)
 #> [1] 10

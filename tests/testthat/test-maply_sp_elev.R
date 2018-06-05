@@ -1,4 +1,4 @@
-census <- fgeo.tool::row_top(bciex::bci12s7mini, sp, 2)
+census <- fgeo.tool::pick_top(bciex::bci12s7mini, sp, 2)
 elevation <- bciex::bci_elevation
 
 

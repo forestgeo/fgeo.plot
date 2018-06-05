@@ -107,7 +107,7 @@ dev.off()
 # (see `?top4quad`)
 dead <- top4quad \%>\%
   add_status_tree(status_a = "alive", status_d = "dead") \%>\%
-  row_top(QuadratID) \%>\%
+  pick_top(QuadratID) \%>\%
   filter(status_tree == "dead")
 select(dead, Tag, Status, status_tree, DBH)
 first(maply_tag(dead))
@@ -123,7 +123,7 @@ first(maply_quad(right))
 p <- filter(top4quad, DBH > 20 | is.na(DBH))
 first(maply_tag(p))
 
-# For more complex filtering, see also ?fgeo.tool::row_discard_twice_dead
+# For more complex filtering, see also ?fgeo.tool::drop_twice_dead
 
 # Customizing the maps ----------------------------------------------------
 

@@ -5,12 +5,12 @@
 #' all_quad <- bciex::bci12vft_mini %>%
 #'   dplyr::rename(QX = x, QY = y) %>%
 #'   dplyr::filter(PlotID == 1) %>%
-#'   fgeo.tool::row_top(CensusID)
+#'   fgeo.tool::pick_top(CensusID)
 #'
-#' top4quad <- all_quad %>% fgeo.tool::row_top(QuadratID, 4)
+#' top4quad <- all_quad %>% fgeo.tool::pick_top(QuadratID, 4)
 #' identical(top4quad, fgeo.map::top4quad)
 #'
-#' top1quad <- all_quad %>% fgeo.tool::row_top(QuadratID, 1)
+#' top1quad <- all_quad %>% fgeo.tool::pick_top(QuadratID, 1)
 #' identical(top1quad, fgeo.map::top4quad)
 #'
 #' top1quad

@@ -42,7 +42,7 @@
 #' # (see `?top4quad`)
 #' dead <- top4quad %>%
 #'   add_status_tree(status_a = "alive", status_d = "dead") %>%
-#'   row_top(QuadratID) %>%
+#'   pick_top(QuadratID) %>%
 #'   filter(status_tree == "dead")
 #' select(dead, Tag, Status, status_tree, DBH)
 #' maply_quad(dead)
@@ -57,7 +57,7 @@
 #' p <- filter(top4quad, DBH > 20 | is.na(DBH))
 #' first(maply_quad(p))
 #'
-#' # For more complex filtering, see also ?fgeo.tool::row_discard_twice_dead)
+#' # For more complex filtering, see also ?fgeo.tool::drop_twice_dead)
 #'
 #' # Customizing the maps ----------------------------------------------------
 #'
@@ -120,7 +120,7 @@ maply_quad <- function(vft,
 
   # Prepare
   message("* Appending tags of dead trees with the suffix '.d'")
-  crucial$tagged_tag <- fgeo.tool::str_suffix_match(
+  crucial$tagged_tag <- fgeo.base::str_suffix_match(
     crucial$tag, crucial$status, status_d, ".d"
   )
   message("* Standarizing `dbh` by the count of `dbh` measurements")

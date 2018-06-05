@@ -208,7 +208,7 @@ test_that("outputs quadrats in order, even if QuadratName is numeric (#33)", {
   expect_nms <- map(tricky_quad, paste0, "_", 1:4) %>% reduce(c)
   
   # Create some data
-  vft_toy <- fgeo.tool::row_top(top4quad, QuadratName, 3)
+  vft_toy <- fgeo.tool::pick_top(top4quad, QuadratName, 3)
   vft_toy <- mutate(
     vft_toy,
     QuadratName = recode(QuadratName,

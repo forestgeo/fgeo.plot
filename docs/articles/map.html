@@ -88,7 +88,7 @@
       <h1>Mapping Functions</h1>
                         <h4 class="author">Mauro Lepore</h4>
             
-            <h4 class="date">2018-05-10</h4>
+            <h4 class="date">2018-06-05</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/forestgeo/fgeo.map/blob/master/vignettes/map.Rmd"><code>vignettes/map.Rmd</code></a></small>
       <div class="hidden name"><code>map.Rmd</code></div>
@@ -151,7 +151,7 @@
 <a class="sourceLine" id="cb7-21" data-line-number="21"><span class="co"># (see `?top4quad`)</span></a>
 <a class="sourceLine" id="cb7-22" data-line-number="22">dead &lt;-<span class="st"> </span>top4quad <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb7-23" data-line-number="23"><span class="st">  </span><span class="kw">add_status_tree</span>(<span class="dt">status_a =</span> <span class="st">"alive"</span>, <span class="dt">status_d =</span> <span class="st">"dead"</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb7-24" data-line-number="24"><span class="st">  </span><span class="kw">row_top</span>(QuadratID) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb7-24" data-line-number="24"><span class="st">  </span><span class="kw">pick_top</span>(QuadratID) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb7-25" data-line-number="25"><span class="st">  </span><span class="kw">filter</span>(status_tree <span class="op">==</span><span class="st"> "dead"</span>)</a>
 <a class="sourceLine" id="cb7-26" data-line-number="26"><span class="kw">select</span>(dead, Tag, Status, status_tree, DBH)</a>
 <a class="sourceLine" id="cb7-27" data-line-number="27"><span class="co">#&gt; # A tibble: 20 x 4</span></a>
@@ -187,8 +187,8 @@
 <a class="sourceLine" id="cb8-2" data-line-number="2">wrong &lt;-<span class="st"> </span><span class="kw">filter</span>(dead, DBH <span class="op">&gt;</span><span class="st"> </span><span class="dv">10</span>)</a>
 <a class="sourceLine" id="cb8-3" data-line-number="3"><span class="kw"><a href="../reference/maply_quad.html">maply_quad</a></span>(wrong)</a>
 <a class="sourceLine" id="cb8-4" data-line-number="4"><span class="co">#&gt; * Appending tags of dead trees with the suffix '.d'</span></a>
-<a class="sourceLine" id="cb8-5" data-line-number="5"><span class="co">#&gt; Warning in fgeo.tool::str_suffix_match(crucial$tag, crucial$status,</span></a>
-<a class="sourceLine" id="cb8-6" data-line-number="6"><span class="co">#&gt; status_d, : No stem has status `dead`. Is this what you expect?</span></a>
+<a class="sourceLine" id="cb8-5" data-line-number="5"><span class="co">#&gt; Warning in fgeo.base::str_suffix_match(crucial$tag, crucial$status,</span></a>
+<a class="sourceLine" id="cb8-6" data-line-number="6"><span class="co">#&gt; status_d, : No `string` matches `dead`. Is this what you expect?</span></a>
 <a class="sourceLine" id="cb8-7" data-line-number="7"><span class="co">#&gt; * Standarizing `dbh` by the count of `dbh` measurements</span></a>
 <a class="sourceLine" id="cb8-8" data-line-number="8"><span class="co">#&gt; named list()</span></a>
 <a class="sourceLine" id="cb8-9" data-line-number="9"><span class="co"># * The right way to do it is to explicietly inlcude rows where DBH = NA</span></a>
@@ -208,7 +208,7 @@
 <a class="sourceLine" id="cb9-7" data-line-number="7"><span class="co">#&gt; Warning: Removed 34 rows containing missing values (geom_point).</span></a></code></pre></div>
 <p><img src="map_files/figure-html/unnamed-chunk-2-4.png" width="98%" style="display: block; margin: auto;"></p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"></a>
-<a class="sourceLine" id="cb10-2" data-line-number="2"><span class="co"># For more complex filtering, see also ?fgeo.tool::row_discard_twice_dead)</span></a>
+<a class="sourceLine" id="cb10-2" data-line-number="2"><span class="co"># For more complex filtering, see also ?fgeo.tool::drop_twice_dead)</span></a>
 <a class="sourceLine" id="cb10-3" data-line-number="3"></a>
 <a class="sourceLine" id="cb10-4" data-line-number="4"><span class="co"># Customizing the maps ----------------------------------------------------</span></a>
 <a class="sourceLine" id="cb10-5" data-line-number="5"></a>
@@ -285,7 +285,7 @@
 <a class="sourceLine" id="cb13-17" data-line-number="17"><span class="co"># (see `?top4quad`)</span></a>
 <a class="sourceLine" id="cb13-18" data-line-number="18">dead &lt;-<span class="st"> </span>top4quad <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb13-19" data-line-number="19"><span class="st">  </span><span class="kw">add_status_tree</span>(<span class="dt">status_a =</span> <span class="st">"alive"</span>, <span class="dt">status_d =</span> <span class="st">"dead"</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb13-20" data-line-number="20"><span class="st">  </span><span class="kw">row_top</span>(QuadratID) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb13-20" data-line-number="20"><span class="st">  </span><span class="kw">pick_top</span>(QuadratID) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb13-21" data-line-number="21"><span class="st">  </span><span class="kw">filter</span>(status_tree <span class="op">==</span><span class="st"> "dead"</span>)</a>
 <a class="sourceLine" id="cb13-22" data-line-number="22"><span class="kw">select</span>(dead, Tag, Status, status_tree, DBH)</a>
 <a class="sourceLine" id="cb13-23" data-line-number="23"><span class="co">#&gt; # A tibble: 20 x 4</span></a>
@@ -370,7 +370,7 @@
 <a class="sourceLine" id="cb15-4" data-line-number="4"><span class="kw">first</span>(<span class="kw"><a href="../reference/maply_tag.html">maply_tag</a></span>(p))</a></code></pre></div>
 <p><img src="map_files/figure-html/unnamed-chunk-3-4.png" width="98%" style="display: block; margin: auto;"></p>
 <div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1"></a>
-<a class="sourceLine" id="cb16-2" data-line-number="2"><span class="co"># For more complex filtering, see also ?fgeo.tool::row_discard_twice_dead</span></a>
+<a class="sourceLine" id="cb16-2" data-line-number="2"><span class="co"># For more complex filtering, see also ?fgeo.tool::drop_twice_dead</span></a>
 <a class="sourceLine" id="cb16-3" data-line-number="3"></a>
 <a class="sourceLine" id="cb16-4" data-line-number="4"><span class="co"># Customizing the maps ----------------------------------------------------</span></a>
 <a class="sourceLine" id="cb16-5" data-line-number="5"></a>
@@ -455,7 +455,7 @@
 <div id="maply_sp_elev-map-species-and-elevation-data" class="section level1">
 <h1 class="hasAnchor">
 <a href="#maply_sp_elev-map-species-and-elevation-data" class="anchor"></a>maply_sp_elev(): Map species and elevation data</h1>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" data-line-number="1">census &lt;-<span class="st"> </span>fgeo.tool<span class="op">::</span><span class="kw">row_top</span>(bciex<span class="op">::</span>bci12s7mini, sp, <span class="dv">2</span>)</a>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" data-line-number="1">census &lt;-<span class="st"> </span>fgeo.tool<span class="op">::</span><span class="kw">pick_top</span>(bciex<span class="op">::</span>bci12s7mini, sp, <span class="dv">2</span>)</a>
 <a class="sourceLine" id="cb23-2" data-line-number="2">elevation &lt;-<span class="st"> </span>bciex<span class="op">::</span>bci_elevation</a>
 <a class="sourceLine" id="cb23-3" data-line-number="3"></a>
 <a class="sourceLine" id="cb23-4" data-line-number="4"><span class="co"># Map on multiple pages ---------------------------------------------------</span></a>
