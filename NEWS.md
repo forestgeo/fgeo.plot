@@ -1,5 +1,6 @@
 # map 0.0.00.9203
 
+* Maintain function names that changed in __fgeo.tool__ and __fgeo.base__.
 * In maply_tag(), `ensure_type()` of crucial variables (#39).
 
 # map 0.0.00.9202
