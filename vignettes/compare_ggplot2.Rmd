@@ -1,0 +1,85 @@
+---
+title: "Comparing ggplot2"
+author: "Vignette Author"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Comparing ggplot2}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, echo = FALSE, message=FALSE, warning=FALSE}
+# hadley's settings
+set.seed(1014)
+options(digits = 3)
+
+knitr::opts_chunk$set(
+  echo = TRUE,  # {mine}
+  comment = "#>",
+  collapse = TRUE,
+  # cache = TRUE,
+  out.width = "100%",
+  fig.align = "center",
+  fig.width = 6,
+  fig.asp = 0.618,  # 1 / phi
+  fig.show = "hold",
+  rows.print = 3  # {mine}
+)
+```
+
+This article compares plots built with __fgeo.map__ versus __ggplot2__. 
+
+# Elevation
+
+Data
+
+```{r}
+# https://forestgeo.github.io/fgeo.map/
+library(fgeo.map)
+
+elevation <- fgeo.data::luquillo_elevation
+str(elevation)
+# Pull elevation dataframe
+elev <- elevation$col
+```
+
+Quick maps with __fgeo.map__.
+
+```{r}
+map_elev(elev)
+```
+
+```
+# map_elev() also understands the elevation list, so this code outputs the same
+map_elev(elevation)
+```
+
+```{r}
+# You have a number of options you can tweak
+map_elev(elev,
+  # Or choose colors by code from http://bit.ly/2rJgQba
+  low = "grey", high = "black", 
+  # How many lines, and how thick
+  bins = 20, contour_size = 0.5,
+  # Hide elevation numbers from inside the plot
+  label_elev = FALSE, 
+  # Keep the "level" legend
+  hide_legend_color = FALSE
+)
+```
+
+More flexible maps with __ggplot2__. 
+
+```{r}
+# http://ggplot2.tidyverse.org/reference/
+library(ggplot2)
+
+ggplot(elev, aes(x = x, y = y, z = elev)) +
+  geom_raster(aes(fill = elev)) +
+  geom_contour(color = "white", bins = 20) +
+  scale_fill_gradient(low = "grey", high = "black") +
+  coord_equal() +
+  theme_bw()
+```
+

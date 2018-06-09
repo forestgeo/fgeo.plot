@@ -21,22 +21,7 @@ navbar:
 
   type: default
 
-  left:
-    - text: Functions Index
-      href: reference/index.html
-
   right:
-    - text: Tutorials
-      href: articles/index.html
-
-    - text: Apps
-      menu:
-      - text: Map tree tags for fieldwork
-        href: https://bookdown.org/fgeocomm/maply_tag_app/
-
-    - text: News
-      href: news/index.html
-
     - icon: fa-gavel
       href: https://github.com/maurolepore
 
@@ -81,8 +66,3 @@ reference:
       - top1quad
       - top4quad
 
-articles:
-
-  - title: "Mapping Functions"
-    contents:
-      - map
