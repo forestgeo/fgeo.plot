@@ -24,6 +24,7 @@ Imports:
     stringr (>= 1.3.1)
 Suggests: 
     covr (>= 3.1.0),
+    fgeo.data,
     gridExtra (>= 2.3),
     knitr,
     magrittr (>= 1.5),
@@ -35,6 +36,7 @@ VignetteBuilder: knitr
 Remotes: 
     forestgeo/bciex,
     forestgeo/fgeo.base,
+    forestgeo/fgeo.data,
     forestgeo/fgeo.tool
 Encoding: UTF-8
 LazyData: true
