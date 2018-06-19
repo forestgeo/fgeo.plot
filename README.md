@@ -110,4 +110,4 @@ first(p3)
 ## Acknowledgments
 
 For ideas and guidance, thanks to Suzanne Lao, Stuart Davis, Shameema
-Jafferjee Esufa, David Kenfack and Anudeep Singh.
+Jafferjee Esufali, David Kenfack and Anudeep Singh.
