@@ -1,26 +1,23 @@
 
 <!-- Don't edit README.md; instead, edit README.Rmd -->
 
-# <img src="https://i.imgur.com/m8FNhQR.png" align="right" height=88 /> fgeo.map: Map species, trees and topography.
+# <img src="https://i.imgur.com/m8FNhQR.png" align="right" height=88 /> Map species, trees and topography.
 
+[![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 [![Build
 Status](https://travis-ci.org/forestgeo/fgeo.map.svg?branch=master)](https://travis-ci.org/forestgeo/fgeo.map)
 [![Coverage
 status](https://codecov.io/gh/forestgeo/fgeo.map/branch/master/graph/badge.svg)](https://codecov.io/github/forestgeo/fgeo.map?branch=master)
+[![CRAN
+status](https://www.r-pkg.org/badges/version/fgeo.map)](https://cran.r-project.org/package=fgeo.map)
 
 ## Installation
 
-To install **fgeo.map** run the following code in R:
+    # install.packages("remotes")
+    remotes::install_github("EDIT-OWNER/EDIT-PACKAGE-NAME")
 
-    missing_remotes <- !require(remotes)
-    if (missing_remotes) {
-      install.packages("remotes")
-    }
-    
-    remotes::install_github("forestgeo/fgeo.map")
-
-To learn the details about how to install packages from GitHub, read
-[this blog post](https://goo.gl/dQKEeg).
+For details on how to install packages from GitHub, see [this
+article](https://goo.gl/dQKEeg).
 
 ## Example
 
@@ -103,3 +100,14 @@ first(p3)
 ```
 
 <img src="README-map-quad-1.png" width="98%" style="display: block; margin: auto;" />
+
+## Information
+
+  - [Getting help](SUPPORT.md).
+  - [Contributing](CONTRIBUTING.md).
+  - [Contributor Code of Conduct](CODE_OF_CONDUCT.md).
+
+## Acknowledgments
+
+For ideas and guidance, thanks to Suzanne Lao, Stuart Davis, Shameema
+Jafferjee Esufa, David Kenfack and Anudeep Singh.

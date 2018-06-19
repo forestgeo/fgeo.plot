@@ -94,7 +94,7 @@
       <h1>Mapping Functions</h1>
                         <h4 class="author">Mauro Lepore</h4>
             
-            <h4 class="date">2018-06-08</h4>
+            <h4 class="date">2018-06-19</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/forestgeo/fgeo.map/blob/master/vignettes/map.Rmd"><code>vignettes/map.Rmd</code></a></small>
       <div class="hidden name"><code>map.Rmd</code></div>
@@ -318,8 +318,8 @@
 <a class="sourceLine" id="cb13-44" data-line-number="44"><span class="co">#&gt; 19 449446 dead   dead           NA</span></a>
 <a class="sourceLine" id="cb13-45" data-line-number="45"><span class="co">#&gt; 20 549206 dead   dead           NA</span></a>
 <a class="sourceLine" id="cb13-46" data-line-number="46"><span class="kw">first</span>(<span class="kw"><a href="../reference/maply_tag.html">maply_tag</a></span>(dead))</a>
-<a class="sourceLine" id="cb13-47" data-line-number="47"><span class="co">#&gt; Warning in check_valid_status(x, .status = c(status_d, status_a), "status"): No observation has .status = alive</span></a>
-<a class="sourceLine" id="cb13-48" data-line-number="48"><span class="co">#&gt;   * Valid values: dead</span></a></code></pre></div>
+<a class="sourceLine" id="cb13-47" data-line-number="47"><span class="co">#&gt; Warning: No observation has .status = alive</span></a>
+<a class="sourceLine" id="cb13-48" data-line-number="48"><span class="co">#&gt;   * Detected values: dead</span></a></code></pre></div>
 <p><img src="map_files/figure-html/unnamed-chunk-3-2.png" width="98%" style="display: block; margin: auto;"></p>
 <div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1"><span class="co"># * If you filter by `DBH`, you loose the dead trees becaue their `DBH = NA`</span></a>
 <a class="sourceLine" id="cb14-2" data-line-number="2">wrong &lt;-<span class="st"> </span><span class="kw">filter</span>(dead, DBH <span class="op">&gt;</span><span class="st"> </span><span class="dv">10</span>)</a>
