@@ -21,9 +21,11 @@
 <!-- clipboard.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
 
+<!-- sticky kit -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
-<script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
 
 
@@ -41,6 +43,7 @@ in a census dataset. The output is not a map but a list of maps, one per
 species, that can be printed on a .pdf file.
 " />
 <meta name="twitter:card" content="summary" />
+
 
 
 <!-- mathjax -->
@@ -193,12 +196,12 @@ different color.</p></td>
     <tr>
       <th>shape</th>
       <td><p>A number giving point size and shape (as in
-[graphics::points()]). Passed to [ggplot2::geom_point()].</p></td>
+<code><a href='http://www.rdocumentation.org/packages/graphics/topics/points'>graphics::points()</a></code>). Passed to <code><a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_point'>ggplot2::geom_point()</a></code>.</p></td>
     </tr>
     <tr>
       <th>point_size</th>
       <td><p>A number giving point size and shape (as in
-[graphics::points()]). Passed to [ggplot2::geom_point()].</p></td>
+<code><a href='http://www.rdocumentation.org/packages/graphics/topics/points'>graphics::points()</a></code>). Passed to <code><a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_point'>ggplot2::geom_point()</a></code>.</p></td>
     </tr>
     <tr>
       <th>contour_size</th>
@@ -229,14 +232,14 @@ low and high elevation.</p></td>
     </tr>
     <tr>
       <th>label_size</th>
-      <td><p>A number (`label_size`) or character
-string (`label_color` and `fontface`) giving the size, colour and fontface
+      <td><p>A number (<code>label_size</code>) or character
+string (<code>label_color</code> and <code>fontface</code>) giving the size, colour and fontface
 of the text labels for the elevation lines.</p></td>
     </tr>
     <tr>
       <th>label_color</th>
-      <td><p>A number (`label_size`) or character
-string (`label_color` and `fontface`) giving the size, colour and fontface
+      <td><p>A number (<code>label_size</code>) or character
+string (<code>label_color</code> and <code>fontface</code>) giving the size, colour and fontface
 of the text labels for the elevation lines.</p></td>
     </tr>
     <tr>
@@ -246,18 +249,18 @@ elevation lines.</p></td>
     </tr>
     <tr>
       <th>fontface</th>
-      <td><p>A number (`label_size`) or character
-string (`label_color` and `fontface`) giving the size, colour and fontface
+      <td><p>A number (<code>label_size</code>) or character
+string (<code>label_color</code> and <code>fontface</code>) giving the size, colour and fontface
 of the text labels for the elevation lines.</p></td>
     </tr>
     <tr>
       <th>xlim</th>
-      <td><p>A vector of lenght 2, for example `c(0, 500)`, giving the
+      <td><p>A vector of lenght 2, for example <code>c(0, 500)</code>, giving the
 minimum and maximum limits of the vertical and horizontal coordinates.</p></td>
     </tr>
     <tr>
       <th>ylim</th>
-      <td><p>A vector of lenght 2, for example `c(0, 500)`, giving the
+      <td><p>A vector of lenght 2, for example <code>c(0, 500)</code>, giving the
 minimum and maximum limits of the vertical and horizontal coordinates.</p></td>
     </tr>
     <tr>

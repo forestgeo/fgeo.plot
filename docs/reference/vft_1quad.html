@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Hide elements of a plot. — hide • fgeo.map</title>
+<title>Small ViewFullTables from Luquillo. — vft_1quad • fgeo.map</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -30,10 +30,10 @@
 
 
 
-<meta property="og:title" content="Hide elements of a plot. — hide" />
+<meta property="og:title" content="Small ViewFullTables from Luquillo. — vft_1quad" />
 
-<meta property="og:description" content="hide_axis_labels hides axis labels.
-hide_legend_color hides the color legend, for example, of elevation lines." />
+<meta property="og:description" content="ViewFullTable data from Luquillo including 1 and 4 quadrats from a single
+census. Apted from fgeo.data::luquillo_vft_4quad." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -125,53 +125,67 @@ hide_legend_color hides the color legend, for example, of elevation lines." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Hide elements of a plot.</h1>
-    <small class="dont-index">Source: <a href='https://github.com/forestgeo/fgeo.map/blob/master/R/maply_sp_elev.R'><code>R/maply_sp_elev.R</code></a></small>
-    <div class="hidden name"><code>hide.Rd</code></div>
+    <h1>Small ViewFullTables from Luquillo.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/forestgeo/fgeo.map/blob/master/R/data.R'><code>R/data.R</code></a></small>
+    <div class="hidden name"><code>vft_1quad.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p><code>hide_axis_labels</code> hides axis labels.
-<code>hide_legend_color</code> hides the color legend, for example, of elevation lines.</p>
+    <p>ViewFullTable data from Luquillo including 1 and 4 quadrats from a single
+census. Apted from <a href='http://www.rdocumentation.org/packages/fgeo.data/topics/luquillo_vft_4quad'>fgeo.data::luquillo_vft_4quad</a>.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>hide_axis_labels</span>(<span class='no'>p</span>)
+    <pre class="usage"><span class='no'>vft_4quad</span>
 
-<span class='fu'>hide_legend_color</span>(<span class='no'>p</span>)</pre>
-    
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>p</th>
-      <td><p>A ggplot.</p></td>
-    </tr>
-    </table>
-    
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+<span class='no'>vft_1quad</span></pre>
+        
+    <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
 
-    <div class='dont-index'><p><code><a href='http://www.rdocumentation.org/packages/ggplot2/topics/labs'>ggplot2::labs()</a></code>,  <code><a href='http://www.rdocumentation.org/packages/ggplot2/topics/guides'>ggplot2::guides()</a></code>.</p>
-<p>Other map components.: <code><a href='add_sp.html'>add_sp</a></code>,
-  <code><a href='contour_elev.html'>contour_elev</a></code>, <code><a href='label_elev.html'>label_elev</a></code>,
-  <code><a href='limit_gx_gy.html'>limit_gx_gy</a></code>, <code><a href='map_gx_gy_elev.html'>map_gx_gy_elev</a></code>,
-  <code><a href='wrap.html'>wrap</a></code></p></div>
+    <p>An object of class <code>tbl_df</code> (inherits from <code>tbl</code>, <code>data.frame</code>) with 1675 rows and 32 columns.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>elevation</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>bciex</span><span class='kw ns'>::</span><span class='no'><a href='http://www.rdocumentation.org/packages/bciex/topics/bci_elevation'>bci_elevation</a></span>
-<span class='no'>map</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='map_gx_gy_elev.html'>map_gx_gy_elev</a></span>(<span class='no'>elevation</span>)
-<span class='fu'>hide_axis_labels</span>(<span class='no'>map</span>)</div><div class='img'><img src='hide-1.png' alt='' width='700' height='433' /></div><div class='input'>
-<span class='no'>with_color_legend</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='contour_elev.html'>contour_elev</a></span>(<span class='fu'><a href='map_gx_gy_elev.html'>map_gx_gy_elev</a></span>(<span class='no'>elevation</span>))
-<span class='fu'>hide_legend_color</span>(<span class='no'>with_color_legend</span>)</div><div class='img'><img src='hide-2.png' alt='' width='700' height='433' /></div></pre>
+    <pre class="examples"><div class='input'><span class='fu'>str</span>(<span class='no'>vft_1quad</span>)</div><div class='output co'>#&gt; Classes 'tbl_df', 'tbl' and 'data.frame':	461 obs. of  32 variables:
+#&gt;  $ DBHID           : int  385079 385080 385081 385082 385085 385086 385089 385090 385091 385092 ...
+#&gt;  $ PlotName        : chr  "luquillo" "luquillo" "luquillo" "luquillo" ...
+#&gt;  $ PlotID          : int  1 1 1 1 1 1 1 1 1 1 ...
+#&gt;  $ Family          : chr  "Arecaceae" "Urticaceae" "Araliaceae" "Rubiaceae" ...
+#&gt;  $ Genus           : chr  "Prestoea" "Cecropia" "Schefflera" "Psychotria" ...
+#&gt;  $ SpeciesName     : chr  "acuminata" "schreberiana" "morototoni" "brachiata" ...
+#&gt;  $ Mnemonic        : chr  "PREMON" "CECSCH" "SCHMOR" "PSYBRA" ...
+#&gt;  $ Subspecies      : chr  NA NA NA NA ...
+#&gt;  $ SpeciesID       : int  182 74 196 185 74 185 198 74 93 185 ...
+#&gt;  $ SubspeciesID    : chr  NA NA NA NA ...
+#&gt;  $ QuadratName     : chr  "621" "621" "621" "621" ...
+#&gt;  $ QuadratID       : int  326 326 326 326 326 326 326 326 326 326 ...
+#&gt;  $ PX              : num  102 104 105 100 104 ...
+#&gt;  $ PY              : num  402 402 403 406 405 ...
+#&gt;  $ QX              : num  2.3 4.33 4.8 0.24 3.73 3.35 4.19 1.48 2.92 0.46 ...
+#&gt;  $ QY              : num  1.6 2.28 2.84 5.81 5.26 ...
+#&gt;  $ TreeID          : int  1789 1800 1802 1805 1806 1811 1812 1814 1822 1827 ...
+#&gt;  $ Tag             : chr  "102015" "102025" "102031" "102034" ...
+#&gt;  $ StemID          : int  2179 2190 2192 2195 2200 2205 2206 2208 2217 2222 ...
+#&gt;  $ StemNumber      : int  0 0 0 0 0 0 0 0 0 0 ...
+#&gt;  $ StemTag         : int  102015 102025 102031 102034 102039 102043 102044 102046 102058 102063 ...
+#&gt;  $ PrimaryStem     : chr  NA NA NA NA ...
+#&gt;  $ CensusID        : int  4 4 4 4 4 4 4 4 4 4 ...
+#&gt;  $ PlotCensusNumber: int  4 4 4 4 4 4 4 4 4 4 ...
+#&gt;  $ DBH             : num  109 246 NA NA 149 NA 43.9 226 82 24.7 ...
+#&gt;  $ HOM             : num  1.3 1.75 NA NA 1.4 NA 1.24 1.3 1.3 1.3 ...
+#&gt;  $ ExactDate       : Date, format: "2006-11-16" "2006-11-16" ...
+#&gt;  $ Date            : int  17121 17121 17121 17121 17121 17121 17121 17121 17121 17121 ...
+#&gt;  $ ListOfTSM       : chr  "MAIN;A" "MAIN;A" "MAIN;DEADT" "MAIN;DEADT" ...
+#&gt;  $ HighHOM         : int  1 1 1 1 1 1 1 1 1 1 ...
+#&gt;  $ LargeStem       : chr  NA NA NA NA ...
+#&gt;  $ Status          : chr  "alive" "alive" "dead" "dead" ...</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
       
-      <li><a href="#see-also">See also</a></li>
+      <li><a href="#format">Format</a></li>
       
       <li><a href="#examples">Examples</a></li>
     </ul>

@@ -10,9 +10,6 @@
     <loc>https://forestgeo.github.io/fgeo.map//reference/contour_elev.html</loc>
   </url>
   <url>
-    <loc>https://forestgeo.github.io/fgeo.map//reference/datasets.html</loc>
-  </url>
-  <url>
     <loc>https://forestgeo.github.io/fgeo.map//reference/fgeo.map-package.html</loc>
   </url>
   <url>
@@ -50,6 +47,9 @@
   </url>
   <url>
     <loc>https://forestgeo.github.io/fgeo.map//reference/themes.html</loc>
+  </url>
+  <url>
+    <loc>https://forestgeo.github.io/fgeo.map//reference/vft_1quad.html</loc>
   </url>
   <url>
     <loc>https://forestgeo.github.io/fgeo.map//reference/wrap.html</loc>

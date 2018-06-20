@@ -21,9 +21,11 @@
 <!-- clipboard.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
 
+<!-- sticky kit -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
-<script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
 
 
@@ -32,6 +34,7 @@
 
 <meta property="og:description" content="Map trees within a quadrat." />
 <meta name="twitter:card" content="summary" />
+
 
 
 <!-- mathjax -->
@@ -150,7 +153,7 @@
     </tr>
     <tr>
       <th>header</th>
-      <td><p>A string to use as a header (see [headers]).</p></td>
+      <td><p>A string to use as a header (see <a href='headers.html'>headers</a>).</p></td>
     </tr>
     <tr>
       <th>theme</th>
@@ -167,7 +170,7 @@
     <tr>
       <th>tag_size</th>
       <td><p>A number giving tag size. Passed to
-[ggrepel::geom_text_repel].</p></td>
+<a href='http://www.rdocumentation.org/packages/ggrepel/topics/geom_text_repel'>ggrepel::geom_text_repel</a>.</p></td>
     </tr>
     <tr>
       <th>move_edge</th>
@@ -195,9 +198,9 @@ status that corresponds to dead stems.</p></td>
 <span class='no'>filter</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='no'><a href='http://dplyr.tidyverse.org/reference/filter.html'>filter</a></span>
 
 <span class='co'># Filter the data you want. For example:</span>
-<span class='co'># (see ?top4quad)</span>
+<span class='co'># (see ?vft_4quad)</span>
 <span class='no'>want</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://dplyr.tidyverse.org/reference/filter.html'>filter</a></span>(
-  <span class='no'>top4quad</span>,
+  <span class='no'>vft_4quad</span>,
   <span class='no'>CensusID</span> <span class='kw'>==</span> <span class='fl'>6</span>,
   <span class='no'>PlotID</span> <span class='kw'>==</span> <span class='fl'>1</span>
 )
@@ -211,8 +214,8 @@ status that corresponds to dead stems.</p></td>
 
 <span class='co'># Be careful if filtering by DBH: You may unintentionally remove dead trees.</span>
 <span class='co'># * Confirm this dataset has dead trees:</span>
-<span class='co'># (see `?top4quad`)</span>
-<span class='no'>dead</span> <span class='kw'>&lt;-</span> <span class='no'>top4quad</span> <span class='kw'>%&gt;%</span>
+<span class='co'># (see `?vft_4quad`)</span>
+<span class='no'>dead</span> <span class='kw'>&lt;-</span> <span class='no'>vft_4quad</span> <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='http://www.rdocumentation.org/packages/fgeo.tool/topics/add_status_tree'>add_status_tree</a></span>(<span class='kw'>status_a</span> <span class='kw'>=</span> <span class='st'>"alive"</span>, <span class='kw'>status_d</span> <span class='kw'>=</span> <span class='st'>"dead"</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='http://www.rdocumentation.org/packages/fgeo.tool/topics/pick_top'>pick_top</a></span>(<span class='no'>QuadratID</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='http://dplyr.tidyverse.org/reference/filter.html'>filter</a></span>(<span class='no'>status_tree</span> <span class='kw'>==</span> <span class='st'>"dead"</span>)
@@ -226,7 +229,7 @@ status that corresponds to dead stems.</p></td>
 <span class='fu'>maply_quad</span>(<span class='no'>right</span>)
 
 <span class='co'># Keeping dead trees with `is.na(DBH)` (e.g. tag 127885.d on the bottom right)</span>
-<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://dplyr.tidyverse.org/reference/filter.html'>filter</a></span>(<span class='no'>top4quad</span>, <span class='no'>DBH</span> <span class='kw'>&gt;</span> <span class='fl'>20</span> <span class='kw'>|</span> <span class='fu'>is.na</span>(<span class='no'>DBH</span>))
+<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://dplyr.tidyverse.org/reference/filter.html'>filter</a></span>(<span class='no'>vft_4quad</span>, <span class='no'>DBH</span> <span class='kw'>&gt;</span> <span class='fl'>20</span> <span class='kw'>|</span> <span class='fu'>is.na</span>(<span class='no'>DBH</span>))
 <span class='fu'><a href='http://dplyr.tidyverse.org/reference/nth.html'>first</a></span>(<span class='fu'>maply_quad</span>(<span class='no'>p</span>))
 
 <span class='co'># For more complex filtering, see also ?fgeo.tool::drop_twice_dead)</span>
@@ -242,14 +245,14 @@ status that corresponds to dead stems.</p></td>
   <span class='st'>" ........................................................................"</span>,
   <span class='kw'>sep</span> <span class='kw'>=</span> <span class='st'>"\n"</span>
 )
-<span class='co'># See ?top1quad</span>
-<span class='fu'>maply_quad</span>(<span class='no'>top1quad</span>, <span class='kw'>title_quad</span> <span class='kw'>=</span> <span class='st'>"My Site, 2018. Quad:"</span>, <span class='kw'>header</span> <span class='kw'>=</span> <span class='no'>myheader</span>)
+<span class='co'># See ?vft_1quad</span>
+<span class='fu'>maply_quad</span>(<span class='no'>vft_1quad</span>, <span class='kw'>title_quad</span> <span class='kw'>=</span> <span class='st'>"My Site, 2018. Quad:"</span>, <span class='kw'>header</span> <span class='kw'>=</span> <span class='no'>myheader</span>)
 
 <span class='co'># Tweak the theme with ggplot</span>
 <span class='fu'>library</span>(<span class='no'>ggplot2</span>)
 
 <span class='fu'>maply_quad</span>(
-  <span class='no'>top1quad</span>,
+  <span class='no'>vft_1quad</span>,
   <span class='kw'>title_quad</span> <span class='kw'>=</span> <span class='st'>"My Site, 2018. Quad:"</span>,
   <span class='kw'>header</span> <span class='kw'>=</span> <span class='fu'><a href='headers.html'>map_quad_header</a></span>(<span class='st'>"spanish"</span>),
   <span class='kw'>tag_size</span> <span class='kw'>=</span> <span class='fl'>3</span>,

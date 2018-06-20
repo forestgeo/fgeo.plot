@@ -1,18 +1,9 @@
-# Few quadrats based on BCI ----------------------------------------------
+# Few quadrats based on Luquillo
 
-library(bciex)
-library(fgeo.tool)
-library(fgeo.map)
-library(dplyr)
-filter <- dplyr::filter
+library(fgeo)
 
-all_quad <- bciex::bci12vft_mini %>%
-  rename(QX = x, QY = y) %>%
-  filter(PlotID == 1) %>%
-  pick_top(CensusID)
+vft_4quad <- fgeo.data::luquillo_vft_4quad %>% pick_top(CensusID)
+use_data(vft_4quad, overwrite = TRUE)
 
-top4quad <- all_quad %>% pick_top(QuadratID, 4)
-use_data(top4quad, overwrite = TRUE)
-
-top1quad <- all_quad %>% pick_top(QuadratID, 1)
-use_data(top1quad, overwrite = TRUE)
+vft_1quad <- vft_4quad %>% pick_top(QuadratID, 1)
+use_data(vft_1quad, overwrite = TRUE)

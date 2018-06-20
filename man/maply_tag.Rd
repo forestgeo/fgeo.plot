@@ -88,9 +88,9 @@ library(dplyr)
 # Filtering the data to map -----------------------------------------------
 
 # Filter the data you want. For example:
-# (see ?top1quad)
+# (see ?vft_1quad)
 want <- filter(
-  top1quad,
+  vft_1quad,
   CensusID == 6,
   PlotID == 1
 )
@@ -104,8 +104,8 @@ dev.off()
 
 # Be careful if filtering by DBH: You may unintentionally remove dead trees.
 # * Confirm this dataset has dead trees:
-# (see `?top4quad`)
-dead <- top4quad \%>\%
+# (see `?vft_4quad`)
+dead <- vft_4quad \%>\%
   add_status_tree(status_a = "alive", status_d = "dead") \%>\%
   pick_top(QuadratID) \%>\%
   filter(status_tree == "dead")
@@ -120,7 +120,7 @@ right
 first(maply_quad(right))
 
 # Keeping dead trees with `is.na(DBH)` (e.g. tag 127885.d on the bottom right)
-p <- filter(top4quad, DBH > 20 | is.na(DBH))
+p <- filter(vft_4quad, DBH > 20 | is.na(DBH))
 first(maply_tag(p))
 
 # For more complex filtering, see also ?fgeo.tool::drop_twice_dead
@@ -129,11 +129,11 @@ first(maply_tag(p))
 
 # Common tweaks
 
-p <- maply_tag(top1quad, show_page = FALSE, show_subquad = FALSE)
+p <- maply_tag(vft_1quad, show_page = FALSE, show_subquad = FALSE)
 first(p)
 
 p <- maply_tag(
-  top1quad,
+  vft_1quad,
   title_quad = "BCI 2012. Quadrat: ",
   bl = "bottom-left", br = "bottom-right", tr = "top-right", tl = "top-left",
   header = "Line 1: _________\\nLine 2:\\nLine 3:.....................",
@@ -150,13 +150,13 @@ first(p)
 
 library(ggplot2)
 
-p <- maply_tag(top1quad, theme = theme_gray())
+p <- maply_tag(vft_1quad, theme = theme_gray())
 first(p)
 
 # Tweaking the default theme of maply_tag()
 
 small_tweak <- theme_map_tag(legend.position = "bottom")
-p <- maply_tag(top1quad, theme = small_tweak)
+p <- maply_tag(vft_1quad, theme = small_tweak)
 first(p)
 
 large_tweak <- theme(
@@ -173,7 +173,7 @@ large_tweak <- theme(
   panel.grid.minor = element_line(colour = "black", linetype = "dotted"),
   panel.grid.major = element_line(colour = "black")
 )
-p <- maply_tag(top1quad, theme = large_tweak)
+p <- maply_tag(vft_1quad, theme = large_tweak)
 first(p)
 
 
@@ -182,7 +182,7 @@ first(p)
 
 # Adapting the dimensions of quadrat and subquadrat to the range of qx and qy
 # Creating new data set with QX and QY ranging 0-100
-smaller <- top1quad
+smaller <- vft_1quad
 n <- nrow(smaller)
 smaller$QX <- sample(0:10, n, replace = TRUE)
 smaller$QY <- sample(0:10, n, replace = TRUE)
