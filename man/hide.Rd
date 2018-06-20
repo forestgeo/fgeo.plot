@@ -33,3 +33,4 @@ Other map components.: \code{\link{add_sp}},
   \code{\link{limit_gx_gy}}, \code{\link{map_gx_gy_elev}},
   \code{\link{wrap}}
 }
+\concept{map components.}

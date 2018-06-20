@@ -45,9 +45,9 @@ under the section entitled \emph{'pch' values}).}
 \code{\link[ggplot2:geom_point]{ggplot2::geom_point()}}.}
 
 \item{tag_size}{A number giving tag size. Passed to
-[ggrepel::geom_text_repel].}
+\link[ggrepel:geom_text_repel]{ggrepel::geom_text_repel}.}
 
-\item{header}{A string to use as a header (see [headers]).}
+\item{header}{A string to use as a header (see \link{headers}).}
 
 \item{theme}{An object of class theme.}
 
@@ -202,3 +202,4 @@ first(p)
 
 Other `maply_*` functions.: \code{\link{maply_sp_elev}}
 }
+\concept{`maply_*` functions.}

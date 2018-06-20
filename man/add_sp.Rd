@@ -9,13 +9,13 @@ add_sp(p, data = NULL, fill = "sp", shape = 21, point_size = 3)
 \arguments{
 \item{p}{A ggplot.}
 
-\item{data}{A dataframe; passed to [ggplot2::ggplot()].}
+\item{data}{A dataframe; passed to \code{\link[ggplot2:ggplot]{ggplot2::ggplot()}}.}
 
 \item{fill}{Character; either a colour or "sp", which maps each species to a
 different color.}
 
 \item{shape, point_size}{A number giving point size and shape (as in
-[graphics::points()]). Passed to [ggplot2::geom_point()].}
+\code{\link[graphics:points]{graphics::points()}}). Passed to \code{\link[ggplot2:geom_point]{ggplot2::geom_point()}}.}
 }
 \description{
 Represent species with points.
@@ -35,3 +35,4 @@ Other map components.: \code{\link{contour_elev}},
   \code{\link{limit_gx_gy}}, \code{\link{map_gx_gy_elev}},
   \code{\link{wrap}}
 }
+\concept{map components.}

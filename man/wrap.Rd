@@ -86,3 +86,4 @@ Other map components.: \code{\link{add_sp}},
   \code{\link{label_elev}}, \code{\link{limit_gx_gy}},
   \code{\link{map_gx_gy_elev}}
 }
+\concept{map components.}

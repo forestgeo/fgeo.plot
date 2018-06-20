@@ -324,7 +324,7 @@ prep_maply_tag <- function(sbst,
   sbst %>%
     fgeo.tool::add_status_tree(status_a = "alive", status_d = "dead") %>%
     select(-.data$status) %>% 
-    fgeo.tool::collapse_censusid() %>% 
+    fgeo.base::collapse_censusid() %>% 
     fgeo.tool::add_subquad(
       x_q = x_q, x_sq = x_sq, y_q = y_q, y_sq = y_sq,
       subquad_offset = subquad_offset

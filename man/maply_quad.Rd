@@ -14,7 +14,7 @@ maply_quad(vft, title_quad = "Site Name, YYYY, Quadrat:",
 
 \item{title_quad}{A string to use as a title.}
 
-\item{header}{A string to use as a header (see [headers]).}
+\item{header}{A string to use as a header (see \link{headers}).}
 
 \item{theme}{An object of class theme.}
 
@@ -23,7 +23,7 @@ maply_quad(vft, title_quad = "Site Name, YYYY, Quadrat:",
 \item{subquadrat_side}{Length in meters of the side of a subquadrat.}
 
 \item{tag_size}{A number giving tag size. Passed to
-[ggrepel::geom_text_repel].}
+\link[ggrepel:geom_text_repel]{ggrepel::geom_text_repel}.}
 
 \item{move_edge}{A number to adjust the extension of the grid lines beyond
 the plot limits.}

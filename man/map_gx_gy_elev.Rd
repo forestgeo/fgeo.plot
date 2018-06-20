@@ -10,7 +10,7 @@ map_gx_gy_elev(data)
 map_gx_gy(data)
 }
 \arguments{
-\item{data}{A dataframe; passed to [ggplot2::ggplot()].}
+\item{data}{A dataframe; passed to \code{\link[ggplot2:ggplot]{ggplot2::ggplot()}}.}
 }
 \description{
 Map a base over which other map components can later be added.
@@ -45,3 +45,4 @@ Other map components.: \code{\link{add_sp}},
   \code{\link{label_elev}}, \code{\link{limit_gx_gy}},
   \code{\link{wrap}}
 }
+\concept{map components.}

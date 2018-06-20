@@ -37,10 +37,10 @@ map all unique codes in the column \code{sp}.}
 different color.}
 
 \item{shape}{A number giving point size and shape (as in
-[graphics::points()]). Passed to [ggplot2::geom_point()].}
+\code{\link[graphics:points]{graphics::points()}}). Passed to \code{\link[ggplot2:geom_point]{ggplot2::geom_point()}}.}
 
 \item{point_size}{A number giving point size and shape (as in
-[graphics::points()]). Passed to [ggplot2::geom_point()].}
+\code{\link[graphics:points]{graphics::points()}}). Passed to \code{\link[ggplot2:geom_point]{ggplot2::geom_point()}}.}
 
 \item{contour_size}{A number giving the size of the contour of elevation
 lines. Passed to \code{\link[ggplot2:stat_contour]{ggplot2::stat_contour()}}.}
@@ -57,25 +57,25 @@ low and high elevation.}
 
 \item{label_elev}{Logical. \code{TRUE} labels the elevation lines with text.}
 
-\item{label_size}{A number (`label_size`) or character
-string (`label_color` and `fontface`) giving the size, colour and fontface
+\item{label_size}{A number (\code{label_size}) or character
+string (\code{label_color} and \code{fontface}) giving the size, colour and fontface
 of the text labels for the elevation lines.}
 
-\item{label_color}{A number (`label_size`) or character
-string (`label_color` and `fontface`) giving the size, colour and fontface
+\item{label_color}{A number (\code{label_size}) or character
+string (\code{label_color} and \code{fontface}) giving the size, colour and fontface
 of the text labels for the elevation lines.}
 
 \item{xyjust}{A number to adjust the position of the text labels of the
 elevation lines.}
 
-\item{fontface}{A number (`label_size`) or character
-string (`label_color` and `fontface`) giving the size, colour and fontface
+\item{fontface}{A number (\code{label_size}) or character
+string (\code{label_color} and \code{fontface}) giving the size, colour and fontface
 of the text labels for the elevation lines.}
 
-\item{xlim}{A vector of lenght 2, for example `c(0, 500)`, giving the
+\item{xlim}{A vector of lenght 2, for example \code{c(0, 500)}, giving the
 minimum and maximum limits of the vertical and horizontal coordinates.}
 
-\item{ylim}{A vector of lenght 2, for example `c(0, 500)`, giving the
+\item{ylim}{A vector of lenght 2, for example \code{c(0, 500)}, giving the
 minimum and maximum limits of the vertical and horizontal coordinates.}
 
 \item{custom_theme}{A valed \code{\link[ggplot2:theme]{ggplot2::theme()}}. \code{NULL} uses the default
@@ -211,3 +211,4 @@ map_gx_gy_elev(elevation) \%>\%
 
 Other `maply_*` functions.: \code{\link{maply_tag}}
 }
+\concept{`maply_*` functions.}
