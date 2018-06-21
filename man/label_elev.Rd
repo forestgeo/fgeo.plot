@@ -10,8 +10,8 @@ label_elev(p, label_size = 3, label_color = "grey", xyjust = 1,
 \arguments{
 \item{p}{A ggplot.}
 
-\item{label_size, label_color, fontface}{A number (`label_size`) or character
-string (`label_color` and `fontface`) giving the size, colour and fontface
+\item{label_size, label_color, fontface}{A number (\code{label_size}) or character
+string (\code{label_color} and \code{fontface}) giving the size, colour and fontface
 of the text labels for the elevation lines.}
 
 \item{xyjust}{A number to adjust the position of the text labels of the
@@ -42,3 +42,4 @@ Other map components.: \code{\link{add_sp}},
   \code{\link{limit_gx_gy}}, \code{\link{map_gx_gy_elev}},
   \code{\link{wrap}}
 }
+\concept{map components.}

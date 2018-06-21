@@ -1,23 +1,15 @@
-#' Data sets for examples; adapted from [bciex::bci12vft_mini].
-#' @name datasets
+#' Small ViewFullTables from Luquillo.
+#' 
+#' ViewFullTable data from Luquillo including 1 and 4 quadrats from a single
+#' census. Apted from [fgeo.data::luquillo_vft_4quad].
+#' 
 #' @examples
-#' library(dplyr)
-#' all_quad <- bciex::bci12vft_mini %>%
-#'   dplyr::rename(QX = x, QY = y) %>%
-#'   dplyr::filter(PlotID == 1) %>%
-#'   fgeo.tool::pick_top(CensusID)
-#'
-#' top4quad <- all_quad %>% fgeo.tool::pick_top(QuadratID, 4)
-#' identical(top4quad, fgeo.map::top4quad)
-#'
-#' top1quad <- all_quad %>% fgeo.tool::pick_top(QuadratID, 1)
-#' identical(top1quad, fgeo.map::top4quad)
-#'
-#' top1quad
+#' str(vft_1quad)
+#' @name vft_1quad
 NULL
 
-#' @rdname datasets
-"top4quad"
+#' @rdname vft_1quad
+"vft_4quad"
 
-#' @rdname datasets
-"top1quad"
+#' @rdname vft_1quad
+"vft_1quad"

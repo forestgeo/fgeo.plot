@@ -23,9 +23,9 @@
 #' filter <- dplyr::filter
 #'
 #' # Filter the data you want. For example:
-#' # (see ?top4quad)
+#' # (see ?vft_4quad)
 #' want <- filter(
-#'   top4quad,
+#'   vft_4quad,
 #'   CensusID == 6,
 #'   PlotID == 1
 #' )
@@ -39,8 +39,8 @@
 #'
 #' # Be careful if filtering by DBH: You may unintentionally remove dead trees.
 #' # * Confirm this dataset has dead trees:
-#' # (see `?top4quad`)
-#' dead <- top4quad %>%
+#' # (see `?vft_4quad`)
+#' dead <- vft_4quad %>%
 #'   add_status_tree(status_a = "alive", status_d = "dead") %>%
 #'   pick_top(QuadratID) %>%
 #'   filter(status_tree == "dead")
@@ -54,7 +54,7 @@
 #' maply_quad(right)
 #'
 #' # Keeping dead trees with `is.na(DBH)` (e.g. tag 127885.d on the bottom right)
-#' p <- filter(top4quad, DBH > 20 | is.na(DBH))
+#' p <- filter(vft_4quad, DBH > 20 | is.na(DBH))
 #' first(maply_quad(p))
 #'
 #' # For more complex filtering, see also ?fgeo.tool::drop_twice_dead)
@@ -70,14 +70,14 @@
 #'   " ........................................................................",
 #'   sep = "\n"
 #' )
-#' # See ?top1quad
-#' maply_quad(top1quad, title_quad = "My Site, 2018. Quad:", header = myheader)
+#' # See ?vft_1quad
+#' maply_quad(vft_1quad, title_quad = "My Site, 2018. Quad:", header = myheader)
 #'
 #' # Tweak the theme with ggplot
 #' library(ggplot2)
 #'
 #' maply_quad(
-#'   top1quad,
+#'   vft_1quad,
 #'   title_quad = "My Site, 2018. Quad:",
 #'   header = map_quad_header("spanish"),
 #'   tag_size = 3,
