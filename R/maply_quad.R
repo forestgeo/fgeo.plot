@@ -120,7 +120,7 @@ maply_quad <- function(vft,
 
   # Prepare
   message("* Appending tags of dead trees with the suffix '.d'")
-  crucial$tagged_tag <- fgeo.base::str_suffix_match(
+  crucial$tagged_tag <- fgeo.base::suffix_match(
     crucial$tag, crucial$status, status_d, ".d"
   )
   message("* Standarizing `dbh` by the count of `dbh` measurements")

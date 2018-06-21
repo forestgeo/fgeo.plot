@@ -49,7 +49,7 @@ suffix_edge_tag <- function(x, .match, suffix, x_q = 20, y_q = x_q) {
     are_to_tag <- detect_to_tag(x = x, x_q = x_q, y_q = y_q)
     to_tag <- x[are_to_tag, ]
     # Suffix edgy tags
-    x[are_to_tag, "tag"] <- fgeo.base::str_suffix_match(
+    x[are_to_tag, "tag"] <- fgeo.base::suffix_match(
       string = to_tag[["tag"]], 
       to_match = to_tag[["status"]], 
       .match = .match,
