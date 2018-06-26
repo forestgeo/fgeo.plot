@@ -3,6 +3,9 @@ library(purrr)
 
 context("maply_tag")
 
+vft_1quad <- fgeo.data::luquillo_vft_4quad %>% 
+  fgeo.tool::pick_top(QuadratName) %>% 
+  fgeo.tool::pick_top(CensusID)
 map_list <- maply_tag(vft_1quad)
 
 # Outputs -----------------------------------------------------------------
@@ -29,7 +32,7 @@ test_that("output is correct", {
   # plots the same with all or just the minimum needed vars in data
   all_vars <- map_list[[1]]$data
   min_vars <- vft_1quad %>%
-    select(Tag, QX, QY, Status, QuadratName, CensusID, PlotID) %>%
+    select(Tag, TreeID, QX, QY, Status, QuadratName, CensusID, PlotID) %>%
     maply_tag() %>%
     .[[1]] %>%
     .$data
@@ -67,7 +70,9 @@ test_that("works with all defaults given in usage", {
 
 
 test_that("handles wrong type", {
-  crucial <- c("tag", "qx", "qy", "status", "quadratname", "censusid", "plotid")
+  crucial <- c(
+    "tag", "treeid", "qx", "qy", "status", "quadratname", "censusid", "plotid"
+  )
   crucial_nms <- paste0(crucial, collapse = "|")
   x <- vft_1quad %>% 
     select(matches(crucial_nms)) 

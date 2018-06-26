@@ -39,56 +39,42 @@ For details on how to install packages from GitHub, see [this article](https://g
 ## Example
 
 ```{r pkg}
-library(fgeo.map)
-library(bciex)
-library(fgeo.tool)
 library(dplyr)
+library(fgeo)
 ```
 
 Map species' distribution.
 
 ```{r fgeo.map-sp}
-census <- bci12t7mini
-# Fix structure of elevation data
-elevation <- fgeo_elevation(bci_elevation)
+census <- luquillo_tree6_random
+elevation <- fgeo_elevation(luquillo_elevation)
 
-# All maps
-p <- maply_sp_elev(census, elevation, species = c("faraoc", "hybapr"))
-
-# Show first map
-first(p)
+p <- maply_sp_elev(census, luquillo_elevation, species = c("PREMON", "CASARB"))
+# Show first map only
+p[[1]]
 ```
 
 Map tree tags by status, showing four subquadrats per plot-page.
 
 ```{r map-tag}
 # Fix two wrong names
-viewfulltable <- rename(bci12vft_mini, qx = x, qy = y)
-
-# Filter one plot and one census
-vft <- filter(viewfulltable, PlotID == 1, CensusID == 6)
+vft <- luquillo_vft_4quad
+vft <- pick_top(vft, CensusID, -1)  # pick from the bottom of the rank
+vft <- pick_top(vft, PlotID)
 
 # All maps
 p2 <- maply_tag(vft)
 length(p2)
 
 # Show first map
-first(p2)
+p2[[1]]
 ```
 
 Map trees within a quadrat mapping tree diameter to point size.
 
 ```{r map-quad}
-# Filtering:
-# * Trees of diameter greater than 10 cm;
-# * Last census;
-# * Plot 1.
-vft2 <- filter(
-  viewfulltable,
-  DBH > 10,
-  CensusID == max(CensusID, na.rm = TRUE),
-  PlotID == 1
-)
+# Focusing on trees which dbh is 10 mm or more
+vft2 <- pick_dbh_min(vft, 10)
 
 # All maps
 p3 <- maply_quad(vft2)
