@@ -15,11 +15,15 @@ vignette: >
 This vignette shows the same code that you can find in the help files of `maply_sp_elev()`, `maply_quad()` and `maply_tag()`, but here you can see the output.
 
 ```{r}
-library(fgeo.map)
-library(fgeo.tool)
+# Data manipulation
 library(dplyr)
-# Avoid conflict with `stats::filter()`
-filter <- dplyr::filter
+library(fgeo.data)
+# Visualization
+library(ggplot2)
+library(fgeo.map)
+
+# Data for examples
+library(fgeo.tool)
 ```
 
 ```{r setup, echo = FALSE, message=FALSE, warning=FALSE}
@@ -43,13 +47,10 @@ knitr::opts_chunk$set(
 # maply\_quad(): Map trees within a quadrat
 
 ```{r}
-# Filter the data you want. For example:
-# (see ?vft_4quad)
-want <- filter(
-  vft_4quad,
-  CensusID == 6,
-  PlotID == 1
-)
+# Filter the data you want.
+# `maply_quad()` works with ViewFullTable (see ?luquillo_vft_4quad)
+vft <- luquillo_vft_4quad
+want <- filter(vft, CensusID == 6, PlotID == 1)
 p <- maply_quad(want)
 # Visualizing only the first plot of `p`
 first(p)
@@ -60,8 +61,7 @@ dev.off()
 
 # Be careful if filtering by DBH: You may unintentionally remove dead trees.
 # * Confirm this dataset has dead trees:
-# (see `?vft_4quad`)
-dead <- vft_4quad %>%
+dead <- vft %>%
   add_status_tree(status_a = "alive", status_d = "dead") %>%
   pick_top(QuadratID) %>%
   filter(status_tree == "dead")
@@ -75,7 +75,7 @@ right <- filter(dead, DBH > 10 | is.na(DBH))
 maply_quad(right)
 
 # Keeping dead trees with `is.na(DBH)` (e.g. tag 127885.d on the bottom right)
-p <- filter(vft_4quad, DBH > 20 | is.na(DBH))
+p <- filter(vft, DBH > 20 | is.na(DBH))
 first(maply_quad(p))
 
 # For more complex filtering, see also ?fgeo.tool::drop_twice_dead)
@@ -91,12 +91,11 @@ myheader <- paste(
   " ........................................................................",
   sep = "\n"
 )
-# See ?vft_1quad
+
+vft_1quad <- pick_top(luquillo_vft_4quad, QuadratName)
 maply_quad(vft_1quad, title_quad = "My Site, 2018. Quad:", header = myheader)
 
 # Tweak the theme with ggplot
-library(ggplot2)
-
 maply_quad(
   vft_1quad,
   title_quad = "My Site, 2018. Quad:",
@@ -118,8 +117,7 @@ maply_quad(
 ```{r}
 # Filtering the data to map -----------------------------------------------
 
-# Filter the data you want. For example:
-# (see ?vft_1quad)
+vft_1quad <- pick_top(luquillo_vft_4quad, QuadratName)
 want <- filter(vft_1quad, CensusID == 4, PlotID == 1)
 p <- maply_tag(want)
 # Visualizing only the first plot of `p`
@@ -131,8 +129,7 @@ dev.off()
 
 # Be careful if filtering by DBH: You may unintentionally remove dead trees.
 # * Confirm this dataset has dead trees:
-# (see `?vft_4quad`)
-dead <- vft_4quad %>%
+dead <- vft %>%
   add_status_tree(status_a = "alive", status_d = "dead") %>%
   pick_top(QuadratID) %>%
   filter(status_tree == "dead")
@@ -147,7 +144,7 @@ right
 first(maply_quad(right))
 
 # Keeping dead trees with `is.na(DBH)` (e.g. tag 127885.d on the bottom right)
-p <- filter(vft_4quad, DBH > 20 | is.na(DBH))
+p <- filter(vft, DBH > 20 | is.na(DBH))
 first(maply_tag(p))
 
 # For more complex filtering, see also ?fgeo.tool::drop_twice_dead
@@ -161,7 +158,7 @@ first(p)
 
 p <- maply_tag(
   vft_1quad,
-  title_quad = "BCI 2012. Quadrat: ",
+  title_quad = "Luquillo. Quadrat: ",
   bl = "bottom-left", br = "bottom-right", tr = "top-right", tl = "top-left",
   header = "Line 1: _________\nLine 2:\nLine 3:.....................",
   subquad_offset = -1,
@@ -229,8 +226,8 @@ first(p)
 # maply\_sp\_elev(): Map species and elevation data
 
 ```{r}
-census <- fgeo.tool::pick_top(bciex::bci12s7mini, sp, 2)
-elevation <- bciex::bci_elevation
+census <- fgeo.tool::pick_top(fgeo.data::luquillo_stem6_1ha, sp, 2)
+elevation <- fgeo.data::luquillo_elevation
 
 # Map on multiple pages ---------------------------------------------------
 

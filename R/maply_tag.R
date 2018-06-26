@@ -190,7 +190,9 @@ maply_tag <- function(vft,
                     move_edge = 0) {
   .vft <- setNames(vft, tolower(names(vft)))
   
-  crucial <- c("tag", "status", "quadratname", "qx", "qy", "censusid", "plotid")
+  crucial <- c(
+    "tag", "treeid", "status", "quadratname", "qx", "qy", "censusid", "plotid"
+  )
   check_maply_tag(
     .vft = .vft,
     crucial = crucial,

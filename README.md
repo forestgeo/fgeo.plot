@@ -22,9 +22,6 @@ article](https://goo.gl/dQKEeg).
 ## Example
 
 ``` r
-library(fgeo.map)
-library(bciex)
-library(fgeo.tool)
 library(dplyr)
 #> 
 #> Attaching package: 'dplyr'
@@ -34,20 +31,30 @@ library(dplyr)
 #> The following objects are masked from 'package:base':
 #> 
 #>     intersect, setdiff, setequal, union
+library(fgeo)
+#> -- Attaching packages ------------------------------------------------ fgeo 0.0.0.9000 --
+#> v bciex           0.0.0.9000     v fgeo.demography 0.0.0.9000
+#> v fgeo.abundance  0.0.0.9004     v fgeo.habitat    0.0.0.9006
+#> v fgeo.base       0.0.0.9001     v fgeo.map        0.0.0.9204
+#> v fgeo.data       0.0.0.9002     v fgeo.tool       0.0.0.9003
+#> -- Conflicts -------------------------------------------------------- fgeo_conflicts() --
+#> x dplyr::filter()    masks stats::filter()
+#> x dplyr::intersect() masks base::intersect()
+#> x dplyr::lag()       masks stats::lag()
+#> x dplyr::setdiff()   masks base::setdiff()
+#> x dplyr::setequal()  masks base::setequal()
+#> x dplyr::union()     masks base::union()
 ```
 
 Map species’ distribution.
 
 ``` r
-census <- bci12t7mini
-# Fix structure of elevation data
-elevation <- fgeo_elevation(bci_elevation)
+census <- luquillo_tree6_random
+elevation <- fgeo_elevation(luquillo_elevation)
 
-# All maps
-p <- maply_sp_elev(census, elevation, species = c("faraoc", "hybapr"))
-
-# Show first map
-first(p)
+p <- maply_sp_elev(census, luquillo_elevation, species = c("PREMON", "CASARB"))
+# Show first map only
+p[[1]]
 ```
 
 <img src="README-fgeo.map-sp-1.png" width="98%" style="display: block; margin: auto;" />
@@ -56,18 +63,17 @@ Map tree tags by status, showing four subquadrats per plot-page.
 
 ``` r
 # Fix two wrong names
-viewfulltable <- rename(bci12vft_mini, qx = x, qy = y)
-
-# Filter one plot and one census
-vft <- filter(viewfulltable, PlotID == 1, CensusID == 6)
+vft <- luquillo_vft_4quad
+vft <- pick_top(vft, CensusID, -1)  # pick from the bottom of the rank
+vft <- pick_top(vft, PlotID)
 
 # All maps
 p2 <- maply_tag(vft)
 length(p2)
-#> [1] 40
+#> [1] 16
 
 # Show first map
-first(p2)
+p2[[1]]
 ```
 
 <img src="README-map-tag-1.png" width="98%" style="display: block; margin: auto;" />
@@ -75,28 +81,19 @@ first(p2)
 Map trees within a quadrat mapping tree diameter to point size.
 
 ``` r
-# Filtering:
-# * Trees of diameter greater than 10 cm;
-# * Last census;
-# * Plot 1.
-vft2 <- filter(
-  viewfulltable,
-  DBH > 10,
-  CensusID == max(CensusID, na.rm = TRUE),
-  PlotID == 1
-)
+# Focusing on trees which dbh is 10 mm or more
+vft2 <- pick_dbh_min(vft, 10)
 
 # All maps
 p3 <- maply_quad(vft2)
 #> * Appending tags of dead trees with the suffix '.d'
-#> Warning in fgeo.base::str_suffix_match(crucial$tag, crucial$status,
-#> status_d, : No `string` matches `dead`. Is this what you expect?
 #> * Standarizing `dbh` by the count of `dbh` measurements
 length(p3)
-#> [1] 10
+#> [1] 4
 
 # Show first map
 first(p3)
+#> Warning: Removed 57 rows containing missing values (geom_point).
 ```
 
 <img src="README-map-quad-1.png" width="98%" style="display: block; margin: auto;" />
