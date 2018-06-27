@@ -3,7 +3,7 @@ pkgdown: 1.1.0
 pkgdown_sha: ~
 articles:
   compare_ggplot2: compare_ggplot2.html
-  map: map.html
+  fgeo.map: fgeo.map.html
 urls:
   reference: https://forestgeo.github.io/fgeo.map//reference
   article: https://forestgeo.github.io/fgeo.map//articles

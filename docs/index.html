@@ -42,6 +42,9 @@
   </a>
 </li>
 <li>
+  <a href="articles/fgeo.map.html">Get started</a>
+</li>
+<li>
   <a href="reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -54,13 +57,7 @@
 <li>
       <a href="articles/compare_ggplot2.html">Comparing ggplot2</a>
     </li>
-    <li>
-      <a href="articles/map.html">Mapping Functions</a>
-    </li>
   </ul>
-</li>
-<li>
-  <a href="news/index.html">Changelog</a>
 </li>
       </ul>
 <ul class="nav navbar-nav navbar-right">
@@ -102,6 +99,7 @@
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
+<p><a href="https://forestgeo.github.io/fgeo/index.html#installation">Install all <strong>fgeo</strong> packages in one step</a></p>
 <pre><code><a href="http://www.rdocumentation.org/packages/remotes/topics/install_github"># install.packages("remotes")
 remotes::install_github("EDIT-OWNER/EDIT-PACKAGE-NAME")</a></code></pre>
 <p>For details on how to install packages from GitHub, see <a href="https://goo.gl/dQKEeg">this article</a>.</p>
@@ -109,65 +107,13 @@ remotes::install_github("EDIT-OWNER/EDIT-PACKAGE-NAME")</a></code></pre>
 <div id="example" class="section level2">
 <h2 class="hasAnchor">
 <a href="#example" class="anchor"></a>Example</h2>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">library</span>(dplyr)</a>
-<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="co">#&gt; Attaching package: 'dplyr'</span></a>
-<a class="sourceLine" id="cb2-4" data-line-number="4"><span class="co">#&gt; The following objects are masked from 'package:stats':</span></a>
-<a class="sourceLine" id="cb2-5" data-line-number="5"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb2-6" data-line-number="6"><span class="co">#&gt;     filter, lag</span></a>
-<a class="sourceLine" id="cb2-7" data-line-number="7"><span class="co">#&gt; The following objects are masked from 'package:base':</span></a>
-<a class="sourceLine" id="cb2-8" data-line-number="8"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb2-9" data-line-number="9"><span class="co">#&gt;     intersect, setdiff, setequal, union</span></a>
-<a class="sourceLine" id="cb2-10" data-line-number="10"><span class="kw">library</span>(fgeo)</a>
-<a class="sourceLine" id="cb2-11" data-line-number="11"><span class="co">#&gt; -- Attaching packages ------------------------------------------------ fgeo 0.0.0.9000 --</span></a>
-<a class="sourceLine" id="cb2-12" data-line-number="12"><span class="co">#&gt; v bciex           0.0.0.9000     v fgeo.demography 0.0.0.9000</span></a>
-<a class="sourceLine" id="cb2-13" data-line-number="13"><span class="co">#&gt; v fgeo.abundance  0.0.0.9004     v fgeo.habitat    0.0.0.9006</span></a>
-<a class="sourceLine" id="cb2-14" data-line-number="14"><span class="co">#&gt; v fgeo.base       0.0.0.9001     v fgeo.map        0.0.0.9204</span></a>
-<a class="sourceLine" id="cb2-15" data-line-number="15"><span class="co">#&gt; v fgeo.data       0.0.0.9002     v fgeo.tool       0.0.0.9003</span></a>
-<a class="sourceLine" id="cb2-16" data-line-number="16"><span class="co">#&gt; -- Conflicts -------------------------------------------------------- fgeo_conflicts() --</span></a>
-<a class="sourceLine" id="cb2-17" data-line-number="17"><span class="co">#&gt; x dplyr::filter()    masks stats::filter()</span></a>
-<a class="sourceLine" id="cb2-18" data-line-number="18"><span class="co">#&gt; x dplyr::intersect() masks base::intersect()</span></a>
-<a class="sourceLine" id="cb2-19" data-line-number="19"><span class="co">#&gt; x dplyr::lag()       masks stats::lag()</span></a>
-<a class="sourceLine" id="cb2-20" data-line-number="20"><span class="co">#&gt; x dplyr::setdiff()   masks base::setdiff()</span></a>
-<a class="sourceLine" id="cb2-21" data-line-number="21"><span class="co">#&gt; x dplyr::setequal()  masks base::setequal()</span></a>
-<a class="sourceLine" id="cb2-22" data-line-number="22"><span class="co">#&gt; x dplyr::union()     masks base::union()</span></a></code></pre></div>
-<p>Map species’ distribution.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">census &lt;-<span class="st"> </span>luquillo_tree6_random</a>
-<a class="sourceLine" id="cb3-2" data-line-number="2">elevation &lt;-<span class="st"> </span><span class="kw">fgeo_elevation</span>(luquillo_elevation)</a>
-<a class="sourceLine" id="cb3-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb3-4" data-line-number="4">p &lt;-<span class="st"> </span><span class="kw"><a href="reference/maply_sp_elev.html">maply_sp_elev</a></span>(census, luquillo_elevation, <span class="dt">species =</span> <span class="kw">c</span>(<span class="st">"PREMON"</span>, <span class="st">"CASARB"</span>))</a>
-<a class="sourceLine" id="cb3-5" data-line-number="5"><span class="co"># Show first map only</span></a>
-<a class="sourceLine" id="cb3-6" data-line-number="6">p[[<span class="dv">1</span>]]</a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">library</span>(fgeo.map)</a>
+<a class="sourceLine" id="cb2-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb2-3" data-line-number="3">census &lt;-<span class="st"> </span>fgeo.data<span class="op">::</span>luquillo_tree6_random</a>
+<a class="sourceLine" id="cb2-4" data-line-number="4">some_sp &lt;-<span class="st"> </span><span class="kw">subset</span>(census, sp <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">"PREMON"</span>, <span class="st">"CASARB"</span>))</a>
+<a class="sourceLine" id="cb2-5" data-line-number="5"><span class="kw"><a href="reference/maply_sp_elev.html">map_sp_elev</a></span>(some_sp)</a></code></pre></div>
 <p><img src="README-fgeo.map-sp-1.png" width="98%" style="display: block; margin: auto;"></p>
-<p>Map tree tags by status, showing four subquadrats per plot-page.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="co"># Fix two wrong names</span></a>
-<a class="sourceLine" id="cb4-2" data-line-number="2">vft &lt;-<span class="st"> </span>luquillo_vft_4quad</a>
-<a class="sourceLine" id="cb4-3" data-line-number="3">vft &lt;-<span class="st"> </span><span class="kw">pick_top</span>(vft, CensusID, <span class="dv">-1</span>)  <span class="co"># pick from the bottom of the rank</span></a>
-<a class="sourceLine" id="cb4-4" data-line-number="4">vft &lt;-<span class="st"> </span><span class="kw">pick_top</span>(vft, PlotID)</a>
-<a class="sourceLine" id="cb4-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb4-6" data-line-number="6"><span class="co"># All maps</span></a>
-<a class="sourceLine" id="cb4-7" data-line-number="7">p2 &lt;-<span class="st"> </span><span class="kw"><a href="reference/maply_tag.html">maply_tag</a></span>(vft)</a>
-<a class="sourceLine" id="cb4-8" data-line-number="8"><span class="kw">length</span>(p2)</a>
-<a class="sourceLine" id="cb4-9" data-line-number="9"><span class="co">#&gt; [1] 16</span></a>
-<a class="sourceLine" id="cb4-10" data-line-number="10"></a>
-<a class="sourceLine" id="cb4-11" data-line-number="11"><span class="co"># Show first map</span></a>
-<a class="sourceLine" id="cb4-12" data-line-number="12">p2[[<span class="dv">1</span>]]</a></code></pre></div>
-<p><img src="README-map-tag-1.png" width="98%" style="display: block; margin: auto;"></p>
-<p>Map trees within a quadrat mapping tree diameter to point size.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="co"># Focusing on trees which dbh is 10 mm or more</span></a>
-<a class="sourceLine" id="cb5-2" data-line-number="2">vft2 &lt;-<span class="st"> </span><span class="kw">pick_dbh_min</span>(vft, <span class="dv">10</span>)</a>
-<a class="sourceLine" id="cb5-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb5-4" data-line-number="4"><span class="co"># All maps</span></a>
-<a class="sourceLine" id="cb5-5" data-line-number="5">p3 &lt;-<span class="st"> </span><span class="kw"><a href="reference/maply_quad.html">maply_quad</a></span>(vft2)</a>
-<a class="sourceLine" id="cb5-6" data-line-number="6"><span class="co">#&gt; * Appending tags of dead trees with the suffix '.d'</span></a>
-<a class="sourceLine" id="cb5-7" data-line-number="7"><span class="co">#&gt; * Standarizing `dbh` by the count of `dbh` measurements</span></a>
-<a class="sourceLine" id="cb5-8" data-line-number="8"><span class="kw">length</span>(p3)</a>
-<a class="sourceLine" id="cb5-9" data-line-number="9"><span class="co">#&gt; [1] 4</span></a>
-<a class="sourceLine" id="cb5-10" data-line-number="10"></a>
-<a class="sourceLine" id="cb5-11" data-line-number="11"><span class="co"># Show first map</span></a>
-<a class="sourceLine" id="cb5-12" data-line-number="12"><span class="kw">first</span>(p3)</a>
-<a class="sourceLine" id="cb5-13" data-line-number="13"><span class="co">#&gt; Warning: Removed 57 rows containing missing values (geom_point).</span></a></code></pre></div>
-<p><img src="README-map-quad-1.png" width="98%" style="display: block; margin: auto;"></p>
+<p><a href="https://forestgeo.github.io/fgeo/articles/fgeo.html">Get started with <strong>fgeo</strong></a></p>
 </div>
 <div id="information" class="section level2">
 <h2 class="hasAnchor">
