@@ -75,7 +75,7 @@ overplotting and makes interpreting the map easier.
 \section{Acknowledgment}{
 
 Useful ideas and guidance came from Suzanne Lao, Stuart Davis, Shameema
-Jafferjee Esufa, David Kenfack and Anudeep Singh. Andudeep Sinh also wrote
+Jafferjee Esufa, David Kenfack and Anudeep Singh. Anudeep Sinh also wrote
 the algorithm to calculate subquadrats.
 }
 
