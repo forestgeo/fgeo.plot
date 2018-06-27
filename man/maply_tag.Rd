@@ -64,15 +64,15 @@ printed on a .pdf file. Each map shows four subquadrats within a quadrat. The
 symbols on the map represent the status of each tree -- not the status of
 each stem. Although you should likely provide data of only one or two
 censuses, \code{maply_tag()} will summarize the data to reduce overplotting. The
-data on the map summarizes the history of each stem accross all censuses
+data on the map summarizes the history of each stem across all censuses
 provided. Each tag will appear in the map only once or twice: * A tag will
-appear once if it belongs to a tree which status was unique accross all
+appear once if it belongs to a tree which status was unique across all
 censuses provided -- either "alive" or "dead". * A tag will appear twice if
 it belongs to a tree which status was "alive" in at least one census, and
 also "dead" in at least one other census. This feature avoids unintentional
 overplotting and makes interpreting the map easier.
 }
-\section{Acknowledgements}{
+\section{Acknowledgment}{
 
 Useful ideas and guidance came from Suzanne Lao, Stuart Davis, Shameema
 Jafferjee Esufa, David Kenfack and Anudeep Singh. Andudeep Sinh also wrote
