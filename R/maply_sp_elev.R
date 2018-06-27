@@ -5,7 +5,7 @@
 #'   single page. You can map multiple species on the same plot or you can facet
 #'   the output to map each species on a single plot and all plots in a single
 #'   page.
-#' * Use `map_elev()` if you want to map only elevation in the sipmlest way.
+#' * Use `map_elev()` if you want to map only elevation in the simplest way.
 #' * Use `maply_sp_elev()` to apply the function `map_sp_elev()` to each species
 #' in a census dataset. The output is not a map but a list of maps, one per
 #' species, that can be printed on a .pdf file.
@@ -26,7 +26,7 @@
 #' @param hide_legend_color Logical; `TRUE` hides the color legend.
 #' @inheritParams label_elev
 #' @inheritParams limit_gx_gy
-#' @param custom_theme A valed [ggplot2::theme()]. `NULL` uses the default
+#' @param custom_theme A valid [ggplot2::theme()]. `NULL` uses the default
 #'   theme [theme_default()].
 #'
 #' @seealso [map_gx_gy_elev()], [limit_gx_gy()], [add_sp()], [contour_elev()],
@@ -35,7 +35,7 @@
 #' 
 #' @return 
 #' * `maply_sp_elev()` returns a list of ggplots.
-#' * `map_elev()` and `map_sp_elev()` return a ggoplot.
+#' * `map_elev()` and `map_sp_elev()` return a ggplot.
 #' 
 #' @export 
 #' @examples

@@ -1,7 +1,7 @@
 #' Suffix tags of dead stems that map beyond the quadrat's edge.
 #'
 #' @param x A ViewFullTable.
-#' @param .match A character string indicaing the matching value of the variable
+#' @param .match A character string indicating the matching value of the variable
 #'   status to suffix.
 #' @param suffix A character string to suffix tree tags with.
 #' @param x_q,y_q Integer; the x and y size in meters of a quadrat.

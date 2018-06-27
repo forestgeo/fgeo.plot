@@ -72,13 +72,13 @@ elevation lines.}
 string (\code{label_color} and \code{fontface}) giving the size, colour and fontface
 of the text labels for the elevation lines.}
 
-\item{xlim}{A vector of lenght 2, for example \code{c(0, 500)}, giving the
+\item{xlim}{A vector of length 2, for example \code{c(0, 500)}, giving the
 minimum and maximum limits of the vertical and horizontal coordinates.}
 
-\item{ylim}{A vector of lenght 2, for example \code{c(0, 500)}, giving the
+\item{ylim}{A vector of length 2, for example \code{c(0, 500)}, giving the
 minimum and maximum limits of the vertical and horizontal coordinates.}
 
-\item{custom_theme}{A valed \code{\link[ggplot2:theme]{ggplot2::theme()}}. \code{NULL} uses the default
+\item{custom_theme}{A valid \code{\link[ggplot2:theme]{ggplot2::theme()}}. \code{NULL} uses the default
 theme \code{\link[=theme_default]{theme_default()}}.}
 
 \item{wrap}{(Not available for \code{maply_sp_elev()}) Logical; \code{TRUE} wraps
@@ -87,7 +87,7 @@ multiple maps within the area of a single graphic plot.}
 \value{
 \itemize{
 \item \code{maply_sp_elev()} returns a list of ggplots.
-\item \code{map_elev()} and \code{map_sp_elev()} return a ggoplot.
+\item \code{map_elev()} and \code{map_sp_elev()} return a ggplot.
 }
 }
 \description{
@@ -97,18 +97,18 @@ These functions wrap a number of map elements for convenience:
 single page. You can map multiple species on the same plot or you can facet
 the output to map each species on a single plot and all plots in a single
 page.
-\item Use \code{map_elev()} if you want to map only elevation in the sipmlest way.
+\item Use \code{map_elev()} if you want to map only elevation in the simplest way.
 \item Use \code{maply_sp_elev()} to apply the function \code{map_sp_elev()} to each species
 in a census dataset. The output is not a map but a list of maps, one per
 species, that can be printed on a .pdf file.
 }
 }
-\section{Comparing ggplot2 and fgeomap}{
+\section{Comparison with ggplot2}{
 
 These functions wrap functions from the \strong{ggplot2} package. For more
 control you can use \strong{ggplot2} directly or smaller wrappers in
 \strong{fgeo.map} (see the sections See Also and Examples). \strong{ggplot2}
-will give you maximum control and is your best choise if you are already
+will give you maximum control and is your best choice if you are already
 familiar with it. The wrapper functions in \strong{fgeo.map} focus on
 ForestGEO's data: For example, their names commonly mention the variable of a
 ForestGEO dataset they work with.

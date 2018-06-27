@@ -37,7 +37,7 @@ Use map_sp_elev() to map species and optionally elevation data in a
 single page. You can map multiple species on the same plot or you can facet
 the output to map each species on a single plot and all plots in a single
 page.
-Use map_elev() if you want to map only elevation in the sipmlest way.
+Use map_elev() if you want to map only elevation in the simplest way.
 Use maply_sp_elev() to apply the function map_sp_elev() to each species
 in a census dataset. The output is not a map but a list of maps, one per
 species, that can be printed on a .pdf file.
@@ -142,7 +142,7 @@ species, that can be printed on a .pdf file.
 single page. You can map multiple species on the same plot or you can facet
 the output to map each species on a single plot and all plots in a single
 page.</p></li>
-<li><p>Use <code>map_elev()</code> if you want to map only elevation in the sipmlest way.</p></li>
+<li><p>Use <code>map_elev()</code> if you want to map only elevation in the simplest way.</p></li>
 <li><p>Use <code>maply_sp_elev()</code> to apply the function <code>map_sp_elev()</code> to each species
 in a census dataset. The output is not a map but a list of maps, one per
 species, that can be printed on a .pdf file.</p></li>
@@ -252,17 +252,17 @@ of the text labels for the elevation lines.</p></td>
     </tr>
     <tr>
       <th>xlim</th>
-      <td><p>A vector of lenght 2, for example <code>c(0, 500)</code>, giving the
+      <td><p>A vector of length 2, for example <code>c(0, 500)</code>, giving the
 minimum and maximum limits of the vertical and horizontal coordinates.</p></td>
     </tr>
     <tr>
       <th>ylim</th>
-      <td><p>A vector of lenght 2, for example <code>c(0, 500)</code>, giving the
+      <td><p>A vector of length 2, for example <code>c(0, 500)</code>, giving the
 minimum and maximum limits of the vertical and horizontal coordinates.</p></td>
     </tr>
     <tr>
       <th>custom_theme</th>
-      <td><p>A valed <code><a href='http://www.rdocumentation.org/packages/ggplot2/topics/theme'>ggplot2::theme()</a></code>. <code>NULL</code> uses the default
+      <td><p>A valid <code><a href='http://www.rdocumentation.org/packages/ggplot2/topics/theme'>ggplot2::theme()</a></code>. <code>NULL</code> uses the default
 theme <code><a href='themes.html'>theme_default()</a></code>.</p></td>
     </tr>
     <tr>
@@ -277,17 +277,17 @@ multiple maps within the area of a single graphic plot.</p></td>
     
 <ul>
 <li><p><code>maply_sp_elev()</code> returns a list of ggplots.</p></li>
-<li><p><code>map_elev()</code> and <code>map_sp_elev()</code> return a ggoplot.</p></li>
+<li><p><code>map_elev()</code> and <code>map_sp_elev()</code> return a ggplot.</p></li>
 </ul>
 
     
-    <h2 class="hasAnchor" id="comparing-ggplot-and-fgeomap"><a class="anchor" href="#comparing-ggplot-and-fgeomap"></a>Comparing ggplot2 and fgeomap</h2>
+    <h2 class="hasAnchor" id="comparison-with-ggplot-"><a class="anchor" href="#comparison-with-ggplot-"></a>Comparison with ggplot2</h2>
 
     
     <p>These functions wrap functions from the <strong>ggplot2</strong> package. For more
 control you can use <strong>ggplot2</strong> directly or smaller wrappers in
 <strong>fgeo.map</strong> (see the sections See Also and Examples). <strong>ggplot2</strong>
-will give you maximum control and is your best choise if you are already
+will give you maximum control and is your best choice if you are already
 familiar with it. The wrapper functions in <strong>fgeo.map</strong> focus on
 ForestGEO's data: For example, their names commonly mention the variable of a
 ForestGEO dataset they work with.</p>
@@ -387,7 +387,7 @@ about the pipe see http://r4ds.had.co.nz/pipes.html.</p>
       
       <li><a href="#value">Value</a></li>
 
-      <li><a href="#comparing-ggplot-and-fgeomap">Comparing ggplot2 and fgeomap</a></li>
+      <li><a href="#comparison-with-ggplot-">Comparison with ggplot2</a></li>
 
       <li><a href="#see-also">See also</a></li>
       
