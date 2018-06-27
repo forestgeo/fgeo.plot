@@ -29,6 +29,8 @@ knitr::opts_chunk$set(
 
 ## Installation
 
+[Install all __fgeo__ packages in one step](https://forestgeo.github.io/fgeo/index.html#installation)
+
 ```
 # install.packages("remotes")
 remotes::install_github("EDIT-OWNER/EDIT-PACKAGE-NAME")
@@ -38,52 +40,15 @@ For details on how to install packages from GitHub, see [this article](https://g
 
 ## Example
 
-```{r pkg}
-library(dplyr)
-library(fgeo)
-```
-
-Map species' distribution.
-
 ```{r fgeo.map-sp}
-census <- luquillo_tree6_random
-elevation <- fgeo_elevation(luquillo_elevation)
+library(fgeo.map)
 
-p <- maply_sp_elev(census, luquillo_elevation, species = c("PREMON", "CASARB"))
-# Show first map only
-p[[1]]
+census <- fgeo.data::luquillo_tree6_random
+some_sp <- subset(census, sp %in% c("PREMON", "CASARB"))
+map_sp_elev(some_sp)
 ```
 
-Map tree tags by status, showing four subquadrats per plot-page.
-
-```{r map-tag}
-# Fix two wrong names
-vft <- luquillo_vft_4quad
-vft <- pick_top(vft, CensusID, -1)  # pick from the bottom of the rank
-vft <- pick_top(vft, PlotID)
-
-# All maps
-p2 <- maply_tag(vft)
-length(p2)
-
-# Show first map
-p2[[1]]
-```
-
-Map trees within a quadrat mapping tree diameter to point size.
-
-```{r map-quad}
-# Focusing on trees which dbh is 10 mm or more
-vft2 <- pick_dbh_min(vft, 10)
-
-# All maps
-p3 <- maply_quad(vft2)
-length(p3)
-
-# Show first map
-first(p3)
-```
-
+[Get started with __fgeo__](https://forestgeo.github.io/fgeo/articles/fgeo.html)
 
 ## Information
 
