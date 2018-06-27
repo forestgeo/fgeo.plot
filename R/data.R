@@ -1,7 +1,7 @@
 #' Small ViewFullTables from Luquillo.
 #' 
 #' ViewFullTable data from Luquillo including 1 and 4 quadrats from a single
-#' census. Apted from [fgeo.data::luquillo_vft_4quad].
+#' census. Adapted from [fgeo.data::luquillo_vft_4quad].
 #' 
 #' @examples
 #' str(vft_1quad)

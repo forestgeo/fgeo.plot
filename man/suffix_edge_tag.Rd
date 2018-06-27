@@ -9,7 +9,7 @@ suffix_edge_tag(x, .match, suffix, x_q = 20, y_q = x_q)
 \arguments{
 \item{x}{A ViewFullTable.}
 
-\item{.match}{A character string indicaing the matching value of the variable
+\item{.match}{A character string indicating the matching value of the variable
 status to suffix.}
 
 \item{suffix}{A character string to suffix tree tags with.}

@@ -47,7 +47,7 @@
 #'
 #' @section Acknowledgment:
 #' Useful ideas and guidance came from Suzanne Lao, Stuart Davis, Shameema
-#' Jafferjee Esufa, David Kenfack and Anudeep Singh. Anudeep Sinh also wrote
+#' Jafferjee Esufali, David Kenfack and Anudeep Singh. Anudeep Sinh also wrote
 #' the algorithm to calculate subquadrats.
 #'
 #' @return A list of ggplots, where each element of the list is a map of tree

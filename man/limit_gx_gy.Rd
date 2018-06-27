@@ -9,7 +9,7 @@ limit_gx_gy(p, xlim = NULL, ylim = NULL)
 \arguments{
 \item{p}{A ggplot.}
 
-\item{xlim, ylim}{A vector of lenght 2, for example \code{c(0, 500)}, giving the
+\item{xlim, ylim}{A vector of length 2, for example \code{c(0, 500)}, giving the
 minimum and maximum limits of the vertical and horizontal coordinates.}
 }
 \description{

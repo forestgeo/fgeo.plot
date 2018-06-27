@@ -13,7 +13,7 @@ vft_1quad
 }
 \description{
 ViewFullTable data from Luquillo including 1 and 4 quadrats from a single
-census. Apted from \link[fgeo.data:luquillo_vft_4quad]{fgeo.data::luquillo_vft_4quad}.
+census. Adapted from \link[fgeo.data:luquillo_vft_4quad]{fgeo.data::luquillo_vft_4quad}.
 }
 \examples{
 str(vft_1quad)

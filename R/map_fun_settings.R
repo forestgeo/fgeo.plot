@@ -99,7 +99,7 @@ theme_default <- function(p,
 #' Pre-made headers.
 #'
 #' @name headers
-#' @param lang = String; Langage of the header: Either "english" or "spanish".
+#' @param lang = String; Language of the header: Either "english" or "spanish".
 #' @examples
 #' cat(map_tag_header())
 #' cat(map_quad_header())

@@ -1,8 +1,8 @@
-#' @section Comparing ggplot2 and fgeomap:
+#' @section Comparison with ggplot2:
 #' These functions wrap functions from the \strong{ggplot2} package. For more
 #' control you can use \strong{ggplot2} directly or smaller wrappers in
 #' \strong{fgeo.map} (see the sections See Also and Examples). \strong{ggplot2}
-#' will give you maximum control and is your best choise if you are already
+#' will give you maximum control and is your best choice if you are already
 #' familiar with it. The wrapper functions in \strong{fgeo.map} focus on
 #' ForestGEO's data: For example, their names commonly mention the variable of a
 #' ForestGEO dataset they work with.
