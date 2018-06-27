@@ -1,10 +1,7 @@
 base
-devtools
-usethis
-testthat
-fgeo.map
-bindrcpp
-ggplot2
 dplyr
 fgeo.data
+ggplot2
+fgeo.map
 fgeo.tool
+bindrcpp
