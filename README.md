@@ -1,7 +1,7 @@
 
 <!-- Don't edit README.md; instead, edit README.Rmd -->
 
-# <img src="https://i.imgur.com/m8FNhQR.png" align="right" height=88 /> Map species, trees and topography.
+# <img src="https://i.imgur.com/vTLlhbp.png" align="right" height=88 /> Map species, trees and topography.
 
 [![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 [![Build
