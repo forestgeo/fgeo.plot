@@ -266,7 +266,7 @@ the algorithm to calculate subquadrats.</p>
 
 <span class='co'># Filter the data you want. For example:</span>
 <span class='co'># (see ?vft_1quad)</span>
-<span class='no'>want</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://dplyr.tidyverse.org/reference/filter.html'>filter</a></span>(
+<span class='no'>want</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/fgeo.tool/topics/reexports'>filter</a></span>(
   <span class='no'>vft_1quad</span>,
   <span class='no'>CensusID</span> <span class='kw'>==</span> <span class='fl'>6</span>,
   <span class='no'>PlotID</span> <span class='kw'>==</span> <span class='fl'>1</span>
@@ -285,19 +285,19 @@ the algorithm to calculate subquadrats.</p>
 <span class='no'>dead</span> <span class='kw'>&lt;-</span> <span class='no'>vft_4quad</span> <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='http://www.rdocumentation.org/packages/fgeo.tool/topics/add_status_tree'>add_status_tree</a></span>(<span class='kw'>status_a</span> <span class='kw'>=</span> <span class='st'>"alive"</span>, <span class='kw'>status_d</span> <span class='kw'>=</span> <span class='st'>"dead"</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='http://www.rdocumentation.org/packages/fgeo.tool/topics/pick_top'>pick_top</a></span>(<span class='no'>QuadratID</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='http://dplyr.tidyverse.org/reference/filter.html'>filter</a></span>(<span class='no'>status_tree</span> <span class='kw'>==</span> <span class='st'>"dead"</span>)
-<span class='fu'><a href='http://dplyr.tidyverse.org/reference/select.html'>select</a></span>(<span class='no'>dead</span>, <span class='no'>Tag</span>, <span class='no'>Status</span>, <span class='no'>status_tree</span>, <span class='no'>DBH</span>)
+  <span class='fu'><a href='http://www.rdocumentation.org/packages/fgeo.tool/topics/reexports'>filter</a></span>(<span class='no'>status_tree</span> <span class='kw'>==</span> <span class='st'>"dead"</span>)
+<span class='fu'><a href='http://www.rdocumentation.org/packages/fgeo.tool/topics/reexports'>select</a></span>(<span class='no'>dead</span>, <span class='no'>Tag</span>, <span class='no'>Status</span>, <span class='no'>status_tree</span>, <span class='no'>DBH</span>)
 <span class='fu'><a href='http://dplyr.tidyverse.org/reference/nth.html'>first</a></span>(<span class='fu'>maply_tag</span>(<span class='no'>dead</span>))
 <span class='co'># * If you filter by `DBH`, you loose the dead trees becaue their `DBH = NA`</span>
-<span class='no'>wrong</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://dplyr.tidyverse.org/reference/filter.html'>filter</a></span>(<span class='no'>dead</span>, <span class='no'>DBH</span> <span class='kw'>&gt;</span> <span class='fl'>10</span>)
+<span class='no'>wrong</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/fgeo.tool/topics/reexports'>filter</a></span>(<span class='no'>dead</span>, <span class='no'>DBH</span> <span class='kw'>&gt;</span> <span class='fl'>10</span>)
 <span class='no'>wrong</span>
 <span class='co'># * The right way to do it is to explicietly inlcude rows where DBH = NA</span>
-<span class='no'>right</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://dplyr.tidyverse.org/reference/filter.html'>filter</a></span>(<span class='no'>dead</span>, <span class='no'>DBH</span> <span class='kw'>&gt;</span> <span class='fl'>10</span> <span class='kw'>|</span> <span class='fu'>is.na</span>(<span class='no'>DBH</span>))
+<span class='no'>right</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/fgeo.tool/topics/reexports'>filter</a></span>(<span class='no'>dead</span>, <span class='no'>DBH</span> <span class='kw'>&gt;</span> <span class='fl'>10</span> <span class='kw'>|</span> <span class='fu'>is.na</span>(<span class='no'>DBH</span>))
 <span class='no'>right</span>
 <span class='fu'><a href='http://dplyr.tidyverse.org/reference/nth.html'>first</a></span>(<span class='fu'><a href='maply_quad.html'>maply_quad</a></span>(<span class='no'>right</span>))
 
 <span class='co'># Keeping dead trees with `is.na(DBH)` (e.g. tag 127885.d on the bottom right)</span>
-<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://dplyr.tidyverse.org/reference/filter.html'>filter</a></span>(<span class='no'>vft_4quad</span>, <span class='no'>DBH</span> <span class='kw'>&gt;</span> <span class='fl'>20</span> <span class='kw'>|</span> <span class='fu'>is.na</span>(<span class='no'>DBH</span>))
+<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/fgeo.tool/topics/reexports'>filter</a></span>(<span class='no'>vft_4quad</span>, <span class='no'>DBH</span> <span class='kw'>&gt;</span> <span class='fl'>20</span> <span class='kw'>|</span> <span class='fu'>is.na</span>(<span class='no'>DBH</span>))
 <span class='fu'><a href='http://dplyr.tidyverse.org/reference/nth.html'>first</a></span>(<span class='fu'>maply_tag</span>(<span class='no'>p</span>))
 
 <span class='co'># For more complex filtering, see also ?fgeo.tool::drop_twice_dead</span>
