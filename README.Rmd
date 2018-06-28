@@ -20,7 +20,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# <img src="https://i.imgur.com/vTLlhbp.png" align="right" height=88 /> Map species, trees and topography. 
+# <img src="https://i.imgur.com/vTLlhbp.png" align="right" height=88 /> Map species, trees and topography
 
 [![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 [![Build Status](https://travis-ci.org/forestgeo/fgeo.map.svg?branch=master)](https://travis-ci.org/forestgeo/fgeo.map)
