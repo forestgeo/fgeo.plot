@@ -1,10 +1,7 @@
-census <- fgeo.tool::pick_top(bciex::bci12s7mini, sp, 2)
-elevation <- bciex::bci_elevation
-
-
+census <- fgeo.tool::pick_top(fgeo.data::luquillo_stem5_random, sp, 2)
+elevation <- fgeo.data::luquillo_elevation$col
 
 context("maply_sp_elev")
-
 
 test_that("works with species parameters", {
   spp <- unique(census$sp)
@@ -50,18 +47,10 @@ test_that("outputs a list of ggplots", {
 })
 
 test_that("errs with wrong inputs", {
-  expect_error(
-    maply_sp_elev(1)
-  )
-  expect_error(
-    maply_sp_elev(census, 1)
-  )
-  expect_error(
-    maply_sp_elev(census, NULL, 1)
-  )
-  expect_error(
-    maply_sp_elev(census, xlim = 0)
-  )
+  expect_error(maply_sp_elev(1), "is not TRUE")
+  expect_error(maply_sp_elev(census, 1), "Can't deal with data of class")
+  expect_error(maply_sp_elev(census, NULL, 1), "is not TRUE")
+  expect_error(maply_sp_elev(census, xlim = 0), "Limits must be in a")
 })
 
 
@@ -69,20 +58,13 @@ test_that("errs with wrong inputs", {
 context("map_sp_elev")
 
 test_that("outputs a ggplot", {
-  p <- map_sp_elev(census)
-  expect_true(has_class(p, "gg"))
+  expect_is(map_sp_elev(census), "gg")
 })
 
 test_that("errs with wrong inputs", {
-  expect_error(
-    map_sp_elev(1)
-  )
-  expect_error(
-    map_sp_elev(census, 1)
-  )
-  expect_error(
-    map_sp_elev(census, xlim = 0)
-  )
+  expect_error(map_sp_elev(1), "is not TRUE")
+  expect_error(map_sp_elev(census, 1), "Can't deal with data of class")
+  expect_error(map_sp_elev(census, xlim = 0), "Limits must be in a")
 })
 
 
@@ -95,18 +77,10 @@ test_that("outputs a ggplot", {
 })
 
 test_that("errs with wrong inputs", {
-  expect_error(
-    map_elev(1)
-  )
-  expect_error(
-    map_elev(census)
-  )
-  expect_error(
-    map_elev(list(not_col = census))
-  )
-  expect_error(
-    map_elev(elevation, xlim = 0)
-  )
+  expect_error(map_elev(1), "Can't deal with data of class")
+  expect_error(map_elev(census), "Ensure your data set has these variables")
+  expect_error(map_elev(list(not_col = census)), "Your list must contain")
+  expect_error(map_elev(elevation, xlim = 0), "Limits must be in a")
 })
 
 
@@ -114,14 +88,11 @@ test_that("errs with wrong inputs", {
 context("map_gx_gy_elev")
 
 test_that("works with raw elevation data", {
-  expect_silent(map_gx_gy_elev(elevation))
-  expect_silent(
-    map_gx_gy_elev(list(col = elevation))
-  )
+  elevation_ls <- fgeo.data::luquillo_elevation
+  expect_silent(map_gx_gy_elev(elevation_ls))
+  expect_silent(map_gx_gy_elev(elevation_ls))
 })
 
-test_that("errs if elevation data is confused with elevation data", {
-  expect_error(
-    map_gx_gy_elev(census)
-  )
+test_that("errs if elevation data is confused with census data", {
+  expect_error(map_gx_gy_elev(census), "Ensure your data set has")
 })
