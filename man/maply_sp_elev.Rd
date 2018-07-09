@@ -124,8 +124,8 @@ about the pipe see http://r4ds.had.co.nz/pipes.html.
 }
 
 \examples{
-census <- fgeo.tool::pick_top(bciex::bci12s7mini, sp, 2)
-elevation <- bciex::bci_elevation
+census <- fgeo.tool::pick_top(fgeo.data::luquillo_stem5_random, sp, 2)
+elevation <- fgeo.data::luquillo_elevation
 
 # Map on multiple pages ---------------------------------------------------
 

@@ -22,7 +22,7 @@ low and high elevation.}
 Represent elevation with lines.
 }
 \examples{
-elevation <- bciex::bci_elevation
+elevation <- fgeo.data::luquillo_elevation
 
 base_elev <- map_gx_gy_elev(elevation)
 

@@ -57,8 +57,8 @@ This function behaves like \code{\link[ggplot2:facet_wrap]{ggplot2::facet_wrap()
 allow using it as part of a pipe.
 }
 \examples{
-census <- bciex::bci12s7mini
-species <- c("hybapr", "faraoc")
+census <- fgeo.data::luquillo_stem5_random
+species <- c("PREMON", "CASARB")
 two_sp <- dplyr::filter(census, sp \%in\% species)
 
 add_sp(map_gx_gy(two_sp))

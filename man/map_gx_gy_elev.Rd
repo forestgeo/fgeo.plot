@@ -16,8 +16,8 @@ map_gx_gy(data)
 Map a base over which other map components can later be added.
 }
 \examples{
-census <- fgeo.tool::pick_top(bciex::bci12s7mini, sp, 2)
-elevation <- bciex::bci_elevation
+census <- fgeo.tool::pick_top(fgeo.data::luquillo_stem5_random, sp, 2)
+elevation <- fgeo.data::luquillo_elevation
 
 # Look alike but internally they are not. 
 base_elev <- map_gx_gy_elev(elevation)

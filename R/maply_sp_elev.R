@@ -39,8 +39,8 @@
 #' 
 #' @export 
 #' @examples
-#' census <- fgeo.tool::pick_top(bciex::bci12s7mini, sp, 2)
-#' elevation <- bciex::bci_elevation
+#' census <- fgeo.tool::pick_top(fgeo.data::luquillo_stem5_random, sp, 2)
+#' elevation <- fgeo.data::luquillo_elevation
 #' 
 #' # Map on multiple pages ---------------------------------------------------
 #' 
@@ -298,8 +298,8 @@ map_pure_elev <- function(elevation,
 #' @family map components.
 #' @export
 #' @examples 
-#' census <- fgeo.tool::pick_top(bciex::bci12s7mini, sp, 2)
-#' elevation <- bciex::bci_elevation
+#' census <- fgeo.tool::pick_top(fgeo.data::luquillo_stem5_random, sp, 2)
+#' elevation <- fgeo.data::luquillo_elevation
 #' 
 #' # Look alike but internally they are not. 
 #' base_elev <- map_gx_gy_elev(elevation)
@@ -342,11 +342,11 @@ map_gx_gy <- function(data) {
 #' @family map components.
 #' @export
 #' @examples 
-#' census <- bciex::bci12s7mini
+#' census <- fgeo.data::luquillo_stem5_random
 #' map <- map_gx_gy(census)
 #' limit_gx_gy(map, xlim = c(0, 500), c(0, 750))
 #' 
-#' elevation <- bciex::bci_elevation
+#' elevation <- fgeo.data::luquillo_elevation
 #' map <- map_gx_gy_elev(elevation)
 #' limit_gx_gy(map, xlim = c(0, 500), c(0, 750))
 limit_gx_gy <- function(p, xlim = NULL, ylim = NULL) {
@@ -376,7 +376,7 @@ limit_gx_gy <- function(p, xlim = NULL, ylim = NULL) {
 #' @family map components.
 #' @export
 #' @examples 
-#' census <- fgeo.tool::pick_top(bciex::bci12s7mini, sp, 2)
+#' census <- fgeo.tool::pick_top(fgeo.data::luquillo_stem5_random, sp, 2)
 #' 
 #' add_sp(map_gx_gy(census))
 #' 
@@ -421,7 +421,7 @@ add_sp <- function(p, data = NULL, fill = "sp", shape = 21, point_size = 3) {
 #' @family map components.
 #' @export
 #' @examples 
-#' elevation <- bciex::bci_elevation
+#' elevation <- fgeo.data::luquillo_elevation
 #' 
 #' base_elev <- map_gx_gy_elev(elevation)
 #' 
@@ -458,7 +458,7 @@ contour_elev <- function(p,
 #' @family map components.
 #' @export
 #' @examples 
-#' elevation <- bciex::bci_elevation
+#' elevation <- fgeo.data::luquillo_elevation
 #' 
 #' contour_elev(map_gx_gy_elev(elevation))
 #' 
@@ -542,7 +542,7 @@ text_at_max <- function(x,
 #' @seealso [ggplot2::labs()],  [ggplot2::guides()].
 #' @family map components.
 #' @examples 
-#' elevation <- bciex::bci_elevation
+#' elevation <- fgeo.data::luquillo_elevation
 #' map <- map_gx_gy_elev(elevation)
 #' hide_axis_labels(map)
 #' 
@@ -583,8 +583,8 @@ hide_legend_color <- function(p) {
 #' 
 #' @export
 #' @examples
-#' census <- bciex::bci12s7mini
-#' species <- c("hybapr", "faraoc")
+#' census <- fgeo.data::luquillo_stem5_random
+#' species <- c("PREMON", "CASARB")
 #' two_sp <- dplyr::filter(census, sp %in% species)
 #' 
 #' add_sp(map_gx_gy(two_sp))
