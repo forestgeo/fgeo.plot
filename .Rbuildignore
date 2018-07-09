@@ -12,8 +12,6 @@
 ^issues$
 ^LICENSE\.md$
 ^README\.Rmd$
-^README\.html$
-^README-.*\.png$
 ^tmp\.R$
 ^man-roxygen$
 ^\.github$
