@@ -124,7 +124,9 @@ about the pipe see http://r4ds.had.co.nz/pipes.html.
 }
 
 \examples{
-census <- fgeo.tool::pick_top(fgeo.data::luquillo_stem5_random, sp, 2)
+# Small dataset with a few species for quick examples
+some_sp <- c("PREMON", "CASARB")
+census <- subset(fgeo.data::luquillo_tree5_random, sp \%in\% some_sp)
 elevation <- fgeo.data::luquillo_elevation
 
 # Map on multiple pages ---------------------------------------------------
@@ -155,7 +157,6 @@ p3 <- maply_sp_elev(
 p3[[1]]
 
 # Map on a single page (maybe multiple panels) ----------------------------
-
 # Simplest way to map elevation data only
 map_elev(elevation)
 
@@ -164,39 +165,17 @@ map_sp_elev(census)
 map_sp_elev(census, elevation)
 
 # For maximum control, you can compose maps as you like
-
-# Traditional: g(f(x))
+# Traditional sintax: g(f(x))
 contour_elev(map_gx_gy_elev(elevation))
 
 # With the pipe: f(x) \%>\% g()
 map_gx_gy_elev(elevation) \%>\%
   contour_elev()
 
-# With traditional sintax: As you add more functions readability decreases.
-theme_default(
-  wrap(
-    add_sp(
-      hide_legend_color(
-        hide_axis_labels(
-          label_elev(
-            contour_elev(
-              limit_gx_gy(
-                map_gx_gy_elev(elevation), 
-                xlim = c(0, 1200)
-              ),
-              contour_size = 0.5
-            ),
-            label_color = "red"
-          )
-        )
-      ), census, point_size = 5
-    ), "sp"
-  ), legend.position = "top"
-)
-
-# Same with the pipe: As you add more functions readability doesn't change
+# The traditional sintax is hard to read when you compose multiple functions.
+# With the pipe, readability isn't affected by the number of functions.
 map_gx_gy_elev(elevation) \%>\%
-  limit_gx_gy(xlim = c(0, 1200)) \%>\%
+  limit_gx_gy(xlim = c(-100, 400)) \%>\%
   contour_elev(contour_size = 0.5) \%>\%
   label_elev(label_color = "red") \%>\%
   hide_axis_labels() \%>\%

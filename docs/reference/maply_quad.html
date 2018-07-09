@@ -172,52 +172,32 @@ status that corresponds to dead stems.</p></td>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='co'># NOT RUN {</span>
-<span class='fu'>library</span>(<span class='no'>fgeo.map</span>)
-<span class='fu'>library</span>(<span class='no'>fgeo.tool</span>)
-<span class='fu'>library</span>(<span class='no'>dplyr</span>)
-<span class='co'># Avoid conflict with `stats::filter()`</span>
-<span class='no'>filter</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='no'><a href='http://dplyr.tidyverse.org/reference/filter.html'>filter</a></span>
+    <pre class="examples"><div class='input'><span class='fu'>library</span>(<span class='no'>dplyr</span>)</div><div class='output co'>#&gt; <span class='message'></span>
+#&gt; <span class='message'>Attaching package: 'dplyr'</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from 'package:stats':</span>
+#&gt; <span class='message'></span>
+#&gt; <span class='message'>    filter, lag</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from 'package:base':</span>
+#&gt; <span class='message'></span>
+#&gt; <span class='message'>    intersect, setdiff, setequal, union</span></div><div class='input'><span class='fu'>library</span>(<span class='no'>fgeo.tool</span>)</div><div class='output co'>#&gt; <span class='message'></span>
+#&gt; <span class='message'>Attaching package: 'fgeo.tool'</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from 'package:stats':</span>
+#&gt; <span class='message'></span>
+#&gt; <span class='message'>    filter</span></div><div class='input'>
+<span class='co'># Using a small viewFullTable for example (see ?vft_1quad)</span>
+<span class='no'>small_vft</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://dplyr.tidyverse.org/reference/sample.html'>sample_n</a></span>(<span class='no'>vft_1quad</span>, <span class='fl'>50</span>)
 
 <span class='co'># Filter the data you want. For example:</span>
-<span class='co'># (see ?vft_4quad)</span>
-<span class='no'>want</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/fgeo.tool/topics/reexports'>filter</a></span>(
-  <span class='no'>vft_4quad</span>,
-  <span class='no'>CensusID</span> <span class='kw'>==</span> <span class='fl'>6</span>,
-  <span class='no'>PlotID</span> <span class='kw'>==</span> <span class='fl'>1</span>
-)
-<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'>maply_quad</span>(<span class='no'>want</span>)
-<span class='co'># Visualizing only the first plot of `p`</span>
-<span class='fu'><a href='http://dplyr.tidyverse.org/reference/nth.html'>first</a></span>(<span class='no'>p</span>)
-<span class='co'># Printing all plots of `p` to .pdf, with parameters optimized for size letter</span>
+<span class='no'>want</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/fgeo.tool/topics/reexports'>filter</a></span>(<span class='no'>small_vft</span>, <span class='no'>CensusID</span> <span class='kw'>==</span> <span class='fl'>4</span>, <span class='no'>PlotID</span> <span class='kw'>==</span> <span class='fl'>1</span>)
+<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'>maply_quad</span>(<span class='no'>want</span>)</div><div class='output co'>#&gt; <span class='message'>* Appending tags of dead trees with the suffix '.d'</span></div><div class='output co'>#&gt; <span class='message'>* Standarizing `dbh` by the count of `dbh` measurements</span></div><div class='input'><span class='co'># Visualizing only the first plot</span>
+<span class='no'>p</span><span class='kw'>[[</span><span class='fl'>1</span>]]</div><div class='output co'>#&gt; <span class='warning'>Warning: Removed 30 rows containing missing values (geom_point).</span></div><div class='img'><img src='maply_quad-1.png' alt='' width='700' height='433' /></div><div class='input'># Printing all plots to .pdf, with parameters optimized for size letter
+</div><span class='co'># NOT RUN {</span>
 <span class='fu'>pdf</span>(<span class='st'>"map.pdf"</span>, <span class='kw'>paper</span> <span class='kw'>=</span> <span class='st'>"letter"</span>, <span class='kw'>height</span> <span class='kw'>=</span> <span class='fl'>10.5</span>, <span class='kw'>width</span> <span class='kw'>=</span> <span class='fl'>8</span>)
 <span class='no'>p</span>
 <span class='fu'>dev.off</span>()
-
+<span class='co'># }</span><div class='input'>
 <span class='co'># Be careful if filtering by DBH: You may unintentionally remove dead trees.</span>
-<span class='co'># * Confirm this dataset has dead trees:</span>
-<span class='co'># (see `?vft_4quad`)</span>
-<span class='no'>dead</span> <span class='kw'>&lt;-</span> <span class='no'>vft_4quad</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='http://www.rdocumentation.org/packages/fgeo.tool/topics/add_status_tree'>add_status_tree</a></span>(<span class='kw'>status_a</span> <span class='kw'>=</span> <span class='st'>"alive"</span>, <span class='kw'>status_d</span> <span class='kw'>=</span> <span class='st'>"dead"</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='http://www.rdocumentation.org/packages/fgeo.tool/topics/pick_top'>pick_top</a></span>(<span class='no'>QuadratID</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='http://www.rdocumentation.org/packages/fgeo.tool/topics/reexports'>filter</a></span>(<span class='no'>status_tree</span> <span class='kw'>==</span> <span class='st'>"dead"</span>)
-<span class='fu'><a href='http://www.rdocumentation.org/packages/fgeo.tool/topics/reexports'>select</a></span>(<span class='no'>dead</span>, <span class='no'>Tag</span>, <span class='no'>Status</span>, <span class='no'>status_tree</span>, <span class='no'>DBH</span>)
-<span class='fu'>maply_quad</span>(<span class='no'>dead</span>)
-<span class='co'># * If you filter by `DBH`, you loose the dead trees becaue their `DBH = NA`</span>
-<span class='no'>wrong</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/fgeo.tool/topics/reexports'>filter</a></span>(<span class='no'>dead</span>, <span class='no'>DBH</span> <span class='kw'>&gt;</span> <span class='fl'>10</span>)
-<span class='fu'>maply_quad</span>(<span class='no'>wrong</span>)
-<span class='co'># * The right way to do it is to explicietly inlcude rows where DBH = NA</span>
-<span class='no'>right</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/fgeo.tool/topics/reexports'>filter</a></span>(<span class='no'>dead</span>, <span class='no'>DBH</span> <span class='kw'>&gt;</span> <span class='fl'>10</span> <span class='kw'>|</span> <span class='fu'>is.na</span>(<span class='no'>DBH</span>))
-<span class='fu'>maply_quad</span>(<span class='no'>right</span>)
-
-<span class='co'># Keeping dead trees with `is.na(DBH)` (e.g. tag 127885.d on the bottom right)</span>
-<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/fgeo.tool/topics/reexports'>filter</a></span>(<span class='no'>vft_4quad</span>, <span class='no'>DBH</span> <span class='kw'>&gt;</span> <span class='fl'>20</span> <span class='kw'>|</span> <span class='fu'>is.na</span>(<span class='no'>DBH</span>))
-<span class='fu'><a href='http://dplyr.tidyverse.org/reference/nth.html'>first</a></span>(<span class='fu'>maply_quad</span>(<span class='no'>p</span>))
-
-<span class='co'># For more complex filtering, see also ?fgeo.tool::drop_twice_dead)</span>
-
+<span class='co'># You should explicietly inlcude missing `DBH` values with `is.na(DBH)`</span>
+<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/fgeo.tool/topics/reexports'>filter</a></span>(<span class='no'>small_vft</span>, <span class='no'>DBH</span> <span class='kw'>&gt;</span> <span class='fl'>20</span> <span class='kw'>|</span> <span class='fu'>is.na</span>(<span class='no'>DBH</span>))
+<span class='fu'>maply_quad</span>(<span class='no'>p</span>)<span class='kw'>[[</span><span class='fl'>1</span>]]</div><div class='output co'>#&gt; <span class='message'>* Appending tags of dead trees with the suffix '.d'</span></div><div class='output co'>#&gt; <span class='message'>* Standarizing `dbh` by the count of `dbh` measurements</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Removed 30 rows containing missing values (geom_point).</span></div><div class='img'><img src='maply_quad-2.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># Customizing the maps ----------------------------------------------------</span>
-
 <span class='co'># A custom title and header</span>
 <span class='no'>myheader</span> <span class='kw'>&lt;-</span> <span class='fu'>paste</span>(
   <span class='st'>" "</span>,
@@ -227,14 +207,13 @@ status that corresponds to dead stems.</p></td>
   <span class='st'>" ........................................................................"</span>,
   <span class='kw'>sep</span> <span class='kw'>=</span> <span class='st'>"\n"</span>
 )
-<span class='co'># See ?vft_1quad</span>
-<span class='fu'>maply_quad</span>(<span class='no'>vft_1quad</span>, <span class='kw'>title_quad</span> <span class='kw'>=</span> <span class='st'>"My Site, 2018. Quad:"</span>, <span class='kw'>header</span> <span class='kw'>=</span> <span class='no'>myheader</span>)
 
+<span class='fu'>maply_quad</span>(<span class='no'>small_vft</span>, <span class='kw'>title_quad</span> <span class='kw'>=</span> <span class='st'>"My Site, 2018. Quad:"</span>, <span class='kw'>header</span> <span class='kw'>=</span> <span class='no'>myheader</span>)</div><div class='output co'>#&gt; <span class='message'>* Appending tags of dead trees with the suffix '.d'</span></div><div class='output co'>#&gt; <span class='message'>* Standarizing `dbh` by the count of `dbh` measurements</span></div><div class='output co'>#&gt; $`621`</div><div class='output co'>#&gt; <span class='warning'>Warning: Removed 30 rows containing missing values (geom_point).</span></div><div class='img'><img src='maply_quad-3.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; </div><div class='input'>
 <span class='co'># Tweak the theme with ggplot</span>
 <span class='fu'>library</span>(<span class='no'>ggplot2</span>)
 
 <span class='fu'>maply_quad</span>(
-  <span class='no'>vft_1quad</span>,
+  <span class='no'>small_vft</span>,
   <span class='kw'>title_quad</span> <span class='kw'>=</span> <span class='st'>"My Site, 2018. Quad:"</span>,
   <span class='kw'>header</span> <span class='kw'>=</span> <span class='fu'><a href='headers.html'>map_quad_header</a></span>(<span class='st'>"spanish"</span>),
   <span class='kw'>tag_size</span> <span class='kw'>=</span> <span class='fl'>3</span>,
@@ -244,8 +223,7 @@ status that corresponds to dead stems.</p></td>
     <span class='kw'>plot.subtitle</span> <span class='kw'>=</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/element'>element_text</a></span>(<span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>5</span>),
     <span class='kw'>panel.background</span> <span class='kw'>=</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/element'>element_rect</a></span>(<span class='kw'>fill</span> <span class='kw'>=</span> <span class='st'>"grey"</span>)
   )
-)
-<span class='co'># }</span></pre>
+)</div><div class='output co'>#&gt; <span class='message'>* Appending tags of dead trees with the suffix '.d'</span></div><div class='output co'>#&gt; <span class='message'>* Standarizing `dbh` by the count of `dbh` measurements</span></div><div class='output co'>#&gt; $`621`</div><div class='output co'>#&gt; <span class='warning'>Warning: Removed 30 rows containing missing values (geom_point).</span></div><div class='img'><img src='maply_quad-4.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

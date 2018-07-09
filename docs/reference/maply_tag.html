@@ -237,65 +237,39 @@ the algorithm to calculate subquadrats.</p>
 
     <div class='dont-index'><p><code><a href='http://www.rdocumentation.org/packages/graphics/topics/points'>graphics::points()</a></code>, <code><a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_point'>ggplot2::geom_point()</a></code>, <code><a href='http://www.rdocumentation.org/packages/ggplot2/topics/theme'>ggplot2::theme()</a></code>
 <code><a href='headers.html'>map_tag_header()</a></code>, <code><a href='themes.html'>theme_map_tag()</a></code>, <code><a href='http://www.rdocumentation.org/packages/fgeo.tool/topics/add_subquad'>fgeo.tool::add_subquad()</a></code>,
-<code><a href='paginate.html'>paginate()</a></code>, <a href='http://www.rdocumentation.org/packages/ggrepel/topics/geom_text_repel'>ggrepel::geom_text_repel</a>.</p>
+<code><a href='paginate.html'>paginate()</a></code>, <a href='http://www.rdocumentation.org/packages/ggrepel/topics/geom_text_repel'>ggrepel::geom_text_repel</a>, <code><a href='http://www.rdocumentation.org/packages/fgeo.tool/topics/drop_twice_dead'>fgeo.tool::drop_twice_dead()</a></code>.</p>
 <p>Other `maply_*` functions.: <code><a href='maply_sp_elev.html'>maply_sp_elev</a></code></p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='co'># NOT RUN {</span>
-<span class='fu'>library</span>(<span class='no'>fgeo.map</span>)
+    <pre class="examples"><div class='input'><span class='fu'>library</span>(<span class='no'>fgeo.map</span>)
 <span class='fu'>library</span>(<span class='no'>fgeo.tool</span>)
-<span class='fu'>library</span>(<span class='no'>dplyr</span>)
 
 <span class='co'># Filtering the data to map -----------------------------------------------</span>
-
-<span class='co'># Filter the data you want. For example:</span>
-<span class='co'># (see ?vft_1quad)</span>
-<span class='no'>want</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/fgeo.tool/topics/reexports'>filter</a></span>(
-  <span class='no'>vft_1quad</span>,
-  <span class='no'>CensusID</span> <span class='kw'>==</span> <span class='fl'>6</span>,
-  <span class='no'>PlotID</span> <span class='kw'>==</span> <span class='fl'>1</span>
-)
+<span class='co'># Filter the data you want. Using a small ViewFullTable for example:</span>
+<span class='co'># (see `?vft_1quad`)</span>
+<span class='no'>small_vft</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='http://dplyr.tidyverse.org/reference/sample.html'>sample_n</a></span>(<span class='no'>vft_1quad</span>, <span class='fl'>50</span>)
+<span class='no'>want</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/fgeo.tool/topics/reexports'>filter</a></span>(<span class='no'>small_vft</span>, <span class='no'>CensusID</span> <span class='kw'>==</span> <span class='fl'>4</span>, <span class='no'>PlotID</span> <span class='kw'>==</span> <span class='fl'>1</span>)
 <span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'>maply_tag</span>(<span class='no'>want</span>)
-<span class='co'># Visualizing only the first plot of `p`</span>
-<span class='fu'><a href='http://dplyr.tidyverse.org/reference/nth.html'>first</a></span>(<span class='no'>p</span>)
-<span class='co'># Printing all plots of `p` to .pdf, with parameters optimized for size letter</span>
+<span class='co'># Visualizing only the first plot</span>
+<span class='no'>p</span><span class='kw'>[[</span><span class='fl'>1</span>]]</div><div class='img'><img src='maply_tag-1.png' alt='' width='700' height='433' /></div><div class='input'>
+# Print all plots to .pdf, with parameters optimized for size letter
+</div><span class='co'># NOT RUN {</span>
 <span class='fu'>pdf</span>(<span class='st'>"map.pdf"</span>, <span class='kw'>paper</span> <span class='kw'>=</span> <span class='st'>"letter"</span>, <span class='kw'>height</span> <span class='kw'>=</span> <span class='fl'>10.5</span>, <span class='kw'>width</span> <span class='kw'>=</span> <span class='fl'>8</span>)
 <span class='no'>p</span>
 <span class='fu'>dev.off</span>()
-
+<span class='co'># }</span><div class='input'>
 <span class='co'># Be careful if filtering by DBH: You may unintentionally remove dead trees.</span>
-<span class='co'># * Confirm this dataset has dead trees:</span>
-<span class='co'># (see `?vft_4quad`)</span>
-<span class='no'>dead</span> <span class='kw'>&lt;-</span> <span class='no'>vft_4quad</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='http://www.rdocumentation.org/packages/fgeo.tool/topics/add_status_tree'>add_status_tree</a></span>(<span class='kw'>status_a</span> <span class='kw'>=</span> <span class='st'>"alive"</span>, <span class='kw'>status_d</span> <span class='kw'>=</span> <span class='st'>"dead"</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='http://www.rdocumentation.org/packages/fgeo.tool/topics/pick_top'>pick_top</a></span>(<span class='no'>QuadratID</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='http://www.rdocumentation.org/packages/fgeo.tool/topics/reexports'>filter</a></span>(<span class='no'>status_tree</span> <span class='kw'>==</span> <span class='st'>"dead"</span>)
-<span class='fu'><a href='http://www.rdocumentation.org/packages/fgeo.tool/topics/reexports'>select</a></span>(<span class='no'>dead</span>, <span class='no'>Tag</span>, <span class='no'>Status</span>, <span class='no'>status_tree</span>, <span class='no'>DBH</span>)
-<span class='fu'><a href='http://dplyr.tidyverse.org/reference/nth.html'>first</a></span>(<span class='fu'>maply_tag</span>(<span class='no'>dead</span>))
 <span class='co'># * If you filter by `DBH`, you loose the dead trees becaue their `DBH = NA`</span>
-<span class='no'>wrong</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/fgeo.tool/topics/reexports'>filter</a></span>(<span class='no'>dead</span>, <span class='no'>DBH</span> <span class='kw'>&gt;</span> <span class='fl'>10</span>)
-<span class='no'>wrong</span>
-<span class='co'># * The right way to do it is to explicietly inlcude rows where DBH = NA</span>
-<span class='no'>right</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/fgeo.tool/topics/reexports'>filter</a></span>(<span class='no'>dead</span>, <span class='no'>DBH</span> <span class='kw'>&gt;</span> <span class='fl'>10</span> <span class='kw'>|</span> <span class='fu'>is.na</span>(<span class='no'>DBH</span>))
-<span class='no'>right</span>
-<span class='fu'><a href='http://dplyr.tidyverse.org/reference/nth.html'>first</a></span>(<span class='fu'><a href='maply_quad.html'>maply_quad</a></span>(<span class='no'>right</span>))
-
-<span class='co'># Keeping dead trees with `is.na(DBH)` (e.g. tag 127885.d on the bottom right)</span>
+<span class='co'># * You should explicietly inlcude missing DBH values with `is.na(DBH)`</span>
 <span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/fgeo.tool/topics/reexports'>filter</a></span>(<span class='no'>vft_4quad</span>, <span class='no'>DBH</span> <span class='kw'>&gt;</span> <span class='fl'>20</span> <span class='kw'>|</span> <span class='fu'>is.na</span>(<span class='no'>DBH</span>))
-<span class='fu'><a href='http://dplyr.tidyverse.org/reference/nth.html'>first</a></span>(<span class='fu'>maply_tag</span>(<span class='no'>p</span>))
-
-<span class='co'># For more complex filtering, see also ?fgeo.tool::drop_twice_dead</span>
-
+<span class='fu'>maply_tag</span>(<span class='no'>p</span>)<span class='kw'>[[</span><span class='fl'>1</span>]]</div><div class='img'><img src='maply_tag-2.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># Customizing the maps ----------------------------------------------------</span>
-
 <span class='co'># Common tweaks</span>
-
-<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'>maply_tag</span>(<span class='no'>vft_1quad</span>, <span class='kw'>show_page</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>show_subquad</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
-<span class='fu'><a href='http://dplyr.tidyverse.org/reference/nth.html'>first</a></span>(<span class='no'>p</span>)
-
+<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'>maply_tag</span>(<span class='no'>small_vft</span>, <span class='kw'>show_page</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>show_subquad</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+<span class='no'>p</span><span class='kw'>[[</span><span class='fl'>1</span>]]</div><div class='img'><img src='maply_tag-3.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'>maply_tag</span>(
-  <span class='no'>vft_1quad</span>,
+  <span class='no'>small_vft</span>,
   <span class='kw'>title_quad</span> <span class='kw'>=</span> <span class='st'>"BCI 2012. Quadrat: "</span>,
   <span class='kw'>bl</span> <span class='kw'>=</span> <span class='st'>"bottom-left"</span>, <span class='kw'>br</span> <span class='kw'>=</span> <span class='st'>"bottom-right"</span>, <span class='kw'>tr</span> <span class='kw'>=</span> <span class='st'>"top-right"</span>, <span class='kw'>tl</span> <span class='kw'>=</span> <span class='st'>"top-left"</span>,
   <span class='kw'>header</span> <span class='kw'>=</span> <span class='st'>"Line 1: _________\nLine 2:\nLine 3:....................."</span>,
@@ -304,58 +278,20 @@ the algorithm to calculate subquadrats.</p>
   <span class='kw'>tag_size</span> <span class='kw'>=</span> <span class='fl'>2</span>,
   <span class='kw'>move_edge</span> <span class='kw'>=</span> <span class='fl'>0.5</span>
 )
-<span class='fu'><a href='http://dplyr.tidyverse.org/reference/nth.html'>first</a></span>(<span class='no'>p</span>)
-
-
-
+<span class='no'>p</span><span class='kw'>[[</span><span class='fl'>1</span>]]</div><div class='img'><img src='maply_tag-4.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># Themes</span>
-
 <span class='fu'>library</span>(<span class='no'>ggplot2</span>)
 
-<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'>maply_tag</span>(<span class='no'>vft_1quad</span>, <span class='kw'>theme</span> <span class='kw'>=</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/ggtheme'>theme_gray</a></span>())
-<span class='fu'><a href='http://dplyr.tidyverse.org/reference/nth.html'>first</a></span>(<span class='no'>p</span>)
-
+<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'>maply_tag</span>(<span class='no'>small_vft</span>, <span class='kw'>theme</span> <span class='kw'>=</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/ggtheme'>theme_gray</a></span>())
+<span class='no'>p</span><span class='kw'>[[</span><span class='fl'>1</span>]]</div><div class='img'><img src='maply_tag-5.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># Tweaking the default theme of maply_tag()</span>
 
 <span class='no'>small_tweak</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='themes.html'>theme_map_tag</a></span>(<span class='kw'>legend.position</span> <span class='kw'>=</span> <span class='st'>"bottom"</span>)
-<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'>maply_tag</span>(<span class='no'>vft_1quad</span>, <span class='kw'>theme</span> <span class='kw'>=</span> <span class='no'>small_tweak</span>)
-<span class='fu'><a href='http://dplyr.tidyverse.org/reference/nth.html'>first</a></span>(<span class='no'>p</span>)
+<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'>maply_tag</span>(<span class='no'>small_vft</span>, <span class='kw'>theme</span> <span class='kw'>=</span> <span class='no'>small_tweak</span>)
+<span class='no'>p</span><span class='kw'>[[</span><span class='fl'>1</span>]]</div><div class='img'><img src='maply_tag-6.png' alt='' width='700' height='433' /></div><div class='input'>
+# For many more options see ?ggplot2::theme
 
-<span class='no'>large_tweak</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/theme'>theme</a></span>(
-  <span class='kw'>legend.position</span> <span class='kw'>=</span> <span class='st'>"bottom"</span>,
-  <span class='kw'>legend.title</span> <span class='kw'>=</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/element'>element_blank</a></span>(),
-  <span class='kw'>legend.text</span> <span class='kw'>=</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/element'>element_text</a></span>(<span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>8</span>, <span class='kw'>colour</span> <span class='kw'>=</span> <span class='st'>"red"</span>),
-  <span class='kw'>text</span> <span class='kw'>=</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/element'>element_text</a></span>(<span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>11</span>, <span class='kw'>face</span> <span class='kw'>=</span> <span class='st'>"bold.italic"</span>, <span class='kw'>colour</span> <span class='kw'>=</span> <span class='st'>"white"</span>),
-  <span class='kw'>plot.background</span> <span class='kw'>=</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/element'>element_rect</a></span>(<span class='kw'>fill</span> <span class='kw'>=</span> <span class='st'>"black"</span>),
-  <span class='kw'>plot.margin</span> <span class='kw'>=</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/element'>margin</a></span>(<span class='fl'>2</span>, <span class='fl'>2</span>, <span class='fl'>2</span>, <span class='fl'>2</span>, <span class='st'>"cm"</span>),
-  <span class='kw'>strip.background</span> <span class='kw'>=</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/element'>element_rect</a></span>(<span class='kw'>fill</span> <span class='kw'>=</span> <span class='st'>"darkgreen"</span>),
-  <span class='kw'>strip.text</span> <span class='kw'>=</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/element'>element_text</a></span>(<span class='kw'>colour</span> <span class='kw'>=</span> <span class='st'>"white"</span>),
-  <span class='co'># make grid to dissapear by matching background colour</span>
-  <span class='kw'>panel.background</span> <span class='kw'>=</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/element'>element_rect</a></span>(<span class='kw'>fill</span> <span class='kw'>=</span> <span class='st'>"lightgreen"</span>),
-  <span class='kw'>panel.grid.minor</span> <span class='kw'>=</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/element'>element_line</a></span>(<span class='kw'>colour</span> <span class='kw'>=</span> <span class='st'>"black"</span>, <span class='kw'>linetype</span> <span class='kw'>=</span> <span class='st'>"dotted"</span>),
-  <span class='kw'>panel.grid.major</span> <span class='kw'>=</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/element'>element_line</a></span>(<span class='kw'>colour</span> <span class='kw'>=</span> <span class='st'>"black"</span>)
-)
-<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'>maply_tag</span>(<span class='no'>vft_1quad</span>, <span class='kw'>theme</span> <span class='kw'>=</span> <span class='no'>large_tweak</span>)
-<span class='fu'><a href='http://dplyr.tidyverse.org/reference/nth.html'>first</a></span>(<span class='no'>p</span>)
-
-
-
-<span class='co'># Quadrat and subquadrat dimensitons</span>
-
-<span class='co'># Adapting the dimensions of quadrat and subquadrat to the range of qx and qy</span>
-<span class='co'># Creating new data set with QX and QY ranging 0-100</span>
-<span class='no'>smaller</span> <span class='kw'>&lt;-</span> <span class='no'>vft_1quad</span>
-<span class='no'>n</span> <span class='kw'>&lt;-</span> <span class='fu'>nrow</span>(<span class='no'>smaller</span>)
-<span class='no'>smaller</span>$<span class='no'>QX</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://dplyr.tidyverse.org/reference/sample.html'>sample</a></span>(<span class='fl'>0</span>:<span class='fl'>10</span>, <span class='no'>n</span>, <span class='kw'>replace</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
-<span class='no'>smaller</span>$<span class='no'>QY</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://dplyr.tidyverse.org/reference/sample.html'>sample</a></span>(<span class='fl'>0</span>:<span class='fl'>10</span>, <span class='no'>n</span>, <span class='kw'>replace</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
-
-<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'>maply_tag</span>(<span class='no'>smaller</span>, <span class='kw'>x_q</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>x_sq</span> <span class='kw'>=</span> <span class='fl'>2.5</span>)
-<span class='fu'><a href='http://dplyr.tidyverse.org/reference/nth.html'>first</a></span>(<span class='no'>p</span>)
-
-<span class='co'># If limit-lines aren't visible, try extending the grid a little</span>
-<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'>maply_tag</span>(<span class='no'>smaller</span>, <span class='kw'>x_q</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>x_sq</span> <span class='kw'>=</span> <span class='fl'>2.5</span>, <span class='kw'>move_edge</span> <span class='kw'>=</span> <span class='fl'>0.25</span>)[<span class='fl'>1</span>]
-<span class='fu'><a href='http://dplyr.tidyverse.org/reference/nth.html'>first</a></span>(<span class='no'>p</span>)
-<span class='co'># }</span></pre>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
