@@ -32,7 +32,7 @@ some_sp <- subset(census, sp %in% c("PREMON", "CASARB"))
 map_sp_elev(some_sp)
 ```
 
-<img src="man/figures/README-fgeo.map-sp-1.png" width="98%" style="display: block; margin: auto;" />
+<img src="man/figures/README-fgeo.map-sp-1.png" width="100%" style="display: block; margin: auto;" />
 
 [Get started with
 **fgeo**](https://forestgeo.github.io/fgeo/articles/fgeo.html)

@@ -1,8 +1,7 @@
 pandoc: 2.1.1
 pkgdown: 1.1.0
 pkgdown_sha: ~
-articles:
-  fgeo.map: fgeo.map.html
+articles: []
 urls:
   reference: https://forestgeo.github.io/fgeo.map//reference
   article: https://forestgeo.github.io/fgeo.map//articles
