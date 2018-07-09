@@ -11,14 +11,9 @@
 ^inst/tutorials$
 ^issues$
 ^LICENSE\.md$
-^NEWS\.md$
 ^README\.Rmd$
 ^README\.html$
 ^README-.*\.png$
-^rsconnect$
 ^tmp\.R$
-^vignettes/rsconnect$
-^vignettes/map_tag_cache$
 ^man-roxygen$
-^inst/tmp$
 ^\.github$

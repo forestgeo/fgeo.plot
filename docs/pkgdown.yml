@@ -2,7 +2,6 @@ pandoc: 2.1.1
 pkgdown: 1.1.0
 pkgdown_sha: ~
 articles:
-  compare_ggplot2: compare_ggplot2.html
   fgeo.map: fgeo.map.html
 urls:
   reference: https://forestgeo.github.io/fgeo.map//reference
