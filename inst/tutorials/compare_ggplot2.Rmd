@@ -2,12 +2,7 @@
 title: "Comparing ggplot2 and fgeo.map"
 author: "Mauro Lepore"
 date: "`r Sys.Date()`"
-output:
-  html_document:
-    toc: yes
-    toc_depth: '3'
-    theme: united
-    keep_md: true
+output: github_document
 ---
 
 ```{r setup, echo = FALSE, message=FALSE, warning=FALSE}
