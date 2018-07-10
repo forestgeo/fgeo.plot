@@ -21,11 +21,14 @@ different color.}
 Represent species with points.
 }
 \examples{
-census <- fgeo.tool::pick_top(fgeo.data::luquillo_stem5_random, sp, 2)
+# Small dataset with a few species for quick examples
+some_sp <- c("PREMON", "CASARB")
+census <- subset(fgeo.data::luquillo_tree5_random, sp \%in\% some_sp)
+p <- map_gx_gy(census)
 
-add_sp(map_gx_gy(census))
+add_sp(p)
 
-add_sp(map_gx_gy(census), fill = "white", shape = 22, point_size = 4)
+add_sp(p, fill = "white", shape = 22, point_size = 4)
 }
 \seealso{
 \code{\link[=map_sp_elev]{map_sp_elev()}}, \code{\link[=maply_sp_elev]{maply_sp_elev()}}, \code{\link[ggplot2:geom_point]{ggplot2::geom_point()}}.

@@ -19,11 +19,13 @@ hide_legend_color(p)
 }
 \examples{
 elevation <- fgeo.data::luquillo_elevation
-map <- map_gx_gy_elev(elevation)
-hide_axis_labels(map)
+p <- map_gx_gy_elev(elevation)
+hide_axis_labels(p)
 
-with_color_legend <- contour_elev(map_gx_gy_elev(elevation))
-hide_legend_color(with_color_legend)
+elevation \%>\% 
+  map_gx_gy_elev() \%>\% 
+  contour_elev() \%>\% 
+  hide_legend_color()
 }
 \seealso{
 \code{\link[ggplot2:labs]{ggplot2::labs()}},  \code{\link[ggplot2:guides]{ggplot2::guides()}}.

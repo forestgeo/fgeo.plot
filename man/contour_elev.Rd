@@ -22,15 +22,9 @@ low and high elevation.}
 Represent elevation with lines.
 }
 \examples{
-elevation <- fgeo.data::luquillo_elevation
-
-base_elev <- map_gx_gy_elev(elevation)
-
-contour_elev(base_elev)
-
-contour_elev(
-  base_elev, contour_size = 0.5, low = "grey", high = "black", bins = 4
-)
+p <- map_gx_gy_elev(fgeo.data::luquillo_elevation)
+contour_elev(p)
+contour_elev(p, contour_size = 0.5, low = "grey", high = "black", bins = 4)
 }
 \seealso{
 \code{\link[=maply_sp_elev]{maply_sp_elev()}}, \code{\link[=map_sp_elev]{map_sp_elev()}}, \code{\link[=map_elev]{map_elev()}},

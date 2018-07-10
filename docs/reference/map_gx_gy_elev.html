@@ -141,23 +141,25 @@
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>census</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>fgeo.tool</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/fgeo.tool/topics/pick_top'>pick_top</a></span>(<span class='kw pkg'>fgeo.data</span><span class='kw ns'>::</span><span class='no'>luquillo_stem5_random</span>, <span class='no'>sp</span>, <span class='fl'>2</span>)
+    <pre class="examples"><div class='input'><span class='co'># Small dataset with a few species for quick examples</span>
+<span class='no'>some_sp</span> <span class='kw'>&lt;-</span> <span class='fu'>c</span>(<span class='st'>"PREMON"</span>, <span class='st'>"CASARB"</span>)
+<span class='no'>census</span> <span class='kw'>&lt;-</span> <span class='fu'>subset</span>(<span class='kw pkg'>fgeo.data</span><span class='kw ns'>::</span><span class='no'>luquillo_tree5_random</span>, <span class='no'>sp</span> <span class='kw'>%in%</span> <span class='no'>some_sp</span>)
 <span class='no'>elevation</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>fgeo.data</span><span class='kw ns'>::</span><span class='no'><a href='http://www.rdocumentation.org/packages/fgeo.data/topics/luquillo_elevation'>luquillo_elevation</a></span>
 
-<span class='co'># Look alike but internally they are not. </span>
-<span class='no'>base_elev</span> <span class='kw'>&lt;-</span> <span class='fu'>map_gx_gy_elev</span>(<span class='no'>elevation</span>)
+<span class='co'># These functions look alike but internally they are not.</span>
 <span class='no'>base_census</span> <span class='kw'>&lt;-</span> <span class='fu'>map_gx_gy</span>(<span class='no'>census</span>)
-
-<span class='co'># Works</span>
-<span class='fu'><a href='contour_elev.html'>contour_elev</a></span>(<span class='no'>base_elev</span>)</div><div class='img'><img src='map_gx_gy_elev-1.png' alt='' width='700' height='433' /></div><div class='input'>
-<span class='co'># # Fails.</span>
-<span class='co'># \dontrun{</span>
-<span class='co'># add_sp(base_elev)</span>
-<span class='co'># contour_elev(base_census)</span>
-<span class='co'># }</span>
-
-<span class='co'># Supply the correct base</span>
-<span class='fu'><a href='add_sp.html'>add_sp</a></span>(<span class='no'>base_census</span>)</div><div class='img'><img src='map_gx_gy_elev-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='contour_elev.html'>contour_elev</a></span>(<span class='no'>base_elev</span>)</div><div class='img'><img src='map_gx_gy_elev-3.png' alt='' width='700' height='433' /></div></pre>
+<span class='no'>base_census</span></div><div class='img'><img src='map_gx_gy_elev-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='no'>base_elevation</span> <span class='kw'>&lt;-</span> <span class='fu'>map_gx_gy_elev</span>(<span class='no'>elevation</span>)
+<span class='no'>base_elevation</span></div><div class='img'><img src='map_gx_gy_elev-2.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='co'># Use map_gx_gy() as a base for layers that need census data</span>
+<span class='fu'><a href='add_sp.html'>add_sp</a></span>(<span class='no'>base_census</span>)</div><div class='img'><img src='map_gx_gy_elev-3.png' alt='' width='700' height='433' /></div><div class='input'># This fails because the base plot has no information about elevation
+</div><span class='co'># NOT RUN {</span>
+  <span class='fu'><a href='contour_elev.html'>contour_elev</a></span>(<span class='no'>base_census</span>)
+<span class='co'># }</span><div class='input'>
+<span class='co'># Use map_gx_gy_elev() as a base for layers that need elevation data</span>
+<span class='fu'><a href='contour_elev.html'>contour_elev</a></span>(<span class='no'>base_elevation</span>)</div><div class='img'><img src='map_gx_gy_elev-4.png' alt='' width='700' height='433' /></div><div class='input'># This fails because the base plot has no information about species
+</div><span class='co'># NOT RUN {</span>
+  <span class='fu'><a href='add_sp.html'>add_sp</a></span>(<span class='no'>base_elevation</span>)
+<span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

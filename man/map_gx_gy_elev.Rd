@@ -16,25 +16,30 @@ map_gx_gy(data)
 Map a base over which other map components can later be added.
 }
 \examples{
-census <- fgeo.tool::pick_top(fgeo.data::luquillo_stem5_random, sp, 2)
+# Small dataset with a few species for quick examples
+some_sp <- c("PREMON", "CASARB")
+census <- subset(fgeo.data::luquillo_tree5_random, sp \%in\% some_sp)
 elevation <- fgeo.data::luquillo_elevation
 
-# Look alike but internally they are not. 
-base_elev <- map_gx_gy_elev(elevation)
+# These functions look alike but internally they are not.
 base_census <- map_gx_gy(census)
+base_census
+base_elevation <- map_gx_gy_elev(elevation)
+base_elevation
 
-# Works
-contour_elev(base_elev)
-
-# # Fails.
-# \dontrun{
-# add_sp(base_elev)
-# contour_elev(base_census)
-# }
-
-# Supply the correct base
+# Use map_gx_gy() as a base for layers that need census data
 add_sp(base_census)
-contour_elev(base_elev)
+# This fails because the base plot has no information about elevation
+\dontrun{
+  contour_elev(base_census)
+}
+
+# Use map_gx_gy_elev() as a base for layers that need elevation data
+contour_elev(base_elevation)
+# This fails because the base plot has no information about species
+\dontrun{
+  add_sp(base_elevation)
+}
 }
 \seealso{
 \code{\link[=map_sp_elev]{map_sp_elev()}}, \code{\link[=map_elev]{map_elev()}}, \code{\link[=maply_sp_elev]{maply_sp_elev()}},

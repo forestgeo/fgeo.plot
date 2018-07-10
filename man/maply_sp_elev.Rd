@@ -130,7 +130,6 @@ census <- subset(fgeo.data::luquillo_tree5_random, sp \%in\% some_sp)
 elevation <- fgeo.data::luquillo_elevation
 
 # Map on multiple pages ---------------------------------------------------
-
 p1 <- maply_sp_elev(census)
 # Showing first map only.
 p1[[1]]

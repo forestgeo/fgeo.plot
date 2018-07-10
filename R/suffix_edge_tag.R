@@ -10,11 +10,12 @@
 #' @export
 #'
 #' @examples
-#' vft <- tibble::tibble(
+#' vft <- data.frame(
 #'   QX = 21:22,
 #'   QY = 21:22,
 #'   Tag = c("01", "02"),
-#'   Status = c("dead", "alive")
+#'   Status = c("dead", "alive"),
+#'   stringsAsFactors = FALSE
 #' )
 #' vft
 #' 
