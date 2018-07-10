@@ -83,22 +83,7 @@ species, that can be printed on a .pdf file.
   </a>
 </li>
 <li>
-  <a href="../articles/fgeo.map.html">Get started</a>
-</li>
-<li>
   <a href="../reference/index.html">Reference</a>
-</li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Articles
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-    <li>
-      <a href="../articles/compare_ggplot2.html">Comparing ggplot2</a>
-    </li>
-  </ul>
 </li>
       </ul>
       
@@ -308,8 +293,10 @@ about the pipe see http://r4ds.had.co.nz/pipes.html.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>census</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>fgeo.tool</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/fgeo.tool/topics/pick_top'>pick_top</a></span>(<span class='kw pkg'>bciex</span><span class='kw ns'>::</span><span class='no'><a href='http://www.rdocumentation.org/packages/bciex/topics/bciYYsNmini'>bci12s7mini</a></span>, <span class='no'>sp</span>, <span class='fl'>2</span>)
-<span class='no'>elevation</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>bciex</span><span class='kw ns'>::</span><span class='no'><a href='http://www.rdocumentation.org/packages/bciex/topics/bci_elevation'>bci_elevation</a></span>
+    <pre class="examples"><div class='input'><span class='co'># Small dataset with a few species for quick examples</span>
+<span class='no'>some_sp</span> <span class='kw'>&lt;-</span> <span class='fu'>c</span>(<span class='st'>"PREMON"</span>, <span class='st'>"CASARB"</span>)
+<span class='no'>census</span> <span class='kw'>&lt;-</span> <span class='fu'>subset</span>(<span class='kw pkg'>fgeo.data</span><span class='kw ns'>::</span><span class='no'>luquillo_tree5_random</span>, <span class='no'>sp</span> <span class='kw'>%in%</span> <span class='no'>some_sp</span>)
+<span class='no'>elevation</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>fgeo.data</span><span class='kw ns'>::</span><span class='no'><a href='http://www.rdocumentation.org/packages/fgeo.data/topics/luquillo_elevation'>luquillo_elevation</a></span>
 
 <span class='co'># Map on multiple pages ---------------------------------------------------</span>
 
@@ -336,49 +323,27 @@ about the pipe see http://r4ds.had.co.nz/pipes.html.</p>
 )
 <span class='no'>p3</span><span class='kw'>[[</span><span class='fl'>1</span>]]</div><div class='img'><img src='maply_sp_elev-3.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># Map on a single page (maybe multiple panels) ----------------------------</span>
-
 <span class='co'># Simplest way to map elevation data only</span>
 <span class='fu'>map_elev</span>(<span class='no'>elevation</span>)</div><div class='img'><img src='maply_sp_elev-4.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='fu'>map_sp_elev</span>(<span class='no'>census</span>)</div><div class='img'><img src='maply_sp_elev-5.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='fu'>map_sp_elev</span>(<span class='no'>census</span>, <span class='no'>elevation</span>)</div><div class='img'><img src='maply_sp_elev-6.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># For maximum control, you can compose maps as you like</span>
-
-<span class='co'># Traditional: g(f(x))</span>
+<span class='co'># Traditional sintax: g(f(x))</span>
 <span class='fu'><a href='contour_elev.html'>contour_elev</a></span>(<span class='fu'><a href='map_gx_gy_elev.html'>map_gx_gy_elev</a></span>(<span class='no'>elevation</span>))</div><div class='img'><img src='maply_sp_elev-7.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># With the pipe: f(x) %&gt;% g()</span>
 <span class='fu'><a href='map_gx_gy_elev.html'>map_gx_gy_elev</a></span>(<span class='no'>elevation</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='contour_elev.html'>contour_elev</a></span>()</div><div class='img'><img src='maply_sp_elev-8.png' alt='' width='700' height='433' /></div><div class='input'>
-<span class='co'># With traditional sintax: As you add more functions readability decreases.</span>
-<span class='fu'><a href='themes.html'>theme_default</a></span>(
-  <span class='fu'><a href='wrap.html'>wrap</a></span>(
-    <span class='fu'><a href='add_sp.html'>add_sp</a></span>(
-      <span class='fu'><a href='hide.html'>hide_legend_color</a></span>(
-        <span class='fu'><a href='hide.html'>hide_axis_labels</a></span>(
-          <span class='fu'><a href='label_elev.html'>label_elev</a></span>(
-            <span class='fu'><a href='contour_elev.html'>contour_elev</a></span>(
-              <span class='fu'><a href='limit_gx_gy.html'>limit_gx_gy</a></span>(
-                <span class='fu'><a href='map_gx_gy_elev.html'>map_gx_gy_elev</a></span>(<span class='no'>elevation</span>),
-                <span class='kw'>xlim</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>0</span>, <span class='fl'>1200</span>)
-              ),
-              <span class='kw'>contour_size</span> <span class='kw'>=</span> <span class='fl'>0.5</span>
-            ),
-            <span class='kw'>label_color</span> <span class='kw'>=</span> <span class='st'>"red"</span>
-          )
-        )
-      ), <span class='no'>census</span>, <span class='kw'>point_size</span> <span class='kw'>=</span> <span class='fl'>5</span>
-    ), <span class='st'>"sp"</span>
-  ), <span class='kw'>legend.position</span> <span class='kw'>=</span> <span class='st'>"top"</span>
-)</div><div class='img'><img src='maply_sp_elev-9.png' alt='' width='700' height='433' /></div><div class='input'>
-<span class='co'># Same with the pipe: As you add more functions readability doesn't change</span>
+<span class='co'># The traditional sintax is hard to read when you compose multiple functions.</span>
+<span class='co'># With the pipe, readability isn't affected by the number of functions.</span>
 <span class='fu'><a href='map_gx_gy_elev.html'>map_gx_gy_elev</a></span>(<span class='no'>elevation</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='limit_gx_gy.html'>limit_gx_gy</a></span>(<span class='kw'>xlim</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>0</span>, <span class='fl'>1200</span>)) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='limit_gx_gy.html'>limit_gx_gy</a></span>(<span class='kw'>xlim</span> <span class='kw'>=</span> <span class='fu'>c</span>(-<span class='fl'>100</span>, <span class='fl'>400</span>)) <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='contour_elev.html'>contour_elev</a></span>(<span class='kw'>contour_size</span> <span class='kw'>=</span> <span class='fl'>0.5</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='label_elev.html'>label_elev</a></span>(<span class='kw'>label_color</span> <span class='kw'>=</span> <span class='st'>"red"</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='hide.html'>hide_axis_labels</a></span>() <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='hide.html'>hide_legend_color</a></span>() <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='add_sp.html'>add_sp</a></span>(<span class='no'>census</span>, <span class='kw'>point_size</span> <span class='kw'>=</span> <span class='fl'>5</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='wrap.html'>wrap</a></span>(<span class='st'>"sp"</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='themes.html'>theme_default</a></span>(<span class='kw'>legend.position</span> <span class='kw'>=</span> <span class='st'>"top"</span>)</div><div class='img'><img src='maply_sp_elev-10.png' alt='' width='700' height='433' /></div></pre>
+  <span class='fu'><a href='themes.html'>theme_default</a></span>(<span class='kw'>legend.position</span> <span class='kw'>=</span> <span class='st'>"top"</span>)</div><div class='img'><img src='maply_sp_elev-9.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

@@ -76,22 +76,7 @@ ggplot2::theme() (via ...)." />
   </a>
 </li>
 <li>
-  <a href="../articles/fgeo.map.html">Get started</a>
-</li>
-<li>
   <a href="../reference/index.html">Reference</a>
-</li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Articles
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-    <li>
-      <a href="../articles/compare_ggplot2.html">Comparing ggplot2</a>
-    </li>
-  </ul>
 </li>
       </ul>
       
@@ -375,12 +360,12 @@ inherits from <code>title</code>) left-aligned by default</p></td>
 #&gt;  - attr(*, "class")= chr [1:2] "theme" "gg"
 #&gt;  - attr(*, "complete")= logi FALSE
 #&gt;  - attr(*, "validate")= logi TRUE</div><div class='input'>
-
 <span class='co'># Compose `theme_default()` with `g(f(x))` or `f(x) %&gt;% g()`</span>
-<span class='co'># NOT as ggplot2 themes. DONT DO THIS: ` f(x) + g()`.</span>
-<span class='fu'>theme_default</span>(<span class='fu'><a href='map_gx_gy_elev.html'>map_gx_gy_elev</a></span>(<span class='kw pkg'>bciex</span><span class='kw ns'>::</span><span class='no'><a href='http://www.rdocumentation.org/packages/bciex/topics/bci_elevation'>bci_elevation</a></span>))</div><div class='img'><img src='themes-1.png' alt='' width='700' height='433' /></div><div class='input'>
-<span class='fu'><a href='map_gx_gy_elev.html'>map_gx_gy</a></span>(<span class='kw pkg'>bciex</span><span class='kw ns'>::</span><span class='no'><a href='http://www.rdocumentation.org/packages/bciex/topics/bciYYtNmini'>bci12t7mini</a></span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'>theme_default</span>()</div><div class='img'><img src='themes-2.png' alt='' width='700' height='433' /></div></pre>
+<span class='fu'>theme_default</span>(<span class='fu'><a href='map_gx_gy_elev.html'>map_gx_gy_elev</a></span>(<span class='kw pkg'>fgeo.data</span><span class='kw ns'>::</span><span class='no'><a href='http://www.rdocumentation.org/packages/fgeo.data/topics/luquillo_elevation'>luquillo_elevation</a></span>))</div><div class='img'><img src='themes-1.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='fu'><a href='map_gx_gy_elev.html'>map_gx_gy</a></span>(<span class='kw pkg'>fgeo.data</span><span class='kw ns'>::</span><span class='no'>luquillo_tree5_random</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'>theme_default</span>()</div><div class='img'><img src='themes-2.png' alt='' width='700' height='433' /></div><div class='input'> 
+# DON'T DO THIS: ` f(x) + g()`.
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

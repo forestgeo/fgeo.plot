@@ -80,60 +80,38 @@ the algorithm to calculate subquadrats.
 }
 
 \examples{
-\dontrun{
 library(fgeo.map)
 library(fgeo.tool)
-library(dplyr)
 
 # Filtering the data to map -----------------------------------------------
-
-# Filter the data you want. For example:
-# (see ?vft_1quad)
-want <- filter(
-  vft_1quad,
-  CensusID == 6,
-  PlotID == 1
-)
+# Filter the data you want. Using a small ViewFullTable for example:
+# (see `?vft_1quad`)
+small_vft <- dplyr::sample_n(vft_1quad, 50)
+want <- filter(small_vft, CensusID == 4, PlotID == 1)
 p <- maply_tag(want)
-# Visualizing only the first plot of `p`
-first(p)
-# Printing all plots of `p` to .pdf, with parameters optimized for size letter
+# Visualizing only the first plot
+p[[1]]
+
+# Print all plots to .pdf, with parameters optimized for size letter
+\dontrun{
 pdf("map.pdf", paper = "letter", height = 10.5, width = 8)
 p
 dev.off()
+}
 
 # Be careful if filtering by DBH: You may unintentionally remove dead trees.
-# * Confirm this dataset has dead trees:
-# (see `?vft_4quad`)
-dead <- vft_4quad \%>\%
-  add_status_tree(status_a = "alive", status_d = "dead") \%>\%
-  pick_top(QuadratID) \%>\%
-  filter(status_tree == "dead")
-select(dead, Tag, Status, status_tree, DBH)
-first(maply_tag(dead))
 # * If you filter by `DBH`, you loose the dead trees becaue their `DBH = NA`
-wrong <- filter(dead, DBH > 10)
-wrong
-# * The right way to do it is to explicietly inlcude rows where DBH = NA
-right <- filter(dead, DBH > 10 | is.na(DBH))
-right
-first(maply_quad(right))
-
-# Keeping dead trees with `is.na(DBH)` (e.g. tag 127885.d on the bottom right)
+# * You should explicietly inlcude missing DBH values with `is.na(DBH)`
 p <- filter(vft_4quad, DBH > 20 | is.na(DBH))
-first(maply_tag(p))
-
-# For more complex filtering, see also ?fgeo.tool::drop_twice_dead
+maply_tag(p)[[1]]
 
 # Customizing the maps ----------------------------------------------------
-
 # Common tweaks
-
-p <- maply_tag(vft_1quad, show_page = FALSE, show_subquad = FALSE)
-first(p)
+p <- maply_tag(small_vft, show_page = FALSE, show_subquad = FALSE)
+p[[1]]
 
 p <- maply_tag(
-  vft_1quad,
+  small_vft,
   title_quad = "BCI 2012. Quadrat: ",
   bl = "bottom-left", br = "bottom-right", tr = "top-right", tl = "top-left",
   header = "Line 1: _________\\nLine 2:\\nLine 3:.....................",
@@ -142,63 +120,27 @@ p <- maply_tag(
   tag_size = 2,
   move_edge = 0.5
 )
-first(p)
-
-
+p[[1]]
 
 # Themes
-
 library(ggplot2)
 
-p <- maply_tag(vft_1quad, theme = theme_gray())
-first(p)
+p <- maply_tag(small_vft, theme = theme_gray())
+p[[1]]
 
 # Tweaking the default theme of maply_tag()
 
 small_tweak <- theme_map_tag(legend.position = "bottom")
-p <- maply_tag(vft_1quad, theme = small_tweak)
-first(p)
+p <- maply_tag(small_vft, theme = small_tweak)
+p[[1]]
 
-large_tweak <- theme(
-  legend.position = "bottom",
-  legend.title = element_blank(),
-  legend.text = element_text(size = 8, colour = "red"),
-  text = element_text(size = 11, face = "bold.italic", colour = "white"),
-  plot.background = element_rect(fill = "black"),
-  plot.margin = margin(2, 2, 2, 2, "cm"),
-  strip.background = element_rect(fill = "darkgreen"),
-  strip.text = element_text(colour = "white"),
-  # make grid to dissapear by matching background colour
-  panel.background = element_rect(fill = "lightgreen"),
-  panel.grid.minor = element_line(colour = "black", linetype = "dotted"),
-  panel.grid.major = element_line(colour = "black")
-)
-p <- maply_tag(vft_1quad, theme = large_tweak)
-first(p)
+# For many more options see ?ggplot2::theme
 
-
-
-# Quadrat and subquadrat dimensitons
-
-# Adapting the dimensions of quadrat and subquadrat to the range of qx and qy
-# Creating new data set with QX and QY ranging 0-100
-smaller <- vft_1quad
-n <- nrow(smaller)
-smaller$QX <- sample(0:10, n, replace = TRUE)
-smaller$QY <- sample(0:10, n, replace = TRUE)
-
-p <- maply_tag(smaller, x_q = 10, x_sq = 2.5)
-first(p)
-
-# If limit-lines aren't visible, try extending the grid a little
-p <- maply_tag(smaller, x_q = 10, x_sq = 2.5, move_edge = 0.25)[1]
-first(p)
-}
 }
 \seealso{
 \code{\link[graphics:points]{graphics::points()}}, \code{\link[ggplot2:geom_point]{ggplot2::geom_point()}}, \code{\link[ggplot2:theme]{ggplot2::theme()}}
 \code{\link[=map_tag_header]{map_tag_header()}}, \code{\link[=theme_map_tag]{theme_map_tag()}}, \code{\link[fgeo.tool:add_subquad]{fgeo.tool::add_subquad()}},
-\code{\link[=paginate]{paginate()}}, \link[ggrepel:geom_text_repel]{ggrepel::geom_text_repel}.
+\code{\link[=paginate]{paginate()}}, \link[ggrepel:geom_text_repel]{ggrepel::geom_text_repel}, \code{\link[fgeo.tool:drop_twice_dead]{fgeo.tool::drop_twice_dead()}}.
 
 Other `maply_*` functions.: \code{\link{maply_sp_elev}}
 }

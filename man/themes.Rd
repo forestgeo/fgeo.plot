@@ -79,13 +79,13 @@ theme by changing the default arguments and also by passing more arguments to
 theme_map_tag()
 theme_map_quad()
 
-
 # Compose `theme_default()` with `g(f(x))` or `f(x) \%>\% g()`
-# NOT as ggplot2 themes. DONT DO THIS: ` f(x) + g()`.
-theme_default(map_gx_gy_elev(bciex::bci_elevation))
+theme_default(map_gx_gy_elev(fgeo.data::luquillo_elevation))
 
-map_gx_gy(bciex::bci12t7mini) \%>\% 
+map_gx_gy(fgeo.data::luquillo_tree5_random) \%>\%
   theme_default()
+ 
+# DON'T DO THIS: ` f(x) + g()`.
 }
 \seealso{
 \code{\link[ggplot2:theme]{ggplot2::theme()}}.

@@ -18,7 +18,7 @@ hide_legend_color(p)
 \code{hide_legend_color} hides the color legend, for example, of elevation lines.
 }
 \examples{
-elevation <- bciex::bci_elevation
+elevation <- fgeo.data::luquillo_elevation
 map <- map_gx_gy_elev(elevation)
 hide_axis_labels(map)
 

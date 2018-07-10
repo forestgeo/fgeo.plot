@@ -39,11 +39,12 @@
 #' 
 #' @export 
 #' @examples
-#' census <- fgeo.tool::pick_top(bciex::bci12s7mini, sp, 2)
-#' elevation <- bciex::bci_elevation
+#' # Small dataset with a few species for quick examples
+#' some_sp <- c("PREMON", "CASARB")
+#' census <- subset(fgeo.data::luquillo_tree5_random, sp %in% some_sp)
+#' elevation <- fgeo.data::luquillo_elevation
 #' 
 #' # Map on multiple pages ---------------------------------------------------
-#' 
 #' p1 <- maply_sp_elev(census)
 #' # Showing first map only.
 #' p1[[1]]
@@ -70,7 +71,6 @@
 #' p3[[1]]
 #' 
 #' # Map on a single page (maybe multiple panels) ----------------------------
-#' 
 #' # Simplest way to map elevation data only
 #' map_elev(elevation)
 #' 
@@ -79,39 +79,17 @@
 #' map_sp_elev(census, elevation)
 #' 
 #' # For maximum control, you can compose maps as you like
-#' 
-#' # Traditional: g(f(x))
+#' # Traditional sintax: g(f(x))
 #' contour_elev(map_gx_gy_elev(elevation))
 #' 
 #' # With the pipe: f(x) %>% g()
 #' map_gx_gy_elev(elevation) %>%
 #'   contour_elev()
-#'
-#' # With traditional sintax: As you add more functions readability decreases.
-#' theme_default(
-#'   wrap(
-#'     add_sp(
-#'       hide_legend_color(
-#'         hide_axis_labels(
-#'           label_elev(
-#'             contour_elev(
-#'               limit_gx_gy(
-#'                 map_gx_gy_elev(elevation), 
-#'                 xlim = c(0, 1200)
-#'               ),
-#'               contour_size = 0.5
-#'             ),
-#'             label_color = "red"
-#'           )
-#'         )
-#'       ), census, point_size = 5
-#'     ), "sp"
-#'   ), legend.position = "top"
-#' )
-#'
-#' # Same with the pipe: As you add more functions readability doesn't change
+#' 
+#' # The traditional sintax is hard to read when you compose multiple functions.
+#' # With the pipe, readability isn't affected by the number of functions.
 #' map_gx_gy_elev(elevation) %>%
-#'   limit_gx_gy(xlim = c(0, 1200)) %>%
+#'   limit_gx_gy(xlim = c(-100, 400)) %>%
 #'   contour_elev(contour_size = 0.5) %>%
 #'   label_elev(label_color = "red") %>%
 #'   hide_axis_labels() %>%
@@ -120,24 +98,24 @@
 #'   wrap("sp") %>%
 #'   theme_default(legend.position = "top")
 maply_sp_elev <- function(census,
-                           elevation = NULL,
-                           species = "all",
-                           fill = "black",
-                           shape = 21,
-                           point_size = 3,
-                           contour_size = 0.5,
-                           low = "blue",
-                           high = "red",
-                           hide_legend_color = FALSE,
-                           bins = NULL,
-                           label_elev = TRUE,
-                           label_size = 3,
-                           label_color = "grey",
-                           xyjust = 1,
-                           fontface = "italic",
-                           xlim = NULL,
-                           ylim = NULL,
-                           custom_theme = NULL) {
+                          elevation = NULL,
+                          species = "all",
+                          fill = "black",
+                          shape = 21,
+                          point_size = 3,
+                          contour_size = 0.5,
+                          low = "blue",
+                          high = "red",
+                          hide_legend_color = FALSE,
+                          bins = NULL,
+                          label_elev = TRUE,
+                          label_size = 3,
+                          label_color = "grey",
+                          xyjust = 1,
+                          fontface = "italic",
+                          xlim = NULL,
+                          ylim = NULL,
+                          custom_theme = NULL) {
   check_sp(census = census, species = species)
 
   species <- best_species(census, species)
@@ -194,7 +172,6 @@ map_sp_elev <- function(census,
                         custom_theme = NULL) {
   stopifnot(is.data.frame(census))
   fgeo.base::check_crucial_names(census, c("gx", "gy"))
-  
   
   # User doesn't provide elevation data
   if (is.null(elevation)) {
@@ -298,8 +275,8 @@ map_pure_elev <- function(elevation,
 #' @family map components.
 #' @export
 #' @examples 
-#' census <- fgeo.tool::pick_top(bciex::bci12s7mini, sp, 2)
-#' elevation <- bciex::bci_elevation
+#' census <- fgeo.tool::pick_top(fgeo.data::luquillo_stem5_random, sp, 2)
+#' elevation <- fgeo.data::luquillo_elevation
 #' 
 #' # Look alike but internally they are not. 
 #' base_elev <- map_gx_gy_elev(elevation)
@@ -342,11 +319,11 @@ map_gx_gy <- function(data) {
 #' @family map components.
 #' @export
 #' @examples 
-#' census <- bciex::bci12s7mini
+#' census <- fgeo.data::luquillo_stem5_random
 #' map <- map_gx_gy(census)
 #' limit_gx_gy(map, xlim = c(0, 500), c(0, 750))
 #' 
-#' elevation <- bciex::bci_elevation
+#' elevation <- fgeo.data::luquillo_elevation
 #' map <- map_gx_gy_elev(elevation)
 #' limit_gx_gy(map, xlim = c(0, 500), c(0, 750))
 limit_gx_gy <- function(p, xlim = NULL, ylim = NULL) {
@@ -376,7 +353,7 @@ limit_gx_gy <- function(p, xlim = NULL, ylim = NULL) {
 #' @family map components.
 #' @export
 #' @examples 
-#' census <- fgeo.tool::pick_top(bciex::bci12s7mini, sp, 2)
+#' census <- fgeo.tool::pick_top(fgeo.data::luquillo_stem5_random, sp, 2)
 #' 
 #' add_sp(map_gx_gy(census))
 #' 
@@ -421,7 +398,7 @@ add_sp <- function(p, data = NULL, fill = "sp", shape = 21, point_size = 3) {
 #' @family map components.
 #' @export
 #' @examples 
-#' elevation <- bciex::bci_elevation
+#' elevation <- fgeo.data::luquillo_elevation
 #' 
 #' base_elev <- map_gx_gy_elev(elevation)
 #' 
@@ -458,7 +435,7 @@ contour_elev <- function(p,
 #' @family map components.
 #' @export
 #' @examples 
-#' elevation <- bciex::bci_elevation
+#' elevation <- fgeo.data::luquillo_elevation
 #' 
 #' contour_elev(map_gx_gy_elev(elevation))
 #' 
@@ -542,7 +519,7 @@ text_at_max <- function(x,
 #' @seealso [ggplot2::labs()],  [ggplot2::guides()].
 #' @family map components.
 #' @examples 
-#' elevation <- bciex::bci_elevation
+#' elevation <- fgeo.data::luquillo_elevation
 #' map <- map_gx_gy_elev(elevation)
 #' hide_axis_labels(map)
 #' 
@@ -583,8 +560,8 @@ hide_legend_color <- function(p) {
 #' 
 #' @export
 #' @examples
-#' census <- bciex::bci12s7mini
-#' species <- c("hybapr", "faraoc")
+#' census <- fgeo.data::luquillo_stem5_random
+#' species <- c("PREMON", "CASARB")
 #' two_sp <- dplyr::filter(census, sp %in% species)
 #' 
 #' add_sp(map_gx_gy(two_sp))

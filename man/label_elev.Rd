@@ -21,7 +21,7 @@ elevation lines.}
 Label elevation lines.
 }
 \examples{
-elevation <- bciex::bci_elevation
+elevation <- fgeo.data::luquillo_elevation
 
 contour_elev(map_gx_gy_elev(elevation))
 

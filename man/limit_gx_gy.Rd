@@ -16,11 +16,11 @@ minimum and maximum limits of the vertical and horizontal coordinates.}
 Set the map limits.
 }
 \examples{
-census <- bciex::bci12s7mini
+census <- fgeo.data::luquillo_stem5_random
 map <- map_gx_gy(census)
 limit_gx_gy(map, xlim = c(0, 500), c(0, 750))
 
-elevation <- bciex::bci_elevation
+elevation <- fgeo.data::luquillo_elevation
 map <- map_gx_gy_elev(elevation)
 limit_gx_gy(map, xlim = c(0, 500), c(0, 750))
 }
