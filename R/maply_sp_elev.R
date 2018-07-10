@@ -275,25 +275,30 @@ map_pure_elev <- function(elevation,
 #' @family map components.
 #' @export
 #' @examples 
-#' census <- fgeo.tool::pick_top(fgeo.data::luquillo_stem5_random, sp, 2)
+#' # Small dataset with a few species for quick examples
+#' some_sp <- c("PREMON", "CASARB")
+#' census <- subset(fgeo.data::luquillo_tree5_random, sp %in% some_sp)
 #' elevation <- fgeo.data::luquillo_elevation
 #' 
-#' # Look alike but internally they are not. 
-#' base_elev <- map_gx_gy_elev(elevation)
+#' # These functions look alike but internally they are not.
 #' base_census <- map_gx_gy(census)
+#' base_census
+#' base_elevation <- map_gx_gy_elev(elevation)
+#' base_elevation
 #' 
-#' # Works
-#' contour_elev(base_elev)
-#' 
-#' # # Fails.
-#' # \dontrun{
-#' # add_sp(base_elev)
-#' # contour_elev(base_census)
-#' # }
-#' 
-#' # Supply the correct base
+#' # Use map_gx_gy() as a base for layers that need census data
 #' add_sp(base_census)
-#' contour_elev(base_elev)
+#' # This fails because the base plot has no information about elevation
+#' \dontrun{
+#'   contour_elev(base_census)
+#' }
+#' 
+#' # Use map_gx_gy_elev() as a base for layers that need elevation data
+#' contour_elev(base_elevation)
+#' # This fails because the base plot has no information about species
+#' \dontrun{
+#'   add_sp(base_elevation)
+#' }
 map_gx_gy_elev <- function(data) {
   data <- fgeo.tool::fgeo_elevation(data)
   ggplot(data, aes(gx, gy, z = elev))
@@ -319,13 +324,16 @@ map_gx_gy <- function(data) {
 #' @family map components.
 #' @export
 #' @examples 
-#' census <- fgeo.data::luquillo_stem5_random
-#' map <- map_gx_gy(census)
-#' limit_gx_gy(map, xlim = c(0, 500), c(0, 750))
+#' some_sp <- c("PREMON", "CASARB")
+#' census <- subset(fgeo.data::luquillo_stem5_random, sp %in% some_sp)
+#' p <- map_gx_gy(census)
+#' p
 #' 
-#' elevation <- fgeo.data::luquillo_elevation
-#' map <- map_gx_gy_elev(elevation)
-#' limit_gx_gy(map, xlim = c(0, 500), c(0, 750))
+#' limit_gx_gy(p, xlim = c(0, 100), ylim = c(0, 400))
+#' 
+#' fgeo.data::luquillo_elevation %>% 
+#'   map_gx_gy_elev() %>% 
+#'   limit_gx_gy(xlim = c(0, 100), ylim = c(0, 400))
 limit_gx_gy <- function(p, xlim = NULL, ylim = NULL) {
   # If user doesn't provide limits, set limits based on entire dataset
   data <- p[["data"]]
@@ -353,11 +361,14 @@ limit_gx_gy <- function(p, xlim = NULL, ylim = NULL) {
 #' @family map components.
 #' @export
 #' @examples 
-#' census <- fgeo.tool::pick_top(fgeo.data::luquillo_stem5_random, sp, 2)
+#' # Small dataset with a few species for quick examples
+#' some_sp <- c("PREMON", "CASARB")
+#' census <- subset(fgeo.data::luquillo_tree5_random, sp %in% some_sp)
+#' p <- map_gx_gy(census)
 #' 
-#' add_sp(map_gx_gy(census))
+#' add_sp(p)
 #' 
-#' add_sp(map_gx_gy(census), fill = "white", shape = 22, point_size = 4)
+#' add_sp(p, fill = "white", shape = 22, point_size = 4)
 add_sp <- function(p, data = NULL, fill = "sp", shape = 21, point_size = 3) {
   check_add_sp(p = p, data = data)
   
@@ -398,15 +409,9 @@ add_sp <- function(p, data = NULL, fill = "sp", shape = 21, point_size = 3) {
 #' @family map components.
 #' @export
 #' @examples 
-#' elevation <- fgeo.data::luquillo_elevation
-#' 
-#' base_elev <- map_gx_gy_elev(elevation)
-#' 
-#' contour_elev(base_elev)
-#' 
-#' contour_elev(
-#'   base_elev, contour_size = 0.5, low = "grey", high = "black", bins = 4
-#' )
+#' p <- map_gx_gy_elev(fgeo.data::luquillo_elevation)
+#' contour_elev(p)
+#' contour_elev(p, contour_size = 0.5, low = "grey", high = "black", bins = 4)
 contour_elev <- function(p, 
                          contour_size = 1, 
                          low = "blue", 
@@ -439,13 +444,10 @@ contour_elev <- function(p,
 #' 
 #' contour_elev(map_gx_gy_elev(elevation))
 #' 
-#' contour_elev(map_gx_gy_elev(elevation)) %>% 
-#'   # Pusing elevation label out of the plot area and removig color legend
-#'   limit_gx_gy(xlim = c(0, 1010), ylim = c(0, 510)) %>% 
-#'   label_elev(
-#'     label_size = 2, label_color = "black", xyjust = -0.25, fontface = "bold"
-#'   ) %>% 
-#'   hide_legend_color()
+#' elevation %>%
+#'   map_gx_gy_elev() %>% 
+#'   contour_elev() %>%
+#'   label_elev(label_size = 2, label_color = "black", xyjust = -0.25)
 label_elev <- function(p, 
                        label_size = 3,
                        label_color = "grey",
@@ -518,13 +520,16 @@ text_at_max <- function(x,
 #' 
 #' @seealso [ggplot2::labs()],  [ggplot2::guides()].
 #' @family map components.
+#' 
 #' @examples 
 #' elevation <- fgeo.data::luquillo_elevation
-#' map <- map_gx_gy_elev(elevation)
-#' hide_axis_labels(map)
+#' p <- map_gx_gy_elev(elevation)
+#' hide_axis_labels(p)
 #' 
-#' with_color_legend <- contour_elev(map_gx_gy_elev(elevation))
-#' hide_legend_color(with_color_legend)
+#' elevation %>% 
+#'   map_gx_gy_elev() %>% 
+#'   contour_elev() %>% 
+#'   hide_legend_color()
 #' @name hide 
 NULL
 
@@ -560,26 +565,22 @@ hide_legend_color <- function(p) {
 #' 
 #' @export
 #' @examples
-#' census <- fgeo.data::luquillo_stem5_random
-#' species <- c("PREMON", "CASARB")
-#' two_sp <- dplyr::filter(census, sp %in% species)
+#' some_sp <- c("PREMON", "CASARB")
+#' census <- subset(fgeo.data::luquillo_stem5_random, sp %in% some_sp)
+#' p <- add_sp(map_gx_gy(census))
+#' p
 #' 
-#' add_sp(map_gx_gy(two_sp))
-#' 
-#' add_sp(map_gx_gy(two_sp)) %>% 
-#'   wrap("sp")
+#' wrap(p, "sp")
 #' # Same
-#' add_sp(map_gx_gy(two_sp)) %>% 
-#'   wrap(~sp)
+#' wrap(p, ~sp)
 #' 
-#' add_sp(map_gx_gy(two_sp)) %>% 
-#'   wrap("status")
+#' wrap(p, c("sp", "status"))
 #' 
-#' add_sp(map_gx_gy(two_sp)) %>% 
+#' # Same, all in one step
+#' census %>% 
+#'   map_gx_gy() %>% 
+#'   add_sp() %>% 
 #'   wrap(c("sp", "status"))
-#' # Same
-#' add_sp(map_gx_gy(two_sp)) %>% 
-#'   wrap(~ sp + status)
 wrap <- function(p, facets, ...) {
   p + facet_wrap(facets, ...)
 }

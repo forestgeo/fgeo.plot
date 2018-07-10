@@ -154,13 +154,10 @@ elevation lines.</p></td>
     <pre class="examples"><div class='input'><span class='no'>elevation</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>fgeo.data</span><span class='kw ns'>::</span><span class='no'><a href='http://www.rdocumentation.org/packages/fgeo.data/topics/luquillo_elevation'>luquillo_elevation</a></span>
 
 <span class='fu'><a href='contour_elev.html'>contour_elev</a></span>(<span class='fu'><a href='map_gx_gy_elev.html'>map_gx_gy_elev</a></span>(<span class='no'>elevation</span>))</div><div class='img'><img src='label_elev-1.png' alt='' width='700' height='433' /></div><div class='input'>
-<span class='fu'><a href='contour_elev.html'>contour_elev</a></span>(<span class='fu'><a href='map_gx_gy_elev.html'>map_gx_gy_elev</a></span>(<span class='no'>elevation</span>)) <span class='kw'>%&gt;%</span>
-  <span class='co'># Pusing elevation label out of the plot area and removig color legend</span>
-  <span class='fu'><a href='limit_gx_gy.html'>limit_gx_gy</a></span>(<span class='kw'>xlim</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>0</span>, <span class='fl'>1010</span>), <span class='kw'>ylim</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>0</span>, <span class='fl'>510</span>)) <span class='kw'>%&gt;%</span>
-  <span class='fu'>label_elev</span>(
-    <span class='kw'>label_size</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>label_color</span> <span class='kw'>=</span> <span class='st'>"black"</span>, <span class='kw'>xyjust</span> <span class='kw'>=</span> -<span class='fl'>0.25</span>, <span class='kw'>fontface</span> <span class='kw'>=</span> <span class='st'>"bold"</span>
-  ) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='hide.html'>hide_legend_color</a></span>()</div><div class='img'><img src='label_elev-2.png' alt='' width='700' height='433' /></div></pre>
+<span class='no'>elevation</span> <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='map_gx_gy_elev.html'>map_gx_gy_elev</a></span>() <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='contour_elev.html'>contour_elev</a></span>() <span class='kw'>%&gt;%</span>
+  <span class='fu'>label_elev</span>(<span class='kw'>label_size</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>label_color</span> <span class='kw'>=</span> <span class='st'>"black"</span>, <span class='kw'>xyjust</span> <span class='kw'>=</span> -<span class='fl'>0.25</span>)</div><div class='img'><img src='label_elev-2.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

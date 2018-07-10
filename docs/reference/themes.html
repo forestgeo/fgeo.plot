@@ -223,149 +223,15 @@ inherits from <code>title</code>) left-aligned by default</p></td>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>theme_map_tag</span>()</div><div class='output co'>#&gt; List of 10
-#&gt;  $ axis.text       :List of 11
-#&gt;   ..$ family       : NULL
-#&gt;   ..$ face         : NULL
-#&gt;   ..$ colour       : NULL
-#&gt;   ..$ size         : num 12
-#&gt;   ..$ hjust        : NULL
-#&gt;   ..$ vjust        : NULL
-#&gt;   ..$ angle        : NULL
-#&gt;   ..$ lineheight   : NULL
-#&gt;   ..$ margin       : NULL
-#&gt;   ..$ debug        : NULL
-#&gt;   ..$ inherit.blank: logi FALSE
-#&gt;   ..- attr(*, "class")= chr [1:2] "element_text" "element"
-#&gt;  $ axis.ticks      : list()
-#&gt;   ..- attr(*, "class")= chr [1:2] "element_blank" "element"
-#&gt;  $ legend.title    : list()
-#&gt;   ..- attr(*, "class")= chr [1:2] "element_blank" "element"
-#&gt;  $ legend.position : chr "top"
-#&gt;  $ panel.background:List of 5
-#&gt;   ..$ fill         : chr "white"
-#&gt;   ..$ colour       : NULL
-#&gt;   ..$ size         : NULL
-#&gt;   ..$ linetype     : NULL
-#&gt;   ..$ inherit.blank: logi FALSE
-#&gt;   ..- attr(*, "class")= chr [1:2] "element_rect" "element"
-#&gt;  $ panel.grid.major:List of 6
-#&gt;   ..$ colour       : chr "black"
-#&gt;   ..$ size         : NULL
-#&gt;   ..$ linetype     : NULL
-#&gt;   ..$ lineend      : NULL
-#&gt;   ..$ arrow        : logi FALSE
-#&gt;   ..$ inherit.blank: logi FALSE
-#&gt;   ..- attr(*, "class")= chr [1:2] "element_line" "element"
-#&gt;  $ panel.grid.minor:List of 6
-#&gt;   ..$ colour       : chr "black"
-#&gt;   ..$ size         : NULL
-#&gt;   ..$ linetype     : chr "dotted"
-#&gt;   ..$ lineend      : NULL
-#&gt;   ..$ arrow        : logi FALSE
-#&gt;   ..$ inherit.blank: logi FALSE
-#&gt;   ..- attr(*, "class")= chr [1:2] "element_line" "element"
-#&gt;  $ plot.title      :List of 11
-#&gt;   ..$ family       : NULL
-#&gt;   ..$ face         : NULL
-#&gt;   ..$ colour       : NULL
-#&gt;   ..$ size         : num 20
-#&gt;   ..$ hjust        : NULL
-#&gt;   ..$ vjust        : NULL
-#&gt;   ..$ angle        : NULL
-#&gt;   ..$ lineheight   : NULL
-#&gt;   ..$ margin       : NULL
-#&gt;   ..$ debug        : NULL
-#&gt;   ..$ inherit.blank: logi FALSE
-#&gt;   ..- attr(*, "class")= chr [1:2] "element_text" "element"
-#&gt;  $ plot.subtitle   :List of 11
-#&gt;   ..$ family       : NULL
-#&gt;   ..$ face         : NULL
-#&gt;   ..$ colour       : NULL
-#&gt;   ..$ size         : num 12
-#&gt;   ..$ hjust        : NULL
-#&gt;   ..$ vjust        : NULL
-#&gt;   ..$ angle        : NULL
-#&gt;   ..$ lineheight   : NULL
-#&gt;   ..$ margin       : NULL
-#&gt;   ..$ debug        : NULL
-#&gt;   ..$ inherit.blank: logi FALSE
-#&gt;   ..- attr(*, "class")= chr [1:2] "element_text" "element"
-#&gt;  $ plot.caption    :List of 11
-#&gt;   ..$ family       : NULL
-#&gt;   ..$ face         : NULL
-#&gt;   ..$ colour       : NULL
-#&gt;   ..$ size         : num 8
-#&gt;   ..$ hjust        : NULL
-#&gt;   ..$ vjust        : NULL
-#&gt;   ..$ angle        : NULL
-#&gt;   ..$ lineheight   : NULL
-#&gt;   ..$ margin       : NULL
-#&gt;   ..$ debug        : NULL
-#&gt;   ..$ inherit.blank: logi FALSE
-#&gt;   ..- attr(*, "class")= chr [1:2] "element_text" "element"
-#&gt;  - attr(*, "class")= chr [1:2] "theme" "gg"
-#&gt;  - attr(*, "complete")= logi FALSE
-#&gt;  - attr(*, "validate")= logi TRUE</div><div class='input'><span class='fu'>theme_map_quad</span>()</div><div class='output co'>#&gt; List of 9
-#&gt;  $ axis.text        : list()
-#&gt;   ..- attr(*, "class")= chr [1:2] "element_blank" "element"
-#&gt;  $ axis.ticks.length: 'unit' num -0.1cm
-#&gt;   ..- attr(*, "valid.unit")= int 1
-#&gt;   ..- attr(*, "unit")= chr "cm"
-#&gt;  $ legend.position  : chr "none"
-#&gt;  $ panel.background :List of 5
-#&gt;   ..$ fill         : chr "white"
-#&gt;   ..$ colour       : NULL
-#&gt;   ..$ size         : NULL
-#&gt;   ..$ linetype     : NULL
-#&gt;   ..$ inherit.blank: logi FALSE
-#&gt;   ..- attr(*, "class")= chr [1:2] "element_rect" "element"
-#&gt;  $ panel.border     :List of 5
-#&gt;   ..$ fill         : logi NA
-#&gt;   ..$ colour       : chr "black"
-#&gt;   ..$ size         : NULL
-#&gt;   ..$ linetype     : NULL
-#&gt;   ..$ inherit.blank: logi FALSE
-#&gt;   ..- attr(*, "class")= chr [1:2] "element_rect" "element"
-#&gt;  $ panel.grid.major : list()
-#&gt;   ..- attr(*, "class")= chr [1:2] "element_blank" "element"
-#&gt;  $ panel.grid.minor : list()
-#&gt;   ..- attr(*, "class")= chr [1:2] "element_blank" "element"
-#&gt;  $ plot.title       :List of 11
-#&gt;   ..$ family       : NULL
-#&gt;   ..$ face         : NULL
-#&gt;   ..$ colour       : NULL
-#&gt;   ..$ size         : num 20
-#&gt;   ..$ hjust        : NULL
-#&gt;   ..$ vjust        : NULL
-#&gt;   ..$ angle        : NULL
-#&gt;   ..$ lineheight   : NULL
-#&gt;   ..$ margin       : NULL
-#&gt;   ..$ debug        : NULL
-#&gt;   ..$ inherit.blank: logi FALSE
-#&gt;   ..- attr(*, "class")= chr [1:2] "element_text" "element"
-#&gt;  $ plot.subtitle    :List of 11
-#&gt;   ..$ family       : NULL
-#&gt;   ..$ face         : NULL
-#&gt;   ..$ colour       : NULL
-#&gt;   ..$ size         : num 12
-#&gt;   ..$ hjust        : NULL
-#&gt;   ..$ vjust        : NULL
-#&gt;   ..$ angle        : NULL
-#&gt;   ..$ lineheight   : NULL
-#&gt;   ..$ margin       : NULL
-#&gt;   ..$ debug        : NULL
-#&gt;   ..$ inherit.blank: logi FALSE
-#&gt;   ..- attr(*, "class")= chr [1:2] "element_text" "element"
-#&gt;  - attr(*, "class")= chr [1:2] "theme" "gg"
-#&gt;  - attr(*, "complete")= logi FALSE
-#&gt;  - attr(*, "validate")= logi TRUE</div><div class='input'>
-<span class='co'># Compose `theme_default()` with `g(f(x))` or `f(x) %&gt;% g()`</span>
-<span class='fu'>theme_default</span>(<span class='fu'><a href='map_gx_gy_elev.html'>map_gx_gy_elev</a></span>(<span class='kw pkg'>fgeo.data</span><span class='kw ns'>::</span><span class='no'><a href='http://www.rdocumentation.org/packages/fgeo.data/topics/luquillo_elevation'>luquillo_elevation</a></span>))</div><div class='img'><img src='themes-1.png' alt='' width='700' height='433' /></div><div class='input'>
-<span class='fu'><a href='map_gx_gy_elev.html'>map_gx_gy</a></span>(<span class='kw pkg'>fgeo.data</span><span class='kw ns'>::</span><span class='no'>luquillo_tree5_random</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'>theme_default</span>()</div><div class='img'><img src='themes-2.png' alt='' width='700' height='433' /></div><div class='input'> 
-# DON'T DO THIS: ` f(x) + g()`.
-</div></pre>
+    <pre class="examples"><div class='input'><span class='fu'>class</span>(<span class='fu'>theme_map_tag</span>())</div><div class='output co'>#&gt; [1] "theme" "gg"   </div><div class='input'><span class='fu'>class</span>(<span class='fu'>theme_map_quad</span>())</div><div class='output co'>#&gt; [1] "theme" "gg"   </div><div class='input'>
+<span class='no'>census</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>fgeo.data</span><span class='kw ns'>::</span><span class='no'>luquillo_tree5_random</span>
+
+<span class='co'># Compose `theme_map_tag()` and `theme_map_quad()` with `+: e.g. `f(x) + g()`</span>
+<span class='fu'><a href='map_gx_gy_elev.html'>map_gx_gy</a></span>(<span class='no'>census</span>) + <span class='fu'>theme_map_quad</span>()</div><div class='img'><img src='themes-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='map_gx_gy_elev.html'>map_gx_gy</a></span>(<span class='no'>census</span>) + <span class='fu'>theme_map_tag</span>()</div><div class='img'><img src='themes-2.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='co'># Compose `theme_default()` as `g(f(x))` or `f(x) %&gt;% g()` (not `f(x) + g()`)</span>
+<span class='fu'>theme_default</span>(<span class='fu'><a href='map_gx_gy_elev.html'>map_gx_gy</a></span>(<span class='no'>census</span>))</div><div class='img'><img src='themes-3.png' alt='' width='700' height='433' /></div><div class='input'><span class='no'>census</span> <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='map_gx_gy_elev.html'>map_gx_gy</a></span>() <span class='kw'>%&gt;%</span>
+  <span class='fu'>theme_default</span>()</div><div class='img'><img src='themes-4.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

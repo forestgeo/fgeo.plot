@@ -11,16 +11,20 @@
 #' @seealso [ggplot2::theme()].
 #' @return A [ggplot2::theme()].
 #' @examples
-#' theme_map_tag()
-#' theme_map_quad()
+#' class(theme_map_tag())
+#' class(theme_map_quad())
 #' 
-#' # Compose `theme_default()` with `g(f(x))` or `f(x) %>% g()`
-#' theme_default(map_gx_gy_elev(fgeo.data::luquillo_elevation))
+#' census <- fgeo.data::luquillo_tree5_random
 #' 
-#' map_gx_gy(fgeo.data::luquillo_tree5_random) %>%
+#' # Compose `theme_map_tag()` and `theme_map_quad()` with `+: e.g. `f(x) + g()`
+#' map_gx_gy(census) + theme_map_quad()
+#' map_gx_gy(census) + theme_map_tag()
+#' 
+#' # Compose `theme_default()` as `g(f(x))` or `f(x) %>% g()` (not `f(x) + g()`)
+#' theme_default(map_gx_gy(census))
+#' census %>% 
+#'   map_gx_gy() %>% 
 #'   theme_default()
-#'  
-#' # DON'T DO THIS: ` f(x) + g()`.
 #' @name themes
 NULL
 

@@ -57,26 +57,22 @@ This function behaves like \code{\link[ggplot2:facet_wrap]{ggplot2::facet_wrap()
 allow using it as part of a pipe.
 }
 \examples{
-census <- fgeo.data::luquillo_stem5_random
-species <- c("PREMON", "CASARB")
-two_sp <- dplyr::filter(census, sp \%in\% species)
+some_sp <- c("PREMON", "CASARB")
+census <- subset(fgeo.data::luquillo_stem5_random, sp \%in\% some_sp)
+p <- add_sp(map_gx_gy(census))
+p
 
-add_sp(map_gx_gy(two_sp))
-
-add_sp(map_gx_gy(two_sp)) \%>\% 
-  wrap("sp")
+wrap(p, "sp")
 # Same
-add_sp(map_gx_gy(two_sp)) \%>\% 
-  wrap(~sp)
+wrap(p, ~sp)
 
-add_sp(map_gx_gy(two_sp)) \%>\% 
-  wrap("status")
+wrap(p, c("sp", "status"))
 
-add_sp(map_gx_gy(two_sp)) \%>\% 
+# Same, all in one step
+census \%>\% 
+  map_gx_gy() \%>\% 
+  add_sp() \%>\% 
   wrap(c("sp", "status"))
-# Same
-add_sp(map_gx_gy(two_sp)) \%>\% 
-  wrap(~ sp + status)
 }
 \seealso{
 \code{\link[ggplot2:facet_wrap]{ggplot2::facet_wrap()}}, \code{\link[ggplot2:facet_grid]{ggplot2::facet_grid()}}.

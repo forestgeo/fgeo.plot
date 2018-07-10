@@ -16,13 +16,16 @@ minimum and maximum limits of the vertical and horizontal coordinates.}
 Set the map limits.
 }
 \examples{
-census <- fgeo.data::luquillo_stem5_random
-map <- map_gx_gy(census)
-limit_gx_gy(map, xlim = c(0, 500), c(0, 750))
+some_sp <- c("PREMON", "CASARB")
+census <- subset(fgeo.data::luquillo_stem5_random, sp \%in\% some_sp)
+p <- map_gx_gy(census)
+p
 
-elevation <- fgeo.data::luquillo_elevation
-map <- map_gx_gy_elev(elevation)
-limit_gx_gy(map, xlim = c(0, 500), c(0, 750))
+limit_gx_gy(p, xlim = c(0, 100), ylim = c(0, 400))
+
+fgeo.data::luquillo_elevation \%>\% 
+  map_gx_gy_elev() \%>\% 
+  limit_gx_gy(xlim = c(0, 100), ylim = c(0, 400))
 }
 \seealso{
 \code{\link[=map_sp_elev]{map_sp_elev()}}, \code{\link[=maply_sp_elev]{maply_sp_elev()}}, \code{\link[ggplot2:coord_fixed]{ggplot2::coord_fixed()}}.
