@@ -19,20 +19,22 @@ has_class <- function(x, class) {
 # Common checks -----------------------------------------------------------
 
 check_unique_plotid <- function(x) {
-  msg <- "* Remove all but a single plot; then try again"
-  fgeo.base::check_unique(x, "plotid", "stop", msg)
+  msg <- paste0(
+    "Detected multiple plotid. Remove all but a single plot; then try again"
+  )
+  fgeo.base::flag_multiple(x, "plotid", abort, msg)
   invisible(x)
 }
 
 check_unique_censusid <- function(x) {
   msg <- "* Likely you should have removed all but one `censusid`"
-  fgeo.base::check_unique(x, "censusid", "warning", msg)
+  fgeo.base::flag_multiple(x, "censusid", warn, msg)
   invisible(x)
 }
 
 check_unique_tag <- function(x) {
   msg <- "* Likely you should have removed all but one `tag` per tree."
-  fgeo.base::check_unique(x, "tag", "warning", msg)
+  fgeo.base::flag_multiple(x, "tag", warn, msg)
   invisible(x)
 }
 
@@ -43,7 +45,7 @@ check_max_print <- function(p) {
       "The option max.print is too low: Printing only ", max_n, " plots",
       "\n* To allow printing n plots use `options(max.print = n)`."
     )
-    rlang::warn(msg)
+    warn(msg)
   }
 }
 
@@ -58,7 +60,7 @@ check_max_print <- function(x, var, times = NULL) {
         var, "`: ", nn, ".\n",
       "* Consider using `options(max.print = HIGHER-NUMBER)`."
     )
-    rlang::warn(msg)
+    warn(msg)
   }
 }
 
