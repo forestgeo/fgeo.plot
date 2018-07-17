@@ -179,7 +179,7 @@ test_that("wrong inputs get noticed", {
   dup_plotid <-   vft_1quad[1, ]
   dup_plotid$PlotID <- 999L
   w_dup_plotid <- dplyr::bind_rows(dup_plotid, vft_1quad)
-  expect_error(x <- maply_tag(w_dup_plotid), "Duplicated")
+  expect_error(x <- maply_tag(w_dup_plotid), "Remove all but a single plot")
 
   # warns if data has more than one CensusID"
   dup_cnsid <-   vft_1quad[1, ]

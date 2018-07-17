@@ -180,25 +180,25 @@ maply_tag <- function(vft,
 }
 
 check_maply_tag <- function(.vft,
-                          crucial,
-                          x_q,
-                          x_sq,
-                          y_q,
-                          y_sq,
-                          subquad_offset,
-                          bl,
-                          br,
-                          tr,
-                          tl,
-                          title_quad,
-                          show_page,
-                          show_subquad,
-                          point_shape,
-                          point_size,
-                          tag_size,
-                          header,
-                          theme,
-                          move_edge) {
+                            crucial,
+                            x_q,
+                            x_sq,
+                            y_q,
+                            y_sq,
+                            subquad_offset,
+                            bl,
+                            br,
+                            tr,
+                            tl,
+                            title_quad,
+                            show_page,
+                            show_subquad,
+                            point_shape,
+                            point_size,
+                            tag_size,
+                            header,
+                            theme,
+                            move_edge) {
   stopifnot(is.data.frame(.vft))
   if (dim(.vft)[1] == 0) {stop("Data can't have cero rows")}
   fgeo.base::check_crucial_names(.vft, crucial)
@@ -231,7 +231,7 @@ check_maply_tag <- function(.vft,
     "* Detected censuses: ", commas(unique(.vft$censusid)),
     collapse = ""
   )
-  fgeo.base::check_unique(.vft, "censusid", "warning", msg_cnsid)
+  fgeo.base::flag_multiple(.vft, "censusid", rlang::warn, msg_cnsid)
   
   check_max_print(.vft, "quadratname", times = 4)
 
