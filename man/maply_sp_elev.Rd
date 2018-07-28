@@ -6,22 +6,25 @@
 \alias{map_elev}
 \title{Map species and elevation data.}
 \usage{
-maply_sp_elev(census, elevation = NULL, species = "all", fill = "black",
-  shape = 21, point_size = 3, contour_size = 0.5, low = "blue",
-  high = "red", hide_legend_color = FALSE, bins = NULL,
-  label_elev = TRUE, label_size = 3, label_color = "grey", xyjust = 1,
-  fontface = "italic", xlim = NULL, ylim = NULL, custom_theme = NULL)
+maply_sp_elev(census, elevation = NULL, species = "all",
+  fill = "black", shape = 21, point_size = 3, contour_size = 0.5,
+  low = "blue", high = "red", hide_legend_color = FALSE,
+  bins = NULL, label_elev = TRUE, label_size = 3,
+  label_color = "grey", xyjust = 1, fontface = "italic",
+  xlim = NULL, ylim = NULL, custom_theme = NULL)
 
 map_sp_elev(census, elevation = NULL, fill = "black", shape = 21,
   wrap = TRUE, point_size = 3, contour_size = 0.5, low = "blue",
   high = "red", hide_legend_color = FALSE, bins = NULL,
-  label_elev = TRUE, label_size = 3, label_color = "grey", xyjust = 1,
-  fontface = "italic", xlim = NULL, ylim = NULL, custom_theme = NULL)
+  label_elev = TRUE, label_size = 3, label_color = "grey",
+  xyjust = 1, fontface = "italic", xlim = NULL, ylim = NULL,
+  custom_theme = NULL)
 
 map_elev(elevation, contour_size = 0.5, low = "blue", high = "red",
   hide_legend_color = FALSE, bins = NULL, label_elev = TRUE,
-  label_size = 3, label_color = "grey", xyjust = 1, fontface = "italic",
-  xlim = NULL, ylim = NULL, custom_theme = NULL)
+  label_size = 3, label_color = "grey", xyjust = 1,
+  fontface = "italic", xlim = NULL, ylim = NULL,
+  custom_theme = NULL)
 }
 \arguments{
 \item{census}{A dataframe; specifically, a ForestGEO's census.}

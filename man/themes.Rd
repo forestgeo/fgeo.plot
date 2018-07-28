@@ -10,20 +10,23 @@
 theme_map_tag(panel.grid.major = element_line(colour = "black"),
   panel.grid.minor = element_line(colour = "black", linetype = "dotted"),
   panel.background = element_rect(fill = "white"),
-  plot.title = element_text(size = 20), plot.subtitle = element_text(size =
-  12), plot.caption = element_text(size = 8), legend.position = "top",
+  plot.title = element_text(size = 20),
+  plot.subtitle = element_text(size = 12),
+  plot.caption = element_text(size = 8), legend.position = "top",
   legend.title = element_blank(), axis.ticks = element_blank(),
   axis.text = element_text(size = 12), ...)
 
 theme_map_quad(axis.text = element_blank(),
   panel.background = element_rect(fill = "white"),
-  panel.grid.minor = element_blank(), panel.grid.major = element_blank(),
-  legend.position = "none", plot.title = element_text(size = 20),
+  panel.grid.minor = element_blank(),
+  panel.grid.major = element_blank(), legend.position = "none",
+  plot.title = element_text(size = 20),
   plot.subtitle = element_text(size = 12),
   panel.border = element_rect(colour = "black", fill = NA),
   axis.ticks.length = unit(-0.1, "cm"), ...)
 
-theme_default(p, panel.grid.minor = element_line(linetype = "dashed"), ...)
+theme_default(p, panel.grid.minor = element_line(linetype = "dashed"),
+  ...)
 }
 \arguments{
 \item{panel.grid.major}{major grid lines (\code{element_line}; inherits from
@@ -59,8 +62,8 @@ inherits from \code{title}) left-aligned by default}
 \item{...}{Additional arguments passed to  \code{\link[ggplot2:theme]{ggplot2::theme()}}.}
 
 \item{panel.border}{border around plotting area, drawn on top of plot so that
-  it covers tick marks and grid lines. This should be used with
-  \code{fill=NA}
+it covers tick marks and grid lines. This should be used with
+\code{fill=NA}
 (\code{element_rect}; inherits from \code{rect})}
 
 \item{axis.ticks.length}{length of tick marks (\code{unit})}
