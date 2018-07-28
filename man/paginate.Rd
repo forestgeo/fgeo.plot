@@ -4,7 +4,8 @@
 \alias{paginate}
 \title{Label the four divisions of a quadrat -- each with four subquadrats.}
 \usage{
-paginate(x, bl = 1, br = 2, tr = 3, tl = 4, subquad_offset = NULL)
+paginate(x, bl = 1, br = 2, tr = 3, tl = 4,
+  subquad_offset = NULL)
 }
 \arguments{
 \item{x}{A dataframe with the variable \code{subquadrat}.}
