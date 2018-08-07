@@ -14,6 +14,11 @@
 #' plot(habitats)
 #' }
 plot.fgeo_habitat <- function(x, ...) {
+  # Use quadrats' center instead of quadrats' bottom-left corner
+  gridsize <- fgeo.tool::extract_gridsize(x)
+  x$gx <- x$gx + (gridsize / 2)
+  x$gy <- x$gy + (gridsize / 2)
+  
   ggplot(x, aes(x = gx, y = gy)) +
     geom_raster(aes(fill = .data$habitats)) + 
     coord_fixed() +
