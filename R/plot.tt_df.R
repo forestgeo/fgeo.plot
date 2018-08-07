@@ -24,7 +24,9 @@ plot.tt_df <- function(x, ...) {
     facet_wrap(vars(.data$habitat)) +
     labs(
       title = "Probability of species distribution by habitat",
-      x = "species", 
+      x = "species",
+      y = "probability",
+      fill = "distribution",
       caption = "The number on each bar indicates the count of stems."
     ) +
     coord_flip()
