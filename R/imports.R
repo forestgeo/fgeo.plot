@@ -1,9 +1,8 @@
 # Import external functions and avoid R CMD check note --------------------
 
-# Not importing dplyr::filter() because it may conflict with stats::filter()
+#' @import ggplot2
 #' @importFrom dplyr group_by ungroup mutate select %>% 
 #' @importFrom rlang abort warn inform
-#' @import ggplot2
 #' @importFrom ggrepel geom_text_repel
 #' @importFrom stats setNames
 NULL

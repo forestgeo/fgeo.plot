@@ -18,13 +18,15 @@
 #' plot(tt_df)
 #' }
 plot.tt_df <- function(x, ...) {
-  ggplot(x, aes(sp, probability)) + 
-    geom_col(aes(fill = distribution), position = "dodge") +
-    geom_label(aes(label = stem_count)) +
-    facet_wrap(vars(habitat)) +
+  ggplot(x, aes(sp, .data$probability)) + 
+    geom_col(aes(fill = .data$distribution), position = "dodge") +
+    geom_label(aes(label = .data$stem_count)) +
+    facet_wrap(vars(.data$habitat)) +
     labs(
       title = "Probability of species distribution by habitat",
-      x = "species", 
+      x = "species",
+      y = "probability",
+      fill = "distribution",
       caption = "The number on each bar indicates the count of stems."
     ) +
     coord_flip()
