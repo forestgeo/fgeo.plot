@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Objects exported from other packages — reexports • fgeo.map</title>
+<title>Plot objects of class "tt_df". — plot.tt_df • fgeo.map</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -30,13 +30,9 @@
 
 
 
-<meta property="og:title" content="Objects exported from other packages — reexports" />
+<meta property="og:title" content="Plot objects of class "tt_df". — plot.tt_df" />
 
-<meta property="og:description" content="These objects are imported from other packages. Follow the links
-below to see their documentation.
-
-  dplyr%&amp;gt;%
-" />
+<meta property="og:description" content="Plot objects of class &quot;tt_df&quot;." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -110,28 +106,59 @@ below to see their documentation.
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Objects exported from other packages</h1>
-    <small class="dont-index">Source: <a href='https://github.com/forestgeo/fgeo.map/blob/master/R/imports.R'><code>R/imports.R</code></a></small>
-    <div class="hidden name"><code>reexports.Rd</code></div>
+    <h1>Plot objects of class "tt_df".</h1>
+    <small class="dont-index">Source: <a href='https://github.com/forestgeo/fgeo.map/blob/master/R/plot.R'><code>R/plot.R</code></a></small>
+    <div class="hidden name"><code>plot.tt_df.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>These objects are imported from other packages. Follow the links
-below to see their documentation.</p>
-<dl class='dl-horizontal'>
-  <dt>dplyr</dt><dd><p><code>%&gt;%</code></p></dd>
-</dl>
+    <p>Plot objects of class "tt_df".</p>
     
     </div>
 
-        
+    <pre class="usage"><span class='co'># S3 method for tt_df</span>
+<span class='fu'>plot</span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
+    
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>x</th>
+      <td><p>An object of class "tt_df".</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>Other arguments passed to methods.</p></td>
+    </tr>
+    </table>
+    
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
+    <p>A ggplot object.</p>
+    
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><span class='co'># NOT RUN {</span>
+<span class='fu'>library</span>(<span class='no'>fgeo.tool</span>)
+<span class='fu'>library</span>(<span class='no'>fgeo.habitat</span>)
+<span class='no'>census</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/fgeo.tool/topics/reexports'>filter</a></span>(<span class='no'>luquillo_top3_sp</span>, <span class='no'>status</span> <span class='kw'>==</span> <span class='st'>"A"</span>, <span class='no'>dbh</span> <span class='kw'>&gt;=</span> <span class='fl'>10</span>)
+<span class='no'>habitat</span> <span class='kw'>&lt;-</span> <span class='no'>luquillo_habitat</span>
+<span class='no'>species</span> <span class='kw'>&lt;-</span> <span class='fu'>c</span>(<span class='st'>"CASARB"</span>, <span class='st'>"PREMON"</span>, <span class='st'>"SLOBER"</span>)
+
+<span class='no'>tt_df</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/fgeo.tool/topics/to_df'>to_df</a></span>(<span class='fu'><a href='http://www.rdocumentation.org/packages/fgeo.habitat/topics/tt_test'>tt_test</a></span>(<span class='no'>census</span>, <span class='no'>species</span>, <span class='no'>habitat</span>))
+<span class='fu'>plot</span>(<span class='no'>tt_df</span>)
+<span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-                </ul>
+      <li><a href="#arguments">Arguments</a></li>
+      
+      <li><a href="#value">Value</a></li>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
 </div>
