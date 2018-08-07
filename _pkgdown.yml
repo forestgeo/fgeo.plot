@@ -64,3 +64,6 @@ reference:
     contents:
       - vft_1quad
 
+  - title: "Generics"
+    contents:
+      - plot.tt_df

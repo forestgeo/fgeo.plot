@@ -130,19 +130,31 @@ allow using it as part of a pipe.</p>
     </tr>
     <tr>
       <th>facets</th>
-      <td><p>Either a formula or character vector. Use either a
-one sided formula, <code>~a + b</code>, or a character vector, <code>c("a", "b")</code>.</p></td>
+      <td><p>A set of variables or expressions quoted by <code>vars()</code>
+and defining faceting groups on the rows or columns dimension.
+The variables can be named (the names are passed to <code>labeller</code>).</p>
+<p>For compatibility with the classic interface, can also be a
+formula or character vector. Use either a one sided formula, `~a</p><ul>
+<li><p>b<code>, or a character vector,</code>c("a", "b")`.</p></li>
+</ul></td>
     </tr>
     <tr>
       <th>...</th>
       <td><p>Arguments passed on to <code><a href='http://www.rdocumentation.org/packages/ggplot2/topics/facet_wrap'>ggplot2::facet_wrap</a></code></p><dl class='dl-horizontal'>
-  <dt>facets</dt><dd><p>Either a formula or character vector. Use either a
-one sided formula, <code>~a + b</code>, or a character vector, <code>c("a", "b")</code>.</p></dd>
+  <dt>facets</dt><dd><p>A set of variables or expressions quoted by <code>vars()</code>
+and defining faceting groups on the rows or columns dimension.
+The variables can be named (the names are passed to <code>labeller</code>).
+
+For compatibility with the classic interface, can also be a
+formula or character vector. Use either a one sided formula, `~a
+<ul>
+<li><p>b<code>, or a character vector,</code>c("a", "b")`.</p></li>
+</ul></p></dd>
   <dt>nrow</dt><dd><p>Number of rows and columns.</p></dd>
   <dt>ncol</dt><dd><p>Number of rows and columns.</p></dd>
-  <dt>scales</dt><dd><p>should Scales be fixed (<code>"fixed"</code>, the default),
+  <dt>scales</dt><dd><p>Should scales be fixed (<code>"fixed"</code>, the default),
 free (<code>"free"</code>), or free in one dimension (<code>"free_x"</code>,
-<code>"free_y"</code>).</p></dd>
+<code>"free_y"</code>)?</p></dd>
   <dt>shrink</dt><dd><p>If <code>TRUE</code>, will shrink scales to fit output of
 statistics, not raw data. If <code>FALSE</code>, will be range of raw data
 before statistical summary.</p></dd>
@@ -153,7 +165,7 @@ one with formulae of the type <code>~cyl + am</code>. Each output
 column gets displayed as one separate line in the strip
 label. This function should inherit from the "labeller" S3 class
 for compatibility with <code>labeller()</code>. See
-<code>label_value</code> for more details and pointers to other
+<code>label_value()</code> for more details and pointers to other
 options.</p></dd>
   <dt>as.table</dt><dd><p>If <code>TRUE</code>, the default, the facets are laid out like
 a table with highest values at the bottom-right. If <code>FALSE</code>, the
@@ -166,12 +178,12 @@ labels will be displayed to the left. Can also be set to
   <dt>drop</dt><dd><p>If <code>TRUE</code>, the default, all factor levels not used in the
 data will automatically be dropped. If <code>FALSE</code>, all factor levels
 will be shown, regardless of whether or not they appear in the data.</p></dd>
-  <dt>dir</dt><dd><p>Direction: either "h" for horizontal, the default, or "v", for
-vertical.</p></dd>
+  <dt>dir</dt><dd><p>Direction: either <code>"h"</code> for horizontal, the default, or <code>"v"</code>,
+for vertical.</p></dd>
   <dt>strip.position</dt><dd><p>By default, the labels are displayed on the top of
 the plot. Using <code>strip.position</code> it is possible to place the labels on
 either of the four sides by setting <code>strip.position = c("top",
-"bottom", "left", "right")</code></p></dd>
+  "bottom", "left", "right")</code></p></dd>
 </dl></td>
     </tr>
     </table>
@@ -187,7 +199,7 @@ either of the four sides by setting <code>strip.position = c("top",
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='no'>some_sp</span> <span class='kw'>&lt;-</span> <span class='fu'>c</span>(<span class='st'>"PREMON"</span>, <span class='st'>"CASARB"</span>)
-<span class='no'>census</span> <span class='kw'>&lt;-</span> <span class='fu'>subset</span>(<span class='kw pkg'>fgeo.data</span><span class='kw ns'>::</span><span class='no'>luquillo_stem5_random</span>, <span class='no'>sp</span> <span class='kw'>%in%</span> <span class='no'>some_sp</span>)
+<span class='no'>census</span> <span class='kw'>&lt;-</span> <span class='fu'>subset</span>(<span class='kw pkg'>fgeo.data</span><span class='kw ns'>::</span><span class='no'><a href='http://www.rdocumentation.org/packages/fgeo.data/topics/census_luquillo'>luquillo_stem5_random</a></span>, <span class='no'>sp</span> <span class='kw'>%in%</span> <span class='no'>some_sp</span>)
 <span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='add_sp.html'>add_sp</a></span>(<span class='fu'><a href='map_gx_gy_elev.html'>map_gx_gy</a></span>(<span class='no'>census</span>))
 <span class='no'>p</span></div><div class='img'><img src='wrap-1.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='fu'>wrap</span>(<span class='no'>p</span>, <span class='st'>"sp"</span>)</div><div class='img'><img src='wrap-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># Same</span>
