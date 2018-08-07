@@ -15,6 +15,6 @@
 #' }
 plot.fgeo_habitat <- function(x, ...) {
   ggplot(x, aes(x = gx, y = gy)) +
-    geom_raster(aes(fill = habitats)) + 
+    geom_raster(aes(fill = .data$habitats)) + 
     coord_fixed()
 }
