@@ -2,6 +2,7 @@ Anudeep
 br
 colour
 CTFS
+df
 ds
 english
 Esufali
@@ -16,7 +17,6 @@ ggrepel
 http
 Jafferjee
 Kenfack
-knitr
 labeller
 Lepore
 luquillo
@@ -28,7 +28,6 @@ Pre
 quadrat
 quadrat's
 quadrats
-rmarkdown
 Shameema
 Sinh
 sp
@@ -37,10 +36,7 @@ subquadrat
 subquadrat's
 subquadrats
 tl
-toc
+tt
 vft
 ViewFullTable
 ViewFullTables
-VignetteEncoding
-VignetteEngine
-VignetteIndexEntry

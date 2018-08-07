@@ -67,3 +67,4 @@ reference:
   - title: "Generics"
     contents:
       - plot.tt_df
+      - plot.fgeo_habitat
