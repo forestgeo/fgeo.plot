@@ -19,6 +19,8 @@ plot.fgeo_habitat <- function(x, ...) {
   x$gx <- x$gx + (gridsize / 2)
   x$gy <- x$gy + (gridsize / 2)
   
+  x$habitats <- as.factor(x$habitats)
+  
   ggplot(x, aes(x = gx, y = gy)) +
     geom_raster(aes(fill = .data$habitats)) + 
     coord_fixed() +
