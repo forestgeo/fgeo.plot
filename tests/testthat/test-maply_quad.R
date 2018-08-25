@@ -49,28 +49,3 @@ test_that("returns a valid ggplot2 theme", {
   expect_s3_class(theme_map_quad(), "gg")
 })
 
-
-
-context("check_unique_plotid")
-
-test_that("works as expected", {
-  expect_silent(check_unique_plotid(data.frame(plotid = c(1, 1))))
-  expect_error(check_unique_plotid(data.frame(plotid = c(1, 2))))
-})
-
-
-
-context("check_unique_censusid")
-
-test_that("works as expected", {
-  expect_silent(
-    check_unique_censusid(data.frame(censusid = c(1, 1)))
-  )
-  expect_warning(
-    check_unique_censusid(
-      data.frame(censusid = c(1, 2))
-    )
-  )
-})
-
-

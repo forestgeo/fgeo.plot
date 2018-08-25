@@ -1,5 +1,3 @@
-# Common functions --------------------------------------------------------
-
 commas <- function(...) {
   paste0(..., collapse = ", ")
 }
@@ -14,39 +12,6 @@ min0 <- function(...) {
 
 has_class <- function(x, class) {
   any(grepl(class, class(x)))
-}
-
-# Common checks -----------------------------------------------------------
-
-check_unique_plotid <- function(x) {
-  msg <- paste0(
-    "Detected multiple plotid. Remove all but a single plot; then try again"
-  )
-  fgeo.base::flag_multiple(x, "plotid", abort, msg)
-  invisible(x)
-}
-
-check_unique_censusid <- function(x) {
-  msg <- "* Likely you should have removed all but one `censusid`"
-  fgeo.base::flag_multiple(x, "censusid", warn, msg)
-  invisible(x)
-}
-
-check_unique_tag <- function(x) {
-  msg <- "* Likely you should have removed all but one `tag` per tree."
-  fgeo.base::flag_multiple(x, "tag", warn, msg)
-  invisible(x)
-}
-
-check_max_print <- function(p) {
-  max_n <- getOption("max.print")
-  if (!max_n >= length(p)) {
-    msg <- paste0(
-      "The option max.print is too low: Printing only ", max_n, " plots",
-      "\n* To allow printing n plots use `options(max.print = n)`."
-    )
-    warn(msg)
-  }
 }
 
 check_max_print <- function(x, var, times = NULL) {
@@ -64,3 +29,7 @@ check_max_print <- function(x, var, times = NULL) {
   }
 }
 
+warn_multiple_plotid <- function(x) {
+  msg <- "Detected multiple plotid. Remove all but a single plot; then try again"
+  flag_if(x, "plotid", is_multiple, abort, msg)
+}

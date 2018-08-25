@@ -201,7 +201,7 @@ check_maply_tag <- function(.vft,
                             move_edge) {
   stopifnot(is.data.frame(.vft))
   if (dim(.vft)[1] == 0) {stop("Data can't have cero rows")}
-  fgeo.base::check_crucial_names(.vft, crucial)
+  check_crucial_names(.vft, crucial)
   stopifnot(is.numeric(x_q))
   stopifnot(is.numeric(x_sq))
   stopifnot(is.numeric(y_q))
@@ -224,14 +224,14 @@ check_maply_tag <- function(.vft,
   arg_theme_is_of_class_theme <- any(grepl("theme", class(theme)))
   stopifnot(arg_theme_is_of_class_theme)
   stopifnot(is.numeric(move_edge))
-  check_unique_plotid(.vft)
+  warn_multiple_plotid(.vft)
   
   msg_cnsid <- paste0(
     "* Likely you want only the last 2 censuses\n",
     "* Detected censuses: ", commas(unique(.vft$censusid)),
     collapse = ""
   )
-  fgeo.base::flag_multiple(.vft, "censusid", rlang::warn, msg_cnsid)
+  flag_if(.vft, "censusid", is_multiple, warn, msg_cnsid)
   
   check_max_print(.vft, "quadratname", times = 4)
 
@@ -336,7 +336,7 @@ prep_maply_tag <- function(sbst,
 #' }
 paginate <- function(x, bl = 1, br = 2, tr = 3, tl = 4, subquad_offset = NULL) {
   stopifnot(is.data.frame(x))
-  fgeo.base::check_crucial_names(x, "subquadrat")
+  check_crucial_names(x, "subquadrat")
 
   if (!is.null(subquad_offset)) {
     stopifnot(subquad_offset == -1)

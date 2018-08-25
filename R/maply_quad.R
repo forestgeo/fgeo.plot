@@ -139,9 +139,11 @@ check_maply_quad <- function(vft,
   arg_theme_has_class_theme <- any(grepl("theme", class(theme)))
   stopifnot(arg_theme_has_class_theme)
   stopifnot(is.character(title_quad), is.character(header))
-  fgeo.base::check_crucial_names(vft, core)
-  check_unique_plotid(vft)
-  check_unique_censusid(vft)
+  check_crucial_names(vft, core)
+  warn_multiple_plotid(vft)
+  msg <- "censusid: Multiple values of treeid were detected."
+  flag_if(vft, "censusid", is_multiple, warn, msg)
+  
   invisible(vft)
 }
 
