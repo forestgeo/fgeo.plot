@@ -224,7 +224,7 @@ check_maply_tag <- function(.vft,
   arg_theme_is_of_class_theme <- any(grepl("theme", class(theme)))
   stopifnot(arg_theme_is_of_class_theme)
   stopifnot(is.numeric(move_edge))
-  check_unique_plotid(.vft)
+  warn_multiple_plotid(.vft)
   
   msg_cnsid <- paste0(
     "* Likely you want only the last 2 censuses\n",
