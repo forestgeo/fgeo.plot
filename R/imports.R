@@ -5,6 +5,7 @@
 #' @importFrom rlang abort warn inform
 #' @importFrom ggrepel geom_text_repel
 #' @importFrom stats setNames
+#' @importFrom fgeo.base is_multiple flag_if
 NULL
 
 #' @export

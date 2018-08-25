@@ -20,21 +20,19 @@ has_class <- function(x, class) {
 
 check_unique_plotid <- function(x) {
   msg <- "Detected multiple plotid. Remove all but a single plot; then try again"
-  fgeo.base::flag_multiple_f("plotid", abort)(x, msg)
+  fgeo.base::flag_if(x, "plotid", fgeo.base::is_multiple, abort, msg)
   invisible(x)
 }
 
 check_unique_censusid <- function(x) {
   msg <- "* Likely you should have removed all but one `censusid`"
-  warn_if_multiple_censusid(x, msg)
+  flag_if(x, "censusid", is_multiple, warn, msg)
   invisible(x)
 }
 
-warn_if_multiple_censusid <- fgeo.base::flag_multiple_f("censusid", warn)
-
 check_unique_tag <- function(x) {
   msg <- "* Likely you should have removed all but one `tag` per tree."
-  fgeo.base::flag_multiple_f("tag", warn)(x, msg)
+  flag_if(x, "tag", is_multiple, warn, msg)
   invisible(x)
 }
 
