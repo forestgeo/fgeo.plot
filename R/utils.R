@@ -20,7 +20,7 @@ has_class <- function(x, class) {
 
 check_unique_plotid <- function(x) {
   msg <- "Detected multiple plotid. Remove all but a single plot; then try again"
-  fgeo.base::flag_if(x, "plotid", fgeo.base::is_multiple, abort, msg)
+  flag_if(x, "plotid", is_multiple, abort, msg)
   invisible(x)
 }
 
