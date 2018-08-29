@@ -11,7 +11,7 @@ contour_elev(p, contour_size = 1, low = "blue", high = "red",
 \item{p}{A ggplot.}
 
 \item{contour_size}{A number giving the size of the contour of elevation
-lines. Passed to \code{\link[ggplot2:stat_contour]{ggplot2::stat_contour()}}.}
+lines. Passed to \code{ggplot2::stat_contour()} (see \code{\link[ggplot2:geom_contour]{ggplot2::geom_contour()}}).}
 
 \item{low, high}{A string giving a color of the elevation lines representing
 low and high elevation.}
@@ -28,7 +28,7 @@ contour_elev(p, contour_size = 0.5, low = "grey", high = "black", bins = 4)
 }
 \seealso{
 \code{\link[=maply_sp_elev]{maply_sp_elev()}}, \code{\link[=map_sp_elev]{map_sp_elev()}}, \code{\link[=map_elev]{map_elev()}},
-\code{\link[ggplot2:stat_contour]{ggplot2::stat_contour()}}.
+\code{\link[ggplot2:geom_contour]{ggplot2::geom_contour()}}.
 
 Other map components.: \code{\link{add_sp}},
   \code{\link{hide}}, \code{\link{label_elev}},

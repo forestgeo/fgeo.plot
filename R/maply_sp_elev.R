@@ -399,12 +399,12 @@ add_sp <- function(p, data = NULL, fill = "sp", shape = 21, point_size = 3) {
 #' 
 #' @template p
 #' @param contour_size A number giving the size of the contour of elevation
-#'   lines. Passed to [ggplot2::stat_contour()].
+#'   lines. Passed to `ggplot2::stat_contour()` (see [ggplot2::geom_contour()]).
 #' @template low_high
 #' @param bins A number giving the number of elevation lines to map.
 #' 
 #' @seealso [maply_sp_elev()], [map_sp_elev()], [map_elev()], 
-#'   [ggplot2::stat_contour()].
+#'   [ggplot2::geom_contour()].
 #' 
 #' @family map components.
 #' @export
