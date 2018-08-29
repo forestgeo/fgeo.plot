@@ -46,7 +46,7 @@ different color.}
 \code{\link[graphics:points]{graphics::points()}}). Passed to \code{\link[ggplot2:geom_point]{ggplot2::geom_point()}}.}
 
 \item{contour_size}{A number giving the size of the contour of elevation
-lines. Passed to \code{\link[ggplot2:stat_contour]{ggplot2::stat_contour()}}.}
+lines. Passed to \code{ggplot2::stat_contour()} (see \code{\link[ggplot2:geom_contour]{ggplot2::geom_contour()}}).}
 
 \item{low}{A string giving a color of the elevation lines representing
 low and high elevation.}
