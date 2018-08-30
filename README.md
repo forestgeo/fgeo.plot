@@ -16,8 +16,8 @@ status](https://www.r-pkg.org/badges/version/fgeo.map)](https://cran.r-project.o
 [Install all **fgeo** packages in one
 step](https://forestgeo.github.io/fgeo/index.html#installation)
 
-    # install.packages("remotes")
-    remotes::install_github("forestgeo/fgeo.map")
+    # install.packages("devtools")
+    devtools::install_github("forestgeo/fgeo.map")
 
 For details on how to install packages from GitHub, see [this
 article](https://goo.gl/dQKEeg).
