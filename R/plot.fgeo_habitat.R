@@ -5,6 +5,8 @@
 #'
 #' @return An object of class "ggplot".
 #' @export
+#' 
+#' @family Methods for common generics
 #'
 #' @examples
 #' \dontrun{

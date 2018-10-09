@@ -64,6 +64,6 @@ reference:
     contents:
       - vft_1quad
 
-  - title: "Generics"
+  - title: "Methods for common generics"
     contents:
       - plot.fgeo_habitat
