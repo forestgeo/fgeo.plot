@@ -25,3 +25,4 @@ habitats <- fgeo_habitat(elev_list, gridsize = 20, n = 4)
 plot(habitats)
 }
 }
+\concept{Methods for common generics}
