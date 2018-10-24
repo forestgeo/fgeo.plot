@@ -146,7 +146,11 @@ p3[[1]]
 \code{\link[=map_gx_gy_elev]{map_gx_gy_elev()}}, \code{\link[=limit_gx_gy]{limit_gx_gy()}}, \code{\link[=add_sp]{add_sp()}}, \code{\link[=contour_elev]{contour_elev()}},
 \code{\link[=label_elev]{label_elev()}}, \code{\link[=hide]{hide()}}, \code{\link[=wrap]{wrap()}}
 
+<<<<<<< HEAD:man/plot_each_species.Rd
 Other functions to create a list of plots: \code{\link{plot_dbh_bubles_by_quadrat}},
+=======
+Other functions to create a list of plots: \code{\link{maply_quad}},
+>>>>>>> 156c4f0258961b7b9d7ca3e31b49f478f7a6765e:man/maply_sp_elev.Rd
   \code{\link{plot_tag_status_by_subquadrat}}
 }
 \concept{functions to create a list of plots}

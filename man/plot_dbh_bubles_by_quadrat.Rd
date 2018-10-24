@@ -91,7 +91,11 @@ plot_dbh_bubles_by_quadrat(
 )
 }
 \seealso{
+<<<<<<< HEAD:man/plot_dbh_bubles_by_quadrat.Rd
 Other functions to create a list of plots: \code{\link{plot_each_species}},
+=======
+Other functions to create a list of plots: \code{\link{maply_sp_elev}},
+>>>>>>> 156c4f0258961b7b9d7ca3e31b49f478f7a6765e:man/maply_quad.Rd
   \code{\link{plot_tag_status_by_subquadrat}}
 }
 \concept{functions to create a list of plots}
