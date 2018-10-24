@@ -143,7 +143,7 @@ p3 <- plot_each_species(
 p3[[1]]
 }
 \seealso{
-\code{\link[=plot_base_elevation]{plot_base_elevation()}}, \code{\link[=set_axis_limits]{set_axis_limits()}}, \code{\link[=add_species]{add_species()}},
+\code{\link[=plot_base_elevation]{plot_base_elevation()}}, \code{\link[=axis_limits]{axis_limits()}}, \code{\link[=add_species]{add_species()}},
 \code{\link[=add_elevation_contrours]{add_elevation_contrours()}}, \code{\link[=add_elevation_labels]{add_elevation_labels()}}, \code{\link[=hide]{hide()}}, \code{\link[=facet]{facet()}}.
 
 Other functions to create a list of plots: \code{\link{plot_dbh_bubles_by_quadrat}},

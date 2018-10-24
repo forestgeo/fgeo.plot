@@ -35,8 +35,8 @@ elevation \%>\%
 \code{\link[=plot_elevation]{plot_elevation()}}, \code{\link[ggplot2:geom_text]{ggplot2::geom_text()}}.
 
 Other functions to create or modify plot layers: \code{\link{add_elevation_contrours}},
-  \code{\link{add_species}}, \code{\link{facet}},
-  \code{\link{hide}}, \code{\link{plot_base_elevation}},
-  \code{\link{set_axis_limits}}
+  \code{\link{add_species}}, \code{\link{axis_limits}},
+  \code{\link{facet}}, \code{\link{hide}},
+  \code{\link{plot_base_elevation}}
 }
 \concept{functions to create or modify plot layers}

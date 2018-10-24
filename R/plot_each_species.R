@@ -26,11 +26,11 @@
 #' @inheritParams add_elevation_contrours
 #' @param hide_color_legend Logical; `TRUE` hides the color legend.
 #' @inheritParams add_elevation_labels
-#' @inheritParams set_axis_limits
+#' @inheritParams axis_limits
 #' @param custom_theme A valid [ggplot2::theme()]. `NULL` uses the default
 #'   theme [theme_default()].
 #'
-#' @seealso [plot_base_elevation()], [set_axis_limits()], [add_species()],
+#' @seealso [plot_base_elevation()], [axis_limits()], [add_species()],
 #'   [add_elevation_contrours()], [add_elevation_labels()], [hide()], [facet()].
 #'
 #' @family functions to create a list of plots
@@ -154,7 +154,7 @@ plot_each_species <- function(census,
 #' # The traditional sintax is hard to read when you compose multiple functions.
 #' # With the pipe, readability isn't affected by the number of functions.
 #' plot_base_elevation(elevation) %>%
-#'   set_axis_limits(xlim = c(-100, 400)) %>%
+#'   axis_limits(xlim = c(-100, 400)) %>%
 #'   add_elevation_contrours(contour_size = 0.5) %>%
 #'   add_elevation_labels(label_color = "red") %>%
 #'   hide_axis_labels() %>%
@@ -208,7 +208,7 @@ plot_species_or_elevation <- function(census,
   base %>% 
     add_species(census, fill = fill, shape = shape, point_size = point_size) %>%
     best_layout(facet = facet) %>% 
-    set_axis_limits(xlim = xlim, ylim = ylim) %>%
+    axis_limits(xlim = xlim, ylim = ylim) %>%
     best_theme(custom_theme = custom_theme)
 }
 
@@ -245,7 +245,7 @@ plot_elevation <- function(elevation,
     fontface = fontface
   )
   base %>% 
-    set_axis_limits(xlim = xlim, ylim = ylim) %>%
+    axis_limits(xlim = xlim, ylim = ylim) %>%
     best_theme(custom_theme = custom_theme)
 }
 
@@ -347,12 +347,12 @@ plot_base_census <- function(data) {
 #' p <- plot_base_census(census)
 #' p
 #' 
-#' set_axis_limits(p, xlim = c(0, 100), ylim = c(0, 400))
+#' axis_limits(p, xlim = c(0, 100), ylim = c(0, 400))
 #' 
 #' fgeo.data::luquillo_elevation %>% 
 #'   plot_base_elevation() %>% 
-#'   set_axis_limits(xlim = c(0, 100), ylim = c(0, 400))
-set_axis_limits <- function(p, xlim = NULL, ylim = NULL) {
+#'   axis_limits(xlim = c(0, 100), ylim = c(0, 400))
+axis_limits <- function(p, xlim = NULL, ylim = NULL) {
   # If user doesn't provide limits, set limits based on entire dataset
   data <- p[["data"]]
   xlim <- best_lim(xlim, data$gx)

@@ -120,7 +120,7 @@ plot_base_elevation(elevation) \%>\%
 # The traditional sintax is hard to read when you compose multiple functions.
 # With the pipe, readability isn't affected by the number of functions.
 plot_base_elevation(elevation) \%>\%
-  set_axis_limits(xlim = c(-100, 400)) \%>\%
+  axis_limits(xlim = c(-100, 400)) \%>\%
   add_elevation_contrours(contour_size = 0.5) \%>\%
   add_elevation_labels(label_color = "red") \%>\%
   hide_axis_labels() \%>\%

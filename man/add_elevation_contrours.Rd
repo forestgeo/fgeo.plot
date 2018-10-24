@@ -31,8 +31,8 @@ add_elevation_contrours(p, contour_size = 0.5, low = "grey", high = "black", bin
 \code{\link[ggplot2:geom_contour]{ggplot2::geom_contour()}}.
 
 Other functions to create or modify plot layers: \code{\link{add_elevation_labels}},
-  \code{\link{add_species}}, \code{\link{facet}},
-  \code{\link{hide}}, \code{\link{plot_base_elevation}},
-  \code{\link{set_axis_limits}}
+  \code{\link{add_species}}, \code{\link{axis_limits}},
+  \code{\link{facet}}, \code{\link{hide}},
+  \code{\link{plot_base_elevation}}
 }
 \concept{functions to create or modify plot layers}

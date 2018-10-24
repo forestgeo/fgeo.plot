@@ -13,6 +13,9 @@
     <loc>https://forestgeo.github.io/fgeo.map//reference/add_species.html</loc>
   </url>
   <url>
+    <loc>https://forestgeo.github.io/fgeo.map//reference/axis_limits.html</loc>
+  </url>
+  <url>
     <loc>https://forestgeo.github.io/fgeo.map//reference/facet.html</loc>
   </url>
   <url>
@@ -47,9 +50,6 @@
   </url>
   <url>
     <loc>https://forestgeo.github.io/fgeo.map//reference/plot_tag_status_by_subquadrat.html</loc>
-  </url>
-  <url>
-    <loc>https://forestgeo.github.io/fgeo.map//reference/set_axis_limits.html</loc>
   </url>
   <url>
     <loc>https://forestgeo.github.io/fgeo.map//reference/suffix_tags_beyond_edge.html</loc>
