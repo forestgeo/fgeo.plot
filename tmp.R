@@ -55,10 +55,12 @@ add_elevation_labels <- label_elev()
 add_species <- add_sp()
 
 facet <- wrap()
-set_limits <- limit_gx_gy()
+limits <- limit_gx_gy()
 
 hide_axis_labels() <- hide_axis_labels()
 hide_color_legend() <- hide_legend_color()
+
+
 
 # Helpers
 
@@ -67,8 +69,4 @@ header_dbh_bubles <- map_quad_header()
 suffix_tags_beyond_edge <- suffix_edge_tag()
 theme_tag_status <- theme_map_tag()
 theme_dbh_bubles <- theme_map_quad()
-
-# Appveyor badge ----------------------------------------------------------
-
-[![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/forestgeo/fgeo.map?branch=master&svg=true)](https://ci.appveyor.com/project/forestgeo/fgeo.map)
 
