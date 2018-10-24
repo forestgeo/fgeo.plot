@@ -14,13 +14,8 @@ export(map_gx_gy_elev)
 export(map_quad_header)
 export(map_sp_elev)
 export(map_tag_header)
-<<<<<<< HEAD
 export(plot_dbh_bubles_by_quadrat)
 export(plot_each_species)
-=======
-export(maply_quad)
-export(maply_sp_elev)
->>>>>>> 156c4f0258961b7b9d7ca3e31b49f478f7a6765e
 export(plot_tag_status_by_subquadrat)
 export(suffix_edge_tag)
 export(theme_default)
