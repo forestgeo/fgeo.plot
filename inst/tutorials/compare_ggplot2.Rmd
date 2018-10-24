@@ -43,17 +43,17 @@ elev <- elevation$col
 Quick maps with __fgeo.map__.
 
 ```{r}
-map_elev(elev)
+plot_elevation(elev)
 ```
 
 ```
-# map_elev() also understands the elevation list, so this code outputs the same
-map_elev(elevation)
+# plot_elevation() also understands the elevation list, so this code outputs the same
+plot_elevation(elevation)
 ```
 
 ```{r}
 # You have a number of options you can tweak
-map_elev(elev,
+plot_elevation(elev,
   # Or choose colors by code from http://bit.ly/2rJgQba
   low = "grey", high = "black", 
   # How many lines, and how thick

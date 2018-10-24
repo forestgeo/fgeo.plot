@@ -1,14 +1,16 @@
 #' Map species and elevation data.
 #' 
 #' These functions wrap a number of map elements for convenience:
-#' * Use `map_sp_elev()` to map species and optionally elevation data in a 
-#'   single page. You can map multiple species on the same plot or you can facet
-#'   the output to map each species on a single plot and all plots in a single
-#'   page.
-#' * Use `map_elev()` if you want to map only elevation in the simplest way.
-#' * Use `plot_each_species()` to apply the function `map_sp_elev()` to each
-#' species in a census dataset. The output is not a map but a list of maps, one
-#' per species, that can be printed on a .pdf file.
+#' * Use `plot_species_or_elevation()` to map species and optionally elevation
+#' data in a single page. You can map multiple species on the same plot or you
+#' can facet the output to map each species on a single plot and all plots in a
+#' single page.
+#' * Use `plot_elevation()` if you want to map only elevation in the simplest
+#' way.
+#' * Use `plot_each_species()` to apply the function
+#' `plot_species_or_elevation()` to each species in a census dataset. The output
+#' is not a map but a list of maps, one per species, that can be printed on a
+#' .pdf file.
 #' 
 #' @template compare_ggplot2
 #' 
@@ -36,7 +38,7 @@
 #' 
 #' @return 
 #' * `plot_each_species()` returns a list of ggplots.
-#' * `map_elev()` and `map_sp_elev()` return a ggplot.
+#' * `plot_elevation()` and `plot_species_or_elevation()` return a ggplot.
 #' 
 #' @export 
 #' @examples
@@ -98,7 +100,7 @@ plot_each_species <- function(census,
   cns <- census[census$sp %in% species, ]
   cns_list <- split(cns, cns$sp)
   p <- lapply(
-    X = cns_list, FUN = map_sp_elev,
+    X = cns_list, FUN = plot_species_or_elevation,
     elevation = elevation,
     fill = fill,
     shape = shape,
@@ -133,11 +135,11 @@ plot_each_species <- function(census,
 #' elevation <- fgeo.data::luquillo_elevation
 #' 
 #' # Simplest way to map elevation data only
-#' map_elev(elevation)
+#' plot_elevation(elevation)
 #' 
-#' map_sp_elev(census)
+#' plot_species_or_elevation(census)
 #' 
-#' map_sp_elev(census, elevation)
+#' plot_species_or_elevation(census, elevation)
 #' 
 #' # For maximum control, you can compose maps as you like
 #' # Traditional sintax: g(f(x))
@@ -158,7 +160,7 @@ plot_each_species <- function(census,
 #'   add_sp(census, point_size = 5) %>%
 #'   wrap("sp") %>%
 #'   theme_default(legend.position = "top")
-map_sp_elev <- function(census,
+plot_species_or_elevation <- function(census,
                         elevation = NULL,
                         fill = "black",
                         shape = 21,
@@ -211,9 +213,9 @@ map_sp_elev <- function(census,
 
 
 
-#' @rdname map_sp_elev
+#' @rdname plot_species_or_elevation
 #' @export
-map_elev <- function(elevation,
+plot_elevation <- function(elevation,
                      contour_size = 0.5,
                      low = "blue",
                      high = "red",
@@ -280,7 +282,7 @@ map_pure_elev <- function(elevation,
 #' Map a base over which other map components can later be added.
 #' 
 #' @template data_ggplot
-#' @seealso [map_sp_elev()], [map_elev()], [plot_each_species()], 
+#' @seealso [plot_species_or_elevation()], [plot_elevation()], [plot_each_species()], 
 #'   [ggplot2::ggplot()].
 #' @family map components.
 #' @export
@@ -329,7 +331,7 @@ map_gx_gy <- function(data) {
 #' @template p
 #' @template xlim_ylim
 #' 
-#' @seealso [map_sp_elev()], [plot_each_species()], [ggplot2::coord_fixed()].
+#' @seealso [plot_species_or_elevation()], [plot_each_species()], [ggplot2::coord_fixed()].
 #' 
 #' @family map components.
 #' @export
@@ -366,7 +368,7 @@ limit_gx_gy <- function(p, xlim = NULL, ylim = NULL) {
 #'   different color.
 #' @template shape_point_size
 #' 
-#' @seealso [map_sp_elev()], [plot_each_species()], [ggplot2::geom_point()].
+#' @seealso [plot_species_or_elevation()], [plot_each_species()], [ggplot2::geom_point()].
 #' 
 #' @family map components.
 #' @export
@@ -413,7 +415,7 @@ add_sp <- function(p, data = NULL, fill = "sp", shape = 21, point_size = 3) {
 #' @template low_high
 #' @param bins A number giving the number of elevation lines to map.
 #' 
-#' @seealso [plot_each_species()], [map_sp_elev()], [map_elev()], 
+#' @seealso [plot_each_species()], [plot_species_or_elevation()], [plot_elevation()], 
 #'   [ggplot2::geom_contour()].
 #' 
 #' @family map components.
@@ -444,7 +446,7 @@ contour_elev <- function(p,
 #' @param xyjust A number to adjust the position of the text labels of the 
 #'   elevation lines.
 #'
-#' @seealso [plot_each_species()], [map_sp_elev()], [map_elev()], 
+#' @seealso [plot_each_species()], [plot_species_or_elevation()], [plot_elevation()], 
 #'   [ggplot2::geom_text()].
 #' 
 #' @family map components.

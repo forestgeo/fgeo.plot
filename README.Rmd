@@ -45,7 +45,7 @@ library(fgeo.map)
 
 census <- fgeo.data::luquillo_tree6_random
 some_sp <- subset(census, sp %in% c("PREMON", "CASARB"))
-map_sp_elev(some_sp)
+plot_species_or_elevation(some_sp)
 ```
 
 [Get started with __fgeo__](https://forestgeo.github.io/fgeo/articles/fgeo.html)

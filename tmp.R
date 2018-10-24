@@ -27,6 +27,8 @@ grep -R "maply_tag" ../fgeo/vignettes ../fgeo.abundance/vignettes ../fgeo.base/v
 * plot_dbh_bubles_by_quadrat() <- maply_quad
 * plot_each_species() <- maply_sp_elev
 
+
+
 # Create a single plot (may have multiple panels)
 
 # TODO: Use S3 to detect if data is census or elevation? Maybe first argument
@@ -34,8 +36,10 @@ grep -R "maply_tag" ../fgeo/vignettes ../fgeo.abundance/vignettes ../fgeo.base/v
 
 # This may be simplified to a single function that automatically detects which
 # of the two the user provided
-* plot_species() <- maply_sp_elev  # Clarify that also plots elevation
+* plot_species_or_elevation() <- map_sp_elev  # Clarify that also plots elevation
 * plot_elevation <- map_elev
+
+
 
 # Create/modify plot layers
 

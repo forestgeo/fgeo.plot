@@ -29,7 +29,7 @@ library(fgeo.map)
 
 census <- fgeo.data::luquillo_tree6_random
 some_sp <- subset(census, sp %in% c("PREMON", "CASARB"))
-map_sp_elev(some_sp)
+plot_species_or_elevation(some_sp)
 ```
 
 <img src="man/figures/README-fgeo.map-sp-1.png" width="100%" style="display: block; margin: auto;" />

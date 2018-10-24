@@ -1,3 +1,4 @@
+^grep\.R$
 ^appveyor\.yml$
 ^.*\.pdf$
 ^.*\.rds$
