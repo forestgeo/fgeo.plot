@@ -90,3 +90,8 @@ maply_quad(
   )
 )
 }
+\seealso{
+Other functions to create a list of plots: \code{\link{maply_sp_elev}},
+  \code{\link{maply_tag}}
+}
+\concept{functions to create a list of plots}

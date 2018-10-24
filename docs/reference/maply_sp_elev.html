@@ -123,12 +123,12 @@ species, that can be printed on a .pdf file.
     <div class="ref-description">
     
     <p>These functions wrap a number of map elements for convenience:</p><ul>
-<li><p>Use <code>map_sp_elev()</code> to map species and optionally elevation data in a
+<li><p>Use <code><a href='map_sp_elev.html'>map_sp_elev()</a></code> to map species and optionally elevation data in a
 single page. You can map multiple species on the same plot or you can facet
 the output to map each species on a single plot and all plots in a single
 page.</p></li>
-<li><p>Use <code>map_elev()</code> if you want to map only elevation in the simplest way.</p></li>
-<li><p>Use <code>maply_sp_elev()</code> to apply the function <code>map_sp_elev()</code> to each species
+<li><p>Use <code><a href='map_sp_elev.html'>map_elev()</a></code> if you want to map only elevation in the simplest way.</p></li>
+<li><p>Use <code>maply_sp_elev()</code> to apply the function <code><a href='map_sp_elev.html'>map_sp_elev()</a></code> to each species
 in a census dataset. The output is not a map but a list of maps, one per
 species, that can be printed on a .pdf file.</p></li>
 </ul>
@@ -140,20 +140,7 @@ species, that can be printed on a .pdf file.</p></li>
   <span class='kw'>low</span> <span class='kw'>=</span> <span class='st'>"blue"</span>, <span class='kw'>high</span> <span class='kw'>=</span> <span class='st'>"red"</span>, <span class='kw'>hide_legend_color</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
   <span class='kw'>bins</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>label_elev</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>label_size</span> <span class='kw'>=</span> <span class='fl'>3</span>,
   <span class='kw'>label_color</span> <span class='kw'>=</span> <span class='st'>"grey"</span>, <span class='kw'>xyjust</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>fontface</span> <span class='kw'>=</span> <span class='st'>"italic"</span>,
-  <span class='kw'>xlim</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>ylim</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>custom_theme</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
-
-<span class='fu'>map_sp_elev</span>(<span class='no'>census</span>, <span class='kw'>elevation</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>fill</span> <span class='kw'>=</span> <span class='st'>"black"</span>, <span class='kw'>shape</span> <span class='kw'>=</span> <span class='fl'>21</span>,
-  <span class='kw'>wrap</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>point_size</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>contour_size</span> <span class='kw'>=</span> <span class='fl'>0.5</span>, <span class='kw'>low</span> <span class='kw'>=</span> <span class='st'>"blue"</span>,
-  <span class='kw'>high</span> <span class='kw'>=</span> <span class='st'>"red"</span>, <span class='kw'>hide_legend_color</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>bins</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>label_elev</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>label_size</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>label_color</span> <span class='kw'>=</span> <span class='st'>"grey"</span>,
-  <span class='kw'>xyjust</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>fontface</span> <span class='kw'>=</span> <span class='st'>"italic"</span>, <span class='kw'>xlim</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>ylim</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>custom_theme</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
-
-<span class='fu'>map_elev</span>(<span class='no'>elevation</span>, <span class='kw'>contour_size</span> <span class='kw'>=</span> <span class='fl'>0.5</span>, <span class='kw'>low</span> <span class='kw'>=</span> <span class='st'>"blue"</span>, <span class='kw'>high</span> <span class='kw'>=</span> <span class='st'>"red"</span>,
-  <span class='kw'>hide_legend_color</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>bins</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>label_elev</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>label_size</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>label_color</span> <span class='kw'>=</span> <span class='st'>"grey"</span>, <span class='kw'>xyjust</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>fontface</span> <span class='kw'>=</span> <span class='st'>"italic"</span>, <span class='kw'>xlim</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>ylim</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>custom_theme</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+  <span class='kw'>xlim</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>ylim</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>custom_theme</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -265,7 +252,7 @@ multiple maps within the area of a single graphic plot.</p></td>
     
 <ul>
 <li><p><code>maply_sp_elev()</code> returns a list of ggplots.</p></li>
-<li><p><code>map_elev()</code> and <code>map_sp_elev()</code> return a ggplot.</p></li>
+<li><p><code><a href='map_sp_elev.html'>map_elev()</a></code> and <code><a href='map_sp_elev.html'>map_sp_elev()</a></code> return a ggplot.</p></li>
 </ul>
 
     
@@ -292,7 +279,8 @@ about the pipe see http://r4ds.had.co.nz/pipes.html.</p>
 
     <div class='dont-index'><p><code><a href='map_gx_gy_elev.html'>map_gx_gy_elev()</a></code>, <code><a href='limit_gx_gy.html'>limit_gx_gy()</a></code>, <code><a href='add_sp.html'>add_sp()</a></code>, <code><a href='contour_elev.html'>contour_elev()</a></code>,
 <code><a href='label_elev.html'>label_elev()</a></code>, <code><a href='hide.html'>hide()</a></code>, <code><a href='wrap.html'>wrap()</a></code></p>
-<p>Other `maply_*` functions.: <code><a href='maply_tag.html'>maply_tag</a></code></p></div>
+<p>Other functions to create a list of plots: <code><a href='maply_quad.html'>maply_quad</a></code>,
+  <code><a href='maply_tag.html'>maply_tag</a></code></p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -301,7 +289,6 @@ about the pipe see http://r4ds.had.co.nz/pipes.html.</p>
 <span class='no'>census</span> <span class='kw'>&lt;-</span> <span class='fu'>subset</span>(<span class='kw pkg'>fgeo.data</span><span class='kw ns'>::</span><span class='no'><a href='http://www.rdocumentation.org/packages/fgeo.data/topics/census_luquillo'>luquillo_tree5_random</a></span>, <span class='no'>sp</span> <span class='kw'>%in%</span> <span class='no'>some_sp</span>)
 <span class='no'>elevation</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>fgeo.data</span><span class='kw ns'>::</span><span class='no'><a href='http://www.rdocumentation.org/packages/fgeo.data/topics/luquillo_elevation'>luquillo_elevation</a></span>
 
-<span class='co'># Map on multiple pages ---------------------------------------------------</span>
 <span class='no'>p1</span> <span class='kw'>&lt;-</span> <span class='fu'>maply_sp_elev</span>(<span class='no'>census</span>)
 <span class='co'># Showing first map only.</span>
 <span class='no'>p1</span><span class='kw'>[[</span><span class='fl'>1</span>]]</div><div class='img'><img src='maply_sp_elev-1.png' alt='' width='700' height='433' /></div><div class='input'>
@@ -323,29 +310,7 @@ about the pipe see http://r4ds.had.co.nz/pipes.html.</p>
   <span class='kw'>bins</span> <span class='kw'>=</span> <span class='fl'>7</span>,
   <span class='kw'>label_elev</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
 )
-<span class='no'>p3</span><span class='kw'>[[</span><span class='fl'>1</span>]]</div><div class='img'><img src='maply_sp_elev-3.png' alt='' width='700' height='433' /></div><div class='input'>
-<span class='co'># Map on a single page (maybe multiple panels) ----------------------------</span>
-<span class='co'># Simplest way to map elevation data only</span>
-<span class='fu'>map_elev</span>(<span class='no'>elevation</span>)</div><div class='img'><img src='maply_sp_elev-4.png' alt='' width='700' height='433' /></div><div class='input'>
-<span class='fu'>map_sp_elev</span>(<span class='no'>census</span>)</div><div class='img'><img src='maply_sp_elev-5.png' alt='' width='700' height='433' /></div><div class='input'>
-<span class='fu'>map_sp_elev</span>(<span class='no'>census</span>, <span class='no'>elevation</span>)</div><div class='img'><img src='maply_sp_elev-6.png' alt='' width='700' height='433' /></div><div class='input'>
-<span class='co'># For maximum control, you can compose maps as you like</span>
-<span class='co'># Traditional sintax: g(f(x))</span>
-<span class='fu'><a href='contour_elev.html'>contour_elev</a></span>(<span class='fu'><a href='map_gx_gy_elev.html'>map_gx_gy_elev</a></span>(<span class='no'>elevation</span>))</div><div class='img'><img src='maply_sp_elev-7.png' alt='' width='700' height='433' /></div><div class='input'>
-<span class='co'># With the pipe: f(x) %&gt;% g()</span>
-<span class='fu'><a href='map_gx_gy_elev.html'>map_gx_gy_elev</a></span>(<span class='no'>elevation</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='contour_elev.html'>contour_elev</a></span>()</div><div class='img'><img src='maply_sp_elev-8.png' alt='' width='700' height='433' /></div><div class='input'>
-<span class='co'># The traditional sintax is hard to read when you compose multiple functions.</span>
-<span class='co'># With the pipe, readability isn't affected by the number of functions.</span>
-<span class='fu'><a href='map_gx_gy_elev.html'>map_gx_gy_elev</a></span>(<span class='no'>elevation</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='limit_gx_gy.html'>limit_gx_gy</a></span>(<span class='kw'>xlim</span> <span class='kw'>=</span> <span class='fu'>c</span>(-<span class='fl'>100</span>, <span class='fl'>400</span>)) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='contour_elev.html'>contour_elev</a></span>(<span class='kw'>contour_size</span> <span class='kw'>=</span> <span class='fl'>0.5</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='label_elev.html'>label_elev</a></span>(<span class='kw'>label_color</span> <span class='kw'>=</span> <span class='st'>"red"</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='hide.html'>hide_axis_labels</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='hide.html'>hide_legend_color</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='add_sp.html'>add_sp</a></span>(<span class='no'>census</span>, <span class='kw'>point_size</span> <span class='kw'>=</span> <span class='fl'>5</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='wrap.html'>wrap</a></span>(<span class='st'>"sp"</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='themes.html'>theme_default</a></span>(<span class='kw'>legend.position</span> <span class='kw'>=</span> <span class='st'>"top"</span>)</div><div class='img'><img src='maply_sp_elev-9.png' alt='' width='700' height='433' /></div></pre>
+<span class='no'>p3</span><span class='kw'>[[</span><span class='fl'>1</span>]]</div><div class='img'><img src='maply_sp_elev-3.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

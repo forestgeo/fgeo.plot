@@ -31,7 +31,8 @@
 #'
 #' @seealso [map_gx_gy_elev()], [limit_gx_gy()], [add_sp()], [contour_elev()],
 #'   [label_elev()], [hide()], [wrap()]
-#' @family `maply_*` functions.
+#'
+#' @family functions to create a list of plots
 #' 
 #' @return 
 #' * `maply_sp_elev()` returns a list of ggplots.
@@ -44,7 +45,6 @@
 #' census <- subset(fgeo.data::luquillo_tree5_random, sp %in% some_sp)
 #' elevation <- fgeo.data::luquillo_elevation
 #' 
-#' # Map on multiple pages ---------------------------------------------------
 #' p1 <- maply_sp_elev(census)
 #' # Showing first map only.
 #' p1[[1]]
@@ -69,34 +69,6 @@
 #'   label_elev = FALSE
 #' )
 #' p3[[1]]
-#' 
-#' # Map on a single page (maybe multiple panels) ----------------------------
-#' # Simplest way to map elevation data only
-#' map_elev(elevation)
-#' 
-#' map_sp_elev(census)
-#' 
-#' map_sp_elev(census, elevation)
-#' 
-#' # For maximum control, you can compose maps as you like
-#' # Traditional sintax: g(f(x))
-#' contour_elev(map_gx_gy_elev(elevation))
-#' 
-#' # With the pipe: f(x) %>% g()
-#' map_gx_gy_elev(elevation) %>%
-#'   contour_elev()
-#' 
-#' # The traditional sintax is hard to read when you compose multiple functions.
-#' # With the pipe, readability isn't affected by the number of functions.
-#' map_gx_gy_elev(elevation) %>%
-#'   limit_gx_gy(xlim = c(-100, 400)) %>%
-#'   contour_elev(contour_size = 0.5) %>%
-#'   label_elev(label_color = "red") %>%
-#'   hide_axis_labels() %>%
-#'   hide_legend_color() %>%
-#'   add_sp(census, point_size = 5) %>%
-#'   wrap("sp") %>%
-#'   theme_default(legend.position = "top")
 maply_sp_elev <- function(census,
                           elevation = NULL,
                           species = "all",
@@ -149,8 +121,43 @@ maply_sp_elev <- function(census,
   setNames(p, species)
 }
 
-#' @rdname maply_sp_elev
+#' @inherit maply_sp_elev title description details return
+#' 
+#' @family functions to create a single plot
+#' 
 #' @export
+#' @examples 
+#' # Small dataset with a few species for quick examples
+#' some_sp <- c("PREMON", "CASARB")
+#' census <- subset(fgeo.data::luquillo_tree5_random, sp %in% some_sp)
+#' elevation <- fgeo.data::luquillo_elevation
+#' 
+#' # Simplest way to map elevation data only
+#' map_elev(elevation)
+#' 
+#' map_sp_elev(census)
+#' 
+#' map_sp_elev(census, elevation)
+#' 
+#' # For maximum control, you can compose maps as you like
+#' # Traditional sintax: g(f(x))
+#' contour_elev(map_gx_gy_elev(elevation))
+#' 
+#' # With the pipe: f(x) %>% g()
+#' map_gx_gy_elev(elevation) %>%
+#'   contour_elev()
+#' 
+#' # The traditional sintax is hard to read when you compose multiple functions.
+#' # With the pipe, readability isn't affected by the number of functions.
+#' map_gx_gy_elev(elevation) %>%
+#'   limit_gx_gy(xlim = c(-100, 400)) %>%
+#'   contour_elev(contour_size = 0.5) %>%
+#'   label_elev(label_color = "red") %>%
+#'   hide_axis_labels() %>%
+#'   hide_legend_color() %>%
+#'   add_sp(census, point_size = 5) %>%
+#'   wrap("sp") %>%
+#'   theme_default(legend.position = "top")
 map_sp_elev <- function(census,
                         elevation = NULL,
                         fill = "black",
@@ -201,7 +208,10 @@ map_sp_elev <- function(census,
     best_theme(custom_theme = custom_theme)
 }
 
-#' @rdname maply_sp_elev
+
+
+
+#' @rdname map_sp_elev
 #' @export
 map_elev <- function(elevation,
                      contour_size = 0.5,

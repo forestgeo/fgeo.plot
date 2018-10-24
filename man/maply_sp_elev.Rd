@@ -2,8 +2,6 @@
 % Please edit documentation in R/maply_sp_elev.R
 \name{maply_sp_elev}
 \alias{maply_sp_elev}
-\alias{map_sp_elev}
-\alias{map_elev}
 \title{Map species and elevation data.}
 \usage{
 maply_sp_elev(census, elevation = NULL, species = "all",
@@ -12,19 +10,6 @@ maply_sp_elev(census, elevation = NULL, species = "all",
   bins = NULL, label_elev = TRUE, label_size = 3,
   label_color = "grey", xyjust = 1, fontface = "italic",
   xlim = NULL, ylim = NULL, custom_theme = NULL)
-
-map_sp_elev(census, elevation = NULL, fill = "black", shape = 21,
-  wrap = TRUE, point_size = 3, contour_size = 0.5, low = "blue",
-  high = "red", hide_legend_color = FALSE, bins = NULL,
-  label_elev = TRUE, label_size = 3, label_color = "grey",
-  xyjust = 1, fontface = "italic", xlim = NULL, ylim = NULL,
-  custom_theme = NULL)
-
-map_elev(elevation, contour_size = 0.5, low = "blue", high = "red",
-  hide_legend_color = FALSE, bins = NULL, label_elev = TRUE,
-  label_size = 3, label_color = "grey", xyjust = 1,
-  fontface = "italic", xlim = NULL, ylim = NULL,
-  custom_theme = NULL)
 }
 \arguments{
 \item{census}{A dataframe; specifically, a ForestGEO's census.}
@@ -132,7 +117,6 @@ some_sp <- c("PREMON", "CASARB")
 census <- subset(fgeo.data::luquillo_tree5_random, sp \%in\% some_sp)
 elevation <- fgeo.data::luquillo_elevation
 
-# Map on multiple pages ---------------------------------------------------
 p1 <- maply_sp_elev(census)
 # Showing first map only.
 p1[[1]]
@@ -157,39 +141,12 @@ p3 <- maply_sp_elev(
   label_elev = FALSE
 )
 p3[[1]]
-
-# Map on a single page (maybe multiple panels) ----------------------------
-# Simplest way to map elevation data only
-map_elev(elevation)
-
-map_sp_elev(census)
-
-map_sp_elev(census, elevation)
-
-# For maximum control, you can compose maps as you like
-# Traditional sintax: g(f(x))
-contour_elev(map_gx_gy_elev(elevation))
-
-# With the pipe: f(x) \%>\% g()
-map_gx_gy_elev(elevation) \%>\%
-  contour_elev()
-
-# The traditional sintax is hard to read when you compose multiple functions.
-# With the pipe, readability isn't affected by the number of functions.
-map_gx_gy_elev(elevation) \%>\%
-  limit_gx_gy(xlim = c(-100, 400)) \%>\%
-  contour_elev(contour_size = 0.5) \%>\%
-  label_elev(label_color = "red") \%>\%
-  hide_axis_labels() \%>\%
-  hide_legend_color() \%>\%
-  add_sp(census, point_size = 5) \%>\%
-  wrap("sp") \%>\%
-  theme_default(legend.position = "top")
 }
 \seealso{
 \code{\link[=map_gx_gy_elev]{map_gx_gy_elev()}}, \code{\link[=limit_gx_gy]{limit_gx_gy()}}, \code{\link[=add_sp]{add_sp()}}, \code{\link[=contour_elev]{contour_elev()}},
 \code{\link[=label_elev]{label_elev()}}, \code{\link[=hide]{hide()}}, \code{\link[=wrap]{wrap()}}
 
-Other `maply_*` functions.: \code{\link{maply_tag}}
+Other functions to create a list of plots: \code{\link{maply_quad}},
+  \code{\link{maply_tag}}
 }
-\concept{`maply_*` functions.}
+\concept{functions to create a list of plots}

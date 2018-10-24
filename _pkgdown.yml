@@ -35,15 +35,15 @@ navbar:
 
 reference:
 
-  - title: Create maps with a single function
+  - title: Create a list of plots.
     contents:
-      - maply_tag
-      - maply_quad
-      - maply_sp_elev
-      - map_sp_elev
-      - map_elev
+      - has_concept("functions to create a list of plots")
+      
+  - title: Create a single plot (may have multiple panels).
+    contents:
+      - has_concept("functions to create a single plot")
 
-  - title: Create maps by composing multiple map components
+  - title: Add or modify layers of a plot.
     contents:
       - map_gx_gy_elev
       - map_gx_gy
@@ -60,10 +60,10 @@ reference:
       - suffix_edge_tag
       - starts_with("theme")
 
-  - title: "Datasets"
-    contents:
-      - vft_1quad
-
   - title: "Methods for common generics"
     contents:
       - plot.fgeo_habitat
+
+  - title: "Datasets"
+    contents:
+      - vft_1quad

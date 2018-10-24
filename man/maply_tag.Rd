@@ -142,6 +142,7 @@ p[[1]]
 \code{\link[=map_tag_header]{map_tag_header()}}, \code{\link[=theme_map_tag]{theme_map_tag()}}, \code{\link[fgeo.tool:add_subquad]{fgeo.tool::add_subquad()}},
 \code{\link[=paginate]{paginate()}}, \link[ggrepel:geom_text_repel]{ggrepel::geom_text_repel}, \code{\link[fgeo.tool:drop_twice_dead]{fgeo.tool::drop_twice_dead()}}.
 
-Other `maply_*` functions.: \code{\link{maply_sp_elev}}
+Other functions to create a list of plots: \code{\link{maply_quad}},
+  \code{\link{maply_sp_elev}}
 }
-\concept{`maply_*` functions.}
+\concept{functions to create a list of plots}

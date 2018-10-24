@@ -39,11 +39,12 @@
 #' @template header
 #' @template theme
 #' @template move_edge
-#'
-#' @family `maply_*` functions.
+#' 
 #' @seealso [graphics::points()], [ggplot2::geom_point()], [ggplot2::theme()]
 #'   [map_tag_header()], [theme_map_tag()], [fgeo.tool::add_subquad()],
 #'   [paginate()], [ggrepel::geom_text_repel], [fgeo.tool::drop_twice_dead()].
+#'
+#' @family functions to create a list of plots
 #'
 #' @section Acknowledgment:
 #' Useful ideas and guidance came from Suzanne Lao, Stuart Davis, Shameema
