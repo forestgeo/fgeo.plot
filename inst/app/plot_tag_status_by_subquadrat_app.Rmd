@@ -1,5 +1,5 @@
 ---
-title: "maply_tag()"
+title: "plot_tag_status_by_subquadrat()"
 resource_files:
 - vft.csv
 runtime: shiny
@@ -35,10 +35,10 @@ Adjust the arguments and preview the effect
 
 ### Usage
 
-`r icon::fa_question_circle()` [`maply_tag()`](https://forestgeo.github.io/fgeo.map/reference/maply_tag.html)
+`r icon::fa_question_circle()` [`plot_tag_status_by_subquadrat()`](https://forestgeo.github.io/fgeo.map/reference/plot_tag_status_by_subquadrat.html)
 
 ```
-maply_tag(
+plot_tag_status_by_subquadrat(
   vft,
   x_q = 20,
   x_sq = 5,
@@ -124,7 +124,7 @@ textInput(".header", "header", "map_tag_header()")
 
 ```{r, fig.asp=1.15}
 renderPlot({
-  maps <- maply_tag(
+  maps <- plot_tag_status_by_subquadrat(
     vft, 
     title_quad = input$title,
     point_size = input$pointsize,
