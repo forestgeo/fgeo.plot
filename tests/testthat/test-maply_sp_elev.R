@@ -1,7 +1,7 @@
 census <- fgeo.tool::pick_top(fgeo.data::luquillo_stem5_random, sp, 2)
 elevation <- fgeo.data::luquillo_elevation$col
 
-context("maply_sp_elev")
+context("plot_each_species")
 
 test_that("works with species parameters", {
   spp <- unique(census$sp)
@@ -9,7 +9,7 @@ test_that("works with species parameters", {
   cns <- census
 
   expect_silent(
-    maply_sp_elev(
+    plot_each_species(
       cns, elev, species = spp, fill = "white", shape = 21, point_size = 5
     )[[1]]
   )
@@ -22,7 +22,7 @@ test_that("works with elevation parameters", {
   cns <- census
 
   expect_silent(
-    maply_sp_elev(
+    plot_each_species(
       cns, elev, species = spp, fill = "white", shape = 21, point_size = 5,
       contour_size = 1, low = "grey", high = "black", hide_legend_color = TRUE,
       bins = 7, label_elev = FALSE
@@ -30,7 +30,7 @@ test_that("works with elevation parameters", {
   )
   
   expect_silent(
-    maply_sp_elev(
+    plot_each_species(
       cns, elev, species = spp, fill = "white", shape = 21, point_size = 5,
       contour_size = 1, low = "grey", high = "black", hide_legend_color = TRUE,
       bins = NULL, label_elev = TRUE, label_color = "black", xyjust = 1,
@@ -41,16 +41,16 @@ test_that("works with elevation parameters", {
 })
 
 test_that("outputs a list of ggplots", {
-  p <- maply_sp_elev(census)
+  p <- plot_each_species(census)
   expect_type(p, "list")
   expect_true(has_class(p[[1]], "gg"))
 })
 
 test_that("errs with wrong inputs", {
-  expect_error(maply_sp_elev(1), "is not TRUE")
-  expect_error(maply_sp_elev(census, 1), "Can't deal with data of class")
-  expect_error(maply_sp_elev(census, NULL, 1), "is not TRUE")
-  expect_error(maply_sp_elev(census, xlim = 0), "Limits must be in a")
+  expect_error(plot_each_species(1), "is not TRUE")
+  expect_error(plot_each_species(census, 1), "Can't deal with data of class")
+  expect_error(plot_each_species(census, NULL, 1), "is not TRUE")
+  expect_error(plot_each_species(census, xlim = 0), "Limits must be in a")
 })
 
 

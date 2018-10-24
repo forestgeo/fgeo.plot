@@ -27,7 +27,7 @@ contour_elev(p)
 contour_elev(p, contour_size = 0.5, low = "grey", high = "black", bins = 4)
 }
 \seealso{
-\code{\link[=maply_sp_elev]{maply_sp_elev()}}, \code{\link[=map_sp_elev]{map_sp_elev()}}, \code{\link[=map_elev]{map_elev()}},
+\code{\link[=plot_each_species]{plot_each_species()}}, \code{\link[=map_sp_elev]{map_sp_elev()}}, \code{\link[=map_elev]{map_elev()}},
 \code{\link[ggplot2:geom_contour]{ggplot2::geom_contour()}}.
 
 Other map components.: \code{\link{add_sp}},

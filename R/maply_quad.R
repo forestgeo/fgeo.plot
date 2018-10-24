@@ -25,7 +25,7 @@
 #' 
 #' # Filter the data you want. For example:
 #' want <- filter(small_vft, CensusID == 4, PlotID == 1)
-#' p <- maply_quad(want)
+#' p <- plot_dbh_bubles_by_quadrat(want)
 #' # Visualizing only the first plot
 #' p[[1]]
 #' # Printing all plots to .pdf, with parameters optimized for size letter
@@ -38,7 +38,7 @@
 #' # Be careful if filtering by DBH: You may unintentionally remove dead trees.
 #' # You should explicietly inlcude missing `DBH` values with `is.na(DBH)`
 #' p <- filter(small_vft, DBH > 20 | is.na(DBH))
-#' maply_quad(p)[[1]]
+#' plot_dbh_bubles_by_quadrat(p)[[1]]
 #'
 #' # Customizing the maps ----------------------------------------------------
 #' # A custom title and header
@@ -51,12 +51,12 @@
 #'   sep = "\n"
 #' )
 #' 
-#' maply_quad(small_vft, title_quad = "My Site, 2018. Quad:", header = myheader)
+#' plot_dbh_bubles_by_quadrat(small_vft, title_quad = "My Site, 2018. Quad:", header = myheader)
 #'
 #' # Tweak the theme with ggplot
 #' library(ggplot2)
 #'
-#' maply_quad(
+#' plot_dbh_bubles_by_quadrat(
 #'   small_vft,
 #'   title_quad = "My Site, 2018. Quad:",
 #'   header = map_quad_header("spanish"),
@@ -68,7 +68,7 @@
 #'     panel.background = element_rect(fill = "grey")
 #'   )
 #' )
-maply_quad <- function(vft,
+plot_dbh_bubles_by_quadrat <- function(vft,
                      title_quad = "Site Name, YYYY, Quadrat:",
                      header = map_quad_header(),
                      theme = theme_map_quad(),
@@ -84,7 +84,7 @@ maply_quad <- function(vft,
     "qx", "qy"
   )
   crucial <- .vft[core]
-  check_maply_quad(
+  check_plot_dbh_bubles_by_quadrat(
     vft = crucial,
     core = core,
     lim_min = lim_min,
@@ -122,7 +122,7 @@ maply_quad <- function(vft,
   setNames(p, nms)
 }
 
-check_maply_quad <- function(vft,
+check_plot_dbh_bubles_by_quadrat <- function(vft,
                            core,
                            lim_min,
                            lim_max,

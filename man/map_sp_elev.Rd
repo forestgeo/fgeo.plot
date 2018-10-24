@@ -20,7 +20,7 @@ map_elev(elevation, contour_size = 0.5, low = "blue", high = "red",
 }
 \value{
 \itemize{
-\item \code{maply_sp_elev()} returns a list of ggplots.
+\item \code{plot_each_species()} returns a list of ggplots.
 \item \code{map_elev()} and \code{map_sp_elev()} return a ggplot.
 }
 }
@@ -32,9 +32,9 @@ single page. You can map multiple species on the same plot or you can facet
 the output to map each species on a single plot and all plots in a single
 page.
 \item Use \code{map_elev()} if you want to map only elevation in the simplest way.
-\item Use \code{maply_sp_elev()} to apply the function \code{map_sp_elev()} to each species
-in a census dataset. The output is not a map but a list of maps, one per
-species, that can be printed on a .pdf file.
+\item Use \code{plot_each_species()} to apply the function \code{map_sp_elev()} to each
+species in a census dataset. The output is not a map but a list of maps, one
+per species, that can be printed on a .pdf file.
 }
 }
 \examples{

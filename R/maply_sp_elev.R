@@ -6,9 +6,9 @@
 #'   the output to map each species on a single plot and all plots in a single
 #'   page.
 #' * Use `map_elev()` if you want to map only elevation in the simplest way.
-#' * Use `maply_sp_elev()` to apply the function `map_sp_elev()` to each species
-#' in a census dataset. The output is not a map but a list of maps, one per
-#' species, that can be printed on a .pdf file.
+#' * Use `plot_each_species()` to apply the function `map_sp_elev()` to each
+#' species in a census dataset. The output is not a map but a list of maps, one
+#' per species, that can be printed on a .pdf file.
 #' 
 #' @template compare_ggplot2
 #' 
@@ -19,7 +19,7 @@
 #'   many maps as elements in this vector. The string "all" is a shortcut to 
 #'   map all unique codes in the column `sp`.
 #' @inheritParams add_sp
-#' @param wrap (Not available for `maply_sp_elev()`) Logical; `TRUE` wraps
+#' @param wrap (Not available for `plot_each_species()`) Logical; `TRUE` wraps
 #'   multiple maps within the area of a single graphic plot.
 #' @param label_elev Logical. `TRUE` labels the elevation lines with text.
 #' @inheritParams contour_elev
@@ -35,7 +35,7 @@
 #' @family functions to create a list of plots
 #' 
 #' @return 
-#' * `maply_sp_elev()` returns a list of ggplots.
+#' * `plot_each_species()` returns a list of ggplots.
 #' * `map_elev()` and `map_sp_elev()` return a ggplot.
 #' 
 #' @export 
@@ -45,16 +45,16 @@
 #' census <- subset(fgeo.data::luquillo_tree5_random, sp %in% some_sp)
 #' elevation <- fgeo.data::luquillo_elevation
 #' 
-#' p1 <- maply_sp_elev(census)
+#' p1 <- plot_each_species(census)
 #' # Showing first map only.
 #' p1[[1]]
 #' 
-#' p2 <- maply_sp_elev(census, elevation)
+#' p2 <- plot_each_species(census, elevation)
 #' # Showing second map only.
 #' p2[[2]]
 #' 
 #' # Tweaking
-#' p3 <- maply_sp_elev(
+#' p3 <- plot_each_species(
 #'   census,
 #'   elevation,
 #'   species = "all",
@@ -69,7 +69,7 @@
 #'   label_elev = FALSE
 #' )
 #' p3[[1]]
-maply_sp_elev <- function(census,
+plot_each_species <- function(census,
                           elevation = NULL,
                           species = "all",
                           fill = "black",
@@ -121,7 +121,7 @@ maply_sp_elev <- function(census,
   setNames(p, species)
 }
 
-#' @inherit maply_sp_elev title description details return
+#' @inherit plot_each_species title description details return
 #' 
 #' @family functions to create a single plot
 #' 
@@ -280,7 +280,7 @@ map_pure_elev <- function(elevation,
 #' Map a base over which other map components can later be added.
 #' 
 #' @template data_ggplot
-#' @seealso [map_sp_elev()], [map_elev()], [maply_sp_elev()], 
+#' @seealso [map_sp_elev()], [map_elev()], [plot_each_species()], 
 #'   [ggplot2::ggplot()].
 #' @family map components.
 #' @export
@@ -329,7 +329,7 @@ map_gx_gy <- function(data) {
 #' @template p
 #' @template xlim_ylim
 #' 
-#' @seealso [map_sp_elev()], [maply_sp_elev()], [ggplot2::coord_fixed()].
+#' @seealso [map_sp_elev()], [plot_each_species()], [ggplot2::coord_fixed()].
 #' 
 #' @family map components.
 #' @export
@@ -366,7 +366,7 @@ limit_gx_gy <- function(p, xlim = NULL, ylim = NULL) {
 #'   different color.
 #' @template shape_point_size
 #' 
-#' @seealso [map_sp_elev()], [maply_sp_elev()], [ggplot2::geom_point()].
+#' @seealso [map_sp_elev()], [plot_each_species()], [ggplot2::geom_point()].
 #' 
 #' @family map components.
 #' @export
@@ -413,7 +413,7 @@ add_sp <- function(p, data = NULL, fill = "sp", shape = 21, point_size = 3) {
 #' @template low_high
 #' @param bins A number giving the number of elevation lines to map.
 #' 
-#' @seealso [maply_sp_elev()], [map_sp_elev()], [map_elev()], 
+#' @seealso [plot_each_species()], [map_sp_elev()], [map_elev()], 
 #'   [ggplot2::geom_contour()].
 #' 
 #' @family map components.
@@ -444,7 +444,7 @@ contour_elev <- function(p,
 #' @param xyjust A number to adjust the position of the text labels of the 
 #'   elevation lines.
 #'
-#' @seealso [maply_sp_elev()], [map_sp_elev()], [map_elev()], 
+#' @seealso [plot_each_species()], [map_sp_elev()], [map_elev()], 
 #'   [ggplot2::geom_text()].
 #' 
 #' @family map components.

@@ -1,12 +1,12 @@
 vft_1quad_sub <- dplyr::sample_n(vft_1quad, 5)
 
 
-context("maply_quad")
+context("plot_dbh_bubles_by_quadrat")
 
 test_that("passes with default arguments", {
   # Warns because dataset has no dead trees
   expect_message(
-    maply_quad(
+    plot_dbh_bubles_by_quadrat(
       vft_1quad_sub,
       title_quad = "Site Name, YYYY, Quadrat:",
       header = map_quad_header(),
@@ -21,21 +21,21 @@ test_that("passes with default arguments", {
 })
 
 test_that("wrong inputs to are rejected", {
-  expect_error(maply_quad())
-  expect_error(maply_quad(1))
-  expect_error(maply_quad(vft_1quad_sub, lim_min = "a"))
-  expect_error(maply_quad(vft_1quad_sub, lim_max = "a"))
-  expect_error(maply_quad(vft_1quad_sub, subquadrat_side = "a"))
-  expect_error(maply_quad(vft_1quad_sub, tag_size = "a"))
-  expect_error(maply_quad(vft_1quad_sub, move_edge = "a"))
-  expect_error(maply_quad(vft_1quad_sub, header = 1))
-  expect_error(maply_quad(vft_1quad_sub, title_quad = 1))
-  expect_error(maply_quad(vft_1quad_sub, theme = 1))
+  expect_error(plot_dbh_bubles_by_quadrat())
+  expect_error(plot_dbh_bubles_by_quadrat(1))
+  expect_error(plot_dbh_bubles_by_quadrat(vft_1quad_sub, lim_min = "a"))
+  expect_error(plot_dbh_bubles_by_quadrat(vft_1quad_sub, lim_max = "a"))
+  expect_error(plot_dbh_bubles_by_quadrat(vft_1quad_sub, subquadrat_side = "a"))
+  expect_error(plot_dbh_bubles_by_quadrat(vft_1quad_sub, tag_size = "a"))
+  expect_error(plot_dbh_bubles_by_quadrat(vft_1quad_sub, move_edge = "a"))
+  expect_error(plot_dbh_bubles_by_quadrat(vft_1quad_sub, header = 1))
+  expect_error(plot_dbh_bubles_by_quadrat(vft_1quad_sub, title_quad = 1))
+  expect_error(plot_dbh_bubles_by_quadrat(vft_1quad_sub, theme = 1))
 })
 
 test_that("returns a list of ggplots", {
   # Warns because dataset has no dead trees
-  one_map <- maply_quad(vft_1quad_sub)
+  one_map <- plot_dbh_bubles_by_quadrat(vft_1quad_sub)
   expect_type(one_map, "list")
   expect_s3_class(one_map[[1]], "ggplot")
 })

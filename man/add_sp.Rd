@@ -31,7 +31,7 @@ add_sp(p)
 add_sp(p, fill = "white", shape = 22, point_size = 4)
 }
 \seealso{
-\code{\link[=map_sp_elev]{map_sp_elev()}}, \code{\link[=maply_sp_elev]{maply_sp_elev()}}, \code{\link[ggplot2:geom_point]{ggplot2::geom_point()}}.
+\code{\link[=map_sp_elev]{map_sp_elev()}}, \code{\link[=plot_each_species]{plot_each_species()}}, \code{\link[ggplot2:geom_point]{ggplot2::geom_point()}}.
 
 Other map components.: \code{\link{contour_elev}},
   \code{\link{hide}}, \code{\link{label_elev}},

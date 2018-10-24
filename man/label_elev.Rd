@@ -31,7 +31,7 @@ elevation \%>\%
   label_elev(label_size = 2, label_color = "black", xyjust = -0.25)
 }
 \seealso{
-\code{\link[=maply_sp_elev]{maply_sp_elev()}}, \code{\link[=map_sp_elev]{map_sp_elev()}}, \code{\link[=map_elev]{map_elev()}},
+\code{\link[=plot_each_species]{plot_each_species()}}, \code{\link[=map_sp_elev]{map_sp_elev()}}, \code{\link[=map_elev]{map_elev()}},
 \code{\link[ggplot2:geom_text]{ggplot2::geom_text()}}.
 
 Other map components.: \code{\link{add_sp}},

@@ -34,7 +34,7 @@ bl       br
 A modified version of the input with the additional variable \code{page}.
 }
 \description{
-This function makes it possible for \code{\link[=maply_tag]{maply_tag()}} to plot each individual map.
+This function makes it possible for \code{\link[=plot_tag_status_by_subquadrat]{plot_tag_status_by_subquadrat()}} to plot each individual map.
 Each map corresponds to one page and includes four subquadrats. There are a
 total of four maps per quadrat (i.e. a total of 16 subquadrats per quadrat).
 }
