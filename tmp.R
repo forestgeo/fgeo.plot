@@ -1,3 +1,6 @@
+#' @param wrap (Not available for `plot_each_species()`) Logical; `TRUE` wraps
+#'   multiple maps within the area of a single graphic plot.
+
 # grep --------------------------------------------------------------------
 
 grep -R "library(fgeo.map)" 

@@ -21,8 +21,6 @@
 #'   many maps as elements in this vector. The string "all" is a shortcut to 
 #'   map all unique codes in the column `sp`.
 #' @inheritParams add_sp
-#' @param wrap (Not available for `plot_each_species()`) Logical; `TRUE` wraps
-#'   multiple maps within the area of a single graphic plot.
 #' @param label_elev Logical. `TRUE` labels the elevation lines with text.
 #' @inheritParams contour_elev
 #' @param hide_legend_color Logical; `TRUE` hides the color legend.
@@ -72,24 +70,24 @@
 #' )
 #' p3[[1]]
 plot_each_species <- function(census,
-                          elevation = NULL,
-                          species = "all",
-                          fill = "black",
-                          shape = 21,
-                          point_size = 3,
-                          contour_size = 0.5,
-                          low = "blue",
-                          high = "red",
-                          hide_legend_color = FALSE,
-                          bins = NULL,
-                          label_elev = TRUE,
-                          label_size = 3,
-                          label_color = "grey",
-                          xyjust = 1,
-                          fontface = "italic",
-                          xlim = NULL,
-                          ylim = NULL,
-                          custom_theme = NULL) {
+                              elevation = NULL,
+                              species = "all",
+                              fill = "black",
+                              shape = 21,
+                              point_size = 3,
+                              contour_size = 0.5,
+                              low = "blue",
+                              high = "red",
+                              hide_legend_color = FALSE,
+                              bins = NULL,
+                              label_elev = TRUE,
+                              label_size = 3,
+                              label_color = "grey",
+                              xyjust = 1,
+                              fontface = "italic",
+                              xlim = NULL,
+                              ylim = NULL,
+                              custom_theme = NULL) {
   check_sp(census = census, species = species)
 
   species <- best_species(census, species)
@@ -124,6 +122,9 @@ plot_each_species <- function(census,
 }
 
 #' @inherit plot_each_species title description details return
+#' @inheritParams plot_each_species
+#' @param wrap (Not available for `plot_each_species()`) Logical; `TRUE` wraps
+#'   multiple maps within the area of a single graphic plot.
 #' 
 #' @family functions to create a single plot
 #' 
@@ -161,24 +162,24 @@ plot_each_species <- function(census,
 #'   wrap("sp") %>%
 #'   theme_default(legend.position = "top")
 plot_species_or_elevation <- function(census,
-                        elevation = NULL,
-                        fill = "black",
-                        shape = 21,
-                        wrap = TRUE,
-                        point_size = 3,
-                        contour_size = 0.5,
-                        low = "blue",
-                        high = "red",
-                        hide_legend_color = FALSE,
-                        bins = NULL,
-                        label_elev = TRUE,
-                        label_size = 3,
-                        label_color = "grey",
-                        xyjust = 1,
-                        fontface = "italic",
-                        xlim = NULL,
-                        ylim = NULL,
-                        custom_theme = NULL) {
+                                      elevation = NULL,
+                                      fill = "black",
+                                      shape = 21,
+                                      wrap = TRUE,
+                                      point_size = 3,
+                                      contour_size = 0.5,
+                                      low = "blue",
+                                      high = "red",
+                                      hide_legend_color = FALSE,
+                                      bins = NULL,
+                                      label_elev = TRUE,
+                                      label_size = 3,
+                                      label_color = "grey",
+                                      xyjust = 1,
+                                      fontface = "italic",
+                                      xlim = NULL,
+                                      ylim = NULL,
+                                      custom_theme = NULL) {
   stopifnot(is.data.frame(census))
   check_crucial_names(census, c("gx", "gy"))
   
@@ -216,19 +217,19 @@ plot_species_or_elevation <- function(census,
 #' @rdname plot_species_or_elevation
 #' @export
 plot_elevation <- function(elevation,
-                     contour_size = 0.5,
-                     low = "blue",
-                     high = "red",
-                     hide_legend_color = FALSE,
-                     bins = NULL,
-                     label_elev = TRUE,
-                     label_size = 3,
-                     label_color = "grey",
-                     xyjust = 1,
-                     fontface = "italic",
-                     xlim = NULL,
-                     ylim = NULL,
-                     custom_theme = NULL) {
+                           contour_size = 0.5,
+                           low = "blue",
+                           high = "red",
+                           hide_legend_color = FALSE,
+                           bins = NULL,
+                           label_elev = TRUE,
+                           label_size = 3,
+                           label_color = "grey",
+                           xyjust = 1,
+                           fontface = "italic",
+                           xlim = NULL,
+                           ylim = NULL,
+                           custom_theme = NULL) {
   base <- map_pure_elev(
     elevation = elevation,
     contour_size = contour_size,

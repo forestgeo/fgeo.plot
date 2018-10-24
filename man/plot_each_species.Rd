@@ -68,9 +68,6 @@ minimum and maximum limits of the vertical and horizontal coordinates.}
 
 \item{custom_theme}{A valid \code{\link[ggplot2:theme]{ggplot2::theme()}}. \code{NULL} uses the default
 theme \code{\link[=theme_default]{theme_default()}}.}
-
-\item{wrap}{(Not available for \code{plot_each_species()}) Logical; \code{TRUE} wraps
-multiple maps within the area of a single graphic plot.}
 }
 \value{
 \itemize{

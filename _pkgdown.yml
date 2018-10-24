@@ -50,13 +50,13 @@ reference:
     contents:
       - has_concept("functions to create or modify plot layers")
 
-  - title: Methods for common generics
-    contents:
-      - plot.fgeo_habitat
-
   - title: Functions to tweak plots
     contents:
       - has_concept("functions to tweak plots")
+
+  - title: Methods for common generics
+    contents:
+      - plot.fgeo_habitat
 
   - title: "Datasets"
     contents:

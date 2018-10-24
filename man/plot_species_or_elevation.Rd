@@ -18,6 +18,62 @@ plot_elevation(elevation, contour_size = 0.5, low = "blue",
   xyjust = 1, fontface = "italic", xlim = NULL, ylim = NULL,
   custom_theme = NULL)
 }
+\arguments{
+\item{census}{A dataframe; specifically, a ForestGEO's census.}
+
+\item{elevation}{A list or dataframe giving ForestGEO's elevation-data.}
+
+\item{fill}{Character; either a colour or "sp", which maps each species to a
+different color.}
+
+\item{shape}{A number giving point size and shape (as in
+\code{\link[graphics:points]{graphics::points()}}). Passed to \code{\link[ggplot2:geom_point]{ggplot2::geom_point()}}.}
+
+\item{wrap}{(Not available for \code{plot_each_species()}) Logical; \code{TRUE} wraps
+multiple maps within the area of a single graphic plot.}
+
+\item{point_size}{A number giving point size and shape (as in
+\code{\link[graphics:points]{graphics::points()}}). Passed to \code{\link[ggplot2:geom_point]{ggplot2::geom_point()}}.}
+
+\item{contour_size}{A number giving the size of the contour of elevation
+lines. Passed to \code{ggplot2::stat_contour()} (see \code{\link[ggplot2:geom_contour]{ggplot2::geom_contour()}}).}
+
+\item{low}{A string giving a color of the elevation lines representing
+low and high elevation.}
+
+\item{high}{A string giving a color of the elevation lines representing
+low and high elevation.}
+
+\item{hide_legend_color}{Logical; \code{TRUE} hides the color legend.}
+
+\item{bins}{A number giving the number of elevation lines to map.}
+
+\item{label_elev}{Logical. \code{TRUE} labels the elevation lines with text.}
+
+\item{label_size}{A number (\code{label_size}) or character
+string (\code{label_color} and \code{fontface}) giving the size, colour and fontface
+of the text labels for the elevation lines.}
+
+\item{label_color}{A number (\code{label_size}) or character
+string (\code{label_color} and \code{fontface}) giving the size, colour and fontface
+of the text labels for the elevation lines.}
+
+\item{xyjust}{A number to adjust the position of the text labels of the
+elevation lines.}
+
+\item{fontface}{A number (\code{label_size}) or character
+string (\code{label_color} and \code{fontface}) giving the size, colour and fontface
+of the text labels for the elevation lines.}
+
+\item{xlim}{A vector of length 2, for example \code{c(0, 500)}, giving the
+minimum and maximum limits of the vertical and horizontal coordinates.}
+
+\item{ylim}{A vector of length 2, for example \code{c(0, 500)}, giving the
+minimum and maximum limits of the vertical and horizontal coordinates.}
+
+\item{custom_theme}{A valid \code{\link[ggplot2:theme]{ggplot2::theme()}}. \code{NULL} uses the default
+theme \code{\link[=theme_default]{theme_default()}}.}
+}
 \value{
 \itemize{
 \item \code{plot_each_species()} returns a list of ggplots.
