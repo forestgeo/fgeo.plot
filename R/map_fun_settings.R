@@ -9,6 +9,9 @@
 #' @inheritParams ggplot2::theme
 #' @param ... Additional arguments passed to  [ggplot2::theme()].
 #' @seealso [ggplot2::theme()].
+#' 
+#' @family functions to tweak plots
+#' 
 #' @return A [ggplot2::theme()].
 #' @examples
 #' class(theme_map_tag())
@@ -104,6 +107,9 @@ theme_default <- function(p,
 #'
 #' @name headers
 #' @param lang = String; Language of the header: Either "english" or "spanish".
+#' 
+#' @family functions to tweak plots
+#' 
 #' @examples
 #' cat(map_tag_header())
 #' cat(map_quad_header())

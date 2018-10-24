@@ -96,4 +96,8 @@ census \%>\%
 }
 \seealso{
 \code{\link[ggplot2:theme]{ggplot2::theme()}}.
+
+Other functions to tweak plots: \code{\link{headers}},
+  \code{\link{suffix_edge_tag}}
 }
+\concept{functions to tweak plots}

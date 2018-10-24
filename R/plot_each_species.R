@@ -282,9 +282,11 @@ map_pure_elev <- function(elevation,
 #' Map a base over which other map components can later be added.
 #' 
 #' @template data_ggplot
-#' @seealso [plot_species_or_elevation()], [plot_elevation()], [plot_each_species()], 
-#'   [ggplot2::ggplot()].
-#' @family map components.
+#' @seealso [plot_species_or_elevation()], [plot_elevation()],
+#'   [plot_each_species()], [ggplot2::ggplot()].
+#'
+#' @family functions to create or modify plot layers
+#' 
 #' @export
 #' @examples 
 #' # Small dataset with a few species for quick examples
@@ -331,9 +333,11 @@ map_gx_gy <- function(data) {
 #' @template p
 #' @template xlim_ylim
 #' 
-#' @seealso [plot_species_or_elevation()], [plot_each_species()], [ggplot2::coord_fixed()].
+#' @seealso [plot_species_or_elevation()], [plot_each_species()],
+#'   [ggplot2::coord_fixed()].
 #' 
-#' @family map components.
+#' @family functions to create or modify plot layers
+#' 
 #' @export
 #' @examples 
 #' some_sp <- c("PREMON", "CASARB")
@@ -368,9 +372,11 @@ limit_gx_gy <- function(p, xlim = NULL, ylim = NULL) {
 #'   different color.
 #' @template shape_point_size
 #' 
-#' @seealso [plot_species_or_elevation()], [plot_each_species()], [ggplot2::geom_point()].
+#' @seealso [plot_species_or_elevation()], [plot_each_species()],
+#'   [ggplot2::geom_point()].
 #' 
-#' @family map components.
+#' @family functions to create or modify plot layers
+#' 
 #' @export
 #' @examples 
 #' # Small dataset with a few species for quick examples
@@ -418,7 +424,7 @@ add_sp <- function(p, data = NULL, fill = "sp", shape = 21, point_size = 3) {
 #' @seealso [plot_each_species()], [plot_species_or_elevation()], [plot_elevation()], 
 #'   [ggplot2::geom_contour()].
 #' 
-#' @family map components.
+#' @family functions to create or modify plot layers
 #' @export
 #' @examples 
 #' p <- map_gx_gy_elev(fgeo.data::luquillo_elevation)
@@ -446,10 +452,11 @@ contour_elev <- function(p,
 #' @param xyjust A number to adjust the position of the text labels of the 
 #'   elevation lines.
 #'
-#' @seealso [plot_each_species()], [plot_species_or_elevation()], [plot_elevation()], 
-#'   [ggplot2::geom_text()].
+#' @seealso [plot_each_species()], [plot_species_or_elevation()],
+#'   [plot_elevation()], [ggplot2::geom_text()].
 #' 
-#' @family map components.
+#' @family functions to create or modify plot layers
+#' 
 #' @export
 #' @examples 
 #' elevation <- fgeo.data::luquillo_elevation
@@ -531,7 +538,8 @@ text_at_max <- function(x,
 #' @template p
 #' 
 #' @seealso [ggplot2::labs()],  [ggplot2::guides()].
-#' @family map components.
+#' 
+#' @family functions to create or modify plot layers
 #' 
 #' @examples 
 #' elevation <- fgeo.data::luquillo_elevation
@@ -573,7 +581,8 @@ hide_legend_color <- function(p) {
 #' @inheritParams ggplot2::facet_wrap
 #' @inheritDotParams ggplot2::facet_wrap
 #' @seealso [ggplot2::facet_wrap()], [ggplot2::facet_grid()].
-#' @family map components.
+#' 
+#' @family functions to create or modify plot layers
 #' 
 #' @export
 #' @examples

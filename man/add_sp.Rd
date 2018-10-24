@@ -31,11 +31,12 @@ add_sp(p)
 add_sp(p, fill = "white", shape = 22, point_size = 4)
 }
 \seealso{
-\code{\link[=plot_species_or_elevation]{plot_species_or_elevation()}}, \code{\link[=plot_each_species]{plot_each_species()}}, \code{\link[ggplot2:geom_point]{ggplot2::geom_point()}}.
+\code{\link[=plot_species_or_elevation]{plot_species_or_elevation()}}, \code{\link[=plot_each_species]{plot_each_species()}},
+\code{\link[ggplot2:geom_point]{ggplot2::geom_point()}}.
 
-Other map components.: \code{\link{contour_elev}},
+Other functions to create or modify plot layers: \code{\link{contour_elev}},
   \code{\link{hide}}, \code{\link{label_elev}},
   \code{\link{limit_gx_gy}}, \code{\link{map_gx_gy_elev}},
   \code{\link{wrap}}
 }
-\concept{map components.}
+\concept{functions to create or modify plot layers}

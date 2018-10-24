@@ -18,4 +18,5 @@ census. Adapted from \link[fgeo.data:luquillo_vft_4quad]{fgeo.data::luquillo_vft
 \examples{
 str(vft_1quad)
 }
+\concept{datasets}
 \keyword{datasets}

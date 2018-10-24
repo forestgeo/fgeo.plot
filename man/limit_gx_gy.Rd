@@ -28,11 +28,12 @@ fgeo.data::luquillo_elevation \%>\%
   limit_gx_gy(xlim = c(0, 100), ylim = c(0, 400))
 }
 \seealso{
-\code{\link[=plot_species_or_elevation]{plot_species_or_elevation()}}, \code{\link[=plot_each_species]{plot_each_species()}}, \code{\link[ggplot2:coord_fixed]{ggplot2::coord_fixed()}}.
+\code{\link[=plot_species_or_elevation]{plot_species_or_elevation()}}, \code{\link[=plot_each_species]{plot_each_species()}},
+\code{\link[ggplot2:coord_fixed]{ggplot2::coord_fixed()}}.
 
-Other map components.: \code{\link{add_sp}},
+Other functions to create or modify plot layers: \code{\link{add_sp}},
   \code{\link{contour_elev}}, \code{\link{hide}},
   \code{\link{label_elev}}, \code{\link{map_gx_gy_elev}},
   \code{\link{wrap}}
 }
-\concept{map components.}
+\concept{functions to create or modify plot layers}

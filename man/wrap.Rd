@@ -91,9 +91,9 @@ census \%>\%
 \seealso{
 \code{\link[ggplot2:facet_wrap]{ggplot2::facet_wrap()}}, \code{\link[ggplot2:facet_grid]{ggplot2::facet_grid()}}.
 
-Other map components.: \code{\link{add_sp}},
+Other functions to create or modify plot layers: \code{\link{add_sp}},
   \code{\link{contour_elev}}, \code{\link{hide}},
   \code{\link{label_elev}}, \code{\link{limit_gx_gy}},
   \code{\link{map_gx_gy_elev}}
 }
-\concept{map components.}
+\concept{functions to create or modify plot layers}

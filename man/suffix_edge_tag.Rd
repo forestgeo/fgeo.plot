@@ -45,3 +45,8 @@ suffix_edge_tag(
   x_q = 20
 )
 }
+\seealso{
+Other functions to tweak plots: \code{\link{headers}},
+  \code{\link{themes}}
+}
+\concept{functions to tweak plots}

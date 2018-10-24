@@ -30,9 +30,9 @@ contour_elev(p, contour_size = 0.5, low = "grey", high = "black", bins = 4)
 \code{\link[=plot_each_species]{plot_each_species()}}, \code{\link[=plot_species_or_elevation]{plot_species_or_elevation()}}, \code{\link[=plot_elevation]{plot_elevation()}},
 \code{\link[ggplot2:geom_contour]{ggplot2::geom_contour()}}.
 
-Other map components.: \code{\link{add_sp}},
+Other functions to create or modify plot layers: \code{\link{add_sp}},
   \code{\link{hide}}, \code{\link{label_elev}},
   \code{\link{limit_gx_gy}}, \code{\link{map_gx_gy_elev}},
   \code{\link{wrap}}
 }
-\concept{map components.}
+\concept{functions to create or modify plot layers}

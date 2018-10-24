@@ -31,12 +31,12 @@ elevation \%>\%
   label_elev(label_size = 2, label_color = "black", xyjust = -0.25)
 }
 \seealso{
-\code{\link[=plot_each_species]{plot_each_species()}}, \code{\link[=plot_species_or_elevation]{plot_species_or_elevation()}}, \code{\link[=plot_elevation]{plot_elevation()}},
-\code{\link[ggplot2:geom_text]{ggplot2::geom_text()}}.
+\code{\link[=plot_each_species]{plot_each_species()}}, \code{\link[=plot_species_or_elevation]{plot_species_or_elevation()}},
+\code{\link[=plot_elevation]{plot_elevation()}}, \code{\link[ggplot2:geom_text]{ggplot2::geom_text()}}.
 
-Other map components.: \code{\link{add_sp}},
+Other functions to create or modify plot layers: \code{\link{add_sp}},
   \code{\link{contour_elev}}, \code{\link{hide}},
   \code{\link{limit_gx_gy}}, \code{\link{map_gx_gy_elev}},
   \code{\link{wrap}}
 }
-\concept{map components.}
+\concept{functions to create or modify plot layers}

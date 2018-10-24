@@ -5,6 +5,8 @@
 #'   status to suffix.
 #' @param suffix A character string to suffix tree tags with.
 #' @param x_q,y_q Integer; the x and y size in meters of a quadrat.
+#' 
+#' @family functions to tweak plots
 #'
 #' @return A modified version of `x`.
 #' @export

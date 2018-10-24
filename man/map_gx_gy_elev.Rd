@@ -42,12 +42,12 @@ contour_elev(base_elevation)
 }
 }
 \seealso{
-\code{\link[=plot_species_or_elevation]{plot_species_or_elevation()}}, \code{\link[=plot_elevation]{plot_elevation()}}, \code{\link[=plot_each_species]{plot_each_species()}},
-\code{\link[ggplot2:ggplot]{ggplot2::ggplot()}}.
+\code{\link[=plot_species_or_elevation]{plot_species_or_elevation()}}, \code{\link[=plot_elevation]{plot_elevation()}},
+\code{\link[=plot_each_species]{plot_each_species()}}, \code{\link[ggplot2:ggplot]{ggplot2::ggplot()}}.
 
-Other map components.: \code{\link{add_sp}},
+Other functions to create or modify plot layers: \code{\link{add_sp}},
   \code{\link{contour_elev}}, \code{\link{hide}},
   \code{\link{label_elev}}, \code{\link{limit_gx_gy}},
   \code{\link{wrap}}
 }
-\concept{map components.}
+\concept{functions to create or modify plot layers}

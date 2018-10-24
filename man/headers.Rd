@@ -20,3 +20,8 @@ Pre-made headers.
 cat(map_tag_header())
 cat(map_quad_header())
 }
+\seealso{
+Other functions to tweak plots: \code{\link{suffix_edge_tag}},
+  \code{\link{themes}}
+}
+\concept{functions to tweak plots}

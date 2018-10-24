@@ -30,9 +30,9 @@ elevation \%>\%
 \seealso{
 \code{\link[ggplot2:labs]{ggplot2::labs()}},  \code{\link[ggplot2:guides]{ggplot2::guides()}}.
 
-Other map components.: \code{\link{add_sp}},
+Other functions to create or modify plot layers: \code{\link{add_sp}},
   \code{\link{contour_elev}}, \code{\link{label_elev}},
   \code{\link{limit_gx_gy}}, \code{\link{map_gx_gy_elev}},
   \code{\link{wrap}}
 }
-\concept{map components.}
+\concept{functions to create or modify plot layers}

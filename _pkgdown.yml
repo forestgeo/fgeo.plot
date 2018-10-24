@@ -43,27 +43,21 @@ reference:
     contents:
       - has_concept("functions to create a single plot")
 
-  - title: Add or modify layers of a plot.
+  - title: Create or modify plot layers.
+    desc: >
+      Functions to build custom plots most flexibly. For even more flexibility
+      use the __ggplot2__ package.
     contents:
-      - map_gx_gy_elev
-      - map_gx_gy
-      - contour_elev
-      - label_elev
-      - add_sp
-      - wrap
-      - limit_gx_gy
-      - hide
+      - has_concept("functions to create or modify plot layers")
 
-  - title: "Helpers"
-    contents:
-      - matches("header")
-      - suffix_edge_tag
-      - starts_with("theme")
-
-  - title: "Methods for common generics"
+  - title: Methods for common generics
     contents:
       - plot.fgeo_habitat
 
+  - title: Functions to tweak plots
+    contents:
+      - has_concept("functions to tweak plots")
+
   - title: "Datasets"
     contents:
-      - vft_1quad
+      - has_concept("datasets")
