@@ -8,8 +8,8 @@ plot_tag_status_by_subquadrat(vft, x_q = 20, x_sq = 5, y_q = 20,
   y_sq = 5, subquad_offset = NULL, bl = 1, br = 2, tr = 3,
   tl = 4, title_quad = "Site Name, YYYY. Quadrat:", show_page = TRUE,
   show_subquad = TRUE, point_shape = c(19, 4), point_size = 1.5,
-  tag_size = 3, header = map_tag_header(), theme = theme_map_tag(),
-  move_edge = 0)
+  tag_size = 3, header = header_tag_status(),
+  theme = theme_tag_status(), move_edge = 0)
 }
 \arguments{
 \item{vft}{A dataframe -- specifically, a ForestGEO ViewFullTable.}
@@ -130,7 +130,7 @@ p[[1]]
 
 # Tweaking the default theme of plot_tag_status_by_subquadrat()
 
-small_tweak <- theme_map_tag(legend.position = "bottom")
+small_tweak <- theme_tag_status(legend.position = "bottom")
 p <- plot_tag_status_by_subquadrat(small_vft, theme = small_tweak)
 p[[1]]
 
@@ -139,7 +139,7 @@ p[[1]]
 }
 \seealso{
 \code{\link[graphics:points]{graphics::points()}}, \code{\link[ggplot2:geom_point]{ggplot2::geom_point()}}, \code{\link[ggplot2:theme]{ggplot2::theme()}}
-\code{\link[=map_tag_header]{map_tag_header()}}, \code{\link[=theme_map_tag]{theme_map_tag()}}, \code{\link[fgeo.tool:add_subquad]{fgeo.tool::add_subquad()}},
+\code{\link[=header_tag_status]{header_tag_status()}}, \code{\link[=theme_tag_status]{theme_tag_status()}}, \code{\link[fgeo.tool:add_subquad]{fgeo.tool::add_subquad()}},
 \code{\link[=paginate]{paginate()}}, \link[ggrepel:geom_text_repel]{ggrepel::geom_text_repel}, \code{\link[fgeo.tool:drop_twice_dead]{fgeo.tool::drop_twice_dead()}}.
 
 Other functions to create a list of plots: \code{\link{plot_dbh_bubles_by_quadrat}},

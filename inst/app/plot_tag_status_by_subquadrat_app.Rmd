@@ -55,8 +55,8 @@ plot_tag_status_by_subquadrat(
   point_shape = c(19, 4),
   point_size = 1.5,
   tag_size = 3,
-  header = map_tag_header(),
-  theme = theme_map_tag(),
+  header = header_tag_status(),
+  theme = theme_tag_status(),
   move_edge = 0
 )
 ```
@@ -105,16 +105,16 @@ fluidRow(
 sliderInput("moveedge", "move_edge", min = -2, max = 2, value = 0)
 ```
 
-`r icon::fa_question_circle()` [`theme_map_tag()`](https://forestgeo.github.io/fgeo.map/reference/themes.html)
+`r icon::fa_question_circle()` [`theme_tag_status()`](https://forestgeo.github.io/fgeo.map/reference/themes.html)
 
 ```{r}
-textInput(".theme", "theme", "theme_map_tag(legend.position = 'top')")
+textInput(".theme", "theme", "theme_tag_status(legend.position = 'top')")
 ```
 
-`r icon::fa_question_circle()` [`map_tag_header()`](https://forestgeo.github.io/map/reference/get_header.html)
+`r icon::fa_question_circle()` [`header_tag_status()`](https://forestgeo.github.io/map/reference/get_header.html)
 
 ```{r}
-textInput(".header", "header", "map_tag_header()")
+textInput(".header", "header", "header_tag_status()")
 ```
 
 --- PLOT {data-width=330}
@@ -131,7 +131,7 @@ renderPlot({
     point_shape = c(input$pointshape_alive, input$pointshape_dead),
     tag_size = input$tagsize,
     header = ifelse(
-      input$.header == "map_tag_header()", map_tag_header(), input$.header
+      input$.header == "header_tag_status()", header_tag_status(), input$.header
     ),
     show_subquad = as.logical(input$showsubquad),
     show_page = as.logical(input$showpage),

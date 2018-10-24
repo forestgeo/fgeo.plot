@@ -20,17 +20,18 @@
 #'   code for one species in the column `sp`. This function will produce as 
 #'   many maps as elements in this vector. The string "all" is a shortcut to 
 #'   map all unique codes in the column `sp`.
-#' @inheritParams add_sp
-#' @param label_elev Logical. `TRUE` labels the elevation lines with text.
-#' @inheritParams contour_elev
-#' @param hide_legend_color Logical; `TRUE` hides the color legend.
-#' @inheritParams label_elev
-#' @inheritParams limit_gx_gy
+#' @inheritParams add_species
+#' @param add_elevation_labels Logical. `TRUE` labels the elevation lines with
+#'   text.
+#' @inheritParams add_elevation_contrours
+#' @param hide_color_legend Logical; `TRUE` hides the color legend.
+#' @inheritParams add_elevation_labels
+#' @inheritParams set_axis_limits
 #' @param custom_theme A valid [ggplot2::theme()]. `NULL` uses the default
 #'   theme [theme_default()].
 #'
-#' @seealso [map_gx_gy_elev()], [limit_gx_gy()], [add_sp()], [contour_elev()],
-#'   [label_elev()], [hide()], [wrap()]
+#' @seealso [plot_base_elevation()], [set_axis_limits()], [add_species()],
+#'   [add_elevation_contrours()], [add_elevation_labels()], [hide()], [facet()].
 #'
 #' @family functions to create a list of plots
 #' 
@@ -64,9 +65,9 @@
 #'   contour_size = 1,
 #'   low = "grey",
 #'   high = "black",
-#'   hide_legend_color = TRUE,
+#'   hide_color_legend = TRUE,
 #'   bins = 7,
-#'   label_elev = FALSE
+#'   add_elevation_labels = FALSE
 #' )
 #' p3[[1]]
 plot_each_species <- function(census,
@@ -78,9 +79,9 @@ plot_each_species <- function(census,
                               contour_size = 0.5,
                               low = "blue",
                               high = "red",
-                              hide_legend_color = FALSE,
+                              hide_color_legend = FALSE,
                               bins = NULL,
-                              label_elev = TRUE,
+                              add_elevation_labels = TRUE,
                               label_size = 3,
                               label_color = "grey",
                               xyjust = 1,
@@ -102,14 +103,14 @@ plot_each_species <- function(census,
     elevation = elevation,
     fill = fill,
     shape = shape,
-    wrap = TRUE,
+    facet = TRUE,
     point_size = point_size,
     contour_size = contour_size,
     low = low,
     high = high,
-    hide_legend_color = hide_legend_color,
+    hide_color_legend = hide_color_legend,
     bins = bins,
-    label_elev = label_elev,
+    add_elevation_labels = add_elevation_labels,
     label_size = label_size,
     label_color = label_color,
     xyjust = xyjust,
@@ -123,7 +124,7 @@ plot_each_species <- function(census,
 
 #' @inherit plot_each_species title description details return
 #' @inheritParams plot_each_species
-#' @param wrap (Not available for `plot_each_species()`) Logical; `TRUE` wraps
+#' @param facet (Not available for `plot_each_species()`) Logical; `TRUE` wraps
 #'   multiple maps within the area of a single graphic plot.
 #' 
 #' @family functions to create a single plot
@@ -144,35 +145,35 @@ plot_each_species <- function(census,
 #' 
 #' # For maximum control, you can compose maps as you like
 #' # Traditional sintax: g(f(x))
-#' contour_elev(map_gx_gy_elev(elevation))
+#' add_elevation_contrours(plot_base_elevation(elevation))
 #' 
 #' # With the pipe: f(x) %>% g()
-#' map_gx_gy_elev(elevation) %>%
-#'   contour_elev()
+#' plot_base_elevation(elevation) %>%
+#'   add_elevation_contrours()
 #' 
 #' # The traditional sintax is hard to read when you compose multiple functions.
 #' # With the pipe, readability isn't affected by the number of functions.
-#' map_gx_gy_elev(elevation) %>%
-#'   limit_gx_gy(xlim = c(-100, 400)) %>%
-#'   contour_elev(contour_size = 0.5) %>%
-#'   label_elev(label_color = "red") %>%
+#' plot_base_elevation(elevation) %>%
+#'   set_axis_limits(xlim = c(-100, 400)) %>%
+#'   add_elevation_contrours(contour_size = 0.5) %>%
+#'   add_elevation_labels(label_color = "red") %>%
 #'   hide_axis_labels() %>%
-#'   hide_legend_color() %>%
-#'   add_sp(census, point_size = 5) %>%
-#'   wrap("sp") %>%
+#'   hide_color_legend() %>%
+#'   add_species(census, point_size = 5) %>%
+#'   facet("sp") %>%
 #'   theme_default(legend.position = "top")
 plot_species_or_elevation <- function(census,
                                       elevation = NULL,
                                       fill = "black",
                                       shape = 21,
-                                      wrap = TRUE,
+                                      facet = TRUE,
                                       point_size = 3,
                                       contour_size = 0.5,
                                       low = "blue",
                                       high = "red",
-                                      hide_legend_color = FALSE,
+                                      hide_color_legend = FALSE,
                                       bins = NULL,
-                                      label_elev = TRUE,
+                                      add_elevation_labels = TRUE,
                                       label_size = 3,
                                       label_color = "grey",
                                       xyjust = 1,
@@ -185,7 +186,7 @@ plot_species_or_elevation <- function(census,
   
   # User doesn't provide elevation data
   if (is.null(elevation)) {
-    base <- map_gx_gy(census)
+    base <- plot_base_census(census)
     
     # User provides elevation data
   } else {
@@ -194,9 +195,9 @@ plot_species_or_elevation <- function(census,
       contour_size = contour_size,
       low = low,
       high = high,
-      hide_legend_color = hide_legend_color,
+      hide_color_legend = hide_color_legend,
       bins = bins,
-      label_elev = label_elev,
+      add_elevation_labels = add_elevation_labels,
       label_size = label_size,
       label_color = label_color,
       xyjust = xyjust,
@@ -205,9 +206,9 @@ plot_species_or_elevation <- function(census,
   }
   
   base %>% 
-    add_sp(census, fill = fill, shape = shape, point_size = point_size) %>%
-    best_layout(wrap = wrap) %>% 
-    limit_gx_gy(xlim = xlim, ylim = ylim) %>%
+    add_species(census, fill = fill, shape = shape, point_size = point_size) %>%
+    best_layout(facet = facet) %>% 
+    set_axis_limits(xlim = xlim, ylim = ylim) %>%
     best_theme(custom_theme = custom_theme)
 }
 
@@ -220,9 +221,9 @@ plot_elevation <- function(elevation,
                            contour_size = 0.5,
                            low = "blue",
                            high = "red",
-                           hide_legend_color = FALSE,
+                           hide_color_legend = FALSE,
                            bins = NULL,
-                           label_elev = TRUE,
+                           add_elevation_labels = TRUE,
                            label_size = 3,
                            label_color = "grey",
                            xyjust = 1,
@@ -235,16 +236,16 @@ plot_elevation <- function(elevation,
     contour_size = contour_size,
     low = low,
     high = high,
-    hide_legend_color = hide_legend_color,
+    hide_color_legend = hide_color_legend,
     bins = bins,
-    label_elev = label_elev,
+    add_elevation_labels = add_elevation_labels,
     label_size = label_size,
     label_color = label_color,
     xyjust = xyjust,
     fontface = fontface
   )
   base %>% 
-    limit_gx_gy(xlim = xlim, ylim = ylim) %>%
+    set_axis_limits(xlim = xlim, ylim = ylim) %>%
     best_theme(custom_theme = custom_theme)
 }
 
@@ -252,22 +253,22 @@ map_pure_elev <- function(elevation,
                           contour_size = 0.5,
                           low = "blue",
                           high = "red",
-                          hide_legend_color = FALSE,
+                          hide_color_legend = FALSE,
                           bins = NULL,
-                          label_elev = TRUE,
+                          add_elevation_labels = TRUE,
                           label_size = 3,
                           label_color = "grey",
                           xyjust = 1,
                           fontface = "italic") {
   elevation <- fgeo.tool::fgeo_elevation(elevation)
   base <- elevation %>% 
-    map_gx_gy_elev() %>% 
-    contour_elev(
+    plot_base_elevation() %>% 
+    add_elevation_contrours(
       contour_size = contour_size, low = low, high = high, bins = bins
     ) %>% 
-    best_elev_legend(hide_legend_color = hide_legend_color)
-  if (label_elev) {
-    base <- label_elev(
+    best_elev_legend(hide_color_legend = hide_color_legend)
+  if (add_elevation_labels) {
+    base <- add_elevation_labels(
       base,
       label_size = label_size,
       label_color = label_color,
@@ -296,33 +297,33 @@ map_pure_elev <- function(elevation,
 #' elevation <- fgeo.data::luquillo_elevation
 #' 
 #' # These functions look alike but internally they are not.
-#' base_census <- map_gx_gy(census)
+#' base_census <- plot_base_census(census)
 #' base_census
-#' base_elevation <- map_gx_gy_elev(elevation)
+#' base_elevation <- plot_base_elevation(elevation)
 #' base_elevation
 #' 
-#' # Use map_gx_gy() as a base for layers that need census data
-#' add_sp(base_census)
+#' # Use plot_base_census() as a base for layers that need census data
+#' add_species(base_census)
 #' # This fails because the base plot has no information about elevation
 #' \dontrun{
-#'   contour_elev(base_census)
+#'   add_elevation_contrours(base_census)
 #' }
 #' 
-#' # Use map_gx_gy_elev() as a base for layers that need elevation data
-#' contour_elev(base_elevation)
+#' # Use plot_base_elevation() as a base for layers that need elevation data
+#' add_elevation_contrours(base_elevation)
 #' # This fails because the base plot has no information about species
 #' \dontrun{
-#'   add_sp(base_elevation)
+#'   add_species(base_elevation)
 #' }
-map_gx_gy_elev <- function(data) {
+plot_base_elevation <- function(data) {
   data <- fgeo.tool::fgeo_elevation(data)
   ggplot(data, aes(gx, gy, z = elev))
 }
 
-#' @rdname map_gx_gy_elev
+#' @rdname plot_base_elevation
 #' @export
-map_gx_gy <- function(data) {
-  check_map_gx_gy(data)
+plot_base_census <- function(data) {
+  check_plot_base_census(data)
   
   ggplot(data, aes(gx, gy))
 }
@@ -343,15 +344,15 @@ map_gx_gy <- function(data) {
 #' @examples 
 #' some_sp <- c("PREMON", "CASARB")
 #' census <- subset(fgeo.data::luquillo_stem5_random, sp %in% some_sp)
-#' p <- map_gx_gy(census)
+#' p <- plot_base_census(census)
 #' p
 #' 
-#' limit_gx_gy(p, xlim = c(0, 100), ylim = c(0, 400))
+#' set_axis_limits(p, xlim = c(0, 100), ylim = c(0, 400))
 #' 
 #' fgeo.data::luquillo_elevation %>% 
-#'   map_gx_gy_elev() %>% 
-#'   limit_gx_gy(xlim = c(0, 100), ylim = c(0, 400))
-limit_gx_gy <- function(p, xlim = NULL, ylim = NULL) {
+#'   plot_base_elevation() %>% 
+#'   set_axis_limits(xlim = c(0, 100), ylim = c(0, 400))
+set_axis_limits <- function(p, xlim = NULL, ylim = NULL) {
   # If user doesn't provide limits, set limits based on entire dataset
   data <- p[["data"]]
   xlim <- best_lim(xlim, data$gx)
@@ -383,13 +384,13 @@ limit_gx_gy <- function(p, xlim = NULL, ylim = NULL) {
 #' # Small dataset with a few species for quick examples
 #' some_sp <- c("PREMON", "CASARB")
 #' census <- subset(fgeo.data::luquillo_tree5_random, sp %in% some_sp)
-#' p <- map_gx_gy(census)
+#' p <- plot_base_census(census)
 #' 
-#' add_sp(p)
+#' add_species(p)
 #' 
-#' add_sp(p, fill = "white", shape = 22, point_size = 4)
-add_sp <- function(p, data = NULL, fill = "sp", shape = 21, point_size = 3) {
-  check_add_sp(p = p, data = data)
+#' add_species(p, fill = "white", shape = 22, point_size = 4)
+add_species <- function(p, data = NULL, fill = "sp", shape = 21, point_size = 3) {
+  check_add_species(p = p, data = data)
   
   if (fill != "sp") {
     # `z` = NULL because base may have `z`, e.g.: aes(z = elevation)`
@@ -428,10 +429,10 @@ add_sp <- function(p, data = NULL, fill = "sp", shape = 21, point_size = 3) {
 #' @family functions to create or modify plot layers
 #' @export
 #' @examples 
-#' p <- map_gx_gy_elev(fgeo.data::luquillo_elevation)
-#' contour_elev(p)
-#' contour_elev(p, contour_size = 0.5, low = "grey", high = "black", bins = 4)
-contour_elev <- function(p, 
+#' p <- plot_base_elevation(fgeo.data::luquillo_elevation)
+#' add_elevation_contrours(p)
+#' add_elevation_contrours(p, contour_size = 0.5, low = "grey", high = "black", bins = 4)
+add_elevation_contrours <- function(p, 
                          contour_size = 1, 
                          low = "blue", 
                          high = "red", 
@@ -462,18 +463,18 @@ contour_elev <- function(p,
 #' @examples 
 #' elevation <- fgeo.data::luquillo_elevation
 #' 
-#' contour_elev(map_gx_gy_elev(elevation))
+#' add_elevation_contrours(plot_base_elevation(elevation))
 #' 
 #' elevation %>%
-#'   map_gx_gy_elev() %>% 
-#'   contour_elev() %>%
-#'   label_elev(label_size = 2, label_color = "black", xyjust = -0.25)
-label_elev <- function(p, 
+#'   plot_base_elevation() %>% 
+#'   add_elevation_contrours() %>%
+#'   add_elevation_labels(label_size = 2, label_color = "black", xyjust = -0.25)
+add_elevation_labels <- function(p, 
                        label_size = 3,
                        label_color = "grey",
                        xyjust = 1, 
                        fontface = "italic") {
-  check_label_elev(
+  check_add_elevation_labels(
     p = p,
     label_color = label_color,
     label_size = label_size,
@@ -534,7 +535,7 @@ text_at_max <- function(x,
 #' Hide elements of a plot.
 #' 
 #' `hide_axis_labels` hides axis labels.
-#' `hide_legend_color` hides the color legend, for example, of elevation lines.
+#' `hide_color_legend` hides the color legend, for example, of elevation lines.
 #' 
 #' @template p
 #' 
@@ -544,13 +545,13 @@ text_at_max <- function(x,
 #' 
 #' @examples 
 #' elevation <- fgeo.data::luquillo_elevation
-#' p <- map_gx_gy_elev(elevation)
+#' p <- plot_base_elevation(elevation)
 #' hide_axis_labels(p)
 #' 
 #' elevation %>% 
-#'   map_gx_gy_elev() %>% 
-#'   contour_elev() %>% 
-#'   hide_legend_color()
+#'   plot_base_elevation() %>% 
+#'   add_elevation_contrours() %>% 
+#'   hide_color_legend()
 #' @name hide 
 NULL
 
@@ -562,7 +563,7 @@ hide_axis_labels <- function(p) {
 
 #' @rdname hide
 #' @export
-hide_legend_color <- function(p) {
+hide_color_legend <- function(p) {
   p + guides(color = "none")
 }
 
@@ -589,21 +590,21 @@ hide_legend_color <- function(p) {
 #' @examples
 #' some_sp <- c("PREMON", "CASARB")
 #' census <- subset(fgeo.data::luquillo_stem5_random, sp %in% some_sp)
-#' p <- add_sp(map_gx_gy(census))
+#' p <- add_species(plot_base_census(census))
 #' p
 #' 
-#' wrap(p, "sp")
+#' facet(p, "sp")
 #' # Same
-#' wrap(p, ~sp)
+#' facet(p, ~sp)
 #' 
-#' wrap(p, c("sp", "status"))
+#' facet(p, c("sp", "status"))
 #' 
 #' # Same, all in one step
 #' census %>% 
-#'   map_gx_gy() %>% 
-#'   add_sp() %>% 
-#'   wrap(c("sp", "status"))
-wrap <- function(p, facets, ...) {
+#'   plot_base_census() %>% 
+#'   add_species() %>% 
+#'   facet(c("sp", "status"))
+facet <- function(p, facets, ...) {
   p + facet_wrap(facets, ...)
 }
 
@@ -629,19 +630,19 @@ best_theme <- function(p, custom_theme) {
   }
 }
 
-best_layout <- function(p, wrap = FALSE) {
-  if (!wrap) {
+best_layout <- function(p, facet = FALSE) {
+  if (!facet) {
     return(p)
   } else {
-    wrap(p, "sp")
+    facet(p, "sp")
   }
 }
 
-best_elev_legend <- function(p, hide_legend_color = FALSE) {
-  if (!hide_legend_color) {
+best_elev_legend <- function(p, hide_color_legend = FALSE) {
+  if (!hide_color_legend) {
     return(p)
   } else {
-    hide_legend_color(p)
+    hide_color_legend(p)
   }
 }
 
@@ -669,11 +670,11 @@ check_sp <- function(census, species) {
   invisible(census)
 }
 
-check_add_sp <- function(p, data) {
+check_add_species <- function(p, data) {
   p_data_laks_sp <- !any(grepl("sp", names(p[["data"]])))
   if (all(is.null(data), p_data_laks_sp)) {
     msg <- paste0(
-      "The plot fed to `add_sp()` lacks the variable `sp`\n",
+      "The plot fed to `add_species()` lacks the variable `sp`\n",
       "* Did you forget to provide census data?"
     )
     abort(msg)
@@ -681,7 +682,7 @@ check_add_sp <- function(p, data) {
   invisible(p)
 }
 
-check_label_elev <- function(p, label_color, label_size, xyjust, fontface) {
+check_add_elevation_labels <- function(p, label_color, label_size, xyjust, fontface) {
   stopifnot(
     is.character(label_color), 
     is.numeric(label_size),
@@ -693,18 +694,18 @@ check_label_elev <- function(p, label_color, label_size, xyjust, fontface) {
   if (p_data_lacks_level) {
     msg <- paste0(
       "The plot fed to `level_elev() lacks the variable `level`\n",
-      "* Did you forget to call `contour_elev()` before `level_elev`?"
+      "* Did you forget to call `add_elevation_contrours()` before `level_elev`?"
     )
     abort(msg)
   }
   invisible(p)
 }
 
-check_map_gx_gy <- function(data) {
+check_plot_base_census <- function(data) {
   if (rlang::has_name(data, "elev")) {
     msg <- paste0(
       "This function is designed not for elevation but for census data.\n",
-      "* If you plan to map elevation lines, use instead `map_gx_gy_elev()`."
+      "* If you plan to map elevation lines, use instead `plot_base_elevation()`."
     )
     warn(msg)
   }

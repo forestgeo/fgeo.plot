@@ -141,8 +141,8 @@ is not a map but a list of maps, one per species, that can be printed on a
 
     <pre class="usage"><span class='fu'>plot_each_species</span>(<span class='no'>census</span>, <span class='kw'>elevation</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>species</span> <span class='kw'>=</span> <span class='st'>"all"</span>,
   <span class='kw'>fill</span> <span class='kw'>=</span> <span class='st'>"black"</span>, <span class='kw'>shape</span> <span class='kw'>=</span> <span class='fl'>21</span>, <span class='kw'>point_size</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>contour_size</span> <span class='kw'>=</span> <span class='fl'>0.5</span>,
-  <span class='kw'>low</span> <span class='kw'>=</span> <span class='st'>"blue"</span>, <span class='kw'>high</span> <span class='kw'>=</span> <span class='st'>"red"</span>, <span class='kw'>hide_legend_color</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>bins</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>label_elev</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>label_size</span> <span class='kw'>=</span> <span class='fl'>3</span>,
+  <span class='kw'>low</span> <span class='kw'>=</span> <span class='st'>"blue"</span>, <span class='kw'>high</span> <span class='kw'>=</span> <span class='st'>"red"</span>, <span class='kw'>hide_color_legend</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>bins</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>add_elevation_labels</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>label_size</span> <span class='kw'>=</span> <span class='fl'>3</span>,
   <span class='kw'>label_color</span> <span class='kw'>=</span> <span class='st'>"grey"</span>, <span class='kw'>xyjust</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>fontface</span> <span class='kw'>=</span> <span class='st'>"italic"</span>,
   <span class='kw'>xlim</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>ylim</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>custom_theme</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
@@ -195,7 +195,7 @@ low and high elevation.</p></td>
 low and high elevation.</p></td>
     </tr>
     <tr>
-      <th>hide_legend_color</th>
+      <th>hide_color_legend</th>
       <td><p>Logical; <code>TRUE</code> hides the color legend.</p></td>
     </tr>
     <tr>
@@ -203,8 +203,9 @@ low and high elevation.</p></td>
       <td><p>A number giving the number of elevation lines to map.</p></td>
     </tr>
     <tr>
-      <th>label_elev</th>
-      <td><p>Logical. <code>TRUE</code> labels the elevation lines with text.</p></td>
+      <th>add_elevation_labels</th>
+      <td><p>Logical. <code>TRUE</code> labels the elevation lines with
+text.</p></td>
     </tr>
     <tr>
       <th>label_size</th>
@@ -244,11 +245,6 @@ minimum and maximum limits of the vertical and horizontal coordinates.</p></td>
       <td><p>A valid <code><a href='http://www.rdocumentation.org/packages/ggplot2/topics/theme'>ggplot2::theme()</a></code>. <code>NULL</code> uses the default
 theme <code><a href='themes.html'>theme_default()</a></code>.</p></td>
     </tr>
-    <tr>
-      <th>wrap</th>
-      <td><p>(Not available for <code>plot_each_species()</code>) Logical; <code>TRUE</code> wraps
-multiple maps within the area of a single graphic plot.</p></td>
-    </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
@@ -281,8 +277,8 @@ about the pipe see http://r4ds.had.co.nz/pipes.html.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='map_gx_gy_elev.html'>map_gx_gy_elev()</a></code>, <code><a href='limit_gx_gy.html'>limit_gx_gy()</a></code>, <code><a href='add_sp.html'>add_sp()</a></code>, <code><a href='contour_elev.html'>contour_elev()</a></code>,
-<code><a href='label_elev.html'>label_elev()</a></code>, <code><a href='hide.html'>hide()</a></code>, <code><a href='wrap.html'>wrap()</a></code></p>
+    <div class='dont-index'><p><code><a href='plot_base_elevation.html'>plot_base_elevation()</a></code>, <code><a href='set_axis_limits.html'>set_axis_limits()</a></code>, <code><a href='add_species.html'>add_species()</a></code>,
+<code><a href='add_elevation_contrours.html'>add_elevation_contrours()</a></code>, <code><a href='add_elevation_labels.html'>add_elevation_labels()</a></code>, <code><a href='hide.html'>hide()</a></code>, <code><a href='facet.html'>facet()</a></code>.</p>
 <p>Other functions to create a list of plots: <code><a href='plot_dbh_bubles_by_quadrat.html'>plot_dbh_bubles_by_quadrat</a></code>,
   <code><a href='plot_tag_status_by_subquadrat.html'>plot_tag_status_by_subquadrat</a></code></p></div>
     
@@ -310,9 +306,9 @@ about the pipe see http://r4ds.had.co.nz/pipes.html.</p>
   <span class='kw'>contour_size</span> <span class='kw'>=</span> <span class='fl'>1</span>,
   <span class='kw'>low</span> <span class='kw'>=</span> <span class='st'>"grey"</span>,
   <span class='kw'>high</span> <span class='kw'>=</span> <span class='st'>"black"</span>,
-  <span class='kw'>hide_legend_color</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>hide_color_legend</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
   <span class='kw'>bins</span> <span class='kw'>=</span> <span class='fl'>7</span>,
-  <span class='kw'>label_elev</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
+  <span class='kw'>add_elevation_labels</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
 )
 <span class='no'>p3</span><span class='kw'>[[</span><span class='fl'>1</span>]]</div><div class='img'><img src='plot_each_species-3.png' alt='' width='700' height='433' /></div></pre>
   </div>

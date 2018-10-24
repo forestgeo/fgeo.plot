@@ -47,9 +47,9 @@ plot_elevation(elev,
   # How many lines, and how thick
   bins = 20, contour_size = 0.5,
   # Hide elevation numbers from inside the plot
-  label_elev = FALSE, 
+  add_elevation_labels = FALSE, 
   # Keep the "level" legend
-  hide_legend_color = FALSE
+  hide_color_legend = FALSE
 )
 ```
 

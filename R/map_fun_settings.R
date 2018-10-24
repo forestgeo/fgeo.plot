@@ -14,26 +14,26 @@
 #' 
 #' @return A [ggplot2::theme()].
 #' @examples
-#' class(theme_map_tag())
-#' class(theme_map_quad())
+#' class(theme_tag_status())
+#' class(theme_dbh_bubles())
 #' 
 #' census <- fgeo.data::luquillo_tree5_random
 #' 
-#' # Compose `theme_map_tag()` and `theme_map_quad()` with `+: e.g. `f(x) + g()`
-#' map_gx_gy(census) + theme_map_quad()
-#' map_gx_gy(census) + theme_map_tag()
+#' # Compose `theme_tag_status()` and `theme_dbh_bubles()` with `+: e.g. `f(x) + g()`
+#' plot_base_census(census) + theme_dbh_bubles()
+#' plot_base_census(census) + theme_tag_status()
 #' 
 #' # Compose `theme_default()` as `g(f(x))` or `f(x) %>% g()` (not `f(x) + g()`)
-#' theme_default(map_gx_gy(census))
+#' theme_default(plot_base_census(census))
 #' census %>% 
-#'   map_gx_gy() %>% 
+#'   plot_base_census() %>% 
 #'   theme_default()
 #' @name themes
 NULL
 
 #' @rdname themes
 #' @export
-theme_map_tag <- function(panel.grid.major = element_line(colour =  "black"),
+theme_tag_status <- function(panel.grid.major = element_line(colour =  "black"),
                           panel.grid.minor = element_line(
                             colour =  "black",
                             linetype = "dotted"
@@ -64,7 +64,7 @@ theme_map_tag <- function(panel.grid.major = element_line(colour =  "black"),
 
 #' @rdname themes
 #' @export
-theme_map_quad <- function(axis.text = element_blank(),
+theme_dbh_bubles <- function(axis.text = element_blank(),
                            panel.background = element_rect(fill = "white"),
                            panel.grid.minor = element_blank(),
                            panel.grid.major = element_blank(),
@@ -111,13 +111,13 @@ theme_default <- function(p,
 #' @family functions to tweak plots
 #' 
 #' @examples
-#' cat(map_tag_header())
-#' cat(map_quad_header())
+#' cat(header_tag_status())
+#' cat(header_dbh_bubles())
 NULL
 
 #' @rdname headers
 #' @export
-map_tag_header <- function() {
+header_tag_status <- function() {
   paste(
     "",
     "Checking: _______________ Checked date: _______________",
@@ -129,7 +129,7 @@ map_tag_header <- function() {
 
 #' @rdname headers
 #' @export
-map_quad_header <- function(lang = "english") {
+header_dbh_bubles <- function(lang = "english") {
   stopifnot(lang  %in% c("english", "spanish"))
   stopifnot(length(lang) == 1)
 

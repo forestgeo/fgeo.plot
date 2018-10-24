@@ -1,15 +1,15 @@
 context("headers")
 
-test_that("map_tag_header outputs the expected string", {
-  x <- map_tag_header()
+test_that("header_tag_status outputs the expected string", {
+  x <- header_tag_status()
   expect_type(x, "character")
   expect_true(grepl("Checking", x))
   x <- NULL
 
 })
 
-test_that("map_quad_header outputs the expected string", {
-  x <- map_quad_header(lang = "spanish")
+test_that("header_dbh_bubles outputs the expected string", {
+  x <- header_dbh_bubles(lang = "spanish")
   expect_true(grepl("Nombres y Fecha", x))
   expect_type(x, "character")
   x <- NULL
@@ -20,10 +20,10 @@ test_that("map_quad_header outputs the expected string", {
 context("themes")
 
 test_that("outputs an object of class equal to that of a ggplot2 theme", {
-  tag <- theme_map_tag()
+  tag <- theme_tag_status()
   expect_equal(class(tag), class(ggplot2::theme()))
 
-  quad <- theme_map_quad()
+  quad <- theme_dbh_bubles()
   expect_equal(class(quad), class(ggplot2::theme()))
 })
 

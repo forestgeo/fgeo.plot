@@ -143,8 +143,8 @@ overplotting and makes interpreting the map easier.</p>
   <span class='kw'>y_sq</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>subquad_offset</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>bl</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>br</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>tr</span> <span class='kw'>=</span> <span class='fl'>3</span>,
   <span class='kw'>tl</span> <span class='kw'>=</span> <span class='fl'>4</span>, <span class='kw'>title_quad</span> <span class='kw'>=</span> <span class='st'>"Site Name, YYYY. Quadrat:"</span>, <span class='kw'>show_page</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
   <span class='kw'>show_subquad</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>point_shape</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>19</span>, <span class='fl'>4</span>), <span class='kw'>point_size</span> <span class='kw'>=</span> <span class='fl'>1.5</span>,
-  <span class='kw'>tag_size</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>header</span> <span class='kw'>=</span> <span class='fu'><a href='headers.html'>map_tag_header</a></span>(), <span class='kw'>theme</span> <span class='kw'>=</span> <span class='fu'><a href='themes.html'>theme_map_tag</a></span>(),
-  <span class='kw'>move_edge</span> <span class='kw'>=</span> <span class='fl'>0</span>)</pre>
+  <span class='kw'>tag_size</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>header</span> <span class='kw'>=</span> <span class='fu'><a href='headers.html'>header_tag_status</a></span>(),
+  <span class='kw'>theme</span> <span class='kw'>=</span> <span class='fu'><a href='themes.html'>theme_tag_status</a></span>(), <span class='kw'>move_edge</span> <span class='kw'>=</span> <span class='fl'>0</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -236,7 +236,7 @@ the algorithm to calculate subquadrats.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='http://www.rdocumentation.org/packages/graphics/topics/points'>graphics::points()</a></code>, <code><a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_point'>ggplot2::geom_point()</a></code>, <code><a href='http://www.rdocumentation.org/packages/ggplot2/topics/theme'>ggplot2::theme()</a></code>
-<code><a href='headers.html'>map_tag_header()</a></code>, <code><a href='themes.html'>theme_map_tag()</a></code>, <code><a href='http://www.rdocumentation.org/packages/fgeo.tool/topics/add_subquad'>fgeo.tool::add_subquad()</a></code>,
+<code><a href='headers.html'>header_tag_status()</a></code>, <code><a href='themes.html'>theme_tag_status()</a></code>, <code><a href='http://www.rdocumentation.org/packages/fgeo.tool/topics/add_subquad'>fgeo.tool::add_subquad()</a></code>,
 <code><a href='paginate.html'>paginate()</a></code>, <a href='http://www.rdocumentation.org/packages/ggrepel/topics/geom_text_repel'>ggrepel::geom_text_repel</a>, <code><a href='http://www.rdocumentation.org/packages/fgeo.tool/topics/drop_twice_dead'>fgeo.tool::drop_twice_dead()</a></code>.</p>
 <p>Other functions to create a list of plots: <code><a href='plot_dbh_bubles_by_quadrat.html'>plot_dbh_bubles_by_quadrat</a></code>,
   <code><a href='plot_each_species.html'>plot_each_species</a></code></p></div>
@@ -287,7 +287,7 @@ the algorithm to calculate subquadrats.</p>
 <span class='no'>p</span><span class='kw'>[[</span><span class='fl'>1</span>]]</div><div class='img'><img src='plot_tag_status_by_subquadrat-5.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># Tweaking the default theme of plot_tag_status_by_subquadrat()</span>
 
-<span class='no'>small_tweak</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='themes.html'>theme_map_tag</a></span>(<span class='kw'>legend.position</span> <span class='kw'>=</span> <span class='st'>"bottom"</span>)
+<span class='no'>small_tweak</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='themes.html'>theme_tag_status</a></span>(<span class='kw'>legend.position</span> <span class='kw'>=</span> <span class='st'>"bottom"</span>)
 <span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'>plot_tag_status_by_subquadrat</span>(<span class='no'>small_vft</span>, <span class='kw'>theme</span> <span class='kw'>=</span> <span class='no'>small_tweak</span>)
 <span class='no'>p</span><span class='kw'>[[</span><span class='fl'>1</span>]]</div><div class='img'><img src='plot_tag_status_by_subquadrat-6.png' alt='' width='700' height='433' /></div><div class='input'>
 # For many more options see ?ggplot2::theme

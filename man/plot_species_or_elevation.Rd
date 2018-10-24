@@ -6,15 +6,15 @@
 \title{Map species and elevation data.}
 \usage{
 plot_species_or_elevation(census, elevation = NULL, fill = "black",
-  shape = 21, wrap = TRUE, point_size = 3, contour_size = 0.5,
-  low = "blue", high = "red", hide_legend_color = FALSE,
-  bins = NULL, label_elev = TRUE, label_size = 3,
+  shape = 21, facet = TRUE, point_size = 3, contour_size = 0.5,
+  low = "blue", high = "red", hide_color_legend = FALSE,
+  bins = NULL, add_elevation_labels = TRUE, label_size = 3,
   label_color = "grey", xyjust = 1, fontface = "italic",
   xlim = NULL, ylim = NULL, custom_theme = NULL)
 
 plot_elevation(elevation, contour_size = 0.5, low = "blue",
-  high = "red", hide_legend_color = FALSE, bins = NULL,
-  label_elev = TRUE, label_size = 3, label_color = "grey",
+  high = "red", hide_color_legend = FALSE, bins = NULL,
+  add_elevation_labels = TRUE, label_size = 3, label_color = "grey",
   xyjust = 1, fontface = "italic", xlim = NULL, ylim = NULL,
   custom_theme = NULL)
 }
@@ -29,7 +29,7 @@ different color.}
 \item{shape}{A number giving point size and shape (as in
 \code{\link[graphics:points]{graphics::points()}}). Passed to \code{\link[ggplot2:geom_point]{ggplot2::geom_point()}}.}
 
-\item{wrap}{(Not available for \code{plot_each_species()}) Logical; \code{TRUE} wraps
+\item{facet}{(Not available for \code{plot_each_species()}) Logical; \code{TRUE} wraps
 multiple maps within the area of a single graphic plot.}
 
 \item{point_size}{A number giving point size and shape (as in
@@ -44,11 +44,12 @@ low and high elevation.}
 \item{high}{A string giving a color of the elevation lines representing
 low and high elevation.}
 
-\item{hide_legend_color}{Logical; \code{TRUE} hides the color legend.}
+\item{hide_color_legend}{Logical; \code{TRUE} hides the color legend.}
 
 \item{bins}{A number giving the number of elevation lines to map.}
 
-\item{label_elev}{Logical. \code{TRUE} labels the elevation lines with text.}
+\item{add_elevation_labels}{Logical. \code{TRUE} labels the elevation lines with
+text.}
 
 \item{label_size}{A number (\code{label_size}) or character
 string (\code{label_color} and \code{fontface}) giving the size, colour and fontface
@@ -110,22 +111,22 @@ plot_species_or_elevation(census, elevation)
 
 # For maximum control, you can compose maps as you like
 # Traditional sintax: g(f(x))
-contour_elev(map_gx_gy_elev(elevation))
+add_elevation_contrours(plot_base_elevation(elevation))
 
 # With the pipe: f(x) \%>\% g()
-map_gx_gy_elev(elevation) \%>\%
-  contour_elev()
+plot_base_elevation(elevation) \%>\%
+  add_elevation_contrours()
 
 # The traditional sintax is hard to read when you compose multiple functions.
 # With the pipe, readability isn't affected by the number of functions.
-map_gx_gy_elev(elevation) \%>\%
-  limit_gx_gy(xlim = c(-100, 400)) \%>\%
-  contour_elev(contour_size = 0.5) \%>\%
-  label_elev(label_color = "red") \%>\%
+plot_base_elevation(elevation) \%>\%
+  set_axis_limits(xlim = c(-100, 400)) \%>\%
+  add_elevation_contrours(contour_size = 0.5) \%>\%
+  add_elevation_labels(label_color = "red") \%>\%
   hide_axis_labels() \%>\%
-  hide_legend_color() \%>\%
-  add_sp(census, point_size = 5) \%>\%
-  wrap("sp") \%>\%
+  hide_color_legend() \%>\%
+  add_species(census, point_size = 5) \%>\%
+  facet("sp") \%>\%
   theme_default(legend.position = "top")
 }
 \concept{functions to create a single plot}

@@ -21,19 +21,19 @@
 #' )
 #' vft
 #' 
-#' suffix_edge_tag(
+#' suffix_tags_beyond_edge(
 #'   x = vft,
 #'   .match = "dead",
 #'   suffix = "_d",
 #'   x_q = 20
 #' )
-#' suffix_edge_tag(
+#' suffix_tags_beyond_edge(
 #'   x = vft,
 #'   .match = "alive",
 #'   suffix = "_a",
 #'   x_q = 20
 #' )
-suffix_edge_tag <- function(x, .match, suffix, x_q = 20, y_q = x_q) {
+suffix_tags_beyond_edge <- function(x, .match, suffix, x_q = 20, y_q = x_q) {
   stopifnot(
     is.data.frame(x), 
     is.character(.match),

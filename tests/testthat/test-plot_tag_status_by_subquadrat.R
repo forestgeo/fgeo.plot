@@ -60,8 +60,8 @@ test_that("works with all defaults given in usage", {
       point_shape = c(19, 4),
       point_size = 1.5,
       tag_size = 3,
-      header = map_tag_header(),
-      theme = theme_map_tag(),
+      header = header_tag_status(),
+      theme = theme_tag_status(),
       move_edge = 0
     )
   )

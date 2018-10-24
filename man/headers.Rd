@@ -2,13 +2,13 @@
 % Please edit documentation in R/map_fun_settings.R
 \name{headers}
 \alias{headers}
-\alias{map_tag_header}
-\alias{map_quad_header}
+\alias{header_tag_status}
+\alias{header_dbh_bubles}
 \title{Pre-made headers.}
 \usage{
-map_tag_header()
+header_tag_status()
 
-map_quad_header(lang = "english")
+header_dbh_bubles(lang = "english")
 }
 \arguments{
 \item{lang}{= String; Language of the header: Either "english" or "spanish".}
@@ -17,11 +17,11 @@ map_quad_header(lang = "english")
 Pre-made headers.
 }
 \examples{
-cat(map_tag_header())
-cat(map_quad_header())
+cat(header_tag_status())
+cat(header_dbh_bubles())
 }
 \seealso{
-Other functions to tweak plots: \code{\link{suffix_edge_tag}},
+Other functions to tweak plots: \code{\link{suffix_tags_beyond_edge}},
   \code{\link{themes}}
 }
 \concept{functions to tweak plots}

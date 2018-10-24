@@ -24,17 +24,17 @@ test_that("works with elevation parameters", {
   expect_silent(
     plot_each_species(
       cns, elev, species = spp, fill = "white", shape = 21, point_size = 5,
-      contour_size = 1, low = "grey", high = "black", hide_legend_color = TRUE,
-      bins = 7, label_elev = FALSE
+      contour_size = 1, low = "grey", high = "black", hide_color_legend =
+      TRUE, bins = 7, add_elevation_labels = FALSE
     )[[1]]
   )
   
   expect_silent(
     plot_each_species(
       cns, elev, species = spp, fill = "white", shape = 21, point_size = 5,
-      contour_size = 1, low = "grey", high = "black", hide_legend_color = TRUE,
-      bins = NULL, label_elev = TRUE, label_color = "black", xyjust = 1,
-      fontface = "bold", xlim = c(0, 500), ylim = c(0, 400), 
+      contour_size = 1, low = "grey", high = "black", hide_color_legend =
+      TRUE, bins = NULL, add_elevation_labels = TRUE, label_color = "black",
+      xyjust = 1, fontface = "bold", xlim = c(0, 500), ylim = c(0, 400),
       custom_theme = ggplot2::theme_bw()
     )[[1]]
   )
@@ -85,14 +85,14 @@ test_that("errs with wrong inputs", {
 
 
 
-context("map_gx_gy_elev")
+context("plot_base_elevation")
 
 test_that("works with raw elevation data", {
   elevation_ls <- fgeo.data::luquillo_elevation
-  expect_silent(map_gx_gy_elev(elevation_ls))
-  expect_silent(map_gx_gy_elev(elevation_ls))
+  expect_silent(plot_base_elevation(elevation_ls))
+  expect_silent(plot_base_elevation(elevation_ls))
 })
 
 test_that("errs if elevation data is confused with census data", {
-  expect_error(map_gx_gy_elev(census), "Ensure your data set has")
+  expect_error(plot_base_elevation(census), "Ensure your data set has")
 })

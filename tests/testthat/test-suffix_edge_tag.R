@@ -1,10 +1,10 @@
 library(tibble)
 
-context("suffix_edge_tag")
+context("suffix_tags_beyond_edge")
 
 test_that("errs with wrong input", {
   expect_message(
-    suffix_edge_tag(
+    suffix_tags_beyond_edge(
       x = tibble(QX = 21, QY = 21, tag = "01", status = "dead"), 
       .match = "dead",
       suffix = "suffix", 
@@ -12,7 +12,7 @@ test_that("errs with wrong input", {
     ) 
   )
   expect_message(
-    suffix_edge_tag(
+    suffix_tags_beyond_edge(
       x = tibble(QX = 20, QY = 20, tag = "01", status = "dead"), 
       .match = "dead",
       suffix = "suffix", 
@@ -21,14 +21,14 @@ test_that("errs with wrong input", {
   )
   
   expect_error(
-    suffix_edge_tag(x = "not dfm", 
+    suffix_tags_beyond_edge(x = "not dfm", 
       .match = "dead",
       suffix = "suffix", 
       x_q = 20
     )  
   )
   expect_error(
-    suffix_edge_tag(
+    suffix_tags_beyond_edge(
       x = tibble(x = 21), 
       .match = "dead",
       suffix = "suffix", 
@@ -36,7 +36,7 @@ test_that("errs with wrong input", {
     )  
   )
   expect_error(
-    suffix_edge_tag(
+    suffix_tags_beyond_edge(
       x = tibble(y = 21), 
       .match = "dead",
       suffix = "suffix", 
@@ -44,7 +44,7 @@ test_that("errs with wrong input", {
     )  
   )
   expect_error(
-    suffix_edge_tag(
+    suffix_tags_beyond_edge(
       x = tibble(a = 21), 
       .match = "dead",
       suffix = "suffix", 

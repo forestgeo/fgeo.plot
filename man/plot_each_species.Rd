@@ -6,8 +6,8 @@
 \usage{
 plot_each_species(census, elevation = NULL, species = "all",
   fill = "black", shape = 21, point_size = 3, contour_size = 0.5,
-  low = "blue", high = "red", hide_legend_color = FALSE,
-  bins = NULL, label_elev = TRUE, label_size = 3,
+  low = "blue", high = "red", hide_color_legend = FALSE,
+  bins = NULL, add_elevation_labels = TRUE, label_size = 3,
   label_color = "grey", xyjust = 1, fontface = "italic",
   xlim = NULL, ylim = NULL, custom_theme = NULL)
 }
@@ -39,11 +39,12 @@ low and high elevation.}
 \item{high}{A string giving a color of the elevation lines representing
 low and high elevation.}
 
-\item{hide_legend_color}{Logical; \code{TRUE} hides the color legend.}
+\item{hide_color_legend}{Logical; \code{TRUE} hides the color legend.}
 
 \item{bins}{A number giving the number of elevation lines to map.}
 
-\item{label_elev}{Logical. \code{TRUE} labels the elevation lines with text.}
+\item{add_elevation_labels}{Logical. \code{TRUE} labels the elevation lines with
+text.}
 
 \item{label_size}{A number (\code{label_size}) or character
 string (\code{label_color} and \code{fontface}) giving the size, colour and fontface
@@ -135,15 +136,15 @@ p3 <- plot_each_species(
   contour_size = 1,
   low = "grey",
   high = "black",
-  hide_legend_color = TRUE,
+  hide_color_legend = TRUE,
   bins = 7,
-  label_elev = FALSE
+  add_elevation_labels = FALSE
 )
 p3[[1]]
 }
 \seealso{
-\code{\link[=map_gx_gy_elev]{map_gx_gy_elev()}}, \code{\link[=limit_gx_gy]{limit_gx_gy()}}, \code{\link[=add_sp]{add_sp()}}, \code{\link[=contour_elev]{contour_elev()}},
-\code{\link[=label_elev]{label_elev()}}, \code{\link[=hide]{hide()}}, \code{\link[=wrap]{wrap()}}
+\code{\link[=plot_base_elevation]{plot_base_elevation()}}, \code{\link[=set_axis_limits]{set_axis_limits()}}, \code{\link[=add_species]{add_species()}},
+\code{\link[=add_elevation_contrours]{add_elevation_contrours()}}, \code{\link[=add_elevation_labels]{add_elevation_labels()}}, \code{\link[=hide]{hide()}}, \code{\link[=facet]{facet()}}.
 
 Other functions to create a list of plots: \code{\link{plot_dbh_bubles_by_quadrat}},
   \code{\link{plot_tag_status_by_subquadrat}}

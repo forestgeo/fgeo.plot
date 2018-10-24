@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Pre-made headers. — headers • fgeo.map</title>
+<title>Label elevation lines. — add_elevation_labels • fgeo.map</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -30,9 +30,9 @@
 
 
 
-<meta property="og:title" content="Pre-made headers. — headers" />
+<meta property="og:title" content="Label elevation lines. — add_elevation_labels" />
 
-<meta property="og:description" content="Pre-made headers." />
+<meta property="og:description" content="Label elevation lines." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -106,46 +106,58 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Pre-made headers.</h1>
-    <small class="dont-index">Source: <a href='https://github.com/forestgeo/fgeo.map/blob/master/R/map_fun_settings.R'><code>R/map_fun_settings.R</code></a></small>
-    <div class="hidden name"><code>headers.Rd</code></div>
+    <h1>Label elevation lines.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/forestgeo/fgeo.map/blob/master/R/plot_each_species.R'><code>R/plot_each_species.R</code></a></small>
+    <div class="hidden name"><code>add_elevation_labels.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Pre-made headers.</p>
+    <p>Label elevation lines.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>header_tag_status</span>()
-
-<span class='fu'>header_dbh_bubles</span>(<span class='kw'>lang</span> <span class='kw'>=</span> <span class='st'>"english"</span>)</pre>
+    <pre class="usage"><span class='fu'>add_elevation_labels</span>(<span class='no'>p</span>, <span class='kw'>label_size</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>label_color</span> <span class='kw'>=</span> <span class='st'>"grey"</span>,
+  <span class='kw'>xyjust</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>fontface</span> <span class='kw'>=</span> <span class='st'>"italic"</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>lang</th>
-      <td><p>= String; Language of the header: Either "english" or "spanish".</p></td>
+      <th>p</th>
+      <td><p>A ggplot.</p></td>
+    </tr>
+    <tr>
+      <th>label_size, label_color, fontface</th>
+      <td><p>A number (<code>label_size</code>) or character
+string (<code>label_color</code> and <code>fontface</code>) giving the size, colour and fontface
+of the text labels for the elevation lines.</p></td>
+    </tr>
+    <tr>
+      <th>xyjust</th>
+      <td><p>A number to adjust the position of the text labels of the
+elevation lines.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>Other functions to tweak plots: <code><a href='suffix_tags_beyond_edge.html'>suffix_tags_beyond_edge</a></code>,
-  <code><a href='themes.html'>themes</a></code></p></div>
+    <div class='dont-index'><p><code><a href='plot_each_species.html'>plot_each_species()</a></code>, <code><a href='plot_species_or_elevation.html'>plot_species_or_elevation()</a></code>,
+<code><a href='plot_species_or_elevation.html'>plot_elevation()</a></code>, <code><a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_text'>ggplot2::geom_text()</a></code>.</p>
+<p>Other functions to create or modify plot layers: <code><a href='add_elevation_contrours.html'>add_elevation_contrours</a></code>,
+  <code><a href='add_species.html'>add_species</a></code>, <code><a href='facet.html'>facet</a></code>,
+  <code><a href='hide.html'>hide</a></code>, <code><a href='plot_base_elevation.html'>plot_base_elevation</a></code>,
+  <code><a href='set_axis_limits.html'>set_axis_limits</a></code></p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>cat</span>(<span class='fu'>header_tag_status</span>())</div><div class='output co'>#&gt; 
-#&gt; Checking: _______________ Checked date: _______________
-#&gt; Recording: _____________
-#&gt; Measuring: _____________ Measurement date: _____________</div><div class='input'><span class='fu'>cat</span>(<span class='fu'>header_dbh_bubles</span>())</div><div class='output co'>#&gt; 
-#&gt; Names and date:                          Reviewed by:                                 Entered on PC by: 
-#&gt; 
-#&gt; _________________________    _________________________    _________________________
-#&gt; _________________________    _________________________    _________________________
-#&gt; _________________________    _________________________    _________________________</div></pre>
+    <pre class="examples"><div class='input'><span class='no'>elevation</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>fgeo.data</span><span class='kw ns'>::</span><span class='no'><a href='http://www.rdocumentation.org/packages/fgeo.data/topics/luquillo_elevation'>luquillo_elevation</a></span>
+
+<span class='fu'><a href='add_elevation_contrours.html'>add_elevation_contrours</a></span>(<span class='fu'><a href='plot_base_elevation.html'>plot_base_elevation</a></span>(<span class='no'>elevation</span>))</div><div class='img'><img src='add_elevation_labels-1.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='no'>elevation</span> <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='plot_base_elevation.html'>plot_base_elevation</a></span>() <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='add_elevation_contrours.html'>add_elevation_contrours</a></span>() <span class='kw'>%&gt;%</span>
+  <span class='fu'>add_elevation_labels</span>(<span class='kw'>label_size</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>label_color</span> <span class='kw'>=</span> <span class='st'>"black"</span>, <span class='kw'>xyjust</span> <span class='kw'>=</span> -<span class='fl'>0.25</span>)</div><div class='img'><img src='add_elevation_labels-2.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

@@ -35,22 +35,24 @@ navbar:
 
 reference:
 
-  - title: Create a list of plots.
+  - title: Create a list of plots
     contents:
+      - plot_each_species
       - has_concept("functions to create a list of plots")
       
-  - title: Create a single plot (may have multiple panels).
+  - title: Create a single plot (may have multiple panels)
     contents:
       - has_concept("functions to create a single plot")
 
-  - title: Create or modify plot layers.
+  - title: Create or modify plot layers
     desc: >
       Functions to build custom plots most flexibly. For even more flexibility
       use the __ggplot2__ package.
     contents:
+      - matches("plot_base")
       - has_concept("functions to create or modify plot layers")
 
-  - title: Functions to tweak plots
+  - title: Tweak plots
     contents:
       - has_concept("functions to tweak plots")
 

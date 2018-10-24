@@ -9,8 +9,8 @@ test_that("passes with default arguments", {
     plot_dbh_bubles_by_quadrat(
       vft_1quad_sub,
       title_quad = "Site Name, YYYY, Quadrat:",
-      header = map_quad_header(),
-      theme = theme_map_quad(),
+      header = header_dbh_bubles(),
+      theme = theme_dbh_bubles(),
       lim_min = 0,
       lim_max = 20,
       subquadrat_side = 5,
@@ -42,10 +42,10 @@ test_that("returns a list of ggplots", {
 
 
 
-context("theme_map_quad")
+context("theme_dbh_bubles")
 
 test_that("returns a valid ggplot2 theme", {
-  expect_s3_class(theme_map_quad(), c("theme"))
-  expect_s3_class(theme_map_quad(), "gg")
+  expect_s3_class(theme_dbh_bubles(), c("theme"))
+  expect_s3_class(theme_dbh_bubles(), "gg")
 })
 

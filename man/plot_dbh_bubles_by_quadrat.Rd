@@ -5,9 +5,9 @@
 \title{Map trees within a quadrat.}
 \usage{
 plot_dbh_bubles_by_quadrat(vft, title_quad = "Site Name, YYYY, Quadrat:",
-  header = map_quad_header(), theme = theme_map_quad(), lim_min = 0,
-  lim_max = 20, subquadrat_side = 5, tag_size = 2, move_edge = 0,
-  status_d = "dead")
+  header = header_dbh_bubles(), theme = theme_dbh_bubles(),
+  lim_min = 0, lim_max = 20, subquadrat_side = 5, tag_size = 2,
+  move_edge = 0, status_d = "dead")
 }
 \arguments{
 \item{vft}{A dataframe -- specifically, a ForestGEO ViewFullTable.}
@@ -80,9 +80,9 @@ library(ggplot2)
 plot_dbh_bubles_by_quadrat(
   small_vft,
   title_quad = "My Site, 2018. Quad:",
-  header = map_quad_header("spanish"),
+  header = header_dbh_bubles("spanish"),
   tag_size = 3,
-  theme = theme_map_quad(
+  theme = theme_dbh_bubles(
     axis.text = NULL,  # NULL shows axis.text; element_blank() doesn't.
     plot.title = element_text(size = 15),
     plot.subtitle = element_text(size = 5),

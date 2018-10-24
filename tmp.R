@@ -1,6 +1,3 @@
-#' @param wrap (Not available for `plot_each_species()`) Logical; `TRUE` wraps
-#'   multiple maps within the area of a single graphic plot.
-
 # grep --------------------------------------------------------------------
 
 grep -R "library(fgeo.map)" 
@@ -51,11 +48,13 @@ grep -R "maply_tag" ../fgeo/vignettes ../fgeo.abundance/vignettes ../fgeo.base/v
 plot_base_census <- map_gx_gy()
 plot_base_elevation <- map_gx_gy_elev()
 
+
+
 add_elevation_contrours <- contour_elev()
 add_elevation_labels <- label_elev()
 add_species <- add_sp()
 
-set_facet <- wrap()
+facet <- wrap()
 set_limits <- limit_gx_gy()
 
 hide_axis_labels() <- hide_axis_labels()
@@ -65,8 +64,9 @@ hide_color_legend() <- hide_legend_color()
 
 header_tag_status <- map_tag_header()
 header_dbh_bubles <- map_quad_header()
-suffix_edgy_tags <- suffix_edge_tag()
-theme_dbh_bubles <- theme_map_tag()
+suffix_tags_beyond_edge <- suffix_edge_tag()
+theme_tag_status <- theme_map_tag()
+theme_dbh_bubles <- theme_map_quad()
 
 # Appveyor badge ----------------------------------------------------------
 

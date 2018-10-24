@@ -118,9 +118,9 @@
     </div>
 
     <pre class="usage"><span class='fu'>plot_dbh_bubles_by_quadrat</span>(<span class='no'>vft</span>, <span class='kw'>title_quad</span> <span class='kw'>=</span> <span class='st'>"Site Name, YYYY, Quadrat:"</span>,
-  <span class='kw'>header</span> <span class='kw'>=</span> <span class='fu'><a href='headers.html'>map_quad_header</a></span>(), <span class='kw'>theme</span> <span class='kw'>=</span> <span class='fu'><a href='themes.html'>theme_map_quad</a></span>(), <span class='kw'>lim_min</span> <span class='kw'>=</span> <span class='fl'>0</span>,
-  <span class='kw'>lim_max</span> <span class='kw'>=</span> <span class='fl'>20</span>, <span class='kw'>subquadrat_side</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>tag_size</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>move_edge</span> <span class='kw'>=</span> <span class='fl'>0</span>,
-  <span class='kw'>status_d</span> <span class='kw'>=</span> <span class='st'>"dead"</span>)</pre>
+  <span class='kw'>header</span> <span class='kw'>=</span> <span class='fu'><a href='headers.html'>header_dbh_bubles</a></span>(), <span class='kw'>theme</span> <span class='kw'>=</span> <span class='fu'><a href='themes.html'>theme_dbh_bubles</a></span>(),
+  <span class='kw'>lim_min</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>lim_max</span> <span class='kw'>=</span> <span class='fl'>20</span>, <span class='kw'>subquadrat_side</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>tag_size</span> <span class='kw'>=</span> <span class='fl'>2</span>,
+  <span class='kw'>move_edge</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>status_d</span> <span class='kw'>=</span> <span class='st'>"dead"</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -224,9 +224,9 @@ status that corresponds to dead stems.</p></td>
 <span class='fu'>plot_dbh_bubles_by_quadrat</span>(
   <span class='no'>small_vft</span>,
   <span class='kw'>title_quad</span> <span class='kw'>=</span> <span class='st'>"My Site, 2018. Quad:"</span>,
-  <span class='kw'>header</span> <span class='kw'>=</span> <span class='fu'><a href='headers.html'>map_quad_header</a></span>(<span class='st'>"spanish"</span>),
+  <span class='kw'>header</span> <span class='kw'>=</span> <span class='fu'><a href='headers.html'>header_dbh_bubles</a></span>(<span class='st'>"spanish"</span>),
   <span class='kw'>tag_size</span> <span class='kw'>=</span> <span class='fl'>3</span>,
-  <span class='kw'>theme</span> <span class='kw'>=</span> <span class='fu'><a href='themes.html'>theme_map_quad</a></span>(
+  <span class='kw'>theme</span> <span class='kw'>=</span> <span class='fu'><a href='themes.html'>theme_dbh_bubles</a></span>(
     <span class='kw'>axis.text</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,  <span class='co'># NULL shows axis.text; element_blank() doesn't.</span>
     <span class='kw'>plot.title</span> <span class='kw'>=</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/element'>element_text</a></span>(<span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>15</span>),
     <span class='kw'>plot.subtitle</span> <span class='kw'>=</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/element'>element_text</a></span>(<span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>5</span>),

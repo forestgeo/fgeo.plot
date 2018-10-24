@@ -4,10 +4,16 @@
     <loc>https://forestgeo.github.io/fgeo.map//index.html</loc>
   </url>
   <url>
-    <loc>https://forestgeo.github.io/fgeo.map//reference/add_sp.html</loc>
+    <loc>https://forestgeo.github.io/fgeo.map//reference/add_elevation_contrours.html</loc>
   </url>
   <url>
-    <loc>https://forestgeo.github.io/fgeo.map//reference/contour_elev.html</loc>
+    <loc>https://forestgeo.github.io/fgeo.map//reference/add_elevation_labels.html</loc>
+  </url>
+  <url>
+    <loc>https://forestgeo.github.io/fgeo.map//reference/add_species.html</loc>
+  </url>
+  <url>
+    <loc>https://forestgeo.github.io/fgeo.map//reference/facet.html</loc>
   </url>
   <url>
     <loc>https://forestgeo.github.io/fgeo.map//reference/fgeo.map-package.html</loc>
@@ -19,15 +25,6 @@
     <loc>https://forestgeo.github.io/fgeo.map//reference/hide.html</loc>
   </url>
   <url>
-    <loc>https://forestgeo.github.io/fgeo.map//reference/label_elev.html</loc>
-  </url>
-  <url>
-    <loc>https://forestgeo.github.io/fgeo.map//reference/limit_gx_gy.html</loc>
-  </url>
-  <url>
-    <loc>https://forestgeo.github.io/fgeo.map//reference/map_gx_gy_elev.html</loc>
-  </url>
-  <url>
     <loc>https://forestgeo.github.io/fgeo.map//reference/paginate.html</loc>
   </url>
   <url>
@@ -35,6 +32,9 @@
   </url>
   <url>
     <loc>https://forestgeo.github.io/fgeo.map//reference/plot.fgeo_habitat.html</loc>
+  </url>
+  <url>
+    <loc>https://forestgeo.github.io/fgeo.map//reference/plot_base_elevation.html</loc>
   </url>
   <url>
     <loc>https://forestgeo.github.io/fgeo.map//reference/plot_dbh_bubles_by_quadrat.html</loc>
@@ -49,15 +49,15 @@
     <loc>https://forestgeo.github.io/fgeo.map//reference/plot_tag_status_by_subquadrat.html</loc>
   </url>
   <url>
-    <loc>https://forestgeo.github.io/fgeo.map//reference/suffix_edge_tag.html</loc>
+    <loc>https://forestgeo.github.io/fgeo.map//reference/set_axis_limits.html</loc>
+  </url>
+  <url>
+    <loc>https://forestgeo.github.io/fgeo.map//reference/suffix_tags_beyond_edge.html</loc>
   </url>
   <url>
     <loc>https://forestgeo.github.io/fgeo.map//reference/themes.html</loc>
   </url>
   <url>
     <loc>https://forestgeo.github.io/fgeo.map//reference/vft_1quad.html</loc>
-  </url>
-  <url>
-    <loc>https://forestgeo.github.io/fgeo.map//reference/wrap.html</loc>
   </url>
 </urlset>

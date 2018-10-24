@@ -2,12 +2,12 @@
 % Please edit documentation in R/map_fun_settings.R
 \name{themes}
 \alias{themes}
-\alias{theme_map_tag}
-\alias{theme_map_quad}
+\alias{theme_tag_status}
+\alias{theme_dbh_bubles}
 \alias{theme_default}
 \title{Themes.}
 \usage{
-theme_map_tag(panel.grid.major = element_line(colour = "black"),
+theme_tag_status(panel.grid.major = element_line(colour = "black"),
   panel.grid.minor = element_line(colour = "black", linetype = "dotted"),
   panel.background = element_rect(fill = "white"),
   plot.title = element_text(size = 20),
@@ -16,7 +16,7 @@ theme_map_tag(panel.grid.major = element_line(colour = "black"),
   legend.title = element_blank(), axis.ticks = element_blank(),
   axis.text = element_text(size = 12), ...)
 
-theme_map_quad(axis.text = element_blank(),
+theme_dbh_bubles(axis.text = element_blank(),
   panel.background = element_rect(fill = "white"),
   panel.grid.minor = element_blank(),
   panel.grid.major = element_blank(), legend.position = "none",
@@ -79,25 +79,25 @@ theme by changing the default arguments and also by passing more arguments to
 \code{\link[ggplot2:theme]{ggplot2::theme()}} (via \code{...}).
 }
 \examples{
-class(theme_map_tag())
-class(theme_map_quad())
+class(theme_tag_status())
+class(theme_dbh_bubles())
 
 census <- fgeo.data::luquillo_tree5_random
 
-# Compose `theme_map_tag()` and `theme_map_quad()` with `+: e.g. `f(x) + g()`
-map_gx_gy(census) + theme_map_quad()
-map_gx_gy(census) + theme_map_tag()
+# Compose `theme_tag_status()` and `theme_dbh_bubles()` with `+: e.g. `f(x) + g()`
+plot_base_census(census) + theme_dbh_bubles()
+plot_base_census(census) + theme_tag_status()
 
 # Compose `theme_default()` as `g(f(x))` or `f(x) \%>\% g()` (not `f(x) + g()`)
-theme_default(map_gx_gy(census))
+theme_default(plot_base_census(census))
 census \%>\% 
-  map_gx_gy() \%>\% 
+  plot_base_census() \%>\% 
   theme_default()
 }
 \seealso{
 \code{\link[ggplot2:theme]{ggplot2::theme()}}.
 
 Other functions to tweak plots: \code{\link{headers}},
-  \code{\link{suffix_edge_tag}}
+  \code{\link{suffix_tags_beyond_edge}}
 }
 \concept{functions to tweak plots}

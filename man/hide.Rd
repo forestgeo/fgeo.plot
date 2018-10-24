@@ -3,36 +3,37 @@
 \name{hide}
 \alias{hide}
 \alias{hide_axis_labels}
-\alias{hide_legend_color}
+\alias{hide_color_legend}
 \title{Hide elements of a plot.}
 \usage{
 hide_axis_labels(p)
 
-hide_legend_color(p)
+hide_color_legend(p)
 }
 \arguments{
 \item{p}{A ggplot.}
 }
 \description{
 \code{hide_axis_labels} hides axis labels.
-\code{hide_legend_color} hides the color legend, for example, of elevation lines.
+\code{hide_color_legend} hides the color legend, for example, of elevation lines.
 }
 \examples{
 elevation <- fgeo.data::luquillo_elevation
-p <- map_gx_gy_elev(elevation)
+p <- plot_base_elevation(elevation)
 hide_axis_labels(p)
 
 elevation \%>\% 
-  map_gx_gy_elev() \%>\% 
-  contour_elev() \%>\% 
-  hide_legend_color()
+  plot_base_elevation() \%>\% 
+  add_elevation_contrours() \%>\% 
+  hide_color_legend()
 }
 \seealso{
 \code{\link[ggplot2:labs]{ggplot2::labs()}},  \code{\link[ggplot2:guides]{ggplot2::guides()}}.
 
-Other functions to create or modify plot layers: \code{\link{add_sp}},
-  \code{\link{contour_elev}}, \code{\link{label_elev}},
-  \code{\link{limit_gx_gy}}, \code{\link{map_gx_gy_elev}},
-  \code{\link{wrap}}
+Other functions to create or modify plot layers: \code{\link{add_elevation_contrours}},
+  \code{\link{add_elevation_labels}},
+  \code{\link{add_species}}, \code{\link{facet}},
+  \code{\link{plot_base_elevation}},
+  \code{\link{set_axis_limits}}
 }
 \concept{functions to create or modify plot layers}

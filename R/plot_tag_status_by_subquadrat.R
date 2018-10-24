@@ -41,7 +41,7 @@
 #' @template move_edge
 #' 
 #' @seealso [graphics::points()], [ggplot2::geom_point()], [ggplot2::theme()]
-#'   [map_tag_header()], [theme_map_tag()], [fgeo.tool::add_subquad()],
+#'   [header_tag_status()], [theme_tag_status()], [fgeo.tool::add_subquad()],
 #'   [paginate()], [ggrepel::geom_text_repel], [fgeo.tool::drop_twice_dead()].
 #'
 #' @family functions to create a list of plots
@@ -106,7 +106,7 @@
 #' 
 #' # Tweaking the default theme of plot_tag_status_by_subquadrat()
 #' 
-#' small_tweak <- theme_map_tag(legend.position = "bottom")
+#' small_tweak <- theme_tag_status(legend.position = "bottom")
 #' p <- plot_tag_status_by_subquadrat(small_vft, theme = small_tweak)
 #' p[[1]]
 #' 
@@ -128,8 +128,8 @@ plot_tag_status_by_subquadrat <- function(vft,
                       point_shape = c(19, 4),
                       point_size = 1.5,
                       tag_size = 3,
-                      header = map_tag_header(),
-                      theme = theme_map_tag(),
+                      header = header_tag_status(),
+                      theme = theme_tag_status(),
                       move_edge = 0) {
   .vft <- setNames(vft, tolower(names(vft)))
   
