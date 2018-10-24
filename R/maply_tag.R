@@ -4,12 +4,12 @@
 #' printed on a .pdf file. Each map shows four subquadrats within a quadrat. The
 #' symbols on the map represent the status of each tree -- not the status of
 #' each stem. Although you should likely provide data of only one or two
-#' censuses, `maply_tag()` will summarize the data to reduce overplotting. The
-#' data on the map summarizes the history of each stem across all censuses
-#' provided. Each tag will appear in the map only once or twice: * A tag will
-#' appear once if it belongs to a tree which status was unique across all
-#' censuses provided -- either "alive" or "dead". * A tag will appear twice if
-#' it belongs to a tree which status was "alive" in at least one census, and
+#' censuses, `plot_tag_status_by_subquadrat()` will summarize the data to reduce
+#' overplotting. The data on the map summarizes the history of each stem across
+#' all censuses provided. Each tag will appear in the map only once or twice: *
+#' A tag will appear once if it belongs to a tree which status was unique across
+#' all censuses provided -- either "alive" or "dead". * A tag will appear twice
+#' if it belongs to a tree which status was "alive" in at least one census, and
 #' also "dead" in at least one other census. This feature avoids unintentional
 #' overplotting and makes interpreting the map easier.
 #'
@@ -64,7 +64,7 @@
 #' # (see `?vft_1quad`)
 #' small_vft <- dplyr::sample_n(vft_1quad, 50)
 #' want <- filter(small_vft, CensusID == 4, PlotID == 1)
-#' p <- maply_tag(want)
+#' p <- plot_tag_status_by_subquadrat(want)
 #' # Visualizing only the first plot
 #' p[[1]]
 #' 
@@ -79,14 +79,14 @@
 #' # * If you filter by `DBH`, you loose the dead trees becaue their `DBH = NA`
 #' # * You should explicietly inlcude missing DBH values with `is.na(DBH)`
 #' p <- filter(vft_4quad, DBH > 20 | is.na(DBH))
-#' maply_tag(p)[[1]]
+#' plot_tag_status_by_subquadrat(p)[[1]]
 #' 
 #' # Customizing the maps ----------------------------------------------------
 #' # Common tweaks
-#' p <- maply_tag(small_vft, show_page = FALSE, show_subquad = FALSE)
+#' p <- plot_tag_status_by_subquadrat(small_vft, show_page = FALSE, show_subquad = FALSE)
 #' p[[1]]
 #' 
-#' p <- maply_tag(
+#' p <- plot_tag_status_by_subquadrat(
 #'   small_vft,
 #'   title_quad = "BCI 2012. Quadrat: ",
 #'   bl = "bottom-left", br = "bottom-right", tr = "top-right", tl = "top-left",
@@ -101,18 +101,18 @@
 #' # Themes
 #' library(ggplot2)
 #' 
-#' p <- maply_tag(small_vft, theme = theme_gray())
+#' p <- plot_tag_status_by_subquadrat(small_vft, theme = theme_gray())
 #' p[[1]]
 #' 
-#' # Tweaking the default theme of maply_tag()
+#' # Tweaking the default theme of plot_tag_status_by_subquadrat()
 #' 
 #' small_tweak <- theme_map_tag(legend.position = "bottom")
-#' p <- maply_tag(small_vft, theme = small_tweak)
+#' p <- plot_tag_status_by_subquadrat(small_vft, theme = small_tweak)
 #' p[[1]]
 #' 
 #' # For many more options see ?ggplot2::theme
 #' 
-maply_tag <- function(vft,
+plot_tag_status_by_subquadrat <- function(vft,
                       x_q = 20,
                       x_sq = 5,
                       y_q = 20,
@@ -136,7 +136,7 @@ maply_tag <- function(vft,
   crucial <- c(
     "tag", "treeid", "status", "quadratname", "qx", "qy", "censusid", "plotid"
   )
-  check_maply_tag(
+  check_plot_tag_status_by_subquadrat(
     .vft = .vft,
     crucial = crucial,
     x_q = x_q,
@@ -161,7 +161,7 @@ maply_tag <- function(vft,
 
   # Prepare
   sbst <- .vft[ , crucial]
-  prepared <- prep_maply_tag(
+  prepared <- prep_plot_tag_status_by_subquadrat(
     sbst, x_q = x_q, x_sq = x_sq, y_q = y_q, y_sq = y_sq, subquad_offset =
     subquad_offset, bl = bl, br = br, tr = tr, tl = tl, move_edge = move_edge
   )
@@ -180,7 +180,7 @@ maply_tag <- function(vft,
   setNames(p, nms)
 }
 
-check_maply_tag <- function(.vft,
+check_plot_tag_status_by_subquadrat <- function(.vft,
                             crucial,
                             x_q,
                             x_sq,
@@ -239,7 +239,7 @@ check_maply_tag <- function(.vft,
   invisible(.vft)
 }
 
-prep_maply_tag <- function(sbst,
+prep_plot_tag_status_by_subquadrat <- function(sbst,
                          x_q,
                          x_sq,
                          y_q,
@@ -291,7 +291,7 @@ prep_maply_tag <- function(sbst,
 
 #' Label the four divisions of a quadrat -- each with four subquadrats.
 #'
-#' This function makes it possible for [maply_tag()] to plot each individual map.
+#' This function makes it possible for [plot_tag_status_by_subquadrat()] to plot each individual map.
 #' Each map corresponds to one page and includes four subquadrats. There are a
 #' total of four maps per quadrat (i.e. a total of 16 subquadrats per quadrat).
 #'

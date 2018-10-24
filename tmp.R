@@ -1,3 +1,26 @@
+# grep --------------------------------------------------------------------
+
+grep -R "library(fgeo.map)" 
+../fgeo
+../fgeo.abundance
+../fgeo.base
+../fgeo.data
+../fgeo.demography
+../fgeo.habitat
+../fgeo.map
+../fgeo.tool
+
+# /R
+grep -R "maply_tag" ../fgeo/R ../fgeo.abundance/R ../fgeo.base/R ../fgeo.data/R ../fgeo.demography/R ../fgeo.habitat/R ../fgeo.tool/R 
+
+# README
+grep -R "maply_tag" ../fgeo/README.Rmd ../fgeo.abundance/README.Rmd ../fgeo.base/README.Rmd ../fgeo.data/README.Rmd ../fgeo.demography/README.Rmd ../fgeo.habitat/README.Rmd ../fgeo.tool/README.Rmd 
+
+# /vignettes
+grep -R "maply_tag" ../fgeo/vignettes ../fgeo.abundance/vignettes ../fgeo.base/vignettes ../fgeo.data/vignettes ../fgeo.demography/vignettes ../fgeo.habitat/vignettes ../fgeo.tool/vignettes
+
+# new names ---------------------------------------------------------------
+
 # Create a list of plots (optimized for printing)
 
 * plot_tag_status_by_subquadrat() <- maply_tag

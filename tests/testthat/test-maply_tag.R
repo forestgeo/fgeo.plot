@@ -1,12 +1,12 @@
 library(dplyr)
 library(purrr)
 
-context("maply_tag")
+context("plot_tag_status_by_subquadrat")
 
 vft_1quad <- fgeo.data::luquillo_vft_4quad %>% 
   fgeo.tool::pick_top(QuadratName) %>% 
   fgeo.tool::pick_top(CensusID)
-map_list <- maply_tag(vft_1quad)
+map_list <- plot_tag_status_by_subquadrat(vft_1quad)
 
 # Outputs -----------------------------------------------------------------
 
@@ -16,7 +16,7 @@ test_that("output is correct", {
 
   # Underlying output-data didn't change
   reference <- map_list[[1]][["data"]]
-  expect_known_output(reference, "ref_maply_tag.csv")
+  expect_known_output(reference, "ref_plot_tag_status_by_subquadrat.csv")
 
   # Plots all unique tags in data
   unique_tags_in_plot_n <- map_list %>%
@@ -33,7 +33,7 @@ test_that("output is correct", {
   all_vars <- map_list[[1]]$data
   min_vars <- vft_1quad %>%
     select(Tag, TreeID, QX, QY, Status, QuadratName, CensusID, PlotID) %>%
-    maply_tag() %>%
+    plot_tag_status_by_subquadrat() %>%
     .[[1]] %>%
     .$data
   expect_equal(all_vars, min_vars)
@@ -43,7 +43,7 @@ test_that("output is correct", {
 
 test_that("works with all defaults given in usage", {
   expect_silent(
-    maply_tag(
+    plot_tag_status_by_subquadrat(
       vft_1quad,
       x_q = 20,
       x_sq = 5,
@@ -78,18 +78,18 @@ test_that("handles wrong type", {
     select(matches(crucial_nms)) 
   
   x <- map_df(x, as.character)
-  expect_warning(maply_tag(x))
+  expect_warning(plot_tag_status_by_subquadrat(x))
 })
 
 test_that("wrong inputs get noticed", {
 
   expect_error(
    # data not a dataframe
-    maply_tag(1)
+    plot_tag_status_by_subquadrat(1)
   )
 
   expect_error(
-    maply_tag(
+    plot_tag_status_by_subquadrat(
      # data has cero rows
      filter(vft_1quad, CensusID == 999)
     )
@@ -98,37 +98,37 @@ test_that("wrong inputs get noticed", {
   # Missing name
   no_qx <- vft_1quad
   no_qx$QX <- NULL
-  expect_error(maply_tag(no_qx), "Ensure")
+  expect_error(plot_tag_status_by_subquadrat(no_qx), "Ensure")
 
   # wrong type
-  expect_error(maply_tag(vft_1quad, x_q = "a"))
-  expect_error(maply_tag(vft_1quad, x_sq = "a"))
-  expect_error(maply_tag(vft_1quad, y_q = "a"))
-  expect_error(maply_tag(vft_1quad, y_sq = "a"))
-  expect_error(maply_tag(vft_1quad, subquad_offset = "not -1"))
+  expect_error(plot_tag_status_by_subquadrat(vft_1quad, x_q = "a"))
+  expect_error(plot_tag_status_by_subquadrat(vft_1quad, x_sq = "a"))
+  expect_error(plot_tag_status_by_subquadrat(vft_1quad, y_q = "a"))
+  expect_error(plot_tag_status_by_subquadrat(vft_1quad, y_sq = "a"))
+  expect_error(plot_tag_status_by_subquadrat(vft_1quad, subquad_offset = "not -1"))
 
-  expect_error(maply_tag(vft_1quad, subquad_offset = 0))
+  expect_error(plot_tag_status_by_subquadrat(vft_1quad, subquad_offset = 0))
 
   # wrong length
-  expect_error(maply_tag(vft_1quad, bl = 1:2))
-  expect_error(maply_tag(vft_1quad, br = 1:2))
-  expect_error(maply_tag(vft_1quad, tr = 1:2))
-  expect_error(maply_tag(vft_1quad, tl = 1:2))
+  expect_error(plot_tag_status_by_subquadrat(vft_1quad, bl = 1:2))
+  expect_error(plot_tag_status_by_subquadrat(vft_1quad, br = 1:2))
+  expect_error(plot_tag_status_by_subquadrat(vft_1quad, tr = 1:2))
+  expect_error(plot_tag_status_by_subquadrat(vft_1quad, tl = 1:2))
 
   expect_error(
-    maply_tag(
+    plot_tag_status_by_subquadrat(
      vft_1quad,
      # wrong type
      title_quad = 1
     )
   )
 
-  expect_error(maply_tag(vft_1quad, show_page = "not logical"))
+  expect_error(plot_tag_status_by_subquadrat(vft_1quad, show_page = "not logical"))
 
-  expect_error(maply_tag(vft_1quad, show_subquad = "not logical"))
+  expect_error(plot_tag_status_by_subquadrat(vft_1quad, show_subquad = "not logical"))
 
   expect_error(
-    maply_tag(
+    plot_tag_status_by_subquadrat(
       vft_1quad,
       # wrong type
       point_shape = c("a", "b")
@@ -136,7 +136,7 @@ test_that("wrong inputs get noticed", {
   )
 
   expect_error(
-    maply_tag(
+    plot_tag_status_by_subquadrat(
       vft_1quad,
       # wrong type
       point_size = "a"
@@ -144,7 +144,7 @@ test_that("wrong inputs get noticed", {
   )
 
   expect_error(
-    maply_tag(
+    plot_tag_status_by_subquadrat(
       vft_1quad,
       # wrong type
       tag_size = "a"
@@ -152,7 +152,7 @@ test_that("wrong inputs get noticed", {
   )
 
   expect_error(
-    maply_tag(
+    plot_tag_status_by_subquadrat(
       vft_1quad,
       # wrong type
       header = 1
@@ -160,7 +160,7 @@ test_that("wrong inputs get noticed", {
   )
 
   expect_error(
-    maply_tag(
+    plot_tag_status_by_subquadrat(
       vft_1quad,
       # wrong type
       theme = 1
@@ -168,7 +168,7 @@ test_that("wrong inputs get noticed", {
   )
 
   expect_error(
-    maply_tag(
+    plot_tag_status_by_subquadrat(
       vft_1quad,
       # wrong type
       move_edge = "a"
@@ -179,18 +179,18 @@ test_that("wrong inputs get noticed", {
   dup_plotid <-   vft_1quad[1, ]
   dup_plotid$PlotID <- 999L
   w_dup_plotid <- dplyr::bind_rows(dup_plotid, vft_1quad)
-  expect_error(x <- maply_tag(w_dup_plotid), "Remove all but a single plot")
+  expect_error(x <- plot_tag_status_by_subquadrat(w_dup_plotid), "Remove all but a single plot")
 
   # warns if data has more than one CensusID"
   dup_cnsid <-   vft_1quad[1, ]
   dup_cnsid$CensusID <- 999L
   w_dup_cnsid <- dplyr::bind_rows(dup_cnsid, vft_1quad)
-  expect_warning(x <- maply_tag(w_dup_cnsid), "Likely")
+  expect_warning(x <- plot_tag_status_by_subquadrat(w_dup_cnsid), "Likely")
 })
 
 test_that("page labels can be changed", {
   plots <- 1:2
-  maps <- maply_tag(vft_4quad,
+  maps <- plot_tag_status_by_subquadrat(vft_4quad,
     bl = "a", br = "b", tr = "c", tl = "d",
     show_page = FALSE
   )[plots]
@@ -199,11 +199,11 @@ test_that("page labels can be changed", {
 })
 
 test_that("argument subquad_offset works as expected", {
-  x <- maply_tag(vft_1quad, subquad_offset = -1)
+  x <- plot_tag_status_by_subquadrat(vft_1quad, subquad_offset = -1)
   subquads <- unique(purrr::map_df(x, "data")$subquadrat)
   expect_true("01" %in% subquads)
 
-  x <- maply_tag(vft_1quad, subquad_offset = -1)
+  x <- plot_tag_status_by_subquadrat(vft_1quad, subquad_offset = -1)
   subquads <- unique(purrr::map_df(x, "data")$subquadrat)
   expect_true("01" %in% subquads)
 })
@@ -223,11 +223,11 @@ test_that("outputs quadrats in order, even if QuadratName is numeric (#33)", {
       )
     )
   
-  good <- maply_tag(vft_toy)
+  good <- plot_tag_status_by_subquadrat(vft_toy)
   expect_equal(names(good), expect_nms)
   
   not_chr <- expect_warning(
-    maply_tag(mutate(vft_toy, QuadratName = as.numeric(QuadratName)))
+    plot_tag_status_by_subquadrat(mutate(vft_toy, QuadratName = as.numeric(QuadratName)))
   )
   expect_equal(names(not_chr), expect_nms)
 })
@@ -236,14 +236,14 @@ test_that("warns if option max.print is not high enough", {
   old_options <- options()
   options(max.print = 2)
   expect_warning(
-    p <- maply_tag(vft_1quad)
+    p <- plot_tag_status_by_subquadrat(vft_1quad)
   )
   options(old_options)
   
   old_options <- options()
   options(max.print = 4)
   expect_silent(
-    p <- maply_tag(vft_1quad)
+    p <- plot_tag_status_by_subquadrat(vft_1quad)
   )
   options(old_options)
 })

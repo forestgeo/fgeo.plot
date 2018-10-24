@@ -147,6 +147,6 @@ p3[[1]]
 \code{\link[=label_elev]{label_elev()}}, \code{\link[=hide]{hide()}}, \code{\link[=wrap]{wrap()}}
 
 Other functions to create a list of plots: \code{\link{maply_quad}},
-  \code{\link{maply_tag}}
+  \code{\link{plot_tag_status_by_subquadrat}}
 }
 \concept{functions to create a list of plots}

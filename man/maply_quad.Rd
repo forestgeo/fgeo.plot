@@ -92,6 +92,6 @@ maply_quad(
 }
 \seealso{
 Other functions to create a list of plots: \code{\link{maply_sp_elev}},
-  \code{\link{maply_tag}}
+  \code{\link{plot_tag_status_by_subquadrat}}
 }
 \concept{functions to create a list of plots}
