@@ -35,9 +35,9 @@ navbar:
 
 reference:
 
-  - title: Quick plots
+  - title: Create `ggplot`s ForestGEO data-classes in a single command
     contents:
-      - plot.fgeo_habitat
+      - autoplot.fgeo_habitat
       - has_concept("functions to create a single plot")
 
   - title: List of species-distribution plots

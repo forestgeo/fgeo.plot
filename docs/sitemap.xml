@@ -13,6 +13,9 @@
     <loc>https://forestgeo.github.io/fgeo.map//reference/add_species.html</loc>
   </url>
   <url>
+    <loc>https://forestgeo.github.io/fgeo.map//reference/autoplot.fgeo_habitat.html</loc>
+  </url>
+  <url>
     <loc>https://forestgeo.github.io/fgeo.map//reference/axis_limits.html</loc>
   </url>
   <url>
@@ -40,9 +43,6 @@
     <loc>https://forestgeo.github.io/fgeo.map//reference/pipe.html</loc>
   </url>
   <url>
-    <loc>https://forestgeo.github.io/fgeo.map//reference/plot.fgeo_habitat.html</loc>
-  </url>
-  <url>
     <loc>https://forestgeo.github.io/fgeo.map//reference/plot_base_elevation.html</loc>
   </url>
   <url>
@@ -56,6 +56,9 @@
   </url>
   <url>
     <loc>https://forestgeo.github.io/fgeo.map//reference/plot_tag_status_by_subquadrat.html</loc>
+  </url>
+  <url>
+    <loc>https://forestgeo.github.io/fgeo.map//reference/reexports.html</loc>
   </url>
   <url>
     <loc>https://forestgeo.github.io/fgeo.map//reference/suffix_tags_beyond_edge.html</loc>

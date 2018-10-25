@@ -389,7 +389,11 @@ axis_limits <- function(p, xlim = NULL, ylim = NULL) {
 #' add_species(p)
 #' 
 #' add_species(p, fill = "white", shape = 22, point_size = 4)
-add_species <- function(p, data = NULL, fill = "sp", shape = 21, point_size = 3) {
+add_species <- function(p,
+                        data = NULL,
+                        fill = "sp",
+                        shape = 21,
+                        point_size = 3) {
   check_add_species(p = p, data = data)
   
   if (fill != "sp") {
@@ -682,7 +686,11 @@ check_add_species <- function(p, data) {
   invisible(p)
 }
 
-check_add_elevation_labels <- function(p, label_color, label_size, xyjust, fontface) {
+check_add_elevation_labels <- function(p,
+                                       label_color,
+                                       label_size,
+                                       xyjust,
+                                       fontface) {
   stopifnot(
     is.character(label_color), 
     is.numeric(label_size),
