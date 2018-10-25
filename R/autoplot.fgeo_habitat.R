@@ -7,7 +7,7 @@
 #' @export
 #' 
 #' 
-#' @family Methods for common generics
+#' @family autoplots
 #'
 #' @examples
 #' elev_list <- fgeo.data::luquillo_elevation

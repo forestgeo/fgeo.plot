@@ -48,9 +48,7 @@ grep -R "maply_tag" ../fgeo/vignettes ../fgeo.abundance/vignettes ../fgeo.base/v
 plot_base_census <- map_gx_gy()
 plot_base_elevation <- map_gx_gy_elev()
 
-
-
-add_elevation_contrours <- contour_elev()
+add_elevation_contours <- contour_elev()
 add_elevation_labels <- label_elev()
 add_species <- add_sp()
 

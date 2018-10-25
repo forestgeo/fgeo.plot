@@ -23,18 +23,18 @@ Label elevation lines.
 \examples{
 elevation <- fgeo.data::luquillo_elevation
 
-add_elevation_contrours(plot_base_elevation(elevation))
+add_elevation_contours(plot_base_elevation(elevation))
 
 elevation \%>\%
   plot_base_elevation() \%>\% 
-  add_elevation_contrours() \%>\%
+  add_elevation_contours() \%>\%
   add_elevation_labels(label_size = 2, label_color = "black", xyjust = -0.25)
 }
 \seealso{
 \code{\link[=plot_each_species]{plot_each_species()}}, \code{\link[=plot_species_or_elevation]{plot_species_or_elevation()}},
 \code{\link[=plot_elevation]{plot_elevation()}}, \code{\link[ggplot2:geom_text]{ggplot2::geom_text()}}.
 
-Other functions to create or modify plot layers: \code{\link{add_elevation_contrours}},
+Other functions to create or modify plot layers: \code{\link{add_elevation_contours}},
   \code{\link{add_species}}, \code{\link{axis_limits}},
   \code{\link{facet}}, \code{\link{hide}},
   \code{\link{plot_base_elevation}},

@@ -35,7 +35,7 @@ add_species(p, fill = "white", shape = 22, point_size = 4)
 \code{\link[=plot_species_or_elevation]{plot_species_or_elevation()}}, \code{\link[=plot_each_species]{plot_each_species()}},
 \code{\link[ggplot2:geom_point]{ggplot2::geom_point()}}.
 
-Other functions to create or modify plot layers: \code{\link{add_elevation_contrours}},
+Other functions to create or modify plot layers: \code{\link{add_elevation_contours}},
   \code{\link{add_elevation_labels}},
   \code{\link{axis_limits}}, \code{\link{facet}},
   \code{\link{hide}}, \code{\link{plot_base_elevation}},

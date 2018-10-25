@@ -24,13 +24,13 @@ hide_axis_labels(p)
 
 elevation \%>\% 
   plot_base_elevation() \%>\% 
-  add_elevation_contrours() \%>\% 
+  add_elevation_contours() \%>\% 
   hide_color_legend()
 }
 \seealso{
 \code{\link[ggplot2:labs]{ggplot2::labs()}},  \code{\link[ggplot2:guides]{ggplot2::guides()}}.
 
-Other functions to create or modify plot layers: \code{\link{add_elevation_contrours}},
+Other functions to create or modify plot layers: \code{\link{add_elevation_contours}},
   \code{\link{add_elevation_labels}},
   \code{\link{add_species}}, \code{\link{axis_limits}},
   \code{\link{facet}}, \code{\link{plot_base_elevation}},

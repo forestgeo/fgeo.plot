@@ -10,8 +10,13 @@ theme_default(p, panel.grid.minor = element_line(linetype = "dashed"),
 \arguments{
 \item{p}{A ggplot.}
 
-\item{panel.grid.minor}{minor grid lines (\code{element_line}; inherits from
-\code{panel.grid})}
+\item{panel.grid.minor}{grid lines (\code{\link[=element_line]{element_line()}}). Specify major grid lines,
+or minor grid lines separately (using \code{panel.grid.major} or \code{panel.grid.minor})
+or individually for each axis (using \code{panel.grid.major.x}, \code{panel.grid.minor.x},
+\code{panel.grid.major.y}, \code{panel.grid.minor.y}).  Y axis grid lines are horizontal
+and x axis grid lines are vertical. \code{panel.grid.*.*} inherits from
+\code{panel.grid.*} which inherits from \code{panel.grid}, which in turn inherits
+from \code{line}}
 
 \item{...}{additional element specifications not part of base ggplot2. If
 supplied \code{validate} needs to be set to \code{FALSE}.}
@@ -24,7 +29,7 @@ census <- fgeo.data::luquillo_tree5_random
 theme_default(plot_base_census(census))
 }
 \seealso{
-Other functions to create or modify plot layers: \code{\link{add_elevation_contrours}},
+Other functions to create or modify plot layers: \code{\link{add_elevation_contours}},
   \code{\link{add_elevation_labels}},
   \code{\link{add_species}}, \code{\link{axis_limits}},
   \code{\link{facet}}, \code{\link{hide}},

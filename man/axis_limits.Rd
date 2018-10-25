@@ -31,7 +31,7 @@ fgeo.data::luquillo_elevation \%>\%
 \code{\link[=plot_species_or_elevation]{plot_species_or_elevation()}}, \code{\link[=plot_each_species]{plot_each_species()}},
 \code{\link[ggplot2:coord_fixed]{ggplot2::coord_fixed()}}.
 
-Other functions to create or modify plot layers: \code{\link{add_elevation_contrours}},
+Other functions to create or modify plot layers: \code{\link{add_elevation_contours}},
   \code{\link{add_elevation_labels}},
   \code{\link{add_species}}, \code{\link{facet}},
   \code{\link{hide}}, \code{\link{plot_base_elevation}},

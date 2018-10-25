@@ -31,11 +31,11 @@ base_elevation
 add_species(base_census)
 # This fails because the base plot has no information about elevation
 \dontrun{
-  add_elevation_contrours(base_census)
+  add_elevation_contours(base_census)
 }
 
 # Use plot_base_elevation() as a base for layers that need elevation data
-add_elevation_contrours(base_elevation)
+add_elevation_contours(base_elevation)
 # This fails because the base plot has no information about species
 \dontrun{
   add_species(base_elevation)
@@ -45,7 +45,7 @@ add_elevation_contrours(base_elevation)
 \code{\link[=plot_species_or_elevation]{plot_species_or_elevation()}}, \code{\link[=plot_elevation]{plot_elevation()}},
 \code{\link[=plot_each_species]{plot_each_species()}}, \code{\link[ggplot2:ggplot]{ggplot2::ggplot()}}.
 
-Other functions to create or modify plot layers: \code{\link{add_elevation_contrours}},
+Other functions to create or modify plot layers: \code{\link{add_elevation_contours}},
   \code{\link{add_elevation_labels}},
   \code{\link{add_species}}, \code{\link{axis_limits}},
   \code{\link{facet}}, \code{\link{hide}},

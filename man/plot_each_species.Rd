@@ -144,7 +144,7 @@ p3[[1]]
 }
 \seealso{
 \code{\link[=plot_base_elevation]{plot_base_elevation()}}, \code{\link[=axis_limits]{axis_limits()}}, \code{\link[=add_species]{add_species()}},
-\code{\link[=add_elevation_contrours]{add_elevation_contrours()}}, \code{\link[=add_elevation_labels]{add_elevation_labels()}}, \code{\link[=hide]{hide()}}, \code{\link[=facet]{facet()}}.
+\code{\link[=add_elevation_contours]{add_elevation_contours()}}, \code{\link[=add_elevation_labels]{add_elevation_labels()}}, \code{\link[=hide]{hide()}}, \code{\link[=facet]{facet()}}.
 
 Other functions to create a list of plots: \code{\link{plot_dbh_bubbles_by_quadrat}},
   \code{\link{plot_tag_status_by_subquadrat}}

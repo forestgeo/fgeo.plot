@@ -23,7 +23,7 @@
 #' @inheritParams add_species
 #' @param add_elevation_labels Logical. `TRUE` labels the elevation lines with
 #'   text.
-#' @inheritParams add_elevation_contrours
+#' @inheritParams add_elevation_contours
 #' @param hide_color_legend Logical; `TRUE` hides the color legend.
 #' @inheritParams add_elevation_labels
 #' @inheritParams axis_limits
@@ -31,7 +31,7 @@
 #'   theme [theme_default()].
 #'
 #' @seealso [plot_base_elevation()], [axis_limits()], [add_species()],
-#'   [add_elevation_contrours()], [add_elevation_labels()], [hide()], [facet()].
+#'   [add_elevation_contours()], [add_elevation_labels()], [hide()], [facet()].
 #'
 #' @family functions to create a list of plots
 #' 
@@ -145,17 +145,17 @@ plot_each_species <- function(census,
 #' 
 #' # For maximum control, you can compose maps as you like
 #' # Traditional sintax: g(f(x))
-#' add_elevation_contrours(plot_base_elevation(elevation))
+#' add_elevation_contours(plot_base_elevation(elevation))
 #' 
 #' # With the pipe: f(x) %>% g()
 #' plot_base_elevation(elevation) %>%
-#'   add_elevation_contrours()
+#'   add_elevation_contours()
 #' 
 #' # The traditional sintax is hard to read when you compose multiple functions.
 #' # With the pipe, readability isn't affected by the number of functions.
 #' plot_base_elevation(elevation) %>%
 #'   axis_limits(xlim = c(-100, 400)) %>%
-#'   add_elevation_contrours(contour_size = 0.5) %>%
+#'   add_elevation_contours(contour_size = 0.5) %>%
 #'   add_elevation_labels(label_color = "red") %>%
 #'   hide_axis_labels() %>%
 #'   hide_color_legend() %>%
@@ -212,9 +212,6 @@ plot_species_or_elevation <- function(census,
     best_theme(custom_theme = custom_theme)
 }
 
-
-
-
 #' @rdname plot_species_or_elevation
 #' @export
 plot_elevation <- function(elevation,
@@ -263,7 +260,7 @@ map_pure_elev <- function(elevation,
   elevation <- fgeo.tool::fgeo_elevation(elevation)
   base <- elevation %>% 
     plot_base_elevation() %>% 
-    add_elevation_contrours(
+    add_elevation_contours(
       contour_size = contour_size, low = low, high = high, bins = bins
     ) %>% 
     best_elev_legend(hide_color_legend = hide_color_legend)
@@ -306,11 +303,11 @@ map_pure_elev <- function(elevation,
 #' add_species(base_census)
 #' # This fails because the base plot has no information about elevation
 #' \dontrun{
-#'   add_elevation_contrours(base_census)
+#'   add_elevation_contours(base_census)
 #' }
 #' 
 #' # Use plot_base_elevation() as a base for layers that need elevation data
-#' add_elevation_contrours(base_elevation)
+#' add_elevation_contours(base_elevation)
 #' # This fails because the base plot has no information about species
 #' \dontrun{
 #'   add_species(base_elevation)
@@ -327,6 +324,8 @@ plot_base_census <- function(data) {
   
   ggplot(data, aes(gx, gy))
 }
+
+
 
 # Limits ------------------------------------------------------------------
 
@@ -434,9 +433,9 @@ add_species <- function(p,
 #' @export
 #' @examples 
 #' p <- plot_base_elevation(fgeo.data::luquillo_elevation)
-#' add_elevation_contrours(p)
-#' add_elevation_contrours(p, contour_size = 0.5, low = "grey", high = "black", bins = 4)
-add_elevation_contrours <- function(p, 
+#' add_elevation_contours(p)
+#' add_elevation_contours(p, contour_size = 0.5, low = "grey", high = "black", bins = 4)
+add_elevation_contours <- function(p, 
                          contour_size = 1, 
                          low = "blue", 
                          high = "red", 
@@ -467,11 +466,11 @@ add_elevation_contrours <- function(p,
 #' @examples 
 #' elevation <- fgeo.data::luquillo_elevation
 #' 
-#' add_elevation_contrours(plot_base_elevation(elevation))
+#' add_elevation_contours(plot_base_elevation(elevation))
 #' 
 #' elevation %>%
 #'   plot_base_elevation() %>% 
-#'   add_elevation_contrours() %>%
+#'   add_elevation_contours() %>%
 #'   add_elevation_labels(label_size = 2, label_color = "black", xyjust = -0.25)
 add_elevation_labels <- function(p, 
                        label_size = 3,
@@ -554,7 +553,7 @@ text_at_max <- function(x,
 #' 
 #' elevation %>% 
 #'   plot_base_elevation() %>% 
-#'   add_elevation_contrours() %>% 
+#'   add_elevation_contours() %>% 
 #'   hide_color_legend()
 #' @name hide 
 NULL
@@ -702,7 +701,7 @@ check_add_elevation_labels <- function(p,
   if (p_data_lacks_level) {
     msg <- paste0(
       "The plot fed to `level_elev() lacks the variable `level`\n",
-      "* Did you forget to call `add_elevation_contrours()` before `level_elev`?"
+      "* Did you forget to call `add_elevation_contours()` before `level_elev`?"
     )
     abort(msg)
   }

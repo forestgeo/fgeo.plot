@@ -14,10 +14,8 @@ and defining faceting groups on the rows or columns dimension.
 The variables can be named (the names are passed to \code{labeller}).
 
 For compatibility with the classic interface, can also be a
-formula or character vector. Use either a one sided formula, `~a
-\itemize{
-\item b\code{, or a character vector,}c("a", "b")`.
-}}
+formula or character vector. Use either a one sided formula, \code{~a + b},
+or a character vector, \code{c("a", "b")}.}
 
 \item{...}{Arguments passed on to \code{ggplot2::facet_wrap}
 \describe{
@@ -26,10 +24,8 @@ and defining faceting groups on the rows or columns dimension.
 The variables can be named (the names are passed to \code{labeller}).
 
 For compatibility with the classic interface, can also be a
-formula or character vector. Use either a one sided formula, `~a
-\itemize{
-\item b\code{, or a character vector,}c("a", "b")`.
-}}
+formula or character vector. Use either a one sided formula, \code{~a + b},
+or a character vector, \code{c("a", "b")}.}
   \item{nrow}{Number of rows and columns.}
   \item{ncol}{Number of rows and columns.}
   \item{scales}{Should scales be fixed (\code{"fixed"}, the default),
@@ -91,7 +87,7 @@ census \%>\%
 \seealso{
 \code{\link[ggplot2:facet_wrap]{ggplot2::facet_wrap()}}, \code{\link[ggplot2:facet_grid]{ggplot2::facet_grid()}}.
 
-Other functions to create or modify plot layers: \code{\link{add_elevation_contrours}},
+Other functions to create or modify plot layers: \code{\link{add_elevation_contours}},
   \code{\link{add_elevation_labels}},
   \code{\link{add_species}}, \code{\link{axis_limits}},
   \code{\link{hide}}, \code{\link{plot_base_elevation}},

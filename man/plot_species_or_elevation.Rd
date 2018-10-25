@@ -111,17 +111,17 @@ plot_species_or_elevation(census, elevation)
 
 # For maximum control, you can compose maps as you like
 # Traditional sintax: g(f(x))
-add_elevation_contrours(plot_base_elevation(elevation))
+add_elevation_contours(plot_base_elevation(elevation))
 
 # With the pipe: f(x) \%>\% g()
 plot_base_elevation(elevation) \%>\%
-  add_elevation_contrours()
+  add_elevation_contours()
 
 # The traditional sintax is hard to read when you compose multiple functions.
 # With the pipe, readability isn't affected by the number of functions.
 plot_base_elevation(elevation) \%>\%
   axis_limits(xlim = c(-100, 400)) \%>\%
-  add_elevation_contrours(contour_size = 0.5) \%>\%
+  add_elevation_contours(contour_size = 0.5) \%>\%
   add_elevation_labels(label_color = "red") \%>\%
   hide_axis_labels() \%>\%
   hide_color_legend() \%>\%

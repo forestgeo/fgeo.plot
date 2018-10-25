@@ -23,4 +23,7 @@ habitats <- fgeo.tool::fgeo_habitat(elev_list, gridsize = 20, n = 4)
 
 autoplot(habitats)
 }
-\concept{Methods for common generics}
+\seealso{
+Other autoplots: \code{\link{autoplot.sp}}
+}
+\concept{autoplots}
