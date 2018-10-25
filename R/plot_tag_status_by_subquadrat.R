@@ -45,6 +45,7 @@
 #'   [paginate()], [ggrepel::geom_text_repel], [fgeo.tool::drop_twice_dead()].
 #'
 #' @family functions to create a list of plots
+#' @family functions to plot tag status
 #'
 #' @section Acknowledgment:
 #' Useful ideas and guidance came from Suzanne Lao, Stuart Davis, Shameema
@@ -181,25 +182,25 @@ plot_tag_status_by_subquadrat <- function(vft,
 }
 
 check_plot_tag_status_by_subquadrat <- function(.vft,
-                            crucial,
-                            x_q,
-                            x_sq,
-                            y_q,
-                            y_sq,
-                            subquad_offset,
-                            bl,
-                            br,
-                            tr,
-                            tl,
-                            title_quad,
-                            show_page,
-                            show_subquad,
-                            point_shape,
-                            point_size,
-                            tag_size,
-                            header,
-                            theme,
-                            move_edge) {
+                                                crucial,
+                                                x_q,
+                                                x_sq,
+                                                y_q,
+                                                y_sq,
+                                                subquad_offset,
+                                                bl,
+                                                br,
+                                                tr,
+                                                tl,
+                                                title_quad,
+                                                show_page,
+                                                show_subquad,
+                                                point_shape,
+                                                point_size,
+                                                tag_size,
+                                                header,
+                                                theme,
+                                                move_edge) {
   stopifnot(is.data.frame(.vft))
   if (dim(.vft)[1] == 0) {stop("Data can't have cero rows")}
   check_crucial_names(.vft, crucial)

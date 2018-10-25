@@ -12,6 +12,7 @@
 #'   status that corresponds to dead stems.
 #'
 #' @family functions to create a list of plots
+#' @family functions to plot dbh bubbles
 #'
 #' @return A list which each element is a plot of class ggplot.
 #' @export
@@ -25,7 +26,7 @@
 #' 
 #' # Filter the data you want. For example:
 #' want <- filter(small_vft, CensusID == 4, PlotID == 1)
-#' p <- plot_dbh_bubles_by_quadrat(want)
+#' p <- plot_dbh_bubbles_by_quadrat(want)
 #' # Visualizing only the first plot
 #' p[[1]]
 #' # Printing all plots to .pdf, with parameters optimized for size letter
@@ -38,7 +39,7 @@
 #' # Be careful if filtering by DBH: You may unintentionally remove dead trees.
 #' # You should explicietly inlcude missing `DBH` values with `is.na(DBH)`
 #' p <- filter(small_vft, DBH > 20 | is.na(DBH))
-#' plot_dbh_bubles_by_quadrat(p)[[1]]
+#' plot_dbh_bubbles_by_quadrat(p)[[1]]
 #'
 #' # Customizing the maps ----------------------------------------------------
 #' # A custom title and header
@@ -51,27 +52,27 @@
 #'   sep = "\n"
 #' )
 #' 
-#' plot_dbh_bubles_by_quadrat(small_vft, title_quad = "My Site, 2018. Quad:", header = myheader)
+#' plot_dbh_bubbles_by_quadrat(small_vft, title_quad = "My Site, 2018. Quad:", header = myheader)
 #'
 #' # Tweak the theme with ggplot
 #' library(ggplot2)
 #'
-#' plot_dbh_bubles_by_quadrat(
+#' plot_dbh_bubbles_by_quadrat(
 #'   small_vft,
 #'   title_quad = "My Site, 2018. Quad:",
-#'   header = header_dbh_bubles("spanish"),
+#'   header = header_dbh_bubbles("spanish"),
 #'   tag_size = 3,
-#'   theme = theme_dbh_bubles(
+#'   theme = theme_dbh_bubbles(
 #'     axis.text = NULL,  # NULL shows axis.text; element_blank() doesn't.
 #'     plot.title = element_text(size = 15),
 #'     plot.subtitle = element_text(size = 5),
 #'     panel.background = element_rect(fill = "grey")
 #'   )
 #' )
-plot_dbh_bubles_by_quadrat <- function(vft,
+plot_dbh_bubbles_by_quadrat <- function(vft,
                      title_quad = "Site Name, YYYY, Quadrat:",
-                     header = header_dbh_bubles(),
-                     theme = theme_dbh_bubles(),
+                     header = header_dbh_bubbles(),
+                     theme = theme_dbh_bubbles(),
                      lim_min = 0,
                      lim_max = 20,
                      subquadrat_side = 5,
@@ -84,7 +85,7 @@ plot_dbh_bubles_by_quadrat <- function(vft,
     "qx", "qy"
   )
   crucial <- .vft[core]
-  check_plot_dbh_bubles_by_quadrat(
+  check_plot_dbh_bubbles_by_quadrat(
     vft = crucial,
     core = core,
     lim_min = lim_min,
@@ -122,7 +123,7 @@ plot_dbh_bubles_by_quadrat <- function(vft,
   setNames(p, nms)
 }
 
-check_plot_dbh_bubles_by_quadrat <- function(vft,
+check_plot_dbh_bubbles_by_quadrat <- function(vft,
                            core,
                            lim_min,
                            lim_max,

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Hide elements of a plot. — hide • fgeo.map</title>
+<title>Pre-made headers. — header_dbh_bubbles • fgeo.map</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -30,10 +30,9 @@
 
 
 
-<meta property="og:title" content="Hide elements of a plot. — hide" />
+<meta property="og:title" content="Pre-made headers. — header_dbh_bubbles" />
 
-<meta property="og:description" content="hide_axis_labels hides axis labels.
-hide_color_legend hides the color legend, for example, of elevation lines." />
+<meta property="og:description" content="Pre-made headers." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -107,49 +106,41 @@ hide_color_legend hides the color legend, for example, of elevation lines." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Hide elements of a plot.</h1>
-    <small class="dont-index">Source: <a href='https://github.com/forestgeo/fgeo.map/blob/master/R/plot_each_species.R'><code>R/plot_each_species.R</code></a></small>
-    <div class="hidden name"><code>hide.Rd</code></div>
+    <h1>Pre-made headers.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/forestgeo/fgeo.map/blob/master/R/headers.R'><code>R/headers.R</code></a></small>
+    <div class="hidden name"><code>header_dbh_bubbles.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p><code>hide_axis_labels</code> hides axis labels.
-<code>hide_color_legend</code> hides the color legend, for example, of elevation lines.</p>
+    <p>Pre-made headers.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>hide_axis_labels</span>(<span class='no'>p</span>)
-
-<span class='fu'>hide_color_legend</span>(<span class='no'>p</span>)</pre>
+    <pre class="usage"><span class='fu'>header_dbh_bubbles</span>(<span class='kw'>lang</span> <span class='kw'>=</span> <span class='st'>"english"</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>p</th>
-      <td><p>A ggplot.</p></td>
+      <th>lang</th>
+      <td><p>= String; Language of the header: Either "english" or "spanish".</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='http://www.rdocumentation.org/packages/ggplot2/topics/labs'>ggplot2::labs()</a></code>,  <code><a href='http://www.rdocumentation.org/packages/ggplot2/topics/guides'>ggplot2::guides()</a></code>.</p>
-<p>Other functions to create or modify plot layers: <code><a href='add_elevation_contrours.html'>add_elevation_contrours</a></code>,
-  <code><a href='add_elevation_labels.html'>add_elevation_labels</a></code>,
-  <code><a href='add_species.html'>add_species</a></code>, <code><a href='axis_limits.html'>axis_limits</a></code>,
-  <code><a href='facet.html'>facet</a></code>, <code><a href='plot_base_elevation.html'>plot_base_elevation</a></code>,
-  <code><a href='theme_default.html'>theme_default</a></code></p></div>
+    <div class='dont-index'><p>Other functions to plot dbh bubbles: <code><a href='plot_dbh_bubbles_by_quadrat.html'>plot_dbh_bubbles_by_quadrat</a></code>,
+  <code><a href='theme_dbh_bubbles.html'>theme_dbh_bubbles</a></code></p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>elevation</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>fgeo.data</span><span class='kw ns'>::</span><span class='no'><a href='http://www.rdocumentation.org/packages/fgeo.data/topics/luquillo_elevation'>luquillo_elevation</a></span>
-<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='plot_base_elevation.html'>plot_base_elevation</a></span>(<span class='no'>elevation</span>)
-<span class='fu'>hide_axis_labels</span>(<span class='no'>p</span>)</div><div class='img'><img src='hide-1.png' alt='' width='700' height='433' /></div><div class='input'>
-<span class='no'>elevation</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='plot_base_elevation.html'>plot_base_elevation</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='add_elevation_contrours.html'>add_elevation_contrours</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'>hide_color_legend</span>()</div><div class='img'><img src='hide-2.png' alt='' width='700' height='433' /></div></pre>
+    <pre class="examples"><div class='input'><span class='fu'>cat</span>(<span class='fu'>header_dbh_bubbles</span>())</div><div class='output co'>#&gt; 
+#&gt; Names and date:                          Reviewed by:                                 Entered on PC by: 
+#&gt; 
+#&gt; _________________________    _________________________    _________________________
+#&gt; _________________________    _________________________    _________________________
+#&gt; _________________________    _________________________    _________________________</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

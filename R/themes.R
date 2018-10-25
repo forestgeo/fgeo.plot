@@ -1,6 +1,6 @@
 #' Themes.
 #'
-#' These functions output themes for specific functions. You can customize any
+#' This function outputs a theme for a specific function. You can customize any
 #' theme by changing the default arguments and also by passing more arguments to
 #' [ggplot2::theme()] (via `...`).
 #'
@@ -8,17 +8,22 @@
 #' @param ... Additional arguments passed to  [ggplot2::theme()].
 #' @seealso [ggplot2::theme()].
 #' 
-#' @family functions to tweak plots
-#' 
 #' @return A [ggplot2::theme()].
+#' @name themes
+NULL
+
+#' @inherit themes
+#' @family functions to plot tag status
+#' 
+#' @export
 #' @examples
 #' class(theme_tag_status())
-#' class(theme_dbh_bubles())
+#' class(theme_dbh_bubbles())
 #' 
 #' census <- fgeo.data::luquillo_tree5_random
 #' 
-#' # Compose `theme_tag_status()` and `theme_dbh_bubles()` with `+: e.g. `f(x) + g()`
-#' plot_base_census(census) + theme_dbh_bubles()
+#' # Compose `theme_tag_status()` and `theme_dbh_bubbles()` with `+: e.g. `f(x) + g()`
+#' plot_base_census(census) + theme_dbh_bubbles()
 #' plot_base_census(census) + theme_tag_status()
 #' 
 #' # Compose `theme_default()` as `g(f(x))` or `f(x) %>% g()` (not `f(x) + g()`)
@@ -26,11 +31,6 @@
 #' census %>% 
 #'   plot_base_census() %>% 
 #'   theme_default()
-#' @name themes
-NULL
-
-#' @rdname themes
-#' @export
 theme_tag_status <- function(panel.grid.major = element_line(colour =  "black"),
                              panel.grid.minor = element_line(
                                colour =  "black",
@@ -60,9 +60,16 @@ theme_tag_status <- function(panel.grid.major = element_line(colour =  "black"),
   )
 }
 
-#' @rdname themes
+#' @inherit themes
+#' @family functions to plot dbh bubbles
+#' 
 #' @export
-theme_dbh_bubles <- function(axis.text = element_blank(),
+#' @examples
+#' class(theme_dbh_bubbles())
+#' 
+#' census <- fgeo.data::luquillo_tree5_random
+#' plot_base_census(census) + theme_dbh_bubbles()
+theme_dbh_bubbles <- function(axis.text = element_blank(),
                              panel.background = element_rect(fill = "white"),
                              panel.grid.minor = element_blank(),
                              panel.grid.major = element_blank(),
@@ -88,8 +95,14 @@ theme_dbh_bubles <- function(axis.text = element_blank(),
   )
 }
 
-#' @rdname themes
+#' @inherit themes
 #' @template p
+#' 
+#' @family functions to create or modify plot layers
+#' 
+#' @examples 
+#' census <- fgeo.data::luquillo_tree5_random
+#' theme_default(plot_base_census(census))
 #' @export
 theme_default <- function(p, 
                           panel.grid.minor = element_line(linetype = "dashed"),

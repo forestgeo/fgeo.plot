@@ -48,6 +48,7 @@ add_elevation_contrours(base_elevation)
 Other functions to create or modify plot layers: \code{\link{add_elevation_contrours}},
   \code{\link{add_elevation_labels}},
   \code{\link{add_species}}, \code{\link{axis_limits}},
-  \code{\link{facet}}, \code{\link{hide}}
+  \code{\link{facet}}, \code{\link{hide}},
+  \code{\link{theme_default}}
 }
 \concept{functions to create or modify plot layers}

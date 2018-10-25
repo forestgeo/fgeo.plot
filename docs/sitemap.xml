@@ -25,6 +25,12 @@
     <loc>https://forestgeo.github.io/fgeo.map//reference/headers.html</loc>
   </url>
   <url>
+    <loc>https://forestgeo.github.io/fgeo.map//reference/header_dbh_bubbles.html</loc>
+  </url>
+  <url>
+    <loc>https://forestgeo.github.io/fgeo.map//reference/header_tag_status.html</loc>
+  </url>
+  <url>
     <loc>https://forestgeo.github.io/fgeo.map//reference/hide.html</loc>
   </url>
   <url>
@@ -40,7 +46,7 @@
     <loc>https://forestgeo.github.io/fgeo.map//reference/plot_base_elevation.html</loc>
   </url>
   <url>
-    <loc>https://forestgeo.github.io/fgeo.map//reference/plot_dbh_bubles_by_quadrat.html</loc>
+    <loc>https://forestgeo.github.io/fgeo.map//reference/plot_dbh_bubbles_by_quadrat.html</loc>
   </url>
   <url>
     <loc>https://forestgeo.github.io/fgeo.map//reference/plot_each_species.html</loc>
@@ -56,6 +62,15 @@
   </url>
   <url>
     <loc>https://forestgeo.github.io/fgeo.map//reference/themes.html</loc>
+  </url>
+  <url>
+    <loc>https://forestgeo.github.io/fgeo.map//reference/theme_dbh_bubbles.html</loc>
+  </url>
+  <url>
+    <loc>https://forestgeo.github.io/fgeo.map//reference/theme_default.html</loc>
+  </url>
+  <url>
+    <loc>https://forestgeo.github.io/fgeo.map//reference/theme_tag_status.html</loc>
   </url>
   <url>
     <loc>https://forestgeo.github.io/fgeo.map//reference/vft_1quad.html</loc>

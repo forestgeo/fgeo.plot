@@ -24,7 +24,7 @@ grep -R "maply_tag" ../fgeo/vignettes ../fgeo.abundance/vignettes ../fgeo.base/v
 # Create a list of plots (optimized for printing)
 
 * plot_tag_status_by_subquadrat() <- maply_tag
-* plot_dbh_bubles_by_quadrat() <- maply_quad
+* plot_dbh_bubbles_by_quadrat() <- maply_quad
 * plot_each_species() <- maply_sp_elev
 
 
@@ -65,8 +65,8 @@ hide_color_legend() <- hide_legend_color()
 # Helpers
 
 header_tag_status <- map_tag_header()
-header_dbh_bubles <- map_quad_header()
+header_dbh_bubbles <- map_quad_header()
 suffix_tags_beyond_edge <- suffix_edge_tag()
 theme_tag_status <- theme_map_tag()
-theme_dbh_bubles <- theme_map_quad()
+theme_dbh_bubbles <- theme_map_quad()
 

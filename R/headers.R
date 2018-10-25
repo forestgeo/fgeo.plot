@@ -1,17 +1,14 @@
 #' Pre-made headers.
 #'
-#' @name headers
 #' @param lang = String; Language of the header: Either "english" or "spanish".
 #' 
-#' @family functions to tweak plots
-#' 
-#' @examples
-#' cat(header_tag_status())
-#' cat(header_dbh_bubles())
+#' @name headers
 NULL
 
-#' @rdname headers
-#' @export
+#' @inherit headers
+#' @family functions to plot tag status
+#' @examples
+#' cat(header_tag_status())
 header_tag_status <- function() {
   paste(
     "",
@@ -22,9 +19,12 @@ header_tag_status <- function() {
   )
 }
 
-#' @rdname headers
+#' @inherit headers
+#' @family functions to plot dbh bubbles
 #' @export
-header_dbh_bubles <- function(lang = "english") {
+#' @examples
+#' cat(header_dbh_bubbles())
+header_dbh_bubbles <- function(lang = "english") {
   stopifnot(lang  %in% c("english", "spanish"))
   stopifnot(length(lang) == 1)
   

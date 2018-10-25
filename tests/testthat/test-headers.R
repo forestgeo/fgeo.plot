@@ -8,8 +8,8 @@ test_that("header_tag_status outputs the expected string", {
 
 })
 
-test_that("header_dbh_bubles outputs the expected string", {
-  x <- header_dbh_bubles(lang = "spanish")
+test_that("header_dbh_bubbles outputs the expected string", {
+  x <- header_dbh_bubbles(lang = "spanish")
   expect_true(grepl("Nombres y Fecha", x))
   expect_type(x, "character")
   x <- NULL

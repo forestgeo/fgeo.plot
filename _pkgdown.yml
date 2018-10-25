@@ -35,30 +35,31 @@ navbar:
 
 reference:
 
-  - title: Create a list of plots
+  - title: Quick plots
     contents:
-      - plot_each_species
-      - has_concept("functions to create a list of plots")
-      
-  - title: Create a single plot (may have multiple panels)
-    contents:
+      - plot.fgeo_habitat
       - has_concept("functions to create a single plot")
 
-  - title: Create or modify plot layers
+  - title: List of species-distribution plots
+    contents:
+      - plot_each_species
+
+  - title: List of dbh bubble-plots
+    contents:
+      - matches("plot_dbh_bubbles")
+      - has_concept("functions to plot dbh bubbles")
+
+  - title: List of fieldwork plots
+    contents:
+      - matches("plot_tag_status")
+      - has_concept("functions to plot tag status")
+
+  - title: Build or modify plots layer by layer
     desc: >
-      Functions to build custom plots most flexibly. For even more flexibility
-      use the __ggplot2__ package.
+      For even more flexibility use the [__ggplot2__ package](https://ggplot2.tidyverse.org/reference/index.html).
     contents:
       - matches("plot_base")
       - has_concept("functions to create or modify plot layers")
-
-  - title: Tweak plots
-    contents:
-      - has_concept("functions to tweak plots")
-
-  - title: Methods for common generics
-    contents:
-      - plot.fgeo_habitat
 
   - title: "Datasets"
     contents:

@@ -94,6 +94,7 @@ census \%>\%
 Other functions to create or modify plot layers: \code{\link{add_elevation_contrours}},
   \code{\link{add_elevation_labels}},
   \code{\link{add_species}}, \code{\link{axis_limits}},
-  \code{\link{hide}}, \code{\link{plot_base_elevation}}
+  \code{\link{hide}}, \code{\link{plot_base_elevation}},
+  \code{\link{theme_default}}
 }
 \concept{functions to create or modify plot layers}

@@ -2,102 +2,18 @@
 % Please edit documentation in R/themes.R
 \name{themes}
 \alias{themes}
-\alias{theme_tag_status}
-\alias{theme_dbh_bubles}
-\alias{theme_default}
 \title{Themes.}
-\usage{
-theme_tag_status(panel.grid.major = element_line(colour = "black"),
-  panel.grid.minor = element_line(colour = "black", linetype = "dotted"),
-  panel.background = element_rect(fill = "white"),
-  plot.title = element_text(size = 20),
-  plot.subtitle = element_text(size = 12),
-  plot.caption = element_text(size = 8), legend.position = "top",
-  legend.title = element_blank(), axis.ticks = element_blank(),
-  axis.text = element_text(size = 12), ...)
-
-theme_dbh_bubles(axis.text = element_blank(),
-  panel.background = element_rect(fill = "white"),
-  panel.grid.minor = element_blank(),
-  panel.grid.major = element_blank(), legend.position = "none",
-  plot.title = element_text(size = 20),
-  plot.subtitle = element_text(size = 12),
-  panel.border = element_rect(colour = "black", fill = NA),
-  axis.ticks.length = unit(-0.1, "cm"), ...)
-
-theme_default(p, panel.grid.minor = element_line(linetype = "dashed"),
-  ...)
-}
 \arguments{
-\item{panel.grid.major}{major grid lines (\code{element_line}; inherits from
-\code{panel.grid})}
-
-\item{panel.grid.minor}{minor grid lines (\code{element_line}; inherits from
-\code{panel.grid})}
-
-\item{panel.background}{background of plotting area, drawn underneath plot
-(\code{element_rect}; inherits from \code{rect})}
-
-\item{plot.title}{plot title (text appearance) (\code{element_text}; inherits
-from \code{title}) left-aligned by default}
-
-\item{plot.subtitle}{plot subtitle (text appearance) (\code{element_text};
-inherits from \code{title}) left-aligned by default}
-
-\item{plot.caption}{caption below the plot (text appearance)
-(\code{element_text}; inherits from \code{title}) right-aligned by default}
-
-\item{legend.position}{the position of legends ("none", "left", "right",
-"bottom", "top", or two-element numeric vector)}
-
-\item{legend.title}{title of legend (\code{element_text}; inherits from
-\code{title})}
-
-\item{axis.ticks}{tick marks along axes (\code{element_line}; inherits from
-\code{line})}
-
-\item{axis.text}{tick labels along axes (\code{element_text}; inherits from
-\code{text})}
-
 \item{...}{Additional arguments passed to  \code{\link[ggplot2:theme]{ggplot2::theme()}}.}
-
-\item{panel.border}{border around plotting area, drawn on top of plot so that
-it covers tick marks and grid lines. This should be used with
-\code{fill=NA}
-(\code{element_rect}; inherits from \code{rect})}
-
-\item{axis.ticks.length}{length of tick marks (\code{unit})}
-
-\item{p}{A ggplot.}
 }
 \value{
 A \code{\link[ggplot2:theme]{ggplot2::theme()}}.
 }
 \description{
-These functions output themes for specific functions. You can customize any
+This function outputs a theme for a specific function. You can customize any
 theme by changing the default arguments and also by passing more arguments to
 \code{\link[ggplot2:theme]{ggplot2::theme()}} (via \code{...}).
 }
-\examples{
-class(theme_tag_status())
-class(theme_dbh_bubles())
-
-census <- fgeo.data::luquillo_tree5_random
-
-# Compose `theme_tag_status()` and `theme_dbh_bubles()` with `+: e.g. `f(x) + g()`
-plot_base_census(census) + theme_dbh_bubles()
-plot_base_census(census) + theme_tag_status()
-
-# Compose `theme_default()` as `g(f(x))` or `f(x) \%>\% g()` (not `f(x) + g()`)
-theme_default(plot_base_census(census))
-census \%>\% 
-  plot_base_census() \%>\% 
-  theme_default()
-}
 \seealso{
 \code{\link[ggplot2:theme]{ggplot2::theme()}}.
-
-Other functions to tweak plots: \code{\link{headers}},
-  \code{\link{suffix_tags_beyond_edge}}
 }
-\concept{functions to tweak plots}
