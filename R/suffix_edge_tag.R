@@ -80,3 +80,7 @@ detect_to_tag <- function(x, x_q, y_q) {
   edgy_y <- x[["qy"]] > y_q
   (edgy_x + edgy_y) != 0
 }
+
+max0 <- function(...) {
+  max(..., na.rm = TRUE)
+}
