@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Themes. — theme_default • fgeo.map</title>
+<title>Default plot theme. — theme_default • fgeo.map</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -30,11 +30,9 @@
 
 
 
-<meta property="og:title" content="Themes. — theme_default" />
+<meta property="og:title" content="Default plot theme. — theme_default" />
 
-<meta property="og:description" content="This function outputs a theme for a specific function. You can customize any
-theme by changing the default arguments and also by passing more arguments to
-ggplot2::theme() (via ...)." />
+<meta property="og:description" content="Default plot theme." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -108,16 +106,14 @@ ggplot2::theme() (via ...)." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Themes.</h1>
+    <h1>Default plot theme.</h1>
     <small class="dont-index">Source: <a href='https://github.com/forestgeo/fgeo.map/blob/master/R/themes.R'><code>R/themes.R</code></a></small>
     <div class="hidden name"><code>theme_default.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>This function outputs a theme for a specific function. You can customize any
-theme by changing the default arguments and also by passing more arguments to
-<code><a href='http://www.rdocumentation.org/packages/ggplot2/topics/theme'>ggplot2::theme()</a></code> (via <code>...</code>).</p>
+    <p>Default plot theme.</p>
     
     </div>
 
@@ -132,14 +128,16 @@ theme by changing the default arguments and also by passing more arguments to
       <td><p>A ggplot.</p></td>
     </tr>
     <tr>
+      <th>panel.grid.minor</th>
+      <td><p>minor grid lines (<code>element_line</code>; inherits from
+<code>panel.grid</code>)</p></td>
+    </tr>
+    <tr>
       <th>...</th>
-      <td><p>Additional arguments passed to  <code><a href='http://www.rdocumentation.org/packages/ggplot2/topics/theme'>ggplot2::theme()</a></code>.</p></td>
+      <td><p>additional element specifications not part of base ggplot2. If
+supplied <code>validate</code> needs to be set to <code>FALSE</code>.</p></td>
     </tr>
     </table>
-    
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
-    <p>A <code><a href='http://www.rdocumentation.org/packages/ggplot2/topics/theme'>ggplot2::theme()</a></code>.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
@@ -159,8 +157,6 @@ theme by changing the default arguments and also by passing more arguments to
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       
-      <li><a href="#value">Value</a></li>
-
       <li><a href="#see-also">See also</a></li>
       
       <li><a href="#examples">Examples</a></li>

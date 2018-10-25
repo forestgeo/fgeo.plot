@@ -12,25 +12,16 @@
 #' @name themes
 NULL
 
-#' @inherit themes
+#' Theme for `plot_base_census()`.
+#' 
+#' @inheritParams ggplot2::theme
 #' @family functions to plot tag status
 #' 
 #' @export
 #' @examples
 #' class(theme_tag_status())
-#' class(theme_dbh_bubbles())
-#' 
 #' census <- fgeo.data::luquillo_tree5_random
-#' 
-#' # Compose `theme_tag_status()` and `theme_dbh_bubbles()` with `+: e.g. `f(x) + g()`
-#' plot_base_census(census) + theme_dbh_bubbles()
 #' plot_base_census(census) + theme_tag_status()
-#' 
-#' # Compose `theme_default()` as `g(f(x))` or `f(x) %>% g()` (not `f(x) + g()`)
-#' theme_default(plot_base_census(census))
-#' census %>% 
-#'   plot_base_census() %>% 
-#'   theme_default()
 theme_tag_status <- function(panel.grid.major = element_line(colour =  "black"),
                              panel.grid.minor = element_line(
                                colour =  "black",
@@ -60,27 +51,28 @@ theme_tag_status <- function(panel.grid.major = element_line(colour =  "black"),
   )
 }
 
-#' @inherit themes
+#' Theme for `theme_dbh_bubbles()`.
+#' 
+#' @inheritParams ggplot2::theme
 #' @family functions to plot dbh bubbles
 #' 
 #' @export
 #' @examples
 #' class(theme_dbh_bubbles())
-#' 
 #' census <- fgeo.data::luquillo_tree5_random
 #' plot_base_census(census) + theme_dbh_bubbles()
 theme_dbh_bubbles <- function(axis.text = element_blank(),
-                             panel.background = element_rect(fill = "white"),
-                             panel.grid.minor = element_blank(),
-                             panel.grid.major = element_blank(),
-                             legend.position = "none",
-                             plot.title = element_text(size = 20),
-                             plot.subtitle = element_text(size = 12),
-                             panel.border = element_rect(
-                               colour = "black", fill = NA
-                             ),
-                             axis.ticks.length = unit(-0.1, "cm"),
-                             ...) {
+                              panel.background = element_rect(fill = "white"),
+                              panel.grid.minor = element_blank(),
+                              panel.grid.major = element_blank(),
+                              legend.position = "none",
+                              plot.title = element_text(size = 20),
+                              plot.subtitle = element_text(size = 12),
+                              panel.border = element_rect(
+                                colour = "black", fill = NA
+                              ),
+                              axis.ticks.length = unit(-0.1, "cm"),
+                              ...) {
   theme(
     panel.background = panel.background,
     panel.grid.minor = panel.grid.minor,
@@ -95,7 +87,9 @@ theme_dbh_bubbles <- function(axis.text = element_blank(),
   )
 }
 
-#' @inherit themes
+#' Default plot theme.
+#' 
+#' @inheritParams ggplot2::theme
 #' @template p
 #' 
 #' @family functions to create or modify plot layers

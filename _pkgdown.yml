@@ -54,9 +54,13 @@ reference:
       - matches("plot_tag_status")
       - has_concept("functions to plot tag status")
 
-  - title: Build or modify plots layer by layer
+  - title: Pipe-able components to build or modify plots layer by layer
     desc: >
-      For even more flexibility use the [__ggplot2__ package](https://ggplot2.tidyverse.org/reference/index.html).
+       For even more flexibility use the 
+       [__ggplot2__ package](https://ggplot2.tidyverse.org/reference/index.html).
+       Compose these plot components not with `f(x) + g()` (as in __ggplot2__)
+       but with `f(x) `%>%` g(x)` or `g(f(x))` (as in all other packages in the
+       [__tidyverse__](https://www.tidyverse.org/)).
     contents:
       - matches("plot_base")
       - has_concept("functions to create or modify plot layers")

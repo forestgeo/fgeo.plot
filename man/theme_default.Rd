@@ -2,7 +2,7 @@
 % Please edit documentation in R/themes.R
 \name{theme_default}
 \alias{theme_default}
-\title{Themes.}
+\title{Default plot theme.}
 \usage{
 theme_default(p, panel.grid.minor = element_line(linetype = "dashed"),
   ...)
@@ -10,15 +10,14 @@ theme_default(p, panel.grid.minor = element_line(linetype = "dashed"),
 \arguments{
 \item{p}{A ggplot.}
 
-\item{...}{Additional arguments passed to  \code{\link[ggplot2:theme]{ggplot2::theme()}}.}
-}
-\value{
-A \code{\link[ggplot2:theme]{ggplot2::theme()}}.
+\item{panel.grid.minor}{minor grid lines (\code{element_line}; inherits from
+\code{panel.grid})}
+
+\item{...}{additional element specifications not part of base ggplot2. If
+supplied \code{validate} needs to be set to \code{FALSE}.}
 }
 \description{
-This function outputs a theme for a specific function. You can customize any
-theme by changing the default arguments and also by passing more arguments to
-\code{\link[ggplot2:theme]{ggplot2::theme()}} (via \code{...}).
+Default plot theme.
 }
 \examples{
 census <- fgeo.data::luquillo_tree5_random

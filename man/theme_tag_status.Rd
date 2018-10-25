@@ -2,7 +2,7 @@
 % Please edit documentation in R/themes.R
 \name{theme_tag_status}
 \alias{theme_tag_status}
-\title{Themes.}
+\title{Theme for \code{plot_base_census()}.}
 \usage{
 theme_tag_status(panel.grid.major = element_line(colour = "black"),
   panel.grid.minor = element_line(colour = "black", linetype = "dotted"),
@@ -14,31 +14,46 @@ theme_tag_status(panel.grid.major = element_line(colour = "black"),
   axis.text = element_text(size = 12), ...)
 }
 \arguments{
-\item{...}{Additional arguments passed to  \code{\link[ggplot2:theme]{ggplot2::theme()}}.}
-}
-\value{
-A \code{\link[ggplot2:theme]{ggplot2::theme()}}.
+\item{panel.grid.major}{major grid lines (\code{element_line}; inherits from
+\code{panel.grid})}
+
+\item{panel.grid.minor}{minor grid lines (\code{element_line}; inherits from
+\code{panel.grid})}
+
+\item{panel.background}{background of plotting area, drawn underneath plot
+(\code{element_rect}; inherits from \code{rect})}
+
+\item{plot.title}{plot title (text appearance) (\code{element_text}; inherits
+from \code{title}) left-aligned by default}
+
+\item{plot.subtitle}{plot subtitle (text appearance) (\code{element_text};
+inherits from \code{title}) left-aligned by default}
+
+\item{plot.caption}{caption below the plot (text appearance)
+(\code{element_text}; inherits from \code{title}) right-aligned by default}
+
+\item{legend.position}{the position of legends ("none", "left", "right",
+"bottom", "top", or two-element numeric vector)}
+
+\item{legend.title}{title of legend (\code{element_text}; inherits from
+\code{title})}
+
+\item{axis.ticks}{tick marks along axes (\code{element_line}; inherits from
+\code{line})}
+
+\item{axis.text}{tick labels along axes (\code{element_text}; inherits from
+\code{text})}
+
+\item{...}{additional element specifications not part of base ggplot2. If
+supplied \code{validate} needs to be set to \code{FALSE}.}
 }
 \description{
-This function outputs a theme for a specific function. You can customize any
-theme by changing the default arguments and also by passing more arguments to
-\code{\link[ggplot2:theme]{ggplot2::theme()}} (via \code{...}).
+Theme for \code{plot_base_census()}.
 }
 \examples{
 class(theme_tag_status())
-class(theme_dbh_bubbles())
-
 census <- fgeo.data::luquillo_tree5_random
-
-# Compose `theme_tag_status()` and `theme_dbh_bubbles()` with `+: e.g. `f(x) + g()`
-plot_base_census(census) + theme_dbh_bubbles()
 plot_base_census(census) + theme_tag_status()
-
-# Compose `theme_default()` as `g(f(x))` or `f(x) \%>\% g()` (not `f(x) + g()`)
-theme_default(plot_base_census(census))
-census \%>\% 
-  plot_base_census() \%>\% 
-  theme_default()
 }
 \seealso{
 Other functions to plot tag status: \code{\link{header_tag_status}},

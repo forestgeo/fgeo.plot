@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Themes. — theme_tag_status • fgeo.map</title>
+<title>Theme for <code>plot_base_census()</code>. — theme_tag_status • fgeo.map</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -30,11 +30,9 @@
 
 
 
-<meta property="og:title" content="Themes. — theme_tag_status" />
+<meta property="og:title" content="Theme for <code>plot_base_census()</code>. — theme_tag_status" />
 
-<meta property="og:description" content="This function outputs a theme for a specific function. You can customize any
-theme by changing the default arguments and also by passing more arguments to
-ggplot2::theme() (via ...)." />
+<meta property="og:description" content="Theme for plot_base_census()." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -108,16 +106,14 @@ ggplot2::theme() (via ...)." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Themes.</h1>
+    <h1>Theme for <code>plot_base_census()</code>.</h1>
     <small class="dont-index">Source: <a href='https://github.com/forestgeo/fgeo.map/blob/master/R/themes.R'><code>R/themes.R</code></a></small>
     <div class="hidden name"><code>theme_tag_status.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>This function outputs a theme for a specific function. You can customize any
-theme by changing the default arguments and also by passing more arguments to
-<code><a href='http://www.rdocumentation.org/packages/ggplot2/topics/theme'>ggplot2::theme()</a></code> (via <code>...</code>).</p>
+    <p>Theme for <code><a href='plot_base_elevation.html'>plot_base_census()</a></code>.</p>
     
     </div>
 
@@ -134,14 +130,61 @@ theme by changing the default arguments and also by passing more arguments to
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
+      <th>panel.grid.major</th>
+      <td><p>major grid lines (<code>element_line</code>; inherits from
+<code>panel.grid</code>)</p></td>
+    </tr>
+    <tr>
+      <th>panel.grid.minor</th>
+      <td><p>minor grid lines (<code>element_line</code>; inherits from
+<code>panel.grid</code>)</p></td>
+    </tr>
+    <tr>
+      <th>panel.background</th>
+      <td><p>background of plotting area, drawn underneath plot
+(<code>element_rect</code>; inherits from <code>rect</code>)</p></td>
+    </tr>
+    <tr>
+      <th>plot.title</th>
+      <td><p>plot title (text appearance) (<code>element_text</code>; inherits
+from <code>title</code>) left-aligned by default</p></td>
+    </tr>
+    <tr>
+      <th>plot.subtitle</th>
+      <td><p>plot subtitle (text appearance) (<code>element_text</code>;
+inherits from <code>title</code>) left-aligned by default</p></td>
+    </tr>
+    <tr>
+      <th>plot.caption</th>
+      <td><p>caption below the plot (text appearance)
+(<code>element_text</code>; inherits from <code>title</code>) right-aligned by default</p></td>
+    </tr>
+    <tr>
+      <th>legend.position</th>
+      <td><p>the position of legends ("none", "left", "right",
+"bottom", "top", or two-element numeric vector)</p></td>
+    </tr>
+    <tr>
+      <th>legend.title</th>
+      <td><p>title of legend (<code>element_text</code>; inherits from
+<code>title</code>)</p></td>
+    </tr>
+    <tr>
+      <th>axis.ticks</th>
+      <td><p>tick marks along axes (<code>element_line</code>; inherits from
+<code>line</code>)</p></td>
+    </tr>
+    <tr>
+      <th>axis.text</th>
+      <td><p>tick labels along axes (<code>element_text</code>; inherits from
+<code>text</code>)</p></td>
+    </tr>
+    <tr>
       <th>...</th>
-      <td><p>Additional arguments passed to  <code><a href='http://www.rdocumentation.org/packages/ggplot2/topics/theme'>ggplot2::theme()</a></code>.</p></td>
+      <td><p>additional element specifications not part of base ggplot2. If
+supplied <code>validate</code> needs to be set to <code>FALSE</code>.</p></td>
     </tr>
     </table>
-    
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
-    <p>A <code><a href='http://www.rdocumentation.org/packages/ggplot2/topics/theme'>ggplot2::theme()</a></code>.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
@@ -150,23 +193,14 @@ theme by changing the default arguments and also by passing more arguments to
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>class</span>(<span class='fu'>theme_tag_status</span>())</div><div class='output co'>#&gt; [1] "theme" "gg"   </div><div class='input'><span class='fu'>class</span>(<span class='fu'><a href='theme_dbh_bubbles.html'>theme_dbh_bubbles</a></span>())</div><div class='output co'>#&gt; [1] "theme" "gg"   </div><div class='input'>
-<span class='no'>census</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>fgeo.data</span><span class='kw ns'>::</span><span class='no'><a href='http://www.rdocumentation.org/packages/fgeo.data/topics/census_luquillo'>luquillo_tree5_random</a></span>
-
-<span class='co'># Compose `theme_tag_status()` and `theme_dbh_bubbles()` with `+: e.g. `f(x) + g()`</span>
-<span class='fu'><a href='plot_base_elevation.html'>plot_base_census</a></span>(<span class='no'>census</span>) + <span class='fu'><a href='theme_dbh_bubbles.html'>theme_dbh_bubbles</a></span>()</div><div class='img'><img src='theme_tag_status-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='plot_base_elevation.html'>plot_base_census</a></span>(<span class='no'>census</span>) + <span class='fu'>theme_tag_status</span>()</div><div class='img'><img src='theme_tag_status-2.png' alt='' width='700' height='433' /></div><div class='input'>
-<span class='co'># Compose `theme_default()` as `g(f(x))` or `f(x) %&gt;% g()` (not `f(x) + g()`)</span>
-<span class='fu'><a href='theme_default.html'>theme_default</a></span>(<span class='fu'><a href='plot_base_elevation.html'>plot_base_census</a></span>(<span class='no'>census</span>))</div><div class='img'><img src='theme_tag_status-3.png' alt='' width='700' height='433' /></div><div class='input'><span class='no'>census</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='plot_base_elevation.html'>plot_base_census</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='theme_default.html'>theme_default</a></span>()</div><div class='img'><img src='theme_tag_status-4.png' alt='' width='700' height='433' /></div></pre>
+    <pre class="examples"><div class='input'><span class='fu'>class</span>(<span class='fu'>theme_tag_status</span>())</div><div class='output co'>#&gt; [1] "theme" "gg"   </div><div class='input'><span class='no'>census</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>fgeo.data</span><span class='kw ns'>::</span><span class='no'><a href='http://www.rdocumentation.org/packages/fgeo.data/topics/census_luquillo'>luquillo_tree5_random</a></span>
+<span class='fu'><a href='plot_base_elevation.html'>plot_base_census</a></span>(<span class='no'>census</span>) + <span class='fu'>theme_tag_status</span>()</div><div class='img'><img src='theme_tag_status-1.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       
-      <li><a href="#value">Value</a></li>
-
       <li><a href="#see-also">See also</a></li>
       
       <li><a href="#examples">Examples</a></li>

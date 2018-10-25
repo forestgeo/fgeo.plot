@@ -1,15 +1,11 @@
-#' @export
-ggplot2::autoplot
-
 #' Plot objects of class "fgeo_habitat".
-#' 
-#' @inherit ggplot2::autoplot description
 #' 
 #' @param object An S3 object of class "fgeo_habitat".
 #' @param ... Other arguments passed to methods.
 #'
 #' @return An object of class "ggplot".
 #' @export
+#' 
 #' 
 #' @family Methods for common generics
 #'
