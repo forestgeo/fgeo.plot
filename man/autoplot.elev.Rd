@@ -4,12 +4,51 @@
 \alias{autoplot.elev}
 \title{Quick plot of species distribution.}
 \usage{
-\method{autoplot}{elev}(object, ...)
+\method{autoplot}{elev}(object, contour_size = 0.5, low = "blue",
+  high = "red", hide_color_legend = FALSE, bins = NULL,
+  add_elevation_labels = TRUE, label_size = 3, label_color = "grey",
+  xyjust = 1, fontface = "italic", xlim = NULL, ylim = NULL,
+  custom_theme = NULL)
 }
 \arguments{
 \item{object}{An object created with \code{elev()}.}
 
-\item{...}{Other arguments passed to \code{add_elevation_contours()}.}
+\item{contour_size}{A number giving the size of the contour of elevation
+lines. Passed to \code{ggplot2::stat_contour()} (see \code{\link[ggplot2:geom_contour]{ggplot2::geom_contour()}}).}
+
+\item{low}{A string giving a color of the elevation lines representing
+low and high elevation.}
+
+\item{high}{A string giving a color of the elevation lines representing
+low and high elevation.}
+
+\item{hide_color_legend}{Logical; \code{TRUE} hides the color legend.}
+
+\item{bins}{A number giving the number of elevation lines to map.}
+
+\item{label_size}{A number (\code{label_size}) or character
+string (\code{label_color} and \code{fontface}) giving the size, colour and fontface
+of the text labels for the elevation lines.}
+
+\item{label_color}{A number (\code{label_size}) or character
+string (\code{label_color} and \code{fontface}) giving the size, colour and fontface
+of the text labels for the elevation lines.}
+
+\item{xyjust}{A number to adjust the position of the text labels of the
+elevation lines.}
+
+\item{fontface}{A number (\code{label_size}) or character
+string (\code{label_color} and \code{fontface}) giving the size, colour and fontface
+of the text labels for the elevation lines.}
+
+\item{xlim}{A vector of length 2, for example \code{c(0, 500)}, giving the
+minimum and maximum limits of the vertical and horizontal coordinates.}
+
+\item{ylim}{A vector of length 2, for example \code{c(0, 500)}, giving the
+minimum and maximum limits of the vertical and horizontal coordinates.}
+
+\item{custom_theme}{A valid \code{\link[ggplot2:theme]{ggplot2::theme()}}. \code{NULL} uses the default
+theme \code{\link[=theme_default]{theme_default()}}.}
 }
 \value{
 A "ggplot".

@@ -55,32 +55,32 @@ test_that("errs with wrong inputs", {
 
 
 
-context("plot_species_or_elevation")
+context("plot_sp_elev")
 
 test_that("outputs a ggplot", {
-  expect_is(plot_species_or_elevation(census), "gg")
+  expect_is(plot_sp_elev(census), "gg")
 })
 
 test_that("errs with wrong inputs", {
-  expect_error(plot_species_or_elevation(1), "is not TRUE")
-  expect_error(plot_species_or_elevation(census, 1), "Can't deal with data of class")
-  expect_error(plot_species_or_elevation(census, xlim = 0), "Limits must be in a")
+  expect_error(plot_sp_elev(1), "is not TRUE")
+  expect_error(plot_sp_elev(census, 1), "Can't deal with data of class")
+  expect_error(plot_sp_elev(census, xlim = 0), "Limits must be in a")
 })
 
 
 
-context("plot_elevation")
+context("plot_elev")
 
 test_that("outputs a ggplot", {
-  p <- plot_elevation(elevation)
+  p <- plot_elev(elevation)
   expect_true(has_class(p, "gg"))
 })
 
 test_that("errs with wrong inputs", {
-  expect_error(plot_elevation(1), "Can't deal with data of class")
-  expect_error(plot_elevation(census), "Ensure your data set has these variables")
-  expect_error(plot_elevation(list(not_col = census)), "Your list must contain")
-  expect_error(plot_elevation(elevation, xlim = 0), "Limits must be in a")
+  expect_error(plot_elev(1), "Can't deal with data of class")
+  expect_error(plot_elev(census), "Ensure your data set has these variables")
+  expect_error(plot_elev(list(not_col = census)), "Your list must contain")
+  expect_error(plot_elev(elevation, xlim = 0), "Limits must be in a")
 })
 
 

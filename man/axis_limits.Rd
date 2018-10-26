@@ -28,13 +28,11 @@ fgeo.data::luquillo_elevation \%>\%
   axis_limits(xlim = c(0, 100), ylim = c(0, 400))
 }
 \seealso{
-\code{\link[=plot_species_or_elevation]{plot_species_or_elevation()}}, \code{\link[=plot_each_species]{plot_each_species()}},
+\code{\link[=plot_sp_elev]{plot_sp_elev()}}, \code{\link[=plot_each_species]{plot_each_species()}},
 \code{\link[ggplot2:coord_fixed]{ggplot2::coord_fixed()}}.
 
 Other functions to create or modify plot layers: \code{\link{add_elevation_contours}},
-  \code{\link{add_elevation_labels}},
-  \code{\link{add_species}}, \code{\link{facet}},
-  \code{\link{hide}}, \code{\link{plot_base_elevation}},
-  \code{\link{theme_default}}
+  \code{\link{add_elevation_labels}}, \code{\link{facet}},
+  \code{\link{hide}}, \code{\link{theme_default}}
 }
 \concept{functions to create or modify plot layers}

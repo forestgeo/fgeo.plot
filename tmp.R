@@ -36,8 +36,8 @@ grep -R "maply_tag" ../fgeo/vignettes ../fgeo.abundance/vignettes ../fgeo.base/v
 
 # This may be simplified to a single function that automatically detects which
 # of the two the user provided
-* plot_species_or_elevation() <- map_sp_elev  # Clarify that also plots elevation
-* plot_elevation <- map_elev
+* plot_sp_elev() <- map_sp_elev  # Clarify that also plots elevation
+* plot_elev <- map_elev
 
 
 

@@ -4,12 +4,32 @@
 \alias{autoplot.sp}
 \title{Quick plot of species distribution.}
 \usage{
-\method{autoplot}{sp}(object, ...)
+\method{autoplot}{sp}(object, fill = "black", shape = 21,
+  point_size = 3, facet = TRUE, hide_color_legend = FALSE,
+  xlim = NULL, ylim = NULL, custom_theme = NULL)
 }
 \arguments{
 \item{object}{An object created with \code{sp()}.}
 
-\item{...}{Other arguments passed to \code{add_species()}.}
+\item{fill}{Character; either a colour or "sp", which maps each species to a
+different color.}
+
+\item{shape, point_size}{A number giving point size and shape (as in
+\code{\link[graphics:points]{graphics::points()}}). Passed to \code{\link[ggplot2:geom_point]{ggplot2::geom_point()}}.}
+
+\item{facet}{(Not available for \code{plot_each_species()}) Logical; \code{TRUE} wraps
+multiple maps within the area of a single graphic plot.}
+
+\item{hide_color_legend}{Logical; \code{TRUE} hides the color legend.}
+
+\item{xlim}{A vector of length 2, for example \code{c(0, 500)}, giving the
+minimum and maximum limits of the vertical and horizontal coordinates.}
+
+\item{ylim}{A vector of length 2, for example \code{c(0, 500)}, giving the
+minimum and maximum limits of the vertical and horizontal coordinates.}
+
+\item{custom_theme}{A valid \code{\link[ggplot2:theme]{ggplot2::theme()}}. \code{NULL} uses the default
+theme \code{\link[=theme_default]{theme_default()}}.}
 }
 \value{
 A "ggplot".

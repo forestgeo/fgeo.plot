@@ -21,15 +21,6 @@ code for one species in the column \code{sp}. This function will produce as
 many maps as elements in this vector. The string "all" is a shortcut to
 map all unique codes in the column \code{sp}.}
 
-\item{fill}{Character; either a colour or "sp", which maps each species to a
-different color.}
-
-\item{shape}{A number giving point size and shape (as in
-\code{\link[graphics:points]{graphics::points()}}). Passed to \code{\link[ggplot2:geom_point]{ggplot2::geom_point()}}.}
-
-\item{point_size}{A number giving point size and shape (as in
-\code{\link[graphics:points]{graphics::points()}}). Passed to \code{\link[ggplot2:geom_point]{ggplot2::geom_point()}}.}
-
 \item{contour_size}{A number giving the size of the contour of elevation
 lines. Passed to \code{ggplot2::stat_contour()} (see \code{\link[ggplot2:geom_contour]{ggplot2::geom_contour()}}).}
 
@@ -73,20 +64,20 @@ theme \code{\link[=theme_default]{theme_default()}}.}
 \value{
 \itemize{
 \item \code{plot_each_species()} returns a list of ggplots.
-\item \code{plot_elevation()} and \code{plot_species_or_elevation()} return a ggplot.
+\item \code{plot_elev()} and \code{plot_sp_elev()} return a ggplot.
 }
 }
 \description{
 These functions wrap a number of map elements for convenience:
 \itemize{
-\item Use \code{plot_species_or_elevation()} to map species and optionally elevation
+\item Use \code{plot_sp_elev()} to map species and optionally elevation
 data in a single page. You can map multiple species on the same plot or you
 can facet the output to map each species on a single plot and all plots in a
 single page.
-\item Use \code{plot_elevation()} if you want to map only elevation in the simplest
+\item Use \code{plot_elev()} if you want to map only elevation in the simplest
 way.
 \item Use \code{plot_each_species()} to apply the function
-\code{plot_species_or_elevation()} to each species in a census dataset. The output
+\code{plot_sp_elev()} to each species in a census dataset. The output
 is not a map but a list of maps, one per species, that can be printed on a
 .pdf file.
 }

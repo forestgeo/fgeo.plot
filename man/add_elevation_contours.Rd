@@ -27,13 +27,11 @@ add_elevation_contours(p)
 add_elevation_contours(p, contour_size = 0.5, low = "grey", high = "black", bins = 4)
 }
 \seealso{
-\code{\link[=plot_each_species]{plot_each_species()}}, \code{\link[=plot_species_or_elevation]{plot_species_or_elevation()}}, \code{\link[=plot_elevation]{plot_elevation()}},
+\code{\link[=plot_each_species]{plot_each_species()}}, \code{\link[=plot_sp_elev]{plot_sp_elev()}}, \code{\link[=plot_elev]{plot_elev()}},
 \code{\link[ggplot2:geom_contour]{ggplot2::geom_contour()}}.
 
 Other functions to create or modify plot layers: \code{\link{add_elevation_labels}},
-  \code{\link{add_species}}, \code{\link{axis_limits}},
-  \code{\link{facet}}, \code{\link{hide}},
-  \code{\link{plot_base_elevation}},
-  \code{\link{theme_default}}
+  \code{\link{axis_limits}}, \code{\link{facet}},
+  \code{\link{hide}}, \code{\link{theme_default}}
 }
 \concept{functions to create or modify plot layers}

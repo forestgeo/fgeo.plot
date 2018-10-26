@@ -1,7 +1,7 @@
 #' Quick plot of species distribution.
 #' 
 #' @description
-#' Automatically plot the `sp` variable of a ForestGEO-like dataset of class 
+#' Automatically plot the `sp` variable of a ForestGEO-like dataset of class
 #' 'sp'. You can create a 'sp' `object` with:
 #' @description
 #' ```
@@ -11,7 +11,15 @@
 #' See sections __Usage__ and __Examples__.
 #' 
 #' @param object An object created with `sp()`.
-#' @param ... Other arguments passed to `add_species()`.
+#' @param fill Character; either a colour or "sp", which maps each species to a
+#'   different color.
+#' @template shape_point_size
+#' @param facet (Not available for `plot_each_species()`) Logical; `TRUE` wraps
+#'   multiple maps within the area of a single graphic plot.
+#' @param hide_color_legend Logical; `TRUE` hides the color legend.
+#' @inheritParams axis_limits
+#' @param custom_theme A valid [ggplot2::theme()]. `NULL` uses the default
+#'   theme [theme_default()].
 #'   
 #' @seealso [autoplot()], [sp()], [add_species()].
 #' @family autoplots
@@ -26,8 +34,27 @@
 #' 
 #' # Customize
 #' autoplot(sp(tree), point_size = 1)
-autoplot.sp <- function(object, ...) {
-  add_species(plot_base(object), ...)
+autoplot.sp <- function(object, 
+                        fill = "black",
+                        shape = 21,
+                        point_size = 3,
+                        facet = TRUE,
+                        hide_color_legend = FALSE,
+                        xlim = NULL,
+                        ylim = NULL,
+                        custom_theme = NULL) {
+  plot_sp_elev(
+    census = object,
+    elevation = NULL,
+    fill = fill,
+    shape = shape,
+    point_size = point_size,
+    facet = facet,
+    hide_color_legend = hide_color_legend,
+    xlim = xlim,
+    ylim = ylim,
+    custom_theme = custom_theme
+  )
 }
 
 #' Quick plot of species distribution.
@@ -43,8 +70,14 @@ autoplot.sp <- function(object, ...) {
 #' See sections __Usage__ and __Examples__.
 #' 
 #' @param object An object created with `elev()`. 
-#' @param ... Other arguments passed to `add_elevation_contours()`.
-#' 
+#' @inheritParams add_elevation_contours
+#' @param hide_color_legend Logical; `TRUE` hides the color legend.
+#' @inheritParams add_elevation_labels
+#' @inheritParams axis_limits
+#' @param custom_theme A valid [ggplot2::theme()]. `NULL` uses the default
+#'   theme [theme_default()].
+#'
+
 #' @seealso [autoplot()], [elev()], [add_elevation_contours].
 #' @family autoplots
 #'
@@ -61,8 +94,36 @@ autoplot.sp <- function(object, ...) {
 #' 
 #' # Customize
 #' hide_color_legend(p)
-autoplot.elev <- function(object, ...) {
-  add_elevation_contours(plot_base(object), ...)
+autoplot.elev <- function(object, 
+                          contour_size = 0.5,
+                          low = "blue",
+                          high = "red",
+                          hide_color_legend = FALSE,
+                          bins = NULL,
+                          add_elevation_labels = TRUE,
+                          label_size = 3,
+                          label_color = "grey",
+                          xyjust = 1,
+                          fontface = "italic",
+                          xlim = NULL,
+                          ylim = NULL,
+                          custom_theme = NULL) {
+  plot_elev(
+    elevation = object,
+    contour_size = contour_size,
+    low = low,
+    high = high,
+    hide_color_legend = hide_color_legend,
+    bins = bins,
+    add_elevation_labels = add_elevation_labels,
+    label_size = label_size,
+    label_color = label_color,
+    xyjust = xyjust,
+    fontface = fontface,
+    xlim = xlim,
+    ylim = ylim,
+    custom_theme = custom_theme
+  )
 }
 
 #' Quick plot of species distribution and topography.
@@ -78,9 +139,10 @@ autoplot.elev <- function(object, ...) {
 #' See sections __Usage__ and __Examples__.
 #' 
 #' @param object An object created with `sp_elev()`.
-#' @param ... Other arguments passed to `plot_species_or_elevation()`.
+#' @inheritParams autoplot.sp
+#' @inheritParams autoplot.elev
 #'
-#' @seealso [autoplot()], [sp_elev()], [plot_species_or_elevation()].
+#' @seealso [autoplot()], [sp_elev()].
 #' @family autoplots
 #'
 #' @return A "ggplot".
@@ -101,6 +163,54 @@ autoplot.elev <- function(object, ...) {
 #' p <- autoplot(sp_elev(tree, elevation_dataframe), fill = "red")
 #' p
 #' hide_color_legend(p)
-autoplot.sp_elev <- function(object, ...) {
-  plot_species_or_elevation(census = object[[1]], elevation = object[[2]], ...)
+#' 
+#' @examples 
+#' # Small dataset with a few species for quick examples
+#' some_sp <- c("PREMON", "CASARB")
+#' census <- subset(fgeo.data::luquillo_tree5_random, sp %in% some_sp)
+#' elevation <- fgeo.data::luquillo_elevation
+#' 
+#' 
+#' plot_sp_elev(census)
+#' 
+#' plot_sp_elev(census, elevation)
+autoplot.sp_elev <- function(object, 
+                             fill = "black",
+                             shape = 21,
+                             point_size = 3,
+                             facet = TRUE,
+                             contour_size = 0.5,
+                             low = "blue",
+                             high = "red",
+                             hide_color_legend = FALSE,
+                             bins = NULL,
+                             add_elevation_labels = TRUE,
+                             label_size = 3,
+                             label_color = "grey",
+                             xyjust = 1,
+                             fontface = "italic",
+                             xlim = NULL,
+                             ylim = NULL,
+                             custom_theme = NULL) {
+  plot_sp_elev(
+    census = object[[1]], 
+    elevation = object[[2]], 
+    fill = fill,
+    shape = shape,
+    point_size = point_size,
+    facet = facet,
+    contour_size = contour_size,
+    low = low,
+    high = high,
+    hide_color_legend = hide_color_legend,
+    bins = bins,
+    add_elevation_labels = add_elevation_labels,
+    label_size = label_size,
+    label_color = label_color,
+    xyjust = xyjust,
+    fontface = fontface,
+    xlim = xlim,
+    ylim = ylim,
+    custom_theme = custom_theme
+  )
 }

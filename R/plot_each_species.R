@@ -1,14 +1,14 @@
 #' Map species and elevation data.
 #' 
 #' These functions wrap a number of map elements for convenience:
-#' * Use `plot_species_or_elevation()` to map species and optionally elevation
+#' * Use `plot_sp_elev()` to map species and optionally elevation
 #' data in a single page. You can map multiple species on the same plot or you
 #' can facet the output to map each species on a single plot and all plots in a
 #' single page.
-#' * Use `plot_elevation()` if you want to map only elevation in the simplest
+#' * Use `plot_elev()` if you want to map only elevation in the simplest
 #' way.
 #' * Use `plot_each_species()` to apply the function
-#' `plot_species_or_elevation()` to each species in a census dataset. The output
+#' `plot_sp_elev()` to each species in a census dataset. The output
 #' is not a map but a list of maps, one per species, that can be printed on a
 #' .pdf file.
 #' 
@@ -37,7 +37,7 @@
 #' 
 #' @return 
 #' * `plot_each_species()` returns a list of ggplots.
-#' * `plot_elevation()` and `plot_species_or_elevation()` return a ggplot.
+#' * `plot_elev()` and `plot_sp_elev()` return a ggplot.
 #' 
 #' @export 
 #' @examples
@@ -99,7 +99,7 @@ plot_each_species <- function(census,
   cns <- census[census$sp %in% species, ]
   cns_list <- split(cns, cns$sp)
   p <- lapply(
-    X = cns_list, FUN = plot_species_or_elevation,
+    X = cns_list, FUN = plot_sp_elev,
     elevation = elevation,
     fill = fill,
     shape = shape,
@@ -122,65 +122,25 @@ plot_each_species <- function(census,
   setNames(p, species)
 }
 
-#' @inherit plot_each_species title description details return
-#' @inheritParams plot_each_species
-#' @param facet (Not available for `plot_each_species()`) Logical; `TRUE` wraps
-#'   multiple maps within the area of a single graphic plot.
-#' 
-#' @family functions to create a single plot
-#' 
-#' @export
-#' @examples 
-#' # Small dataset with a few species for quick examples
-#' some_sp <- c("PREMON", "CASARB")
-#' census <- subset(fgeo.data::luquillo_tree5_random, sp %in% some_sp)
-#' elevation <- fgeo.data::luquillo_elevation
-#' 
-#' # Simplest way to map elevation data only
-#' plot_elevation(elevation)
-#' 
-#' plot_species_or_elevation(census)
-#' 
-#' plot_species_or_elevation(census, elevation)
-#' 
-#' # For maximum control, you can compose maps as you like
-#' # Traditional sintax: g(f(x))
-#' add_elevation_contours(plot_base_elevation(elevation))
-#' 
-#' # With the pipe: f(x) %>% g()
-#' plot_base_elevation(elevation) %>%
-#'   add_elevation_contours()
-#' 
-#' # The traditional sintax is hard to read when you compose multiple functions.
-#' # With the pipe, readability isn't affected by the number of functions.
-#' plot_base_elevation(elevation) %>%
-#'   axis_limits(xlim = c(-100, 400)) %>%
-#'   add_elevation_contours(contour_size = 0.5) %>%
-#'   add_elevation_labels(label_color = "red") %>%
-#'   hide_axis_labels() %>%
-#'   hide_color_legend() %>%
-#'   add_species(census, point_size = 5) %>%
-#'   facet("sp") %>%
-#'   theme_default(legend.position = "top")
-plot_species_or_elevation <- function(census,
-                                      elevation = NULL,
-                                      fill = "black",
-                                      shape = 21,
-                                      facet = TRUE,
-                                      point_size = 3,
-                                      contour_size = 0.5,
-                                      low = "blue",
-                                      high = "red",
-                                      hide_color_legend = FALSE,
-                                      bins = NULL,
-                                      add_elevation_labels = TRUE,
-                                      label_size = 3,
-                                      label_color = "grey",
-                                      xyjust = 1,
-                                      fontface = "italic",
-                                      xlim = NULL,
-                                      ylim = NULL,
-                                      custom_theme = NULL) {
+plot_sp_elev <- function(census,
+                         elevation = NULL,
+                         fill = "black",
+                         shape = 21,
+                         facet = TRUE,
+                         point_size = 3,
+                         contour_size = 0.5,
+                         low = "blue",
+                         high = "red",
+                         hide_color_legend = FALSE,
+                         bins = NULL,
+                         add_elevation_labels = TRUE,
+                         label_size = 3,
+                         label_color = "grey",
+                         xyjust = 1,
+                         fontface = "italic",
+                         xlim = NULL,
+                         ylim = NULL,
+                         custom_theme = NULL) {
   stopifnot(is.data.frame(census))
   check_crucial_names(census, c("gx", "gy"))
   
@@ -212,22 +172,20 @@ plot_species_or_elevation <- function(census,
     best_theme(custom_theme = custom_theme)
 }
 
-#' @rdname plot_species_or_elevation
-#' @export
-plot_elevation <- function(elevation,
-                           contour_size = 0.5,
-                           low = "blue",
-                           high = "red",
-                           hide_color_legend = FALSE,
-                           bins = NULL,
-                           add_elevation_labels = TRUE,
-                           label_size = 3,
-                           label_color = "grey",
-                           xyjust = 1,
-                           fontface = "italic",
-                           xlim = NULL,
-                           ylim = NULL,
-                           custom_theme = NULL) {
+plot_elev <- function(elevation,
+                      contour_size = 0.5,
+                      low = "blue",
+                      high = "red",
+                      hide_color_legend = FALSE,
+                      bins = NULL,
+                      add_elevation_labels = TRUE,
+                      label_size = 3,
+                      label_color = "grey",
+                      xyjust = 1,
+                      fontface = "italic",
+                      xlim = NULL,
+                      ylim = NULL,
+                      custom_theme = NULL) {
   base <- map_pure_elev(
     elevation = elevation,
     contour_size = contour_size,
@@ -278,54 +236,16 @@ map_pure_elev <- function(elevation,
 
 # Base maps ---------------------------------------------------------------
 
-#' Map a base over which other map components can later be added.
-#' 
-#' @template data_ggplot
-#' @seealso [plot_species_or_elevation()], [plot_elevation()],
-#'   [plot_each_species()], [ggplot2::ggplot()].
-#'
-#' @family functions to create or modify plot layers
-#' 
-#' @export
-#' @examples 
-#' # Small dataset with a few species for quick examples
-#' some_sp <- c("PREMON", "CASARB")
-#' census <- subset(fgeo.data::luquillo_tree5_random, sp %in% some_sp)
-#' elevation <- fgeo.data::luquillo_elevation
-#' 
-#' # These functions look alike but internally they are not.
-#' base_census <- plot_base_census(census)
-#' base_census
-#' base_elevation <- plot_base_elevation(elevation)
-#' base_elevation
-#' 
-#' # Use plot_base_census() as a base for layers that need census data
-#' add_species(base_census)
-#' # This fails because the base plot has no information about elevation
-#' \dontrun{
-#'   add_elevation_contours(base_census)
-#' }
-#' 
-#' # Use plot_base_elevation() as a base for layers that need elevation data
-#' add_elevation_contours(base_elevation)
-#' # This fails because the base plot has no information about species
-#' \dontrun{
-#'   add_species(base_elevation)
-#' }
 plot_base_elevation <- function(data) {
   data <- fgeo.tool::fgeo_elevation(data)
   ggplot(data, aes(gx, gy, z = elev))
 }
 
-#' @rdname plot_base_elevation
-#' @export
 plot_base_census <- function(data) {
   check_plot_base_census(data)
   
   ggplot(data, aes(gx, gy))
 }
-
-
 
 # Limits ------------------------------------------------------------------
 
@@ -334,7 +254,7 @@ plot_base_census <- function(data) {
 #' @template p
 #' @template xlim_ylim
 #' 
-#' @seealso [plot_species_or_elevation()], [plot_each_species()],
+#' @seealso [plot_sp_elev()], [plot_each_species()],
 #'   [ggplot2::coord_fixed()].
 #' 
 #' @family functions to create or modify plot layers
@@ -365,29 +285,6 @@ axis_limits <- function(p, xlim = NULL, ylim = NULL) {
 
 # Layers ------------------------------------------------------------------
 
-#' Represent species with points.
-#' 
-#' @template p
-#' @template data_ggplot
-#' @param fill Character; either a colour or "sp", which maps each species to a
-#'   different color.
-#' @template shape_point_size
-#' 
-#' @seealso [plot_species_or_elevation()], [plot_each_species()],
-#'   [ggplot2::geom_point()].
-#' 
-#' @family functions to create or modify plot layers
-#' 
-#' @export
-#' @examples 
-#' # Small dataset with a few species for quick examples
-#' some_sp <- c("PREMON", "CASARB")
-#' census <- subset(fgeo.data::luquillo_tree5_random, sp %in% some_sp)
-#' p <- plot_base_census(census)
-#' 
-#' add_species(p)
-#' 
-#' add_species(p, fill = "white", shape = 22, point_size = 4)
 add_species <- function(p,
                         data = NULL,
                         fill = "sp",
@@ -426,7 +323,7 @@ add_species <- function(p,
 #' @template low_high
 #' @param bins A number giving the number of elevation lines to map.
 #' 
-#' @seealso [plot_each_species()], [plot_species_or_elevation()], [plot_elevation()], 
+#' @seealso [plot_each_species()], [plot_sp_elev()], [plot_elev()], 
 #'   [ggplot2::geom_contour()].
 #' 
 #' @family functions to create or modify plot layers
@@ -436,10 +333,10 @@ add_species <- function(p,
 #' add_elevation_contours(p)
 #' add_elevation_contours(p, contour_size = 0.5, low = "grey", high = "black", bins = 4)
 add_elevation_contours <- function(p, 
-                         contour_size = 1, 
-                         low = "blue", 
-                         high = "red", 
-                         bins = NULL) {
+                                   contour_size = 1, 
+                                   low = "blue", 
+                                   high = "red", 
+                                   bins = NULL) {
   check_crucial_names(p[["data"]], "elev")
   
    p +
@@ -457,8 +354,8 @@ add_elevation_contours <- function(p,
 #' @param xyjust A number to adjust the position of the text labels of the 
 #'   elevation lines.
 #'
-#' @seealso [plot_each_species()], [plot_species_or_elevation()],
-#'   [plot_elevation()], [ggplot2::geom_text()].
+#' @seealso [plot_each_species()], [plot_sp_elev()],
+#'   [plot_elev()], [ggplot2::geom_text()].
 #' 
 #' @family functions to create or modify plot layers
 #' 
