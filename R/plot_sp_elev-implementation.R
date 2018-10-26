@@ -1,3 +1,5 @@
+# Internal implementation of functions to plot species and elevevation.
+
 plot_each_species <- function(census,
                               elevation = NULL,
                               species = "all",
