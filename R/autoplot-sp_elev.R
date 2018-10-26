@@ -10,6 +10,8 @@
 #' @description
 #' See sections __Usage__ and __Examples__.
 #' 
+#' @template compare_ggplot2
+#' 
 #' @param object An object created with `sp()`.
 #' @param fill Character; either a colour or "sp", which maps each species to a
 #'   different color.
@@ -69,6 +71,8 @@ autoplot.sp <- function(object,
 #' @description
 #' See sections __Usage__ and __Examples__.
 #' 
+#' @template compare_ggplot2
+#' 
 #' @param object An object created with `elev()`. 
 #' @inheritParams add_elevation_contours
 #' @param hide_color_legend Logical; `TRUE` hides the color legend.
@@ -77,7 +81,6 @@ autoplot.sp <- function(object,
 #' @param custom_theme A valid [ggplot2::theme()]. `NULL` uses the default
 #'   theme [theme_default()].
 #'
-
 #' @seealso [autoplot()], [elev()], [add_elevation_contours].
 #' @family autoplots
 #'
@@ -138,6 +141,8 @@ autoplot.elev <- function(object,
 #' @description
 #' See sections __Usage__ and __Examples__.
 #' 
+#' @template compare_ggplot2
+#' 
 #' @param object An object created with `sp_elev()`.
 #' @inheritParams autoplot.sp
 #' @inheritParams autoplot.elev
@@ -170,10 +175,7 @@ autoplot.elev <- function(object,
 #' census <- subset(fgeo.data::luquillo_tree5_random, sp %in% some_sp)
 #' elevation <- fgeo.data::luquillo_elevation
 #' 
-#' 
-#' plot_sp_elev(census)
-#' 
-#' plot_sp_elev(census, elevation)
+#' autoplot(sp_elev(census, elevation))
 autoplot.sp_elev <- function(object, 
                              fill = "black",
                              shape = 21,
@@ -213,4 +215,11 @@ autoplot.sp_elev <- function(object,
     ylim = ylim,
     custom_theme = custom_theme
   )
+}
+
+autoplot.default <- function(object, ...) {
+  abort(glue("
+    Can't deal with data unless it is of class 'sp', 'elev' or 'sp_elev'.
+    Do you forget to use `sp()`, `elev()` or `sp_elev()`?
+    "))
 }

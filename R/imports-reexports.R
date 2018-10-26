@@ -1,10 +1,11 @@
 # Import external functions and avoid R CMD check note --------------------
 
 #' @importFrom dplyr group_by ungroup mutate select
-#' @importFrom rlang abort warn inform
-#' @importFrom ggrepel geom_text_repel
-#' @importFrom stats setNames
 #' @importFrom fgeo.base is_multiple flag_if check_crucial_names
+#' @importFrom ggrepel geom_text_repel
+#' @importFrom glue glue
+#' @importFrom rlang abort warn inform
+#' @importFrom stats setNames
 #' @import ggplot2
 NULL
 

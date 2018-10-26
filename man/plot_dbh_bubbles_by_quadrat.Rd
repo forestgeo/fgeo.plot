@@ -92,7 +92,7 @@ plot_dbh_bubbles_by_quadrat(
 )
 }
 \seealso{
-Other functions to create a list of plots: \code{\link{plot_each_species}},
+Other functions to create a list of plots: \code{\link{plot_by_species}},
   \code{\link{plot_tag_status_by_subquadrat}}
 
 Other functions to plot dbh bubbles: \code{\link{header_dbh_bubbles}},

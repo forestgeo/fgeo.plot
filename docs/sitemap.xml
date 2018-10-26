@@ -10,9 +10,6 @@
     <loc>https://forestgeo.github.io/fgeo.map//reference/add_elevation_labels.html</loc>
   </url>
   <url>
-    <loc>https://forestgeo.github.io/fgeo.map//reference/add_species.html</loc>
-  </url>
-  <url>
     <loc>https://forestgeo.github.io/fgeo.map//reference/autoplot.elev.html</loc>
   </url>
   <url>
@@ -55,16 +52,10 @@
     <loc>https://forestgeo.github.io/fgeo.map//reference/pipe.html</loc>
   </url>
   <url>
-    <loc>https://forestgeo.github.io/fgeo.map//reference/plot_base_elevation.html</loc>
+    <loc>https://forestgeo.github.io/fgeo.map//reference/plot_by_species.html</loc>
   </url>
   <url>
     <loc>https://forestgeo.github.io/fgeo.map//reference/plot_dbh_bubbles_by_quadrat.html</loc>
-  </url>
-  <url>
-    <loc>https://forestgeo.github.io/fgeo.map//reference/plot_each_species.html</loc>
-  </url>
-  <url>
-    <loc>https://forestgeo.github.io/fgeo.map//reference/plot_species_or_elevation.html</loc>
   </url>
   <url>
     <loc>https://forestgeo.github.io/fgeo.map//reference/plot_tag_status_by_subquadrat.html</loc>

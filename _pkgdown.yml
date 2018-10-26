@@ -46,7 +46,7 @@ reference:
 
   - title: List plots of species-distribution
     contents:
-      - plot_each_species
+      - plot_by_species
 
   - title: List bubble-plots of tree diameter
     contents:

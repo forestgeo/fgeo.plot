@@ -128,7 +128,11 @@ object &amp;lt;- elev(DATA-WITH-VARIABLE-elev)
     </div>
 
     <pre class="usage"><span class='co'># S3 method for elev</span>
-<span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/autoplot'>autoplot</a></span>(<span class='no'>object</span>, <span class='no'>...</span>)</pre>
+<span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/autoplot'>autoplot</a></span>(<span class='no'>object</span>, <span class='kw'>contour_size</span> <span class='kw'>=</span> <span class='fl'>0.5</span>, <span class='kw'>low</span> <span class='kw'>=</span> <span class='st'>"blue"</span>,
+  <span class='kw'>high</span> <span class='kw'>=</span> <span class='st'>"red"</span>, <span class='kw'>hide_color_legend</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>bins</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>add_elevation_labels</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>label_size</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>label_color</span> <span class='kw'>=</span> <span class='st'>"grey"</span>,
+  <span class='kw'>xyjust</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>fontface</span> <span class='kw'>=</span> <span class='st'>"italic"</span>, <span class='kw'>xlim</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>ylim</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>custom_theme</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -138,8 +142,65 @@ object &amp;lt;- elev(DATA-WITH-VARIABLE-elev)
       <td><p>An object created with <code><a href='elev.html'>elev()</a></code>.</p></td>
     </tr>
     <tr>
-      <th>...</th>
-      <td><p>Other arguments passed to <code><a href='add_elevation_contours.html'>add_elevation_contours()</a></code>.</p></td>
+      <th>contour_size</th>
+      <td><p>A number giving the size of the contour of elevation
+lines. Passed to <code><a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_contour'>ggplot2::stat_contour()</a></code> (see <code><a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_contour'>ggplot2::geom_contour()</a></code>).</p></td>
+    </tr>
+    <tr>
+      <th>low</th>
+      <td><p>A string giving a color of the elevation lines representing
+low and high elevation.</p></td>
+    </tr>
+    <tr>
+      <th>high</th>
+      <td><p>A string giving a color of the elevation lines representing
+low and high elevation.</p></td>
+    </tr>
+    <tr>
+      <th>hide_color_legend</th>
+      <td><p>Logical; <code>TRUE</code> hides the color legend.</p></td>
+    </tr>
+    <tr>
+      <th>bins</th>
+      <td><p>A number giving the number of elevation lines to map.</p></td>
+    </tr>
+    <tr>
+      <th>label_size</th>
+      <td><p>A number (<code>label_size</code>) or character
+string (<code>label_color</code> and <code>fontface</code>) giving the size, colour and fontface
+of the text labels for the elevation lines.</p></td>
+    </tr>
+    <tr>
+      <th>label_color</th>
+      <td><p>A number (<code>label_size</code>) or character
+string (<code>label_color</code> and <code>fontface</code>) giving the size, colour and fontface
+of the text labels for the elevation lines.</p></td>
+    </tr>
+    <tr>
+      <th>xyjust</th>
+      <td><p>A number to adjust the position of the text labels of the
+elevation lines.</p></td>
+    </tr>
+    <tr>
+      <th>fontface</th>
+      <td><p>A number (<code>label_size</code>) or character
+string (<code>label_color</code> and <code>fontface</code>) giving the size, colour and fontface
+of the text labels for the elevation lines.</p></td>
+    </tr>
+    <tr>
+      <th>xlim</th>
+      <td><p>A vector of length 2, for example <code>c(0, 500)</code>, giving the
+minimum and maximum limits of the vertical and horizontal coordinates.</p></td>
+    </tr>
+    <tr>
+      <th>ylim</th>
+      <td><p>A vector of length 2, for example <code>c(0, 500)</code>, giving the
+minimum and maximum limits of the vertical and horizontal coordinates.</p></td>
+    </tr>
+    <tr>
+      <th>custom_theme</th>
+      <td><p>A valid <code><a href='http://www.rdocumentation.org/packages/ggplot2/topics/theme'>ggplot2::theme()</a></code>. <code>NULL</code> uses the default
+theme <code><a href='theme_default.html'>theme_default()</a></code>.</p></td>
     </tr>
     </table>
     
@@ -147,20 +208,41 @@ object &amp;lt;- elev(DATA-WITH-VARIABLE-elev)
 
     <p>A "ggplot".</p>
     
+    <h2 class="hasAnchor" id="comparison-with-ggplot-"><a class="anchor" href="#comparison-with-ggplot-"></a>Comparison with ggplot2</h2>
+
+    
+    <p>These functions wrap functions from the <strong>ggplot2</strong> package. For more
+control you can use <strong>ggplot2</strong> directly or smaller wrappers in
+<strong>fgeo.map</strong> (see the sections See Also and Examples). <strong>ggplot2</strong>
+will give you maximum control and is your best choice if you are already
+familiar with it. The wrapper functions in <strong>fgeo.map</strong> focus on
+ForestGEO's data: For example, their names commonly mention the variable of a
+ForestGEO dataset they work with.</p>
+<p>The most important difference between <strong>ggplot2</strong> and <strong>fgeo.map</strong>
+is in the way you compose multiple functions to create complex plots. With
+<strong>ggplot2</strong> you compose multiple functions with <code>+</code>. For example,
+to apply functions <code>f()</code> then <code>g()</code> you do something like this:
+<code>f(data) + g()</code>. With <strong>fgeo.map</strong> you compose multiple functions
+in the usual way with <code>g(f(data))</code>, or in the modern way with the pipe:
+<code>f(data)</code> <code>%&gt;%</code> <code>g()</code> -- it is up to you. To learn more
+about the pipe see http://r4ds.had.co.nz/pipes.html.</p>
+    
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='http://www.rdocumentation.org/packages/ggplot2/topics/autoplot'>autoplot()</a></code>, <code><a href='elev.html'>elev()</a></code>, <a href='add_elevation_contours.html'>add_elevation_contours</a>.</p>
 <p>Other autoplots: <code><a href='autoplot.fgeo_habitat.html'>autoplot.fgeo_habitat</a></code>,
-  <code><a href='autoplot.sp_elev.html'>autoplot.sp_elev</a></code>, <code><a href='autoplot.sp.html'>autoplot.sp</a></code></p></div>
+  <code><a href='autoplot.sp_elev.html'>autoplot.sp_elev</a></code>,
+  <code><a href='autoplot.sp.html'>autoplot.sp</a></code>, <code><a href='plot_by_species.html'>plot_by_species</a></code></p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='no'>elevation_list</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>fgeo.data</span><span class='kw ns'>::</span><span class='no'><a href='http://www.rdocumentation.org/packages/fgeo.data/topics/luquillo_elevation'>luquillo_elevation</a></span>
 <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/autoplot'>autoplot</a></span>(<span class='fu'><a href='elev.html'>elev</a></span>(<span class='no'>elevation_list</span>))</div><div class='img'><img src='autoplot.elev-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># Same</span>
 <span class='no'>elevation_dataframe</span> <span class='kw'>&lt;-</span> <span class='no'>elevation_list</span>$<span class='no'>col</span>
-<span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/autoplot'>autoplot</a></span>(<span class='fu'><a href='elev.html'>elev</a></span>(<span class='no'>elevation_dataframe</span>))</div><div class='img'><img src='autoplot.elev-2.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/autoplot'>autoplot</a></span>(<span class='fu'><a href='elev.html'>elev</a></span>(<span class='no'>elevation_dataframe</span>))
+<span class='no'>p</span></div><div class='img'><img src='autoplot.elev-2.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># Customize</span>
-<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/autoplot'>autoplot</a></span>(<span class='fu'><a href='elev.html'>elev</a></span>(<span class='no'>elevation_dataframe</span>), <span class='kw'>fill</span> <span class='kw'>=</span> <span class='st'>"red"</span>)</div><div class='output co'>#&gt; <span class='error'>Error in add_elevation_contours(plot_base(object), ...): unused argument (fill = "red")</span></div><div class='input'><span class='no'>p</span></div><div class='output co'>#&gt; <span class='error'>Error in eval(expr, envir, enclos): object 'p' not found</span></div><div class='input'><span class='fu'><a href='hide.html'>hide_color_legend</a></span>(<span class='no'>p</span>)</div><div class='output co'>#&gt; <span class='error'>Error in hide_color_legend(p): object 'p' not found</span></div></pre>
+<span class='fu'><a href='hide.html'>hide_color_legend</a></span>(<span class='no'>p</span>)</div><div class='img'><img src='autoplot.elev-3.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -168,6 +250,8 @@ object &amp;lt;- elev(DATA-WITH-VARIABLE-elev)
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
+
+      <li><a href="#comparison-with-ggplot-">Comparison with ggplot2</a></li>
 
       <li><a href="#see-also">See also</a></li>
       

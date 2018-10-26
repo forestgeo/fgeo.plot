@@ -145,6 +145,12 @@
           <p><code><a href="autoplot.sp_elev.html">autoplot(<i>&lt;sp_elev&gt;</i>)</a></code> </p>
         </td>
         <td><p>Quick plot of species distribution and topography.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="plot_by_species.html">plot_by_species()</a></code> </p>
+        </td>
+        <td><p>List plots of species distribution and topography (good for pdf output).</p></td>
       </tr>
     </tbody><tbody>
       <tr>
@@ -182,9 +188,9 @@
       <tr>
         
         <td>
-          <p><code><a href="plot_each_species.html">plot_each_species()</a></code> </p>
+          <p><code><a href="plot_by_species.html">plot_by_species()</a></code> </p>
         </td>
-        <td><p>Map species and elevation data.</p></td>
+        <td><p>List plots of species distribution and topography (good for pdf output).</p></td>
       </tr>
     </tbody><tbody>
       <tr>
@@ -248,18 +254,6 @@
       <tr>
         
         <td>
-          <p><code><a href="plot_species_or_elevation.html">plot_species_or_elevation()</a></code> <code><a href="plot_species_or_elevation.html">plot_elevation()</a></code> </p>
-        </td>
-        <td><p>Map species and elevation data.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="plot_base_elevation.html">plot_base_elevation()</a></code> <code><a href="plot_base_elevation.html">plot_base_census()</a></code> </p>
-        </td>
-        <td><p>Map a base over which other map components can later be added.</p></td>
-      </tr><tr>
-        
-        <td>
           <p><code><a href="add_elevation_contours.html">add_elevation_contours()</a></code> </p>
         </td>
         <td><p>Represent elevation with lines.</p></td>
@@ -272,9 +266,27 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="add_species.html">add_species()</a></code> </p>
+          <p><code><a href="autoplot.elev.html">autoplot(<i>&lt;elev&gt;</i>)</a></code> </p>
         </td>
-        <td><p>Represent species with points.</p></td>
+        <td><p>Quick plot of species distribution.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="autoplot.fgeo_habitat.html">autoplot(<i>&lt;fgeo_habitat&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>Plot objects of class "fgeo_habitat".</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="autoplot.sp.html">autoplot(<i>&lt;sp&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>Quick plot of species distribution.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="autoplot.sp_elev.html">autoplot(<i>&lt;sp_elev&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>Quick plot of species distribution and topography.</p></td>
       </tr><tr>
         
         <td>
@@ -284,9 +296,33 @@
       </tr><tr>
         
         <td>
+          <p><code><a href="elev.html">elev()</a></code> </p>
+        </td>
+        <td><p>Classify a ForestGEO-like dataset as containing the variable <code>elev</code>.</p></td>
+      </tr><tr>
+        
+        <td>
           <p><code><a href="facet.html">facet()</a></code> </p>
         </td>
         <td><p>Facet data by a variable, and wrap multiple plots to fit a single page.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="headers.html">headers</a></code> </p>
+        </td>
+        <td><p>Pre-made headers.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="header_dbh_bubbles.html">header_dbh_bubbles()</a></code> </p>
+        </td>
+        <td><p>Pre-made headers.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="header_tag_status.html">header_tag_status()</a></code> </p>
+        </td>
+        <td><p>Pre-made headers.</p></td>
       </tr><tr>
         
         <td>
@@ -296,9 +332,63 @@
       </tr><tr>
         
         <td>
+          <p><code><a href="plot_by_species.html">plot_by_species()</a></code> </p>
+        </td>
+        <td><p>List plots of species distribution and topography (good for pdf output).</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="plot_dbh_bubbles_by_quadrat.html">plot_dbh_bubbles_by_quadrat()</a></code> </p>
+        </td>
+        <td><p>Map trees within a quadrat.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="plot_tag_status_by_subquadrat.html">plot_tag_status_by_subquadrat()</a></code> </p>
+        </td>
+        <td><p>Map tree tags by status, showing four subquadrats per plot-page.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="sp.html">sp()</a></code> </p>
+        </td>
+        <td><p>Classify a ForestGEO-like dataset as containing the variable <code>sp</code>.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="sp_elev.html">sp_elev()</a></code> </p>
+        </td>
+        <td><p>Classify ForestGEO-like datasets as containing the variables <code>sp</code> and <code>elev</code>.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="themes.html">themes</a></code> </p>
+        </td>
+        <td><p>Themes.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="theme_dbh_bubbles.html">theme_dbh_bubbles()</a></code> </p>
+        </td>
+        <td><p>Theme for <code>theme_dbh_bubbles()</code>.</p></td>
+      </tr><tr>
+        
+        <td>
           <p><code><a href="theme_default.html">theme_default()</a></code> </p>
         </td>
         <td><p>Default plot theme.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="theme_tag_status.html">theme_tag_status()</a></code> </p>
+        </td>
+        <td><p>Theme for <code>plot_base_census()</code>.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="vft_1quad.html">vft_4quad</a></code> <code><a href="vft_1quad.html">vft_1quad</a></code> </p>
+        </td>
+        <td><p>Small ViewFullTables from Luquillo.</p></td>
       </tr>
     </tbody><tbody>
       <tr>
