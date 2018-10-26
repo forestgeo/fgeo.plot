@@ -2,30 +2,32 @@
 % Please edit documentation in R/sp_elev.R
 \name{sp_elev}
 \alias{sp_elev}
-\alias{sp}
-\alias{elev}
-\title{Define data containing variables \code{sp} (species) and/or \code{elev} (elevation).}
+\title{Classify ForestGEO-like datasets as containing the variables \code{sp} and \code{elev}.}
 \usage{
 sp_elev(sp, elev)
-
-sp(sp)
-
-elev(elev)
 }
 \arguments{
-\item{x}{}
+\item{sp}{A ForestGEO-like dataframe with column the column \code{sp}.}
+
+\item{elev}{A ForestGEO-like elevation list or its \code{col} dataframe -- with
+the column \code{elev}.}
+}
+\value{
+An S3 object of class 'sp_elev'.
 }
 \description{
-\itemize{
-\item \code{sp()} takes a dataset with variables \code{gx}, \code{gy}, and \code{sp}.
-\item \code{elev()} takes a dataset with variables \code{gx}, \code{gy}, and \code{elev}.
-\item \code{sp_elev()} takes two dataset:
-\itemize{
-\item The first one with variables \code{gx}, \code{gy}, and \code{sp}.
-\item A second one with variables \code{gx}, \code{gy}, and \code{elev}.
-}
-}
+Classify ForestGEO-like datasets as containing the variables \code{sp} and \code{elev}.
 }
 \examples{
-
+species_elevation <- sp_elev(
+  fgeo.data::luquillo_stem5_random, fgeo.data::luquillo_elevation
+)
+class(species_elevation)
 }
+\seealso{
+\code{\link[=autoplot.sp_elev]{autoplot.sp_elev()}}.
+
+Other functions to construct fgeo classes: \code{\link{elev}},
+  \code{\link{sp}}
+}
+\concept{functions to construct fgeo classes}

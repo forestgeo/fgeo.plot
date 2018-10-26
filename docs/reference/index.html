@@ -117,7 +117,7 @@
     <tbody>
       <tr>
         <th colspan="2">
-          <h2 id="section-create-ggplot-s-forestgeo-data-classes-in-a-single-command" class="hasAnchor"><a href="#section-create-ggplot-s-forestgeo-data-classes-in-a-single-command" class="anchor"></a>Create `ggplot`s ForestGEO data-classes in a single command</h2>
+          <h2 id="section-quickly-plot-different-classes-of-forestgeo-data" class="hasAnchor"><a href="#section-quickly-plot-different-classes-of-forestgeo-data" class="anchor"></a>Quickly plot different classes of ForestGEO data</h2>
           <p class="section-desc"></p>
         </th>
       </tr>
@@ -130,14 +130,52 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="plot_species_or_elevation.html">plot_species_or_elevation()</a></code> <code><a href="plot_species_or_elevation.html">plot_elevation()</a></code> </p>
+          <p><code><a href="autoplot.elev.html">autoplot(<i>&lt;elev&gt;</i>)</a></code> </p>
         </td>
-        <td><p>Map species and elevation data.</p></td>
+        <td><p>Quick plot of species distribution.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="autoplot.sp.html">autoplot(<i>&lt;sp&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>Quick plot of species distribution.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="autoplot.sp_elev.html">autoplot(<i>&lt;sp_elev&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>Quick plot of species distribution and topography.</p></td>
       </tr>
     </tbody><tbody>
       <tr>
         <th colspan="2">
-          <h2 id="section-list-of-species-distribution-plots" class="hasAnchor"><a href="#section-list-of-species-distribution-plots" class="anchor"></a>List of species-distribution plots</h2>
+          <h2 id="section-define-which-variable-of-a-dataset-should-be-autoplot-ed-" class="hasAnchor"><a href="#section-define-which-variable-of-a-dataset-should-be-autoplot-ed-" class="anchor"></a>Define which variable of a dataset should be `autoplot`ed.</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="elev.html">elev()</a></code> </p>
+        </td>
+        <td><p>Classify a ForestGEO-like dataset as containing the variable <code>elev</code>.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="sp.html">sp()</a></code> </p>
+        </td>
+        <td><p>Classify a ForestGEO-like dataset as containing the variable <code>sp</code>.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="sp_elev.html">sp_elev()</a></code> </p>
+        </td>
+        <td><p>Classify ForestGEO-like datasets as containing the variables <code>sp</code> and <code>elev</code>.</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-list-plots-of-species-distribution" class="hasAnchor"><a href="#section-list-plots-of-species-distribution" class="anchor"></a>List plots of species-distribution</h2>
           <p class="section-desc"></p>
         </th>
       </tr>
@@ -151,7 +189,7 @@
     </tbody><tbody>
       <tr>
         <th colspan="2">
-          <h2 id="section-list-of-dbh-bubble-plots" class="hasAnchor"><a href="#section-list-of-dbh-bubble-plots" class="anchor"></a>List of dbh bubble-plots</h2>
+          <h2 id="section-list-bubble-plots-of-tree-diameter" class="hasAnchor"><a href="#section-list-bubble-plots-of-tree-diameter" class="anchor"></a>List bubble-plots of tree diameter</h2>
           <p class="section-desc"></p>
         </th>
       </tr>
@@ -177,7 +215,7 @@
     </tbody><tbody>
       <tr>
         <th colspan="2">
-          <h2 id="section-list-of-fieldwork-plots" class="hasAnchor"><a href="#section-list-of-fieldwork-plots" class="anchor"></a>List of fieldwork plots</h2>
+          <h2 id="section-list-fieldwork-plots" class="hasAnchor"><a href="#section-list-fieldwork-plots" class="anchor"></a>List fieldwork plots</h2>
           <p class="section-desc"></p>
         </th>
       </tr>
@@ -203,11 +241,17 @@
     </tbody><tbody>
       <tr>
         <th colspan="2">
-          <h2 id="section-pipe-able-components-to-build-or-modify-plots-layer-by-layer" class="hasAnchor"><a href="#section-pipe-able-components-to-build-or-modify-plots-layer-by-layer" class="anchor"></a>Pipe-able components to build or modify plots layer by layer</h2>
-          <p class="section-desc"><p>For even more flexibility use the <a href="https://ggplot2.tidyverse.org/reference/index.html"><strong>ggplot2</strong> package</a>. Compose these plot components not with <code>f(x) + g()</code> (as in <strong>ggplot2</strong>) but with <code>f(x)</code>%&gt;%<code>g(x)</code> or <code>g(f(x))</code> (as in all other packages in the <a href="https://www.tidyverse.org/"><strong>tidyverse</strong></a>).</p></p>
+          <h2 id="section-build-modify-plots-layer-by-layer" class="hasAnchor"><a href="#section-build-modify-plots-layer-by-layer" class="anchor"></a>Build/modify plots layer by layer</h2>
+          <p class="section-desc"><p>Compose these plot components not with <code>f(x) + g()</code> (<strong>ggplot2</strong> style) but with <code>g(f(x))</code> (usual style) or with <code>x %&gt;% f() %&gt;% g()</code> (<a href="https://www.tidyverse.org/"><strong>tidyverse</strong></a> style). For greatest flexibility use instead <a href="https://ggplot2.tidyverse.org/reference/index.html"><strong>ggplot2</strong> package</a></p></p>
         </th>
       </tr>
       <tr>
+        
+        <td>
+          <p><code><a href="plot_species_or_elevation.html">plot_species_or_elevation()</a></code> <code><a href="plot_species_or_elevation.html">plot_elevation()</a></code> </p>
+        </td>
+        <td><p>Map species and elevation data.</p></td>
+      </tr><tr>
         
         <td>
           <p><code><a href="plot_base_elevation.html">plot_base_elevation()</a></code> <code><a href="plot_base_elevation.html">plot_base_census()</a></code> </p>
@@ -216,7 +260,7 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="add_elevation_contrours.html">add_elevation_contrours()</a></code> </p>
+          <p><code><a href="add_elevation_contours.html">add_elevation_contours()</a></code> </p>
         </td>
         <td><p>Represent elevation with lines.</p></td>
       </tr><tr>
@@ -277,11 +321,12 @@
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#section-create-ggplot-s-forestgeo-data-classes-in-a-single-command">Create `ggplot`s ForestGEO data-classes in a single command</a></li>
-      <li><a href="#section-list-of-species-distribution-plots">List of species-distribution plots</a></li>
-      <li><a href="#section-list-of-dbh-bubble-plots">List of dbh bubble-plots</a></li>
-      <li><a href="#section-list-of-fieldwork-plots">List of fieldwork plots</a></li>
-      <li><a href="#section-pipe-able-components-to-build-or-modify-plots-layer-by-layer">Pipe-able components to build or modify plots layer by layer</a></li>
+      <li><a href="#section-quickly-plot-different-classes-of-forestgeo-data">Quickly plot different classes of ForestGEO data</a></li>
+      <li><a href="#section-define-which-variable-of-a-dataset-should-be-autoplot-ed-">Define which variable of a dataset should be `autoplot`ed.</a></li>
+      <li><a href="#section-list-plots-of-species-distribution">List plots of species-distribution</a></li>
+      <li><a href="#section-list-bubble-plots-of-tree-diameter">List bubble-plots of tree diameter</a></li>
+      <li><a href="#section-list-fieldwork-plots">List fieldwork plots</a></li>
+      <li><a href="#section-build-modify-plots-layer-by-layer">Build/modify plots layer by layer</a></li>
       <li><a href="#section-datasets">Datasets</a></li>
     </ul>
   </div>

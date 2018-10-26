@@ -4,7 +4,7 @@
     <loc>https://forestgeo.github.io/fgeo.map//index.html</loc>
   </url>
   <url>
-    <loc>https://forestgeo.github.io/fgeo.map//reference/add_elevation_contrours.html</loc>
+    <loc>https://forestgeo.github.io/fgeo.map//reference/add_elevation_contours.html</loc>
   </url>
   <url>
     <loc>https://forestgeo.github.io/fgeo.map//reference/add_elevation_labels.html</loc>
@@ -13,10 +13,22 @@
     <loc>https://forestgeo.github.io/fgeo.map//reference/add_species.html</loc>
   </url>
   <url>
+    <loc>https://forestgeo.github.io/fgeo.map//reference/autoplot.elev.html</loc>
+  </url>
+  <url>
     <loc>https://forestgeo.github.io/fgeo.map//reference/autoplot.fgeo_habitat.html</loc>
   </url>
   <url>
+    <loc>https://forestgeo.github.io/fgeo.map//reference/autoplot.sp.html</loc>
+  </url>
+  <url>
+    <loc>https://forestgeo.github.io/fgeo.map//reference/autoplot.sp_elev.html</loc>
+  </url>
+  <url>
     <loc>https://forestgeo.github.io/fgeo.map//reference/axis_limits.html</loc>
+  </url>
+  <url>
+    <loc>https://forestgeo.github.io/fgeo.map//reference/elev.html</loc>
   </url>
   <url>
     <loc>https://forestgeo.github.io/fgeo.map//reference/facet.html</loc>
@@ -59,6 +71,12 @@
   </url>
   <url>
     <loc>https://forestgeo.github.io/fgeo.map//reference/reexports.html</loc>
+  </url>
+  <url>
+    <loc>https://forestgeo.github.io/fgeo.map//reference/sp.html</loc>
+  </url>
+  <url>
+    <loc>https://forestgeo.github.io/fgeo.map//reference/sp_elev.html</loc>
   </url>
   <url>
     <loc>https://forestgeo.github.io/fgeo.map//reference/themes.html</loc>

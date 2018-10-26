@@ -6,7 +6,6 @@
 #' @return An object of class "ggplot".
 #' @export
 #' 
-#' 
 #' @family autoplots
 #'
 #' @examples

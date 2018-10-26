@@ -129,8 +129,13 @@
     </tr>
     <tr>
       <th>panel.grid.minor</th>
-      <td><p>minor grid lines (<code>element_line</code>; inherits from
-<code>panel.grid</code>)</p></td>
+      <td><p>grid lines (<code>element_line()</code>). Specify major grid lines,
+or minor grid lines separately (using <code>panel.grid.major</code> or <code>panel.grid.minor</code>)
+or individually for each axis (using <code>panel.grid.major.x</code>, <code>panel.grid.minor.x</code>,
+<code>panel.grid.major.y</code>, <code>panel.grid.minor.y</code>).  Y axis grid lines are horizontal
+and x axis grid lines are vertical. <code>panel.grid.*.*</code> inherits from
+<code>panel.grid.*</code> which inherits from <code>panel.grid</code>, which in turn inherits
+from <code>line</code></p></td>
     </tr>
     <tr>
       <th>...</th>
@@ -141,7 +146,7 @@ supplied <code>validate</code> needs to be set to <code>FALSE</code>.</p></td>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>Other functions to create or modify plot layers: <code><a href='add_elevation_contrours.html'>add_elevation_contrours</a></code>,
+    <div class='dont-index'><p>Other functions to create or modify plot layers: <code><a href='add_elevation_contours.html'>add_elevation_contours</a></code>,
   <code><a href='add_elevation_labels.html'>add_elevation_labels</a></code>,
   <code><a href='add_species.html'>add_species</a></code>, <code><a href='axis_limits.html'>axis_limits</a></code>,
   <code><a href='facet.html'>facet</a></code>, <code><a href='hide.html'>hide</a></code>,

@@ -1,3 +1,5 @@
+^ship\.sh$
+^tmp\.sh$
 ^grep\.R$
 ^appveyor\.yml$
 ^.*\.pdf$

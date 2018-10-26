@@ -2,56 +2,40 @@
 % Please edit documentation in R/autoplot-sp_elev.R
 \name{autoplot.sp}
 \alias{autoplot.sp}
-\title{Quick plots of species distribution and/or topography.}
+\title{Quick plot of species distribution.}
 \usage{
 \method{autoplot}{sp}(object, ...)
 }
 \arguments{
-\item{object}{A function call with one of these formats:
-* \code{sp(<data with variable sp>)}.
-* \code{elev(<data with variable elev>)}.
-* \code{sp_elev(<data with variable sp>, <data with variable elev>)}.}
+\item{object}{An object created with \code{sp()}.}
 
-\item{...}{Other arguments passed to methods:
-\itemize{
-\item \code{sp(<sp-data>)} passes \code{...} to \code{add_species()}.
-\item \code{elev(<elev-data>)} passes \code{...} to \code{add_elevation_contours()}.
-\item \code{sp_elev(<sp-data>, <elev-data>)} passes \code{...} to
-\code{plot_species_or_elevation()}.
-}}
+\item{...}{Other arguments passed to \code{add_species()}.}
 }
 \value{
-An object of class "ggplot".
+A "ggplot".
 }
 \description{
-These \code{autoplot()}s work in combination with functions that let you specify
-which are the primary variable(s) you want to plot. Use these templates:
-\itemize{
-\item \code{autoplot(sp(<data with variable sp>))} to plot species distribution.
-\item Use \code{autoplot(elev(<data with variable elev>))} to plot topography.
-\item Use \code{autoplot(sp_elev(<data with variable sp>, <data with variable elev>))}
-to plot species distribution and topography.
+Automatically plot the \code{sp} variable of a ForestGEO-like dataset of class
+'sp'. You can create a 'sp' \code{object} with:
+
+\preformatted{object <- sp(DATA-WITH-VARIABLE-sp)
 }
+
+See sections \strong{Usage} and \strong{Examples}.
 }
 \examples{
 # Small dataset with a few species for quick examples
 tree <- subset(fgeo.data::luquillo_tree5_random, sp \%in\% c("PREMON", "CASARB"))
 autoplot(sp(tree))
+
 # Customize
-autoplot(sp(tree), point_size = 1, shape = 1)
-
-elevation_list <- fgeo.data::luquillo_elevation
-autoplot(elev(elevation_list))
-# Same
-elevation_df <- elevation_list$col
-autoplot(elev(elevation_list))
-
-autoplot(sp_elev(tree, elevation_df))
-
+autoplot(sp(tree), point_size = 1)
 }
 \seealso{
-\code{\link[=add_sp]{add_sp()}}, \code{\link[=add_elevation_controus]{add_elevation_controus()}}, \code{\link[=plot_species_or_elevation]{plot_species_or_elevation()}}.
+\code{\link[=autoplot]{autoplot()}}, \code{\link[=sp]{sp()}}, \code{\link[=add_species]{add_species()}}.
 
-Other autoplots: \code{\link{autoplot.fgeo_habitat}}
+Other autoplots: \code{\link{autoplot.elev}},
+  \code{\link{autoplot.fgeo_habitat}},
+  \code{\link{autoplot.sp_elev}}
 }
 \concept{autoplots}

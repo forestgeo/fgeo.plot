@@ -273,15 +273,15 @@ theme <code><a href='theme_default.html'>theme_default()</a></code>.</p></td>
 <span class='fu'>plot_species_or_elevation</span>(<span class='no'>census</span>, <span class='no'>elevation</span>)</div><div class='img'><img src='plot_species_or_elevation-3.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># For maximum control, you can compose maps as you like</span>
 <span class='co'># Traditional sintax: g(f(x))</span>
-<span class='fu'><a href='add_elevation_contrours.html'>add_elevation_contrours</a></span>(<span class='fu'><a href='plot_base_elevation.html'>plot_base_elevation</a></span>(<span class='no'>elevation</span>))</div><div class='img'><img src='plot_species_or_elevation-4.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='fu'><a href='add_elevation_contours.html'>add_elevation_contours</a></span>(<span class='fu'><a href='plot_base_elevation.html'>plot_base_elevation</a></span>(<span class='no'>elevation</span>))</div><div class='img'><img src='plot_species_or_elevation-4.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># With the pipe: f(x) %&gt;% g()</span>
 <span class='fu'><a href='plot_base_elevation.html'>plot_base_elevation</a></span>(<span class='no'>elevation</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='add_elevation_contrours.html'>add_elevation_contrours</a></span>()</div><div class='img'><img src='plot_species_or_elevation-5.png' alt='' width='700' height='433' /></div><div class='input'>
+  <span class='fu'><a href='add_elevation_contours.html'>add_elevation_contours</a></span>()</div><div class='img'><img src='plot_species_or_elevation-5.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># The traditional sintax is hard to read when you compose multiple functions.</span>
 <span class='co'># With the pipe, readability isn't affected by the number of functions.</span>
 <span class='fu'><a href='plot_base_elevation.html'>plot_base_elevation</a></span>(<span class='no'>elevation</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='axis_limits.html'>axis_limits</a></span>(<span class='kw'>xlim</span> <span class='kw'>=</span> <span class='fu'>c</span>(-<span class='fl'>100</span>, <span class='fl'>400</span>)) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='add_elevation_contrours.html'>add_elevation_contrours</a></span>(<span class='kw'>contour_size</span> <span class='kw'>=</span> <span class='fl'>0.5</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='add_elevation_contours.html'>add_elevation_contours</a></span>(<span class='kw'>contour_size</span> <span class='kw'>=</span> <span class='fl'>0.5</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='add_elevation_labels.html'>add_elevation_labels</a></span>(<span class='kw'>label_color</span> <span class='kw'>=</span> <span class='st'>"red"</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='hide.html'>hide_axis_labels</a></span>() <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='hide.html'>hide_color_legend</a></span>() <span class='kw'>%&gt;%</span>

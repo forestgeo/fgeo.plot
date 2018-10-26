@@ -131,33 +131,43 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>panel.grid.major</th>
-      <td><p>major grid lines (<code>element_line</code>; inherits from
-<code>panel.grid</code>)</p></td>
+      <td><p>grid lines (<code>element_line()</code>). Specify major grid lines,
+or minor grid lines separately (using <code>panel.grid.major</code> or <code>panel.grid.minor</code>)
+or individually for each axis (using <code>panel.grid.major.x</code>, <code>panel.grid.minor.x</code>,
+<code>panel.grid.major.y</code>, <code>panel.grid.minor.y</code>).  Y axis grid lines are horizontal
+and x axis grid lines are vertical. <code>panel.grid.*.*</code> inherits from
+<code>panel.grid.*</code> which inherits from <code>panel.grid</code>, which in turn inherits
+from <code>line</code></p></td>
     </tr>
     <tr>
       <th>panel.grid.minor</th>
-      <td><p>minor grid lines (<code>element_line</code>; inherits from
-<code>panel.grid</code>)</p></td>
+      <td><p>grid lines (<code>element_line()</code>). Specify major grid lines,
+or minor grid lines separately (using <code>panel.grid.major</code> or <code>panel.grid.minor</code>)
+or individually for each axis (using <code>panel.grid.major.x</code>, <code>panel.grid.minor.x</code>,
+<code>panel.grid.major.y</code>, <code>panel.grid.minor.y</code>).  Y axis grid lines are horizontal
+and x axis grid lines are vertical. <code>panel.grid.*.*</code> inherits from
+<code>panel.grid.*</code> which inherits from <code>panel.grid</code>, which in turn inherits
+from <code>line</code></p></td>
     </tr>
     <tr>
       <th>panel.background</th>
       <td><p>background of plotting area, drawn underneath plot
-(<code>element_rect</code>; inherits from <code>rect</code>)</p></td>
+(<code>element_rect()</code>; inherits from <code>rect</code>)</p></td>
     </tr>
     <tr>
       <th>plot.title</th>
-      <td><p>plot title (text appearance) (<code>element_text</code>; inherits
+      <td><p>plot title (text appearance) (<code>element_text()</code>; inherits
 from <code>title</code>) left-aligned by default</p></td>
     </tr>
     <tr>
       <th>plot.subtitle</th>
-      <td><p>plot subtitle (text appearance) (<code>element_text</code>;
+      <td><p>plot subtitle (text appearance) (<code>element_text()</code>;
 inherits from <code>title</code>) left-aligned by default</p></td>
     </tr>
     <tr>
       <th>plot.caption</th>
       <td><p>caption below the plot (text appearance)
-(<code>element_text</code>; inherits from <code>title</code>) right-aligned by default</p></td>
+(<code>element_text()</code>; inherits from <code>title</code>) right-aligned by default</p></td>
     </tr>
     <tr>
       <th>legend.position</th>
@@ -166,18 +176,26 @@ inherits from <code>title</code>) left-aligned by default</p></td>
     </tr>
     <tr>
       <th>legend.title</th>
-      <td><p>title of legend (<code>element_text</code>; inherits from
+      <td><p>title of legend (<code>element_text()</code>; inherits from
 <code>title</code>)</p></td>
     </tr>
     <tr>
       <th>axis.ticks</th>
-      <td><p>tick marks along axes (<code>element_line</code>; inherits from
-<code>line</code>)</p></td>
+      <td><p>tick marks along axes (<code>element_line()</code>). Specify all tick marks (<code>axis.ticks</code>),
+ticks by plane (using <code>axis.ticks.x</code> or <code>axis.ticks.y</code>), or individually
+for each axis (using <code>axis.ticks.x.bottom</code>, <code>axis.ticks.x.top</code>,
+<code>axis.ticks.y.left</code>, <code>axis.ticks.y.right</code>). <code>axis.ticks.*.*</code> inherits from
+<code>axis.ticks.*</code> which inherits from <code>axis.ticks</code>, which in turn inherits
+from <code>line</code></p></td>
     </tr>
     <tr>
       <th>axis.text</th>
-      <td><p>tick labels along axes (<code>element_text</code>; inherits from
-<code>text</code>)</p></td>
+      <td><p>tick labels along axes (<code>element_text()</code>). Specify all axis tick labels (<code>axis.text</code>),
+tick labels by plane (using <code>axis.text.x</code> or <code>axis.text.y</code>), or individually
+for each axis (using <code>axis.text.x.bottom</code>, <code>axis.text.x.top</code>,
+<code>axis.text.y.left</code>, <code>axis.text.y.right</code>). <code>axis.text.*.*</code> inherits from
+<code>axis.text.*</code> which inherits from <code>axis.text</code>, which in turn inherits
+from <code>text</code></p></td>
     </tr>
     <tr>
       <th>...</th>

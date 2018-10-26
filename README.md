@@ -1,7 +1,7 @@
 
 <!-- Don't edit README.md; instead, edit README.Rmd -->
 
-# <img src="https://i.imgur.com/vTLlhbp.png" align="right" height=88 /> Map species, trees and topography
+# <img src="https://i.imgur.com/vTLlhbp.png" align="right" height=88 /> Plot ForestGEO-like datasets
 
 [![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 [![Build
@@ -27,12 +27,31 @@ article](https://goo.gl/dQKEeg).
 ``` r
 library(fgeo.map)
 
-census <- fgeo.data::luquillo_tree6_random
-some_sp <- subset(census, sp %in% c("PREMON", "CASARB"))
-plot_species_or_elevation(some_sp)
+# Small dataset with a few species for quick examples
+tree <- subset(fgeo.data::luquillo_tree5_random, sp %in% c("PREMON", "CASARB"))
+elevation_list <- fgeo.data::luquillo_elevation
+
+autoplot(sp(tree))
+
+autoplot(sp(tree), point_size = 1, shape = 1)
+
+autoplot(elev(elevation_list))
+
+# Same
+autoplot(elev(elevation_list$col))
+
+autoplot(sp_elev(tree, elevation_list))
+
+autoplot(sp_elev(tree, elevation_list$col))
+
+# Customize
+p <- autoplot(sp_elev(tree, elevation_list$col), fill = "red")
+p
+
+hide_color_legend(p)
 ```
 
-<img src="man/figures/README-fgeo.map-sp-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="man/figures/README-fgeo.map-sp-1.png" width="100%" style="display: block; margin: auto;" /><img src="man/figures/README-fgeo.map-sp-2.png" width="100%" style="display: block; margin: auto;" /><img src="man/figures/README-fgeo.map-sp-3.png" width="100%" style="display: block; margin: auto;" /><img src="man/figures/README-fgeo.map-sp-4.png" width="100%" style="display: block; margin: auto;" /><img src="man/figures/README-fgeo.map-sp-5.png" width="100%" style="display: block; margin: auto;" /><img src="man/figures/README-fgeo.map-sp-6.png" width="100%" style="display: block; margin: auto;" /><img src="man/figures/README-fgeo.map-sp-7.png" width="100%" style="display: block; margin: auto;" /><img src="man/figures/README-fgeo.map-sp-8.png" width="100%" style="display: block; margin: auto;" />
 
 [Get started with
 **fgeo**](https://forestgeo.github.io/fgeo/articles/fgeo.html)
