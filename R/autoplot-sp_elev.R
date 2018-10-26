@@ -56,11 +56,10 @@ autoplot.sp <- function(object, ...) {
 #' autoplot(elev(elevation_list))
 #' # Same
 #' elevation_dataframe <- elevation_list$col
-#' autoplot(elev(elevation_dataframe))
+#' p <- autoplot(elev(elevation_dataframe))
+#' p
 #' 
 #' # Customize
-#' p <- autoplot(elev(elevation_dataframe), fill = "red")
-#' p
 #' hide_color_legend(p)
 autoplot.elev <- function(object, ...) {
   add_elevation_contours(plot_base(object), ...)
