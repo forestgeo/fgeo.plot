@@ -1,83 +1,44 @@
-#' Quick plot of species distribution.
+#' Quick plot of species distribution and/or topography.
 #' 
 #' @description
-#' Automatically plot the `sp` variable of a ForestGEO-like dataset of class
-#' 'sp'. You can create a 'sp' `object` with:
+#' Automatically plot the `sp` and/or `elev` variables of ForestGEO-like
+#' datasets of class 'sp' and/or 'sp_elev'. 
+#' 
+#' * You can create a 'sp' `object` with:
 #' @description
+#' ``` 
+#'     object <- sp(DATA-WITH-VARIABLE-sp)
 #' ```
-#' object <- sp(DATA-WITH-VARIABLE-sp)
+#' * You can create an 'elev' `object` with:
+#' @description
+#' ``` 
+#'     object <- elev(DATA-WITH-VARIABLE-elev)
 #' ```
+#' @description
+#' * You can create a 'sp_elev' `object` with:
+#' @description
+#' ``` 
+#'     object <- sp_elev(DATA-WITH-VARIABLE-sp, DATA-WITH-VARIABLE-elev)
+#' ```
+#' 
 #' @description
 #' See sections __Usage__ and __Examples__.
 #' 
+#' @details
+#' `autoplot(sp_elev(DATA-WITH-VARIABLE-sp)` (without elevation data) is
+#' equivalent to `autoplot(sp(DATA-WITH-VARIABLE-sp))`.
+#' 
 #' @template compare_ggplot2
 #' 
-#' @param object An object created with [sp()].
+#' @inheritParams autoplot.elev
+#' @param object An object created with [sp()], [elev()], or [sp_elev()].
 #' @param fill Character; either a colour or "sp", which maps each species to a
 #'   different color.
+#' @param hide_fill_legend Logical; `TRUE` hides the fill legend.
 #' @template shape_point_size
 #' @param facet (Not available for `plot_each_species()`) Logical; `TRUE` wraps
 #'   multiple maps within the area of a single graphic plot.
-#' @param hide_color_legend Logical; `TRUE` hides the color legend.
 #' @template xlim_ylim
-#' @param custom_theme A valid [ggplot2::theme()]. `NULL` uses the default
-#'   theme [theme_default()].
-#' @param ... Other arguments passed to methods.
-#'   
-#' @seealso [autoplot()], [sp()].
-#' @family autoplots
-#' @family functions to plot species
-#'
-#' @return A "ggplot".
-#'
-#' @export
-#' @examples
-#' # Small dataset with a few species for quick examples
-#' tree <- subset(fgeo.data::luquillo_tree5_random, sp %in% c("PREMON", "CASARB"))
-#' autoplot(sp(tree))
-#' 
-#' # Customize
-#' autoplot(sp(tree), point_size = 1)
-autoplot.sp <- function(object, 
-                        fill = "black",
-                        shape = 21,
-                        point_size = 3,
-                        facet = TRUE,
-                        hide_color_legend = FALSE,
-                        xlim = NULL,
-                        ylim = NULL,
-                        custom_theme = NULL, 
-                        ...) {
-  plot_sp_elev(
-    census = object,
-    elevation = NULL,
-    fill = fill,
-    shape = shape,
-    point_size = point_size,
-    facet = facet,
-    hide_color_legend = hide_color_legend,
-    xlim = xlim,
-    ylim = ylim,
-    custom_theme = custom_theme
-  )
-}
-
-#' Quick topography plot.
-#' 
-#' @description
-#' Automatically plot the `elev` variable of a ForestGEO-like dataset of class 
-#' 'elev'. You can create an 'elev' `object` with:
-#' @description
-#' ```
-#' object <- elev(DATA-WITH-VARIABLE-elev)
-#' ```
-#' @description
-#' See sections __Usage__ and __Examples__.
-#' 
-#' @template compare_ggplot2
-#' 
-#' @inheritParams autoplot.sp
-#' @param object An object created with [elev()]. 
 #' @param contour_size A number giving the size of the contour of elevation
 #'   lines. Passed to `ggplot2::stat_contour()` (see [ggplot2::geom_contour()]).
 #' @template low_high
@@ -89,74 +50,9 @@ autoplot.sp <- function(object,
 #'   elevation lines.
 #' @param custom_theme A valid [ggplot2::theme()]. `NULL` uses the default
 #'   theme [theme_default()].
+#' @param ... Other arguments passed to methods.
 #'
-#' @seealso [autoplot()], [elev()].
-#' @family autoplots
-#' @family functions to plot elevation
-#'
-#' @return A "ggplot".
-#'
-#' @export
-#' @examples
-#' elevation_list <- fgeo.data::luquillo_elevation
-#' autoplot(elev(elevation_list))
-#' # Same
-#' autoplot(elev(elevation_list$col))
-#' 
-#' # Customize
-#' autoplot(elev(elevation_list$col), contour_size = 1)
-autoplot.elev <- function(object, 
-                          contour_size = 0.5,
-                          low = "blue",
-                          high = "red",
-                          hide_color_legend = FALSE,
-                          bins = NULL,
-                          add_elevation_labels = TRUE,
-                          label_size = 3,
-                          label_color = "grey",
-                          xyjust = 1,
-                          fontface = "italic",
-                          xlim = NULL,
-                          ylim = NULL,
-                          custom_theme = NULL,
-                          ...) {
-  plot_elev(
-    elevation = object,
-    contour_size = contour_size,
-    low = low,
-    high = high,
-    hide_color_legend = hide_color_legend,
-    bins = bins,
-    add_elevation_labels = add_elevation_labels,
-    label_size = label_size,
-    label_color = label_color,
-    xyjust = xyjust,
-    fontface = fontface,
-    xlim = xlim,
-    ylim = ylim,
-    custom_theme = custom_theme
-  )
-}
-
-#' Quick plot of species distribution and topography.
-#' 
-#' @description
-#' Automatically plot the `sp` and `elev` variables of a ForestGEO-like
-#' dataset of class 'sp_elev'. You can create a 'sp_elev' `object` with:
-#' @description
-#' ``` 
-#' object <- sp_elev(DATA-WITH-VARIABLE-sp, DATA-WITH-VARIABLE-elev)
-#' ```
-#' @description
-#' See sections __Usage__ and __Examples__.
-#' 
-#' @template compare_ggplot2
-#' 
-#' @param object An object created with [sp_elev()].
-#' @inheritParams autoplot.sp
-#' @inheritParams autoplot.elev
-#'
-#' @seealso [autoplot()], [sp_elev()].
+#' @seealso [autoplot()], [sp()], [elev()], [sp_elev()].
 #' @family autoplots
 #' @family functions to plot elevation
 #' @family functions to plot species
@@ -165,6 +61,24 @@ autoplot.elev <- function(object,
 #'
 #' @export
 #' @examples 
+#' # Species ---------------------------------------------------------------
+#' # Small dataset with a few species for quick examples
+#' tree <- subset(fgeo.data::luquillo_tree5_random, sp %in% c("PREMON", "CASARB"))
+#' autoplot(sp(tree))
+#' 
+#' # Customize
+#' autoplot(sp(tree), point_size = 1)
+#' 
+#' # Elevation -------------------------------------------------------------
+#' elevation_list <- fgeo.data::luquillo_elevation
+#' autoplot(elev(elevation_list))
+#' # Same
+#' autoplot(elev(elevation_list$col))
+#' 
+#' # Customize
+#' autoplot(elev(elevation_list$col), contour_size = 1)
+#' 
+#' # Species and elevation -------------------------------------------------
 #' # Small dataset with a few species for quick examples
 #' some_sp <- c("PREMON", "CASARB")
 #' census <- subset(fgeo.data::luquillo_tree5_random, sp %in% some_sp)
@@ -173,7 +87,8 @@ autoplot.elev <- function(object,
 #' # Customize
 #' autoplot(sp_elev(census, elevation), facet = FALSE, point_size = 1)
 autoplot.sp_elev <- function(object, 
-                             fill = "black",
+                             fill = "sp",
+                             hide_fill_legend = FALSE,
                              shape = 21,
                              point_size = 3,
                              facet = TRUE,
@@ -195,9 +110,70 @@ autoplot.sp_elev <- function(object,
     census = object[[1]], 
     elevation = object[[2]], 
     fill = fill,
+    hide_fill_legend = hide_fill_legend,
     shape = shape,
     point_size = point_size,
     facet = facet,
+    contour_size = contour_size,
+    low = low,
+    high = high,
+    hide_color_legend = hide_color_legend,
+    bins = bins,
+    add_elevation_labels = add_elevation_labels,
+    label_size = label_size,
+    label_color = label_color,
+    xyjust = xyjust,
+    fontface = fontface,
+    xlim = xlim,
+    ylim = ylim,
+    custom_theme = custom_theme
+  )
+}
+
+#' @rdname autoplot.sp_elev
+#' @export
+autoplot.sp <- function(object, 
+                        fill = "sp",
+                        hide_fill_legend = FALSE,
+                        shape = 21,
+                        point_size = 3,
+                        facet = TRUE,
+                        xlim = NULL,
+                        ylim = NULL,
+                        custom_theme = NULL,
+                        ...) {
+  autoplot(
+    sp_elev(sp = object, elev = NULL), 
+    fill = fill,
+    hide_fill_legend = hide_fill_legend,
+    shape = shape,
+    point_size = point_size,
+    facet = facet,
+    xlim = xlim,
+    ylim = ylim,
+    custom_theme = custom_theme
+  )
+}
+
+#' @rdname autoplot.sp_elev
+#' @export
+autoplot.elev <- function(object, 
+                          contour_size = 0.5,
+                          low = "blue",
+                          high = "red",
+                          hide_color_legend = FALSE,
+                          bins = NULL,
+                          add_elevation_labels = TRUE,
+                          label_size = 3,
+                          label_color = "grey",
+                          xyjust = 1,
+                          fontface = "italic",
+                          xlim = NULL,
+                          ylim = NULL,
+                          custom_theme = NULL,
+                          ...) {
+  plot_elev(
+    elevation = object,
     contour_size = contour_size,
     low = low,
     high = high,

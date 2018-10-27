@@ -92,12 +92,10 @@ plot_dbh_bubbles_by_quadrat(
 )
 }
 \seealso{
-Other functions to create a list of plots: \code{\link{autoplot_by_species.sp_elev}},
-  \code{\link{autoplot_by_species.sp}},
-  \code{\link{plot_tag_status_by_subquadrat}}
+Other functions to list plots from ForestGEO ViewFullTable: \code{\link{plot_tag_status_by_subquadrat}}
 
 Other functions to plot dbh bubbles: \code{\link{header_dbh_bubbles}},
   \code{\link{theme_dbh_bubbles}}
 }
-\concept{functions to create a list of plots}
+\concept{functions to list plots from ForestGEO ViewFullTable}
 \concept{functions to plot dbh bubbles}

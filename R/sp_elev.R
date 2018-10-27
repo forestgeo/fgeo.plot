@@ -1,4 +1,4 @@
-#' Transform data to `autoplot()` the variable `sp`.
+#' Enable autoplotting the variable `sp`.
 #' 
 #' @param sp A ForestGEO-like dataframe with the column `sp`.
 #' 
@@ -15,7 +15,7 @@ sp <- function(sp) {
   structure(sp, class = c("sp", class(sp)))
 }
 
-#' Transform data to `autoplot()` the variable `elev`.
+#' Enable autoplotting the variable `elev`.
 #' 
 #' @param elev A ForestGEO-like elevation list or its `col` dataframe -- with
 #'   the variable `elev`.
@@ -35,7 +35,7 @@ elev <- function(elev) {
   structure(elev, class = c("elev", class(elev)))
 }
 
-#' Transform data to `autoplot()` the variables `sp` and `elev`.
+#' Enable autoplotting the variables `sp` and `elev`.
 #' 
 #' @param sp A ForestGEO-like dataframe with column the column `sp`.
 #' @param elev A ForestGEO-like elevation list or its `col` dataframe -- with
@@ -54,14 +54,16 @@ elev <- function(elev) {
 #'   fgeo.data::luquillo_stem5_random, fgeo.data::luquillo_elevation
 #' )
 #' class(species_elevation)
-sp_elev <- function(sp, elev) {
+sp_elev <- function(sp, elev = NULL) {
   validate_sp_elev(sp, elev)
   cns_elev <- list(sp = sp, elev = elev)
   structure(cns_elev, class = c("sp_elev", class(cns_elev)))
 }
 
 validate_sp_elev <- function(sp, elev) {
-  stopifnot(is.data.frame(fgeo.tool::fgeo_elevation(elev)))
+  if (!is.null(elev)) {
+    stopifnot(is.data.frame(fgeo.tool::fgeo_elevation(elev)))
+  }
   
   stopifnot(is.data.frame(sp))
   fgeo.base::check_crucial_names(sp, c("gx", "gy", "sp"))

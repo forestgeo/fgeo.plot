@@ -52,32 +52,32 @@ For details on how to install packages from GitHub, see [this article](https://g
 ```{r fgeo.map-sp}
 library(fgeo.map)
 
+elevation <- fgeo.data::luquillo_elevation
+
 # Small dataset with a few species for quick examples
-tree <- subset(fgeo.data::luquillo_tree5_random, sp %in% c("PREMON", "CASARB"))
-elevation_list <- fgeo.data::luquillo_elevation
+selected_species <- c("PREMON", "CASARB")
+census <- subset(fgeo.data::luquillo_tree5_random, sp %in% selected_species)
 ```
 
 ```{r}
-autoplot(sp(tree))
+autoplot(sp(census))
 ```
 
 ```{r}
-autoplot(sp(tree), point_size = 2, shape = 21, fill = "darkgreen")
+autoplot(sp(census), point_size = 2, shape = 21, fill = "darkgreen")
 ```
 
 ```{r}
-# Same
-# autoplot(elev(elevation_list$col))
-autoplot(elev(elevation_list))
+autoplot(elev(elevation))
 ```
 
 ```{r}
-autoplot(sp_elev(tree, elevation_list))
+autoplot(sp_elev(census, elevation))
 ```
 
 ```{r}
 # Customize
-autoplot(sp_elev(tree, elevation_list), fill = "red", hide_color_legend = TRUE)
+autoplot(sp_elev(census, elevation), fill = "red", hide_color_legend = TRUE)
 ```
 
 [Get started with __fgeo__](https://forestgeo.github.io/fgeo/articles/fgeo.html)

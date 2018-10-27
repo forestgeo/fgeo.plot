@@ -44,7 +44,7 @@
 #'   [header_tag_status()], [theme_tag_status()], [fgeo.tool::add_subquad()],
 #'   [paginate()], [ggrepel::geom_text_repel], [fgeo.tool::drop_twice_dead()].
 #'
-#' @family functions to create a list of plots
+#' @family functions to list plots from ForestGEO ViewFullTable
 #' @family functions to plot tag status
 #'
 #' @section Acknowledgment:

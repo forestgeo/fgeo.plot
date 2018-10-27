@@ -2,9 +2,9 @@
 % Please edit documentation in R/sp_elev.R
 \name{sp_elev}
 \alias{sp_elev}
-\title{Transform data to \code{autoplot()} the variables \code{sp} and \code{elev}.}
+\title{Enable autoplotting the variables \code{sp} and \code{elev}.}
 \usage{
-sp_elev(sp, elev)
+sp_elev(sp, elev = NULL)
 }
 \arguments{
 \item{sp}{A ForestGEO-like dataframe with column the column \code{sp}.}
@@ -16,7 +16,7 @@ the column \code{elev}.}
 An S3 object of class 'sp_elev'.
 }
 \description{
-Transform data to \code{autoplot()} the variables \code{sp} and \code{elev}.
+Enable autoplotting the variables \code{sp} and \code{elev}.
 }
 \examples{
 species_elevation <- sp_elev(
@@ -30,15 +30,13 @@ class(species_elevation)
 Other functions to construct fgeo classes: \code{\link{elev}},
   \code{\link{sp}}
 
-Other functions to plot elevation: \code{\link{autoplot.elev}},
-  \code{\link{autoplot.sp_elev}},
+Other functions to plot elevation: \code{\link{autoplot.sp_elev}},
   \code{\link{autoplot_by_species.sp_elev}},
   \code{\link{elev}}
 
 Other functions to plot species: \code{\link{autoplot.sp_elev}},
-  \code{\link{autoplot.sp}},
   \code{\link{autoplot_by_species.sp_elev}},
-  \code{\link{autoplot_by_species.sp}}, \code{\link{sp}}
+  \code{\link{sp}}
 }
 \concept{functions to construct fgeo classes}
 \concept{functions to plot elevation}

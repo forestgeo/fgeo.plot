@@ -4,22 +4,13 @@
     <loc>https://forestgeo.github.io/fgeo.map//index.html</loc>
   </url>
   <url>
-    <loc>https://forestgeo.github.io/fgeo.map//reference/autoplot.elev.html</loc>
-  </url>
-  <url>
     <loc>https://forestgeo.github.io/fgeo.map//reference/autoplot.fgeo_habitat.html</loc>
-  </url>
-  <url>
-    <loc>https://forestgeo.github.io/fgeo.map//reference/autoplot.sp.html</loc>
   </url>
   <url>
     <loc>https://forestgeo.github.io/fgeo.map//reference/autoplot.sp_elev.html</loc>
   </url>
   <url>
     <loc>https://forestgeo.github.io/fgeo.map//reference/autoplot_by_species.html</loc>
-  </url>
-  <url>
-    <loc>https://forestgeo.github.io/fgeo.map//reference/autoplot_by_species.sp.html</loc>
   </url>
   <url>
     <loc>https://forestgeo.github.io/fgeo.map//reference/autoplot_by_species.sp_elev.html</loc>

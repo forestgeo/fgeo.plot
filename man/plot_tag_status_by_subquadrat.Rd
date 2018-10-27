@@ -142,12 +142,10 @@ p[[1]]
 \code{\link[=header_tag_status]{header_tag_status()}}, \code{\link[=theme_tag_status]{theme_tag_status()}}, \code{\link[fgeo.tool:add_subquad]{fgeo.tool::add_subquad()}},
 \code{\link[=paginate]{paginate()}}, \link[ggrepel:geom_text_repel]{ggrepel::geom_text_repel}, \code{\link[fgeo.tool:drop_twice_dead]{fgeo.tool::drop_twice_dead()}}.
 
-Other functions to create a list of plots: \code{\link{autoplot_by_species.sp_elev}},
-  \code{\link{autoplot_by_species.sp}},
-  \code{\link{plot_dbh_bubbles_by_quadrat}}
+Other functions to list plots from ForestGEO ViewFullTable: \code{\link{plot_dbh_bubbles_by_quadrat}}
 
 Other functions to plot tag status: \code{\link{header_tag_status}},
   \code{\link{theme_tag_status}}
 }
-\concept{functions to create a list of plots}
+\concept{functions to list plots from ForestGEO ViewFullTable}
 \concept{functions to plot tag status}
