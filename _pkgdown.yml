@@ -35,35 +35,21 @@ navbar:
 
 reference:
 
-  - title: Create maps with a single function
+  - title: Quickly plot different classes of ForestGEO data
     contents:
-      - maply_tag
-      - maply_quad
-      - maply_sp_elev
-      - map_sp_elev
-      - map_elev
+      - autoplot.fgeo_habitat
+      - has_concept("autoplots")
 
-  - title: Create maps by composing multiple map components
+  - title: Create a list of plots that can be easily printed to a .pdf file
     contents:
-      - map_gx_gy_elev
-      - map_gx_gy
-      - contour_elev
-      - label_elev
-      - add_sp
-      - wrap
-      - limit_gx_gy
-      - hide
+      - has_concept("functions to create a list of plots")
+      - -matches("header_")
+      - -matches("theme_")
 
-  - title: "Helpers"
+  - title: Transform data to `autoplot()` specific variables
     contents:
-      - matches("header")
-      - suffix_edge_tag
-      - starts_with("theme")
+      - has_concept("functions to construct fgeo classes")
 
   - title: "Datasets"
     contents:
-      - vft_1quad
-
-  - title: "Methods for common generics"
-    contents:
-      - plot.fgeo_habitat
+      - has_concept("datasets")

@@ -26,7 +26,8 @@ Imports:
     magrittr,
     rlang,
     stats,
-    stringr
+    stringr,
+    glue
 Suggests: 
     covr,
     fgeo.data,

@@ -1,0 +1,167 @@
+---
+title: "plot_tag_status_by_subquadrat()"
+resource_files:
+- vft.csv
+runtime: shiny
+output:
+  flexdashboard::flex_dashboard:
+    theme: united
+    orientation: columns
+    social: menu
+    source_code: embed
+    navbar:
+      - {href: "https://github.com/maurolepore", align: right, icon: fa-gavel}
+---
+
+```{r, include=FALSE}
+```
+
+```{r global, include=FALSE}
+library(shiny)
+library(flexdashboard)
+library(fgeo.map)
+library(dplyr)
+library(ggplot2)
+library(icon)
+
+vft <- readr::read_csv("vft.csv")
+```
+
+Adjust the arguments and preview the effect
+=======================================================================
+
+--- SIGNATURE {data-width=270}
+-----------------------------------------------------------------------
+
+### Usage
+
+`r icon::fa_question_circle()` [`plot_tag_status_by_subquadrat()`](https://forestgeo.github.io/fgeo.map/reference/plot_tag_status_by_subquadrat.html)
+
+```
+plot_tag_status_by_subquadrat(
+  vft,
+  x_q = 20,
+  x_sq = 5,
+  y_q = 20,
+  y_sq = 5,
+  subquad_offset = NULL,
+  bl = 1,
+  br = 2,
+  tr = 3,
+  tl = 4,
+  title_quad = "Site Name, YYYY. Quadrat:",
+  show_page = TRUE,
+  show_subquad = TRUE,
+  point_shape = c(19, 4),
+  point_size = 1.5,
+  tag_size = 3,
+  header = header_tag_status(),
+  theme = theme_tag_status(),
+  move_edge = 0
+)
+```
+
+--- ARGUMENTS {data-width=330}
+-----------------------------------------------------------------------
+
+### Adjust
+
+```{r}
+textInput("title", "title_quad", "Site Name, YYYY. Quadrat:")
+
+
+num <- 1:4
+let <- letters[1:4]
+labs <- unlist(lapply(list(num, let), paste0, collapse = ", "))
+
+fluidRow(
+  column(6, selectInput("showpage", "show_page", c(TRUE, FALSE), TRUE)),
+  column(6, selectInput("pagelab", "bl = ?, br = ?, tr = ?, tl = ?", labs))
+)
+
+fluidRow(
+  column(4, selectInput("showsubquad", "show_subquad", c(TRUE, FALSE), TRUE)),
+  column(6, checkboxInput("subquadoffset", "subquad_offset"))
+)
+
+fluidRow(
+  column(4, numericInput("tagsize", "tag_size", 3)),
+  column(4, numericInput("pointsize", "point_size", 1.5))
+)
+
+fluidRow(
+  column(
+    6, 
+    sliderInput(
+      "pointshape_alive", "point_shape (alive)", min = 1, max = 25, 19)
+  ),
+  column(
+    6, 
+    sliderInput(
+      "pointshape_dead", "point_shape (dead)", min = 1, max = 25, 4)
+  )
+)
+
+sliderInput("moveedge", "move_edge", min = -2, max = 2, value = 0)
+```
+
+`r icon::fa_question_circle()` [`theme_tag_status()`](https://forestgeo.github.io/fgeo.map/reference/themes.html)
+
+```{r}
+textInput(".theme", "theme", "theme_tag_status(legend.position = 'top')")
+```
+
+`r icon::fa_question_circle()` [`header_tag_status()`](https://forestgeo.github.io/map/reference/get_header.html)
+
+```{r}
+textInput(".header", "header", "header_tag_status()")
+```
+
+--- PLOT {data-width=330}
+-----------------------------------------------------------------------
+
+### Preview
+
+```{r, fig.asp=1.15}
+renderPlot({
+  maps <- plot_tag_status_by_subquadrat(
+    vft, 
+    title_quad = input$title,
+    point_size = input$pointsize,
+    point_shape = c(input$pointshape_alive, input$pointshape_dead),
+    tag_size = input$tagsize,
+    header = ifelse(
+      input$.header == "header_tag_status()", header_tag_status(), input$.header
+    ),
+    show_subquad = as.logical(input$showsubquad),
+    show_page = as.logical(input$showpage),
+    bl = unlist(strsplit(input$pagelab, ", "))[[1]],
+    br = unlist(strsplit(input$pagelab, ", "))[[2]],
+    tr = unlist(strsplit(input$pagelab, ", "))[[3]],
+    tl = unlist(strsplit(input$pagelab, ", "))[[4]],
+    subquad_offset = if (input$subquadoffset) -1 else NULL,
+    move_edge = input$moveedge,
+    theme = eval(parse(text = input$.theme))
+
+  )
+  maps[[1]]
+})
+```
+
+Example data set
+=======================================================================
+
+`r h1("Example data set")`
+
+### Data were filtered to keep only one `PlotID` and one `QuadratName` {data-height=90}
+
+```{r}
+renderPrint({
+  rngx <- paste0(range(vft$QX), collapse = " ")
+  rngy <- paste0(range(vft$QY), collapse = " ")
+  cat("range x: ", rngx, "\n", "range y: ", rngy, "\n", "\n", sep = "")
+  
+  vft
+})
+```
+

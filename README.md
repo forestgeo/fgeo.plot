@@ -1,7 +1,7 @@
 
 <!-- Don't edit README.md; instead, edit README.Rmd -->
 
-# <img src="https://i.imgur.com/vTLlhbp.png" align="right" height=88 /> Map species, trees and topography
+# <img src="https://i.imgur.com/vTLlhbp.png" align="right" height=88 /> Plot ForestGEO-like datasets
 
 [![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 [![Build
@@ -27,12 +27,43 @@ article](https://goo.gl/dQKEeg).
 ``` r
 library(fgeo.map)
 
-census <- fgeo.data::luquillo_tree6_random
-some_sp <- subset(census, sp %in% c("PREMON", "CASARB"))
-map_sp_elev(some_sp)
+# Small dataset with a few species for quick examples
+tree <- subset(fgeo.data::luquillo_tree5_random, sp %in% c("PREMON", "CASARB"))
+elevation_list <- fgeo.data::luquillo_elevation
 ```
 
-<img src="man/figures/README-fgeo.map-sp-1.png" width="100%" style="display: block; margin: auto;" />
+``` r
+autoplot(sp(tree))
+```
+
+<img src="man/figures/README-unnamed-chunk-1-1.png" width="100%" style="display: block; margin: auto;" />
+
+``` r
+autoplot(sp(tree), point_size = 2, shape = 21, fill = "darkgreen")
+```
+
+<img src="man/figures/README-unnamed-chunk-2-1.png" width="100%" style="display: block; margin: auto;" />
+
+``` r
+# Same
+# autoplot(elev(elevation_list$col))
+autoplot(elev(elevation_list))
+```
+
+<img src="man/figures/README-unnamed-chunk-3-1.png" width="100%" style="display: block; margin: auto;" />
+
+``` r
+autoplot(sp_elev(tree, elevation_list))
+```
+
+<img src="man/figures/README-unnamed-chunk-4-1.png" width="100%" style="display: block; margin: auto;" />
+
+``` r
+# Customize
+autoplot(sp_elev(tree, elevation_list), fill = "red", hide_color_legend = TRUE)
+```
+
+<img src="man/figures/README-unnamed-chunk-5-1.png" width="100%" style="display: block; margin: auto;" />
 
 [Get started with
 **fgeo**](https://forestgeo.github.io/fgeo/articles/fgeo.html)

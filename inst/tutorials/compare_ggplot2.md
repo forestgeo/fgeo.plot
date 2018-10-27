@@ -1,7 +1,7 @@
 Comparing ggplot2 and fgeo.map
 ================
 Mauro Lepore
-2018-07-09
+2018-10-24
 
 This article compares plots built with **fgeo.map** versus **ggplot2**.
 
@@ -31,25 +31,25 @@ Quick maps with
 **fgeo.map**.
 
 ``` r
-map_elev(elev)
+plot_elevation(elev)
 ```
 
 <img src="compare_ggplot2_files/figure-gfm/unnamed-chunk-2-1.png" width="100%" style="display: block; margin: auto;" />
 
-    # map_elev() also understands the elevation list, so this code outputs the same
-    map_elev(elevation)
+    # plot_elevation() also understands the elevation list, so this code outputs the same
+    plot_elevation(elevation)
 
 ``` r
 # You have a number of options you can tweak
-map_elev(elev,
+plot_elevation(elev,
   # Or choose colors by code from http://bit.ly/2rJgQba
   low = "grey", high = "black", 
   # How many lines, and how thick
   bins = 20, contour_size = 0.5,
   # Hide elevation numbers from inside the plot
-  label_elev = FALSE, 
+  add_elevation_labels = FALSE, 
   # Keep the "level" legend
-  hide_legend_color = FALSE
+  hide_color_legend = FALSE
 )
 ```
 

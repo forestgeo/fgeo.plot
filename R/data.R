@@ -3,6 +3,8 @@
 #' ViewFullTable data from Luquillo including 1 and 4 quadrats from a single
 #' census. Adapted from [fgeo.data::luquillo_vft_4quad].
 #' 
+#' @family datasets
+#' 
 #' @examples
 #' str(vft_1quad)
 #' @name vft_1quad

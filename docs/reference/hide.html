@@ -33,7 +33,7 @@
 <meta property="og:title" content="Hide elements of a plot. — hide" />
 
 <meta property="og:description" content="hide_axis_labels hides axis labels.
-hide_legend_color hides the color legend, for example, of elevation lines." />
+hide_color_legend hides the color legend, for example, of elevation lines." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -108,20 +108,20 @@ hide_legend_color hides the color legend, for example, of elevation lines." />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Hide elements of a plot.</h1>
-    <small class="dont-index">Source: <a href='https://github.com/forestgeo/fgeo.map/blob/master/R/maply_sp_elev.R'><code>R/maply_sp_elev.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/forestgeo/fgeo.map/blob/master/R/layers.R'><code>R/layers.R</code></a></small>
     <div class="hidden name"><code>hide.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
     <p><code>hide_axis_labels</code> hides axis labels.
-<code>hide_legend_color</code> hides the color legend, for example, of elevation lines.</p>
+<code>hide_color_legend</code> hides the color legend, for example, of elevation lines.</p>
     
     </div>
 
     <pre class="usage"><span class='fu'>hide_axis_labels</span>(<span class='no'>p</span>)
 
-<span class='fu'>hide_legend_color</span>(<span class='no'>p</span>)</pre>
+<span class='fu'>hide_color_legend</span>(<span class='no'>p</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -135,20 +135,20 @@ hide_legend_color hides the color legend, for example, of elevation lines." />
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='http://www.rdocumentation.org/packages/ggplot2/topics/labs'>ggplot2::labs()</a></code>,  <code><a href='http://www.rdocumentation.org/packages/ggplot2/topics/guides'>ggplot2::guides()</a></code>.</p>
-<p>Other map components.: <code><a href='add_sp.html'>add_sp</a></code>,
-  <code><a href='contour_elev.html'>contour_elev</a></code>, <code><a href='label_elev.html'>label_elev</a></code>,
-  <code><a href='limit_gx_gy.html'>limit_gx_gy</a></code>, <code><a href='map_gx_gy_elev.html'>map_gx_gy_elev</a></code>,
-  <code><a href='wrap.html'>wrap</a></code></p></div>
+<p>Other functions to create or modify plot layers: <code><a href='add_elevation_contours.html'>add_elevation_contours</a></code>,
+  <code><a href='add_elevation_labels.html'>add_elevation_labels</a></code>,
+  <code><a href='axis_limits.html'>axis_limits</a></code>, <code><a href='facet.html'>facet</a></code>,
+  <code><a href='theme_default.html'>theme_default</a></code></p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='no'>elevation</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>fgeo.data</span><span class='kw ns'>::</span><span class='no'><a href='http://www.rdocumentation.org/packages/fgeo.data/topics/luquillo_elevation'>luquillo_elevation</a></span>
-<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='map_gx_gy_elev.html'>map_gx_gy_elev</a></span>(<span class='no'>elevation</span>)
+<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'>plot_base_elevation</span>(<span class='no'>elevation</span>)
 <span class='fu'>hide_axis_labels</span>(<span class='no'>p</span>)</div><div class='img'><img src='hide-1.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='no'>elevation</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='map_gx_gy_elev.html'>map_gx_gy_elev</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='contour_elev.html'>contour_elev</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'>hide_legend_color</span>()</div><div class='img'><img src='hide-2.png' alt='' width='700' height='433' /></div></pre>
+  <span class='fu'>plot_base_elevation</span>() <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='add_elevation_contours.html'>add_elevation_contours</a></span>() <span class='kw'>%&gt;%</span>
+  <span class='fu'>hide_color_legend</span>()</div><div class='img'><img src='hide-2.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
