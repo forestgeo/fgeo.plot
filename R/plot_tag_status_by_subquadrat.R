@@ -1,4 +1,4 @@
-#' Map tree tags by status, showing four subquadrats per plot-page.
+#' List plots of tree-tag status by subquadrat (good for .pdf output).
 #'
 #' This function maps tree tags by status and outputs a list of maps that can be
 #' printed on a .pdf file. Each map shows four subquadrats within a quadrat. The

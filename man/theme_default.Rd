@@ -25,13 +25,6 @@ supplied \code{validate} needs to be set to \code{FALSE}.}
 Default plot theme.
 }
 \examples{
-census <- fgeo.data::luquillo_tree5_random
-theme_default(plot_base_census(census))
-}
-\seealso{
-Other functions to create or modify plot layers: \code{\link{add_elevation_contours}},
-  \code{\link{add_elevation_labels}},
-  \code{\link{axis_limits}}, \code{\link{facet}},
-  \code{\link{hide}}
+class(theme_default(ggplot2::ggplot(iris)))
 }
 \concept{functions to create or modify plot layers}

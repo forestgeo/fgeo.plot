@@ -30,28 +30,46 @@ library(fgeo.map)
 # Small dataset with a few species for quick examples
 tree <- subset(fgeo.data::luquillo_tree5_random, sp %in% c("PREMON", "CASARB"))
 elevation_list <- fgeo.data::luquillo_elevation
-
-autoplot(sp(tree))
-
-autoplot(sp(tree), point_size = 1, shape = 1)
-
-autoplot(elev(elevation_list))
-
-# Same
-autoplot(elev(elevation_list$col))
-
-autoplot(sp_elev(tree, elevation_list))
-
-autoplot(sp_elev(tree, elevation_list$col))
-
-# Customize
-p <- autoplot(sp_elev(tree, elevation_list$col), fill = "red")
-p
-
-hide_color_legend(p)
 ```
 
-<img src="man/figures/README-fgeo.map-sp-1.png" width="100%" style="display: block; margin: auto;" /><img src="man/figures/README-fgeo.map-sp-2.png" width="100%" style="display: block; margin: auto;" /><img src="man/figures/README-fgeo.map-sp-3.png" width="100%" style="display: block; margin: auto;" /><img src="man/figures/README-fgeo.map-sp-4.png" width="100%" style="display: block; margin: auto;" /><img src="man/figures/README-fgeo.map-sp-5.png" width="100%" style="display: block; margin: auto;" /><img src="man/figures/README-fgeo.map-sp-6.png" width="100%" style="display: block; margin: auto;" /><img src="man/figures/README-fgeo.map-sp-7.png" width="100%" style="display: block; margin: auto;" /><img src="man/figures/README-fgeo.map-sp-8.png" width="100%" style="display: block; margin: auto;" />
+``` r
+autoplot(sp(tree))
+```
+
+<img src="man/figures/README-unnamed-chunk-1-1.png" width="100%" style="display: block; margin: auto;" />
+
+``` r
+autoplot(sp(tree), point_size = 2, shape = 21, fill = "darkgreen")
+```
+
+<img src="man/figures/README-unnamed-chunk-2-1.png" width="100%" style="display: block; margin: auto;" />
+
+``` r
+# Same
+# autoplot(elev(elevation_list$col))
+autoplot(elev(elevation_list))
+```
+
+<img src="man/figures/README-unnamed-chunk-3-1.png" width="100%" style="display: block; margin: auto;" />
+
+``` r
+autoplot(sp_elev(tree, elevation_list))
+```
+
+<img src="man/figures/README-unnamed-chunk-4-1.png" width="100%" style="display: block; margin: auto;" />
+
+``` r
+autoplot(sp_elev(tree, elevation_list$col))
+```
+
+<img src="man/figures/README-unnamed-chunk-5-1.png" width="100%" style="display: block; margin: auto;" />
+
+``` r
+# Customize
+autoplot(sp_elev(tree, elevation_list), fill = "red", hide_color_legend = TRUE)
+```
+
+<img src="man/figures/README-unnamed-chunk-6-1.png" width="100%" style="display: block; margin: auto;" />
 
 [Get started with
 **fgeo**](https://forestgeo.github.io/fgeo/articles/fgeo.html)

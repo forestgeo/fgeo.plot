@@ -64,8 +64,6 @@ Theme for \code{theme_dbh_bubbles()}.
 }
 \examples{
 class(theme_dbh_bubbles())
-census <- fgeo.data::luquillo_tree5_random
-plot_base_census(census) + theme_dbh_bubbles()
 }
 \seealso{
 Other functions to plot dbh bubbles: \code{\link{header_dbh_bubbles}},

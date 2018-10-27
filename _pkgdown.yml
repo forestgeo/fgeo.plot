@@ -39,38 +39,16 @@ reference:
     contents:
       - autoplot.fgeo_habitat
       - has_concept("autoplots")
-      
-  - title: Define which variable of a dataset should be `autoplot`ed.
+
+  - title: Create a list of plots that can be easily printed to a .pdf file
+    contents:
+      - has_concept("functions to create a list of plots")
+      - -matches("header_")
+      - -matches("theme_")
+
+  - title: Ask `autoplot()` to plot specific variables
     contents:
       - has_concept("functions to construct fgeo classes")
-
-  - title: List plots of species-distribution
-    contents:
-      - plot_by_species
-
-  - title: List bubble-plots of tree diameter
-    contents:
-      - matches("plot_dbh_bubbles")
-      - has_concept("functions to plot dbh bubbles")
-      - -headers
-      - -themes
-
-  - title: List fieldwork plots
-    contents:
-      - matches("plot_tag_status")
-      - has_concept("functions to plot tag status")
-
-  - title: Build/modify plots layer by layer
-    desc: >
-       Compose these plot components not with `f(x) + g()` (__ggplot2__ style)
-       but with `g(f(x))` (usual style) or with `x %>% f() %>% g()` 
-       ([__tidyverse__](https://www.tidyverse.org/) style). For greatest
-       flexibility use instead
-       [__ggplot2__ package](https://ggplot2.tidyverse.org/reference/index.html)
-    contents:
-      - has_concept("functions to create a single plot")
-      - matches("plot_base")
-      - has_concept("functions to create or modify plot layers")
 
   - title: "Datasets"
     contents:

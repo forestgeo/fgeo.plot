@@ -1,4 +1,4 @@
-#' Map trees within a quadrat.
+#' List dbh bubble-plots by quadrat (good for .pdf output).
 #'
 #' @template vft
 #' @template title_quad

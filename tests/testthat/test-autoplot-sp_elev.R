@@ -9,7 +9,7 @@ elevation_df <- elevation_lst$col
 test_that("fails with informative message", {
   expect_error(autoplot(census), "Can't deal with data")
   expect_error(autoplot(elevation_lst), "Can't deal with data")
-  expect_error(plot_by_species(elevation_lst), "Can't deal with data")
+  expect_error(autoplot_by_species(elevation_lst), "Can't deal with data")
 })
 
 test_that("returns a ggplot", {

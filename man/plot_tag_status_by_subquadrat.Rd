@@ -2,7 +2,7 @@
 % Please edit documentation in R/plot_tag_status_by_subquadrat.R
 \name{plot_tag_status_by_subquadrat}
 \alias{plot_tag_status_by_subquadrat}
-\title{Map tree tags by status, showing four subquadrats per plot-page.}
+\title{List plots of tree-tag status by subquadrat (good for .pdf output).}
 \usage{
 plot_tag_status_by_subquadrat(vft, x_q = 20, x_sq = 5, y_q = 20,
   y_sq = 5, subquad_offset = NULL, bl = 1, br = 2, tr = 3,
@@ -142,7 +142,8 @@ p[[1]]
 \code{\link[=header_tag_status]{header_tag_status()}}, \code{\link[=theme_tag_status]{theme_tag_status()}}, \code{\link[fgeo.tool:add_subquad]{fgeo.tool::add_subquad()}},
 \code{\link[=paginate]{paginate()}}, \link[ggrepel:geom_text_repel]{ggrepel::geom_text_repel}, \code{\link[fgeo.tool:drop_twice_dead]{fgeo.tool::drop_twice_dead()}}.
 
-Other functions to create a list of plots: \code{\link{plot_by_species}},
+Other functions to create a list of plots: \code{\link{autoplot_by_species.sp_elev}},
+  \code{\link{autoplot_by_species.sp}},
   \code{\link{plot_dbh_bubbles_by_quadrat}}
 
 Other functions to plot tag status: \code{\link{header_tag_status}},

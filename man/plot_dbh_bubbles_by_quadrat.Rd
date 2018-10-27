@@ -2,7 +2,7 @@
 % Please edit documentation in R/plot_dbh_bubles_by_quadrat.R
 \name{plot_dbh_bubbles_by_quadrat}
 \alias{plot_dbh_bubbles_by_quadrat}
-\title{Map trees within a quadrat.}
+\title{List dbh bubble-plots by quadrat (good for .pdf output).}
 \usage{
 plot_dbh_bubbles_by_quadrat(vft,
   title_quad = "Site Name, YYYY, Quadrat:",
@@ -36,7 +36,7 @@ status that corresponds to dead stems.}
 A list which each element is a plot of class ggplot.
 }
 \description{
-Map trees within a quadrat.
+List dbh bubble-plots by quadrat (good for .pdf output).
 }
 \examples{
 library(dplyr)
@@ -92,7 +92,8 @@ plot_dbh_bubbles_by_quadrat(
 )
 }
 \seealso{
-Other functions to create a list of plots: \code{\link{plot_by_species}},
+Other functions to create a list of plots: \code{\link{autoplot_by_species.sp_elev}},
+  \code{\link{autoplot_by_species.sp}},
   \code{\link{plot_tag_status_by_subquadrat}}
 
 Other functions to plot dbh bubbles: \code{\link{header_dbh_bubbles}},

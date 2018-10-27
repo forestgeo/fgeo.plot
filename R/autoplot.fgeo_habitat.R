@@ -1,6 +1,6 @@
-#' Plot objects of class "fgeo_habitat".
+#' Quick habitat plot.
 #' 
-#' @param object An S3 object of class "fgeo_habitat".
+#' @param object An object created with [fgeo.tool::fgeo_habitat()].
 #' @param ... Other arguments passed to methods.
 #'
 #' @return An object of class "ggplot".

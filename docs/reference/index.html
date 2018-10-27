@@ -126,13 +126,13 @@
         <td>
           <p><code><a href="autoplot.fgeo_habitat.html">autoplot(<i>&lt;fgeo_habitat&gt;</i>)</a></code> </p>
         </td>
-        <td><p>Plot objects of class "fgeo_habitat".</p></td>
+        <td><p>Quick habitat plot.</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="autoplot.elev.html">autoplot(<i>&lt;elev&gt;</i>)</a></code> </p>
         </td>
-        <td><p>Quick plot of species distribution.</p></td>
+        <td><p>Quick topography plot.</p></td>
       </tr><tr>
         
         <td>
@@ -145,17 +145,43 @@
           <p><code><a href="autoplot.sp_elev.html">autoplot(<i>&lt;sp_elev&gt;</i>)</a></code> </p>
         </td>
         <td><p>Quick plot of species distribution and topography.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="plot_by_species.html">plot_by_species()</a></code> </p>
-        </td>
-        <td><p>List plots of species distribution and topography (good for pdf output).</p></td>
       </tr>
     </tbody><tbody>
       <tr>
         <th colspan="2">
-          <h2 id="section-define-which-variable-of-a-dataset-should-be-autoplot-ed-" class="hasAnchor"><a href="#section-define-which-variable-of-a-dataset-should-be-autoplot-ed-" class="anchor"></a>Define which variable of a dataset should be `autoplot`ed.</h2>
+          <h2 id="section-create-a-list-of-plots-that-can-be-easily-printed-to-a-pdf-file" class="hasAnchor"><a href="#section-create-a-list-of-plots-that-can-be-easily-printed-to-a-pdf-file" class="anchor"></a>Create a list of plots that can be easily printed to a .pdf file</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="autoplot_by_species.sp.html">autoplot_by_species(<i>&lt;sp&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>List plots of species distribution (good for pdf output).</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="autoplot_by_species.sp_elev.html">autoplot_by_species(<i>&lt;sp_elev&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>List plots of species distribution and topography (good for pdf output).</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="plot_dbh_bubbles_by_quadrat.html">plot_dbh_bubbles_by_quadrat()</a></code> </p>
+        </td>
+        <td><p>List dbh bubble-plots by quadrat (good for .pdf output).</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="plot_tag_status_by_subquadrat.html">plot_tag_status_by_subquadrat()</a></code> </p>
+        </td>
+        <td><p>List plots of tree-tag status by subquadrat (good for .pdf output).</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-ask-autoplot-to-plot-specific-variables" class="hasAnchor"><a href="#section-ask-autoplot-to-plot-specific-variables" class="anchor"></a>Ask `autoplot()` to plot specific variables</h2>
           <p class="section-desc"></p>
         </th>
       </tr>
@@ -164,231 +190,19 @@
         <td>
           <p><code><a href="elev.html">elev()</a></code> </p>
         </td>
-        <td><p>Classify a ForestGEO-like dataset as containing the variable <code>elev</code>.</p></td>
+        <td><p>'Ask' <code>autoplot()</code> to plot the variable <code>elev</code>.</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="sp.html">sp()</a></code> </p>
         </td>
-        <td><p>Classify a ForestGEO-like dataset as containing the variable <code>sp</code>.</p></td>
+        <td><p>'Ask' <code>autoplot()</code> to plot the variable <code>sp</code>.</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="sp_elev.html">sp_elev()</a></code> </p>
         </td>
-        <td><p>Classify ForestGEO-like datasets as containing the variables <code>sp</code> and <code>elev</code>.</p></td>
-      </tr>
-    </tbody><tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-list-plots-of-species-distribution" class="hasAnchor"><a href="#section-list-plots-of-species-distribution" class="anchor"></a>List plots of species-distribution</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      <tr>
-        
-        <td>
-          <p><code><a href="plot_by_species.html">plot_by_species()</a></code> </p>
-        </td>
-        <td><p>List plots of species distribution and topography (good for pdf output).</p></td>
-      </tr>
-    </tbody><tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-list-bubble-plots-of-tree-diameter" class="hasAnchor"><a href="#section-list-bubble-plots-of-tree-diameter" class="anchor"></a>List bubble-plots of tree diameter</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      <tr>
-        
-        <td>
-          <p><code><a href="plot_dbh_bubbles_by_quadrat.html">plot_dbh_bubbles_by_quadrat()</a></code> </p>
-        </td>
-        <td><p>Map trees within a quadrat.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="header_dbh_bubbles.html">header_dbh_bubbles()</a></code> </p>
-        </td>
-        <td><p>Pre-made headers.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="theme_dbh_bubbles.html">theme_dbh_bubbles()</a></code> </p>
-        </td>
-        <td><p>Theme for <code>theme_dbh_bubbles()</code>.</p></td>
-      </tr>
-    </tbody><tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-list-fieldwork-plots" class="hasAnchor"><a href="#section-list-fieldwork-plots" class="anchor"></a>List fieldwork plots</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      <tr>
-        
-        <td>
-          <p><code><a href="plot_tag_status_by_subquadrat.html">plot_tag_status_by_subquadrat()</a></code> </p>
-        </td>
-        <td><p>Map tree tags by status, showing four subquadrats per plot-page.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="header_tag_status.html">header_tag_status()</a></code> </p>
-        </td>
-        <td><p>Pre-made headers.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="theme_tag_status.html">theme_tag_status()</a></code> </p>
-        </td>
-        <td><p>Theme for <code>plot_base_census()</code>.</p></td>
-      </tr>
-    </tbody><tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-build-modify-plots-layer-by-layer" class="hasAnchor"><a href="#section-build-modify-plots-layer-by-layer" class="anchor"></a>Build/modify plots layer by layer</h2>
-          <p class="section-desc"><p>Compose these plot components not with <code>f(x) + g()</code> (<strong>ggplot2</strong> style) but with <code>g(f(x))</code> (usual style) or with <code>x %&gt;% f() %&gt;% g()</code> (<a href="https://www.tidyverse.org/"><strong>tidyverse</strong></a> style). For greatest flexibility use instead <a href="https://ggplot2.tidyverse.org/reference/index.html"><strong>ggplot2</strong> package</a></p></p>
-        </th>
-      </tr>
-      <tr>
-        
-        <td>
-          <p><code><a href="add_elevation_contours.html">add_elevation_contours()</a></code> </p>
-        </td>
-        <td><p>Represent elevation with lines.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="add_elevation_labels.html">add_elevation_labels()</a></code> </p>
-        </td>
-        <td><p>Label elevation lines.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="autoplot.elev.html">autoplot(<i>&lt;elev&gt;</i>)</a></code> </p>
-        </td>
-        <td><p>Quick plot of species distribution.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="autoplot.fgeo_habitat.html">autoplot(<i>&lt;fgeo_habitat&gt;</i>)</a></code> </p>
-        </td>
-        <td><p>Plot objects of class "fgeo_habitat".</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="autoplot.sp.html">autoplot(<i>&lt;sp&gt;</i>)</a></code> </p>
-        </td>
-        <td><p>Quick plot of species distribution.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="autoplot.sp_elev.html">autoplot(<i>&lt;sp_elev&gt;</i>)</a></code> </p>
-        </td>
-        <td><p>Quick plot of species distribution and topography.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="axis_limits.html">axis_limits()</a></code> </p>
-        </td>
-        <td><p>Set the map limits.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="elev.html">elev()</a></code> </p>
-        </td>
-        <td><p>Classify a ForestGEO-like dataset as containing the variable <code>elev</code>.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="facet.html">facet()</a></code> </p>
-        </td>
-        <td><p>Facet data by a variable, and wrap multiple plots to fit a single page.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="headers.html">headers</a></code> </p>
-        </td>
-        <td><p>Pre-made headers.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="header_dbh_bubbles.html">header_dbh_bubbles()</a></code> </p>
-        </td>
-        <td><p>Pre-made headers.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="header_tag_status.html">header_tag_status()</a></code> </p>
-        </td>
-        <td><p>Pre-made headers.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="hide.html">hide_axis_labels()</a></code> <code><a href="hide.html">hide_color_legend()</a></code> </p>
-        </td>
-        <td><p>Hide elements of a plot.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="plot_by_species.html">plot_by_species()</a></code> </p>
-        </td>
-        <td><p>List plots of species distribution and topography (good for pdf output).</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="plot_dbh_bubbles_by_quadrat.html">plot_dbh_bubbles_by_quadrat()</a></code> </p>
-        </td>
-        <td><p>Map trees within a quadrat.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="plot_tag_status_by_subquadrat.html">plot_tag_status_by_subquadrat()</a></code> </p>
-        </td>
-        <td><p>Map tree tags by status, showing four subquadrats per plot-page.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="sp.html">sp()</a></code> </p>
-        </td>
-        <td><p>Classify a ForestGEO-like dataset as containing the variable <code>sp</code>.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="sp_elev.html">sp_elev()</a></code> </p>
-        </td>
-        <td><p>Classify ForestGEO-like datasets as containing the variables <code>sp</code> and <code>elev</code>.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="themes.html">themes</a></code> </p>
-        </td>
-        <td><p>Themes.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="theme_dbh_bubbles.html">theme_dbh_bubbles()</a></code> </p>
-        </td>
-        <td><p>Theme for <code>theme_dbh_bubbles()</code>.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="theme_default.html">theme_default()</a></code> </p>
-        </td>
-        <td><p>Default plot theme.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="theme_tag_status.html">theme_tag_status()</a></code> </p>
-        </td>
-        <td><p>Theme for <code>plot_base_census()</code>.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="vft_1quad.html">vft_4quad</a></code> <code><a href="vft_1quad.html">vft_1quad</a></code> </p>
-        </td>
-        <td><p>Small ViewFullTables from Luquillo.</p></td>
+        <td><p>'Ask' <code>autoplot()</code> to plot the variables <code>sp</code> and <code>elev</code>.</p></td>
       </tr>
     </tbody><tbody>
       <tr>
@@ -412,11 +226,8 @@
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#section-quickly-plot-different-classes-of-forestgeo-data">Quickly plot different classes of ForestGEO data</a></li>
-      <li><a href="#section-define-which-variable-of-a-dataset-should-be-autoplot-ed-">Define which variable of a dataset should be `autoplot`ed.</a></li>
-      <li><a href="#section-list-plots-of-species-distribution">List plots of species-distribution</a></li>
-      <li><a href="#section-list-bubble-plots-of-tree-diameter">List bubble-plots of tree diameter</a></li>
-      <li><a href="#section-list-fieldwork-plots">List fieldwork plots</a></li>
-      <li><a href="#section-build-modify-plots-layer-by-layer">Build/modify plots layer by layer</a></li>
+      <li><a href="#section-create-a-list-of-plots-that-can-be-easily-printed-to-a-pdf-file">Create a list of plots that can be easily printed to a .pdf file</a></li>
+      <li><a href="#section-ask-autoplot-to-plot-specific-variables">Ask `autoplot()` to plot specific variables</a></li>
       <li><a href="#section-datasets">Datasets</a></li>
     </ul>
   </div>

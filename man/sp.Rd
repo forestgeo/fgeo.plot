@@ -2,7 +2,7 @@
 % Please edit documentation in R/sp_elev.R
 \name{sp}
 \alias{sp}
-\title{Classify a ForestGEO-like dataset as containing the variable \code{sp}.}
+\title{'Ask' \code{autoplot()} to plot the variable \code{sp}.}
 \usage{
 sp(sp)
 }
@@ -13,7 +13,7 @@ sp(sp)
 An S3 object of class 'sp'.
 }
 \description{
-Classify a ForestGEO-like dataset as containing the variable \code{sp}.
+'Ask' \code{autoplot()} to plot the variable \code{sp}.
 }
 \examples{
 class(sp(fgeo.data::luquillo_stem5_random))
@@ -23,5 +23,12 @@ class(sp(fgeo.data::luquillo_stem5_random))
 
 Other functions to construct fgeo classes: \code{\link{elev}},
   \code{\link{sp_elev}}
+
+Other functions to plot species: \code{\link{autoplot.sp_elev}},
+  \code{\link{autoplot.sp}},
+  \code{\link{autoplot_by_species.sp_elev}},
+  \code{\link{autoplot_by_species.sp}},
+  \code{\link{sp_elev}}
 }
 \concept{functions to construct fgeo classes}
+\concept{functions to plot species}

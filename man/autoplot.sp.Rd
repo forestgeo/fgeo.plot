@@ -6,10 +6,10 @@
 \usage{
 \method{autoplot}{sp}(object, fill = "black", shape = 21,
   point_size = 3, facet = TRUE, hide_color_legend = FALSE,
-  xlim = NULL, ylim = NULL, custom_theme = NULL)
+  xlim = NULL, ylim = NULL, custom_theme = NULL, ...)
 }
 \arguments{
-\item{object}{An object created with \code{sp()}.}
+\item{object}{An object created with \code{\link[=sp]{sp()}}.}
 
 \item{fill}{Character; either a colour or "sp", which maps each species to a
 different color.}
@@ -22,14 +22,13 @@ multiple maps within the area of a single graphic plot.}
 
 \item{hide_color_legend}{Logical; \code{TRUE} hides the color legend.}
 
-\item{xlim}{A vector of length 2, for example \code{c(0, 500)}, giving the
-minimum and maximum limits of the vertical and horizontal coordinates.}
-
-\item{ylim}{A vector of length 2, for example \code{c(0, 500)}, giving the
+\item{xlim, ylim}{A vector of length 2, for example \code{c(0, 500)}, giving the
 minimum and maximum limits of the vertical and horizontal coordinates.}
 
 \item{custom_theme}{A valid \code{\link[ggplot2:theme]{ggplot2::theme()}}. \code{NULL} uses the default
 theme \code{\link[=theme_default]{theme_default()}}.}
+
+\item{...}{Other arguments passed to methods.}
 }
 \value{
 A "ggplot".
@@ -72,11 +71,16 @@ autoplot(sp(tree))
 autoplot(sp(tree), point_size = 1)
 }
 \seealso{
-\code{\link[=autoplot]{autoplot()}}, \code{\link[=sp]{sp()}}, \code{\link[=add_species]{add_species()}}.
+\code{\link[=autoplot]{autoplot()}}, \code{\link[=sp]{sp()}}.
 
 Other autoplots: \code{\link{autoplot.elev}},
   \code{\link{autoplot.fgeo_habitat}},
-  \code{\link{autoplot.sp_elev}},
-  \code{\link{plot_by_species}}
+  \code{\link{autoplot.sp_elev}}
+
+Other functions to plot species: \code{\link{autoplot.sp_elev}},
+  \code{\link{autoplot_by_species.sp_elev}},
+  \code{\link{autoplot_by_species.sp}},
+  \code{\link{sp_elev}}, \code{\link{sp}}
 }
 \concept{autoplots}
+\concept{functions to plot species}

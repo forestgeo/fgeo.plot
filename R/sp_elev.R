@@ -1,9 +1,10 @@
-#' Classify a ForestGEO-like dataset as containing the variable `sp`.
+#' 'Ask' `autoplot()` to plot the variable `sp`.
 #' 
 #' @param sp A ForestGEO-like dataframe with the column `sp`.
 #' 
 #' @seealso [autoplot.sp()].
 #' @family functions to construct fgeo classes
+#' @family functions to plot species
 #' 
 #' @return An S3 object of class 'sp'.
 #' 
@@ -14,13 +15,14 @@ sp <- function(sp) {
   structure(sp, class = c("sp", class(sp)))
 }
 
-#' Classify a ForestGEO-like dataset as containing the variable `elev`.
+#' 'Ask' `autoplot()` to plot the variable `elev`.
 #' 
 #' @param elev A ForestGEO-like elevation list or its `col` dataframe -- with
 #'   the variable `elev`.
 #'   
 #' @seealso [autoplot.elev()].
 #' @family functions to construct fgeo classes
+#' @family functions to plot elevation
 #' 
 #' @return An S3 object of class 'elev'.
 #' 
@@ -33,7 +35,7 @@ elev <- function(elev) {
   structure(elev, class = c("elev", class(elev)))
 }
 
-#' Classify ForestGEO-like datasets as containing the variables `sp` and `elev`.
+#' 'Ask' `autoplot()` to plot the variables `sp` and `elev`.
 #' 
 #' @param sp A ForestGEO-like dataframe with column the column `sp`.
 #' @param elev A ForestGEO-like elevation list or its `col` dataframe -- with
@@ -41,6 +43,8 @@ elev <- function(elev) {
 #' 
 #' @seealso [autoplot.sp_elev()].
 #' @family functions to construct fgeo classes
+#' @family functions to plot elevation
+#' @family functions to plot species
 #' 
 #' @return An S3 object of class 'sp_elev'.
 #' 

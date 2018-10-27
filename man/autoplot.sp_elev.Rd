@@ -9,10 +9,10 @@
   high = "red", hide_color_legend = FALSE, bins = NULL,
   add_elevation_labels = TRUE, label_size = 3, label_color = "grey",
   xyjust = 1, fontface = "italic", xlim = NULL, ylim = NULL,
-  custom_theme = NULL)
+  custom_theme = NULL, ...)
 }
 \arguments{
-\item{object}{An object created with \code{sp_elev()}.}
+\item{object}{An object created with \code{\link[=sp_elev]{sp_elev()}}.}
 
 \item{fill}{Character; either a colour or "sp", which maps each species to a
 different color.}
@@ -39,6 +39,8 @@ low and high elevation.}
 
 \item{bins}{A number giving the number of elevation lines to map.}
 
+\item{add_elevation_labels}{Logical; \code{FALSE} hides elevation labels.}
+
 \item{label_size}{A number (\code{label_size}) or character
 string (\code{label_color} and \code{fontface}) giving the size, colour and fontface
 of the text labels for the elevation lines.}
@@ -62,6 +64,8 @@ minimum and maximum limits of the vertical and horizontal coordinates.}
 
 \item{custom_theme}{A valid \code{\link[ggplot2:theme]{ggplot2::theme()}}. \code{NULL} uses the default
 theme \code{\link[=theme_default]{theme_default()}}.}
+
+\item{...}{Other arguments passed to methods.}
 }
 \value{
 A "ggplot".
@@ -97,32 +101,29 @@ about the pipe see http://r4ds.had.co.nz/pipes.html.
 
 \examples{
 # Small dataset with a few species for quick examples
-tree <- subset(fgeo.data::luquillo_tree5_random, sp \%in\% c("PREMON", "CASARB"))
-elevation_list <- fgeo.data::luquillo_elevation
-
-autoplot(sp_elev(tree, elevation_list))
-
-# Same
-elevation_dataframe <- elevation_list$col
-autoplot(sp_elev(tree, elevation_dataframe))
-
-# Customize
-p <- autoplot(sp_elev(tree, elevation_dataframe), fill = "red")
-p
-hide_color_legend(p)
-
-# Small dataset with a few species for quick examples
 some_sp <- c("PREMON", "CASARB")
 census <- subset(fgeo.data::luquillo_tree5_random, sp \%in\% some_sp)
 elevation <- fgeo.data::luquillo_elevation
 
-autoplot(sp_elev(census, elevation))
+# Customize
+autoplot(sp_elev(census, elevation), facet = FALSE, point_size = 1)
 }
 \seealso{
 \code{\link[=autoplot]{autoplot()}}, \code{\link[=sp_elev]{sp_elev()}}.
 
 Other autoplots: \code{\link{autoplot.elev}},
   \code{\link{autoplot.fgeo_habitat}},
-  \code{\link{autoplot.sp}}, \code{\link{plot_by_species}}
+  \code{\link{autoplot.sp}}
+
+Other functions to plot elevation: \code{\link{autoplot.elev}},
+  \code{\link{autoplot_by_species.sp_elev}},
+  \code{\link{elev}}, \code{\link{sp_elev}}
+
+Other functions to plot species: \code{\link{autoplot.sp}},
+  \code{\link{autoplot_by_species.sp_elev}},
+  \code{\link{autoplot_by_species.sp}},
+  \code{\link{sp_elev}}, \code{\link{sp}}
 }
 \concept{autoplots}
+\concept{functions to plot elevation}
+\concept{functions to plot species}

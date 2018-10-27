@@ -20,8 +20,6 @@ NULL
 #' @export
 #' @examples
 #' class(theme_tag_status())
-#' census <- fgeo.data::luquillo_tree5_random
-#' plot_base_census(census) + theme_tag_status()
 theme_tag_status <- function(panel.grid.major = element_line(colour =  "black"),
                              panel.grid.minor = element_line(
                                colour =  "black",
@@ -59,8 +57,6 @@ theme_tag_status <- function(panel.grid.major = element_line(colour =  "black"),
 #' @export
 #' @examples
 #' class(theme_dbh_bubbles())
-#' census <- fgeo.data::luquillo_tree5_random
-#' plot_base_census(census) + theme_dbh_bubbles()
 theme_dbh_bubbles <- function(axis.text = element_blank(),
                               panel.background = element_rect(fill = "white"),
                               panel.grid.minor = element_blank(),
@@ -94,10 +90,9 @@ theme_dbh_bubbles <- function(axis.text = element_blank(),
 #' 
 #' @family functions to create or modify plot layers
 #' 
-#' @examples 
-#' census <- fgeo.data::luquillo_tree5_random
-#' theme_default(plot_base_census(census))
 #' @export
+#' @examples
+#' class(theme_default(ggplot2::ggplot(iris)))
 theme_default <- function(p, 
                           panel.grid.minor = element_line(linetype = "dashed"),
                           ...) {

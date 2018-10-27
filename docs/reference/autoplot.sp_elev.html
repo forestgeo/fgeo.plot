@@ -133,7 +133,7 @@ dataset of class 'sp_elev'. You can create a 'sp_elev' <code>object</code> with:
   <span class='kw'>high</span> <span class='kw'>=</span> <span class='st'>"red"</span>, <span class='kw'>hide_color_legend</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>bins</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>add_elevation_labels</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>label_size</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>label_color</span> <span class='kw'>=</span> <span class='st'>"grey"</span>,
   <span class='kw'>xyjust</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>fontface</span> <span class='kw'>=</span> <span class='st'>"italic"</span>, <span class='kw'>xlim</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>ylim</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>custom_theme</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+  <span class='kw'>custom_theme</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -186,6 +186,10 @@ low and high elevation.</p></td>
       <td><p>A number giving the number of elevation lines to map.</p></td>
     </tr>
     <tr>
+      <th>add_elevation_labels</th>
+      <td><p>Logical; <code>FALSE</code> hides elevation labels.</p></td>
+    </tr>
+    <tr>
       <th>label_size</th>
       <td><p>A number (<code>label_size</code>) or character
 string (<code>label_color</code> and <code>fontface</code>) giving the size, colour and fontface
@@ -223,6 +227,10 @@ minimum and maximum limits of the vertical and horizontal coordinates.</p></td>
       <td><p>A valid <code><a href='http://www.rdocumentation.org/packages/ggplot2/topics/theme'>ggplot2::theme()</a></code>. <code>NULL</code> uses the default
 theme <code><a href='theme_default.html'>theme_default()</a></code>.</p></td>
     </tr>
+    <tr>
+      <th>...</th>
+      <td><p>Other arguments passed to methods.</p></td>
+    </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
@@ -253,27 +261,24 @@ about the pipe see http://r4ds.had.co.nz/pipes.html.</p>
     <div class='dont-index'><p><code><a href='http://www.rdocumentation.org/packages/ggplot2/topics/autoplot'>autoplot()</a></code>, <code><a href='sp_elev.html'>sp_elev()</a></code>.</p>
 <p>Other autoplots: <code><a href='autoplot.elev.html'>autoplot.elev</a></code>,
   <code><a href='autoplot.fgeo_habitat.html'>autoplot.fgeo_habitat</a></code>,
-  <code><a href='autoplot.sp.html'>autoplot.sp</a></code>, <code><a href='plot_by_species.html'>plot_by_species</a></code></p></div>
+  <code><a href='autoplot.sp.html'>autoplot.sp</a></code></p>
+<p>Other functions to plot elevation: <code><a href='autoplot.elev.html'>autoplot.elev</a></code>,
+  <code><a href='autoplot_by_species.sp_elev.html'>autoplot_by_species.sp_elev</a></code>,
+  <code><a href='elev.html'>elev</a></code>, <code><a href='sp_elev.html'>sp_elev</a></code></p>
+<p>Other functions to plot species: <code><a href='autoplot.sp.html'>autoplot.sp</a></code>,
+  <code><a href='autoplot_by_species.sp_elev.html'>autoplot_by_species.sp_elev</a></code>,
+  <code><a href='autoplot_by_species.sp.html'>autoplot_by_species.sp</a></code>,
+  <code><a href='sp_elev.html'>sp_elev</a></code>, <code><a href='sp.html'>sp</a></code></p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># Small dataset with a few species for quick examples</span>
-<span class='no'>tree</span> <span class='kw'>&lt;-</span> <span class='fu'>subset</span>(<span class='kw pkg'>fgeo.data</span><span class='kw ns'>::</span><span class='no'><a href='http://www.rdocumentation.org/packages/fgeo.data/topics/census_luquillo'>luquillo_tree5_random</a></span>, <span class='no'>sp</span> <span class='kw'>%in%</span> <span class='fu'>c</span>(<span class='st'>"PREMON"</span>, <span class='st'>"CASARB"</span>))
-<span class='no'>elevation_list</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>fgeo.data</span><span class='kw ns'>::</span><span class='no'><a href='http://www.rdocumentation.org/packages/fgeo.data/topics/luquillo_elevation'>luquillo_elevation</a></span>
-
-<span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/autoplot'>autoplot</a></span>(<span class='fu'><a href='sp_elev.html'>sp_elev</a></span>(<span class='no'>tree</span>, <span class='no'>elevation_list</span>))</div><div class='img'><img src='autoplot.sp_elev-1.png' alt='' width='700' height='433' /></div><div class='input'>
-<span class='co'># Same</span>
-<span class='no'>elevation_dataframe</span> <span class='kw'>&lt;-</span> <span class='no'>elevation_list</span>$<span class='no'>col</span>
-<span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/autoplot'>autoplot</a></span>(<span class='fu'><a href='sp_elev.html'>sp_elev</a></span>(<span class='no'>tree</span>, <span class='no'>elevation_dataframe</span>))</div><div class='img'><img src='autoplot.sp_elev-2.png' alt='' width='700' height='433' /></div><div class='input'>
-<span class='co'># Customize</span>
-<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/autoplot'>autoplot</a></span>(<span class='fu'><a href='sp_elev.html'>sp_elev</a></span>(<span class='no'>tree</span>, <span class='no'>elevation_dataframe</span>), <span class='kw'>fill</span> <span class='kw'>=</span> <span class='st'>"red"</span>)
-<span class='no'>p</span></div><div class='img'><img src='autoplot.sp_elev-3.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='hide.html'>hide_color_legend</a></span>(<span class='no'>p</span>)</div><div class='img'><img src='autoplot.sp_elev-4.png' alt='' width='700' height='433' /></div><div class='input'>
-<span class='co'># Small dataset with a few species for quick examples</span>
 <span class='no'>some_sp</span> <span class='kw'>&lt;-</span> <span class='fu'>c</span>(<span class='st'>"PREMON"</span>, <span class='st'>"CASARB"</span>)
 <span class='no'>census</span> <span class='kw'>&lt;-</span> <span class='fu'>subset</span>(<span class='kw pkg'>fgeo.data</span><span class='kw ns'>::</span><span class='no'><a href='http://www.rdocumentation.org/packages/fgeo.data/topics/census_luquillo'>luquillo_tree5_random</a></span>, <span class='no'>sp</span> <span class='kw'>%in%</span> <span class='no'>some_sp</span>)
 <span class='no'>elevation</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>fgeo.data</span><span class='kw ns'>::</span><span class='no'><a href='http://www.rdocumentation.org/packages/fgeo.data/topics/luquillo_elevation'>luquillo_elevation</a></span>
 
-<span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/autoplot'>autoplot</a></span>(<span class='fu'><a href='sp_elev.html'>sp_elev</a></span>(<span class='no'>census</span>, <span class='no'>elevation</span>))</div><div class='img'><img src='autoplot.sp_elev-5.png' alt='' width='700' height='433' /></div></pre>
+<span class='co'># Customize</span>
+<span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/autoplot'>autoplot</a></span>(<span class='fu'><a href='sp_elev.html'>sp_elev</a></span>(<span class='no'>census</span>, <span class='no'>elevation</span>), <span class='kw'>facet</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>point_size</span> <span class='kw'>=</span> <span class='fl'>1</span>)</div><div class='img'><img src='autoplot.sp_elev-1.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
