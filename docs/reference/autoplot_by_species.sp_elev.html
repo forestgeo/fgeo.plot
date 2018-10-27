@@ -267,25 +267,8 @@ theme <code><a href='theme_default.html'>theme_default()</a></code>.</p></td>
 
     <p><code>autoplot_by_species(sp_elev(DATA-WITH-VARIABLE-sp)</code> (without elevation data)
 is equivalent to <code><a href='autoplot_by_species.html'>autoplot_by_species(sp(DATA-WITH-VARIABLE-sp))</a></code>.</p>
-    
-    <h2 class="hasAnchor" id="comparison-with-ggplot-"><a class="anchor" href="#comparison-with-ggplot-"></a>Comparison with ggplot2</h2>
-
-    
-    <p>These functions wrap functions from the <strong>ggplot2</strong> package. For more
-control you can use <strong>ggplot2</strong> directly or smaller wrappers in
-<strong>fgeo.map</strong> (see the sections See Also and Examples). <strong>ggplot2</strong>
-will give you maximum control and is your best choice if you are already
-familiar with it. The wrapper functions in <strong>fgeo.map</strong> focus on
-ForestGEO's data: For example, their names commonly mention the variable of a
-ForestGEO dataset they work with.</p>
-<p>The most important difference between <strong>ggplot2</strong> and <strong>fgeo.map</strong>
-is in the way you compose multiple functions to create complex plots. With
-<strong>ggplot2</strong> you compose multiple functions with <code>+</code>. For example,
-to apply functions <code>f()</code> then <code>g()</code> you do something like this:
-<code>f(data) + g()</code>. With <strong>fgeo.map</strong> you compose multiple functions
-in the usual way with <code>g(f(data))</code>, or in the modern way with the pipe:
-<code>f(data)</code> <code>%&gt;%</code> <code>g()</code> -- it is up to you. To learn more
-about the pipe see http://r4ds.had.co.nz/pipes.html.</p>
+<p><strong>fgeo.map</strong> wraps the <strong>ggplot2</strong> package. For more control you
+can use <strong>ggplot2</strong> directly.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
@@ -320,8 +303,6 @@ about the pipe see http://r4ds.had.co.nz/pipes.html.</p>
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#details">Details</a></li>
-
-      <li><a href="#comparison-with-ggplot-">Comparison with ggplot2</a></li>
 
       <li><a href="#see-also">See also</a></li>
       
