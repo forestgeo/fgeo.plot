@@ -2,6 +2,7 @@
 % Please edit documentation in R/autoplot_by_species.R
 \name{autoplot_by_species.sp_elev}
 \alias{autoplot_by_species.sp_elev}
+\alias{autoplot_by_species.sp}
 \title{List plots of species distribution and topography (good for pdf output).}
 \usage{
 \method{autoplot_by_species}{sp_elev}(object, species = "all",
@@ -10,14 +11,19 @@
   bins = NULL, add_elevation_labels = TRUE, label_size = 3,
   label_color = "grey", xyjust = 1, fontface = "italic",
   xlim = NULL, ylim = NULL, custom_theme = NULL, ...)
+
+\method{autoplot_by_species}{sp}(object, species = "all",
+  fill = "black", shape = 21, point_size = 3,
+  hide_color_legend = FALSE, xlim = NULL, ylim = NULL,
+  custom_theme = NULL, ...)
 }
 \arguments{
 \item{object}{An object created with \code{\link[=sp_elev]{sp_elev()}}.}
 
 \item{species}{A character vector. Each element of the vector must be the
-code for one species in the column \code{sp}. This function will produce as
-many maps as elements in this vector. The string "all" is a shortcut to
-map all unique codes in the column \code{sp}.}
+code for one species in the column \code{sp}. This function will produce as many
+maps as elements in this vector. The string "all" (default) is a shortcut
+to map all unique codes in the column \code{sp}.}
 
 \item{fill}{Character; either a colour or "sp", which maps each species to a
 different color.}
@@ -70,18 +76,28 @@ theme \code{\link[=theme_default]{theme_default()}}.}
 \item{...}{Other arguments passed to methods.}
 }
 \description{
-This function extends the functionality of \code{\link[=autoplot.sp]{autoplot.sp()}} and
-\code{\link[=autoplot.elev]{autoplot.elev()}} and returns not a single plot but a list of plots. It is
-ideal to print a .pdf file with one plot per page.
+These functions extend the functionality of \code{\link[=autoplot.sp]{autoplot.sp()}} and
+\code{\link[=autoplot.elev]{autoplot.elev()}} and return not a single plot but a list of plots. It is
+ideal to print a .pdf file with one plot per page. They automatically plot
+the variables \code{sp} and \code{elev} of a ForestGEO-like dataset of class 'sp_elev'.
+\itemize{
+\item Create a 'sp' \code{object} with:
+}
 
-Automatically plots the variables \code{sp} and \code{elev} of a ForestGEO-like dataset
-of class 'sp_elev'.
+\preformatted{    object <- sp(DATA-WITH-VARIABLE-sp)
+}
+\itemize{
+\item Create a 'sp_elev' \code{object} with:
+}
 
-\preformatted{Create a 'sp_elev' `object` with:
-object <- sp_elev(DATA-WITH-VARIABLE-sp, DATA-WITH-VARIABLE-elev)
+\preformatted{    object <- sp_elev(DATA-WITH-VARIABLE-sp, DATA-WITH-VARIABLE-elev)
 }
 
 See sections \strong{Usage} and \strong{Examples}.
+}
+\details{
+\code{autoplot_by_species(sp_elev(DATA-WITH-VARIABLE-sp)} (without elevation data)
+is equivalent to \code{autoplot_by_species(sp(DATA-WITH-VARIABLE-sp))}.
 }
 \section{Comparison with ggplot2}{
 
@@ -104,29 +120,32 @@ about the pipe see http://r4ds.had.co.nz/pipes.html.
 }
 
 \examples{
+# Species ---------------------------------------------------------------
 # Small dataset with a few species for quick examples
 some_sp <- c("PREMON", "CASARB")
 census <- subset(fgeo.data::luquillo_tree5_random, sp \%in\% some_sp)
-elevation <- fgeo.data::luquillo_elevation
 
-autoplot_by_species(sp_elev(census, elevation))
+autoplot_by_species(sp(census))
+
+# Species and or elevation ----------------------------------------------
+# Species only: Same as autoplot_by_species(sp(census))
+autoplot_by_species(sp_elev(census))
+
+# Species and elevation
+census_elevation <- sp_elev(census, fgeo.data::luquillo_elevation)
+p <- autoplot_by_species(census_elevation)
+# Showing only the first plot
+p[[1]]
 }
 \seealso{
 \code{\link[=autoplot]{autoplot()}}, \code{\link[=sp]{sp()}}, \code{\link[=sp_elev]{sp_elev()}}.
 
-Other functions to create a list of plots: \code{\link{autoplot_by_species.sp}},
-  \code{\link{plot_dbh_bubbles_by_quadrat}},
-  \code{\link{plot_tag_status_by_subquadrat}}
-
-Other functions to plot elevation: \code{\link{autoplot.elev}},
-  \code{\link{autoplot.sp_elev}}, \code{\link{elev}},
-  \code{\link{sp_elev}}
+Other functions to plot elevation: \code{\link{autoplot.sp_elev}},
+  \code{\link{elev}}, \code{\link{sp_elev}}
 
 Other functions to plot species: \code{\link{autoplot.sp_elev}},
-  \code{\link{autoplot.sp}},
-  \code{\link{autoplot_by_species.sp}},
   \code{\link{sp_elev}}, \code{\link{sp}}
 }
-\concept{functions to create a list of plots}
+\concept{functions to list plots from different ForestGEO classes}
 \concept{functions to plot elevation}
 \concept{functions to plot species}

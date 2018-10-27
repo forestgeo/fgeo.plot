@@ -58,7 +58,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">fgeo.map</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.0.0.9400</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.0.0.9401</span>
       </span>
     </div>
 
@@ -130,42 +130,32 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="autoplot.elev.html">autoplot(<i>&lt;elev&gt;</i>)</a></code> </p>
+          <p><code><a href="autoplot.sp_elev.html">autoplot(<i>&lt;sp_elev&gt;</i>)</a></code> <code><a href="autoplot.sp_elev.html">autoplot(<i>&lt;sp&gt;</i>)</a></code> <code><a href="autoplot.sp_elev.html">autoplot(<i>&lt;elev&gt;</i>)</a></code> </p>
         </td>
-        <td><p>Quick topography plot.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="autoplot.sp.html">autoplot(<i>&lt;sp&gt;</i>)</a></code> </p>
-        </td>
-        <td><p>Quick plot of species distribution.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="autoplot.sp_elev.html">autoplot(<i>&lt;sp_elev&gt;</i>)</a></code> </p>
-        </td>
-        <td><p>Quick plot of species distribution and topography.</p></td>
+        <td><p>Quick plot of species distribution and/or topography.</p></td>
       </tr>
     </tbody><tbody>
       <tr>
         <th colspan="2">
-          <h2 id="section-create-a-list-of-plots-that-can-be-easily-printed-to-a-pdf-file" class="hasAnchor"><a href="#section-create-a-list-of-plots-that-can-be-easily-printed-to-a-pdf-file" class="anchor"></a>Create a list of plots that can be easily printed to a .pdf file</h2>
-          <p class="section-desc"></p>
+          <h2 id="section-quickly-list-plots-from-different-classes-of-forestgeo-data" class="hasAnchor"><a href="#section-quickly-list-plots-from-different-classes-of-forestgeo-data" class="anchor"></a>Quickly list plots from different classes of ForestGEO data</h2>
+          <p class="section-desc"><p>The output of these functions can easily be printed to a .pdf file</p></p>
         </th>
       </tr>
       <tr>
         
         <td>
-          <p><code><a href="autoplot_by_species.sp.html">autoplot_by_species(<i>&lt;sp&gt;</i>)</a></code> </p>
-        </td>
-        <td><p>List plots of species distribution (good for pdf output).</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="autoplot_by_species.sp_elev.html">autoplot_by_species(<i>&lt;sp_elev&gt;</i>)</a></code> </p>
+          <p><code><a href="autoplot_by_species.sp_elev.html">autoplot_by_species(<i>&lt;sp_elev&gt;</i>)</a></code> <code><a href="autoplot_by_species.sp_elev.html">autoplot_by_species(<i>&lt;sp&gt;</i>)</a></code> </p>
         </td>
         <td><p>List plots of species distribution and topography (good for pdf output).</p></td>
-      </tr><tr>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-quickly-list-plots-from-forestgeo-viewfulltables" class="hasAnchor"><a href="#section-quickly-list-plots-from-forestgeo-viewfulltables" class="anchor"></a>Quickly list plots from ForestGEO ViewFullTables</h2>
+          <p class="section-desc"><p>The output of these functions can easily be printed to a .pdf file</p></p>
+        </th>
+      </tr>
+      <tr>
         
         <td>
           <p><code><a href="plot_dbh_bubbles_by_quadrat.html">plot_dbh_bubbles_by_quadrat()</a></code> </p>
@@ -181,7 +171,7 @@
     </tbody><tbody>
       <tr>
         <th colspan="2">
-          <h2 id="section-transform-data-to-autoplot-specific-variables" class="hasAnchor"><a href="#section-transform-data-to-autoplot-specific-variables" class="anchor"></a>Transform data to `autoplot()` specific variables</h2>
+          <h2 id="section-enable-autoplotting-specific-variables" class="hasAnchor"><a href="#section-enable-autoplotting-specific-variables" class="anchor"></a>Enable autoplotting specific variables</h2>
           <p class="section-desc"></p>
         </th>
       </tr>
@@ -190,19 +180,19 @@
         <td>
           <p><code><a href="elev.html">elev()</a></code> </p>
         </td>
-        <td><p>Transform data to <code>autoplot()</code> the variable <code>elev</code>.</p></td>
+        <td><p>Enable autoplotting the variable <code>elev</code>.</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="sp.html">sp()</a></code> </p>
         </td>
-        <td><p>Transform data to <code>autoplot()</code> the variable <code>sp</code>.</p></td>
+        <td><p>Enable autoplotting the variable <code>sp</code>.</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="sp_elev.html">sp_elev()</a></code> </p>
         </td>
-        <td><p>Transform data to <code>autoplot()</code> the variables <code>sp</code> and <code>elev</code>.</p></td>
+        <td><p>Enable autoplotting the variables <code>sp</code> and <code>elev</code>.</p></td>
       </tr>
     </tbody><tbody>
       <tr>
@@ -226,8 +216,9 @@
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#section-quickly-plot-different-classes-of-forestgeo-data">Quickly plot different classes of ForestGEO data</a></li>
-      <li><a href="#section-create-a-list-of-plots-that-can-be-easily-printed-to-a-pdf-file">Create a list of plots that can be easily printed to a .pdf file</a></li>
-      <li><a href="#section-transform-data-to-autoplot-specific-variables">Transform data to `autoplot()` specific variables</a></li>
+      <li><a href="#section-quickly-list-plots-from-different-classes-of-forestgeo-data">Quickly list plots from different classes of ForestGEO data</a></li>
+      <li><a href="#section-quickly-list-plots-from-forestgeo-viewfulltables">Quickly list plots from ForestGEO ViewFullTables</a></li>
+      <li><a href="#section-enable-autoplotting-specific-variables">Enable autoplotting specific variables</a></li>
       <li><a href="#section-datasets">Datasets</a></li>
     </ul>
   </div>

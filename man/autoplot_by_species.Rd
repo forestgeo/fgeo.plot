@@ -17,3 +17,4 @@ A list of 'ggplots'.
 \description{
 Generic function to create a list of autoplots by species.
 }
+\concept{generics for ForestGEO classes}

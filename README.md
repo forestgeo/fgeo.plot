@@ -34,40 +34,40 @@ article](https://goo.gl/dQKEeg).
 ``` r
 library(fgeo.map)
 
+elevation <- fgeo.data::luquillo_elevation
+
 # Small dataset with a few species for quick examples
-tree <- subset(fgeo.data::luquillo_tree5_random, sp %in% c("PREMON", "CASARB"))
-elevation_list <- fgeo.data::luquillo_elevation
+selected_species <- c("PREMON", "CASARB")
+census <- subset(fgeo.data::luquillo_tree5_random, sp %in% selected_species)
 ```
 
 ``` r
-autoplot(sp(tree))
+autoplot(sp(census))
 ```
 
 <img src="man/figures/README-unnamed-chunk-1-1.png" width="100%" style="display: block; margin: auto;" />
 
 ``` r
-autoplot(sp(tree), point_size = 2, shape = 21, fill = "darkgreen")
+autoplot(sp(census), point_size = 2, shape = 21, fill = "darkgreen")
 ```
 
 <img src="man/figures/README-unnamed-chunk-2-1.png" width="100%" style="display: block; margin: auto;" />
 
 ``` r
-# Same
-# autoplot(elev(elevation_list$col))
-autoplot(elev(elevation_list))
+autoplot(elev(elevation))
 ```
 
 <img src="man/figures/README-unnamed-chunk-3-1.png" width="100%" style="display: block; margin: auto;" />
 
 ``` r
-autoplot(sp_elev(tree, elevation_list))
+autoplot(sp_elev(census, elevation))
 ```
 
 <img src="man/figures/README-unnamed-chunk-4-1.png" width="100%" style="display: block; margin: auto;" />
 
 ``` r
 # Customize
-autoplot(sp_elev(tree, elevation_list), fill = "red", hide_color_legend = TRUE)
+autoplot(sp_elev(census, elevation), fill = "red", hide_color_legend = TRUE)
 ```
 
 <img src="man/figures/README-unnamed-chunk-5-1.png" width="100%" style="display: block; margin: auto;" />

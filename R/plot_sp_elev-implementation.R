@@ -54,7 +54,8 @@ plot_each_species <- function(census,
 
 plot_sp_elev <- function(census,
                          elevation = NULL,
-                         fill = "black",
+                         fill = "sp",
+                         hide_fill_legend = FALSE,
                          shape = 21,
                          facet = TRUE,
                          point_size = 3,
@@ -95,11 +96,15 @@ plot_sp_elev <- function(census,
     )
   }
   
-  base %>% 
+  base <- base %>% 
     add_species(census, fill = fill, shape = shape, point_size = point_size) %>%
     best_layout(facet = facet) %>% 
     axis_limits(xlim = xlim, ylim = ylim) %>%
     best_theme(custom_theme = custom_theme)
+  
+  if (hide_fill_legend) base <- hide_fill_legend(base)
+  
+  base
 }
 
 plot_elev <- function(elevation,
