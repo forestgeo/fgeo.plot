@@ -24,7 +24,6 @@ habitats <- fgeo.tool::fgeo_habitat(elev_list, gridsize = 20, n = 4)
 autoplot(habitats)
 }
 \seealso{
-Other autoplots: \code{\link{autoplot.elev}},
-  \code{\link{autoplot.sp_elev}}
+Other autoplots: \code{\link{autoplot.sp_elev}}
 }
 \concept{autoplots}

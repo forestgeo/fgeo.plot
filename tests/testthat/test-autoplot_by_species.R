@@ -19,6 +19,7 @@ test_that("output expected ggplot", {
   expect_is(autoplot_by_species(sp(census))[[1]], "ggplot")
   expect_is(autoplot_by_species(sp_elev(census, elevation_lst))[[1]], "ggplot")
   expect_is(autoplot_by_species(sp_elev(census, elevation_df))[[1]], "ggplot")
+  expect_is(autoplot_by_species(sp_elev(census))[[1]], "ggplot")
 })
 
 test_that("isn't sensitive to argument `hide_fill_legend`", {

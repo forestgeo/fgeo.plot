@@ -32,13 +32,20 @@
 
 <meta property="og:title" content="List plots of species distribution and topography (good for pdf output). — autoplot_by_species.sp_elev" />
 
-<meta property="og:description" content="This function extends the functionality of autoplot.sp() and
-autoplot.elev() and returns not a single plot but a list of plots. It is
-ideal to print a .pdf file with one plot per page.
-Automatically plots the variables sp and elev of a ForestGEO-like dataset
-of class 'sp_elev'.
-Create a 'sp_elev' `object` with:
-object &amp;lt;- sp_elev(DATA-WITH-VARIABLE-sp, DATA-WITH-VARIABLE-elev)
+<meta property="og:description" content="These functions extend the functionality of autoplot.sp() and
+autoplot.elev() and return not a single plot but a list of plots. It is
+ideal to print a .pdf file with one plot per page. They automatically plot
+the variables sp and elev of a ForestGEO-like dataset of class 'sp_elev'.
+Create a 'sp' object with:
+" />
+
+<meta property="og:description" content="    object &amp;lt;- sp(DATA-WITH-VARIABLE-sp)
+
+
+Create a 'sp_elev' object with:
+" />
+
+<meta property="og:description" content="    object &amp;lt;- sp_elev(DATA-WITH-VARIABLE-sp, DATA-WITH-VARIABLE-elev)
 " />
 
 <meta property="og:description" content="See sections Usage and Examples." />
@@ -122,13 +129,20 @@ object &amp;lt;- sp_elev(DATA-WITH-VARIABLE-sp, DATA-WITH-VARIABLE-elev)
 
     <div class="ref-description">
     
-    <p>This function extends the functionality of <code><a href='autoplot.sp_elev.html'>autoplot.sp()</a></code> and
-<code><a href='autoplot.elev.html'>autoplot.elev()</a></code> and returns not a single plot but a list of plots. It is
-ideal to print a .pdf file with one plot per page.</p>
-<p>Automatically plots the variables <code>sp</code> and <code>elev</code> of a ForestGEO-like dataset
-of class 'sp_elev'.</p>
-<pre>Create a 'sp_elev' `object` with:
-object &lt;- sp_elev(DATA-WITH-VARIABLE-sp, DATA-WITH-VARIABLE-elev)
+    <p>These functions extend the functionality of <code><a href='autoplot.sp_elev.html'>autoplot.sp()</a></code> and
+<code><a href='autoplot.sp_elev.html'>autoplot.elev()</a></code> and return not a single plot but a list of plots. It is
+ideal to print a .pdf file with one plot per page. They automatically plot
+the variables <code>sp</code> and <code>elev</code> of a ForestGEO-like dataset of class 'sp_elev'.</p><ul>
+<li><p>Create a 'sp' <code>object</code> with:</p></li>
+</ul>
+
+    <pre>    object &lt;- sp(DATA-WITH-VARIABLE-sp)
+</pre>
+<ul>
+<li><p>Create a 'sp_elev' <code>object</code> with:</p></li>
+</ul>
+
+    <pre>    object &lt;- sp_elev(DATA-WITH-VARIABLE-sp, DATA-WITH-VARIABLE-elev)
 </pre>
 
     <p>See sections <strong>Usage</strong> and <strong>Examples</strong>.</p>
@@ -141,7 +155,13 @@ object &lt;- sp_elev(DATA-WITH-VARIABLE-sp, DATA-WITH-VARIABLE-elev)
   <span class='kw'>low</span> <span class='kw'>=</span> <span class='st'>"blue"</span>, <span class='kw'>high</span> <span class='kw'>=</span> <span class='st'>"red"</span>, <span class='kw'>hide_color_legend</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
   <span class='kw'>bins</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>add_elevation_labels</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>label_size</span> <span class='kw'>=</span> <span class='fl'>3</span>,
   <span class='kw'>label_color</span> <span class='kw'>=</span> <span class='st'>"grey"</span>, <span class='kw'>xyjust</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>fontface</span> <span class='kw'>=</span> <span class='st'>"italic"</span>,
-  <span class='kw'>xlim</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>ylim</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>custom_theme</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)</pre>
+  <span class='kw'>xlim</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>ylim</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>custom_theme</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)
+
+<span class='co'># S3 method for sp</span>
+<span class='fu'><a href='autoplot_by_species.html'>autoplot_by_species</a></span>(<span class='no'>object</span>, <span class='kw'>species</span> <span class='kw'>=</span> <span class='st'>"all"</span>,
+  <span class='kw'>fill</span> <span class='kw'>=</span> <span class='st'>"black"</span>, <span class='kw'>shape</span> <span class='kw'>=</span> <span class='fl'>21</span>, <span class='kw'>point_size</span> <span class='kw'>=</span> <span class='fl'>3</span>,
+  <span class='kw'>hide_color_legend</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>xlim</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>ylim</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>custom_theme</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -153,9 +173,9 @@ object &lt;- sp_elev(DATA-WITH-VARIABLE-sp, DATA-WITH-VARIABLE-elev)
     <tr>
       <th>species</th>
       <td><p>A character vector. Each element of the vector must be the
-code for one species in the column <code>sp</code>. This function will produce as
-many maps as elements in this vector. The string "all" is a shortcut to
-map all unique codes in the column <code>sp</code>.</p></td>
+code for one species in the column <code>sp</code>. This function will produce as many
+maps as elements in this vector. The string "all" (default) is a shortcut
+to map all unique codes in the column <code>sp</code>.</p></td>
     </tr>
     <tr>
       <th>fill</th>
@@ -243,6 +263,11 @@ theme <code><a href='theme_default.html'>theme_default()</a></code>.</p></td>
     </tr>
     </table>
     
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p><code>autoplot_by_species(sp_elev(DATA-WITH-VARIABLE-sp)</code> (without elevation data)
+is equivalent to <code><a href='autoplot_by_species.html'>autoplot_by_species(sp(DATA-WITH-VARIABLE-sp))</a></code>.</p>
+    
     <h2 class="hasAnchor" id="comparison-with-ggplot-"><a class="anchor" href="#comparison-with-ggplot-"></a>Comparison with ggplot2</h2>
 
     
@@ -265,31 +290,37 @@ about the pipe see http://r4ds.had.co.nz/pipes.html.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='http://www.rdocumentation.org/packages/ggplot2/topics/autoplot'>autoplot()</a></code>, <code><a href='sp.html'>sp()</a></code>, <code><a href='sp_elev.html'>sp_elev()</a></code>.</p>
-<p>Other functions to create a list of plots: <code><a href='autoplot_by_species.sp.html'>autoplot_by_species.sp</a></code>,
-  <code><a href='plot_dbh_bubbles_by_quadrat.html'>plot_dbh_bubbles_by_quadrat</a></code>,
-  <code><a href='plot_tag_status_by_subquadrat.html'>plot_tag_status_by_subquadrat</a></code></p>
-<p>Other functions to plot elevation: <code><a href='autoplot.elev.html'>autoplot.elev</a></code>,
-  <code><a href='autoplot.sp_elev.html'>autoplot.sp_elev</a></code>, <code><a href='elev.html'>elev</a></code>,
-  <code><a href='sp_elev.html'>sp_elev</a></code></p>
+<p>Other functions to plot elevation: <code><a href='autoplot.sp_elev.html'>autoplot.sp_elev</a></code>,
+  <code><a href='elev.html'>elev</a></code>, <code><a href='sp_elev.html'>sp_elev</a></code></p>
 <p>Other functions to plot species: <code><a href='autoplot.sp_elev.html'>autoplot.sp_elev</a></code>,
-  <code><a href='autoplot_by_species.sp.html'>autoplot_by_species.sp</a></code>,
   <code><a href='sp_elev.html'>sp_elev</a></code>, <code><a href='sp.html'>sp</a></code></p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># Small dataset with a few species for quick examples</span>
+    <pre class="examples"><div class='input'><span class='co'># Species ---------------------------------------------------------------</span>
+<span class='co'># Small dataset with a few species for quick examples</span>
 <span class='no'>some_sp</span> <span class='kw'>&lt;-</span> <span class='fu'>c</span>(<span class='st'>"PREMON"</span>, <span class='st'>"CASARB"</span>)
 <span class='no'>census</span> <span class='kw'>&lt;-</span> <span class='fu'>subset</span>(<span class='kw pkg'>fgeo.data</span><span class='kw ns'>::</span><span class='no'><a href='http://www.rdocumentation.org/packages/fgeo.data/topics/census_luquillo'>luquillo_tree5_random</a></span>, <span class='no'>sp</span> <span class='kw'>%in%</span> <span class='no'>some_sp</span>)
-<span class='no'>elevation</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>fgeo.data</span><span class='kw ns'>::</span><span class='no'><a href='http://www.rdocumentation.org/packages/fgeo.data/topics/luquillo_elevation'>luquillo_elevation</a></span>
 
-<span class='fu'><a href='autoplot_by_species.html'>autoplot_by_species</a></span>(<span class='fu'><a href='sp_elev.html'>sp_elev</a></span>(<span class='no'>census</span>, <span class='no'>elevation</span>))</div><div class='output co'>#&gt; $CASARB</div><div class='img'><img src='autoplot_by_species.sp_elev-1.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; 
-#&gt; $PREMON</div><div class='img'><img src='autoplot_by_species.sp_elev-2.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; </div></pre>
+<span class='fu'><a href='autoplot_by_species.html'>autoplot_by_species</a></span>(<span class='fu'><a href='sp.html'>sp</a></span>(<span class='no'>census</span>))</div><div class='output co'>#&gt; $CASARB</div><div class='img'><img src='autoplot_by_species.sp_elev-1.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; 
+#&gt; $PREMON</div><div class='img'><img src='autoplot_by_species.sp_elev-2.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; </div><div class='input'>
+<span class='co'># Species and or elevation ----------------------------------------------</span>
+<span class='co'># Species only: Same as autoplot_by_species(sp(census))</span>
+<span class='fu'><a href='autoplot_by_species.html'>autoplot_by_species</a></span>(<span class='fu'><a href='sp_elev.html'>sp_elev</a></span>(<span class='no'>census</span>))</div><div class='output co'>#&gt; $CASARB</div><div class='img'><img src='autoplot_by_species.sp_elev-3.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; 
+#&gt; $PREMON</div><div class='img'><img src='autoplot_by_species.sp_elev-4.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; </div><div class='input'>
+<span class='co'># Species and elevation</span>
+<span class='no'>census_elevation</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='sp_elev.html'>sp_elev</a></span>(<span class='no'>census</span>, <span class='kw pkg'>fgeo.data</span><span class='kw ns'>::</span><span class='no'><a href='http://www.rdocumentation.org/packages/fgeo.data/topics/luquillo_elevation'>luquillo_elevation</a></span>)
+<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='autoplot_by_species.html'>autoplot_by_species</a></span>(<span class='no'>census_elevation</span>)
+<span class='co'># Showing only the first plot</span>
+<span class='no'>p</span><span class='kw'>[[</span><span class='fl'>1</span>]]</div><div class='img'><img src='autoplot_by_species.sp_elev-5.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       
+      <li><a href="#details">Details</a></li>
+
       <li><a href="#comparison-with-ggplot-">Comparison with ggplot2</a></li>
 
       <li><a href="#see-also">See also</a></li>

@@ -1,14 +1,18 @@
-#' Quick plot of species distribution and topography.
+#' Quick plot of species distribution and/or topography.
 #' 
 #' @description
-#' Automatically plot the `sp` and `elev` variables of a ForestGEO-like
-#' dataset of class 'sp' or 'sp_elev'. 
+#' Automatically plot the `sp` and/or `elev` variables of ForestGEO-like
+#' datasets of class 'sp' and/or 'sp_elev'. 
 #' 
-#' 
-#' * You can create an 'sp' `object` with:
+#' * You can create a 'sp' `object` with:
 #' @description
 #' ``` 
 #'     object <- sp(DATA-WITH-VARIABLE-sp)
+#' ```
+#' * You can create an 'elev' `object` with:
+#' @description
+#' ``` 
+#'     object <- elev(DATA-WITH-VARIABLE-elev)
 #' ```
 #' @description
 #' * You can create a 'sp_elev' `object` with:
@@ -27,20 +31,28 @@
 #' @template compare_ggplot2
 #' 
 #' @inheritParams autoplot.elev
-#' @param object An object created with [sp()] or [sp_elev()].
+#' @param object An object created with [sp()], [elev()], or [sp_elev()].
 #' @param fill Character; either a colour or "sp", which maps each species to a
 #'   different color.
 #' @param hide_fill_legend Logical; `TRUE` hides the fill legend.
 #' @template shape_point_size
 #' @param facet (Not available for `plot_each_species()`) Logical; `TRUE` wraps
 #'   multiple maps within the area of a single graphic plot.
-#' @param hide_color_legend Logical; `TRUE` hides the color legend.
 #' @template xlim_ylim
+#' @param contour_size A number giving the size of the contour of elevation
+#'   lines. Passed to `ggplot2::stat_contour()` (see [ggplot2::geom_contour()]).
+#' @template low_high
+#' @param bins A number giving the number of elevation lines to map.
+#' @param add_elevation_labels Logical; `FALSE` hides elevation labels.
+#' @param hide_color_legend Logical; `TRUE` hides the color legend.
+#' @template label_size_label_color_fontface
+#' @param xyjust A number to adjust the position of the text labels of the 
+#'   elevation lines.
 #' @param custom_theme A valid [ggplot2::theme()]. `NULL` uses the default
 #'   theme [theme_default()].
-#' @param ... Arguments passed to autoplot.sp_elev()
+#' @param ... Other arguments passed to methods.
 #'
-#' @seealso [autoplot()], [sp_elev()].
+#' @seealso [autoplot()], [sp()], [elev()], [sp_elev()].
 #' @family autoplots
 #' @family functions to plot elevation
 #' @family functions to plot species
@@ -56,6 +68,15 @@
 #' 
 #' # Customize
 #' autoplot(sp(tree), point_size = 1)
+#' 
+#' # Elevation -------------------------------------------------------------
+#' elevation_list <- fgeo.data::luquillo_elevation
+#' autoplot(elev(elevation_list))
+#' # Same
+#' autoplot(elev(elevation_list$col))
+#' 
+#' # Customize
+#' autoplot(elev(elevation_list$col), contour_size = 1)
 #' 
 #' # Species and elevation -------------------------------------------------
 #' # Small dataset with a few species for quick examples
@@ -109,8 +130,8 @@ autoplot.sp_elev <- function(object,
   )
 }
 
-#' @export
 #' @rdname autoplot.sp_elev
+#' @export
 autoplot.sp <- function(object, 
                         fill = "sp",
                         hide_fill_legend = FALSE,
@@ -134,49 +155,8 @@ autoplot.sp <- function(object,
   )
 }
 
-#' Quick topography plot.
-#' 
-#' @description
-#' Automatically plot the `elev` variable of a ForestGEO-like dataset of class 
-#' 'elev'. You can create an 'elev' `object` with:
-#' @description
-#' ```
-#' object <- elev(DATA-WITH-VARIABLE-elev)
-#' ```
-#' @description
-#' See sections __Usage__ and __Examples__.
-#' 
-#' @template compare_ggplot2
-#' 
-#' @inheritParams autoplot.sp_elev
-#' @param object An object created with [elev()]. 
-#' @param contour_size A number giving the size of the contour of elevation
-#'   lines. Passed to `ggplot2::stat_contour()` (see [ggplot2::geom_contour()]).
-#' @template low_high
-#' @param bins A number giving the number of elevation lines to map.
-#' @param add_elevation_labels Logical; `FALSE` hides elevation labels.
-#' @param hide_color_legend Logical; `TRUE` hides the color legend.
-#' @template label_size_label_color_fontface
-#' @param xyjust A number to adjust the position of the text labels of the 
-#'   elevation lines.
-#' @param custom_theme A valid [ggplot2::theme()]. `NULL` uses the default
-#'   theme [theme_default()].
-#'
-#' @seealso [autoplot()], [elev()].
-#' @family autoplots
-#' @family functions to plot elevation
-#'
-#' @return A "ggplot".
-#'
+#' @rdname autoplot.sp_elev
 #' @export
-#' @examples
-#' elevation_list <- fgeo.data::luquillo_elevation
-#' autoplot(elev(elevation_list))
-#' # Same
-#' autoplot(elev(elevation_list$col))
-#' 
-#' # Customize
-#' autoplot(elev(elevation_list$col), contour_size = 1)
 autoplot.elev <- function(object, 
                           contour_size = 0.5,
                           low = "blue",

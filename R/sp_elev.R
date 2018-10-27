@@ -1,4 +1,4 @@
-#' Transform data to `autoplot()` the variable `sp`.
+#' Enable autoplotting the variable `sp`.
 #' 
 #' @param sp A ForestGEO-like dataframe with the column `sp`.
 #' 
@@ -15,7 +15,7 @@ sp <- function(sp) {
   structure(sp, class = c("sp", class(sp)))
 }
 
-#' Transform data to `autoplot()` the variable `elev`.
+#' Enable autoplotting the variable `elev`.
 #' 
 #' @param elev A ForestGEO-like elevation list or its `col` dataframe -- with
 #'   the variable `elev`.
@@ -35,7 +35,7 @@ elev <- function(elev) {
   structure(elev, class = c("elev", class(elev)))
 }
 
-#' Transform data to `autoplot()` the variables `sp` and `elev`.
+#' Enable autoplotting the variables `sp` and `elev`.
 #' 
 #' @param sp A ForestGEO-like dataframe with column the column `sp`.
 #' @param elev A ForestGEO-like elevation list or its `col` dataframe -- with

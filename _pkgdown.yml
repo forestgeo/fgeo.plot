@@ -40,13 +40,21 @@ reference:
       - autoplot.fgeo_habitat
       - has_concept("autoplots")
 
-  - title: Create a list of plots that can be easily printed to a .pdf file
+  - title: Quickly list plots from different classes of ForestGEO data
+    desc: >
+      The output of these functions can easily be printed to a .pdf file
     contents:
-      - has_concept("functions to create a list of plots")
+      - has_concept("functions to list plots from different ForestGEO classes")
+
+  - title: Quickly list plots from ForestGEO ViewFullTables
+    desc: >
+      The output of these functions can easily be printed to a .pdf file
+    contents:
+      - has_concept("functions to list plots from ForestGEO ViewFullTable")
       - -matches("header_")
       - -matches("theme_")
 
-  - title: Transform data to `autoplot()` specific variables
+  - title: Enable autoplotting specific variables
     contents:
       - has_concept("functions to construct fgeo classes")
 

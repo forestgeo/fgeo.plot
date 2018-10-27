@@ -3,7 +3,8 @@
 \name{autoplot.sp_elev}
 \alias{autoplot.sp_elev}
 \alias{autoplot.sp}
-\title{Quick plot of species distribution and topography.}
+\alias{autoplot.elev}
+\title{Quick plot of species distribution and/or topography.}
 \usage{
 \method{autoplot}{sp_elev}(object, fill = "sp",
   hide_fill_legend = FALSE, shape = 21, point_size = 3,
@@ -16,9 +17,15 @@
 \method{autoplot}{sp}(object, fill = "sp", hide_fill_legend = FALSE,
   shape = 21, point_size = 3, facet = TRUE, xlim = NULL,
   ylim = NULL, custom_theme = NULL, ...)
+
+\method{autoplot}{elev}(object, contour_size = 0.5, low = "blue",
+  high = "red", hide_color_legend = FALSE, bins = NULL,
+  add_elevation_labels = TRUE, label_size = 3, label_color = "grey",
+  xyjust = 1, fontface = "italic", xlim = NULL, ylim = NULL,
+  custom_theme = NULL, ...)
 }
 \arguments{
-\item{object}{An object created with \code{\link[=sp]{sp()}} or \code{\link[=sp_elev]{sp_elev()}}.}
+\item{object}{An object created with \code{\link[=sp]{sp()}}, \code{\link[=elev]{elev()}}, or \code{\link[=sp_elev]{sp_elev()}}.}
 
 \item{fill}{Character; either a colour or "sp", which maps each species to a
 different color.}
@@ -34,10 +41,7 @@ multiple maps within the area of a single graphic plot.}
 \item{contour_size}{A number giving the size of the contour of elevation
 lines. Passed to \code{ggplot2::stat_contour()} (see \code{\link[ggplot2:geom_contour]{ggplot2::geom_contour()}}).}
 
-\item{low}{A string giving a color of the elevation lines representing
-low and high elevation.}
-
-\item{high}{A string giving a color of the elevation lines representing
+\item{low, high}{A string giving a color of the elevation lines representing
 low and high elevation.}
 
 \item{hide_color_legend}{Logical; \code{TRUE} hides the color legend.}
@@ -46,20 +50,12 @@ low and high elevation.}
 
 \item{add_elevation_labels}{Logical; \code{FALSE} hides elevation labels.}
 
-\item{label_size}{A number (\code{label_size}) or character
-string (\code{label_color} and \code{fontface}) giving the size, colour and fontface
-of the text labels for the elevation lines.}
-
-\item{label_color}{A number (\code{label_size}) or character
+\item{label_size, label_color, fontface}{A number (\code{label_size}) or character
 string (\code{label_color} and \code{fontface}) giving the size, colour and fontface
 of the text labels for the elevation lines.}
 
 \item{xyjust}{A number to adjust the position of the text labels of the
 elevation lines.}
-
-\item{fontface}{A number (\code{label_size}) or character
-string (\code{label_color} and \code{fontface}) giving the size, colour and fontface
-of the text labels for the elevation lines.}
 
 \item{xlim, ylim}{A vector of length 2, for example \code{c(0, 500)}, giving the
 minimum and maximum limits of the vertical and horizontal coordinates.}
@@ -67,19 +63,25 @@ minimum and maximum limits of the vertical and horizontal coordinates.}
 \item{custom_theme}{A valid \code{\link[ggplot2:theme]{ggplot2::theme()}}. \code{NULL} uses the default
 theme \code{\link[=theme_default]{theme_default()}}.}
 
-\item{...}{Arguments passed to autoplot.sp_elev()}
+\item{...}{Other arguments passed to methods.}
 }
 \value{
 A "ggplot".
 }
 \description{
-Automatically plot the \code{sp} and \code{elev} variables of a ForestGEO-like
-dataset of class 'sp' or 'sp_elev'.
+Automatically plot the \code{sp} and/or \code{elev} variables of ForestGEO-like
+datasets of class 'sp' and/or 'sp_elev'.
 \itemize{
-\item You can create an 'sp' \code{object} with:
+\item You can create a 'sp' \code{object} with:
 }
 
 \preformatted{    object <- sp(DATA-WITH-VARIABLE-sp)
+}
+\itemize{
+\item You can create an 'elev' \code{object} with:
+}
+
+\preformatted{    object <- elev(DATA-WITH-VARIABLE-elev)
 }
 
 \itemize{
@@ -124,6 +126,15 @@ autoplot(sp(tree))
 # Customize
 autoplot(sp(tree), point_size = 1)
 
+# Elevation -------------------------------------------------------------
+elevation_list <- fgeo.data::luquillo_elevation
+autoplot(elev(elevation_list))
+# Same
+autoplot(elev(elevation_list$col))
+
+# Customize
+autoplot(elev(elevation_list$col), contour_size = 1)
+
 # Species and elevation -------------------------------------------------
 # Small dataset with a few species for quick examples
 some_sp <- c("PREMON", "CASARB")
@@ -134,17 +145,14 @@ elevation <- fgeo.data::luquillo_elevation
 autoplot(sp_elev(census, elevation), facet = FALSE, point_size = 1)
 }
 \seealso{
-\code{\link[=autoplot]{autoplot()}}, \code{\link[=sp_elev]{sp_elev()}}.
+\code{\link[=autoplot]{autoplot()}}, \code{\link[=sp]{sp()}}, \code{\link[=elev]{elev()}}, \code{\link[=sp_elev]{sp_elev()}}.
 
-Other autoplots: \code{\link{autoplot.elev}},
-  \code{\link{autoplot.fgeo_habitat}}
+Other autoplots: \code{\link{autoplot.fgeo_habitat}}
 
-Other functions to plot elevation: \code{\link{autoplot.elev}},
-  \code{\link{autoplot_by_species.sp_elev}},
+Other functions to plot elevation: \code{\link{autoplot_by_species.sp_elev}},
   \code{\link{elev}}, \code{\link{sp_elev}}
 
 Other functions to plot species: \code{\link{autoplot_by_species.sp_elev}},
-  \code{\link{autoplot_by_species.sp}},
   \code{\link{sp_elev}}, \code{\link{sp}}
 }
 \concept{autoplots}

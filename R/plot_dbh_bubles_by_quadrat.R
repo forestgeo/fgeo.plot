@@ -11,7 +11,7 @@
 #' @param status_d A character string indicating the value of the variable 
 #'   status that corresponds to dead stems.
 #'
-#' @family functions to create a list of plots
+#' @family functions to list plots from ForestGEO ViewFullTable
 #' @family functions to plot dbh bubbles
 #'
 #' @return A list which each element is a plot of class ggplot.
