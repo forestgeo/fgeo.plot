@@ -1,5 +1,5 @@
 Package: fgeo.map
-Title: Map Species, Trees and Topography
+Title: Plot ForestGEO-Like Datasets
 Version: 0.0.0.9402
 Authors@R: 
     c(person(given = "Mauro",
@@ -9,7 +9,7 @@ Authors@R:
       person(given = "CTFS-ForestGEO",
              role = c("cph", "fnd"),
              email = "ForestGEO@si.edu"))
-Description: Map species, trees and topography.
+Description: Plot ForestGEO-like datasets.
 License: GPL-3
 URL: https://github.com/forestgeo/fgeo.map,
     https://forestgeo.github.io/fgeo.map/

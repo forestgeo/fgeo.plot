@@ -4,12 +4,12 @@ git status
 git add .
 git commit -a -m "Update site"
 
-git tag -a  0.0.0.9401 -m "Pre-release"
-git checkout  0.0.0.9401
-git push origin  0.0.0.9401
+git tag -a  VERSION-GOES-HERE -m "Pre-release"
+git checkout  VERSION-GOES-HERE
+git push origin  VERSION-GOES-HERE
 
 git checkout pre-release
-git merge 0.0.0.9401
+git merge VERSION-GOES-HERE
 git pull
 git push -u origin pre-release
 

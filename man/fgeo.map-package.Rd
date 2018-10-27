@@ -4,9 +4,9 @@
 \name{fgeo.map-package}
 \alias{fgeo.map}
 \alias{fgeo.map-package}
-\title{fgeo.map: Map Species, Trees and Topography}
+\title{fgeo.map: Plot ForestGEO-Like Datasets}
 \description{
-Map species, trees and topography.
+Plot ForestGEO-like datasets.
 }
 \seealso{
 Useful links:
