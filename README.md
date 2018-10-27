@@ -59,17 +59,11 @@ autoplot(sp_elev(tree, elevation_list))
 <img src="man/figures/README-unnamed-chunk-4-1.png" width="100%" style="display: block; margin: auto;" />
 
 ``` r
-autoplot(sp_elev(tree, elevation_list$col))
-```
-
-<img src="man/figures/README-unnamed-chunk-5-1.png" width="100%" style="display: block; margin: auto;" />
-
-``` r
 # Customize
 autoplot(sp_elev(tree, elevation_list), fill = "red", hide_color_legend = TRUE)
 ```
 
-<img src="man/figures/README-unnamed-chunk-6-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-5-1.png" width="100%" style="display: block; margin: auto;" />
 
 [Get started with
 **fgeo**](https://forestgeo.github.io/fgeo/articles/fgeo.html)

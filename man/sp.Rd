@@ -2,7 +2,7 @@
 % Please edit documentation in R/sp_elev.R
 \name{sp}
 \alias{sp}
-\title{'Ask' \code{autoplot()} to plot the variable \code{sp}.}
+\title{Transform data to \code{autoplot()} the variable \code{sp}.}
 \usage{
 sp(sp)
 }
@@ -13,7 +13,7 @@ sp(sp)
 An S3 object of class 'sp'.
 }
 \description{
-'Ask' \code{autoplot()} to plot the variable \code{sp}.
+Transform data to \code{autoplot()} the variable \code{sp}.
 }
 \examples{
 class(sp(fgeo.data::luquillo_stem5_random))

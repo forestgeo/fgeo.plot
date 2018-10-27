@@ -46,7 +46,7 @@ reference:
       - -matches("header_")
       - -matches("theme_")
 
-  - title: Ask `autoplot()` to plot specific variables
+  - title: Transform data to `autoplot()` specific variables
     contents:
       - has_concept("functions to construct fgeo classes")
 

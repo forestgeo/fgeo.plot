@@ -67,10 +67,6 @@ autoplot(sp_elev(tree, elevation_list))
 ```
 
 ```{r}
-autoplot(sp_elev(tree, elevation_list$col))
-```
-
-```{r}
 # Customize
 autoplot(sp_elev(tree, elevation_list), fill = "red", hide_color_legend = TRUE)
 ```

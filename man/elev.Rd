@@ -2,7 +2,7 @@
 % Please edit documentation in R/sp_elev.R
 \name{elev}
 \alias{elev}
-\title{'Ask' \code{autoplot()} to plot the variable \code{elev}.}
+\title{Transform data to \code{autoplot()} the variable \code{elev}.}
 \usage{
 elev(elev)
 }
@@ -14,7 +14,7 @@ the variable \code{elev}.}
 An S3 object of class 'elev'.
 }
 \description{
-'Ask' \code{autoplot()} to plot the variable \code{elev}.
+Transform data to \code{autoplot()} the variable \code{elev}.
 }
 \examples{
 class(elev(fgeo.data::luquillo_elevation))

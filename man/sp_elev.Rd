@@ -2,7 +2,7 @@
 % Please edit documentation in R/sp_elev.R
 \name{sp_elev}
 \alias{sp_elev}
-\title{'Ask' \code{autoplot()} to plot the variables \code{sp} and \code{elev}.}
+\title{Transform data to \code{autoplot()} the variables \code{sp} and \code{elev}.}
 \usage{
 sp_elev(sp, elev)
 }
@@ -16,7 +16,7 @@ the column \code{elev}.}
 An S3 object of class 'sp_elev'.
 }
 \description{
-'Ask' \code{autoplot()} to plot the variables \code{sp} and \code{elev}.
+Transform data to \code{autoplot()} the variables \code{sp} and \code{elev}.
 }
 \examples{
 species_elevation <- sp_elev(
