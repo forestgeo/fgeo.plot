@@ -13,11 +13,18 @@ status](https://www.r-pkg.org/badges/version/fgeo.map)](https://cran.r-project.o
 
 ## Installation
 
-[Install all **fgeo** packages in one
-step](https://forestgeo.github.io/fgeo/index.html#installation)
+Install the pre-release version of **fgeo.map**:
+
+    # install.packages("devtools")
+    devtools::install_github("forestgeo/fgeo.map@pre-release")
+
+Or install the development version of **fgeo.map**:
 
     # install.packages("devtools")
     devtools::install_github("forestgeo/fgeo.map")
+
+Or [install all **fgeo** packages in one
+step](https://forestgeo.github.io/fgeo/index.html#installation).
 
 For details on how to install packages from GitHub, see [this
 article](https://goo.gl/dQKEeg).

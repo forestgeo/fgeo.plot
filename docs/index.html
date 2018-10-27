@@ -84,31 +84,35 @@
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
-<p><a href="https://forestgeo.github.io/fgeo/index.html#installation">Install all <strong>fgeo</strong> packages in one step</a></p>
+<p>Install the pre-release version of <strong>fgeo.map</strong>:</p>
+<pre><code><a href="http://www.rdocumentation.org/packages/devtools/topics/reexports"># install.packages("devtools")
+devtools::install_github("forestgeo/fgeo.map@pre-release")</a></code></pre>
+<p>Or install the development version of <strong>fgeo.map</strong>:</p>
 <pre><code><a href="http://www.rdocumentation.org/packages/devtools/topics/reexports"># install.packages("devtools")
 devtools::install_github("forestgeo/fgeo.map")</a></code></pre>
+<p>Or <a href="https://forestgeo.github.io/fgeo/index.html#installation">install all <strong>fgeo</strong> packages in one step</a>.</p>
 <p>For details on how to install packages from GitHub, see <a href="https://goo.gl/dQKEeg">this article</a>.</p>
 </div>
 <div id="example" class="section level2">
 <h2 class="hasAnchor">
 <a href="#example" class="anchor"></a>Example</h2>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">library</span>(fgeo.map)</a>
-<a class="sourceLine" id="cb2-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="co"># Small dataset with a few species for quick examples</span></a>
-<a class="sourceLine" id="cb2-4" data-line-number="4">tree &lt;-<span class="st"> </span><span class="kw">subset</span>(fgeo.data<span class="op">::</span>luquillo_tree5_random, sp <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">"PREMON"</span>, <span class="st">"CASARB"</span>))</a>
-<a class="sourceLine" id="cb2-5" data-line-number="5">elevation_list &lt;-<span class="st"> </span>fgeo.data<span class="op">::</span>luquillo_elevation</a></code></pre></div>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/autoplot">autoplot</a></span>(<span class="kw"><a href="reference/sp.html">sp</a></span>(tree))</a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw">library</span>(fgeo.map)</a>
+<a class="sourceLine" id="cb3-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="co"># Small dataset with a few species for quick examples</span></a>
+<a class="sourceLine" id="cb3-4" data-line-number="4">tree &lt;-<span class="st"> </span><span class="kw">subset</span>(fgeo.data<span class="op">::</span>luquillo_tree5_random, sp <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">"PREMON"</span>, <span class="st">"CASARB"</span>))</a>
+<a class="sourceLine" id="cb3-5" data-line-number="5">elevation_list &lt;-<span class="st"> </span>fgeo.data<span class="op">::</span>luquillo_elevation</a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/autoplot">autoplot</a></span>(<span class="kw"><a href="reference/sp.html">sp</a></span>(tree))</a></code></pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-1-1.png" width="100%" style="display: block; margin: auto;"></p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/autoplot">autoplot</a></span>(<span class="kw"><a href="reference/sp.html">sp</a></span>(tree), <span class="dt">point_size =</span> <span class="dv">2</span>, <span class="dt">shape =</span> <span class="dv">21</span>, <span class="dt">fill =</span> <span class="st">"darkgreen"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/autoplot">autoplot</a></span>(<span class="kw"><a href="reference/sp.html">sp</a></span>(tree), <span class="dt">point_size =</span> <span class="dv">2</span>, <span class="dt">shape =</span> <span class="dv">21</span>, <span class="dt">fill =</span> <span class="st">"darkgreen"</span>)</a></code></pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-2-1.png" width="100%" style="display: block; margin: auto;"></p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="co"># Same</span></a>
-<a class="sourceLine" id="cb5-2" data-line-number="2"><span class="co"># autoplot(elev(elevation_list$col))</span></a>
-<a class="sourceLine" id="cb5-3" data-line-number="3"><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/autoplot">autoplot</a></span>(<span class="kw"><a href="reference/elev.html">elev</a></span>(elevation_list))</a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="co"># Same</span></a>
+<a class="sourceLine" id="cb6-2" data-line-number="2"><span class="co"># autoplot(elev(elevation_list$col))</span></a>
+<a class="sourceLine" id="cb6-3" data-line-number="3"><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/autoplot">autoplot</a></span>(<span class="kw"><a href="reference/elev.html">elev</a></span>(elevation_list))</a></code></pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-3-1.png" width="100%" style="display: block; margin: auto;"></p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/autoplot">autoplot</a></span>(<span class="kw"><a href="reference/sp_elev.html">sp_elev</a></span>(tree, elevation_list))</a></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/autoplot">autoplot</a></span>(<span class="kw"><a href="reference/sp_elev.html">sp_elev</a></span>(tree, elevation_list))</a></code></pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-4-1.png" width="100%" style="display: block; margin: auto;"></p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="co"># Customize</span></a>
-<a class="sourceLine" id="cb7-2" data-line-number="2"><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/autoplot">autoplot</a></span>(<span class="kw"><a href="reference/sp_elev.html">sp_elev</a></span>(tree, elevation_list), <span class="dt">fill =</span> <span class="st">"red"</span>, <span class="dt">hide_color_legend =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="co"># Customize</span></a>
+<a class="sourceLine" id="cb8-2" data-line-number="2"><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/autoplot">autoplot</a></span>(<span class="kw"><a href="reference/sp_elev.html">sp_elev</a></span>(tree, elevation_list), <span class="dt">fill =</span> <span class="st">"red"</span>, <span class="dt">hide_color_legend =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-5-1.png" width="100%" style="display: block; margin: auto;"></p>
 <p><a href="https://forestgeo.github.io/fgeo/articles/fgeo.html">Get started with <strong>fgeo</strong></a></p>
 </div>

@@ -1,3 +1,16 @@
+git status
+git add .
+git commit -a -m "Update site"
+
+git tag -a  0.0.0.9400 -m "Pre-release"
+git checkout  0.0.0.9400
+git push origin  0.0.0.9400
+
+git checkout -b pre-release
+git push -u origin pre-release
+
+
+
 for file in ../fgeo.base/ship.sh ../fgeo.data/ship.sh ../fgeo.demography/ship.sh ../fgeo.habitat/ship.sh ../fgeo.map/ship.sh ../fgeo.tool/ship.sh;
 do
   cp ship.sh $file;

@@ -1,6 +1,6 @@
 Package: fgeo.map
 Title: Map Species, Trees and Topography
-Version: 0.0.0.9400
+Version: 0.0.0.9401
 Authors@R: 
     c(person(given = "Mauro",
              family = "Lepore",
