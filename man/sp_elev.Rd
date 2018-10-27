@@ -4,7 +4,7 @@
 \alias{sp_elev}
 \title{Transform data to \code{autoplot()} the variables \code{sp} and \code{elev}.}
 \usage{
-sp_elev(sp, elev)
+sp_elev(sp, elev = NULL)
 }
 \arguments{
 \item{sp}{A ForestGEO-like dataframe with column the column \code{sp}.}
@@ -36,7 +36,6 @@ Other functions to plot elevation: \code{\link{autoplot.elev}},
   \code{\link{elev}}
 
 Other functions to plot species: \code{\link{autoplot.sp_elev}},
-  \code{\link{autoplot.sp}},
   \code{\link{autoplot_by_species.sp_elev}},
   \code{\link{autoplot_by_species.sp}}, \code{\link{sp}}
 }

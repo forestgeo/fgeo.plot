@@ -25,6 +25,6 @@ autoplot(habitats)
 }
 \seealso{
 Other autoplots: \code{\link{autoplot.elev}},
-  \code{\link{autoplot.sp_elev}}, \code{\link{autoplot.sp}}
+  \code{\link{autoplot.sp_elev}}
 }
 \concept{autoplots}

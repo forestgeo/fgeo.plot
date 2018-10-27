@@ -54,14 +54,16 @@ elev <- function(elev) {
 #'   fgeo.data::luquillo_stem5_random, fgeo.data::luquillo_elevation
 #' )
 #' class(species_elevation)
-sp_elev <- function(sp, elev) {
+sp_elev <- function(sp, elev = NULL) {
   validate_sp_elev(sp, elev)
   cns_elev <- list(sp = sp, elev = elev)
   structure(cns_elev, class = c("sp_elev", class(cns_elev)))
 }
 
 validate_sp_elev <- function(sp, elev) {
-  stopifnot(is.data.frame(fgeo.tool::fgeo_elevation(elev)))
+  if (!is.null(elev)) {
+    stopifnot(is.data.frame(fgeo.tool::fgeo_elevation(elev)))
+  }
   
   stopifnot(is.data.frame(sp))
   fgeo.base::check_crucial_names(sp, c("gx", "gy", "sp"))

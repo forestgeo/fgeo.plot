@@ -88,7 +88,6 @@ Other functions to create a list of plots: \code{\link{autoplot_by_species.sp_el
   \code{\link{plot_tag_status_by_subquadrat}}
 
 Other functions to plot species: \code{\link{autoplot.sp_elev}},
-  \code{\link{autoplot.sp}},
   \code{\link{autoplot_by_species.sp_elev}},
   \code{\link{sp_elev}}, \code{\link{sp}}
 }

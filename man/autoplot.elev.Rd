@@ -41,7 +41,7 @@ minimum and maximum limits of the vertical and horizontal coordinates.}
 \item{custom_theme}{A valid \code{\link[ggplot2:theme]{ggplot2::theme()}}. \code{NULL} uses the default
 theme \code{\link[=theme_default]{theme_default()}}.}
 
-\item{...}{Other arguments passed to methods.}
+\item{...}{Arguments passed to autoplot.sp_elev()}
 }
 \value{
 A "ggplot".
@@ -88,7 +88,7 @@ autoplot(elev(elevation_list$col), contour_size = 1)
 \code{\link[=autoplot]{autoplot()}}, \code{\link[=elev]{elev()}}.
 
 Other autoplots: \code{\link{autoplot.fgeo_habitat}},
-  \code{\link{autoplot.sp_elev}}, \code{\link{autoplot.sp}}
+  \code{\link{autoplot.sp_elev}}
 
 Other functions to plot elevation: \code{\link{autoplot.sp_elev}},
   \code{\link{autoplot_by_species.sp_elev}},

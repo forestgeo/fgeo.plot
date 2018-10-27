@@ -25,7 +25,6 @@ Other functions to construct fgeo classes: \code{\link{elev}},
   \code{\link{sp_elev}}
 
 Other functions to plot species: \code{\link{autoplot.sp_elev}},
-  \code{\link{autoplot.sp}},
   \code{\link{autoplot_by_species.sp_elev}},
   \code{\link{autoplot_by_species.sp}},
   \code{\link{sp_elev}}

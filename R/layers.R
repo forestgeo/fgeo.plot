@@ -120,6 +120,10 @@ hide_color_legend <- function(p) {
   p + guides(color = "none")
 }
 
+hide_fill_legend <- function(p) {
+  p + guides(fill = "none")
+}
+
 facet <- function(p, facets, ...) {
   p + facet_wrap(facets, ...)
 }

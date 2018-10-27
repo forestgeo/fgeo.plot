@@ -2,25 +2,30 @@
 % Please edit documentation in R/autoplot-sp_elev.R
 \name{autoplot.sp_elev}
 \alias{autoplot.sp_elev}
+\alias{autoplot.sp}
 \title{Quick plot of species distribution and topography.}
 \usage{
-\method{autoplot}{sp_elev}(object, fill = "black", shape = 21,
-  point_size = 3, facet = TRUE, contour_size = 0.5, low = "blue",
-  high = "red", hide_color_legend = FALSE, bins = NULL,
+\method{autoplot}{sp_elev}(object, fill = "sp",
+  hide_fill_legend = FALSE, shape = 21, point_size = 3,
+  facet = TRUE, contour_size = 0.5, low = "blue", high = "red",
+  hide_color_legend = FALSE, bins = NULL,
   add_elevation_labels = TRUE, label_size = 3, label_color = "grey",
   xyjust = 1, fontface = "italic", xlim = NULL, ylim = NULL,
   custom_theme = NULL, ...)
+
+\method{autoplot}{sp}(object, fill = "sp", hide_fill_legend = FALSE,
+  shape = 21, point_size = 3, facet = TRUE, xlim = NULL,
+  ylim = NULL, custom_theme = NULL, ...)
 }
 \arguments{
-\item{object}{An object created with \code{\link[=sp_elev]{sp_elev()}}.}
+\item{object}{An object created with \code{\link[=sp]{sp()}} or \code{\link[=sp_elev]{sp_elev()}}.}
 
 \item{fill}{Character; either a colour or "sp", which maps each species to a
 different color.}
 
-\item{shape}{A number giving point size and shape (as in
-\code{\link[graphics:points]{graphics::points()}}). Passed to \code{\link[ggplot2:geom_point]{ggplot2::geom_point()}}.}
+\item{hide_fill_legend}{Logical; \code{TRUE} hides the fill legend.}
 
-\item{point_size}{A number giving point size and shape (as in
+\item{shape, point_size}{A number giving point size and shape (as in
 \code{\link[graphics:points]{graphics::points()}}). Passed to \code{\link[ggplot2:geom_point]{ggplot2::geom_point()}}.}
 
 \item{facet}{(Not available for \code{plot_each_species()}) Logical; \code{TRUE} wraps
@@ -56,28 +61,39 @@ elevation lines.}
 string (\code{label_color} and \code{fontface}) giving the size, colour and fontface
 of the text labels for the elevation lines.}
 
-\item{xlim}{A vector of length 2, for example \code{c(0, 500)}, giving the
-minimum and maximum limits of the vertical and horizontal coordinates.}
-
-\item{ylim}{A vector of length 2, for example \code{c(0, 500)}, giving the
+\item{xlim, ylim}{A vector of length 2, for example \code{c(0, 500)}, giving the
 minimum and maximum limits of the vertical and horizontal coordinates.}
 
 \item{custom_theme}{A valid \code{\link[ggplot2:theme]{ggplot2::theme()}}. \code{NULL} uses the default
 theme \code{\link[=theme_default]{theme_default()}}.}
 
-\item{...}{Other arguments passed to methods.}
+\item{...}{Arguments passed to autoplot.sp_elev()}
 }
 \value{
 A "ggplot".
 }
 \description{
 Automatically plot the \code{sp} and \code{elev} variables of a ForestGEO-like
-dataset of class 'sp_elev'. You can create a 'sp_elev' \code{object} with:
+dataset of class 'sp' or 'sp_elev'.
+\itemize{
+\item You can create an 'sp' \code{object} with:
+}
 
-\preformatted{object <- sp_elev(DATA-WITH-VARIABLE-sp, DATA-WITH-VARIABLE-elev)
+\preformatted{    object <- sp(DATA-WITH-VARIABLE-sp)
+}
+
+\itemize{
+\item You can create a 'sp_elev' \code{object} with:
+}
+
+\preformatted{    object <- sp_elev(DATA-WITH-VARIABLE-sp, DATA-WITH-VARIABLE-elev)
 }
 
 See sections \strong{Usage} and \strong{Examples}.
+}
+\details{
+\code{autoplot(sp_elev(DATA-WITH-VARIABLE-sp)} (without elevation data) is
+equivalent to \code{autoplot(sp(DATA-WITH-VARIABLE-sp))}.
 }
 \section{Comparison with ggplot2}{
 
@@ -100,6 +116,15 @@ about the pipe see http://r4ds.had.co.nz/pipes.html.
 }
 
 \examples{
+# Species ---------------------------------------------------------------
+# Small dataset with a few species for quick examples
+tree <- subset(fgeo.data::luquillo_tree5_random, sp \%in\% c("PREMON", "CASARB"))
+autoplot(sp(tree))
+
+# Customize
+autoplot(sp(tree), point_size = 1)
+
+# Species and elevation -------------------------------------------------
 # Small dataset with a few species for quick examples
 some_sp <- c("PREMON", "CASARB")
 census <- subset(fgeo.data::luquillo_tree5_random, sp \%in\% some_sp)
@@ -112,15 +137,13 @@ autoplot(sp_elev(census, elevation), facet = FALSE, point_size = 1)
 \code{\link[=autoplot]{autoplot()}}, \code{\link[=sp_elev]{sp_elev()}}.
 
 Other autoplots: \code{\link{autoplot.elev}},
-  \code{\link{autoplot.fgeo_habitat}},
-  \code{\link{autoplot.sp}}
+  \code{\link{autoplot.fgeo_habitat}}
 
 Other functions to plot elevation: \code{\link{autoplot.elev}},
   \code{\link{autoplot_by_species.sp_elev}},
   \code{\link{elev}}, \code{\link{sp_elev}}
 
-Other functions to plot species: \code{\link{autoplot.sp}},
-  \code{\link{autoplot_by_species.sp_elev}},
+Other functions to plot species: \code{\link{autoplot_by_species.sp_elev}},
   \code{\link{autoplot_by_species.sp}},
   \code{\link{sp_elev}}, \code{\link{sp}}
 }
