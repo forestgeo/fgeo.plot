@@ -110,9 +110,3 @@ plot_dbh_bubbles_by_quadrat(alive)[[1]]
 * [Contributing](CONTRIBUTING.md).
 * [Contributor Code of Conduct](CODE_OF_CONDUCT.md).
 
-## Acknowledgments
-
-For ideas and guidance, thanks to Suzanne Lao, Stuart Davis, Shameema
-Jafferjee Esufali, David Kenfack and Anudeep Singh.
- 
- 
