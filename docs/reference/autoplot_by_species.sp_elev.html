@@ -285,17 +285,24 @@ can use <strong>ggplot2</strong> directly.</p>
 <span class='no'>some_sp</span> <span class='kw'>&lt;-</span> <span class='fu'>c</span>(<span class='st'>"PREMON"</span>, <span class='st'>"CASARB"</span>)
 <span class='no'>census</span> <span class='kw'>&lt;-</span> <span class='fu'>subset</span>(<span class='kw pkg'>fgeo.data</span><span class='kw ns'>::</span><span class='no'><a href='http://www.rdocumentation.org/packages/fgeo.data/topics/census_luquillo'>luquillo_tree5_random</a></span>, <span class='no'>sp</span> <span class='kw'>%in%</span> <span class='no'>some_sp</span>)
 
-<span class='fu'><a href='autoplot_by_species.html'>autoplot_by_species</a></span>(<span class='fu'><a href='sp.html'>sp</a></span>(<span class='no'>census</span>))</div><div class='output co'>#&gt; $CASARB</div><div class='img'><img src='autoplot_by_species.sp_elev-1.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; 
-#&gt; $PREMON</div><div class='img'><img src='autoplot_by_species.sp_elev-2.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; </div><div class='input'>
+<span class='no'>plots_list</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='autoplot_by_species.html'>autoplot_by_species</a></span>(<span class='fu'><a href='sp.html'>sp</a></span>(<span class='no'>census</span>))
+<span class='co'># Show the first plot in the list</span>
+<span class='no'>plots_list</span><span class='kw'>[[</span><span class='fl'>1</span>]]</div><div class='img'><img src='autoplot_by_species.sp_elev-1.png' alt='' width='700' height='433' /></div><div class='input'>
+</div><span class='co'># NOT RUN {</span>
+<span class='co'># Print all plots in the list</span>
+<span class='fu'>pdf</span>(<span class='st'>"map.pdf"</span>, <span class='kw'>paper</span> <span class='kw'>=</span> <span class='st'>"letter"</span>, <span class='kw'>height</span> <span class='kw'>=</span> <span class='fl'>10.5</span>, <span class='kw'>width</span> <span class='kw'>=</span> <span class='fl'>8</span>)
+<span class='no'>plots_list</span>
+<span class='fu'>dev.off</span>()
+<span class='co'># }</span><div class='input'>
 <span class='co'># Species and or elevation ----------------------------------------------</span>
 <span class='co'># Species only: Same as autoplot_by_species(sp(census))</span>
-<span class='fu'><a href='autoplot_by_species.html'>autoplot_by_species</a></span>(<span class='fu'><a href='sp_elev.html'>sp_elev</a></span>(<span class='no'>census</span>))</div><div class='output co'>#&gt; $CASARB</div><div class='img'><img src='autoplot_by_species.sp_elev-3.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; 
-#&gt; $PREMON</div><div class='img'><img src='autoplot_by_species.sp_elev-4.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; </div><div class='input'>
+<span class='fu'><a href='autoplot_by_species.html'>autoplot_by_species</a></span>(<span class='fu'><a href='sp_elev.html'>sp_elev</a></span>(<span class='no'>census</span>))</div><div class='output co'>#&gt; $CASARB</div><div class='img'><img src='autoplot_by_species.sp_elev-2.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; 
+#&gt; $PREMON</div><div class='img'><img src='autoplot_by_species.sp_elev-3.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; </div><div class='input'>
 <span class='co'># Species and elevation</span>
 <span class='no'>census_elevation</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='sp_elev.html'>sp_elev</a></span>(<span class='no'>census</span>, <span class='kw pkg'>fgeo.data</span><span class='kw ns'>::</span><span class='no'><a href='http://www.rdocumentation.org/packages/fgeo.data/topics/luquillo_elevation'>luquillo_elevation</a></span>)
 <span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='autoplot_by_species.html'>autoplot_by_species</a></span>(<span class='no'>census_elevation</span>)
 <span class='co'># Showing only the first plot</span>
-<span class='no'>p</span><span class='kw'>[[</span><span class='fl'>1</span>]]</div><div class='img'><img src='autoplot_by_species.sp_elev-5.png' alt='' width='700' height='433' /></div></pre>
+<span class='no'>p</span><span class='kw'>[[</span><span class='fl'>1</span>]]</div><div class='img'><img src='autoplot_by_species.sp_elev-4.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

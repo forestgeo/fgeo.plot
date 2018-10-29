@@ -64,21 +64,43 @@ autoplot(sp(census))
 ```
 
 ```{r}
-autoplot(sp(census), point_size = 2, shape = 21, fill = "darkgreen")
-```
-
-```{r}
-autoplot(elev(elevation))
-```
-
-```{r}
-autoplot(sp_elev(census, elevation))
-```
-
-```{r}
 # Customize
 autoplot(sp_elev(census, elevation), fill = "red", hide_color_legend = TRUE)
 ```
+
+```{r}
+ plots_list <- autoplot_by_species(sp_elev(census, elevation))
+ # Show the first plot in the list
+ plots_list[[1]]
+```
+
+Print each plots in the list on each page of a .pdf file.
+
+```R
+pdf("species-and-elevation.pdf", paper = "letter", height = 10.5, width = 8)
+plots_list
+dev.off()
+```
+
+### Plot data from ViewFullTable
+
+```{r}
+some_trees <- sample(rownames(vft_1quad), 100)
+vft <- vft_1quad[some_trees, ]
+
+# Showing first plot of the list
+plot_tag_status_by_subquadrat(vft)[[1]]
+```
+
+```{r}
+alive <- subset(vft, Status == "alive")
+
+# Showing first plot of the list
+plot_dbh_bubbles_by_quadrat(alive)[[1]]
+```
+
+
+
 
 [Get started with __fgeo__](https://forestgeo.github.io/fgeo/articles/fgeo.html)
 

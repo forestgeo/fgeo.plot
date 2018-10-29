@@ -108,7 +108,16 @@ can use \strong{ggplot2} directly.
 some_sp <- c("PREMON", "CASARB")
 census <- subset(fgeo.data::luquillo_tree5_random, sp \%in\% some_sp)
 
-autoplot_by_species(sp(census))
+plots_list <- autoplot_by_species(sp(census))
+# Show the first plot in the list
+plots_list[[1]]
+
+\dontrun{
+# Print all plots in the list
+pdf("map.pdf", paper = "letter", height = 10.5, width = 8)
+plots_list
+dev.off()
+}
 
 # Species and or elevation ----------------------------------------------
 # Species only: Same as autoplot_by_species(sp(census))

@@ -48,26 +48,50 @@ autoplot(sp(census))
 <img src="man/figures/README-unnamed-chunk-1-1.png" width="100%" style="display: block; margin: auto;" />
 
 ``` r
-autoplot(sp(census), point_size = 2, shape = 21, fill = "darkgreen")
+# Customize
+autoplot(sp_elev(census, elevation), fill = "red", hide_color_legend = TRUE)
 ```
 
 <img src="man/figures/README-unnamed-chunk-2-1.png" width="100%" style="display: block; margin: auto;" />
 
 ``` r
-autoplot(elev(elevation))
+ plots_list <- autoplot_by_species(sp_elev(census, elevation))
+ # Show the first plot in the list
+ plots_list[[1]]
 ```
 
 <img src="man/figures/README-unnamed-chunk-3-1.png" width="100%" style="display: block; margin: auto;" />
 
+Print each plots in the list on each page of a .pdf
+file.
+
 ``` r
-autoplot(sp_elev(census, elevation))
+pdf("species-and-elevation.pdf", paper = "letter", height = 10.5, width = 8)
+plots_list
+dev.off()
+```
+
+### Plot data from ViewFullTable
+
+``` r
+some_trees <- sample(rownames(vft_1quad), 100)
+vft <- vft_1quad[some_trees, ]
+
+# Showing first plot of the list
+plot_tag_status_by_subquadrat(vft)[[1]]
 ```
 
 <img src="man/figures/README-unnamed-chunk-4-1.png" width="100%" style="display: block; margin: auto;" />
 
 ``` r
-# Customize
-autoplot(sp_elev(census, elevation), fill = "red", hide_color_legend = TRUE)
+alive <- subset(vft, Status == "alive")
+
+# Showing first plot of the list
+plot_dbh_bubbles_by_quadrat(alive)[[1]]
+#> * Appending tags of dead trees with the suffix '.d'
+#> Warning: No `string` matches `dead`. Is this what you expect?
+#> * Standarizing `dbh` by the count of `dbh` measurements
+#> Warning: Removed 1 rows containing missing values (geom_point).
 ```
 
 <img src="man/figures/README-unnamed-chunk-5-1.png" width="100%" style="display: block; margin: auto;" />
