@@ -74,7 +74,7 @@ autoplot(sp_elev(census, elevation), fill = "red", hide_color_legend = TRUE)
  plots_list[[1]]
 ```
 
-Print each plots in the list on each page of a .pdf file.
+Print each plot in the list on each page of a .pdf file.
 
 ```R
 pdf("species-and-elevation.pdf", paper = "letter", height = 10.5, width = 8)
