@@ -6,6 +6,6 @@ test_that("exists", {
 })
 
 test_that("remains unchanged", {
-  expect_known_output(vft_4quad, "vft_4quad.csv")
-  expect_known_output(vft_1quad, "vft_1quad.csv")
+  expect_known_output(fgeo.map::vft_4quad, "ref-vft_4quad.csv", print = TRUE)
+  expect_known_output(fgeo.map::vft_1quad, "ref-vft_1quad.csv", print = TRUE)
 })

@@ -1,0 +1,19 @@
+# A tibble: 1,675 x 32
+    DBHID PlotName PlotID Family Genus SpeciesName Mnemonic Subspecies SpeciesID
+    <int> <chr>     <int> <chr>  <chr> <chr>       <chr>    <chr>          <int>
+ 1 384550 luquillo      1 Rubia~ Psyc~ berteroana  PSYBER   <NA>             184
+ 2 384553 luquillo      1 Urtic~ Cecr~ schreberia~ CECSCH   <NA>              74
+ 3 384554 luquillo      1 Urtic~ Cecr~ schreberia~ CECSCH   <NA>              74
+ 4 384555 luquillo      1 Arali~ Sche~ morototoni  SCHMOR   <NA>             196
+ 5 384556 luquillo      1 Salic~ Case~ arborea     CASARB   <NA>              70
+ 6 384557 luquillo      1 Laura~ Ocot~ leucoxylon  OCOLEU   <NA>             161
+ 7 384558 luquillo      1 Rubia~ Psyc~ berteroana  PSYBER   <NA>             184
+ 8 384560 luquillo      1 Melia~ Guar~ guidonia    GUAGUI   <NA>             117
+ 9 384561 luquillo      1 Laura~ Ocot~ leucoxylon  OCOLEU   <NA>             161
+10 384562 luquillo      1 Laura~ Ocot~ leucoxylon  OCOLEU   <NA>             161
+# ... with 1,665 more rows, and 23 more variables: SubspeciesID <chr>,
+#   QuadratName <chr>, QuadratID <int>, PX <dbl>, PY <dbl>, QX <dbl>, QY <dbl>,
+#   TreeID <int>, Tag <chr>, StemID <int>, StemNumber <int>, StemTag <int>,
+#   PrimaryStem <chr>, CensusID <int>, PlotCensusNumber <int>, DBH <dbl>,
+#   HOM <dbl>, ExactDate <date>, Date <int>, ListOfTSM <chr>, HighHOM <int>,
+#   LargeStem <chr>, Status <chr>

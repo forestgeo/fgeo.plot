@@ -1,0 +1,15 @@
+# A tibble: 84 x 15
+   tag   treeid quadratname    qx    qy censusid plotid status_tree subquadrat
+   <chr>  <int> <chr>       <dbl> <dbl> <chr>     <int> <chr>       <chr>     
+ 1 1020~   1789 621          2.3   1.6  4             1 alive       11        
+ 2 1020~   1800 621          4.33  2.28 4             1 alive       11        
+ 3 1020~   1802 621          4.8   2.84 4             1 dead        11        
+ 4 1020~   1805 621          0.24  5.81 4             1 alive       12        
+ 5 1020~   1806 621          3.73  5.26 4             1 alive       12        
+ 6 1020~   1811 621          3.35  5.27 4             1 alive       12        
+ 7 1020~   1812 621          4.19  5.2  4             1 alive       12        
+ 8 1020~   1814 621          1.48  9.54 4             1 alive       12        
+ 9 1020~   1822 621          2.92  6.56 4             1 alive       12        
+10 1023~   2112 621          9.52  0.61 4             1 alive       21        
+# ... with 74 more rows, and 6 more variables: page <dbl>, x1 <dbl>, x2 <dbl>,
+#   y1 <dbl>, y2 <dbl>, split <chr>

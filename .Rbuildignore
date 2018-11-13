@@ -1,3 +1,4 @@
+^inst/buildignore$
 ^ship\.sh$
 ^tmp\.sh$
 ^grep\.R$

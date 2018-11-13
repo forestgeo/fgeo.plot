@@ -16,7 +16,11 @@ test_that("output is correct", {
 
   # Underlying output-data didn't change
   reference <- map_list[[1]][["data"]]
-  expect_known_output(reference, "ref_plot_tag_status_by_subquadrat.csv")
+  expect_known_output(
+    reference, 
+    "ref-plot_tag_status_by_subquadrat.csv",
+    print = TRUE
+  )
 
   # Plots all unique tags in data
   unique_tags_in_plot_n <- map_list %>%
