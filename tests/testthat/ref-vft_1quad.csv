@@ -1,19 +1,28 @@
-# A tibble: 461 x 32
-    DBHID PlotName PlotID Family Genus SpeciesName Mnemonic Subspecies SpeciesID
-    <int> <chr>     <int> <chr>  <chr> <chr>       <chr>    <chr>          <int>
- 1 385079 luquillo      1 Areca~ Pres~ acuminata   PREMON   <NA>             182
- 2 385080 luquillo      1 Urtic~ Cecr~ schreberia~ CECSCH   <NA>              74
- 3 385081 luquillo      1 Arali~ Sche~ morototoni  SCHMOR   <NA>             196
- 4 385082 luquillo      1 Rubia~ Psyc~ brachiata   PSYBRA   <NA>             185
- 5 385085 luquillo      1 Urtic~ Cecr~ schreberia~ CECSCH   <NA>              74
- 6 385086 luquillo      1 Rubia~ Psyc~ brachiata   PSYBRA   <NA>             185
- 7 385089 luquillo      1 Elaeo~ Sloa~ berteroana  SLOBER   <NA>             198
- 8 385090 luquillo      1 Urtic~ Cecr~ schreberia~ CECSCH   <NA>              74
- 9 385091 luquillo      1 Borag~ Cord~ borinquens~ CORBOR   <NA>              93
-10 385092 luquillo      1 Rubia~ Psyc~ brachiata   PSYBRA   <NA>             185
-# ... with 451 more rows, and 23 more variables: SubspeciesID <chr>,
-#   QuadratName <chr>, QuadratID <int>, PX <dbl>, PY <dbl>, QX <dbl>, QY <dbl>,
-#   TreeID <int>, Tag <chr>, StemID <int>, StemNumber <int>, StemTag <int>,
-#   PrimaryStem <chr>, CensusID <int>, PlotCensusNumber <int>, DBH <dbl>,
-#   HOM <dbl>, ExactDate <date>, Date <int>, ListOfTSM <chr>, HighHOM <int>,
-#   LargeStem <chr>, Status <chr>
+   DBHID PlotName PlotID     Family      Genus  SpeciesName Mnemonic Subspecies
+1 385079 luquillo      1  Arecaceae   Prestoea    acuminata   PREMON       <NA>
+2 385080 luquillo      1 Urticaceae   Cecropia schreberiana   CECSCH       <NA>
+3 385081 luquillo      1 Araliaceae Schefflera   morototoni   SCHMOR       <NA>
+4 385082 luquillo      1  Rubiaceae Psychotria    brachiata   PSYBRA       <NA>
+5 385085 luquillo      1 Urticaceae   Cecropia schreberiana   CECSCH       <NA>
+6 385086 luquillo      1  Rubiaceae Psychotria    brachiata   PSYBRA       <NA>
+  SpeciesID SubspeciesID QuadratName QuadratID     PX     PY   QX   QY TreeID
+1       182         <NA>         621       326 102.30 401.60 2.30 1.60   1789
+2        74         <NA>         621       326 104.33 402.28 4.33 2.28   1800
+3       196         <NA>         621       326 104.80 402.84 4.80 2.84   1802
+4       185         <NA>         621       326 100.24 405.81 0.24 5.81   1805
+5        74         <NA>         621       326 103.73 405.26 3.73 5.26   1806
+6       185         <NA>         621       326 103.35 405.27 3.35 5.27   1811
+     Tag StemID StemNumber StemTag PrimaryStem CensusID PlotCensusNumber DBH
+1 102015   2179          0  102015        <NA>        4                4 109
+2 102025   2190          0  102025        <NA>        4                4 246
+3 102031   2192          0  102031        <NA>        4                4  NA
+4 102034   2195          0  102034        <NA>        4                4  NA
+5 102039   2200          0  102039        <NA>        4                4 149
+6 102043   2205          0  102043        <NA>        4                4  NA
+   HOM  ExactDate  Date  ListOfTSM HighHOM LargeStem Status
+1 1.30 2006-11-16 17121     MAIN;A       1      <NA>  alive
+2 1.75 2006-11-16 17121     MAIN;A       1      <NA>  alive
+3   NA 2006-11-16 17121 MAIN;DEADT       1      <NA>   dead
+4   NA 2006-11-16 17121 MAIN;DEADT       1      <NA>   dead
+5 1.40 2006-11-16 17121     MAIN;A       1      <NA>  alive
+6   NA 2006-11-16 17121 MAIN;DEADT       1      <NA>   dead

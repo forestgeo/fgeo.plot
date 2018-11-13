@@ -6,6 +6,14 @@ test_that("exists", {
 })
 
 test_that("remains unchanged", {
-  expect_known_output(fgeo.map::vft_4quad, "ref-vft_4quad.csv", print = TRUE)
-  expect_known_output(fgeo.map::vft_1quad, "ref-vft_1quad.csv", print = TRUE)
+  expect_known_output(
+    head(as.data.frame(fgeo.map::vft_4quad)), 
+    "ref-vft_4quad.csv", 
+    print = TRUE
+  )
+  expect_known_output(
+    head(as.data.frame(fgeo.map::vft_1quad)), 
+    "ref-vft_1quad.csv", 
+    print = TRUE
+  )
 })
