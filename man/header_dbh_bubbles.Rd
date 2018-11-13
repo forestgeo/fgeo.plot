@@ -20,3 +20,4 @@ Other functions to plot dbh bubbles: \code{\link{plot_dbh_bubbles_by_quadrat}},
   \code{\link{theme_dbh_bubbles}}
 }
 \concept{functions to plot dbh bubbles}
+\keyword{internal}

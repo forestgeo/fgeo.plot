@@ -18,3 +18,4 @@ A list of 'ggplots'.
 Generic function to create a list of autoplots by species.
 }
 \concept{generics for ForestGEO classes}
+\keyword{internal}

@@ -140,9 +140,11 @@ autoplot_by_species.sp <- function(object,
 #' @param ... Other arguments passed to methods.
 #' 
 #' @family generics for ForestGEO classes
+#' 
 #'
 #' @return A list of 'ggplots'.
 #' @export
+#' @keywords internal
 autoplot_by_species <- function(object, ...) {
   UseMethod("autoplot_by_species")
 }

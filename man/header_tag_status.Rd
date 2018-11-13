@@ -17,3 +17,4 @@ Other functions to plot tag status: \code{\link{plot_tag_status_by_subquadrat}},
   \code{\link{theme_tag_status}}
 }
 \concept{functions to plot tag status}
+\keyword{internal}

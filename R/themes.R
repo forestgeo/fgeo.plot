@@ -9,6 +9,7 @@
 #' @seealso [ggplot2::theme()].
 #' 
 #' @return A [ggplot2::theme()].
+#' @keywords internal
 #' @name themes
 NULL
 
@@ -16,6 +17,7 @@ NULL
 #' 
 #' @inheritParams ggplot2::theme
 #' @family functions to plot tag status
+#' @keywords internal
 #' 
 #' @export
 #' @examples
@@ -53,6 +55,7 @@ theme_tag_status <- function(panel.grid.major = element_line(colour =  "black"),
 #' 
 #' @inheritParams ggplot2::theme
 #' @family functions to plot dbh bubbles
+#' @keywords internal
 #' 
 #' @export
 #' @examples
@@ -89,6 +92,7 @@ theme_dbh_bubbles <- function(axis.text = element_blank(),
 #' @template p
 #' 
 #' @family functions to create or modify plot layers
+#' @keywords internal
 #' 
 #' @export
 #' @examples

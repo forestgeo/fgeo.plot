@@ -70,3 +70,4 @@ Other functions to plot dbh bubbles: \code{\link{header_dbh_bubbles}},
   \code{\link{plot_dbh_bubbles_by_quadrat}}
 }
 \concept{functions to plot dbh bubbles}
+\keyword{internal}

@@ -76,3 +76,4 @@ Other functions to plot tag status: \code{\link{header_tag_status}},
   \code{\link{plot_tag_status_by_subquadrat}}
 }
 \concept{functions to plot tag status}
+\keyword{internal}

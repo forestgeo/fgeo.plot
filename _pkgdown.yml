@@ -51,8 +51,6 @@ reference:
       The output of these functions can easily be printed to a .pdf file
     contents:
       - has_concept("functions to list plots from ForestGEO ViewFullTable")
-      - -matches("header_")
-      - -matches("theme_")
 
   - title: Enable autoplotting specific variables
     contents:

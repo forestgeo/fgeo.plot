@@ -17,3 +17,4 @@ theme by changing the default arguments and also by passing more arguments to
 \seealso{
 \code{\link[ggplot2:theme]{ggplot2::theme()}}.
 }
+\keyword{internal}
