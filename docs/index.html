@@ -103,38 +103,9 @@ devtools::install_github("forestgeo/fgeo.map")</a></code></pre>
 <a class="sourceLine" id="cb3-5" data-line-number="5"><span class="co"># Small dataset with a few species for quick examples</span></a>
 <a class="sourceLine" id="cb3-6" data-line-number="6">selected_species &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">"PREMON"</span>, <span class="st">"CASARB"</span>)</a>
 <a class="sourceLine" id="cb3-7" data-line-number="7">census &lt;-<span class="st"> </span><span class="kw">subset</span>(fgeo.data<span class="op">::</span>luquillo_tree5_random, sp <span class="op">%in%</span><span class="st"> </span>selected_species)</a></code></pre></div>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw"><a href="ggplot2.tidyverse.org/reference/autoplot.html">autoplot</a></span>(<span class="kw"><a href="reference/sp.html">sp</a></span>(census))</a></code></pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-1-1.png" width="100%" style="display: block; margin: auto;"></p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="co"># Customize</span></a>
-<a class="sourceLine" id="cb5-2" data-line-number="2"><span class="kw"><a href="ggplot2.tidyverse.org/reference/autoplot.html">autoplot</a></span>(<span class="kw"><a href="reference/sp_elev.html">sp_elev</a></span>(census, elevation), <span class="dt">fill =</span> <span class="st">"red"</span>, <span class="dt">hide_color_legend =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-2-1.png" width="100%" style="display: block; margin: auto;"></p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"> plots_list &lt;-<span class="st"> </span><span class="kw"><a href="reference/autoplot_by_species.html">autoplot_by_species</a></span>(<span class="kw"><a href="reference/sp_elev.html">sp_elev</a></span>(census, elevation))</a>
-<a class="sourceLine" id="cb6-2" data-line-number="2"> <span class="co"># Show the first plot in the list</span></a>
-<a class="sourceLine" id="cb6-3" data-line-number="3"> plots_list[[<span class="dv">1</span>]]</a></code></pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-3-1.png" width="100%" style="display: block; margin: auto;"></p>
-<p>Print each plots in the list on each page of a .pdf file.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw">pdf</span>(<span class="st">"species-and-elevation.pdf"</span>, <span class="dt">paper =</span> <span class="st">"letter"</span>, <span class="dt">height =</span> <span class="fl">10.5</span>, <span class="dt">width =</span> <span class="dv">8</span>)</a>
-<a class="sourceLine" id="cb7-2" data-line-number="2">plots_list</a>
-<a class="sourceLine" id="cb7-3" data-line-number="3"><span class="kw">dev.off</span>()</a></code></pre></div>
-<div id="plot-data-from-viewfulltable" class="section level3">
-<h3 class="hasAnchor">
-<a href="#plot-data-from-viewfulltable" class="anchor"></a>Plot data from ViewFullTable</h3>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">some_trees &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="kw">rownames</span>(vft_1quad), <span class="dv">100</span>)</a>
-<a class="sourceLine" id="cb8-2" data-line-number="2">vft &lt;-<span class="st"> </span>vft_1quad[some_trees, ]</a>
-<a class="sourceLine" id="cb8-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb8-4" data-line-number="4"><span class="co"># Showing first plot of the list</span></a>
-<a class="sourceLine" id="cb8-5" data-line-number="5"><span class="kw"><a href="reference/plot_tag_status_by_subquadrat.html">plot_tag_status_by_subquadrat</a></span>(vft)[[<span class="dv">1</span>]]</a></code></pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-4-1.png" width="100%" style="display: block; margin: auto;"></p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1">alive &lt;-<span class="st"> </span><span class="kw">subset</span>(vft, Status <span class="op">==</span><span class="st"> "alive"</span>)</a>
-<a class="sourceLine" id="cb9-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb9-3" data-line-number="3"><span class="co"># Showing first plot of the list</span></a>
-<a class="sourceLine" id="cb9-4" data-line-number="4"><span class="kw"><a href="reference/plot_dbh_bubbles_by_quadrat.html">plot_dbh_bubbles_by_quadrat</a></span>(alive)[[<span class="dv">1</span>]]</a>
-<a class="sourceLine" id="cb9-5" data-line-number="5"><span class="co">#&gt; * Appending tags of dead trees with the suffix '.d'</span></a>
-<a class="sourceLine" id="cb9-6" data-line-number="6"><span class="co">#&gt; Warning: No `string` matches `dead`. Is this what you expect?</span></a>
-<a class="sourceLine" id="cb9-7" data-line-number="7"><span class="co">#&gt; * Standarizing `dbh` by the count of `dbh` measurements</span></a></code></pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-5-1.png" width="100%" style="display: block; margin: auto;"></p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw"><a href="ggplot2.tidyverse.org/reference/autoplot.html">autoplot</a></span>(<span class="kw"><a href="reference/sp_elev.html">sp_elev</a></span>(census, elevation), <span class="dt">fill =</span> <span class="st">"red"</span>, <span class="dt">hide_color_legend =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<p><img src="reference/figures/README-unnamed-chunk-1-1.png" width="75%" style="display: block; margin: auto;"></p>
 <p><a href="https://forestgeo.github.io/fgeo/articles/fgeo.html">Get started with <strong>fgeo</strong></a></p>
-</div>
 </div>
 <div id="information" class="section level2">
 <h2 class="hasAnchor">
