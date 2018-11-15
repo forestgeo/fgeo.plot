@@ -1,7 +1,7 @@
 library(dplyr)
 library(purrr)
 
-vft_1quad <- fgeo.map::vft_1quad
+vft_1quad <- vft_1quad()
 vft_4quad <- fgeo.x::vft_4quad
 
 map_list <- plot_tag_status_by_subquadrat(vft_1quad)
@@ -21,7 +21,8 @@ test_that("output is correct", {
   expect_known_output(
     head(as.data.frame(reference)), 
     "ref-plot_tag_status_by_subquadrat.csv",
-    print = TRUE
+    print = TRUE,
+    overwrite = FALSE
   )
 
   # Plots all unique tags in data

@@ -63,7 +63,7 @@
 #' # Filtering the data to map -----------------------------------------------
 #' # Filter the data you want. Using a small ViewFullTable for example:
 #' # (see `?vft_1quad`)
-#' small_vft <- dplyr::sample_n(vft_1quad, 50)
+#' small_vft <- dplyr::sample_n(vft_1quad(), 50)
 #' want <- filter(small_vft, CensusID == 4, PlotID == 1)
 #' p <- plot_tag_status_by_subquadrat(want)
 #' # Visualizing only the first plot

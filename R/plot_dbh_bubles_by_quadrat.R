@@ -22,7 +22,7 @@
 #' library(fgeo.tool)
 #'
 #' # Using a small viewFullTable for example (see ?vft_1quad)
-#' small_vft <- sample_n(vft_1quad, 50)
+#' small_vft <- sample_n(vft_1quad(), 50)
 #' 
 #' # Filter the data you want. For example:
 #' want <- filter(small_vft, CensusID == 4, PlotID == 1)

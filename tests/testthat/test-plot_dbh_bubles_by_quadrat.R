@@ -1,6 +1,6 @@
 context("plot_dbh_bubbles_by_quadrat")
 
-vft_1quad_sub <- dplyr::sample_n(vft_1quad, 5)
+vft_1quad_sub <- dplyr::sample_n(vft_1quad(), 5)
 
 test_that("passes with default arguments", {
   # Warns because dataset has no dead trees
