@@ -20,7 +20,7 @@ Imports:
     dplyr,
     fgeo.base,
     fgeo.tool,
-    fgeo.x (>= 0.0.0.9000),
+    fgeo.x,
     ggplot2,
     ggrepel,
     glue,
