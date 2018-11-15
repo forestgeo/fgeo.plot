@@ -103,14 +103,14 @@ can use \strong{ggplot2} directly.
 \examples{
 # Species ---------------------------------------------------------------
 # Small dataset with a few species for quick examples
-tree <- subset(fgeo.data::luquillo_tree5_random, sp \%in\% c("PREMON", "CASARB"))
+tree <- subset(fgeo.x::tree5, sp \%in\% c("PREMON", "CASARB"))
 autoplot(sp(tree))
 
 # Customize
 autoplot(sp(tree), point_size = 1)
 
 # Elevation -------------------------------------------------------------
-elevation_list <- fgeo.data::luquillo_elevation
+elevation_list <- fgeo.x::elevation
 autoplot(elev(elevation_list))
 # Same
 autoplot(elev(elevation_list$col))
@@ -121,8 +121,8 @@ autoplot(elev(elevation_list$col), contour_size = 1)
 # Species and elevation -------------------------------------------------
 # Small dataset with a few species for quick examples
 some_sp <- c("PREMON", "CASARB")
-census <- subset(fgeo.data::luquillo_tree5_random, sp \%in\% some_sp)
-elevation <- fgeo.data::luquillo_elevation
+census <- subset(fgeo.x::tree5, sp \%in\% some_sp)
+elevation <- fgeo.x::elevation
 
 # Customize
 autoplot(sp_elev(census, elevation), facet = FALSE, point_size = 1)

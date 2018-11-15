@@ -4,7 +4,7 @@ describe("outputs an object of class ggplot", {
   skip_if_not_installed("fgeo.tool")
   library(fgeo.tool)
 
-  elev_list <- fgeo.data::luquillo_elevation
+  elev_list <- fgeo.x::elevation
   habitats <- fgeo_habitat(elev_list, gridsize = 20, n = 4)
   p <- autoplot(habitats)
   

@@ -16,7 +16,7 @@ An S3 object of class 'sp'.
 Enable autoplotting the variable \code{sp}.
 }
 \examples{
-class(sp(fgeo.data::luquillo_stem5_random))
+class(sp(fgeo.x::stem5))
 }
 \seealso{
 \code{\link[=autoplot.sp]{autoplot.sp()}}.

@@ -20,7 +20,7 @@ Enable autoplotting the variables \code{sp} and \code{elev}.
 }
 \examples{
 species_elevation <- sp_elev(
-  fgeo.data::luquillo_stem5_random, fgeo.data::luquillo_elevation
+  fgeo.x::stem5, fgeo.x::elevation
 )
 class(species_elevation)
 }

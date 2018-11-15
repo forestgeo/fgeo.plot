@@ -3,20 +3,19 @@
 \docType{data}
 \name{vft_1quad}
 \alias{vft_1quad}
-\alias{vft_4quad}
 \title{Small ViewFullTables from Luquillo.}
-\format{An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 1675 rows and 32 columns.}
+\format{An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 461 rows and 32 columns.}
 \usage{
-vft_4quad
-
 vft_1quad
 }
 \description{
-ViewFullTable data from Luquillo including 1 and 4 quadrats from a single
-census. Adapted from \link[fgeo.data:luquillo_vft_4quad]{fgeo.data::luquillo_vft_4quad}.
+One quadrat of a ViewFullTable from Luquillo.
 }
 \examples{
 str(vft_1quad)
+}
+\seealso{
+\link[fgeo.x:vft_4quad]{fgeo.x::vft_4quad}
 }
 \concept{datasets}
 \keyword{datasets}

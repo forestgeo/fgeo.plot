@@ -106,7 +106,7 @@ can use \strong{ggplot2} directly.
 # Species ---------------------------------------------------------------
 # Small dataset with a few species for quick examples
 some_sp <- c("PREMON", "CASARB")
-census <- subset(fgeo.data::luquillo_tree5_random, sp \%in\% some_sp)
+census <- subset(fgeo.x::tree5, sp \%in\% some_sp)
 
 plots_list <- autoplot_by_species(sp(census))
 # Show the first plot in the list
@@ -124,7 +124,7 @@ dev.off()
 autoplot_by_species(sp_elev(census))
 
 # Species and elevation
-census_elevation <- sp_elev(census, fgeo.data::luquillo_elevation)
+census_elevation <- sp_elev(census, fgeo.x::elevation)
 p <- autoplot_by_species(census_elevation)
 # Showing only the first plot
 p[[1]]

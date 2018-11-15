@@ -57,8 +57,8 @@
 #' @export
 #'
 #' @examples
-#' library(fgeo.map)
 #' library(fgeo.tool)
+#' vft_4quad <- fgeo.x::vft_4quad
 #' 
 #' # Filtering the data to map -----------------------------------------------
 #' # Filter the data you want. Using a small ViewFullTable for example:

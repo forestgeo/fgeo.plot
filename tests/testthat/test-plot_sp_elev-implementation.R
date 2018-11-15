@@ -1,5 +1,5 @@
-census <- fgeo.tool::pick_top(fgeo.data::luquillo_stem5_random, sp, 2)
-elevation <- fgeo.data::luquillo_elevation$col
+census <- fgeo.tool::pick_top(fgeo.x::stem5, sp, 2)
+elevation <- fgeo.x::elevation$col
 
 context("plot_each_species")
 
@@ -88,7 +88,7 @@ test_that("errs with wrong inputs", {
 context("plot_base_elevation")
 
 test_that("works with raw elevation data", {
-  elevation_ls <- fgeo.data::luquillo_elevation
+  elevation_ls <- fgeo.x::elevation
   expect_silent(plot_base_elevation(elevation_ls))
   expect_silent(plot_base_elevation(elevation_ls))
 })

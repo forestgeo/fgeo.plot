@@ -10,7 +10,7 @@
 #' 
 #' @export
 #' @examples
-#' class(sp(fgeo.data::luquillo_stem5_random))
+#' class(sp(fgeo.x::stem5))
 sp <- function(sp) {
   structure(sp, class = c("sp", class(sp)))
 }
@@ -28,9 +28,9 @@ sp <- function(sp) {
 #' 
 #' @export
 #' @examples
-#' class(elev(fgeo.data::luquillo_elevation))
+#' class(elev(fgeo.x::elevation))
 #' # Same
-#' class(elev(fgeo.data::luquillo_elevation$col))
+#' class(elev(fgeo.x::elevation$col))
 elev <- function(elev) {
   structure(elev, class = c("elev", class(elev)))
 }
@@ -51,7 +51,7 @@ elev <- function(elev) {
 #' @export
 #' @examples
 #' species_elevation <- sp_elev(
-#'   fgeo.data::luquillo_stem5_random, fgeo.data::luquillo_elevation
+#'   fgeo.x::stem5, fgeo.x::elevation
 #' )
 #' class(species_elevation)
 sp_elev <- function(sp, elev = NULL) {

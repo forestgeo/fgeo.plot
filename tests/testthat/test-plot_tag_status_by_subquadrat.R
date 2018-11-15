@@ -1,12 +1,14 @@
 library(dplyr)
 library(purrr)
 
-context("plot_tag_status_by_subquadrat")
+vft_1quad <- fgeo.map::vft_1quad
+vft_4quad <- fgeo.x::vft_4quad
 
-vft_1quad <- fgeo.data::luquillo_vft_4quad %>% 
-  fgeo.tool::pick_top(QuadratName) %>% 
-  fgeo.tool::pick_top(CensusID)
 map_list <- plot_tag_status_by_subquadrat(vft_1quad)
+
+
+
+context("plot_tag_status_by_subquadrat")
 
 # Outputs -----------------------------------------------------------------
 
@@ -194,10 +196,16 @@ test_that("wrong inputs get noticed", {
 
 test_that("page labels can be changed", {
   plots <- 1:2
-  maps <- plot_tag_status_by_subquadrat(vft_4quad,
-    bl = "a", br = "b", tr = "c", tl = "d",
-    show_page = FALSE
-  )[plots]
+  
+  suppressWarnings({
+    # Warns: "Likely you want only the last 2 censuses"
+    maps <- plot_tag_status_by_subquadrat(vft_4quad,
+      bl = "a", br = "b", tr = "c", tl = "d",
+      show_page = FALSE
+    )[plots]
+  })
+  
+  
   page <- unique(purrr::map_df(maps, "data")$page)
   expect_equal(page, letters[plots])
 })
@@ -227,7 +235,11 @@ test_that("outputs quadrats in order, even if QuadratName is numeric (#33)", {
       )
     )
   
-  good <- plot_tag_status_by_subquadrat(vft_toy)
+  suppressWarnings({
+    # Warns: "Likely you want only the last 2 censuses"
+    good <- plot_tag_status_by_subquadrat(vft_toy)
+  })
+  
   expect_equal(names(good), expect_nms)
   
   not_chr <- expect_warning(

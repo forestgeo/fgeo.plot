@@ -17,9 +17,9 @@ An S3 object of class 'elev'.
 Enable autoplotting the variable \code{elev}.
 }
 \examples{
-class(elev(fgeo.data::luquillo_elevation))
+class(elev(fgeo.x::elevation))
 # Same
-class(elev(fgeo.data::luquillo_elevation$col))
+class(elev(fgeo.x::elevation$col))
 }
 \seealso{
 \code{\link[=autoplot.elev]{autoplot.elev()}}.

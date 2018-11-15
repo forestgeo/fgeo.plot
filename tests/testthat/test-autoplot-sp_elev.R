@@ -2,8 +2,8 @@ context("autoplot-sp_elev")
 
 # Small dataset with a few species for quick examples
 some_sp <- c("PREMON", "CASARB")
-census <- subset(fgeo.data::luquillo_tree5_random, sp %in% some_sp)
-elevation_lst <- fgeo.data::luquillo_elevation
+census <- subset(fgeo.x::tree5, sp %in% some_sp)
+elevation_lst <- fgeo.x::elevation
 elevation_df <- elevation_lst$col
 
 test_that("fails with informative message", {

@@ -18,7 +18,7 @@ An object of class "ggplot".
 Quick habitat plot.
 }
 \examples{
-elev_list <- fgeo.data::luquillo_elevation
+elev_list <- fgeo.x::elevation
 habitats <- fgeo.tool::fgeo_habitat(elev_list, gridsize = 20, n = 4)
 
 autoplot(habitats)
