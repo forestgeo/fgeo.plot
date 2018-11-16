@@ -1,10 +1,5 @@
-^inst/buildignore$
-^ship\.sh$
-^tmp\.sh$
-^grep\.R$
+^\.buildignore$
 ^appveyor\.yml$
-^.*\.pdf$
-^.*\.rds$
 ^.*\.Rproj$
 ^\.Rproj\.user$
 ^\.travis\.yml$
@@ -12,11 +7,7 @@
 ^codecov\.yml$
 ^data-raw$
 ^docs$
-^inst/app$
-^inst/tutorials$
-^issues$
 ^LICENSE\.md$
 ^README\.Rmd$
-^tmp\.R$
 ^man-roxygen$
 ^\.github$
