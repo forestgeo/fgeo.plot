@@ -66,7 +66,7 @@ validate_sp_elev <- function(sp, elev) {
   }
   
   stopifnot(is.data.frame(sp))
-  fgeo.base::check_crucial_names(sp, c("gx", "gy", "sp"))
+  check_crucial_names(sp, c("gx", "gy", "sp"))
 }
 
 #' @export

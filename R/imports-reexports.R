@@ -1,7 +1,7 @@
 # Import external functions and avoid R CMD check note --------------------
 
 #' @importFrom dplyr group_by ungroup mutate select
-#' @importFrom fgeo.base is_multiple flag_if check_crucial_names
+#' @importFrom fgeo.tool is_multiple flag_if check_crucial_names
 #' @importFrom ggrepel geom_text_repel
 #' @importFrom glue glue
 #' @importFrom rlang abort warn inform
