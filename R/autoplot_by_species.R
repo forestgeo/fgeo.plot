@@ -35,11 +35,7 @@
 #' @param ... Other arguments passed to methods.
 #' 
 #' @seealso [autoplot()], [sp()], [sp_elev()].
-#' @family functions to list plots from different ForestGEO classes
-#' @family functions to plot elevation
-#' @family functions to plot species
 #' 
-#' @export
 #' @examples
 #' # Species ---------------------------------------------------------------
 #' # Small dataset with a few species for quick examples
@@ -66,6 +62,12 @@
 #' p <- autoplot_by_species(census_elevation)
 #' # Showing only the first plot
 #' p[[1]]
+#' 
+#' @family plot functions
+#' @family functions to list plots from different ForestGEO classes
+#' @family functions to plot elevation
+#' @family functions to plot species
+#' @export
 autoplot_by_species.sp_elev <- function(object, 
                                         species = "all",
                                         fill = "black",

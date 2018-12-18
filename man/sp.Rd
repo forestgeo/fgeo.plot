@@ -17,6 +17,7 @@ Enable autoplotting the variable \code{sp}.
 }
 \examples{
 class(sp(fgeo.x::stem5))
+
 }
 \seealso{
 \code{\link[=autoplot.sp]{autoplot.sp()}}.

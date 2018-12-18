@@ -70,6 +70,7 @@ Theme for \code{plot_base_census()}.
 }
 \examples{
 class(theme_tag_status())
+
 }
 \seealso{
 Other functions to plot tag status: \code{\link{header_tag_status}},

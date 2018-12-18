@@ -88,8 +88,8 @@ add_elevation_labels <- function(p,
 max_elev <- function(p) {
   built <- ggplot_build(p)$data[[1]]
   elev <-  mutate(built, gx = .data$x, gy = .data$y)
-  elev_x <- elev[elev$gx == max0(elev$gx), ]
-  elev_y <- elev[elev$gy == max0(elev$gy), ]
+  elev_x <- elev[elev$gx == maximum(elev$gx), ]
+  elev_y <- elev[elev$gy == maximum(elev$gy), ]
   list(x = elev_x, y = elev_y)
 }
 

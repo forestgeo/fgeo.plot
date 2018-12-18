@@ -4,7 +4,7 @@
 \alias{headers}
 \title{Pre-made headers.}
 \arguments{
-\item{lang}{= String; Language of the header: Either "english" or "spanish".}
+\item{lang}{String; Language of the header: Either "english" or "spanish".}
 }
 \description{
 Pre-made headers.

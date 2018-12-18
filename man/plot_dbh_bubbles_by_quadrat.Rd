@@ -50,6 +50,7 @@ want <- filter(small_vft, CensusID == 4, PlotID == 1)
 p <- plot_dbh_bubbles_by_quadrat(want)
 # Visualizing only the first plot
 p[[1]]
+
 # Printing all plots to .pdf, with parameters optimized for size letter
 \dontrun{
 pdf("map.pdf", paper = "letter", height = 10.5, width = 8)
@@ -92,6 +93,11 @@ plot_dbh_bubbles_by_quadrat(
 )
 }
 \seealso{
+Other plot functions: \code{\link{autoplot.fgeo_habitat}},
+  \code{\link{autoplot.sp_elev}},
+  \code{\link{autoplot_by_species.sp_elev}},
+  \code{\link{plot_tag_status_by_subquadrat}}
+
 Other functions to list plots from ForestGEO ViewFullTable: \code{\link{plot_tag_status_by_subquadrat}}
 
 Other functions to plot dbh bubbles: \code{\link{header_dbh_bubbles}},
@@ -99,3 +105,4 @@ Other functions to plot dbh bubbles: \code{\link{header_dbh_bubbles}},
 }
 \concept{functions to list plots from ForestGEO ViewFullTable}
 \concept{functions to plot dbh bubbles}
+\concept{plot functions}

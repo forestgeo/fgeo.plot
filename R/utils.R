@@ -2,12 +2,8 @@ commas <- function(...) {
   paste0(..., collapse = ", ")
 }
 
-max0 <- function(...) {
+maximum <- function(...) {
   max(..., na.rm = TRUE)
-}
-
-min0 <- function(...) {
-  min(..., na.rm = TRUE)
 }
 
 has_class <- function(x, class) {

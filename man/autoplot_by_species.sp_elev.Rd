@@ -128,9 +128,15 @@ census_elevation <- sp_elev(census, fgeo.x::elevation)
 p <- autoplot_by_species(census_elevation)
 # Showing only the first plot
 p[[1]]
+
 }
 \seealso{
 \code{\link[=autoplot]{autoplot()}}, \code{\link[=sp]{sp()}}, \code{\link[=sp_elev]{sp_elev()}}.
+
+Other plot functions: \code{\link{autoplot.fgeo_habitat}},
+  \code{\link{autoplot.sp_elev}},
+  \code{\link{plot_dbh_bubbles_by_quadrat}},
+  \code{\link{plot_tag_status_by_subquadrat}}
 
 Other functions to plot elevation: \code{\link{autoplot.sp_elev}},
   \code{\link{elev}}, \code{\link{sp_elev}}
@@ -141,3 +147,4 @@ Other functions to plot species: \code{\link{autoplot.sp_elev}},
 \concept{functions to list plots from different ForestGEO classes}
 \concept{functions to plot elevation}
 \concept{functions to plot species}
+\concept{plot functions}

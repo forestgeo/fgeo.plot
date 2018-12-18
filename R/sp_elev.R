@@ -3,15 +3,17 @@
 #' @param sp A ForestGEO-like dataframe with the column `sp`.
 #' 
 #' @seealso [autoplot.sp()].
-#' @family functions to construct fgeo classes
-#' @family functions to plot species
 #' 
 #' @return An S3 object of class 'sp'.
 #' 
-#' @export
 #' @examples
 #' class(sp(fgeo.x::stem5))
+#' 
+#' @family functions to construct fgeo classes
+#' @family functions to plot species
+#' @export
 sp <- function(sp) {
+  stopifnot(is.data.frame(sp))
   structure(sp, class = c("sp", class(sp)))
 }
 
@@ -21,17 +23,19 @@ sp <- function(sp) {
 #'   the variable `elev`.
 #'   
 #' @seealso [autoplot.elev()].
-#' @family functions to construct fgeo classes
-#' @family functions to plot elevation
 #' 
 #' @return An S3 object of class 'elev'.
 #' 
-#' @export
 #' @examples
 #' class(elev(fgeo.x::elevation))
 #' # Same
 #' class(elev(fgeo.x::elevation$col))
+#' 
+#' @family functions to construct fgeo classes
+#' @family functions to plot elevation
+#' @export
 elev <- function(elev) {
+  stopifnot(is.list(elev))
   structure(elev, class = c("elev", class(elev)))
 }
 
@@ -42,18 +46,19 @@ elev <- function(elev) {
 #'   the column `elev`.
 #' 
 #' @seealso [autoplot.sp_elev()].
-#' @family functions to construct fgeo classes
-#' @family functions to plot elevation
-#' @family functions to plot species
 #' 
 #' @return An S3 object of class 'sp_elev'.
 #' 
-#' @export
 #' @examples
 #' species_elevation <- sp_elev(
 #'   fgeo.x::stem5, fgeo.x::elevation
 #' )
 #' class(species_elevation)
+#' 
+#' @family functions to construct fgeo classes
+#' @family functions to plot elevation
+#' @family functions to plot species
+#' @export
 sp_elev <- function(sp, elev = NULL) {
   validate_sp_elev(sp, elev)
   cns_elev <- list(sp = sp, elev = elev)

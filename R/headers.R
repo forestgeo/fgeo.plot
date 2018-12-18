@@ -1,16 +1,19 @@
 #' Pre-made headers.
-#' @param lang = String; Language of the header: Either "english" or "spanish".
+#' 
+#' @param lang String; Language of the header: Either "english" or "spanish".
+#' 
 #' @name headers
 #' @keywords internal
 NULL
 
 #' @inherit headers
-#' @family functions to plot tag status
-#' @keywords internal
 #' 
-#' @export
 #' @examples
 #' cat(header_tag_status())
+#' 
+#' @family functions to plot tag status
+#' @keywords internal
+#' @export
 header_tag_status <- function() {
   paste(
     "",
@@ -22,12 +25,13 @@ header_tag_status <- function() {
 }
 
 #' @inherit headers
-#' @family functions to plot dbh bubbles
-#' @keywords internal
 #' 
-#' @export
 #' @examples
 #' cat(header_dbh_bubbles())
+#' 
+#' @family functions to plot dbh bubbles
+#' @keywords internal
+#' @export
 header_dbh_bubbles <- function(lang = "english") {
   stopifnot(lang  %in% c("english", "spanish"))
   stopifnot(length(lang) == 1)

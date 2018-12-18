@@ -240,6 +240,10 @@ the algorithm to calculate subquadrats.</p>
     <div class='dont-index'><p><code><a href='https://www.rdocumentation.org/packages/graphics/topics/points'>graphics::points()</a></code>, <code><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>ggplot2::geom_point()</a></code>, <code><a href='https://ggplot2.tidyverse.org/reference/theme.html'>ggplot2::theme()</a></code>
 <code><a href='header_tag_status.html'>header_tag_status()</a></code>, <code><a href='theme_tag_status.html'>theme_tag_status()</a></code>, <code><a href='https://www.rdocumentation.org/packages/fgeo.tool/topics/add_subquad'>fgeo.tool::add_subquad()</a></code>,
 <code><a href='paginate.html'>paginate()</a></code>, <a href='https://www.rdocumentation.org/packages/ggrepel/topics/geom_text_repel'>ggrepel::geom_text_repel</a>, <code><a href='https://www.rdocumentation.org/packages/fgeo.tool/topics/drop_twice_dead'>fgeo.tool::drop_twice_dead()</a></code>.</p>
+<p>Other plot functions: <code><a href='autoplot.fgeo_habitat.html'>autoplot.fgeo_habitat</a></code>,
+  <code><a href='autoplot.sp_elev.html'>autoplot.sp_elev</a></code>,
+  <code><a href='autoplot_by_species.sp_elev.html'>autoplot_by_species.sp_elev</a></code>,
+  <code><a href='plot_dbh_bubbles_by_quadrat.html'>plot_dbh_bubbles_by_quadrat</a></code></p>
 <p>Other functions to list plots from ForestGEO ViewFullTable: <code><a href='plot_dbh_bubbles_by_quadrat.html'>plot_dbh_bubbles_by_quadrat</a></code></p>
 <p>Other functions to plot tag status: <code><a href='header_tag_status.html'>header_tag_status</a></code>,
   <code><a href='theme_tag_status.html'>theme_tag_status</a></code></p></div>
@@ -290,12 +294,10 @@ the algorithm to calculate subquadrats.</p>
 <span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'>plot_tag_status_by_subquadrat</span>(<span class='no'>small_vft</span>, <span class='kw'>theme</span> <span class='kw'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggtheme.html'>theme_gray</a></span>())
 <span class='no'>p</span><span class='kw'>[[</span><span class='fl'>1</span>]]</div><div class='img'><img src='plot_tag_status_by_subquadrat-5.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># Tweaking the default theme of plot_tag_status_by_subquadrat()</span>
-
+<span class='co'># For many more options see ?ggplot2::theme</span>
 <span class='no'>small_tweak</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='theme_tag_status.html'>theme_tag_status</a></span>(<span class='kw'>legend.position</span> <span class='kw'>=</span> <span class='st'>"bottom"</span>)
 <span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'>plot_tag_status_by_subquadrat</span>(<span class='no'>small_vft</span>, <span class='kw'>theme</span> <span class='kw'>=</span> <span class='no'>small_tweak</span>)
 <span class='no'>p</span><span class='kw'>[[</span><span class='fl'>1</span>]]</div><div class='img'><img src='plot_tag_status_by_subquadrat-6.png' alt='' width='700' height='433' /></div><div class='input'>
-# For many more options see ?ggplot2::theme
-
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

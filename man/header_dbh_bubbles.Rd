@@ -7,13 +7,14 @@
 header_dbh_bubbles(lang = "english")
 }
 \arguments{
-\item{lang}{= String; Language of the header: Either "english" or "spanish".}
+\item{lang}{String; Language of the header: Either "english" or "spanish".}
 }
 \description{
 Pre-made headers.
 }
 \examples{
 cat(header_dbh_bubbles())
+
 }
 \seealso{
 Other functions to plot dbh bubbles: \code{\link{plot_dbh_bubbles_by_quadrat}},

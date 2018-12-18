@@ -20,6 +20,7 @@ Enable autoplotting the variable \code{elev}.
 class(elev(fgeo.x::elevation))
 # Same
 class(elev(fgeo.x::elevation$col))
+
 }
 \seealso{
 \code{\link[=autoplot.elev]{autoplot.elev()}}.

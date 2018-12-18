@@ -44,9 +44,6 @@
 #'   [header_tag_status()], [theme_tag_status()], [fgeo.tool::add_subquad()],
 #'   [paginate()], [ggrepel::geom_text_repel], [fgeo.tool::drop_twice_dead()].
 #'
-#' @family functions to list plots from ForestGEO ViewFullTable
-#' @family functions to plot tag status
-#'
 #' @section Acknowledgment:
 #' Useful ideas and guidance came from Suzanne Lao, Stuart Davis, Shameema
 #' Jafferjee Esufali, David Kenfack and Anudeep Singh. Anudeep Sinh also wrote
@@ -54,7 +51,6 @@
 #'
 #' @return A list of ggplots, where each element of the list is a map of tree
 #'   tags by status, showing four subquadrats.
-#' @export
 #'
 #' @examples
 #' library(fgeo.tool)
@@ -106,13 +102,15 @@
 #' p[[1]]
 #' 
 #' # Tweaking the default theme of plot_tag_status_by_subquadrat()
-#' 
+#' # For many more options see ?ggplot2::theme
 #' small_tweak <- theme_tag_status(legend.position = "bottom")
 #' p <- plot_tag_status_by_subquadrat(small_vft, theme = small_tweak)
 #' p[[1]]
 #' 
-#' # For many more options see ?ggplot2::theme
-#' 
+#' @family plot functions
+#' @family functions to list plots from ForestGEO ViewFullTable
+#' @family functions to plot tag status
+#' @export
 plot_tag_status_by_subquadrat <- function(vft,
                       x_q = 20,
                       x_sq = 5,

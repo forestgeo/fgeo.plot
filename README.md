@@ -29,20 +29,16 @@ article](https://goo.gl/dQKEeg).
 ``` r
 library(fgeo.map)
 
-# Small dataset with a few species for quick examples
-these_species <- c("PREMON", "CASARB")
-census <- subset(fgeo.x::tree5, sp %in% these_species)
-
-autoplot(sp(census))
+small_census <- fgeo.x::tree6_3species
+autoplot(sp(small_census))
 ```
 
 <img src="man/figures/README-fgeo.map-sp-1.png" width="75%" style="display: block; margin: auto;" />
 
 ``` r
 elevation <- fgeo.x::elevation
-
 autoplot(
-  sp_elev(census, elevation),
+  sp_elev(small_census, elevation),
   fill = "red", 
   hide_color_legend = TRUE
 )

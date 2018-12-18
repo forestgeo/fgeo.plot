@@ -14,5 +14,6 @@ One quadrat of a ViewFullTable from Luquillo.
 }
 \examples{
 str(vft_1quad())
+
 }
 \concept{datasets}

@@ -223,7 +223,7 @@ best_lim <- function(lim, coord) {
     }
     return(lim)
   } else {
-    lim <- c(0, max0(coord))
+    lim <- c(0, maximum(coord))
     lim
   }
 }

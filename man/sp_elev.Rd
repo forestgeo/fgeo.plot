@@ -23,6 +23,7 @@ species_elevation <- sp_elev(
   fgeo.x::stem5, fgeo.x::elevation
 )
 class(species_elevation)
+
 }
 \seealso{
 \code{\link[=autoplot.sp_elev]{autoplot.sp_elev()}}.

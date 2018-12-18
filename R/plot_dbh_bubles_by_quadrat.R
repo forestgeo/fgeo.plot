@@ -11,11 +11,7 @@
 #' @param status_d A character string indicating the value of the variable 
 #'   status that corresponds to dead stems.
 #'
-#' @family functions to list plots from ForestGEO ViewFullTable
-#' @family functions to plot dbh bubbles
-#'
 #' @return A list which each element is a plot of class ggplot.
-#' @export
 #'
 #' @examples
 #' library(dplyr)
@@ -29,6 +25,7 @@
 #' p <- plot_dbh_bubbles_by_quadrat(want)
 #' # Visualizing only the first plot
 #' p[[1]]
+#' 
 #' # Printing all plots to .pdf, with parameters optimized for size letter
 #' \dontrun{
 #' pdf("map.pdf", paper = "letter", height = 10.5, width = 8)
@@ -69,6 +66,10 @@
 #'     panel.background = element_rect(fill = "grey")
 #'   )
 #' )
+#' @family plot functions
+#' @family functions to list plots from ForestGEO ViewFullTable
+#' @family functions to plot dbh bubbles
+#' @export
 plot_dbh_bubbles_by_quadrat <- function(vft,
                      title_quad = "Site Name, YYYY, Quadrat:",
                      header = header_dbh_bubbles(),
@@ -139,8 +140,7 @@ check_plot_dbh_bubbles_by_quadrat <- function(vft,
     is.numeric(lim_min), is.numeric(lim_max), is.numeric(subquadrat_side),
     is.numeric(tag_size), is.numeric(move_edge)
   )
-  arg_theme_has_class_theme <- any(grepl("theme", class(theme)))
-  stopifnot(arg_theme_has_class_theme)
+  stopifnot(inherits(theme, "theme"))
   stopifnot(is.character(title_quad), is.character(header))
   check_crucial_names(vft, core)
   warn_multiple_plotid(vft)

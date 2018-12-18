@@ -1,3 +1,5 @@
+^map\.pdf$
+^Rplots\.pdf$
 ^\.buildignore$
 ^appveyor\.yml$
 ^.*\.Rproj$

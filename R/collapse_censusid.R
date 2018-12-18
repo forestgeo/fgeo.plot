@@ -5,12 +5,7 @@
 #'
 #' @param x A dataframe -- specifically a ViewFullTable.
 #'
-#' @family functions to edit ForestGEO data in place
-#' @keywords internal
-#'
 #' @return A modified version of `x`, most likely with less rows.
-#' @keywords internal
-#' @noRd
 #'
 #' @examples
 #' x <- data.frame(
@@ -21,6 +16,9 @@
 #' )
 #' x
 #' collapse_censusid(x)
+#' 
+#' @family functions to edit ForestGEO data in place
+#' @noRd
 collapse_censusid <- function(x) {
   stopifnot(is.data.frame(x))
 
@@ -28,12 +26,8 @@ collapse_censusid <- function(x) {
   names(x) <- tolower(old)
   check_crucial_names(x, "censusid")
 
-  x$censusid <- glue_comma(sort(unique(x$censusid)))
+  x$censusid <- commas(sort(unique(x$censusid)))
 
   x <- stats::setNames(x, old)
   unique(x)
-}
-
-glue_comma <- function(...) {
-  paste0(..., collapse = ", ")
 }

@@ -45,23 +45,18 @@ For details on how to install packages from GitHub, see [this article](https://g
 ```{r fgeo.map-sp}
 library(fgeo.map)
 
-# Small dataset with a few species for quick examples
-these_species <- c("PREMON", "CASARB")
-census <- subset(fgeo.x::tree5, sp %in% these_species)
-
-autoplot(sp(census))
+small_census <- fgeo.x::tree6_3species
+autoplot(sp(small_census))
 ```
 
 ```{r}
 elevation <- fgeo.x::elevation
-
 autoplot(
-  sp_elev(census, elevation),
+  sp_elev(small_census, elevation),
   fill = "red", 
   hide_color_legend = TRUE
 )
 ```
-
 
 [Get started with __fgeo__](https://forestgeo.github.io/fgeo/articles/fgeo.html)
 

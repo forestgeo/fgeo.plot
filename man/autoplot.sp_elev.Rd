@@ -131,6 +131,11 @@ autoplot(sp_elev(census, elevation), facet = FALSE, point_size = 1)
 \seealso{
 \code{\link[=autoplot]{autoplot()}}, \code{\link[=sp]{sp()}}, \code{\link[=elev]{elev()}}, \code{\link[=sp_elev]{sp_elev()}}.
 
+Other plot functions: \code{\link{autoplot.fgeo_habitat}},
+  \code{\link{autoplot_by_species.sp_elev}},
+  \code{\link{plot_dbh_bubbles_by_quadrat}},
+  \code{\link{plot_tag_status_by_subquadrat}}
+
 Other autoplots: \code{\link{autoplot.fgeo_habitat}}
 
 Other functions to plot elevation: \code{\link{autoplot_by_species.sp_elev}},

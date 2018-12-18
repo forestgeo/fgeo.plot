@@ -175,7 +175,11 @@ status that corresponds to dead stems.</p></td>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>Other functions to list plots from ForestGEO ViewFullTable: <code><a href='plot_tag_status_by_subquadrat.html'>plot_tag_status_by_subquadrat</a></code></p>
+    <div class='dont-index'><p>Other plot functions: <code><a href='autoplot.fgeo_habitat.html'>autoplot.fgeo_habitat</a></code>,
+  <code><a href='autoplot.sp_elev.html'>autoplot.sp_elev</a></code>,
+  <code><a href='autoplot_by_species.sp_elev.html'>autoplot_by_species.sp_elev</a></code>,
+  <code><a href='plot_tag_status_by_subquadrat.html'>plot_tag_status_by_subquadrat</a></code></p>
+<p>Other functions to list plots from ForestGEO ViewFullTable: <code><a href='plot_tag_status_by_subquadrat.html'>plot_tag_status_by_subquadrat</a></code></p>
 <p>Other functions to plot dbh bubbles: <code><a href='header_dbh_bubbles.html'>header_dbh_bubbles</a></code>,
   <code><a href='theme_dbh_bubbles.html'>theme_dbh_bubbles</a></code></p></div>
     
@@ -188,15 +192,20 @@ status that corresponds to dead stems.</p></td>
 #&gt; <span class='message'></span>
 #&gt; <span class='message'>    filter, lag</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from 'package:base':</span>
 #&gt; <span class='message'></span>
-#&gt; <span class='message'>    intersect, setdiff, setequal, union</span></div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/library'>library</a></span>(<span class='no'>fgeo.tool</span>)
-
+#&gt; <span class='message'>    intersect, setdiff, setequal, union</span></div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/library'>library</a></span>(<span class='no'>fgeo.tool</span>)</div><div class='output co'>#&gt; <span class='message'></span>
+#&gt; <span class='message'>Attaching package: 'fgeo.tool'</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from 'package:testthat':</span>
+#&gt; <span class='message'></span>
+#&gt; <span class='message'>    matches</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from 'package:stats':</span>
+#&gt; <span class='message'></span>
+#&gt; <span class='message'>    filter</span></div><div class='input'>
 <span class='co'># Using a small viewFullTable for example (see ?vft_1quad)</span>
 <span class='no'>small_vft</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://dplyr.tidyverse.org/reference/sample.html'>sample_n</a></span>(<span class='fu'><a href='vft_1quad.html'>vft_1quad</a></span>(), <span class='fl'>50</span>)
 
 <span class='co'># Filter the data you want. For example:</span>
 <span class='no'>want</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/fgeo.tool/topics/reexports'>filter</a></span>(<span class='no'>small_vft</span>, <span class='no'>CensusID</span> <span class='kw'>==</span> <span class='fl'>4</span>, <span class='no'>PlotID</span> <span class='kw'>==</span> <span class='fl'>1</span>)
 <span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'>plot_dbh_bubbles_by_quadrat</span>(<span class='no'>want</span>)</div><div class='output co'>#&gt; <span class='message'>* Appending tags of dead trees with the suffix '.d'</span></div><div class='output co'>#&gt; <span class='message'>* Standarizing `dbh` by the count of `dbh` measurements</span></div><div class='input'><span class='co'># Visualizing only the first plot</span>
-<span class='no'>p</span><span class='kw'>[[</span><span class='fl'>1</span>]]</div><div class='output co'>#&gt; <span class='warning'>Warning: Removed 33 rows containing missing values (geom_point).</span></div><div class='img'><img src='plot_dbh_bubbles_by_quadrat-1.png' alt='' width='700' height='433' /></div><div class='input'># Printing all plots to .pdf, with parameters optimized for size letter
+<span class='no'>p</span><span class='kw'>[[</span><span class='fl'>1</span>]]</div><div class='output co'>#&gt; <span class='warning'>Warning: Removed 33 rows containing missing values (geom_point).</span></div><div class='img'><img src='plot_dbh_bubbles_by_quadrat-1.png' alt='' width='700' height='433' /></div><div class='input'>
+# Printing all plots to .pdf, with parameters optimized for size letter
 </div><span class='co'># NOT RUN {</span>
 <span class='fu'><a href='https://www.rdocumentation.org/packages/grDevices/topics/pdf'>pdf</a></span>(<span class='st'>"map.pdf"</span>, <span class='kw'>paper</span> <span class='kw'>=</span> <span class='st'>"letter"</span>, <span class='kw'>height</span> <span class='kw'>=</span> <span class='fl'>10.5</span>, <span class='kw'>width</span> <span class='kw'>=</span> <span class='fl'>8</span>)
 <span class='no'>p</span>

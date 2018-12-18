@@ -32,6 +32,7 @@ caption_tag_xy <- function(x, x_coord, y_coord, max_n = NULL) {
 
 #' `inform_more()` and `show_max()` help to truncate the number of items of a 
 #' list, based on the argument `max_n` and/or the length of `x`.
+#' 
 #' inform_more(1:3, NULL)
 #' inform_more(1:3, 0)
 #' inform_more(1:3, 3)

@@ -6,9 +6,11 @@
 #'
 #' @inheritParams ggplot2::theme
 #' @param ... Additional arguments passed to  [ggplot2::theme()].
+#' 
 #' @seealso [ggplot2::theme()].
 #' 
 #' @return A [ggplot2::theme()].
+#' 
 #' @keywords internal
 #' @name themes
 NULL
@@ -16,12 +18,13 @@ NULL
 #' Theme for `plot_base_census()`.
 #' 
 #' @inheritParams ggplot2::theme
-#' @family functions to plot tag status
-#' @keywords internal
 #' 
-#' @export
 #' @examples
 #' class(theme_tag_status())
+#' 
+#' @family functions to plot tag status
+#' @keywords internal
+#' @export
 theme_tag_status <- function(panel.grid.major = element_line(colour =  "black"),
                              panel.grid.minor = element_line(
                                colour =  "black",
@@ -54,12 +57,13 @@ theme_tag_status <- function(panel.grid.major = element_line(colour =  "black"),
 #' Theme for `theme_dbh_bubbles()`.
 #' 
 #' @inheritParams ggplot2::theme
-#' @family functions to plot dbh bubbles
-#' @keywords internal
 #' 
-#' @export
 #' @examples
 #' class(theme_dbh_bubbles())
+#' 
+#' @family functions to plot dbh bubbles
+#' @keywords internal
+#' @export
 theme_dbh_bubbles <- function(axis.text = element_blank(),
                               panel.background = element_rect(fill = "white"),
                               panel.grid.minor = element_blank(),
@@ -91,12 +95,12 @@ theme_dbh_bubbles <- function(axis.text = element_blank(),
 #' @inheritParams ggplot2::theme
 #' @template p
 #' 
-#' @family functions to create or modify plot layers
-#' @keywords internal
-#' 
-#' @export
 #' @examples
 #' class(theme_default(ggplot2::ggplot(iris)))
+#' 
+#' @family functions to create or modify plot layers
+#' @keywords internal
+#' @export
 theme_default <- function(p, 
                           panel.grid.minor = element_line(linetype = "dashed"),
                           ...) {

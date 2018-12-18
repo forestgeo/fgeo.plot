@@ -2,13 +2,13 @@
 % Please edit documentation in R/autoplot.fgeo_habitat.R
 \name{autoplot.fgeo_habitat}
 \alias{autoplot.fgeo_habitat}
-\title{Plot objects of class "fgeo_habitat".}
+\title{Quick habitat plots.}
 \usage{
 \method{autoplot}{fgeo_habitat}(object, ...)
 }
 \arguments{
-\item{object}{An object objects of class "fgeo_habitat" (see
-\code{?fgeo::fgeo_habitat}).}
+\item{object}{An object objects of class "fgeo_habitat"
+(\url{http://bit.ly/fgeo-reference}).}
 
 \item{...}{Other arguments passed to methods.}
 }
@@ -16,17 +16,25 @@
 An object of class "ggplot".
 }
 \description{
-Plot objects of class "fgeo_habitat".
+Quick habitat plots.
 }
 \examples{
-if (requireNamespace("fgeo")) {
+\dontrun{
+if (requireNamespace("fgeo", quietly = TRUE)) {
   library(fgeo)
   
   habitats <- fgeo_habitat(fgeo.x::elevation, gridsize = 20, n = 4)
   autoplot(habitats)
 } 
 }
+}
 \seealso{
+Other plot functions: \code{\link{autoplot.sp_elev}},
+  \code{\link{autoplot_by_species.sp_elev}},
+  \code{\link{plot_dbh_bubbles_by_quadrat}},
+  \code{\link{plot_tag_status_by_subquadrat}}
+
 Other autoplots: \code{\link{autoplot.sp_elev}}
 }
 \concept{autoplots}
+\concept{plot functions}
