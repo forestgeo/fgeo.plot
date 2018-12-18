@@ -29,14 +29,7 @@ knitr::opts_chunk$set(
 
 ## Installation
 
-Install the pre-release version of **fgeo.map**:
-
-```
-# install.packages("devtools")
-devtools::install_github("forestgeo/fgeo.map@pre-release")
-```
-
-Or install the development version of **fgeo.map**:
+Install the development version of **fgeo.map**:
 
 ```
 # install.packages("devtools")
@@ -52,16 +45,23 @@ For details on how to install packages from GitHub, see [this article](https://g
 ```{r fgeo.map-sp}
 library(fgeo.map)
 
-elevation <- fgeo.data::luquillo_elevation
-
 # Small dataset with a few species for quick examples
-selected_species <- c("PREMON", "CASARB")
-census <- subset(fgeo.data::luquillo_tree5_random, sp %in% selected_species)
+these_species <- c("PREMON", "CASARB")
+census <- subset(fgeo.x::tree5, sp %in% these_species)
+
+autoplot(sp(census))
 ```
 
 ```{r}
-autoplot(sp_elev(census, elevation), fill = "red", hide_color_legend = TRUE)
+elevation <- fgeo.x::elevation
+
+autoplot(
+  sp_elev(census, elevation),
+  fill = "red", 
+  hide_color_legend = TRUE
+)
 ```
+
 
 [Get started with __fgeo__](https://forestgeo.github.io/fgeo/articles/fgeo.html)
 

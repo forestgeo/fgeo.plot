@@ -53,13 +53,8 @@
 #' @param ... Other arguments passed to methods.
 #'
 #' @seealso [autoplot()], [sp()], [elev()], [sp_elev()].
-#' @family autoplots
-#' @family functions to plot elevation
-#' @family functions to plot species
-#'
 #' @return A "ggplot".
 #'
-#' @export
 #' @examples 
 #' # Species ---------------------------------------------------------------
 #' # Small dataset with a few species for quick examples
@@ -86,6 +81,12 @@
 #' 
 #' # Customize
 #' autoplot(sp_elev(census, elevation), facet = FALSE, point_size = 1)
+#' 
+#' @family plot functions
+#' @family autoplots
+#' @family functions to plot elevation
+#' @family functions to plot species
+#' @export
 autoplot.sp_elev <- function(object, 
                              fill = "sp",
                              hide_fill_legend = FALSE,

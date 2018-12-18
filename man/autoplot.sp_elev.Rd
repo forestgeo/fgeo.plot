@@ -126,6 +126,7 @@ elevation <- fgeo.x::elevation
 
 # Customize
 autoplot(sp_elev(census, elevation), facet = FALSE, point_size = 1)
+
 }
 \seealso{
 \code{\link[=autoplot]{autoplot()}}, \code{\link[=sp]{sp()}}, \code{\link[=elev]{elev()}}, \code{\link[=sp_elev]{sp_elev()}}.
@@ -141,3 +142,4 @@ Other functions to plot species: \code{\link{autoplot_by_species.sp_elev}},
 \concept{autoplots}
 \concept{functions to plot elevation}
 \concept{functions to plot species}
+\concept{plot functions}

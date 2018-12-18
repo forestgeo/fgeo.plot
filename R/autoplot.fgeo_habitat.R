@@ -1,6 +1,7 @@
-#' Quick habitat plot.
+#' Plot objects of class "fgeo_habitat".
 #' 
-#' @param object An object created with [fgeo.tool::fgeo_habitat()].
+#' @param object An object objects of class "fgeo_habitat" (see 
+#'   `?fgeo::fgeo_habitat`).
 #' @param ... Other arguments passed to methods.
 #'
 #' @return An object of class "ggplot".
@@ -9,10 +10,12 @@
 #' @family autoplots
 #'
 #' @examples
-#' elev_list <- fgeo.x::elevation
-#' habitats <- fgeo.tool::fgeo_habitat(elev_list, gridsize = 20, n = 4)
-#' 
-#' autoplot(habitats)
+#' if (requireNamespace("fgeo")) {
+#'   library(fgeo)
+#'   
+#'   habitats <- fgeo_habitat(fgeo.x::elevation, gridsize = 20, n = 4)
+#'   autoplot(habitats)
+#' } 
 autoplot.fgeo_habitat <- function(object, ...) {
   # Use quadrats' center instead of quadrats' bottom-left corner
   gridsize <- fgeo.tool::extract_gridsize(object)

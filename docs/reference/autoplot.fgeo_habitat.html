@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Quick habitat plot. — autoplot.fgeo_habitat • fgeo.map</title>
+<title>Plot objects of class "fgeo_habitat". — autoplot.fgeo_habitat • fgeo.map</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,9 +30,9 @@
 
 
 
-<meta property="og:title" content="Quick habitat plot. — autoplot.fgeo_habitat" />
+<meta property="og:title" content="Plot objects of class "fgeo_habitat". — autoplot.fgeo_habitat" />
 
-<meta property="og:description" content="Quick habitat plot." />
+<meta property="og:description" content="Plot objects of class &quot;fgeo_habitat&quot;." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -108,14 +108,14 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Quick habitat plot.</h1>
+    <h1>Plot objects of class "fgeo_habitat".</h1>
     <small class="dont-index">Source: <a href='https://github.com/forestgeo/fgeo.map/blob/master/R/autoplot.fgeo_habitat.R'><code>R/autoplot.fgeo_habitat.R</code></a></small>
     <div class="hidden name"><code>autoplot.fgeo_habitat.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Quick habitat plot.</p>
+    <p>Plot objects of class "fgeo_habitat".</p>
     
     </div>
 
@@ -127,7 +127,8 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>object</th>
-      <td><p>An object created with <code><a href='https://www.rdocumentation.org/packages/fgeo.tool/topics/fgeo_habitat'>fgeo.tool::fgeo_habitat()</a></code>.</p></td>
+      <td><p>An object objects of class "fgeo_habitat" (see
+<code><a href='https://forestgeo.github.io/fgeo//reference/reexports.html'>?fgeo::fgeo_habitat</a></code>).</p></td>
     </tr>
     <tr>
       <th>...</th>
@@ -145,10 +146,16 @@
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>elev_list</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>fgeo.x</span><span class='kw ns'>::</span><span class='no'><a href='https://www.rdocumentation.org/packages/fgeo.x/topics/datasets'>elevation</a></span>
-<span class='no'>habitats</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>fgeo.tool</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/fgeo.tool/topics/fgeo_habitat'>fgeo_habitat</a></span>(<span class='no'>elev_list</span>, <span class='kw'>gridsize</span> <span class='kw'>=</span> <span class='fl'>20</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>4</span>)
+    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/ns-load'>requireNamespace</a></span>(<span class='st'>"fgeo"</span>)) {
+  <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/library'>library</a></span>(<span class='no'>fgeo</span>)
 
-<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/autoplot.html'>autoplot</a></span>(<span class='no'>habitats</span>)</div><div class='img'><img src='autoplot.fgeo_habitat-1.png' alt='' width='700' height='433' /></div></pre>
+  <span class='no'>habitats</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://forestgeo.github.io/fgeo//reference/reexports.html'>fgeo_habitat</a></span>(<span class='kw pkg'>fgeo.x</span><span class='kw ns'>::</span><span class='no'><a href='https://www.rdocumentation.org/packages/fgeo.x/topics/datasets'>elevation</a></span>, <span class='kw'>gridsize</span> <span class='kw'>=</span> <span class='fl'>20</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>4</span>)
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/autoplot.html'>autoplot</a></span>(<span class='no'>habitats</span>)
+}</div><div class='output co'>#&gt; <span class='message'>Loading required namespace: fgeo</span></div><div class='output co'>#&gt; <span class='message'>-- <span style='font-weight: bold;'>Attaching packages</span><span> --------------------------------------------- fgeo 0.0.0.</span><span style='color: #BB0000;'>9002</span><span> --</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>v</span><span> </span><span style='color: #0000BB;'>fgeo.x   </span><span> 0.0.0.</span><span style='color: #BB0000;'>9000</span><span>     </span><span style='color: #00BB00;'>v</span><span> </span><span style='color: #0000BB;'>fgeo.tool</span><span> 0.0.0.</span><span style='color: #BB0000;'>9005</span><span></span></div><div class='output co'>#&gt; <span class='message'>-- </span><span style='font-weight: bold;'>Conflicts</span><span> ----------------------------------------------------- fgeo_conflicts() --</span>
+#&gt; <span class='message'></span><span style='color: #BB0000;'>x</span><span> </span><span style='color: #0000BB;'>devtools_shims</span><span>::</span><span style='color: #00BB00;'>?()</span><span>    masks </span><span style='color: #0000BB;'>utils</span><span>::?()</span>
+#&gt; <span class='message'></span><span style='color: #BB0000;'>x</span><span> </span><span style='color: #0000BB;'>fgeo.tool</span><span>::</span><span style='color: #00BB00;'>filter()</span><span>    masks </span><span style='color: #0000BB;'>stats</span><span>::filter()</span>
+#&gt; <span class='message'></span><span style='color: #BB0000;'>x</span><span> </span><span style='color: #0000BB;'>devtools_shims</span><span>::</span><span style='color: #00BB00;'>help()</span><span> masks </span><span style='color: #0000BB;'>utils</span><span>::help()</span>
+#&gt; <span class='message'></span><span style='color: #BB0000;'>x</span><span> </span><span style='color: #0000BB;'>fgeo.tool</span><span>::</span><span style='color: #00BB00;'>matches()</span><span>   masks </span><span style='color: #0000BB;'>testthat</span><span>::matches()</span></div><div class='img'><img src='autoplot.fgeo_habitat-1.png' alt='' width='700' height='433' /></div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -171,7 +178,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.2.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
 </div>
       </footer>
    </div>

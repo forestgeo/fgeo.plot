@@ -13,12 +13,7 @@ status](https://www.r-pkg.org/badges/version/fgeo.map)](https://cran.r-project.o
 
 ## Installation
 
-Install the pre-release version of **fgeo.map**:
-
-    # install.packages("devtools")
-    devtools::install_github("forestgeo/fgeo.map@pre-release")
-
-Or install the development version of **fgeo.map**:
+Install the development version of **fgeo.map**:
 
     # install.packages("devtools")
     devtools::install_github("forestgeo/fgeo.map")
@@ -34,15 +29,23 @@ article](https://goo.gl/dQKEeg).
 ``` r
 library(fgeo.map)
 
-elevation <- fgeo.data::luquillo_elevation
-
 # Small dataset with a few species for quick examples
-selected_species <- c("PREMON", "CASARB")
-census <- subset(fgeo.data::luquillo_tree5_random, sp %in% selected_species)
+these_species <- c("PREMON", "CASARB")
+census <- subset(fgeo.x::tree5, sp %in% these_species)
+
+autoplot(sp(census))
 ```
 
+<img src="man/figures/README-fgeo.map-sp-1.png" width="75%" style="display: block; margin: auto;" />
+
 ``` r
-autoplot(sp_elev(census, elevation), fill = "red", hide_color_legend = TRUE)
+elevation <- fgeo.x::elevation
+
+autoplot(
+  sp_elev(census, elevation),
+  fill = "red", 
+  hide_color_legend = TRUE
+)
 ```
 
 <img src="man/figures/README-unnamed-chunk-1-1.png" width="75%" style="display: block; margin: auto;" />

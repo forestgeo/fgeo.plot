@@ -13,9 +13,6 @@ One quadrat of a ViewFullTable dataframe.
 One quadrat of a ViewFullTable from Luquillo.
 }
 \examples{
-str( vft_1quad())
-}
-\seealso{
-\code{fgeo.data::luquillo_vft_4quad}
+str(vft_1quad())
 }
 \concept{datasets}

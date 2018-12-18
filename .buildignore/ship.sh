@@ -1,7 +1,14 @@
-# From .R send to terminal: control + alt + enter
 git checkout master
-git pull
-git merge dev
-git pull
-git push
-git checkout dev
+git fetch upstream
+git reset --hard upstream/master
+
+
+
+message="Prune documentation
+* Organize roxygen2 docs."
+
+git add .
+git commit --amend -m "$message"
+
+git add .
+git commit --amend -m "$message"
