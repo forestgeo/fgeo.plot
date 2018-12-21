@@ -1,13 +1,13 @@
 # grep --------------------------------------------------------------------
 
-grep -R "library(fgeo.map)" 
+grep -R "library(fgeo.plot)" 
 ../fgeo
 ../fgeo.abundance
 ../fgeo.base
 ../fgeo.data
 ../fgeo.demography
 ../fgeo.habitat
-../fgeo.map
+../fgeo.plot
 ../fgeo.tool
 
 # /R

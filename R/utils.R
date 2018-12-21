@@ -1,3 +1,15 @@
+pick_top <- function(.data, var, n = 1) {
+  var <- enquo(var)
+  pulled <- dplyr::pull(.data, !!var)
+  sorted <- sort(unique(pulled))
+  if (n > 0 ) {
+    to_match <- head(sorted, n)
+  } else {
+    to_match <- tail(sorted, abs(n))
+  }
+  .data[pulled %in% to_match, ]
+}
+
 commas <- function(...) {
   paste0(..., collapse = ", ")
 }

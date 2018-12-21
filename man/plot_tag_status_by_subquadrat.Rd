@@ -138,7 +138,7 @@ p[[1]]
 \seealso{
 \code{\link[graphics:points]{graphics::points()}}, \code{\link[ggplot2:geom_point]{ggplot2::geom_point()}}, \code{\link[ggplot2:theme]{ggplot2::theme()}}
 \code{\link[=header_tag_status]{header_tag_status()}}, \code{\link[=theme_tag_status]{theme_tag_status()}}, \code{\link[fgeo.tool:add_subquad]{fgeo.tool::add_subquad()}},
-\code{\link[=paginate]{paginate()}}, \link[ggrepel:geom_text_repel]{ggrepel::geom_text_repel}, \code{\link[fgeo.tool:drop_twice_dead]{fgeo.tool::drop_twice_dead()}}.
+\code{\link[=paginate]{paginate()}}, \link[ggrepel:geom_text_repel]{ggrepel::geom_text_repel}.
 
 Other plot functions: \code{\link{autoplot.fgeo_habitat}},
   \code{\link{autoplot.sp_elev}},

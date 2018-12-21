@@ -1,5 +1,5 @@
 ---
-title: "Comparing ggplot2 and fgeo.map"
+title: "Comparing ggplot2 and fgeo.plot"
 author: "Mauro Lepore"
 date: "`r Sys.Date()`"
 output: github_document
@@ -24,15 +24,15 @@ knitr::opts_chunk$set(
 )
 ```
 
-This article compares plots built with __fgeo.map__ versus __ggplot2__. 
+This article compares plots built with __fgeo.plot__ versus __ggplot2__. 
 
 # Elevation
 
 Data
 
 ```{r}
-# https://forestgeo.github.io/fgeo.map/
-library(fgeo.map)
+# https://forestgeo.github.io/fgeo.plot/
+library(fgeo.plot)
 
 elevation <- fgeo.data::luquillo_elevation
 str(elevation)
@@ -40,7 +40,7 @@ str(elevation)
 elev <- elevation$col
 ```
 
-Quick maps with __fgeo.map__.
+Quick maps with __fgeo.plot__.
 
 ```{r}
 plot_elevation(elev)

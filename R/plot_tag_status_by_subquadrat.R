@@ -42,7 +42,7 @@
 #' 
 #' @seealso [graphics::points()], [ggplot2::geom_point()], [ggplot2::theme()]
 #'   [header_tag_status()], [theme_tag_status()], [fgeo.tool::add_subquad()],
-#'   [paginate()], [ggrepel::geom_text_repel], [fgeo.tool::drop_twice_dead()].
+#'   [paginate()], [ggrepel::geom_text_repel].
 #'
 #' @section Acknowledgment:
 #' Useful ideas and guidance came from Suzanne Lao, Stuart Davis, Shameema
@@ -318,7 +318,6 @@ prep_plot_tag_status_by_subquadrat <- function(sbst,
 #' ```
 #' @return A modified version of the input with the additional variable `page`.
 #' @seealso [fgeo.tool::add_subquad()].
-#' @keywords internal
 #' @examples
 #' \dontrun{
 #' library(dplyr)
@@ -331,9 +330,10 @@ prep_plot_tag_status_by_subquadrat <- function(sbst,
 #' with_subquad <- fgeo.tool::add_subquad(viewfulltable, 20, 20, 5, 5)
 #'
 #' # Warning: Internal function
-#' fgeo.map:::paginate(with_subquad)
-#' fgeo.map:::paginate(with_subquad, "a", "b", "c", "d")
+#' paginate(with_subquad)
+#' paginate(with_subquad, "a", "b", "c", "d")
 #' }
+#' @noRd
 paginate <- function(x, bl = 1, br = 2, tr = 3, tl = 4, subquad_offset = NULL) {
   stopifnot(is.data.frame(x))
   check_crucial_names(x, "subquadrat")
@@ -375,11 +375,13 @@ paginate <- function(x, bl = 1, br = 2, tr = 3, tl = 4, subquad_offset = NULL) {
 }
 
 #' Add plot limits to a dataframe with the variable `subquadrat`.
-#' @noRd
+#' 
 #' @param paged A dataframe with the variable `page`.
 #' @param x_q Integer; the size in meters of a (squared) quadrat.
 #' @param bl,br,tr,tl See `paginate()`.
 #' @param move_edge A positive or negative number to move the edge lines of each map.
+#' 
+#' @noRd
 add_subquad_lims <- function(paged, x_q = 20, bl, br, tr, tl, move_edge = 0) {
   # ggplots come with a default extention
   default_extention <- 0.45
@@ -497,7 +499,7 @@ entitle_map <- function(x, chr, show_page = TRUE) {
 }
 
 #' Create data to plot labels in each subquadrat.
-#' @noRd
+#' 
 #' @examples
 #' library(ggplot2)
 #' library(tibble)
@@ -514,6 +516,8 @@ entitle_map <- function(x, chr, show_page = TRUE) {
 #'   geom_label(data = df_labs, aes(qx, qy, label = subquadrat),
 #'     colour = "white", fill = "grey", fontface = "bold") +
 #'   ggrepel::geom_text_repel(aes(label = tag))
+#'   
+#' @noRd
 df_subquad_labs <- function(x_q, x_sq, y_q, y_sq, subquad_offset, ...) {
   # Center labels in each subquadrat
   # x

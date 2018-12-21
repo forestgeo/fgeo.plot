@@ -1,17 +1,17 @@
-Comparing ggplot2 and fgeo.map
+Comparing ggplot2 and fgeo.plot
 ================
 Mauro Lepore
 2018-10-24
 
-This article compares plots built with **fgeo.map** versus **ggplot2**.
+This article compares plots built with **fgeo.plot** versus **ggplot2**.
 
 # Elevation
 
 Data
 
 ``` r
-# https://forestgeo.github.io/fgeo.map/
-library(fgeo.map)
+# https://forestgeo.github.io/fgeo.plot/
+library(fgeo.plot)
 
 elevation <- fgeo.data::luquillo_elevation
 str(elevation)
@@ -28,7 +28,7 @@ elev <- elevation$col
 ```
 
 Quick maps with
-**fgeo.map**.
+**fgeo.plot**.
 
 ``` r
 plot_elevation(elev)

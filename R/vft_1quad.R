@@ -11,6 +11,6 @@
 #' @export
 vft_1quad <- function() {
   fgeo.x::vft_4quad %>% 
-  fgeo.tool::pick_top(.data$CensusID) %>% 
-  fgeo.tool::pick_top(.data$QuadratID, 1)
+  pick_top(.data$CensusID) %>% 
+  pick_top(.data$QuadratID, 1)
 }

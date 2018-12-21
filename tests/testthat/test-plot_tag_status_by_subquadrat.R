@@ -226,7 +226,7 @@ test_that("outputs quadrats in order, even if QuadratName is numeric (#33)", {
   expect_nms <- flatten_chr(map(tricky_quad, paste0, "_", 1:4))
   
   # Create some data
-  vft_toy <- fgeo.tool::pick_top(vft_4quad, QuadratName, 3)
+  vft_toy <- pick_top(vft_4quad, QuadratName, 3)
   vft_toy <- vft_toy %>% 
     mutate(
       QuadratName = recode(QuadratName,

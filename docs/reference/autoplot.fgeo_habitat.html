@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Quick habitat plots. — autoplot.fgeo_habitat • fgeo.map</title>
+<title>Quick habitat plots. — autoplot.fgeo_habitat • fgeo.plot</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -62,7 +62,7 @@
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">fgeo.map</a>
+        <a class="navbar-link" href="../index.html">fgeo.plot</a>
         <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9402</span>
       </span>
     </div>
@@ -88,7 +88,7 @@
   </a>
 </li>
 <li>
-  <a href="https://github.com/forestgeo/fgeo.map">
+  <a href="https://github.com/forestgeo/fgeo.plot">
     <span class="fa fa-github"></span>
      
   </a>
@@ -109,7 +109,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Quick habitat plots.</h1>
-    <small class="dont-index">Source: <a href='https://github.com/forestgeo/fgeo.map/blob/master/R/autoplot.fgeo_habitat.R'><code>R/autoplot.fgeo_habitat.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/forestgeo/fgeo.plot/blob/master/R/autoplot.fgeo_habitat.R'><code>R/autoplot.fgeo_habitat.R</code></a></small>
     <div class="hidden name"><code>autoplot.fgeo_habitat.Rd</code></div>
     </div>
 
@@ -154,7 +154,7 @@
 <span class='kw'>if</span> (<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/ns-load'>requireNamespace</a></span>(<span class='st'>"fgeo"</span>, <span class='kw'>quietly</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)) {
   <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/library'>library</a></span>(<span class='no'>fgeo</span>)
 
-  <span class='no'>habitats</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://forestgeo.github.io/fgeo//reference/reexports.html'>fgeo_habitat</a></span>(<span class='kw pkg'>fgeo.x</span><span class='kw ns'>::</span><span class='no'><a href='https://www.rdocumentation.org/packages/fgeo.x/topics/datasets'>elevation</a></span>, <span class='kw'>gridsize</span> <span class='kw'>=</span> <span class='fl'>20</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>4</span>)
+  <span class='no'>habitats</span> <span class='kw'>&lt;-</span> <span class='fu'>fgeo_habitat</span>(<span class='kw pkg'>fgeo.x</span><span class='kw ns'>::</span><span class='no'><a href='https://www.rdocumentation.org/packages/fgeo.x/topics/datasets'>elevation</a></span>, <span class='kw'>gridsize</span> <span class='kw'>=</span> <span class='fl'>20</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>4</span>)
   <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/autoplot.html'>autoplot</a></span>(<span class='no'>habitats</span>)
 }
 <span class='co'># }</span></pre>

@@ -1,4 +1,4 @@
-url: https://forestgeo.github.io/fgeo.map/
+url: https://forestgeo.github.io/fgeo.plot/
 
 authors:
   Mauro Lepore:
@@ -26,7 +26,7 @@ navbar:
       href: https://github.com/maurolepore
 
     - icon: fa-github
-      href: https://github.com/forestgeo/fgeo.map
+      href: https://github.com/forestgeo/fgeo.plot
 
     - text: fgeo
       href: https://forestgeo.github.io/fgeo/

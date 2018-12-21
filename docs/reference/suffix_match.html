@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Label the four divisions of a quadrat -- each with four subquadrats. — paginate • fgeo.map</title>
+<title>Suffix a strings where a vector exactly matches one specific string. — suffix_match • fgeo.plot</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,11 +30,9 @@
 
 
 
-<meta property="og:title" content="Label the four divisions of a quadrat -- each with four subquadrats. — paginate" />
+<meta property="og:title" content="Suffix a strings where a vector exactly matches one specific string. — suffix_match" />
 
-<meta property="og:description" content="This function makes it possible for plot_tag_status_by_subquadrat() to plot each individual map.
-Each map corresponds to one page and includes four subquadrats. There are a
-total of four maps per quadrat (i.e. a total of 16 subquadrats per quadrat)." />
+<meta property="og:description" content="Suffix a strings where a vector exactly matches one specific string." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -64,7 +62,7 @@ total of four maps per quadrat (i.e. a total of 16 subquadrats per quadrat)." />
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">fgeo.map</a>
+        <a class="navbar-link" href="../index.html">fgeo.plot</a>
         <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9402</span>
       </span>
     </div>
@@ -90,7 +88,7 @@ total of four maps per quadrat (i.e. a total of 16 subquadrats per quadrat)." />
   </a>
 </li>
 <li>
-  <a href="https://github.com/forestgeo/fgeo.map">
+  <a href="https://github.com/forestgeo/fgeo.plot">
     <span class="fa fa-github"></span>
      
   </a>
@@ -110,79 +108,66 @@ total of four maps per quadrat (i.e. a total of 16 subquadrats per quadrat)." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Label the four divisions of a quadrat -- each with four subquadrats.</h1>
-    <small class="dont-index">Source: <a href='https://github.com/forestgeo/fgeo.map/blob/master/R/plot_tag_status_by_subquadrat.R'><code>R/plot_tag_status_by_subquadrat.R</code></a></small>
-    <div class="hidden name"><code>paginate.Rd</code></div>
+    <h1>Suffix a strings where a vector exactly matches one specific string.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/forestgeo/fgeo.plot/blob/master/R/suffix_match.R'><code>R/suffix_match.R</code></a></small>
+    <div class="hidden name"><code>suffix_match.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>This function makes it possible for <code><a href='plot_tag_status_by_subquadrat.html'>plot_tag_status_by_subquadrat()</a></code> to plot each individual map.
-Each map corresponds to one page and includes four subquadrats. There are a
-total of four maps per quadrat (i.e. a total of 16 subquadrats per quadrat).</p>
+    <p>Suffix a strings where a vector exactly matches one specific string.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>paginate</span>(<span class='no'>x</span>, <span class='kw'>bl</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>br</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>tr</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>tl</span> <span class='kw'>=</span> <span class='fl'>4</span>,
-  <span class='kw'>subquad_offset</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>suffix_match</span>(<span class='no'>string</span>, <span class='no'>to_match</span>, <span class='no'>.match</span>, <span class='no'>suffix</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>x</th>
-      <td><p>A dataframe with the variable <code>subquadrat</code>.</p></td>
+      <th>string</th>
+      <td><p>A vector of strings to suffix.</p></td>
     </tr>
     <tr>
-      <th>bl, br, tr, tl</th>
-      <td><p>Number or character giving the label of the four
-subquadrats on each or the four divisions of a quadrat: bottom left (bl),
-bottom right (br), top right (tr), and top left (tl).</p></td>
+      <th>to_match</th>
+      <td><p>A vector of strings to match with <code>.match</code>.</p></td>
     </tr>
     <tr>
-      <th>subquad_offset</th>
-      <td><p><code>NULL</code> or <code>-1</code>. This argument is for internal use. It
-helps paginate to use the same code for data with two different types of
-labels for the subquadrat variable: (1) that with subquadrat-columns
-starting at 1; and (2) that with subquadrat-columns starting at 0.</p><pre>The four divisions of a quadrat (bl, br, tr, tl), each with four subquadrats:
-
-tl       tr
-----     -----
-14 24    34 44
-13 23    33 43
-
-bl       br
-----     -----
-12 22    32 42
-11 21    31 41
-</pre></td>
+      <th>.match</th>
+      <td><p>A string to match the vector <code>to_match</code> with.</p></td>
+    </tr>
+    <tr>
+      <th>suffix</th>
+      <td><p>A suffix to add at the end of each element of <code>string</code>.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A modified version of the input with the additional variable <code>page</code>.</p>
-    
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
-    <div class='dont-index'><p><code><a href='https://www.rdocumentation.org/packages/fgeo.tool/topics/add_subquad'>fgeo.tool::add_subquad()</a></code>.</p></div>
+    <p>A modified version of <code>x</code>.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='co'># NOT RUN {</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/library'>library</a></span>(<span class='no'>dplyr</span>)
-<span class='no'>viewfulltable</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://dplyr.tidyverse.org/reference/reexports.html'>tribble</a></span>(
-   ~<span class='no'>QX</span>,  ~<span class='no'>QY</span>,
-  <span class='fl'>17.9</span>,    <span class='fl'>0</span>,
-   <span class='fl'>4.1</span>,   <span class='fl'>15</span>,
-   <span class='fl'>6.1</span>, <span class='fl'>17.3</span>
+    <pre class="examples"><div class='input'><span class='fu'>suffix_match</span>(
+  <span class='kw'>string</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"one"</span>, <span class='st'>"banana"</span>),
+  <span class='kw'>to_match</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"number"</span>, <span class='st'>"fruit"</span>),
+  <span class='kw'>.match</span> <span class='kw'>=</span> <span class='st'>"number"</span>,
+  <span class='kw'>suffix</span> <span class='kw'>=</span> <span class='st'>"_num"</span>
+)</div><div class='output co'>#&gt; [1] "one_num" "banana" </div><div class='input'>
+<span class='fu'>suffix_match</span>(
+  <span class='kw'>string</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"tag1"</span>, <span class='st'>"tag2"</span>),
+  <span class='kw'>to_match</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"dead"</span>, <span class='st'>"not-dead"</span>),
+  <span class='kw'>.match</span> <span class='kw'>=</span> <span class='st'>"dead"</span>,
+  <span class='kw'>suffix</span> <span class='kw'>=</span> <span class='st'>".d"</span>
+)</div><div class='output co'>#&gt; [1] "tag1.d" "tag2"  </div><div class='input'>
+<span class='no'>vft</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/data.frame'>data.frame</a></span>(
+  <span class='kw'>Tag</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"01"</span>, <span class='st'>"02"</span>),
+  <span class='kw'>Status</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"dead"</span>, <span class='st'>"alive"</span>),
+  <span class='kw'>stringsAsFactors</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
 )
-<span class='no'>with_subquad</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>fgeo.tool</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/fgeo.tool/topics/add_subquad'>add_subquad</a></span>(<span class='no'>viewfulltable</span>, <span class='fl'>20</span>, <span class='fl'>20</span>, <span class='fl'>5</span>, <span class='fl'>5</span>)
-
-<span class='co'># Warning: Internal function</span>
-<span class='kw pkg'>fgeo.map</span><span class='kw ns'>:::</span><span class='fu'><a href='https://forestgeo.github.io/fgeo.map//reference/paginate.html'>paginate</a></span>(<span class='no'>with_subquad</span>)
-<span class='kw pkg'>fgeo.map</span><span class='kw ns'>:::</span><span class='fu'><a href='https://forestgeo.github.io/fgeo.map//reference/paginate.html'>paginate</a></span>(<span class='no'>with_subquad</span>, <span class='st'>"a"</span>, <span class='st'>"b"</span>, <span class='st'>"c"</span>, <span class='st'>"d"</span>)
-<span class='co'># }</span></pre>
+<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/transform'>transform</a></span>(<span class='no'>vft</span>, <span class='kw'>tagged</span> <span class='kw'>=</span> <span class='fu'>suffix_match</span>(<span class='no'>Tag</span>, <span class='no'>Status</span>, <span class='st'>"dead"</span>, <span class='st'>".d"</span>))</div><div class='output co'>#&gt;   Tag Status tagged
+#&gt; 1  01   dead   01.d
+#&gt; 2  02  alive     02</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -190,8 +175,6 @@ bl       br
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
-
-      <li><a href="#see-also">See also</a></li>
       
       <li><a href="#examples">Examples</a></li>
     </ul>

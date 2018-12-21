@@ -99,7 +99,7 @@ See sections \strong{Usage} and \strong{Examples}.
 \code{autoplot_by_species(sp_elev(DATA-WITH-VARIABLE-sp)} (without elevation data)
 is equivalent to \code{autoplot_by_species(sp(DATA-WITH-VARIABLE-sp))}.
 
-\strong{fgeo.map} wraps the \strong{ggplot2} package. For more control you
+\strong{fgeo.plot} wraps the \strong{ggplot2} package. For more control you
 can use \strong{ggplot2} directly.
 }
 \examples{

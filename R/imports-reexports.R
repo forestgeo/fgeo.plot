@@ -6,6 +6,7 @@
 #' @importFrom glue glue
 #' @importFrom rlang abort warn inform
 #' @importFrom stats setNames
+#' @importFrom utils head tail
 #' @import ggplot2
 NULL
 

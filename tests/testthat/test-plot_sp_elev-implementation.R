@@ -1,4 +1,4 @@
-census <- fgeo.tool::pick_top(fgeo.x::stem5, sp, 2)
+census <- pick_top(fgeo.x::stem5, sp, 2)
 elevation <- fgeo.x::elevation$col
 
 context("plot_each_species")
