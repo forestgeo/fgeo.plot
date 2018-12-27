@@ -29,7 +29,9 @@ subquadrats as 1.  \code{-1} defines the first column of subquadrats as 0.\prefo
      11 21 31 41             01 11 21 31
 }}
 
-\item{bl, br, tr, tl}{Label each of the four maps of a quadrat. See \code{\link[=paginate]{paginate()}}.}
+\item{bl, br, tr, tl}{Number or character giving the label of the four
+subquadrats on each or the four divisions of a quadrat: bottom left (bl),
+bottom right (br), top right (tr), and top left (tl).}
 
 \item{title_quad}{A string to use as a title.}
 
@@ -138,7 +140,7 @@ p[[1]]
 \seealso{
 \code{\link[graphics:points]{graphics::points()}}, \code{\link[ggplot2:geom_point]{ggplot2::geom_point()}}, \code{\link[ggplot2:theme]{ggplot2::theme()}}
 \code{\link[=header_tag_status]{header_tag_status()}}, \code{\link[=theme_tag_status]{theme_tag_status()}}, \code{\link[fgeo.tool:add_subquad]{fgeo.tool::add_subquad()}},
-\code{\link[=paginate]{paginate()}}, \link[ggrepel:geom_text_repel]{ggrepel::geom_text_repel}.
+\link[ggrepel:geom_text_repel]{ggrepel::geom_text_repel}.
 
 Other plot functions: \code{\link{autoplot.fgeo_habitat}},
   \code{\link{autoplot.sp_elev}},

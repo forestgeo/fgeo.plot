@@ -26,7 +26,9 @@
 #'        12 22 32 42             02 12 22 32
 #'        11 21 31 41             01 11 21 31
 #'   ```
-#' @param bl,br,tr,tl Label each of the four maps of a quadrat. See [paginate()].
+#' @param bl,br,tr,tl Number or character giving the label of the four
+#'   subquadrats on each or the four divisions of a quadrat: bottom left (bl),
+#'   bottom right (br), top right (tr), and top left (tl).
 #' @template title_quad
 #' @param show_page Logical; `FALSE` removes the page label from the map title.
 #' @param show_subquad Logical; `FALSE` removes subquadrat labels on each map.
@@ -42,7 +44,7 @@
 #' 
 #' @seealso [graphics::points()], [ggplot2::geom_point()], [ggplot2::theme()]
 #'   [header_tag_status()], [theme_tag_status()], [fgeo.tool::add_subquad()],
-#'   [paginate()], [ggrepel::geom_text_repel].
+#'   [ggrepel::geom_text_repel].
 #'
 #' @section Acknowledgment:
 #' Useful ideas and guidance came from Suzanne Lao, Stuart Davis, Shameema
@@ -295,9 +297,7 @@ prep_plot_tag_status_by_subquadrat <- function(sbst,
 #' total of four maps per quadrat (i.e. a total of 16 subquadrats per quadrat).
 #'
 #' @param x A dataframe with the variable `subquadrat`.
-#' @param bl,br,tr,tl Number or character giving the label of the four
-#'   subquadrats on each or the four divisions of a quadrat: bottom left (bl),
-#'   bottom right (br), top right (tr), and top left (tl).
+#' @param bl,br,tr,tl See [plot_tag_status_by_subquadrat()].
 #' @param subquad_offset `NULL` or `-1`. This argument is for internal use. It
 #'   helps paginate to use the same code for data with two different types of
 #'   labels for the subquadrat variable: (1) that with subquadrat-columns
@@ -378,7 +378,8 @@ paginate <- function(x, bl = 1, br = 2, tr = 3, tl = 4, subquad_offset = NULL) {
 #' 
 #' @param paged A dataframe with the variable `page`.
 #' @param x_q Integer; the size in meters of a (squared) quadrat.
-#' @param bl,br,tr,tl See `paginate()`.
+#' @param bl,br,tr,tl #' @param bl,br,tr,tl See 
+#'   [plot_tag_status_by_subquadrat()].
 #' @param move_edge A positive or negative number to move the edge lines of each map.
 #' 
 #' @noRd
