@@ -8,7 +8,7 @@
 }
 \arguments{
 \item{object}{An object objects of class "fgeo_habitat"
-(\url{http://bit.ly/fgeo-reference}).}
+(see \code{fgeo_habitat} at \url{http://bit.ly/fgeo-reference}).}
 
 \item{...}{Other arguments passed to methods.}
 }

@@ -1,7 +1,7 @@
 #' Quick habitat plots.
 #' 
 #' @param object An object objects of class "fgeo_habitat" 
-#'   (\url{http://bit.ly/fgeo-reference}).
+#'   (see `fgeo_habitat` at \url{http://bit.ly/fgeo-reference}).
 #' @param ... Other arguments passed to methods.
 #'
 #' @return An object of class "ggplot".

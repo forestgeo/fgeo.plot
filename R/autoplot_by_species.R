@@ -3,8 +3,9 @@
 #' @description
 #' These functions extend the functionality of [autoplot.sp()] and
 #' [autoplot.elev()] and return not a single plot but a list of plots. It is
-#' ideal to print a .pdf file with one plot per page. They automatically plot
-#' the variables `sp` and `elev` of a ForestGEO-like dataset of class 'sp_elev'.
+#' ideal to print a _.pdf_ file with one plot per page. They automatically plot
+#' the variables `sp` and `elev` of a ForestGEO-like dataset of class 'sp' or
+#' 'sp_elev'.
 #' * Create a 'sp' `object` with:
 #' @description
 #' ``` 
@@ -39,29 +40,24 @@
 #' @examples
 #' # Species ---------------------------------------------------------------
 #' # Small dataset with a few species for quick examples
-#' some_sp <- c("PREMON", "CASARB")
-#' census <- subset(fgeo.x::tree5, sp %in% some_sp)
+#' census <- fgeo.x::tree6_3species
 #' 
-#' plots_list <- autoplot_by_species(sp(census))
-#' # Show the first plot in the list
-#' plots_list[[1]]
+#' autoplot_by_species(sp(census))
 #' 
 #' \dontrun{
 #' # Print all plots in the list
 #' pdf("map.pdf", paper = "letter", height = 10.5, width = 8)
-#' plots_list
+#' autoplot_by_species(sp(census))
 #' dev.off()
 #' }
 #' 
-#' # Species and or elevation ----------------------------------------------
+#' # Species and elevation (optional) ---------------------------------------
 #' # Species only: Same as autoplot_by_species(sp(census))
 #' autoplot_by_species(sp_elev(census))
 #' 
 #' # Species and elevation
-#' census_elevation <- sp_elev(census, fgeo.x::elevation)
-#' p <- autoplot_by_species(census_elevation)
-#' # Showing only the first plot
-#' p[[1]]
+#' elevation <- fgeo.x::elevation
+#' autoplot_by_species(sp_elev(census, elevation))
 #' 
 #' @family plot functions
 #' @family functions to list plots from different ForestGEO classes
