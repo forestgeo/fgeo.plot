@@ -2,9 +2,12 @@
 % Please edit documentation in R/vft_1quad.R
 \name{vft_1quad}
 \alias{vft_1quad}
+\alias{pick_vft}
 \title{Small ViewFullTables from Luquillo.}
 \usage{
 vft_1quad()
+
+pick_vft(.data = fgeo.x::vft_4quad, n_censuses = 1, n_quadrats = 1)
 }
 \value{
 One quadrat of a ViewFullTable dataframe.
