@@ -1,6 +1,6 @@
 context("plot_dbh_bubbles_by_quadrat")
 
-vft_1quad_sub <- pick_vft_xxx(
+vft_1quad_sub <- pick_vft(
   fgeo.x::vft_4quad, 
   n_censuses = 1,
   n_quadrats = 1,

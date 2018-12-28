@@ -4,7 +4,15 @@
 \alias{pick_vft}
 \title{Pick ViewFullTables to create small example datasets.}
 \usage{
-pick_vft(.data, n_censuses = 1, n_quadrats = 1, n_rows = NULL)
+pick_vft(.data, n_censuses = NULL, n_quadrats = NULL, n_rows = NULL)
+}
+\arguments{
+\item{.data}{A ViewFullTable}
+
+\item{n_censuses, n_quadrats}{Number of censuses and quadrats to pick.}
+
+\item{n_rows}{Number of rows to sample after picking \code{n_censuses} and
+\code{n_quadrats}.}
 }
 \value{
 A tibble (dataframe).
@@ -17,7 +25,7 @@ specific number of censuses, quadrats and rows.
 \examples{
 # Same
 dim(fgeo.x::vft_4quad)
-dim(pick_vft_xxx(fgeo.x::vft_4quad))
+dim(pick_vft(fgeo.x::vft_4quad))
 
 dim(
   pick_vft(
@@ -27,5 +35,7 @@ dim(
     n_rows = 50
  )
 )
+
 }
-\concept{datasets}
+\concept{functions for fgeo vft}
+\concept{functions to pick or drop rows of a ForestGEO dataframe}

@@ -14,14 +14,14 @@
 #' @return A list which each element is a plot of class ggplot.
 #'
 #' @examples
-#' small_vft <- pick_vft(fgeo.x::vft_4quad, n_censuses = 1, n_quadrats = 1)
+#' small_vft <- pick_vft(fgeo.x::vft_4quad, n_censuses = 1, n_quadrats = 2)
 #' 
 #' plot_dbh_bubbles_by_quadrat(small_vft)
 #' 
 #' # Printing all plots to .pdf, with parameters optimized for size letter
 #' \dontrun{
 #'   pdf("map.pdf", paper = "letter", height = 10.5, width = 8)
-#'   plot_dbh_bubbles_by_quadrat(small_vft
+#'   plot_dbh_bubbles_by_quadrat(small_vft)
 #'   dev.off()
 #' }
 #' 

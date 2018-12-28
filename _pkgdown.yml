@@ -56,6 +56,6 @@ reference:
     contents:
       - has_concept("functions to construct fgeo classes")
 
-  - title: "Datasets"
+  - title: "Create small datasets for examples"
     contents:
-      - has_concept("datasets")
+      - has_concept("functions to pick or drop rows of a ForestGEO dataframe")

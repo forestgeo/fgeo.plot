@@ -55,37 +55,32 @@
 #'   tags by status, showing four subquadrats.
 #'
 #' @examples
-#' library(fgeo.tool)
+#' small_vft <- pick_vft(fgeo.x::vft_4quad, n_censuses = 1, n_quadrats = 1)
 #' 
-#' # Filtering the data to map -----------------------------------------------
-#' # Filter the data you want. Using a small ViewFullTable for example:
-#' small_vft <- pick_vft(
-#'   fgeo.x::vft_4quad, 
-#'   n_censuses = 1,
-#'   n_quadrats = 2,
-#'   n_rows = 50
-#' )
-#' want <- filter(small_vft, CensusID == 4, PlotID == 1)
-#' p <- plot_tag_status_by_subquadrat(want)
-#' # Visualizing only the first plot
-#' p[[1]]
+#' plot_tag_status_by_subquadrat(small_vft)
 #' 
 #' # Print all plots to .pdf, with parameters optimized for size letter
 #' \dontrun{
 #' pdf("map.pdf", paper = "letter", height = 10.5, width = 8)
-#' p
+#' plot_tag_status_by_subquadrat(small_vft)
 #' dev.off()
 #' }
 #' 
 #' # Be careful if filtering by DBH: You may unintentionally remove dead trees.
 #' # * If you filter by `DBH`, you loose the dead trees becaue their `DBH = NA`
 #' # * You should explicietly inlcude missing DBH values with `is.na(DBH)`
-#' p <- filter(fgeo.x::vft_4quad, DBH > 20 | is.na(DBH))
-#' plot_tag_status_by_subquadrat(p)[[1]]
+#' include_missing_dbh <- subset(small_vft, DBH > 20 | is.na(DBH))
+#' p <- plot_tag_status_by_subquadrat(include_missing_dbh)
+#' # Showing only the first plot to keep the output short
+#' p[[1]]
 #' 
 #' # Customizing the maps ----------------------------------------------------
 #' # Common tweaks
-#' p <- plot_tag_status_by_subquadrat(small_vft, show_page = FALSE, show_subquad = FALSE)
+#' p <- plot_tag_status_by_subquadrat(
+#'   small_vft,
+#'   show_page = FALSE,
+#'   show_subquad = FALSE
+#' )
 #' p[[1]]
 #' 
 #' p <- plot_tag_status_by_subquadrat(

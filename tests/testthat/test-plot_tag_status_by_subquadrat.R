@@ -3,7 +3,7 @@ set.seed(123)
 library(dplyr)
 library(purrr)
 
-small_vft <- pick_vft_xxx(
+small_vft <- pick_vft(
   fgeo.x::vft_4quad,
   n_censuses = 1,
   n_quadrats = 1

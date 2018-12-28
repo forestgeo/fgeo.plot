@@ -252,35 +252,33 @@ the algorithm to calculate subquadrats.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/library'>library</a></span>(<span class='no'>fgeo.tool</span>)</div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Attaching package: 'fgeo.tool'</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from 'package:testthat':</span>
-#&gt; <span class='message'></span>
-#&gt; <span class='message'>    matches</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from 'package:stats':</span>
-#&gt; <span class='message'></span>
-#&gt; <span class='message'>    filter</span></div><div class='input'>
-<span class='co'># Filtering the data to map -----------------------------------------------</span>
-<span class='co'># Filter the data you want. Using a small ViewFullTable for example:</span>
-<span class='no'>small_vft</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='vft_1quad.html'>pick_vft</a></span>(<span class='kw pkg'>fgeo.x</span><span class='kw ns'>::</span><span class='no'><a href='https://www.rdocumentation.org/packages/fgeo.x/topics/datasets'>vft_4quad</a></span>, <span class='kw'>n_rows</span> <span class='kw'>=</span> <span class='fl'>50</span>)
-<span class='no'>want</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/fgeo.tool/topics/reexports'>filter</a></span>(<span class='no'>small_vft</span>, <span class='no'>CensusID</span> <span class='kw'>==</span> <span class='fl'>4</span>, <span class='no'>PlotID</span> <span class='kw'>==</span> <span class='fl'>1</span>)
-<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'>plot_tag_status_by_subquadrat</span>(<span class='no'>want</span>)
-<span class='co'># Visualizing only the first plot</span>
-<span class='no'>p</span><span class='kw'>[[</span><span class='fl'>1</span>]]</div><div class='img'><img src='plot_tag_status_by_subquadrat-1.png' alt='' width='700' height='433' /></div><div class='input'>
+    <pre class="examples"><div class='input'><span class='no'>small_vft</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='pick_vft.html'>pick_vft</a></span>(<span class='kw pkg'>fgeo.x</span><span class='kw ns'>::</span><span class='no'><a href='https://www.rdocumentation.org/packages/fgeo.x/topics/datasets'>vft_4quad</a></span>, <span class='kw'>n_censuses</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>n_quadrats</span> <span class='kw'>=</span> <span class='fl'>1</span>)
+
+<span class='fu'>plot_tag_status_by_subquadrat</span>(<span class='no'>small_vft</span>)</div><div class='output co'>#&gt; $`621_1`</div><div class='img'><img src='plot_tag_status_by_subquadrat-1.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; 
+#&gt; $`621_2`</div><div class='img'><img src='plot_tag_status_by_subquadrat-2.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; 
+#&gt; $`621_3`</div><div class='img'><img src='plot_tag_status_by_subquadrat-3.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; 
+#&gt; $`621_4`</div><div class='img'><img src='plot_tag_status_by_subquadrat-4.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; </div><div class='input'>
 # Print all plots to .pdf, with parameters optimized for size letter
 </div><span class='co'># NOT RUN {</span>
 <span class='fu'><a href='https://www.rdocumentation.org/packages/grDevices/topics/pdf'>pdf</a></span>(<span class='st'>"map.pdf"</span>, <span class='kw'>paper</span> <span class='kw'>=</span> <span class='st'>"letter"</span>, <span class='kw'>height</span> <span class='kw'>=</span> <span class='fl'>10.5</span>, <span class='kw'>width</span> <span class='kw'>=</span> <span class='fl'>8</span>)
-<span class='no'>p</span>
+<span class='fu'>plot_tag_status_by_subquadrat</span>(<span class='no'>small_vft</span>)
 <span class='fu'><a href='https://www.rdocumentation.org/packages/grDevices/topics/dev'>dev.off</a></span>()
 <span class='co'># }</span><div class='input'>
 <span class='co'># Be careful if filtering by DBH: You may unintentionally remove dead trees.</span>
 <span class='co'># * If you filter by `DBH`, you loose the dead trees becaue their `DBH = NA`</span>
 <span class='co'># * You should explicietly inlcude missing DBH values with `is.na(DBH)`</span>
-<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/fgeo.tool/topics/reexports'>filter</a></span>(<span class='kw pkg'>fgeo.x</span><span class='kw ns'>::</span><span class='no'><a href='https://www.rdocumentation.org/packages/fgeo.x/topics/datasets'>vft_4quad</a></span>, <span class='no'>DBH</span> <span class='kw'>&gt;</span> <span class='fl'>20</span> <span class='kw'>|</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/NA'>is.na</a></span>(<span class='no'>DBH</span>))
-<span class='fu'>plot_tag_status_by_subquadrat</span>(<span class='no'>p</span>)<span class='kw'>[[</span><span class='fl'>1</span>]]</div><div class='output co'>#&gt; <span class='warning'>Warning: * Likely you want only the last 2 censuses</span>
-#&gt; <span class='warning'>* Detected censuses: 5, 4, 6</span></div><div class='img'><img src='plot_tag_status_by_subquadrat-2.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='no'>include_missing_dbh</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/subset'>subset</a></span>(<span class='no'>small_vft</span>, <span class='no'>DBH</span> <span class='kw'>&gt;</span> <span class='fl'>20</span> <span class='kw'>|</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/NA'>is.na</a></span>(<span class='no'>DBH</span>))
+<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'>plot_tag_status_by_subquadrat</span>(<span class='no'>include_missing_dbh</span>)
+<span class='co'># Showing only the first plot to keep the output short</span>
+<span class='no'>p</span><span class='kw'>[[</span><span class='fl'>1</span>]]</div><div class='img'><img src='plot_tag_status_by_subquadrat-5.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># Customizing the maps ----------------------------------------------------</span>
 <span class='co'># Common tweaks</span>
-<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'>plot_tag_status_by_subquadrat</span>(<span class='no'>small_vft</span>, <span class='kw'>show_page</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>show_subquad</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
-<span class='no'>p</span><span class='kw'>[[</span><span class='fl'>1</span>]]</div><div class='img'><img src='plot_tag_status_by_subquadrat-3.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'>plot_tag_status_by_subquadrat</span>(
+  <span class='no'>small_vft</span>,
+  <span class='kw'>show_page</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>show_subquad</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
+)
+<span class='no'>p</span><span class='kw'>[[</span><span class='fl'>1</span>]]</div><div class='img'><img src='plot_tag_status_by_subquadrat-6.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'>plot_tag_status_by_subquadrat</span>(
   <span class='no'>small_vft</span>,
   <span class='kw'>title_quad</span> <span class='kw'>=</span> <span class='st'>"BCI 2012. Quadrat: "</span>,
@@ -291,17 +289,17 @@ the algorithm to calculate subquadrats.</p>
   <span class='kw'>tag_size</span> <span class='kw'>=</span> <span class='fl'>2</span>,
   <span class='kw'>move_edge</span> <span class='kw'>=</span> <span class='fl'>0.5</span>
 )
-<span class='no'>p</span><span class='kw'>[[</span><span class='fl'>1</span>]]</div><div class='img'><img src='plot_tag_status_by_subquadrat-4.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='no'>p</span><span class='kw'>[[</span><span class='fl'>1</span>]]</div><div class='img'><img src='plot_tag_status_by_subquadrat-7.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># Themes</span>
 <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/library'>library</a></span>(<span class='no'>ggplot2</span>)
 
 <span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'>plot_tag_status_by_subquadrat</span>(<span class='no'>small_vft</span>, <span class='kw'>theme</span> <span class='kw'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggtheme.html'>theme_gray</a></span>())
-<span class='no'>p</span><span class='kw'>[[</span><span class='fl'>1</span>]]</div><div class='img'><img src='plot_tag_status_by_subquadrat-5.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='no'>p</span><span class='kw'>[[</span><span class='fl'>1</span>]]</div><div class='img'><img src='plot_tag_status_by_subquadrat-8.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># Tweaking the default theme of plot_tag_status_by_subquadrat()</span>
 <span class='co'># For many more options see ?ggplot2::theme</span>
 <span class='no'>small_tweak</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='theme_tag_status.html'>theme_tag_status</a></span>(<span class='kw'>legend.position</span> <span class='kw'>=</span> <span class='st'>"bottom"</span>)
 <span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'>plot_tag_status_by_subquadrat</span>(<span class='no'>small_vft</span>, <span class='kw'>theme</span> <span class='kw'>=</span> <span class='no'>small_tweak</span>)
-<span class='no'>p</span><span class='kw'>[[</span><span class='fl'>1</span>]]</div><div class='img'><img src='plot_tag_status_by_subquadrat-6.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='no'>p</span><span class='kw'>[[</span><span class='fl'>1</span>]]</div><div class='img'><img src='plot_tag_status_by_subquadrat-9.png' alt='' width='700' height='433' /></div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
