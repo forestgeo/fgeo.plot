@@ -39,15 +39,14 @@ A list which each element is a plot of class ggplot.
 List dbh bubble-plots by quadrat (good for .pdf output).
 }
 \examples{
-# Using a small viewFullTable for example (see ?vft_1quad)
-small_vft <- vft_1quad()
+small_vft <- pick_vft(fgeo.x::vft_4quad, n_censuses = 1, n_quadrats = 1)
 
 plot_dbh_bubbles_by_quadrat(small_vft)
 
 # Printing all plots to .pdf, with parameters optimized for size letter
 \dontrun{
   pdf("map.pdf", paper = "letter", height = 10.5, width = 8)
-  plot_dbh_bubbles_by_quadrat(small_vft)
+  plot_dbh_bubbles_by_quadrat(small_vft
   dev.off()
 }
 

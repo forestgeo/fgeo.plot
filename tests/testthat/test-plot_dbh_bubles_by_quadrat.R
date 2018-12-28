@@ -1,6 +1,11 @@
 context("plot_dbh_bubbles_by_quadrat")
 
-vft_1quad_sub <- pick_vft(fgeo.x::vft_4quad, n_rows = 5)
+vft_1quad_sub <- pick_vft_xxx(
+  fgeo.x::vft_4quad, 
+  n_censuses = 1,
+  n_quadrats = 1,
+  n_rows = 5
+)
 
 test_that("passes with default arguments", {
   # Warns because dataset has no dead trees

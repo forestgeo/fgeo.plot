@@ -185,19 +185,18 @@ status that corresponds to dead stems.</p></td>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># Using a small viewFullTable for example (see ?vft_1quad)</span>
-<span class='no'>small_vft</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='vft_1quad.html'>vft_1quad</a></span>()
+    <pre class="examples"><div class='input'><span class='no'>example_viewfulltable</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='vft_1quad.html'>pick_vft</a></span>(<span class='kw pkg'>fgeo.x</span><span class='kw ns'>::</span><span class='no'><a href='https://www.rdocumentation.org/packages/fgeo.x/topics/datasets'>vft_4quad</a></span>)
 
-<span class='fu'>plot_dbh_bubbles_by_quadrat</span>(<span class='no'>small_vft</span>)</div><div class='output co'>#&gt; <span class='message'>* Appending tags of dead trees with the suffix '.d'</span></div><div class='output co'>#&gt; <span class='message'>* Standarizing `dbh` by the count of `dbh` measurements</span></div><div class='output co'>#&gt; $`621`</div><div class='output co'>#&gt; <span class='warning'>Warning: Removed 40 rows containing missing values (geom_point).</span></div><div class='img'><img src='plot_dbh_bubbles_by_quadrat-1.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; </div><div class='input'>
+<span class='fu'>plot_dbh_bubbles_by_quadrat</span>(<span class='no'>example_viewfulltable</span>)</div><div class='output co'>#&gt; <span class='message'>* Appending tags of dead trees with the suffix '.d'</span></div><div class='output co'>#&gt; <span class='message'>* Standarizing `dbh` by the count of `dbh` measurements</span></div><div class='output co'>#&gt; $`621`</div><div class='output co'>#&gt; <span class='warning'>Warning: Removed 40 rows containing missing values (geom_point).</span></div><div class='img'><img src='plot_dbh_bubbles_by_quadrat-1.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; </div><div class='input'>
 # Printing all plots to .pdf, with parameters optimized for size letter
 </div><span class='co'># NOT RUN {</span>
   <span class='fu'><a href='https://www.rdocumentation.org/packages/grDevices/topics/pdf'>pdf</a></span>(<span class='st'>"map.pdf"</span>, <span class='kw'>paper</span> <span class='kw'>=</span> <span class='st'>"letter"</span>, <span class='kw'>height</span> <span class='kw'>=</span> <span class='fl'>10.5</span>, <span class='kw'>width</span> <span class='kw'>=</span> <span class='fl'>8</span>)
-  <span class='fu'>plot_dbh_bubbles_by_quadrat</span>(<span class='no'>small_vft</span>)
+  <span class='fu'>plot_dbh_bubbles_by_quadrat</span>(<span class='no'>example_viewfulltable</span>)
   <span class='fu'><a href='https://www.rdocumentation.org/packages/grDevices/topics/dev'>dev.off</a></span>()
 <span class='co'># }</span><div class='input'>
 <span class='co'># Be careful if subsetting by DBH: You may unintentionally remove dead trees.</span>
 <span class='co'># You should explicietly inlcude missing `DBH` values with `is.na(DBH)`</span>
-<span class='no'>include_missing_dbh</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/subset'>subset</a></span>(<span class='no'>small_vft</span>, <span class='no'>DBH</span> <span class='kw'>&gt;</span> <span class='fl'>20</span> <span class='kw'>|</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/NA'>is.na</a></span>(<span class='no'>DBH</span>))
+<span class='no'>include_missing_dbh</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/subset'>subset</a></span>(<span class='no'>example_viewfulltable</span>, <span class='no'>DBH</span> <span class='kw'>&gt;</span> <span class='fl'>20</span> <span class='kw'>|</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/NA'>is.na</a></span>(<span class='no'>DBH</span>))
 <span class='fu'>plot_dbh_bubbles_by_quadrat</span>(<span class='no'>include_missing_dbh</span>)</div><div class='output co'>#&gt; <span class='message'>* Appending tags of dead trees with the suffix '.d'</span></div><div class='output co'>#&gt; <span class='message'>* Standarizing `dbh` by the count of `dbh` measurements</span></div><div class='output co'>#&gt; $`621`</div><div class='output co'>#&gt; <span class='warning'>Warning: Removed 40 rows containing missing values (geom_point).</span></div><div class='img'><img src='plot_dbh_bubbles_by_quadrat-2.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; </div><div class='input'>
 <span class='co'># Customizing the maps ----------------------------------------------------</span>
 <span class='co'># A custom title and header</span>
@@ -211,7 +210,7 @@ status that corresponds to dead stems.</p></td>
 )
 
 <span class='fu'>plot_dbh_bubbles_by_quadrat</span>(
-  <span class='no'>small_vft</span>,
+  <span class='no'>example_viewfulltable</span>,
   <span class='kw'>title_quad</span> <span class='kw'>=</span> <span class='st'>"My Site, 2018. Quad:"</span>,
   <span class='kw'>header</span> <span class='kw'>=</span> <span class='no'>myheader</span>
 )</div><div class='output co'>#&gt; <span class='message'>* Appending tags of dead trees with the suffix '.d'</span></div><div class='output co'>#&gt; <span class='message'>* Standarizing `dbh` by the count of `dbh` measurements</span></div><div class='output co'>#&gt; $`621`</div><div class='output co'>#&gt; <span class='warning'>Warning: Removed 40 rows containing missing values (geom_point).</span></div><div class='img'><img src='plot_dbh_bubbles_by_quadrat-3.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; </div><div class='input'>
@@ -219,7 +218,7 @@ status that corresponds to dead stems.</p></td>
 <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/library'>library</a></span>(<span class='no'>ggplot2</span>)
 
 <span class='fu'>plot_dbh_bubbles_by_quadrat</span>(
-  <span class='no'>small_vft</span>,
+  <span class='no'>example_viewfulltable</span>,
   <span class='kw'>title_quad</span> <span class='kw'>=</span> <span class='st'>"My Site, 2018. Quad:"</span>,
   <span class='kw'>header</span> <span class='kw'>=</span> <span class='fu'><a href='header_dbh_bubbles.html'>header_dbh_bubbles</a></span>(<span class='st'>"spanish"</span>),
   <span class='kw'>tag_size</span> <span class='kw'>=</span> <span class='fl'>3</span>,

@@ -4,7 +4,7 @@
 #' @importFrom fgeo.tool is_multiple flag_if check_crucial_names
 #' @importFrom ggrepel geom_text_repel
 #' @importFrom glue glue
-#' @importFrom rlang abort warn inform
+#' @importFrom rlang abort warn inform enquo
 #' @importFrom stats setNames
 #' @importFrom utils head tail
 #' @import ggplot2

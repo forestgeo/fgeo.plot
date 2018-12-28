@@ -59,7 +59,12 @@
 #' 
 #' # Filtering the data to map -----------------------------------------------
 #' # Filter the data you want. Using a small ViewFullTable for example:
-#' small_vft <- pick_vft(fgeo.x::vft_4quad, n_rows = 50)
+#' small_vft <- pick_vft(
+#'   fgeo.x::vft_4quad, 
+#'   n_censuses = 1,
+#'   n_quadrats = 2,
+#'   n_rows = 50
+#' )
 #' want <- filter(small_vft, CensusID == 4, PlotID == 1)
 #' p <- plot_tag_status_by_subquadrat(want)
 #' # Visualizing only the first plot
