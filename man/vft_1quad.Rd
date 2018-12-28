@@ -7,7 +7,7 @@
 \usage{
 vft_1quad()
 
-pick_vft(.data = fgeo.x::vft_4quad, n_censuses = 1, n_quadrats = 1)
+pick_vft(.data, n_censuses = 1, n_quadrats = 1, n_rows = NULL)
 }
 \value{
 One quadrat of a ViewFullTable dataframe.

@@ -10,7 +10,7 @@ context("plot_tag_status_by_subquadrat")
 # Outputs -----------------------------------------------------------------
 
 test_that("output is correct", {
-  map_list <- plot_tag_status_by_subquadrat(vft_1quad())
+  map_list <- plot_tag_status_by_subquadrat(pick_vft(fgeo.x::vft_4quad))
   
   # Class is correct
   expect_true(any(grepl("ggplot", class(map_list[[1]]))))
@@ -32,12 +32,12 @@ test_that("output is correct", {
     pull() %>%
     length()
   unique_tags_in_plot_n
-  unique_tags_in_data_n <- unique(vft_1quad()$Tag) %>% length()
+  unique_tags_in_data_n <- unique(pick_vft(fgeo.x::vft_4quad)$Tag) %>% length()
   expect_equal(unique_tags_in_plot_n, unique_tags_in_data_n)
 
   # plots the same with all or just the minimum needed vars in data
   all_vars <- map_list[[1]]$data
-  min_vars <- vft_1quad() %>%
+  min_vars <- pick_vft(fgeo.x::vft_4quad) %>%
     select(Tag, TreeID, QX, QY, Status, QuadratName, CensusID, PlotID) %>%
     plot_tag_status_by_subquadrat() %>%
     .[[1]] %>%
@@ -50,7 +50,7 @@ test_that("output is correct", {
 test_that("works with all defaults given in usage", {
   expect_silent(
     plot_tag_status_by_subquadrat(
-      vft_1quad(),
+      pick_vft(fgeo.x::vft_4quad),
       x_q = 20,
       x_sq = 5,
       y_q = 20,
@@ -80,7 +80,7 @@ test_that("handles wrong type", {
     "tag", "treeid", "qx", "qy", "status", "quadratname", "censusid", "plotid"
   )
   crucial_nms <- paste0(crucial, collapse = "|")
-  x <- vft_1quad() %>% 
+  x <- pick_vft(fgeo.x::vft_4quad) %>% 
     select(matches(crucial_nms)) 
   
   x <- map_df(x, as.character)
@@ -97,45 +97,73 @@ test_that("wrong inputs get noticed", {
   expect_error(
     plot_tag_status_by_subquadrat(
      # data has cero rows
-     filter(vft_1quad(), CensusID == 999)
+     filter(pick_vft(fgeo.x::vft_4quad), CensusID == 999)
     )
   )
 
   # Missing name
-  no_qx <- vft_1quad()
+  no_qx <- pick_vft(fgeo.x::vft_4quad)
   no_qx$QX <- NULL
   expect_error(plot_tag_status_by_subquadrat(no_qx), "Ensure")
 
   # wrong type
-  expect_error(plot_tag_status_by_subquadrat(vft_1quad(), x_q = "a"))
-  expect_error(plot_tag_status_by_subquadrat(vft_1quad(), x_sq = "a"))
-  expect_error(plot_tag_status_by_subquadrat(vft_1quad(), y_q = "a"))
-  expect_error(plot_tag_status_by_subquadrat(vft_1quad(), y_sq = "a"))
-  expect_error(plot_tag_status_by_subquadrat(vft_1quad(), subquad_offset = "not -1"))
-
-  expect_error(plot_tag_status_by_subquadrat(vft_1quad(), subquad_offset = 0))
-
-  # wrong length
-  expect_error(plot_tag_status_by_subquadrat(vft_1quad(), bl = 1:2))
-  expect_error(plot_tag_status_by_subquadrat(vft_1quad(), br = 1:2))
-  expect_error(plot_tag_status_by_subquadrat(vft_1quad(), tr = 1:2))
-  expect_error(plot_tag_status_by_subquadrat(vft_1quad(), tl = 1:2))
+  expect_error(
+    plot_tag_status_by_subquadrat(pick_vft(fgeo.x::vft_4quad), x_q = "a")
+  )
+  expect_error(
+    plot_tag_status_by_subquadrat(pick_vft(fgeo.x::vft_4quad), x_sq = "a")
+  )
+  expect_error(
+    plot_tag_status_by_subquadrat(pick_vft(fgeo.x::vft_4quad), y_q = "a")
+  )
+  expect_error(
+    plot_tag_status_by_subquadrat(pick_vft(fgeo.x::vft_4quad), y_sq = "a")
+  )
+  expect_error(
+    plot_tag_status_by_subquadrat(
+      pick_vft(fgeo.x::vft_4quad), subquad_offset = "not -1"
+    )
+  )
 
   expect_error(
     plot_tag_status_by_subquadrat(
-     vft_1quad(),
+      pick_vft(fgeo.x::vft_4quad), subquad_offset = 0
+    )
+  )
+
+  # wrong length
+  expect_error(
+    plot_tag_status_by_subquadrat(pick_vft(fgeo.x::vft_4quad), bl = 1:2)
+  )
+  expect_error(
+    plot_tag_status_by_subquadrat(pick_vft(fgeo.x::vft_4quad), br = 1:2)
+  )
+  expect_error(
+    plot_tag_status_by_subquadrat(pick_vft(fgeo.x::vft_4quad), tr = 1:2)
+  )
+  expect_error(
+    plot_tag_status_by_subquadrat(pick_vft(fgeo.x::vft_4quad), tl = 1:2)
+  )
+
+  expect_error(
+    plot_tag_status_by_subquadrat(
+     pick_vft(fgeo.x::vft_4quad),
      # wrong type
      title_quad = 1
     )
   )
 
-  expect_error(plot_tag_status_by_subquadrat(vft_1quad(), show_page = "not logical"))
+  expect_error(
+    plot_tag_status_by_subquadrat(
+      pick_vft(fgeo.x::vft_4quad), show_page = "not logical"
+    )
+  )
 
-  expect_error(plot_tag_status_by_subquadrat(vft_1quad(), show_subquad = "not logical"))
+  expect_error(plot_tag_status_by_subquadrat(pick_vft(fgeo.x::vft_4quad), show_subquad = "not logical"))
 
   expect_error(
     plot_tag_status_by_subquadrat(
-      vft_1quad(),
+      pick_vft(fgeo.x::vft_4quad),
       # wrong type
       point_shape = c("a", "b")
     )
@@ -143,7 +171,7 @@ test_that("wrong inputs get noticed", {
 
   expect_error(
     plot_tag_status_by_subquadrat(
-      vft_1quad(),
+      pick_vft(fgeo.x::vft_4quad),
       # wrong type
       point_size = "a"
     )
@@ -151,7 +179,7 @@ test_that("wrong inputs get noticed", {
 
   expect_error(
     plot_tag_status_by_subquadrat(
-      vft_1quad(),
+      pick_vft(fgeo.x::vft_4quad),
       # wrong type
       tag_size = "a"
     )
@@ -159,7 +187,7 @@ test_that("wrong inputs get noticed", {
 
   expect_error(
     plot_tag_status_by_subquadrat(
-      vft_1quad(),
+      pick_vft(fgeo.x::vft_4quad),
       # wrong type
       header = 1
     )
@@ -167,7 +195,7 @@ test_that("wrong inputs get noticed", {
 
   expect_error(
     plot_tag_status_by_subquadrat(
-      vft_1quad(),
+      pick_vft(fgeo.x::vft_4quad),
       # wrong type
       theme = 1
     )
@@ -175,22 +203,25 @@ test_that("wrong inputs get noticed", {
 
   expect_error(
     plot_tag_status_by_subquadrat(
-      vft_1quad(),
+      pick_vft(fgeo.x::vft_4quad),
       # wrong type
       move_edge = "a"
     )
   )
 
   # stops if data has more than one PlotID"
-  dup_plotid <-   vft_1quad()[1, ]
+  dup_plotid <-   pick_vft(fgeo.x::vft_4quad)[1, ]
   dup_plotid$PlotID <- 999L
-  w_dup_plotid <- dplyr::bind_rows(dup_plotid, vft_1quad())
-  expect_error(x <- plot_tag_status_by_subquadrat(w_dup_plotid), "Remove all but a single plot")
+  w_dup_plotid <- dplyr::bind_rows(dup_plotid, pick_vft(fgeo.x::vft_4quad))
+  expect_error(
+    x <- plot_tag_status_by_subquadrat(w_dup_plotid), 
+    "Remove all but a single plot"
+  )
 
   # warns if data has more than one CensusID"
-  dup_cnsid <-   vft_1quad()[1, ]
+  dup_cnsid <-   pick_vft(fgeo.x::vft_4quad)[1, ]
   dup_cnsid$CensusID <- 999L
-  w_dup_cnsid <- dplyr::bind_rows(dup_cnsid, vft_1quad())
+  w_dup_cnsid <- dplyr::bind_rows(dup_cnsid, pick_vft(fgeo.x::vft_4quad))
   expect_warning(x <- plot_tag_status_by_subquadrat(w_dup_cnsid), "Likely")
 })
 
@@ -211,11 +242,15 @@ test_that("page labels can be changed", {
 })
 
 test_that("argument subquad_offset works as expected", {
-  x <- plot_tag_status_by_subquadrat(vft_1quad(), subquad_offset = -1)
+  x <- plot_tag_status_by_subquadrat(
+    pick_vft(fgeo.x::vft_4quad), subquad_offset = -1
+  )
   subquads <- unique(purrr::map_df(x, "data")$subquadrat)
   expect_true("01" %in% subquads)
 
-  x <- plot_tag_status_by_subquadrat(vft_1quad(), subquad_offset = -1)
+  x <- plot_tag_status_by_subquadrat(
+    pick_vft(fgeo.x::vft_4quad), subquad_offset = -1
+  )
   subquads <- unique(purrr::map_df(x, "data")$subquadrat)
   expect_true("01" %in% subquads)
 })
@@ -243,7 +278,9 @@ test_that("outputs quadrats in order, even if QuadratName is numeric (#33)", {
   expect_equal(names(good), expect_nms)
   
   not_chr <- expect_warning(
-    plot_tag_status_by_subquadrat(mutate(vft_toy, QuadratName = as.numeric(QuadratName)))
+    plot_tag_status_by_subquadrat(
+      mutate(vft_toy, QuadratName = as.numeric(QuadratName))
+    )
   )
   expect_equal(names(not_chr), expect_nms)
 })
@@ -252,14 +289,14 @@ test_that("warns if option max.print is not high enough", {
   old_options <- options()
   options(max.print = 2)
   expect_warning(
-    p <- plot_tag_status_by_subquadrat(vft_1quad())
+    p <- plot_tag_status_by_subquadrat(pick_vft(fgeo.x::vft_4quad))
   )
   options(old_options)
   
   old_options <- options()
   options(max.print = 4)
   expect_silent(
-    p <- plot_tag_status_by_subquadrat(vft_1quad())
+    p <- plot_tag_status_by_subquadrat(pick_vft(fgeo.x::vft_4quad))
   )
   options(old_options)
 })

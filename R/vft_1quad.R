@@ -17,10 +17,7 @@ vft_1quad <- function() {
 
 #' @export
 #' @rdname vft_1quad
-pick_vft <- function(.data = fgeo.x::vft_4quad, 
-                     n_censuses = 1, 
-                     n_quadrats = 1,
-                     n_rows = NULL) {
+pick_vft <- function(.data, n_censuses = 1, n_quadrats = 1, n_rows = NULL) {
   result <- .data %>% 
     pick_top(.data$CensusID, n_censuses) %>% 
     pick_top(.data$QuadratID, n_quadrats)

@@ -83,12 +83,11 @@ the algorithm to calculate subquadrats.
 
 \examples{
 library(fgeo.tool)
-vft_4quad <- fgeo.x::vft_4quad
 
 # Filtering the data to map -----------------------------------------------
 # Filter the data you want. Using a small ViewFullTable for example:
 # (see `?vft_1quad`)
-small_vft <- dplyr::sample_n(vft_1quad(), 50)
+small_vft <- pick_vft(fgeo.x::vft_4quad, n_rows = 50)
 want <- filter(small_vft, CensusID == 4, PlotID == 1)
 p <- plot_tag_status_by_subquadrat(want)
 # Visualizing only the first plot
@@ -104,7 +103,7 @@ dev.off()
 # Be careful if filtering by DBH: You may unintentionally remove dead trees.
 # * If you filter by `DBH`, you loose the dead trees becaue their `DBH = NA`
 # * You should explicietly inlcude missing DBH values with `is.na(DBH)`
-p <- filter(vft_4quad, DBH > 20 | is.na(DBH))
+p <- filter(fgeo.x::vft_4quad, DBH > 20 | is.na(DBH))
 plot_tag_status_by_subquadrat(p)[[1]]
 
 # Customizing the maps ----------------------------------------------------
