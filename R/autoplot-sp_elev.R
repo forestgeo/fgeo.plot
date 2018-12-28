@@ -1,8 +1,8 @@
 #' Quick plot of species distribution and/or topography.
 #' 
 #' @description
-#' Automatically plot the `sp` and/or `elev` variables of ForestGEO-like
-#' datasets of class 'sp' and/or 'sp_elev'. 
+#' Plot the columns `sp` and/or `elev` of ForestGEO-like datasets of class 'sp'
+#' and/or 'sp_elev'.
 #' 
 #' * You can create a 'sp' `object` with:
 #' @description
@@ -22,7 +22,7 @@
 #' ```
 #' 
 #' @description
-#' See sections __Usage__ and __Examples__.
+#' See __Examples__ below.
 #' 
 #' @details
 #' `autoplot(sp_elev(DATA-WITH-VARIABLE-sp)` (without elevation data) is

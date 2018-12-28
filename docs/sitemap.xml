@@ -31,6 +31,9 @@
     <loc>https://forestgeo.github.io/fgeo.plot//reference/header_tag_status.html</loc>
   </url>
   <url>
+    <loc>https://forestgeo.github.io/fgeo.plot//reference/pick_vft.html</loc>
+  </url>
+  <url>
     <loc>https://forestgeo.github.io/fgeo.plot//reference/pipe.html</loc>
   </url>
   <url>
@@ -62,8 +65,5 @@
   </url>
   <url>
     <loc>https://forestgeo.github.io/fgeo.plot//reference/theme_tag_status.html</loc>
-  </url>
-  <url>
-    <loc>https://forestgeo.github.io/fgeo.plot//reference/vft_1quad.html</loc>
   </url>
 </urlset>

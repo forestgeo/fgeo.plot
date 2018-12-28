@@ -35,7 +35,8 @@
 <meta property="og:description" content="These functions extend the functionality of autoplot.sp() and
 autoplot.elev() and return not a single plot but a list of plots. It is
 ideal to print a .pdf file with one plot per page. They automatically plot
-the variables sp and elev of a ForestGEO-like dataset of class 'sp_elev'.
+the variables sp and elev of a ForestGEO-like dataset of class 'sp' or
+'sp_elev'.
 Create a 'sp' object with:
 " />
 
@@ -133,8 +134,9 @@ Create a 'sp_elev' object with:
     
     <p>These functions extend the functionality of <code><a href='autoplot.sp_elev.html'>autoplot.sp()</a></code> and
 <code><a href='autoplot.sp_elev.html'>autoplot.elev()</a></code> and return not a single plot but a list of plots. It is
-ideal to print a .pdf file with one plot per page. They automatically plot
-the variables <code>sp</code> and <code>elev</code> of a ForestGEO-like dataset of class 'sp_elev'.</p><ul>
+ideal to print a <em>.pdf</em> file with one plot per page. They automatically plot
+the variables <code>sp</code> and <code>elev</code> of a ForestGEO-like dataset of class 'sp' or
+'sp_elev'.</p><ul>
 <li><p>Create a 'sp' <code>object</code> with:</p></li>
 </ul>
 
@@ -288,27 +290,27 @@ can use <strong>ggplot2</strong> directly.</p>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># Species ---------------------------------------------------------------</span>
 <span class='co'># Small dataset with a few species for quick examples</span>
-<span class='no'>some_sp</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"PREMON"</span>, <span class='st'>"CASARB"</span>)
-<span class='no'>census</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/subset'>subset</a></span>(<span class='kw pkg'>fgeo.x</span><span class='kw ns'>::</span><span class='no'><a href='https://www.rdocumentation.org/packages/fgeo.x/topics/datasets'>tree5</a></span>, <span class='no'>sp</span> <span class='kw'>%in%</span> <span class='no'>some_sp</span>)
+<span class='no'>census</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>fgeo.x</span><span class='kw ns'>::</span><span class='no'><a href='https://www.rdocumentation.org/packages/fgeo.x/topics/datasets'>tree6_3species</a></span>
 
-<span class='no'>plots_list</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='autoplot_by_species.html'>autoplot_by_species</a></span>(<span class='fu'><a href='sp.html'>sp</a></span>(<span class='no'>census</span>))
-<span class='co'># Show the first plot in the list</span>
-<span class='no'>plots_list</span><span class='kw'>[[</span><span class='fl'>1</span>]]</div><div class='img'><img src='autoplot_by_species.sp_elev-1.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='fu'><a href='autoplot_by_species.html'>autoplot_by_species</a></span>(<span class='fu'><a href='sp.html'>sp</a></span>(<span class='no'>census</span>))</div><div class='output co'>#&gt; $CASARB</div><div class='img'><img src='autoplot_by_species.sp_elev-1.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; 
+#&gt; $PREMON</div><div class='img'><img src='autoplot_by_species.sp_elev-2.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; 
+#&gt; $SLOBER</div><div class='img'><img src='autoplot_by_species.sp_elev-3.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; </div><div class='input'>
 </div><span class='co'># NOT RUN {</span>
 <span class='co'># Print all plots in the list</span>
 <span class='fu'><a href='https://www.rdocumentation.org/packages/grDevices/topics/pdf'>pdf</a></span>(<span class='st'>"map.pdf"</span>, <span class='kw'>paper</span> <span class='kw'>=</span> <span class='st'>"letter"</span>, <span class='kw'>height</span> <span class='kw'>=</span> <span class='fl'>10.5</span>, <span class='kw'>width</span> <span class='kw'>=</span> <span class='fl'>8</span>)
-<span class='no'>plots_list</span>
+<span class='fu'><a href='autoplot_by_species.html'>autoplot_by_species</a></span>(<span class='fu'><a href='sp.html'>sp</a></span>(<span class='no'>census</span>))
 <span class='fu'><a href='https://www.rdocumentation.org/packages/grDevices/topics/dev'>dev.off</a></span>()
 <span class='co'># }</span><div class='input'>
-<span class='co'># Species and or elevation ----------------------------------------------</span>
+<span class='co'># Species and elevation (optional) ---------------------------------------</span>
 <span class='co'># Species only: Same as autoplot_by_species(sp(census))</span>
-<span class='fu'><a href='autoplot_by_species.html'>autoplot_by_species</a></span>(<span class='fu'><a href='sp_elev.html'>sp_elev</a></span>(<span class='no'>census</span>))</div><div class='output co'>#&gt; $CASARB</div><div class='img'><img src='autoplot_by_species.sp_elev-2.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; 
-#&gt; $PREMON</div><div class='img'><img src='autoplot_by_species.sp_elev-3.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; </div><div class='input'>
+<span class='fu'><a href='autoplot_by_species.html'>autoplot_by_species</a></span>(<span class='fu'><a href='sp_elev.html'>sp_elev</a></span>(<span class='no'>census</span>))</div><div class='output co'>#&gt; $CASARB</div><div class='img'><img src='autoplot_by_species.sp_elev-4.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; 
+#&gt; $PREMON</div><div class='img'><img src='autoplot_by_species.sp_elev-5.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; 
+#&gt; $SLOBER</div><div class='img'><img src='autoplot_by_species.sp_elev-6.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; </div><div class='input'>
 <span class='co'># Species and elevation</span>
-<span class='no'>census_elevation</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='sp_elev.html'>sp_elev</a></span>(<span class='no'>census</span>, <span class='kw pkg'>fgeo.x</span><span class='kw ns'>::</span><span class='no'><a href='https://www.rdocumentation.org/packages/fgeo.x/topics/datasets'>elevation</a></span>)
-<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='autoplot_by_species.html'>autoplot_by_species</a></span>(<span class='no'>census_elevation</span>)
-<span class='co'># Showing only the first plot</span>
-<span class='no'>p</span><span class='kw'>[[</span><span class='fl'>1</span>]]</div><div class='img'><img src='autoplot_by_species.sp_elev-4.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='no'>elevation</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>fgeo.x</span><span class='kw ns'>::</span><span class='no'><a href='https://www.rdocumentation.org/packages/fgeo.x/topics/datasets'>elevation</a></span>
+<span class='fu'><a href='autoplot_by_species.html'>autoplot_by_species</a></span>(<span class='fu'><a href='sp_elev.html'>sp_elev</a></span>(<span class='no'>census</span>, <span class='no'>elevation</span>))</div><div class='output co'>#&gt; $CASARB</div><div class='img'><img src='autoplot_by_species.sp_elev-7.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; 
+#&gt; $PREMON</div><div class='img'><img src='autoplot_by_species.sp_elev-8.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; 
+#&gt; $SLOBER</div><div class='img'><img src='autoplot_by_species.sp_elev-9.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; </div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

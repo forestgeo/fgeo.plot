@@ -69,8 +69,8 @@ theme \code{\link[=theme_default]{theme_default()}}.}
 A "ggplot".
 }
 \description{
-Automatically plot the \code{sp} and/or \code{elev} variables of ForestGEO-like
-datasets of class 'sp' and/or 'sp_elev'.
+Plot the columns \code{sp} and/or \code{elev} of ForestGEO-like datasets of class 'sp'
+and/or 'sp_elev'.
 \itemize{
 \item You can create a 'sp' \code{object} with:
 }
@@ -91,7 +91,7 @@ datasets of class 'sp' and/or 'sp_elev'.
 \preformatted{    object <- sp_elev(DATA-WITH-VARIABLE-sp, DATA-WITH-VARIABLE-elev)
 }
 
-See sections \strong{Usage} and \strong{Examples}.
+See \strong{Examples} below.
 }
 \details{
 \code{autoplot(sp_elev(DATA-WITH-VARIABLE-sp)} (without elevation data) is

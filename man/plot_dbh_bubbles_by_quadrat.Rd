@@ -39,29 +39,21 @@ A list which each element is a plot of class ggplot.
 List dbh bubble-plots by quadrat (good for .pdf output).
 }
 \examples{
-library(dplyr)
-library(fgeo.tool)
+small_vft <- pick_vft(fgeo.x::vft_4quad, n_censuses = 1, n_quadrats = 2)
 
-# Using a small viewFullTable for example (see ?vft_1quad)
-small_vft <- sample_n(vft_1quad(), 50)
-
-# Filter the data you want. For example:
-want <- filter(small_vft, CensusID == 4, PlotID == 1)
-p <- plot_dbh_bubbles_by_quadrat(want)
-# Visualizing only the first plot
-p[[1]]
+plot_dbh_bubbles_by_quadrat(small_vft)
 
 # Printing all plots to .pdf, with parameters optimized for size letter
 \dontrun{
-pdf("map.pdf", paper = "letter", height = 10.5, width = 8)
-p
-dev.off()
+  pdf("map.pdf", paper = "letter", height = 10.5, width = 8)
+  plot_dbh_bubbles_by_quadrat(small_vft)
+  dev.off()
 }
- 
-# Be careful if filtering by DBH: You may unintentionally remove dead trees.
+
+# Be careful if subsetting by DBH: You may unintentionally remove dead trees.
 # You should explicietly inlcude missing `DBH` values with `is.na(DBH)`
-p <- filter(small_vft, DBH > 20 | is.na(DBH))
-plot_dbh_bubbles_by_quadrat(p)[[1]]
+include_missing_dbh <- subset(small_vft, DBH > 20 | is.na(DBH))
+plot_dbh_bubbles_by_quadrat(include_missing_dbh)
 
 # Customizing the maps ----------------------------------------------------
 # A custom title and header
@@ -74,7 +66,11 @@ myheader <- paste(
   sep = "\\n"
 )
 
-plot_dbh_bubbles_by_quadrat(small_vft, title_quad = "My Site, 2018. Quad:", header = myheader)
+plot_dbh_bubbles_by_quadrat(
+  small_vft, 
+  title_quad = "My Site, 2018. Quad:", 
+  header = myheader
+)
 
 # Tweak the theme with ggplot
 library(ggplot2)
