@@ -84,10 +84,7 @@ the algorithm to calculate subquadrats.
 \examples{
 # Create a small VieFullTable
 first <- function(x) x \%in\% sort(unique(x))[1]
-small_vft <- subset(
-  fgeo.x::vft_4quad,
-  first(CensusID), first(QuadratID)
-)
+small_vft <- subset(fgeo.x::vft_4quad, first(CensusID) & first(QuadratID))
 
 plot_tag_status_by_subquadrat(small_vft)
 
