@@ -1,11 +1,12 @@
+library(dplyr)
+
 context("plot_dbh_bubbles_by_quadrat")
 
-vft_1quad_sub <- pick_vft(
-  fgeo.x::vft_4quad, 
-  n_censuses = 1,
-  n_quadrats = 1,
-  n_rows = 5
-)
+is_first <- function(x) x %in% sort(unique(x))[1]
+
+vft_1quad_sub <- fgeo.x::vft_4quad %>% 
+  filter(is_first(CensusID), is_first(QuadratID)) %>% 
+  sample_n(5)
 
 test_that("passes with default arguments", {
   # Warns because dataset has no dead trees

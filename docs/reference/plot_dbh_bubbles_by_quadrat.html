@@ -185,7 +185,11 @@ status that corresponds to dead stems.</p></td>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>small_vft</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='pick_vft.html'>pick_vft</a></span>(<span class='kw pkg'>fgeo.x</span><span class='kw ns'>::</span><span class='no'><a href='https://www.rdocumentation.org/packages/fgeo.x/topics/datasets'>vft_4quad</a></span>, <span class='kw'>n_censuses</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>n_quadrats</span> <span class='kw'>=</span> <span class='fl'>2</span>)
+    <pre class="examples"><div class='input'><span class='co'># Create a small VieFullTable</span>
+<span class='no'>first_n</span> <span class='kw'>&lt;-</span> <span class='kw'>function</span>(<span class='no'>x</span>, <span class='no'>n</span>) <span class='no'>x</span> <span class='kw'>%in%</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/sort'>sort</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/unique'>unique</a></span>(<span class='no'>x</span>))[<span class='fl'>1</span>:<span class='no'>n</span>]
+<span class='no'>small_vft</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/subset'>subset</a></span>(
+  <span class='kw pkg'>fgeo.x</span><span class='kw ns'>::</span><span class='no'><a href='https://www.rdocumentation.org/packages/fgeo.x/topics/datasets'>vft_4quad</a></span>, <span class='fu'>first_n</span>(<span class='no'>CensusID</span>, <span class='fl'>1</span>) <span class='kw'>&amp;</span> <span class='fu'>first_n</span>(<span class='no'>QuadratID</span>, <span class='fl'>2</span>)
+)
 
 <span class='fu'>plot_dbh_bubbles_by_quadrat</span>(<span class='no'>small_vft</span>)</div><div class='output co'>#&gt; <span class='message'>* Appending tags of dead trees with the suffix '.d'</span></div><div class='output co'>#&gt; <span class='message'>* Standarizing `dbh` by the count of `dbh` measurements</span></div><div class='output co'>#&gt; $`621`</div><div class='output co'>#&gt; <span class='warning'>Warning: Removed 40 rows containing missing values (geom_point).</span></div><div class='img'><img src='plot_dbh_bubbles_by_quadrat-1.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; 
 #&gt; $`721`</div><div class='output co'>#&gt; <span class='warning'>Warning: Removed 49 rows containing missing values (geom_point).</span></div><div class='img'><img src='plot_dbh_bubbles_by_quadrat-2.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; </div><div class='input'>
@@ -232,7 +236,8 @@ status that corresponds to dead stems.</p></td>
     <span class='kw'>panel.background</span> <span class='kw'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_rect</a></span>(<span class='kw'>fill</span> <span class='kw'>=</span> <span class='st'>"grey"</span>)
   )
 )</div><div class='output co'>#&gt; <span class='message'>* Appending tags of dead trees with the suffix '.d'</span></div><div class='output co'>#&gt; <span class='message'>* Standarizing `dbh` by the count of `dbh` measurements</span></div><div class='output co'>#&gt; $`621`</div><div class='output co'>#&gt; <span class='warning'>Warning: Removed 40 rows containing missing values (geom_point).</span></div><div class='img'><img src='plot_dbh_bubbles_by_quadrat-7.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; 
-#&gt; $`721`</div><div class='output co'>#&gt; <span class='warning'>Warning: Removed 49 rows containing missing values (geom_point).</span></div><div class='img'><img src='plot_dbh_bubbles_by_quadrat-8.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; </div></pre>
+#&gt; $`721`</div><div class='output co'>#&gt; <span class='warning'>Warning: Removed 49 rows containing missing values (geom_point).</span></div><div class='img'><img src='plot_dbh_bubbles_by_quadrat-8.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; </div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

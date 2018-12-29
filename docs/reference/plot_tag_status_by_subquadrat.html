@@ -252,7 +252,9 @@ the algorithm to calculate subquadrats.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>small_vft</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='pick_vft.html'>pick_vft</a></span>(<span class='kw pkg'>fgeo.x</span><span class='kw ns'>::</span><span class='no'><a href='https://www.rdocumentation.org/packages/fgeo.x/topics/datasets'>vft_4quad</a></span>, <span class='kw'>n_censuses</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>n_quadrats</span> <span class='kw'>=</span> <span class='fl'>1</span>)
+    <pre class="examples"><div class='input'><span class='co'># Create a small VieFullTable</span>
+<span class='no'>first</span> <span class='kw'>&lt;-</span> <span class='kw'>function</span>(<span class='no'>x</span>) <span class='no'>x</span> <span class='kw'>%in%</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/sort'>sort</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/unique'>unique</a></span>(<span class='no'>x</span>))[<span class='fl'>1</span>]
+<span class='no'>small_vft</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/subset'>subset</a></span>(<span class='kw pkg'>fgeo.x</span><span class='kw ns'>::</span><span class='no'><a href='https://www.rdocumentation.org/packages/fgeo.x/topics/datasets'>vft_4quad</a></span>, <span class='fu'>first</span>(<span class='no'>CensusID</span>) <span class='kw'>&amp;</span> <span class='fu'>first</span>(<span class='no'>QuadratID</span>))
 
 <span class='fu'>plot_tag_status_by_subquadrat</span>(<span class='no'>small_vft</span>)</div><div class='output co'>#&gt; $`621_1`</div><div class='img'><img src='plot_tag_status_by_subquadrat-1.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; 
 #&gt; $`621_2`</div><div class='img'><img src='plot_tag_status_by_subquadrat-2.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; 

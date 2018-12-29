@@ -14,7 +14,11 @@
 #' @return A list which each element is a plot of class ggplot.
 #'
 #' @examples
-#' small_vft <- pick_vft(fgeo.x::vft_4quad, n_censuses = 1, n_quadrats = 2)
+#' # Create a small VieFullTable
+#' first_n <- function(x, n) x %in% sort(unique(x))[1:n]
+#' small_vft <- subset(
+#'   fgeo.x::vft_4quad, first_n(CensusID, 1) & first_n(QuadratID, 2)
+#' )
 #' 
 #' plot_dbh_bubbles_by_quadrat(small_vft)
 #' 
@@ -42,8 +46,8 @@
 #' )
 #' 
 #' plot_dbh_bubbles_by_quadrat(
-#'   small_vft, 
-#'   title_quad = "My Site, 2018. Quad:", 
+#'   small_vft,
+#'   title_quad = "My Site, 2018. Quad:",
 #'   header = myheader
 #' )
 #' 
@@ -62,20 +66,21 @@
 #'     panel.background = element_rect(fill = "grey")
 #'   )
 #' )
+#' 
 #' @family plot functions
 #' @family functions to list plots from ForestGEO ViewFullTable
 #' @family functions to plot dbh bubbles
 #' @export
 plot_dbh_bubbles_by_quadrat <- function(vft,
-                     title_quad = "Site Name, YYYY, Quadrat:",
-                     header = header_dbh_bubbles(),
-                     theme = theme_dbh_bubbles(),
-                     lim_min = 0,
-                     lim_max = 20,
-                     subquadrat_side = 5,
-                     tag_size = 2,
-                     move_edge = 0,
-                     status_d = "dead") {
+                                        title_quad = "Site Name, YYYY, Quadrat:",
+                                        header = header_dbh_bubbles(),
+                                        theme = theme_dbh_bubbles(),
+                                        lim_min = 0,
+                                        lim_max = 20,
+                                        subquadrat_side = 5,
+                                        tag_size = 2,
+                                        move_edge = 0,
+                                        status_d = "dead") {
   .vft <- setNames(vft, tolower(names(vft)))
   core <- c(
     "plotid", "censusid", "tag", "dbh", "status", "quadratname",
@@ -121,15 +126,15 @@ plot_dbh_bubbles_by_quadrat <- function(vft,
 }
 
 check_plot_dbh_bubbles_by_quadrat <- function(vft,
-                           core,
-                           lim_min,
-                           lim_max,
-                           subquadrat_side,
-                           tag_size,
-                           move_edge,
-                           title_quad,
-                           header,
-                           theme) {
+                                              core,
+                                              lim_min,
+                                              lim_max,
+                                              subquadrat_side,
+                                              tag_size,
+                                              move_edge,
+                                              title_quad,
+                                              header,
+                                              theme) {
   if (missing(vft)) stop("`vft` can't be missing")
   if (!is.data.frame(vft)) stop("`vft` should be a dataframe")
   stopifnot(

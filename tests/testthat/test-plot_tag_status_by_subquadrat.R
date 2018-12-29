@@ -3,11 +3,12 @@ set.seed(123)
 library(dplyr)
 library(purrr)
 
-small_vft <- pick_vft(
-  fgeo.x::vft_4quad,
-  n_censuses = 1,
-  n_quadrats = 1
-)
+is_first <- function(x) x %in% sort(unique(x))[1]
+
+small_vft <- fgeo.x::vft_4quad %>% 
+  filter(is_first(.data$CensusID), is_first(.data$QuadratID))
+
+
 
 context("plot_tag_status_by_subquadrat")
 
