@@ -39,7 +39,12 @@ A list which each element is a plot of class ggplot.
 List dbh bubble-plots by quadrat (good for .pdf output).
 }
 \examples{
-small_vft <- pick_vft(fgeo.x::vft_4quad, n_censuses = 1, n_quadrats = 2)
+# Create a small VieFullTable
+first_n <- function(x, n = 1) x \%in\% sort(unique(x))[1:n]
+small_vft <- subset(
+  fgeo.x::vft_4quad,
+  first_n(CensusID, 1), first_n(QuadratID, 2)
+)
 
 plot_dbh_bubbles_by_quadrat(small_vft)
 
@@ -67,8 +72,8 @@ myheader <- paste(
 )
 
 plot_dbh_bubbles_by_quadrat(
-  small_vft, 
-  title_quad = "My Site, 2018. Quad:", 
+  small_vft,
+  title_quad = "My Site, 2018. Quad:",
   header = myheader
 )
 
@@ -87,6 +92,7 @@ plot_dbh_bubbles_by_quadrat(
     panel.background = element_rect(fill = "grey")
   )
 )
+
 }
 \seealso{
 Other plot functions: \code{\link{autoplot.fgeo_habitat}},
