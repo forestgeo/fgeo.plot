@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Pick ViewFullTables to create small example datasets. — pick_vft • fgeo.plot</title>
+<title>Pick some censuses, quadrats and rows from a ViewFullTable. — pick_vft • fgeo.plot</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,11 +30,12 @@
 
 
 
-<meta property="og:title" content="Pick ViewFullTables to create small example datasets. — pick_vft" />
+<meta property="og:title" content="Pick some censuses, quadrats and rows from a ViewFullTable. — pick_vft" />
 
-<meta property="og:description" content="This function helps you to create small datasets for examples. It defaults to
-returning the input ViewFullTable &quot;as is&quot;, but provides arguments to pick a
-specific number of censuses, quadrats and rows." />
+<meta property="og:description" content="This function helps you to pick some rows of a ForestGEO ViewFullTable. It is
+useful to create small datasets for examples. It defaults to returning the
+input ViewFullTable &quot;as is&quot;, but provides arguments to pick a specific number
+of censuses, quadrats and rows." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -110,16 +111,17 @@ specific number of censuses, quadrats and rows." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Pick ViewFullTables to create small example datasets.</h1>
+    <h1>Pick some censuses, quadrats and rows from a ViewFullTable.</h1>
     <small class="dont-index">Source: <a href='https://github.com/forestgeo/fgeo.plot/blob/master/R/pick_vft.R'><code>R/pick_vft.R</code></a></small>
     <div class="hidden name"><code>pick_vft.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>This function helps you to create small datasets for examples. It defaults to
-returning the input ViewFullTable "as is", but provides arguments to pick a
-specific number of censuses, quadrats and rows.</p>
+    <p>This function helps you to pick some rows of a ForestGEO ViewFullTable. It is
+useful to create small datasets for examples. It defaults to returning the
+input ViewFullTable "as is", but provides arguments to pick a specific number
+of censuses, quadrats and rows.</p>
     
     </div>
 
@@ -134,12 +136,14 @@ specific number of censuses, quadrats and rows.</p>
     </tr>
     <tr>
       <th>n_censuses, n_quadrats</th>
-      <td><p>Number of censuses and quadrats to pick.</p></td>
+      <td><p>Number of censuses and quadrats to pick from the
+front (if positive) or back (if negative) of the unique alpha-sorted values
+of <code>CensusID</code> and <code>QuadratID</code>, respectively (see examples below).</p></td>
     </tr>
     <tr>
       <th>n_rows</th>
-      <td><p>Number of rows to sample after picking <code>n_censuses</code> and
-<code>n_quadrats</code>.</p></td>
+      <td><p>Number of rows to sample at random -- after picking
+<code>n_censuses</code> and <code>n_quadrats</code>.</p></td>
     </tr>
     </table>
     
@@ -149,16 +153,14 @@ specific number of censuses, quadrats and rows.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># Same</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/dim'>dim</a></span>(<span class='kw pkg'>fgeo.x</span><span class='kw ns'>::</span><span class='no'><a href='https://www.rdocumentation.org/packages/fgeo.x/topics/datasets'>vft_4quad</a></span>)</div><div class='output co'>#&gt; [1] 500  32</div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/dim'>dim</a></span>(<span class='fu'>pick_vft</span>(<span class='kw pkg'>fgeo.x</span><span class='kw ns'>::</span><span class='no'><a href='https://www.rdocumentation.org/packages/fgeo.x/topics/datasets'>vft_4quad</a></span>))</div><div class='output co'>#&gt; [1] 500  32</div><div class='input'>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/dim'>dim</a></span>(
-  <span class='fu'>pick_vft</span>(
-    <span class='kw pkg'>fgeo.x</span><span class='kw ns'>::</span><span class='no'><a href='https://www.rdocumentation.org/packages/fgeo.x/topics/datasets'>vft_4quad</a></span>,
-    <span class='kw'>n_censuses</span> <span class='kw'>=</span> <span class='fl'>2</span>,
-    <span class='kw'>n_quadrats</span> <span class='kw'>=</span> <span class='fl'>2</span>,
-    <span class='kw'>n_rows</span> <span class='kw'>=</span> <span class='fl'>50</span>
- )
-)</div><div class='output co'>#&gt; [1] 50 32</div><div class='input'>
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/dim'>dim</a></span>(<span class='kw pkg'>fgeo.x</span><span class='kw ns'>::</span><span class='no'><a href='https://www.rdocumentation.org/packages/fgeo.x/topics/datasets'>vft_4quad</a></span>)</div><div class='output co'>#&gt; [1] 500  32</div><div class='input'><span class='co'># Same</span>
+<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/dim'>dim</a></span>(<span class='fu'>pick_vft</span>(<span class='kw pkg'>fgeo.x</span><span class='kw ns'>::</span><span class='no'><a href='https://www.rdocumentation.org/packages/fgeo.x/topics/datasets'>vft_4quad</a></span>))</div><div class='output co'>#&gt; [1] 500  32</div><div class='input'>
+<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/dim'>dim</a></span>(<span class='fu'>pick_vft</span>(<span class='kw pkg'>fgeo.x</span><span class='kw ns'>::</span><span class='no'><a href='https://www.rdocumentation.org/packages/fgeo.x/topics/datasets'>vft_4quad</a></span>, <span class='kw'>n_rows</span> <span class='kw'>=</span> <span class='fl'>50</span>))</div><div class='output co'>#&gt; [1] 50 32</div><div class='input'>
+<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/sort'>sort</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/unique'>unique</a></span>(<span class='kw pkg'>fgeo.x</span><span class='kw ns'>::</span><span class='no'><a href='https://www.rdocumentation.org/packages/fgeo.x/topics/datasets'>vft_4quad</a></span>$<span class='no'>QuadratID</span>))</div><div class='output co'>#&gt; [1] 326 327 342 343</div><div class='input'>
+<span class='co'># Pick from the front</span>
+<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/unique'>unique</a></span>(<span class='fu'>pick_vft</span>(<span class='kw pkg'>fgeo.x</span><span class='kw ns'>::</span><span class='no'><a href='https://www.rdocumentation.org/packages/fgeo.x/topics/datasets'>vft_4quad</a></span>, <span class='kw'>n_quadrats</span> <span class='kw'>=</span> <span class='fl'>1</span>)$<span class='no'>QuadratID</span>)</div><div class='output co'>#&gt; [1] 326</div><div class='input'>
+<span class='co'># Pick from the back</span>
+<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/unique'>unique</a></span>(<span class='fu'>pick_vft</span>(<span class='kw pkg'>fgeo.x</span><span class='kw ns'>::</span><span class='no'><a href='https://www.rdocumentation.org/packages/fgeo.x/topics/datasets'>vft_4quad</a></span>, <span class='kw'>n_quadrats</span> <span class='kw'>=</span> -<span class='fl'>2</span>)$<span class='no'>QuadratID</span>)</div><div class='output co'>#&gt; [1] 342 343</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

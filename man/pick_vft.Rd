@@ -2,39 +2,43 @@
 % Please edit documentation in R/pick_vft.R
 \name{pick_vft}
 \alias{pick_vft}
-\title{Pick ViewFullTables to create small example datasets.}
+\title{Pick some censuses, quadrats and rows from a ViewFullTable.}
 \usage{
 pick_vft(.data, n_censuses = NULL, n_quadrats = NULL, n_rows = NULL)
 }
 \arguments{
 \item{.data}{A ViewFullTable}
 
-\item{n_censuses, n_quadrats}{Number of censuses and quadrats to pick.}
+\item{n_censuses, n_quadrats}{Number of censuses and quadrats to pick from the
+front (if positive) or back (if negative) of the unique alpha-sorted values
+of \code{CensusID} and \code{QuadratID}, respectively (see examples below).}
 
-\item{n_rows}{Number of rows to sample after picking \code{n_censuses} and
-\code{n_quadrats}.}
+\item{n_rows}{Number of rows to sample at random -- after picking
+\code{n_censuses} and \code{n_quadrats}.}
 }
 \value{
 A tibble (dataframe).
 }
 \description{
-This function helps you to create small datasets for examples. It defaults to
-returning the input ViewFullTable "as is", but provides arguments to pick a
-specific number of censuses, quadrats and rows.
+This function helps you to pick some rows of a ForestGEO ViewFullTable. It is
+useful to create small datasets for examples. It defaults to returning the
+input ViewFullTable "as is", but provides arguments to pick a specific number
+of censuses, quadrats and rows.
 }
 \examples{
-# Same
 dim(fgeo.x::vft_4quad)
+# Same
 dim(pick_vft(fgeo.x::vft_4quad))
 
-dim(
-  pick_vft(
-    fgeo.x::vft_4quad, 
-    n_censuses = 2, 
-    n_quadrats = 2, 
-    n_rows = 50
- )
-)
+dim(pick_vft(fgeo.x::vft_4quad, n_rows = 50))
+
+sort(unique(fgeo.x::vft_4quad$QuadratID))
+
+# Pick from the front
+unique(pick_vft(fgeo.x::vft_4quad, n_quadrats = 1)$QuadratID)
+
+# Pick from the back
+unique(pick_vft(fgeo.x::vft_4quad, n_quadrats = -2)$QuadratID)
 
 }
 \concept{functions for fgeo vft}
