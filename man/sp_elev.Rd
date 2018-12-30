@@ -28,6 +28,18 @@ class(species_elevation)
 \seealso{
 \code{\link[=autoplot.sp_elev]{autoplot.sp_elev()}}.
 
+Other plot functions: \code{\link{autoplot.fgeo_habitat}},
+  \code{\link{autoplot.sp_elev}},
+  \code{\link{autoplot_by_species.sp_elev}},
+  \code{\link{elev}},
+  \code{\link{plot_dbh_bubbles_by_quadrat}},
+  \code{\link{plot_tag_status_by_subquadrat}},
+  \code{\link{sp}}
+
+Other autoplots: \code{\link{autoplot.fgeo_habitat}},
+  \code{\link{autoplot.sp_elev}}, \code{\link{elev}},
+  \code{\link{sp}}
+
 Other functions to construct fgeo classes: \code{\link{elev}},
   \code{\link{sp}}
 
@@ -39,6 +51,8 @@ Other functions to plot species: \code{\link{autoplot.sp_elev}},
   \code{\link{autoplot_by_species.sp_elev}},
   \code{\link{sp}}
 }
+\concept{autoplots}
 \concept{functions to construct fgeo classes}
 \concept{functions to plot elevation}
 \concept{functions to plot species}
+\concept{plot functions}

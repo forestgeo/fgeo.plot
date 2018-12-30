@@ -145,7 +145,9 @@ p[[1]]
 Other plot functions: \code{\link{autoplot.fgeo_habitat}},
   \code{\link{autoplot.sp_elev}},
   \code{\link{autoplot_by_species.sp_elev}},
-  \code{\link{plot_dbh_bubbles_by_quadrat}}
+  \code{\link{elev}},
+  \code{\link{plot_dbh_bubbles_by_quadrat}},
+  \code{\link{sp_elev}}, \code{\link{sp}}
 
 Other functions to list plots from ForestGEO ViewFullTable: \code{\link{plot_dbh_bubbles_by_quadrat}}
 
