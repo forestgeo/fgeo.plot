@@ -9,6 +9,8 @@
 #' @examples
 #' class(sp(fgeo.x::stem5))
 #' 
+#' @family plot functions
+#' @family autoplots
 #' @family functions to construct fgeo classes
 #' @family functions to plot species
 #' @export
@@ -31,6 +33,8 @@ sp <- function(sp) {
 #' # Same
 #' class(elev(fgeo.x::elevation$col))
 #' 
+#' @family plot functions
+#' @family autoplots
 #' @family functions to construct fgeo classes
 #' @family functions to plot elevation
 #' @export
@@ -55,6 +59,8 @@ elev <- function(elev) {
 #' )
 #' class(species_elevation)
 #' 
+#' @family plot functions
+#' @family autoplots
 #' @family functions to construct fgeo classes
 #' @family functions to plot elevation
 #' @family functions to plot species

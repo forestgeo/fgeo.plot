@@ -102,29 +102,28 @@ can use \strong{ggplot2} directly.
 }
 \examples{
 # Species ---------------------------------------------------------------
+
 # Small dataset with a few species for quick examples
-tree <- subset(fgeo.x::tree5, sp \%in\% c("PREMON", "CASARB"))
-autoplot(sp(tree))
+census <- fgeo.x::download_data("luquillo_tree5_random") \%>\%
+  subset(sp \%in\% c("PREMON", "CASARB"))
+
+autoplot(sp(census))
 
 # Customize
-autoplot(sp(tree), point_size = 1)
+autoplot(sp(census), point_size = 1)
 
 # Elevation -------------------------------------------------------------
-elevation_list <- fgeo.x::elevation
-autoplot(elev(elevation_list))
-# Same
-autoplot(elev(elevation_list$col))
+
+elevation <- fgeo.x::elevation
+autoplot(elev(elevation))
+# Same: Works both with the elevation list and dataframe
+autoplot(elev(elevation$col))
 
 # Customize
-autoplot(elev(elevation_list$col), contour_size = 1)
+autoplot(elev(elevation), contour_size = 1)
 
 # Species and elevation -------------------------------------------------
-# Small dataset with a few species for quick examples
-some_sp <- c("PREMON", "CASARB")
-census <- subset(fgeo.x::tree5, sp \%in\% some_sp)
-elevation <- fgeo.x::elevation
 
-# Customize
 autoplot(sp_elev(census, elevation), facet = FALSE, point_size = 1)
 
 }
@@ -133,10 +132,14 @@ autoplot(sp_elev(census, elevation), facet = FALSE, point_size = 1)
 
 Other plot functions: \code{\link{autoplot.fgeo_habitat}},
   \code{\link{autoplot_by_species.sp_elev}},
+  \code{\link{elev}},
   \code{\link{plot_dbh_bubbles_by_quadrat}},
-  \code{\link{plot_tag_status_by_subquadrat}}
+  \code{\link{plot_tag_status_by_subquadrat}},
+  \code{\link{sp_elev}}, \code{\link{sp}}
 
-Other autoplots: \code{\link{autoplot.fgeo_habitat}}
+Other autoplots: \code{\link{autoplot.fgeo_habitat}},
+  \code{\link{elev}}, \code{\link{sp_elev}},
+  \code{\link{sp}}
 
 Other functions to plot elevation: \code{\link{autoplot_by_species.sp_elev}},
   \code{\link{elev}}, \code{\link{sp_elev}}

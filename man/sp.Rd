@@ -22,6 +22,18 @@ class(sp(fgeo.x::stem5))
 \seealso{
 \code{\link[=autoplot.sp]{autoplot.sp()}}.
 
+Other plot functions: \code{\link{autoplot.fgeo_habitat}},
+  \code{\link{autoplot.sp_elev}},
+  \code{\link{autoplot_by_species.sp_elev}},
+  \code{\link{elev}},
+  \code{\link{plot_dbh_bubbles_by_quadrat}},
+  \code{\link{plot_tag_status_by_subquadrat}},
+  \code{\link{sp_elev}}
+
+Other autoplots: \code{\link{autoplot.fgeo_habitat}},
+  \code{\link{autoplot.sp_elev}}, \code{\link{elev}},
+  \code{\link{sp_elev}}
+
 Other functions to construct fgeo classes: \code{\link{elev}},
   \code{\link{sp_elev}}
 
@@ -29,5 +41,7 @@ Other functions to plot species: \code{\link{autoplot.sp_elev}},
   \code{\link{autoplot_by_species.sp_elev}},
   \code{\link{sp_elev}}
 }
+\concept{autoplots}
 \concept{functions to construct fgeo classes}
 \concept{functions to plot species}
+\concept{plot functions}
