@@ -21,15 +21,13 @@ Install the development version of **fgeo.plot**:
 Or [install all **fgeo** packages in one
 step](https://forestgeo.github.io/fgeo/index.html#installation).
 
-For details on how to install packages from GitHub, see [this
-article](https://goo.gl/dQKEeg).
-
 ## Example
 
 ``` r
 library(fgeo.plot)
 
 small_census <- fgeo.x::tree6_3species
+
 autoplot(sp(small_census))
 ```
 
@@ -37,6 +35,7 @@ autoplot(sp(small_census))
 
 ``` r
 elevation <- fgeo.x::elevation
+
 autoplot(
   sp_elev(small_census, elevation),
   fill = "red", 

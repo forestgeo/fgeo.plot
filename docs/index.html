@@ -89,7 +89,6 @@
 <pre><code><a href="https://www.rdocumentation.org/packages/devtools/topics/reexports"># install.packages("devtools")
 devtools::install_github("forestgeo/fgeo.plot")</a></code></pre>
 <p>Or <a href="https://forestgeo.github.io/fgeo/index.html#installation">install all <strong>fgeo</strong> packages in one step</a>.</p>
-<p>For details on how to install packages from GitHub, see <a href="https://goo.gl/dQKEeg">this article</a>.</p>
 </div>
 <div id="example" class="section level2">
 <h2 class="hasAnchor">
@@ -97,14 +96,16 @@ devtools::install_github("forestgeo/fgeo.plot")</a></code></pre>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(fgeo.plot)</a>
 <a class="sourceLine" id="cb2-2" data-line-number="2"></a>
 <a class="sourceLine" id="cb2-3" data-line-number="3">small_census &lt;-<span class="st"> </span>fgeo.x<span class="op">::</span>tree6_3species</a>
-<a class="sourceLine" id="cb2-4" data-line-number="4"><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/autoplot.html">autoplot</a></span>(<span class="kw"><a href="reference/sp.html">sp</a></span>(small_census))</a></code></pre></div>
+<a class="sourceLine" id="cb2-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb2-5" data-line-number="5"><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/autoplot.html">autoplot</a></span>(<span class="kw"><a href="reference/sp.html">sp</a></span>(small_census))</a></code></pre></div>
 <p><img src="reference/figures/README-fgeo.plot-sp-1.png" width="75%" style="display: block; margin: auto;"></p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">elevation &lt;-<span class="st"> </span>fgeo.x<span class="op">::</span>elevation</a>
-<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/autoplot.html">autoplot</a></span>(</a>
-<a class="sourceLine" id="cb3-3" data-line-number="3">  <span class="kw"><a href="reference/sp_elev.html">sp_elev</a></span>(small_census, elevation),</a>
-<a class="sourceLine" id="cb3-4" data-line-number="4">  <span class="dt">fill =</span> <span class="st">"red"</span>, </a>
-<a class="sourceLine" id="cb3-5" data-line-number="5">  <span class="dt">hide_color_legend =</span> <span class="ot">TRUE</span></a>
-<a class="sourceLine" id="cb3-6" data-line-number="6">)</a></code></pre></div>
+<a class="sourceLine" id="cb3-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/autoplot.html">autoplot</a></span>(</a>
+<a class="sourceLine" id="cb3-4" data-line-number="4">  <span class="kw"><a href="reference/sp_elev.html">sp_elev</a></span>(small_census, elevation),</a>
+<a class="sourceLine" id="cb3-5" data-line-number="5">  <span class="dt">fill =</span> <span class="st">"red"</span>, </a>
+<a class="sourceLine" id="cb3-6" data-line-number="6">  <span class="dt">hide_color_legend =</span> <span class="ot">TRUE</span></a>
+<a class="sourceLine" id="cb3-7" data-line-number="7">)</a></code></pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-1-1.png" width="75%" style="display: block; margin: auto;"></p>
 <p><a href="https://forestgeo.github.io/fgeo/articles/fgeo.html">Get started with <strong>fgeo</strong></a></p>
 </div>

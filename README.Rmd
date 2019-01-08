@@ -13,7 +13,7 @@ knitr::opts_chunk$set(
   fig.align = "center",
   out.width = "75%",
   fig.width = 7.5, 
-  fig.asp = 0.9,
+  fig.asp = 0.6,
   collapse = TRUE,
   comment = "#>",
   fig.path = "man/figures/README-"
@@ -38,19 +38,19 @@ devtools::install_github("forestgeo/fgeo.plot")
 
 Or [install all **fgeo** packages in one step](https://forestgeo.github.io/fgeo/index.html#installation).
 
-For details on how to install packages from GitHub, see [this article](https://goo.gl/dQKEeg).
-
 ## Example
 
 ```{r fgeo.plot-sp}
 library(fgeo.plot)
 
 small_census <- fgeo.x::tree6_3species
+
 autoplot(sp(small_census))
 ```
 
 ```{r}
 elevation <- fgeo.x::elevation
+
 autoplot(
   sp_elev(small_census, elevation),
   fill = "red", 
