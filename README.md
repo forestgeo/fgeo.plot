@@ -45,8 +45,7 @@ autoplot(
 
 <img src="man/figures/README-unnamed-chunk-1-1.png" width="75%" style="display: block; margin: auto;" />
 
-[Get started with
-**fgeo**](https://forestgeo.github.io/fgeo/articles/fgeo.html)
+[Get started with **fgeo**](https://forestgeo.github.io/fgeo)
 
 ## Information
 
