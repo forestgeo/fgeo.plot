@@ -1,5 +1,5 @@
 Package: fgeo.plot
-Title: Plot ForestGEO-Like Datasets
+Title: Plot ForestGEO Data
 Version: 0.0.0.9402
 Authors@R: 
     c(person(given = "Mauro",
@@ -9,7 +9,8 @@ Authors@R:
       person(given = "CTFS-ForestGEO",
              role = c("cph", "fnd"),
              email = "ForestGEO@si.edu"))
-Description: Plot ForestGEO-like datasets.
+Description: Plot ForestGEO data
+    (<http://www.forestgeo.si.edu/>).
 License: GPL-3
 URL: https://github.com/forestgeo/fgeo.plot,
     https://forestgeo.github.io/fgeo.plot/
@@ -36,8 +37,6 @@ Suggests:
     rmarkdown,
     testthat,
     tibble
-VignetteBuilder: 
-    knitr
 Remotes: 
     forestgeo/fgeo.tool@*release,
     forestgeo/fgeo.x@*release
