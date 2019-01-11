@@ -41,9 +41,9 @@ List dbh bubble-plots by quadrat (good for .pdf output).
 \examples{
 # Create a small VieFullTable
 first_n <- function(x, n) x \%in\% sort(unique(x))[1:n]
-small_vft <- subset(
-  fgeo.x::vft_4quad, first_n(CensusID, 1) & first_n(QuadratID, 2)
-)
+small_vft <- fgeo.x::vft_4quad \%>\% 
+  dplyr::filter(first_n(CensusID, 1) & first_n(QuadratID, 2)) \%>\% 
+  dplyr::sample_n(50)
 
 plot_dbh_bubbles_by_quadrat(small_vft)
 

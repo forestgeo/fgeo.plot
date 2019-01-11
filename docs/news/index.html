@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Enable autoplotting the variable <code>elev</code>. — elev • fgeo.plot</title>
+<title>Changelog • fgeo.plot</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,10 +30,7 @@
 
 
 
-<meta property="og:title" content="Enable autoplotting the variable <code>elev</code>. — elev" />
-
-<meta property="og:description" content="Enable autoplotting the variable elev." />
-<meta name="twitter:card" content="summary" />
+<meta property="og:title" content="Changelog" />
 
 
 
@@ -50,7 +47,7 @@
   </head>
 
   <body>
-    <div class="container template-reference-topic">
+    <div class="container template-news">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -111,70 +108,20 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Enable autoplotting the variable <code>elev</code>.</h1>
-    <small class="dont-index">Source: <a href='https://github.com/forestgeo/fgeo.plot/blob/master/R/sp_elev.R'><code>R/sp_elev.R</code></a></small>
-    <div class="hidden name"><code>elev.Rd</code></div>
+      <h1>Changelog <small></small></h1>
+      <small>Source: <a href='https://github.com/forestgeo/fgeo.plot/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div class="ref-description">
-    
-    <p>Enable autoplotting the variable <code>elev</code>.</p>
-    
-    </div>
-
-    <pre class="usage"><span class='fu'>elev</span>(<span class='no'>elev</span>)</pre>
-    
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>elev</th>
-      <td><p>A ForestGEO-like elevation list or its <code>col</code> dataframe -- with
-the variable <code>elev</code>.</p></td>
-    </tr>
-    </table>
-    
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
-    <p>An S3 object of class 'elev'.</p>
-    
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
-    <div class='dont-index'><p><code><a href='autoplot.sp_elev.html'>autoplot.elev()</a></code>.</p>
-<p>Other plot functions: <code><a href='autoplot.fgeo_habitat.html'>autoplot.fgeo_habitat</a></code>,
-  <code><a href='autoplot.sp_elev.html'>autoplot.sp_elev</a></code>,
-  <code><a href='autoplot_by_species.sp_elev.html'>autoplot_by_species.sp_elev</a></code>,
-  <code><a href='plot_dbh_bubbles_by_quadrat.html'>plot_dbh_bubbles_by_quadrat</a></code>,
-  <code><a href='plot_tag_status_by_subquadrat.html'>plot_tag_status_by_subquadrat</a></code>,
-  <code><a href='sp_elev.html'>sp_elev</a></code>, <code><a href='sp.html'>sp</a></code></p>
-<p>Other autoplots: <code><a href='autoplot.fgeo_habitat.html'>autoplot.fgeo_habitat</a></code>,
-  <code><a href='autoplot.sp_elev.html'>autoplot.sp_elev</a></code>, <code><a href='sp_elev.html'>sp_elev</a></code>,
-  <code><a href='sp.html'>sp</a></code></p>
-<p>Other functions to construct fgeo classes: <code><a href='sp_elev.html'>sp_elev</a></code>,
-  <code><a href='sp.html'>sp</a></code></p>
-<p>Other functions to plot elevation: <code><a href='autoplot.sp_elev.html'>autoplot.sp_elev</a></code>,
-  <code><a href='autoplot_by_species.sp_elev.html'>autoplot_by_species.sp_elev</a></code>,
-  <code><a href='sp_elev.html'>sp_elev</a></code></p></div>
-    
-
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/class'>class</a></span>(<span class='fu'>elev</span>(<span class='kw pkg'>fgeo.x</span><span class='kw ns'>::</span><span class='no'><a href='https://www.rdocumentation.org/packages/fgeo.x/topics/datasets'>elevation</a></span>))</div><div class='output co'>#&gt; [1] "elev" "list"</div><div class='input'><span class='co'># Same</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/class'>class</a></span>(<span class='fu'>elev</span>(<span class='kw pkg'>fgeo.x</span><span class='kw ns'>::</span><span class='no'><a href='https://www.rdocumentation.org/packages/fgeo.x/topics/datasets'>elevation</a></span>$<span class='no'>col</span>))</div><div class='output co'>#&gt; [1] "elev"       "tbl_df"     "tbl"        "data.frame"</div><div class='input'>
-</div></pre>
   </div>
+
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      
-      <li><a href="#value">Value</a></li>
-
-      <li><a href="#see-also">See also</a></li>
-      
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
+    <div id="tocnav">
+      <h2>Contents</h2>
+      <ul class="nav nav-pills nav-stacked">
+      </ul>
+    </div>
   </div>
+
 </div>
 
       <footer>

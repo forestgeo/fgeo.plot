@@ -9,8 +9,7 @@ vft_1quad_sub <- fgeo.x::vft_4quad %>%
   sample_n(5)
 
 test_that("passes with default arguments", {
-  # Warns because dataset has no dead trees
-  expect_message(
+  expect_error(
     plot_dbh_bubbles_by_quadrat(
       vft_1quad_sub,
       title_quad = "Site Name, YYYY, Quadrat:",
@@ -21,7 +20,8 @@ test_that("passes with default arguments", {
       subquadrat_side = 5,
       tag_size = 2,
       move_edge = 0
-    )
+    ), 
+    NA
   )
 })
 

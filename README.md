@@ -11,6 +11,9 @@ status](https://codecov.io/gh/forestgeo/fgeo.plot/branch/master/graph/badge.svg)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/fgeo.plot)](https://cran.r-project.org/package=fgeo.plot)
 
+**fgeo.plot** helps you to plot
+[ForestGEO](http://www.forestgeo.si.edu/) data.
+
 ## Installation
 
 Install the development version of **fgeo.plot**:
