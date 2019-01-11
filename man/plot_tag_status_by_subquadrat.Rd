@@ -86,7 +86,9 @@ the algorithm to calculate subquadrats.
 first <- function(x) x \%in\% sort(unique(x))[1]
 small_vft <- subset(fgeo.x::vft_4quad, first(CensusID) & first(QuadratID))
 
-plot_tag_status_by_subquadrat(small_vft)
+p <- plot_tag_status_by_subquadrat(small_vft)
+# Showing only two sub-quadtrats
+p[1:2]
 
 # Print all plots to .pdf, with parameters optimized for size letter
 \dontrun{
