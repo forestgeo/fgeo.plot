@@ -4,9 +4,9 @@
 \name{fgeo.plot-package}
 \alias{fgeo.plot}
 \alias{fgeo.plot-package}
-\title{fgeo.plot: Plot ForestGEO Data}
+\title{fgeo.plot: Plot "ForestGEO" Data}
 \description{
-Plot ForestGEO data
+Plot "ForestGEO" data
     (<http://www.forestgeo.si.edu/>).
 }
 \seealso{
