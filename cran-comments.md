@@ -6,21 +6,14 @@
 
 ## R CMD check results
 
-
-Platform:	Windows Server 2008 R2 SP1, R-devel, 32/64 bit
-Build ID:	fgeo.plot_0.0.0.9402.tar.gz-2533537420614cdea73725cd4b3af12f
-
-ADDRESS
-* Version contains large components (0.0.0.9402)
-
-NOTES:
-
-WARNINGS:
+Ignoring these WARNINGS:
 * New submission
-* Version contains large components (0.0.0.9402)
 * Unknown, possibly mis-spelled, fields in DESCRIPTION: 'Remotes'
-Strong dependencies not in mainstream repositories: fgeo.tool, fgeo.x
+* Strong dependencies not in mainstream repositories: fgeo.tool, fgeo.x
+
+Ignoring this ERROR
+* Packages required but not available: 'fgeo.tool', 'fgeo.x'
 
 ## Downstream dependencies
 
-There are currently no downstream dependencies for this package.
+fgeo depends on this package. fgeo is not on CRAN.
