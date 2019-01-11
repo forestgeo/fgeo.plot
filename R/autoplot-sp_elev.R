@@ -71,11 +71,14 @@
 #' 
 #' elevation <- fgeo.x::elevation
 #' autoplot(elev(elevation))
+#' 
+#' \dontrun{
 #' # Same: Works both with the elevation list and dataframe
 #' autoplot(elev(elevation$col))
 #' 
 #' # Customize
 #' autoplot(elev(elevation), contour_size = 1)
+#' }
 #' 
 #' # Species and elevation -------------------------------------------------
 #' 

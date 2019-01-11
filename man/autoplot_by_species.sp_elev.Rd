@@ -108,7 +108,8 @@ can use \strong{ggplot2} directly.
 # Small dataset with a few species for quick examples
 census <- fgeo.x::tree6_3species
 
-autoplot_by_species(sp(census))
+# Showing only two species for speed
+autoplot_by_species(sp(census))[1:2]
 
 \dontrun{
 # Print all plots in the list
