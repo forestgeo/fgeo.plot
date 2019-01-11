@@ -16,6 +16,11 @@ status](https://www.r-pkg.org/badges/version/fgeo.plot)](https://cran.r-project.
 
 ## Installation
 
+Install the latest GitHub release of **fgeo.plot** with:
+
+    # install.packages("devtools")
+    install_github("forestgeo/fgeo.plot@*release")
+
 Install the development version of **fgeo.plot**:
 
     # install.packages("devtools")
