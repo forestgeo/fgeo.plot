@@ -27,16 +27,16 @@
 \arguments{
 \item{object}{An object created with \code{\link[=sp]{sp()}}, \code{\link[=elev]{elev()}}, or \code{\link[=sp_elev]{sp_elev()}}.}
 
-\item{fill}{Character; either a colour or "sp", which maps each species to a
+\item{fill}{Character; either a color or "sp", which maps each species to a
 different color.}
 
 \item{hide_fill_legend}{Logical; \code{TRUE} hides the fill legend.}
 
-\item{shape, point_size}{A number giving point size and shape (as in
+\item{point_size, shape}{A number giving point size and shape (as in
 \code{\link[graphics:points]{graphics::points()}}). Passed to \code{\link[ggplot2:geom_point]{ggplot2::geom_point()}}.}
 
-\item{facet}{(Not available for \code{plot_each_species()}) Logical; \code{TRUE} wraps
-multiple maps within the area of a single graphic plot.}
+\item{facet}{Logical; \code{TRUE} wraps multiple panels within the area of a single
+graphic plot.}
 
 \item{contour_size}{A number giving the size of the contour of elevation
 lines. Passed to \code{ggplot2::stat_contour()} (see \code{\link[ggplot2:geom_contour]{ggplot2::geom_contour()}}).}
@@ -46,7 +46,7 @@ low and high elevation.}
 
 \item{hide_color_legend}{Logical; \code{TRUE} hides the color legend.}
 
-\item{bins}{A number giving the number of elevation lines to map.}
+\item{bins}{A number giving the number of elevation lines to plot.}
 
 \item{add_elevation_labels}{Logical; \code{FALSE} hides elevation labels.}
 
@@ -63,7 +63,7 @@ minimum and maximum limits of the vertical and horizontal coordinates.}
 \item{custom_theme}{A valid \code{\link[ggplot2:theme]{ggplot2::theme()}}. \code{NULL} uses the default
 theme \code{\link[=theme_default]{theme_default()}}.}
 
-\item{...}{Other arguments passed to methods.}
+\item{...}{Not used (included for compatibility across methods).}
 }
 \value{
 A "ggplot".
@@ -131,8 +131,6 @@ autoplot(sp_elev(census, elevation), facet = FALSE, point_size = 1)
 
 }
 \seealso{
-\code{\link[=autoplot]{autoplot()}}, \code{\link[=sp]{sp()}}, \code{\link[=elev]{elev()}}, \code{\link[=sp_elev]{sp_elev()}}.
-
 Other plot functions: \code{\link{autoplot.fgeo_habitat}},
   \code{\link{autoplot_by_species.sp_elev}},
   \code{\link{elev}},

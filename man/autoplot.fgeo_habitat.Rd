@@ -7,10 +7,10 @@
 \method{autoplot}{fgeo_habitat}(object, ...)
 }
 \arguments{
-\item{object}{An object objects of class "fgeo_habitat"
-(see \code{fgeo_habitat} at \url{http://bit.ly/fgeo-reference}).}
+\item{object}{An object of class "fgeo_habitat" (see \code{fgeo_habitat} at
+\url{http://bit.ly/fgeo-reference}).}
 
-\item{...}{Other arguments passed to methods.}
+\item{...}{Not used (included for compatibility across methods).}
 }
 \value{
 An object of class "ggplot".
@@ -20,8 +20,9 @@ Quick habitat plots.
 }
 \examples{
 \dontrun{
-if (requireNamespace("fgeo", quietly = TRUE)) {
-  library(fgeo)
+fgeo_analyze_is_installed <- requireNamespace("fgeo_analyze", quietly = TRUE)
+if (fgeo_analyze_is_installed) {
+  library(fgeo.analyze)
   
   habitats <- fgeo_habitat(fgeo.x::elevation, gridsize = 20, n = 4)
   autoplot(habitats)

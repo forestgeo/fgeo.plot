@@ -18,14 +18,13 @@
   custom_theme = NULL, ...)
 }
 \arguments{
-\item{object}{An object created with \code{\link[=sp_elev]{sp_elev()}}.}
+\item{object}{An object created with \code{\link[=sp]{sp()}} or \code{\link[=sp_elev]{sp_elev()}}.}
 
-\item{species}{A character vector. Each element of the vector must be the
-code for one species in the column \code{sp}. This function will produce as many
-maps as elements in this vector. The string "all" (default) is a shortcut
-to map all unique codes in the column \code{sp}.}
+\item{species}{A character vector giving values in the column \code{sp}. This
+function will output a list with as many plots as elements in this vector.
+The string "all" (default) plots all unique values of \code{sp}.}
 
-\item{fill}{Character; either a colour or "sp", which maps each species to a
+\item{fill}{Character; either a color or "sp", which maps each species to a
 different color.}
 
 \item{shape}{A number giving point size and shape (as in
@@ -45,7 +44,7 @@ low and high elevation.}
 
 \item{hide_color_legend}{Logical; \code{TRUE} hides the color legend.}
 
-\item{bins}{A number giving the number of elevation lines to map.}
+\item{bins}{A number giving the number of elevation lines to plot.}
 
 \item{add_elevation_labels}{Logical; \code{FALSE} hides elevation labels.}
 
@@ -73,7 +72,7 @@ minimum and maximum limits of the vertical and horizontal coordinates.}
 \item{custom_theme}{A valid \code{\link[ggplot2:theme]{ggplot2::theme()}}. \code{NULL} uses the default
 theme \code{\link[=theme_default]{theme_default()}}.}
 
-\item{...}{Other arguments passed to methods.}
+\item{...}{Not used (included for compatibility across methods).}
 }
 \description{
 These functions extend the functionality of \code{\link[=autoplot.sp]{autoplot.sp()}} and
