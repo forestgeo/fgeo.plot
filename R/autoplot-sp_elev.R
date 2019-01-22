@@ -35,8 +35,10 @@
 #' @param fill Character; either a color or "sp", which maps each species to a
 #'   different color.
 #' @param hide_fill_legend Logical; `TRUE` hides the fill legend.
-#' @param point_size,shape A number giving point size and shape (as in
-#'   [graphics::points()]). Passed to [ggplot2::geom_point()].
+#' @param point_size A number giving point size. Passed to
+#'   [ggplot2::geom_point()].
+#' @param shape A number giving point shape (as in [graphics::points()]). Passed
+#'   to [ggplot2::geom_point()].
 #' @param facet Logical; `TRUE` wraps multiple panels within the area of a single
 #'   graphic plot.
 #' @param contour_size A number giving the size of the contour of elevation

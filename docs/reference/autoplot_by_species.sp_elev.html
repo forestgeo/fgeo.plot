@@ -175,29 +175,28 @@ the variables <code>sp</code> and <code>elev</code> of a ForestGEO-like dataset 
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>object</th>
-      <td><p>An object created with <code><a href='sp_elev.html'>sp_elev()</a></code>.</p></td>
+      <td><p>An object created with <code><a href='sp.html'>sp()</a></code> or <code><a href='sp_elev.html'>sp_elev()</a></code>.</p></td>
     </tr>
     <tr>
       <th>species</th>
-      <td><p>A character vector. Each element of the vector must be the
-code for one species in the column <code>sp</code>. This function will produce as many
-maps as elements in this vector. The string "all" (default) is a shortcut
-to map all unique codes in the column <code>sp</code>.</p></td>
+      <td><p>A character vector giving values in the column <code>sp</code>. This
+function will output a list with as many plots as elements in this vector.
+The string "all" (default) plots all unique values of <code>sp</code>.</p></td>
     </tr>
     <tr>
       <th>fill</th>
-      <td><p>Character; either a colour or "sp", which maps each species to a
+      <td><p>Character; either a color or "sp", which maps each species to a
 different color.</p></td>
     </tr>
     <tr>
       <th>shape</th>
-      <td><p>A number giving point size and shape (as in
-<code><a href='https://www.rdocumentation.org/packages/graphics/topics/points'>graphics::points()</a></code>). Passed to <code><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>ggplot2::geom_point()</a></code>.</p></td>
+      <td><p>A number giving point shape (as in <code><a href='https://www.rdocumentation.org/packages/graphics/topics/points'>graphics::points()</a></code>). Passed
+to <code><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>ggplot2::geom_point()</a></code>.</p></td>
     </tr>
     <tr>
       <th>point_size</th>
-      <td><p>A number giving point size and shape (as in
-<code><a href='https://www.rdocumentation.org/packages/graphics/topics/points'>graphics::points()</a></code>). Passed to <code><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>ggplot2::geom_point()</a></code>.</p></td>
+      <td><p>A number giving point size. Passed to
+<code><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>ggplot2::geom_point()</a></code>.</p></td>
     </tr>
     <tr>
       <th>contour_size</th>
@@ -220,7 +219,7 @@ low and high elevation.</p></td>
     </tr>
     <tr>
       <th>bins</th>
-      <td><p>A number giving the number of elevation lines to map.</p></td>
+      <td><p>A number giving the number of elevation lines to plot.</p></td>
     </tr>
     <tr>
       <th>add_elevation_labels</th>
@@ -266,7 +265,7 @@ theme <code><a href='theme_default.html'>theme_default()</a></code>.</p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>Other arguments passed to methods.</p></td>
+      <td><p>Not used (included for compatibility across methods).</p></td>
     </tr>
     </table>
     
@@ -274,8 +273,8 @@ theme <code><a href='theme_default.html'>theme_default()</a></code>.</p></td>
 
     <p><code>autoplot_by_species(sp_elev(DATA-WITH-VARIABLE-sp)</code> (without elevation data)
 is equivalent to <code><a href='autoplot_by_species.html'>autoplot_by_species(sp(DATA-WITH-VARIABLE-sp))</a></code>.</p>
-<p><strong>fgeo.plot</strong> wraps the <strong>ggplot2</strong> package. For more control you
-can use <strong>ggplot2</strong> directly.</p>
+<p><strong>fgeo.plot</strong> wraps some functions from the <strong>ggplot2</strong> package.
+For more control you can use <strong>ggplot2</strong> directly.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 

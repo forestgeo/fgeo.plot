@@ -194,7 +194,7 @@ and/or 'sp_elev'.</p><ul>
     </tr>
     <tr>
       <th>fill</th>
-      <td><p>Character; either a colour or "sp", which maps each species to a
+      <td><p>Character; either a color or "sp", which maps each species to a
 different color.</p></td>
     </tr>
     <tr>
@@ -202,14 +202,19 @@ different color.</p></td>
       <td><p>Logical; <code>TRUE</code> hides the fill legend.</p></td>
     </tr>
     <tr>
-      <th>shape, point_size</th>
-      <td><p>A number giving point size and shape (as in
-<code><a href='https://www.rdocumentation.org/packages/graphics/topics/points'>graphics::points()</a></code>). Passed to <code><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>ggplot2::geom_point()</a></code>.</p></td>
+      <th>shape</th>
+      <td><p>A number giving point shape (as in <code><a href='https://www.rdocumentation.org/packages/graphics/topics/points'>graphics::points()</a></code>). Passed
+to <code><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>ggplot2::geom_point()</a></code>.</p></td>
+    </tr>
+    <tr>
+      <th>point_size</th>
+      <td><p>A number giving point size. Passed to
+<code><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>ggplot2::geom_point()</a></code>.</p></td>
     </tr>
     <tr>
       <th>facet</th>
-      <td><p>(Not available for <code>plot_each_species()</code>) Logical; <code>TRUE</code> wraps
-multiple maps within the area of a single graphic plot.</p></td>
+      <td><p>Logical; <code>TRUE</code> wraps multiple panels within the area of a single
+graphic plot.</p></td>
     </tr>
     <tr>
       <th>contour_size</th>
@@ -227,7 +232,7 @@ low and high elevation.</p></td>
     </tr>
     <tr>
       <th>bins</th>
-      <td><p>A number giving the number of elevation lines to map.</p></td>
+      <td><p>A number giving the number of elevation lines to plot.</p></td>
     </tr>
     <tr>
       <th>add_elevation_labels</th>
@@ -256,7 +261,7 @@ theme <code><a href='theme_default.html'>theme_default()</a></code>.</p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>Other arguments passed to methods.</p></td>
+      <td><p>Not used (included for compatibility across methods).</p></td>
     </tr>
     </table>
     
@@ -268,13 +273,12 @@ theme <code><a href='theme_default.html'>theme_default()</a></code>.</p></td>
 
     <p><code>autoplot(sp_elev(DATA-WITH-VARIABLE-sp)</code> (without elevation data) is
 equivalent to <code><a href='https://ggplot2.tidyverse.org/reference/autoplot.html'>autoplot(sp(DATA-WITH-VARIABLE-sp))</a></code>.</p>
-<p><strong>fgeo.plot</strong> wraps the <strong>ggplot2</strong> package. For more control you
-can use <strong>ggplot2</strong> directly.</p>
+<p><strong>fgeo.plot</strong> wraps some functions from the <strong>ggplot2</strong> package.
+For more control you can use <strong>ggplot2</strong> directly.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='https://ggplot2.tidyverse.org/reference/autoplot.html'>autoplot()</a></code>, <code><a href='sp.html'>sp()</a></code>, <code><a href='elev.html'>elev()</a></code>, <code><a href='sp_elev.html'>sp_elev()</a></code>.</p>
-<p>Other plot functions: <code><a href='autoplot.fgeo_habitat.html'>autoplot.fgeo_habitat</a></code>,
+    <div class='dont-index'><p>Other plot functions: <code><a href='autoplot.fgeo_habitat.html'>autoplot.fgeo_habitat</a></code>,
   <code><a href='autoplot_by_species.sp_elev.html'>autoplot_by_species.sp_elev</a></code>,
   <code><a href='elev.html'>elev</a></code>,
   <code><a href='plot_dbh_bubbles_by_quadrat.html'>plot_dbh_bubbles_by_quadrat</a></code>,
