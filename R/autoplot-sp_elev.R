@@ -1,4 +1,4 @@
-#' Quick plot of species distribution and/or topography.
+#' Plot species distribution and/or topography.
 #' 
 #' @description
 #' Plot the columns `sp` and/or `elev` of ForestGEO-like datasets of class 'sp'
@@ -32,27 +32,29 @@
 #' 
 #' @inheritParams autoplot.elev
 #' @param object An object created with [sp()], [elev()], or [sp_elev()].
-#' @param fill Character; either a colour or "sp", which maps each species to a
+#' @param fill Character; either a color or "sp", which maps each species to a
 #'   different color.
 #' @param hide_fill_legend Logical; `TRUE` hides the fill legend.
-#' @template shape_point_size
-#' @param facet (Not available for `plot_each_species()`) Logical; `TRUE` wraps
-#'   multiple maps within the area of a single graphic plot.
-#' @template xlim_ylim
+#' @param point_size A number giving point size. Passed to
+#'   [ggplot2::geom_point()].
+#' @param shape A number giving point shape (as in [graphics::points()]). Passed
+#'   to [ggplot2::geom_point()].
+#' @param facet Logical; `TRUE` wraps multiple panels within the area of a single
+#'   graphic plot.
 #' @param contour_size A number giving the size of the contour of elevation
 #'   lines. Passed to `ggplot2::stat_contour()` (see [ggplot2::geom_contour()]).
 #' @template low_high
-#' @param bins A number giving the number of elevation lines to map.
+#' @param bins A number giving the number of elevation lines to plot.
 #' @param add_elevation_labels Logical; `FALSE` hides elevation labels.
 #' @param hide_color_legend Logical; `TRUE` hides the color legend.
 #' @template label_size_label_color_fontface
 #' @param xyjust A number to adjust the position of the text labels of the 
 #'   elevation lines.
+#' @template xlim_ylim
 #' @param custom_theme A valid [ggplot2::theme()]. `NULL` uses the default
 #'   theme [theme_default()].
-#' @param ... Other arguments passed to methods.
+#' @template autoplot_unused_dots
 #'
-#' @seealso [autoplot()], [sp()], [elev()], [sp_elev()].
 #' @return A "ggplot".
 #'
 #' @examples 
@@ -197,5 +199,5 @@ autoplot.default <- function(object, ...) {
   abort(glue("
     Can't deal with data unless it is of class 'sp', 'elev' or 'sp_elev'.
     Do you forget to use `sp()`, `elev()` or `sp_elev()`?
-    "))
+  "))
 }

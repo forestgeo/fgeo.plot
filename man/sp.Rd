@@ -2,7 +2,7 @@
 % Please edit documentation in R/sp_elev.R
 \name{sp}
 \alias{sp}
-\title{Enable autoplotting the variable \code{sp}.}
+\title{Allow autoplotting the column \code{sp}.}
 \usage{
 sp(sp)
 }
@@ -13,10 +13,10 @@ sp(sp)
 An S3 object of class 'sp'.
 }
 \description{
-Enable autoplotting the variable \code{sp}.
+Allow autoplotting the column \code{sp}.
 }
 \examples{
-class(sp(fgeo.x::stem5))
+inherits(sp(fgeo.x::stem5), "sp")
 
 }
 \seealso{

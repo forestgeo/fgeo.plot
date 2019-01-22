@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Enable autoplotting the variable <code>elev</code>. — elev • fgeo.plot</title>
+<title>Allow autoplotting the column <code>elev</code>. — elev • fgeo.plot</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,9 +30,9 @@
 
 
 
-<meta property="og:title" content="Enable autoplotting the variable <code>elev</code>. — elev" />
+<meta property="og:title" content="Allow autoplotting the column <code>elev</code>. — elev" />
 
-<meta property="og:description" content="Enable autoplotting the variable elev." />
+<meta property="og:description" content="Allow autoplotting the column elev." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -111,14 +111,14 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Enable autoplotting the variable <code>elev</code>.</h1>
+    <h1>Allow autoplotting the column <code>elev</code>.</h1>
     <small class="dont-index">Source: <a href='https://github.com/forestgeo/fgeo.plot/blob/master/R/sp_elev.R'><code>R/sp_elev.R</code></a></small>
     <div class="hidden name"><code>elev.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Enable autoplotting the variable <code>elev</code>.</p>
+    <p>Allow autoplotting the column <code>elev</code>.</p>
     
     </div>
 
@@ -129,8 +129,8 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>elev</th>
-      <td><p>A ForestGEO-like elevation list or its <code>col</code> dataframe -- with
-the variable <code>elev</code>.</p></td>
+      <td><p>A ForestGEO-like elevation list or its <code>col</code> dataframe (with
+the column <code>elev</code>).</p></td>
     </tr>
     </table>
     
@@ -158,8 +158,8 @@ the variable <code>elev</code>.</p></td>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/class'>class</a></span>(<span class='fu'>elev</span>(<span class='kw pkg'>fgeo.x</span><span class='kw ns'>::</span><span class='no'><a href='https://www.rdocumentation.org/packages/fgeo.x/topics/datasets'>elevation</a></span>))</div><div class='output co'>#&gt; [1] "elev" "list"</div><div class='input'><span class='co'># Same</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/class'>class</a></span>(<span class='fu'>elev</span>(<span class='kw pkg'>fgeo.x</span><span class='kw ns'>::</span><span class='no'><a href='https://www.rdocumentation.org/packages/fgeo.x/topics/datasets'>elevation</a></span>$<span class='no'>col</span>))</div><div class='output co'>#&gt; [1] "elev"       "tbl_df"     "tbl"        "data.frame"</div><div class='input'>
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/class'>inherits</a></span>(<span class='fu'>elev</span>(<span class='kw pkg'>fgeo.x</span><span class='kw ns'>::</span><span class='no'><a href='https://www.rdocumentation.org/packages/fgeo.x/topics/datasets'>elevation</a></span>), <span class='st'>"elev"</span>)</div><div class='output co'>#&gt; [1] TRUE</div><div class='input'>
+<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/class'>inherits</a></span>(<span class='fu'>elev</span>(<span class='kw pkg'>fgeo.x</span><span class='kw ns'>::</span><span class='no'><a href='https://www.rdocumentation.org/packages/fgeo.x/topics/datasets'>elevation</a></span>$<span class='no'>col</span>), <span class='st'>"elev"</span>)</div><div class='output co'>#&gt; [1] TRUE</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

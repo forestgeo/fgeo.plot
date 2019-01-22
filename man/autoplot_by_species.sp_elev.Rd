@@ -18,68 +18,56 @@
   custom_theme = NULL, ...)
 }
 \arguments{
-\item{object}{An object created with \code{\link[=sp_elev]{sp_elev()}}.}
+\item{object}{An object created with \code{\link[=sp]{sp()}} or \code{\link[=sp_elev]{sp_elev()}}.}
 
-\item{species}{A character vector. Each element of the vector must be the
-code for one species in the column \code{sp}. This function will produce as many
-maps as elements in this vector. The string "all" (default) is a shortcut
-to map all unique codes in the column \code{sp}.}
+\item{species}{A character vector giving values in the column \code{sp}. The
+output will be a list with as many plots as elements in this vector.
+The string "all" (default) plots all unique values of \code{sp}.}
 
-\item{fill}{Character; either a colour or "sp", which maps each species to a
+\item{fill}{Character; either a color or "sp", which maps each species to a
 different color.}
 
-\item{shape}{A number giving point size and shape (as in
-\code{\link[graphics:points]{graphics::points()}}). Passed to \code{\link[ggplot2:geom_point]{ggplot2::geom_point()}}.}
+\item{shape}{A number giving point shape (as in \code{\link[graphics:points]{graphics::points()}}). Passed
+to \code{\link[ggplot2:geom_point]{ggplot2::geom_point()}}.}
 
-\item{point_size}{A number giving point size and shape (as in
-\code{\link[graphics:points]{graphics::points()}}). Passed to \code{\link[ggplot2:geom_point]{ggplot2::geom_point()}}.}
+\item{point_size}{A number giving point size. Passed to
+\code{\link[ggplot2:geom_point]{ggplot2::geom_point()}}.}
 
 \item{contour_size}{A number giving the size of the contour of elevation
 lines. Passed to \code{ggplot2::stat_contour()} (see \code{\link[ggplot2:geom_contour]{ggplot2::geom_contour()}}).}
 
-\item{low}{A string giving a color of the elevation lines representing
-low and high elevation.}
-
-\item{high}{A string giving a color of the elevation lines representing
+\item{low, high}{A string giving a color of the elevation lines representing
 low and high elevation.}
 
 \item{hide_color_legend}{Logical; \code{TRUE} hides the color legend.}
 
-\item{bins}{A number giving the number of elevation lines to map.}
+\item{bins}{A number giving the number of elevation lines to plot.}
 
 \item{add_elevation_labels}{Logical; \code{FALSE} hides elevation labels.}
 
-\item{label_size}{A number (\code{label_size}) or character
-string (\code{label_color} and \code{fontface}) giving the size, colour and fontface
-of the text labels for the elevation lines.}
-
-\item{label_color}{A number (\code{label_size}) or character
+\item{label_size, label_color, fontface}{A number (\code{label_size}) or character
 string (\code{label_color} and \code{fontface}) giving the size, colour and fontface
 of the text labels for the elevation lines.}
 
 \item{xyjust}{A number to adjust the position of the text labels of the
 elevation lines.}
 
-\item{fontface}{A number (\code{label_size}) or character
-string (\code{label_color} and \code{fontface}) giving the size, colour and fontface
-of the text labels for the elevation lines.}
-
-\item{xlim}{A vector of length 2, for example \code{c(0, 500)}, giving the
-minimum and maximum limits of the vertical and horizontal coordinates.}
-
-\item{ylim}{A vector of length 2, for example \code{c(0, 500)}, giving the
+\item{xlim, ylim}{A vector of length 2, for example \code{c(0, 500)}, giving the
 minimum and maximum limits of the vertical and horizontal coordinates.}
 
 \item{custom_theme}{A valid \code{\link[ggplot2:theme]{ggplot2::theme()}}. \code{NULL} uses the default
 theme \code{\link[=theme_default]{theme_default()}}.}
 
-\item{...}{Other arguments passed to methods.}
+\item{...}{Not used (included for compatibility across methods).}
+}
+\value{
+A list of objects of class "ggplot".
 }
 \description{
-These functions extend the functionality of \code{\link[=autoplot.sp]{autoplot.sp()}} and
-\code{\link[=autoplot.elev]{autoplot.elev()}} and return not a single plot but a list of plots. It is
-ideal to print a \emph{.pdf} file with one plot per page. They automatically plot
-the variables \code{sp} and \code{elev} of a ForestGEO-like dataset of class 'sp' or
+These functions extend \code{\link[=autoplot.sp]{autoplot.sp()}} and \code{\link[=autoplot.elev]{autoplot.elev()}} and return not a
+single plot but a list of plots. They are particularly useful if you want to
+print a \emph{.pdf} file with one plot per page. They automatically plot the
+variables \code{sp} and \code{elev} of a ForestGEO-like dataset of class 'sp' or
 'sp_elev'.
 \itemize{
 \item Create a 'sp' \code{object} with:
@@ -100,8 +88,8 @@ See sections \strong{Usage} and \strong{Examples}.
 \code{autoplot_by_species(sp_elev(DATA-WITH-VARIABLE-sp)} (without elevation data)
 is equivalent to \code{autoplot_by_species(sp(DATA-WITH-VARIABLE-sp))}.
 
-\strong{fgeo.plot} wraps the \strong{ggplot2} package. For more control you
-can use \strong{ggplot2} directly.
+\strong{fgeo.plot} wraps some functions from the \strong{ggplot2} package.
+For more control you can use \strong{ggplot2} directly.
 }
 \examples{
 # Species ---------------------------------------------------------------

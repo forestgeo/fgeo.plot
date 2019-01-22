@@ -279,7 +279,7 @@ check_plot_base_census <- function(data) {
   if (rlang::has_name(data, "elev")) {
     msg <- paste0(
       "This function is designed not for elevation but for census data.\n",
-      "* If you plan to map elevation lines, use instead `plot_base_elevation()`."
+      "* If you plan to plot elevation lines, use `plot_base_elevation()` instead."
     )
     warn(msg)
   }

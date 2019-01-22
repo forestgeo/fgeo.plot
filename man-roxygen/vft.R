@@ -1,1 +1,1 @@
-#' @param vft A dataframe -- specifically, a ForestGEO ViewFullTable.
+#' @param vft A ForestGEO ViewFullTable (dataframe).

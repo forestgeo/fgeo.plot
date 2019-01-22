@@ -9,13 +9,18 @@ autoplot_by_species(object, ...)
 \arguments{
 \item{object}{An object of supported S3 class.}
 
-\item{...}{Other arguments passed to methods.}
+\item{...}{Other arguments passed to specific methods.}
 }
 \value{
-A list of 'ggplots'.
+A list of objects of class "ggplot".
 }
 \description{
-Generic function to create a list of autoplots by species.
+\code{autoplot_by_species} uses \strong{ggplot2} to create a list of plots by species
+for an object of a particular class in a single command. It extends the
+S3 generic defined by \code{\link[ggplot2:autoplot]{ggplot2::autoplot()}}.
+}
+\seealso{
+\code{\link[ggplot2:autoplot]{ggplot2::autoplot()}}.
 }
 \concept{generics for ForestGEO classes}
 \keyword{internal}

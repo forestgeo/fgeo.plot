@@ -40,7 +40,7 @@ str(elevation)
 elev <- elevation$col
 ```
 
-Quick maps with __fgeo.plot__.
+Auto-plots with __fgeo.plot__.
 
 ```{r}
 plot_elevation(elev)

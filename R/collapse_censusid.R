@@ -1,7 +1,7 @@
 #' Collapse the values of CensusID.
 #'
 #' This function is useful to summarize the status history of a tree tag across
-#' censuses. It is particularly useful to avoid duplicated tree tags on maps.
+#' censuses. It is particularly useful to avoid duplicated tree tags on plots.
 #'
 #' @param x A dataframe -- specifically a ViewFullTable.
 #'

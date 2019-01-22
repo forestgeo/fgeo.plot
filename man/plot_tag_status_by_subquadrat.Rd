@@ -12,7 +12,7 @@ plot_tag_status_by_subquadrat(vft, x_q = 20, x_sq = 5, y_q = 20,
   theme = theme_tag_status(), move_edge = 0)
 }
 \arguments{
-\item{vft}{A dataframe -- specifically, a ForestGEO ViewFullTable.}
+\item{vft}{A ForestGEO ViewFullTable (dataframe).}
 
 \item{x_q, y_q}{Size in meters of a quadrat's side. For ForestGEO sites, a
 common value is 20.}
@@ -35,9 +35,9 @@ bottom right (br), top right (tr), and top left (tl).}
 
 \item{title_quad}{A string to use as a title.}
 
-\item{show_page}{Logical; \code{FALSE} removes the page label from the map title.}
+\item{show_page}{Logical; \code{FALSE} removes the page label from the plot title.}
 
-\item{show_subquad}{Logical; \code{FALSE} removes subquadrat labels on each map.}
+\item{show_subquad}{Logical; \code{FALSE} removes subquadrat labels on each plot.}
 
 \item{point_shape}{A vector of two numbers giving the shape of the points to
 plot (see possible shapes in the documentation of ?\code{\link[graphics:points]{graphics::points()}},
@@ -51,28 +51,30 @@ under the section entitled \emph{'pch' values}).}
 
 \item{header}{A string to use as a header (see \link{headers}).}
 
-\item{theme}{An object of class theme.}
+\item{theme}{An object of class "theme".}
 
 \item{move_edge}{A number to adjust the extension of the grid lines beyond
 the plot limits.}
 }
 \value{
-A list of ggplots, where each element of the list is a map of tree
-tags by status, showing four subquadrats.
+A list of objects of class "ggplot".
 }
 \description{
-This function maps tree tags by status and outputs a list of maps that can be
-printed on a .pdf file. Each map shows four subquadrats within a quadrat. The
-symbols on the map represent the status of each tree -- not the status of
+This function plots tree tags by status and outputs a list of plots that can
+be printed on a .pdf file. Each plot shows four subquadrats within a quadrat.
+The symbols on the plot represent the status of each tree -- not the status of
 each stem. Although you should likely provide data of only one or two
 censuses, \code{plot_tag_status_by_subquadrat()} will summarize the data to reduce
-overplotting. The data on the map summarizes the history of each stem across
-all censuses provided. Each tag will appear in the map only once or twice: *
-A tag will appear once if it belongs to a tree which status was unique across
-all censuses provided -- either "alive" or "dead". * A tag will appear twice
-if it belongs to a tree which status was "alive" in at least one census, and
-also "dead" in at least one other census. This feature avoids unintentional
-overplotting and makes interpreting the map easier.
+overplotting. The data on the plot summarizes the history of each stem across
+all censuses provided. Each tag will appear in the plot only once or twice:
+\itemize{
+\item A tag will appear once if it belongs to a tree which status was unique
+across all censuses provided -- either "alive" or "dead".
+\item A tag will appear twice if it belongs to a tree which status was "alive" in
+at least one census, and also "dead" in at least one other census. This
+feature avoids unintentional overplotting and makes interpreting the plot
+easier.
+}
 }
 \section{Acknowledgment}{
 

@@ -2,12 +2,12 @@
 % Please edit documentation in R/sp_elev.R
 \name{sp_elev}
 \alias{sp_elev}
-\title{Enable autoplotting the variables \code{sp} and \code{elev}.}
+\title{Allow autoplotting the columns \code{sp} and \code{elev}.}
 \usage{
 sp_elev(sp, elev = NULL)
 }
 \arguments{
-\item{sp}{A ForestGEO-like dataframe with column the column \code{sp}.}
+\item{sp}{A ForestGEO-like dataframe with the column \code{sp}.}
 
 \item{elev}{A ForestGEO-like elevation list or its \code{col} dataframe -- with
 the column \code{elev}.}
@@ -16,13 +16,11 @@ the column \code{elev}.}
 An S3 object of class 'sp_elev'.
 }
 \description{
-Enable autoplotting the variables \code{sp} and \code{elev}.
+Allow autoplotting the columns \code{sp} and \code{elev}.
 }
 \examples{
-species_elevation <- sp_elev(
-  fgeo.x::stem5, fgeo.x::elevation
-)
-class(species_elevation)
+species_elevation <- sp_elev(fgeo.x::stem5, fgeo.x::elevation)
+inherits(species_elevation, "sp_elev")
 
 }
 \seealso{

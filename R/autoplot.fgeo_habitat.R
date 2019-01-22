@@ -1,16 +1,16 @@
-#' Quick habitat plots.
+#' Plot habitats.
 #' 
-#' @param object An object objects of class "fgeo_habitat" 
-#'   (see `fgeo_habitat` at \url{http://bit.ly/fgeo-reference}).
-#' @param ... Other arguments passed to methods.
+#' @param object An object of class "fgeo_habitat" (see `fgeo_habitat` at
+#'   \url{http://bit.ly/fgeo-reference}).
+#' @template autoplot_unused_dots
 #'
 #' @return An object of class "ggplot".
 #'
 #' @examples
 #' \dontrun{
-#' if (requireNamespace("fgeo", quietly = TRUE)) {
-
-#'   library(fgeo)
+#' fgeo_analyze_is_installed <- requireNamespace("fgeo_analyze", quietly = TRUE)
+#' if (fgeo_analyze_is_installed) {
+#'   library(fgeo.analyze)
 #'   
 #'   habitats <- fgeo_habitat(fgeo.x::elevation, gridsize = 20, n = 4)
 #'   autoplot(habitats)

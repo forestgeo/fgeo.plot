@@ -2,24 +2,24 @@
 % Please edit documentation in R/sp_elev.R
 \name{elev}
 \alias{elev}
-\title{Enable autoplotting the variable \code{elev}.}
+\title{Allow autoplotting the column \code{elev}.}
 \usage{
 elev(elev)
 }
 \arguments{
-\item{elev}{A ForestGEO-like elevation list or its \code{col} dataframe -- with
-the variable \code{elev}.}
+\item{elev}{A ForestGEO-like elevation list or its \code{col} dataframe (with
+the column \code{elev}).}
 }
 \value{
 An S3 object of class 'elev'.
 }
 \description{
-Enable autoplotting the variable \code{elev}.
+Allow autoplotting the column \code{elev}.
 }
 \examples{
-class(elev(fgeo.x::elevation))
-# Same
-class(elev(fgeo.x::elevation$col))
+inherits(elev(fgeo.x::elevation), "elev")
+
+inherits(elev(fgeo.x::elevation$col), "elev")
 
 }
 \seealso{

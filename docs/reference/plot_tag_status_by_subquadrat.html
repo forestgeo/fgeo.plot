@@ -32,18 +32,20 @@
 
 <meta property="og:title" content="List plots of tree-tag status by subquadrat (good for .pdf output). — plot_tag_status_by_subquadrat" />
 
-<meta property="og:description" content="This function maps tree tags by status and outputs a list of maps that can be
-printed on a .pdf file. Each map shows four subquadrats within a quadrat. The
-symbols on the map represent the status of each tree -- not the status of
+<meta property="og:description" content="This function plots tree tags by status and outputs a list of plots that can
+be printed on a .pdf file. Each plot shows four subquadrats within a quadrat.
+The symbols on the plot represent the status of each tree -- not the status of
 each stem. Although you should likely provide data of only one or two
 censuses, plot_tag_status_by_subquadrat() will summarize the data to reduce
-overplotting. The data on the map summarizes the history of each stem across
-all censuses provided. Each tag will appear in the map only once or twice: *
-A tag will appear once if it belongs to a tree which status was unique across
-all censuses provided -- either &quot;alive&quot; or &quot;dead&quot;. * A tag will appear twice
-if it belongs to a tree which status was &quot;alive&quot; in at least one census, and
-also &quot;dead&quot; in at least one other census. This feature avoids unintentional
-overplotting and makes interpreting the map easier." />
+overplotting. The data on the plot summarizes the history of each stem across
+all censuses provided. Each tag will appear in the plot only once or twice:
+A tag will appear once if it belongs to a tree which status was unique
+across all censuses provided -- either &quot;alive&quot; or &quot;dead&quot;.
+A tag will appear twice if it belongs to a tree which status was &quot;alive&quot; in
+at least one census, and also &quot;dead&quot; in at least one other census. This
+feature avoids unintentional overplotting and makes interpreting the plot
+easier.
+" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -129,18 +131,20 @@ overplotting and makes interpreting the map easier." />
 
     <div class="ref-description">
     
-    <p>This function maps tree tags by status and outputs a list of maps that can be
-printed on a .pdf file. Each map shows four subquadrats within a quadrat. The
-symbols on the map represent the status of each tree -- not the status of
+    <p>This function plots tree tags by status and outputs a list of plots that can
+be printed on a .pdf file. Each plot shows four subquadrats within a quadrat.
+The symbols on the plot represent the status of each tree -- not the status of
 each stem. Although you should likely provide data of only one or two
 censuses, <code>plot_tag_status_by_subquadrat()</code> will summarize the data to reduce
-overplotting. The data on the map summarizes the history of each stem across
-all censuses provided. Each tag will appear in the map only once or twice: *
-A tag will appear once if it belongs to a tree which status was unique across
-all censuses provided -- either "alive" or "dead". * A tag will appear twice
-if it belongs to a tree which status was "alive" in at least one census, and
-also "dead" in at least one other census. This feature avoids unintentional
-overplotting and makes interpreting the map easier.</p>
+overplotting. The data on the plot summarizes the history of each stem across
+all censuses provided. Each tag will appear in the plot only once or twice:</p><ul>
+<li><p>A tag will appear once if it belongs to a tree which status was unique
+across all censuses provided -- either "alive" or "dead".</p></li>
+<li><p>A tag will appear twice if it belongs to a tree which status was "alive" in
+at least one census, and also "dead" in at least one other census. This
+feature avoids unintentional overplotting and makes interpreting the plot
+easier.</p></li>
+</ul>
     
     </div>
 
@@ -156,7 +160,7 @@ overplotting and makes interpreting the map easier.</p>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>vft</th>
-      <td><p>A dataframe -- specifically, a ForestGEO ViewFullTable.</p></td>
+      <td><p>A ForestGEO ViewFullTable (dataframe).</p></td>
     </tr>
     <tr>
       <th>x_q, y_q</th>
@@ -191,11 +195,11 @@ bottom right (br), top right (tr), and top left (tl).</p></td>
     </tr>
     <tr>
       <th>show_page</th>
-      <td><p>Logical; <code>FALSE</code> removes the page label from the map title.</p></td>
+      <td><p>Logical; <code>FALSE</code> removes the page label from the plot title.</p></td>
     </tr>
     <tr>
       <th>show_subquad</th>
-      <td><p>Logical; <code>FALSE</code> removes subquadrat labels on each map.</p></td>
+      <td><p>Logical; <code>FALSE</code> removes subquadrat labels on each plot.</p></td>
     </tr>
     <tr>
       <th>point_shape</th>
@@ -219,7 +223,7 @@ under the section entitled <em>'pch' values</em>).</p></td>
     </tr>
     <tr>
       <th>theme</th>
-      <td><p>An object of class theme.</p></td>
+      <td><p>An object of class "theme".</p></td>
     </tr>
     <tr>
       <th>move_edge</th>
@@ -230,8 +234,7 @@ the plot limits.</p></td>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A list of ggplots, where each element of the list is a map of tree
-tags by status, showing four subquadrats.</p>
+    <p>A list of objects of class "ggplot".</p>
     
     <h2 class="hasAnchor" id="acknowledgment"><a class="anchor" href="#acknowledgment"></a>Acknowledgment</h2>
 

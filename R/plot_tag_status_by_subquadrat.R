@@ -1,17 +1,18 @@
 #' List plots of tree-tag status by subquadrat (good for .pdf output).
 #'
-#' This function maps tree tags by status and outputs a list of maps that can be
-#' printed on a .pdf file. Each map shows four subquadrats within a quadrat. The
-#' symbols on the map represent the status of each tree -- not the status of
+#' This function plots tree tags by status and outputs a list of plots that can
+#' be printed on a .pdf file. Each plot shows four subquadrats within a quadrat.
+#' The symbols on the plot represent the status of each tree -- not the status of
 #' each stem. Although you should likely provide data of only one or two
 #' censuses, `plot_tag_status_by_subquadrat()` will summarize the data to reduce
-#' overplotting. The data on the map summarizes the history of each stem across
-#' all censuses provided. Each tag will appear in the map only once or twice: *
-#' A tag will appear once if it belongs to a tree which status was unique across
-#' all censuses provided -- either "alive" or "dead". * A tag will appear twice
-#' if it belongs to a tree which status was "alive" in at least one census, and
-#' also "dead" in at least one other census. This feature avoids unintentional
-#' overplotting and makes interpreting the map easier.
+#' overplotting. The data on the plot summarizes the history of each stem across
+#' all censuses provided. Each tag will appear in the plot only once or twice: 
+#' * A tag will appear once if it belongs to a tree which status was unique
+#' across all censuses provided -- either "alive" or "dead".
+#' * A tag will appear twice if it belongs to a tree which status was "alive" in
+#' at least one census, and also "dead" in at least one other census. This
+#' feature avoids unintentional overplotting and makes interpreting the plot
+#' easier.
 #'
 #' @template vft
 #' @template x_q_y_q
@@ -30,8 +31,8 @@
 #'   subquadrats on each or the four divisions of a quadrat: bottom left (bl),
 #'   bottom right (br), top right (tr), and top left (tl).
 #' @template title_quad
-#' @param show_page Logical; `FALSE` removes the page label from the map title.
-#' @param show_subquad Logical; `FALSE` removes subquadrat labels on each map.
+#' @param show_page Logical; `FALSE` removes the page label from the plot title.
+#' @param show_subquad Logical; `FALSE` removes subquadrat labels on each plot.
 #' @param point_shape A vector of two numbers giving the shape of the points to
 #'   plot (see possible shapes in the documentation of ?[graphics::points()],
 #'   under the section entitled _'pch' values_).
@@ -51,8 +52,7 @@
 #' Jafferjee Esufali, David Kenfack and Anudeep Singh. Anudeep Sinh also wrote
 #' the algorithm to calculate subquadrats.
 #'
-#' @return A list of ggplots, where each element of the list is a map of tree
-#'   tags by status, showing four subquadrats.
+#' @template return_a_list_of_ggplots
 #'
 #' @examples
 #' # Create a small VieFullTable
@@ -292,11 +292,12 @@ prep_plot_tag_status_by_subquadrat <- function(sbst,
     unique()
 }
 
-#' Label the four divisions of a quadrat -- each with four subquadrats.
+#' Label the four divisions of a quadrat, each with four subquadrats.
 #'
-#' This function makes it possible for [plot_tag_status_by_subquadrat()] to plot each individual map.
-#' Each map corresponds to one page and includes four subquadrats. There are a
-#' total of four maps per quadrat (i.e. a total of 16 subquadrats per quadrat).
+#' This function makes it possible for [plot_tag_status_by_subquadrat()] to
+#' create each individual plot. Each plot corresponds to one page and includes
+#' four subquadrats. There are a total of four plots per quadrat (i.e. a total
+#' of 16 subquadrats per quadrat).
 #'
 #' @param x A dataframe with the variable `subquadrat`.
 #' @param bl,br,tr,tl See [plot_tag_status_by_subquadrat()].

@@ -1,10 +1,10 @@
 #' List plots of species distribution and topography (good for pdf output).
 #' 
 #' @description
-#' These functions extend the functionality of [autoplot.sp()] and
-#' [autoplot.elev()] and return not a single plot but a list of plots. It is
-#' ideal to print a _.pdf_ file with one plot per page. They automatically plot
-#' the variables `sp` and `elev` of a ForestGEO-like dataset of class 'sp' or
+#' These functions extend [autoplot.sp()] and [autoplot.elev()] and return not a
+#' single plot but a list of plots. They are particularly useful if you want to
+#' print a _.pdf_ file with one plot per page. They automatically plot the
+#' variables `sp` and `elev` of a ForestGEO-like dataset of class 'sp' or
 #' 'sp_elev'.
 #' * Create a 'sp' `object` with:
 #' @description
@@ -25,17 +25,21 @@
 #' 
 #' @template compare_ggplot2
 #' 
-#' @param object An object created with [sp_elev()].
-#' @param species A character vector. Each element of the vector must be the
-#'   code for one species in the column `sp`. This function will produce as many
-#'   maps as elements in this vector. The string "all" (default) is a shortcut
-#'   to map all unique codes in the column `sp`.
+#' @param object An object created with [sp()] or [sp_elev()].
+#' @param species A character vector giving values in the column `sp`. The
+#'   output will be a list with as many plots as elements in this vector.
+#'   The string "all" (default) plots all unique values of `sp`.
+#' @template low_high
+#' @template label_size_label_color_fontface
+#' @template xlim_ylim
 #' @inheritParams autoplot.sp
 #' @inheritParams autoplot.elev
 #' @inheritParams autoplot_by_species.sp
-#' @param ... Other arguments passed to methods.
+#' @template autoplot_unused_dots
 #' 
 #' @seealso [autoplot()], [sp()], [sp_elev()].
+#' 
+#' @template return_a_list_of_ggplots
 #' 
 #' @examples
 #' # Species ---------------------------------------------------------------
@@ -134,16 +138,21 @@ autoplot_by_species.sp <- function(object,
 }
 
 #' Generic function to create a list of autoplots by species.
+#' 
+#' `autoplot_by_species` uses __ggplot2__ to create a list of plots by species 
+#' for an object of a particular class in a single command. It extends the 
+#' S3 generic defined by [ggplot2::autoplot()].
 #'
 #' @param object An object of supported S3 class.
-#' @param ... Other arguments passed to methods.
+#' @param ... Other arguments passed to specific methods.
 #' 
-#' @family generics for ForestGEO classes
-#' 
+#' @seealso [ggplot2::autoplot()].
 #'
-#' @return A list of 'ggplots'.
-#' @export
+#' @template return_a_list_of_ggplots
+#'  
+#' @family generics for ForestGEO classes
 #' @keywords internal
+#' @export
 autoplot_by_species <- function(object, ...) {
   UseMethod("autoplot_by_species")
 }
