@@ -1,1 +1,1 @@
-#' @param theme An object of class theme.
+#' @param theme An object of class "theme".

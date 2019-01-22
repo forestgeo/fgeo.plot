@@ -60,12 +60,15 @@ theme \code{\link[=theme_default]{theme_default()}}.}
 
 \item{...}{Not used (included for compatibility across methods).}
 }
+\value{
+A list of objects of class "ggplot".
+}
 \description{
-These functions extend the functionality of \code{\link[=autoplot.sp]{autoplot.sp()}} and
-\code{\link[=autoplot.elev]{autoplot.elev()}} and return not a single plot but a list of plots. They are
-particularly useful if you want to print a \emph{.pdf} file with one plot per
-page. They automatically plot the variables \code{sp} and \code{elev} of a
-ForestGEO-like dataset of class 'sp' or 'sp_elev'.
+These functions extend \code{\link[=autoplot.sp]{autoplot.sp()}} and \code{\link[=autoplot.elev]{autoplot.elev()}} and return not a
+single plot but a list of plots. They are particularly useful if you want to
+print a \emph{.pdf} file with one plot per page. They automatically plot the
+variables \code{sp} and \code{elev} of a ForestGEO-like dataset of class 'sp' or
+'sp_elev'.
 \itemize{
 \item Create a 'sp' \code{object} with:
 }

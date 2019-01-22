@@ -32,11 +32,11 @@
 
 <meta property="og:title" content="List plots of species distribution and topography (good for pdf output). — autoplot_by_species.sp_elev" />
 
-<meta property="og:description" content="These functions extend the functionality of autoplot.sp() and
-autoplot.elev() and return not a single plot but a list of plots. They are
-particularly useful if you want to print a .pdf file with one plot per
-page. They automatically plot the variables sp and elev of a
-ForestGEO-like dataset of class 'sp' or 'sp_elev'.
+<meta property="og:description" content="These functions extend autoplot.sp() and autoplot.elev() and return not a
+single plot but a list of plots. They are particularly useful if you want to
+print a .pdf file with one plot per page. They automatically plot the
+variables sp and elev of a ForestGEO-like dataset of class 'sp' or
+'sp_elev'.
 Create a 'sp' object with:
 " />
 
@@ -135,11 +135,11 @@ Create a 'sp_elev' object with:
 
     <div class="ref-description">
     
-    <p>These functions extend the functionality of <code><a href='autoplot.sp_elev.html'>autoplot.sp()</a></code> and
-<code><a href='autoplot.sp_elev.html'>autoplot.elev()</a></code> and return not a single plot but a list of plots. They are
-particularly useful if you want to print a <em>.pdf</em> file with one plot per
-page. They automatically plot the variables <code>sp</code> and <code>elev</code> of a
-ForestGEO-like dataset of class 'sp' or 'sp_elev'.</p><ul>
+    <p>These functions extend <code><a href='autoplot.sp_elev.html'>autoplot.sp()</a></code> and <code><a href='autoplot.sp_elev.html'>autoplot.elev()</a></code> and return not a
+single plot but a list of plots. They are particularly useful if you want to
+print a <em>.pdf</em> file with one plot per page. They automatically plot the
+variables <code>sp</code> and <code>elev</code> of a ForestGEO-like dataset of class 'sp' or
+'sp_elev'.</p><ul>
 <li><p>Create a 'sp' <code>object</code> with:</p></li>
 </ul>
 
@@ -179,8 +179,8 @@ ForestGEO-like dataset of class 'sp' or 'sp_elev'.</p><ul>
     </tr>
     <tr>
       <th>species</th>
-      <td><p>A character vector giving values in the column <code>sp</code>. This
-function will output a list with as many plots as elements in this vector.
+      <td><p>A character vector giving values in the column <code>sp</code>. The
+output will be a list with as many plots as elements in this vector.
 The string "all" (default) plots all unique values of <code>sp</code>.</p></td>
     </tr>
     <tr>
@@ -204,12 +204,7 @@ to <code><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>ggplo
 lines. Passed to <code><a href='https://ggplot2.tidyverse.org/reference/geom_contour.html'>ggplot2::stat_contour()</a></code> (see <code><a href='https://ggplot2.tidyverse.org/reference/geom_contour.html'>ggplot2::geom_contour()</a></code>).</p></td>
     </tr>
     <tr>
-      <th>low</th>
-      <td><p>A string giving a color of the elevation lines representing
-low and high elevation.</p></td>
-    </tr>
-    <tr>
-      <th>high</th>
+      <th>low, high</th>
       <td><p>A string giving a color of the elevation lines representing
 low and high elevation.</p></td>
     </tr>
@@ -226,13 +221,7 @@ low and high elevation.</p></td>
       <td><p>Logical; <code>FALSE</code> hides elevation labels.</p></td>
     </tr>
     <tr>
-      <th>label_size</th>
-      <td><p>A number (<code>label_size</code>) or character
-string (<code>label_color</code> and <code>fontface</code>) giving the size, colour and fontface
-of the text labels for the elevation lines.</p></td>
-    </tr>
-    <tr>
-      <th>label_color</th>
+      <th>label_size, label_color, fontface</th>
       <td><p>A number (<code>label_size</code>) or character
 string (<code>label_color</code> and <code>fontface</code>) giving the size, colour and fontface
 of the text labels for the elevation lines.</p></td>
@@ -243,18 +232,7 @@ of the text labels for the elevation lines.</p></td>
 elevation lines.</p></td>
     </tr>
     <tr>
-      <th>fontface</th>
-      <td><p>A number (<code>label_size</code>) or character
-string (<code>label_color</code> and <code>fontface</code>) giving the size, colour and fontface
-of the text labels for the elevation lines.</p></td>
-    </tr>
-    <tr>
-      <th>xlim</th>
-      <td><p>A vector of length 2, for example <code><a href='https://www.rdocumentation.org/packages/base/topics/c'>c(0, 500)</a></code>, giving the
-minimum and maximum limits of the vertical and horizontal coordinates.</p></td>
-    </tr>
-    <tr>
-      <th>ylim</th>
+      <th>xlim, ylim</th>
       <td><p>A vector of length 2, for example <code><a href='https://www.rdocumentation.org/packages/base/topics/c'>c(0, 500)</a></code>, giving the
 minimum and maximum limits of the vertical and horizontal coordinates.</p></td>
     </tr>
@@ -268,6 +246,10 @@ theme <code><a href='theme_default.html'>theme_default()</a></code>.</p></td>
       <td><p>Not used (included for compatibility across methods).</p></td>
     </tr>
     </table>
+    
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>A list of objects of class "ggplot".</p>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
@@ -321,6 +303,8 @@ For more control you can use <strong>ggplot2</strong> directly.</p>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       
+      <li><a href="#value">Value</a></li>
+
       <li><a href="#details">Details</a></li>
 
       <li><a href="#see-also">See also</a></li>

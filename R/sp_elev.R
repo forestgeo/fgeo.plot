@@ -1,4 +1,4 @@
-#' Enable autoplotting the variable `sp`.
+#' Allow autoplotting the column `sp`.
 #' 
 #' @param sp A ForestGEO-like dataframe with the column `sp`.
 #' 
@@ -7,7 +7,7 @@
 #' @return An S3 object of class 'sp'.
 #' 
 #' @examples
-#' class(sp(fgeo.x::stem5))
+#' inherits(sp(fgeo.x::stem5), "sp")
 #' 
 #' @family plot functions
 #' @family autoplots
@@ -19,19 +19,19 @@ sp <- function(sp) {
   structure(sp, class = c("sp", class(sp)))
 }
 
-#' Enable autoplotting the variable `elev`.
+#' Allow autoplotting the column `elev`.
 #' 
-#' @param elev A ForestGEO-like elevation list or its `col` dataframe -- with
-#'   the variable `elev`.
+#' @param elev A ForestGEO-like elevation list or its `col` dataframe (with
+#'   the column `elev`).
 #'   
 #' @seealso [autoplot.elev()].
 #' 
 #' @return An S3 object of class 'elev'.
 #' 
 #' @examples
-#' class(elev(fgeo.x::elevation))
-#' # Same
-#' class(elev(fgeo.x::elevation$col))
+#' inherits(elev(fgeo.x::elevation), "elev")
+#' 
+#' inherits(elev(fgeo.x::elevation$col), "elev")
 #' 
 #' @family plot functions
 #' @family autoplots
@@ -43,9 +43,9 @@ elev <- function(elev) {
   structure(elev, class = c("elev", class(elev)))
 }
 
-#' Enable autoplotting the variables `sp` and `elev`.
+#' Allow autoplotting the columns `sp` and `elev`.
 #' 
-#' @param sp A ForestGEO-like dataframe with column the column `sp`.
+#' @param sp A ForestGEO-like dataframe with the column `sp`.
 #' @param elev A ForestGEO-like elevation list or its `col` dataframe -- with
 #'   the column `elev`.
 #' 
@@ -54,10 +54,8 @@ elev <- function(elev) {
 #' @return An S3 object of class 'sp_elev'.
 #' 
 #' @examples
-#' species_elevation <- sp_elev(
-#'   fgeo.x::stem5, fgeo.x::elevation
-#' )
-#' class(species_elevation)
+#' species_elevation <- sp_elev(fgeo.x::stem5, fgeo.x::elevation)
+#' inherits(species_elevation, "sp_elev")
 #' 
 #' @family plot functions
 #' @family autoplots

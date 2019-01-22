@@ -1,4 +1,4 @@
-#' Quick habitat plots.
+#' Plot habitats.
 #' 
 #' @param object An object of class "fgeo_habitat" (see `fgeo_habitat` at
 #'   \url{http://bit.ly/fgeo-reference}).

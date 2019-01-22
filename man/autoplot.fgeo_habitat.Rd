@@ -2,7 +2,7 @@
 % Please edit documentation in R/autoplot.fgeo_habitat.R
 \name{autoplot.fgeo_habitat}
 \alias{autoplot.fgeo_habitat}
-\title{Quick habitat plots.}
+\title{Plot habitats.}
 \usage{
 \method{autoplot}{fgeo_habitat}(object, ...)
 }
@@ -16,7 +16,7 @@
 An object of class "ggplot".
 }
 \description{
-Quick habitat plots.
+Plot habitats.
 }
 \examples{
 \dontrun{

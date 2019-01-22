@@ -4,7 +4,7 @@
 \alias{autoplot.sp_elev}
 \alias{autoplot.sp}
 \alias{autoplot.elev}
-\title{Quick plot of species distribution and/or topography.}
+\title{Plot species distribution and/or topography.}
 \usage{
 \method{autoplot}{sp_elev}(object, fill = "sp",
   hide_fill_legend = FALSE, shape = 21, point_size = 3,

@@ -35,24 +35,25 @@ navbar:
 
 reference:
 
-  - title: Quickly plot different classes of ForestGEO data
+  - title: Plot different classes of ForestGEO data
     contents:
       - autoplot.fgeo_habitat
       - has_concept("autoplots")
+      - -has_concept("functions to construct fgeo classes")
 
-  - title: Quickly list plots from different classes of ForestGEO data
+  - title: List plots created from different classes of ForestGEO data
     desc: >
       The output of these functions can easily be printed to a .pdf file
     contents:
       - has_concept("functions to list plots from different ForestGEO classes")
 
-  - title: Quickly list plots from ForestGEO ViewFullTables
+  - title: List plots created from ForestGEO ViewFullTables
     desc: >
       The output of these functions can easily be printed to a .pdf file
     contents:
       - has_concept("functions to list plots from ForestGEO ViewFullTable")
 
-  - title: Enable autoplotting specific variables
+  - title: Allow autoplotting specific variables
     contents:
       - has_concept("functions to construct fgeo classes")
 

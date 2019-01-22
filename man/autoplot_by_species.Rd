@@ -12,7 +12,7 @@ autoplot_by_species(object, ...)
 \item{...}{Other arguments passed to specific methods.}
 }
 \value{
-A list of 'ggplots'.
+A list of objects of class "ggplot".
 }
 \description{
 \code{autoplot_by_species} uses \strong{ggplot2} to create a list of plots by species

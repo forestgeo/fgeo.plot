@@ -1,11 +1,11 @@
 #' List plots of species distribution and topography (good for pdf output).
 #' 
 #' @description
-#' These functions extend the functionality of [autoplot.sp()] and
-#' [autoplot.elev()] and return not a single plot but a list of plots. They are
-#' particularly useful if you want to print a _.pdf_ file with one plot per
-#' page. They automatically plot the variables `sp` and `elev` of a
-#' ForestGEO-like dataset of class 'sp' or 'sp_elev'.
+#' These functions extend [autoplot.sp()] and [autoplot.elev()] and return not a
+#' single plot but a list of plots. They are particularly useful if you want to
+#' print a _.pdf_ file with one plot per page. They automatically plot the
+#' variables `sp` and `elev` of a ForestGEO-like dataset of class 'sp' or
+#' 'sp_elev'.
 #' * Create a 'sp' `object` with:
 #' @description
 #' ``` 
@@ -31,14 +31,15 @@
 #'   The string "all" (default) plots all unique values of `sp`.
 #' @template low_high
 #' @template label_size_label_color_fontface
-#' @param xlim,ylim A vector of length 2, for example `c(0, 500)`, giving the
-#'   minimum and maximum limits of the vertical and horizontal coordinates.
+#' @template xlim_ylim
 #' @inheritParams autoplot.sp
 #' @inheritParams autoplot.elev
 #' @inheritParams autoplot_by_species.sp
 #' @template autoplot_unused_dots
 #' 
 #' @seealso [autoplot()], [sp()], [sp_elev()].
+#' 
+#' @template return_a_list_of_ggplots
 #' 
 #' @examples
 #' # Species ---------------------------------------------------------------
@@ -147,8 +148,8 @@ autoplot_by_species.sp <- function(object,
 #' 
 #' @seealso [ggplot2::autoplot()].
 #'
-#' @return A list of 'ggplots'.
-#' 
+#' @template return_a_list_of_ggplots
+#'  
 #' @family generics for ForestGEO classes
 #' @keywords internal
 #' @export

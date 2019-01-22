@@ -1,4 +1,4 @@
-#' Quick plot of species distribution and/or topography.
+#' Plot species distribution and/or topography.
 #' 
 #' @description
 #' Plot the columns `sp` and/or `elev` of ForestGEO-like datasets of class 'sp'
@@ -50,8 +50,7 @@
 #' @template label_size_label_color_fontface
 #' @param xyjust A number to adjust the position of the text labels of the 
 #'   elevation lines.
-#' @param xlim,ylim A vector of length 2, for example `c(0, 500)`, giving the
-#'   minimum and maximum limits of the vertical and horizontal coordinates.
+#' @template xlim_ylim
 #' @param custom_theme A valid [ggplot2::theme()]. `NULL` uses the default
 #'   theme [theme_default()].
 #' @template autoplot_unused_dots

@@ -11,13 +11,13 @@ plot_dbh_bubbles_by_quadrat(vft,
   move_edge = 0, status_d = "dead")
 }
 \arguments{
-\item{vft}{A dataframe -- specifically, a ForestGEO ViewFullTable.}
+\item{vft}{A ForestGEO ViewFullTable (dataframe).}
 
 \item{title_quad}{A string to use as a title.}
 
 \item{header}{A string to use as a header (see \link{headers}).}
 
-\item{theme}{An object of class theme.}
+\item{theme}{An object of class "theme".}
 
 \item{lim_min, lim_max}{Minimum and maximum limits of the plot area.}
 
