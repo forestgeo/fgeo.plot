@@ -2,10 +2,10 @@
 #' 
 #' @description
 #' These functions extend the functionality of [autoplot.sp()] and
-#' [autoplot.elev()] and return not a single plot but a list of plots. It is
-#' ideal to print a _.pdf_ file with one plot per page. They automatically plot
-#' the variables `sp` and `elev` of a ForestGEO-like dataset of class 'sp' or
-#' 'sp_elev'.
+#' [autoplot.elev()] and return not a single plot but a list of plots. They are
+#' particularly useful if you want to print a _.pdf_ file with one plot per
+#' page. They automatically plot the variables `sp` and `elev` of a
+#' ForestGEO-like dataset of class 'sp' or 'sp_elev'.
 #' * Create a 'sp' `object` with:
 #' @description
 #' ``` 
@@ -26,9 +26,13 @@
 #' @template compare_ggplot2
 #' 
 #' @param object An object created with [sp()] or [sp_elev()].
-#' @param species A character vector giving values in the column `sp`. This
-#'   function will output a list with as many plots as elements in this vector.
+#' @param species A character vector giving values in the column `sp`. The
+#'   output will be a list with as many plots as elements in this vector.
 #'   The string "all" (default) plots all unique values of `sp`.
+#' @template low_high
+#' @template label_size_label_color_fontface
+#' @param xlim,ylim A vector of length 2, for example `c(0, 500)`, giving the
+#'   minimum and maximum limits of the vertical and horizontal coordinates.
 #' @inheritParams autoplot.sp
 #' @inheritParams autoplot.elev
 #' @inheritParams autoplot_by_species.sp

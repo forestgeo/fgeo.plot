@@ -43,14 +43,11 @@
 #'   graphic plot.
 #' @param contour_size A number giving the size of the contour of elevation
 #'   lines. Passed to `ggplot2::stat_contour()` (see [ggplot2::geom_contour()]).
-#' @param low,high A string giving a color of the elevation lines representing
-#'   low and high elevation.
+#' @template low_high
 #' @param bins A number giving the number of elevation lines to plot.
 #' @param add_elevation_labels Logical; `FALSE` hides elevation labels.
 #' @param hide_color_legend Logical; `TRUE` hides the color legend.
-#' @param label_size,label_color,fontface A number (`label_size`) or character
-#'   string (`label_color` and `fontface`) giving the size, colour and fontface
-#'   of the text labels for the elevation lines.
+#' @template label_size_label_color_fontface
 #' @param xyjust A number to adjust the position of the text labels of the 
 #'   elevation lines.
 #' @param xlim,ylim A vector of length 2, for example `c(0, 500)`, giving the
