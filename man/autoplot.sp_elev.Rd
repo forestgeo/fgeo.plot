@@ -32,8 +32,11 @@ different color.}
 
 \item{hide_fill_legend}{Logical; \code{TRUE} hides the fill legend.}
 
-\item{point_size, shape}{A number giving point size and shape (as in
-\code{\link[graphics:points]{graphics::points()}}). Passed to \code{\link[ggplot2:geom_point]{ggplot2::geom_point()}}.}
+\item{shape}{A number giving point shape (as in \code{\link[graphics:points]{graphics::points()}}). Passed
+to \code{\link[ggplot2:geom_point]{ggplot2::geom_point()}}.}
+
+\item{point_size}{A number giving point size. Passed to
+\code{\link[ggplot2:geom_point]{ggplot2::geom_point()}}.}
 
 \item{facet}{Logical; \code{TRUE} wraps multiple panels within the area of a single
 graphic plot.}
@@ -97,8 +100,8 @@ See \strong{Examples} below.
 \code{autoplot(sp_elev(DATA-WITH-VARIABLE-sp)} (without elevation data) is
 equivalent to \code{autoplot(sp(DATA-WITH-VARIABLE-sp))}.
 
-\strong{fgeo.plot} wraps the \strong{ggplot2} package. For more control you
-can use \strong{ggplot2} directly.
+\strong{fgeo.plot} wraps some functions from the \strong{ggplot2} package.
+For more control you can use \strong{ggplot2} directly.
 }
 \examples{
 # Species ---------------------------------------------------------------

@@ -27,11 +27,11 @@ The string "all" (default) plots all unique values of \code{sp}.}
 \item{fill}{Character; either a color or "sp", which maps each species to a
 different color.}
 
-\item{shape}{A number giving point size and shape (as in
-\code{\link[graphics:points]{graphics::points()}}). Passed to \code{\link[ggplot2:geom_point]{ggplot2::geom_point()}}.}
+\item{shape}{A number giving point shape (as in \code{\link[graphics:points]{graphics::points()}}). Passed
+to \code{\link[ggplot2:geom_point]{ggplot2::geom_point()}}.}
 
-\item{point_size}{A number giving point size and shape (as in
-\code{\link[graphics:points]{graphics::points()}}). Passed to \code{\link[ggplot2:geom_point]{ggplot2::geom_point()}}.}
+\item{point_size}{A number giving point size. Passed to
+\code{\link[ggplot2:geom_point]{ggplot2::geom_point()}}.}
 
 \item{contour_size}{A number giving the size of the contour of elevation
 lines. Passed to \code{ggplot2::stat_contour()} (see \code{\link[ggplot2:geom_contour]{ggplot2::geom_contour()}}).}
@@ -99,8 +99,8 @@ See sections \strong{Usage} and \strong{Examples}.
 \code{autoplot_by_species(sp_elev(DATA-WITH-VARIABLE-sp)} (without elevation data)
 is equivalent to \code{autoplot_by_species(sp(DATA-WITH-VARIABLE-sp))}.
 
-\strong{fgeo.plot} wraps the \strong{ggplot2} package. For more control you
-can use \strong{ggplot2} directly.
+\strong{fgeo.plot} wraps some functions from the \strong{ggplot2} package.
+For more control you can use \strong{ggplot2} directly.
 }
 \examples{
 # Species ---------------------------------------------------------------
