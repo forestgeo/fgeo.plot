@@ -1,6 +1,6 @@
 Package: fgeo.plot
 Title: Plot 'ForestGEO' Data
-Version: 1.0.0.9000
+Version: 1.0.1
 Authors@R: 
     c(person(given = "Mauro",
              family = "Lepore",
@@ -36,7 +36,8 @@ Suggests:
     purrr,
     rmarkdown,
     testthat,
-    tibble
+    tibble,
+    spelling
 Remotes: 
     forestgeo/fgeo.tool@*release,
     forestgeo/fgeo.x@*release
@@ -44,3 +45,4 @@ Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.1.1
+Language: en-US
