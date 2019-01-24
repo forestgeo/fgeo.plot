@@ -511,9 +511,8 @@ entitle_map <- function(x, chr, show_page = TRUE) {
 #'
 #' @examples
 #' library(ggplot2)
-#' library(tibble)
 #' 
-#' tags <- tibble(
+#' tags <- dplyr::tibble(
 #'   tag = sample(1:10000, 100),
 #'   qx = sample(1:20, 100, replace = TRUE),
 #'   qy = sample(1:20, 100, replace = TRUE)
