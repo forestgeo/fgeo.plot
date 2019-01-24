@@ -98,7 +98,6 @@ census <- fgeo.x::tree6_3species
 
 # Showing only two species for speed
 autoplot_by_species(sp(census))[1:2]
-
 \dontrun{
 # Print all plots in the list
 pdf("map.pdf", paper = "letter", height = 10.5, width = 8)
@@ -113,7 +112,6 @@ autoplot_by_species(sp_elev(census))
 # Species and elevation
 elevation <- fgeo.x::elevation
 autoplot_by_species(sp_elev(census, elevation))
-
 }
 \seealso{
 \code{\link[=autoplot]{autoplot()}}, \code{\link[=sp]{sp()}}, \code{\link[=sp_elev]{sp_elev()}}.

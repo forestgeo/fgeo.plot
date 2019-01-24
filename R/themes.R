@@ -6,28 +6,27 @@
 #'
 #' @inheritParams ggplot2::theme
 #' @param ... Additional arguments passed to  [ggplot2::theme()].
-#' 
+#'
 #' @seealso [ggplot2::theme()].
-#' 
+#'
 #' @return A [ggplot2::theme()].
-#' 
+#'
 #' @keywords internal
 #' @name themes
 NULL
 
 #' Theme for `plot_base_census()`.
-#' 
+#'
 #' @inheritParams ggplot2::theme
-#' 
+#'
 #' @examples
 #' class(theme_tag_status())
-#' 
 #' @family functions to plot tag status
 #' @keywords internal
 #' @export
-theme_tag_status <- function(panel.grid.major = element_line(colour =  "black"),
+theme_tag_status <- function(panel.grid.major = element_line(colour = "black"),
                              panel.grid.minor = element_line(
-                               colour =  "black",
+                               colour = "black",
                                linetype = "dotted"
                              ),
                              panel.background = element_rect(fill = "white"),
@@ -38,7 +37,7 @@ theme_tag_status <- function(panel.grid.major = element_line(colour =  "black"),
                              legend.title = element_blank(),
                              axis.ticks = element_blank(),
                              axis.text = element_text(size = 12),
-                             ...){
+                             ...) {
   theme(
     panel.grid.major = panel.grid.major,
     panel.grid.minor = panel.grid.minor,
@@ -55,12 +54,11 @@ theme_tag_status <- function(panel.grid.major = element_line(colour =  "black"),
 }
 
 #' Theme for `theme_dbh_bubbles()`.
-#' 
+#'
 #' @inheritParams ggplot2::theme
-#' 
+#'
 #' @examples
 #' class(theme_dbh_bubbles())
-#' 
 #' @family functions to plot dbh bubbles
 #' @keywords internal
 #' @export
@@ -91,21 +89,19 @@ theme_dbh_bubbles <- function(axis.text = element_blank(),
 }
 
 #' Default plot theme.
-#' 
+#'
 #' @inheritParams ggplot2::theme
 #' @template p
-#' 
+#'
 #' @examples
 #' class(theme_default(ggplot2::ggplot(iris)))
-#' 
 #' @family functions to create or modify plot layers
 #' @keywords internal
 #' @export
-theme_default <- function(p, 
+theme_default <- function(p,
                           panel.grid.minor = element_line(linetype = "dashed"),
                           ...) {
-  p + 
-    theme_bw() + 
+  p +
+    theme_bw() +
     theme(panel.grid.minor = panel.grid.minor, ...)
 }
-

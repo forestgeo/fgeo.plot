@@ -5,7 +5,6 @@ test_that("header_tag_status outputs the expected string", {
   expect_type(x, "character")
   expect_true(grepl("Checking", x))
   x <- NULL
-
 })
 
 test_that("header_dbh_bubbles outputs the expected string", {
@@ -14,4 +13,3 @@ test_that("header_dbh_bubbles outputs the expected string", {
   expect_type(x, "character")
   x <- NULL
 })
-

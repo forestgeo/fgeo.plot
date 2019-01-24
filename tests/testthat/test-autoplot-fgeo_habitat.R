@@ -7,7 +7,7 @@ describe("outputs an object of class ggplot", {
   elev_list <- fgeo.x::elevation
   habitats <- fgeo_habitat(elev_list, gridsize = 20, n = 4)
   p <- autoplot(habitats)
-  
+
   it("does something I want it to do", {
     expect_is(p, "ggplot")
   })

@@ -17,7 +17,6 @@ Allow autoplotting the column \code{sp}.
 }
 \examples{
 inherits(sp(fgeo.x::stem5), "sp")
-
 }
 \seealso{
 \code{\link[=autoplot.sp]{autoplot.sp()}}.

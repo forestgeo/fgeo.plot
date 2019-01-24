@@ -41,17 +41,17 @@ List dbh bubble-plots by quadrat (good for .pdf output).
 \examples{
 # Create a small VieFullTable
 first_n <- function(x, n) x \%in\% sort(unique(x))[1:n]
-small_vft <- fgeo.x::vft_4quad \%>\% 
-  dplyr::filter(first_n(CensusID, 1) & first_n(QuadratID, 2)) \%>\% 
+small_vft <- fgeo.x::vft_4quad \%>\%
+  dplyr::filter(first_n(CensusID, 1) & first_n(QuadratID, 2)) \%>\%
   dplyr::sample_n(50)
 
 plot_dbh_bubbles_by_quadrat(small_vft)
 
 # Printing all plots to .pdf, with parameters optimized for size letter
 \dontrun{
-  pdf("map.pdf", paper = "letter", height = 10.5, width = 8)
-  plot_dbh_bubbles_by_quadrat(small_vft)
-  dev.off()
+pdf("map.pdf", paper = "letter", height = 10.5, width = 8)
+plot_dbh_bubbles_by_quadrat(small_vft)
+dev.off()
 }
 
 # Be careful if subsetting by DBH: You may unintentionally remove dead trees.
@@ -85,13 +85,12 @@ plot_dbh_bubbles_by_quadrat(
   header = header_dbh_bubbles("spanish"),
   tag_size = 3,
   theme = theme_dbh_bubbles(
-    axis.text = NULL,  # NULL shows axis.text; element_blank() doesn't.
+    axis.text = NULL, # NULL shows axis.text; element_blank() doesn't.
     plot.title = element_text(size = 15),
     plot.subtitle = element_text(size = 5),
     panel.background = element_rect(fill = "grey")
   )
 )
-
 }
 \seealso{
 Other plot functions: \code{\link{autoplot.fgeo_habitat}},

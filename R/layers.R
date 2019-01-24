@@ -3,7 +3,7 @@ axis_limits <- function(p, xlim = NULL, ylim = NULL) {
   data <- p[["data"]]
   xlim <- best_lim(xlim, data$gx)
   ylim <- best_lim(ylim, data$gy)
-  
+
   p +
     coord_fixed(xlim = xlim, ylim = ylim) +
     scale_x_continuous(minor_breaks = seq(xlim[1], xlim[2], 20)) +
@@ -16,49 +16,48 @@ add_species <- function(p,
                         shape = 21,
                         point_size = 3) {
   check_add_species(p = p, data = data)
-  
+
   if (fill != "sp") {
     # `z` = NULL because base may have `z`, e.g.: aes(z = elevation)`
-    p <- p + 
+    p <- p +
       suppressWarnings(
         geom_point(
-          data = data, aes(gx, gy, z = NULL), 
+          data = data, aes(gx, gy, z = NULL),
           shape = shape, size = point_size, fill = fill
         )
       )
     return(p)
   } else {
-    p + 
+    p +
       suppressWarnings(
         geom_point(
-          data = data, 
-          aes(gx, gy, z = NULL, fill = sp), 
+          data = data,
+          aes(gx, gy, z = NULL, fill = sp),
           shape = shape, size = point_size
         )
       )
-    
   }
 }
 
-add_elevation_contours <- function(p, 
-                                   contour_size = 1, 
-                                   low = "blue", 
-                                   high = "red", 
+add_elevation_contours <- function(p,
+                                   contour_size = 1,
+                                   low = "blue",
+                                   high = "red",
                                    bins = NULL) {
   check_crucial_names(p[["data"]], "elev")
-  
+
   p +
     stat_contour(
-      aes(x = gx, y = gy, z = elev, colour = ..level..), 
+      aes(x = gx, y = gy, z = elev, colour = ..level..),
       size = contour_size, bins = bins
     ) +
     scale_colour_continuous(low = low, high = high)
 }
 
-add_elevation_labels <- function(p, 
+add_elevation_labels <- function(p,
                                  label_size = 3,
                                  label_color = "grey",
-                                 xyjust = 1, 
+                                 xyjust = 1,
                                  fontface = "italic") {
   check_add_elevation_labels(
     p = p,
@@ -67,7 +66,7 @@ add_elevation_labels <- function(p,
     xyjust = xyjust,
     fontface = fontface
   )
-  
+
   p +
     text_at_max(
       max_elev(p)$x,
@@ -87,7 +86,7 @@ add_elevation_labels <- function(p,
 
 max_elev <- function(p) {
   built <- ggplot_build(p)$data[[1]]
-  elev <-  mutate(built, gx = .data$x, gy = .data$y)
+  elev <- mutate(built, gx = .data$x, gy = .data$y)
   elev_x <- elev[elev$gx == maximum(elev$gx), ]
   elev_y <- elev[elev$gy == maximum(elev$gy), ]
   list(x = elev_x, y = elev_y)
@@ -104,10 +103,10 @@ text_at_max <- function(x,
       data = x,
       aes(label = level, z = NULL),
       size = label_size,
-      color =  label_color,
+      color = label_color,
       hjust = xyjust,
       vjust = xyjust,
-      fontface =  fontface
+      fontface = fontface
     )
   )
 }
@@ -127,4 +126,3 @@ hide_fill_legend <- function(p) {
 facet <- function(p, facets, ...) {
   p + facet_wrap(facets, ...)
 }
-

@@ -119,7 +119,6 @@ autoplot(sp(census), point_size = 1)
 
 elevation <- fgeo.x::elevation
 autoplot(elev(elevation))
-
 \dontrun{
 # Same: Works both with the elevation list and dataframe
 autoplot(elev(elevation$col))
@@ -131,7 +130,6 @@ autoplot(elev(elevation), contour_size = 1)
 # Species and elevation -------------------------------------------------
 
 autoplot(sp_elev(census, elevation), facet = FALSE, point_size = 1)
-
 }
 \seealso{
 Other plot functions: \code{\link{autoplot.fgeo_habitat}},

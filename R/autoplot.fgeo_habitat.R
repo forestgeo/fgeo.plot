@@ -1,5 +1,5 @@
 #' Plot habitats.
-#' 
+#'
 #' @param object An object of class "fgeo_habitat" (see `fgeo_habitat` at
 #'   \url{http://bit.ly/fgeo-reference}).
 #' @template autoplot_unused_dots
@@ -11,10 +11,10 @@
 #' fgeo_analyze_is_installed <- requireNamespace("fgeo_analyze", quietly = TRUE)
 #' if (fgeo_analyze_is_installed) {
 #'   library(fgeo.analyze)
-#'   
+#' 
 #'   habitats <- fgeo_habitat(fgeo.x::elevation, gridsize = 20, n = 4)
 #'   autoplot(habitats)
-#' } 
+#' }
 #' }
 #' @family plot functions
 #' @family autoplots
@@ -25,9 +25,9 @@ autoplot.fgeo_habitat <- function(object, ...) {
   object$gx <- object$gx + (gridsize / 2)
   object$gy <- object$gy + (gridsize / 2)
   object$habitats <- as.factor(object$habitats)
-  
+
   ggplot(object, aes(x = gx, y = gy)) +
-    geom_raster(aes(fill = .data$habitats)) + 
+    geom_raster(aes(fill = .data$habitats)) +
     coord_fixed() +
     labs(fill = "habitats")
 }

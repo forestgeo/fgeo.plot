@@ -20,7 +20,6 @@ Allow autoplotting the column \code{elev}.
 inherits(elev(fgeo.x::elevation), "elev")
 
 inherits(elev(fgeo.x::elevation$col), "elev")
-
 }
 \seealso{
 \code{\link[=autoplot.elev]{autoplot.elev()}}.

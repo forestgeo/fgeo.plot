@@ -24,7 +24,7 @@ plot_each_species <- function(census,
   species <- best_species(census, species)
   xlim <- best_lim(xlim, census$gx)
   ylim <- best_lim(ylim, census$gy)
-  
+
   # Iterate over each of the given species
   cns <- census[census$sp %in% species, ]
   cns_list <- split(cns, cns$sp)
@@ -74,11 +74,11 @@ plot_sp_elev <- function(census,
                          custom_theme = NULL) {
   stopifnot(is.data.frame(census))
   check_crucial_names(census, c("gx", "gy"))
-  
+
   # User doesn't provide elevation data
   if (is.null(elevation)) {
     base <- plot_base_census(census)
-    
+
     # User provides elevation data
   } else {
     base <- map_pure_elev(
@@ -95,15 +95,15 @@ plot_sp_elev <- function(census,
       fontface = fontface
     )
   }
-  
-  base <- base %>% 
+
+  base <- base %>%
     add_species(census, fill = fill, shape = shape, point_size = point_size) %>%
-    best_layout(facet = facet) %>% 
+    best_layout(facet = facet) %>%
     axis_limits(xlim = xlim, ylim = ylim) %>%
     best_theme(custom_theme = custom_theme)
-  
+
   if (hide_fill_legend) base <- hide_fill_legend(base)
-  
+
   base
 }
 
@@ -134,7 +134,7 @@ plot_elev <- function(elevation,
     xyjust = xyjust,
     fontface = fontface
   )
-  base %>% 
+  base %>%
     axis_limits(xlim = xlim, ylim = ylim) %>%
     best_theme(custom_theme = custom_theme)
 }
@@ -151,11 +151,11 @@ map_pure_elev <- function(elevation,
                           xyjust = 1,
                           fontface = "italic") {
   elevation <- fgeo.tool::fgeo_elevation(elevation)
-  base <- elevation %>% 
-    plot_base_elevation() %>% 
+  base <- elevation %>%
+    plot_base_elevation() %>%
     add_elevation_contours(
       contour_size = contour_size, low = low, high = high, bins = bins
-    ) %>% 
+    ) %>%
     best_elev_legend(hide_color_legend = hide_color_legend)
   if (add_elevation_labels) {
     base <- add_elevation_labels(
@@ -178,7 +178,7 @@ plot_base_elevation <- function(data) {
 
 plot_base_census <- function(data) {
   check_plot_base_census(data)
-  
+
   ggplot(data, aes(gx, gy))
 }
 
@@ -258,10 +258,10 @@ check_add_elevation_labels <- function(p,
                                        xyjust,
                                        fontface) {
   stopifnot(
-    is.character(label_color), 
+    is.character(label_color),
     is.numeric(label_size),
     is.numeric(xyjust),
-    is.character(fontface) 
+    is.character(fontface)
   )
   p_data <- ggplot_build(p)[["data"]][[1]]
   p_data_lacks_level <- !any(grepl("level", names(p_data)))

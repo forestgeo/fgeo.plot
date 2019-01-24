@@ -21,7 +21,6 @@ Allow autoplotting the columns \code{sp} and \code{elev}.
 \examples{
 species_elevation <- sp_elev(fgeo.x::stem5, fgeo.x::elevation)
 inherits(species_elevation, "sp_elev")
-
 }
 \seealso{
 \code{\link[=autoplot.sp_elev]{autoplot.sp_elev()}}.

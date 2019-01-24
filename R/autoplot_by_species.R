@@ -1,5 +1,5 @@
 #' List plots of species distribution and topography (good for pdf output).
-#' 
+#'
 #' @description
 #' These functions extend [autoplot.sp()] and [autoplot.elev()] and return not a
 #' single plot but a list of plots. They are particularly useful if you want to
@@ -8,23 +8,23 @@
 #' 'sp_elev'.
 #' * Create a 'sp' `object` with:
 #' @description
-#' ``` 
+#' ```
 #'     object <- sp(DATA-WITH-VARIABLE-sp)
 #' ```
 #' * Create a 'sp_elev' `object` with:
 #' @description
-#' ``` 
+#' ```
 #'     object <- sp_elev(DATA-WITH-VARIABLE-sp, DATA-WITH-VARIABLE-elev)
 #' ```
 #' @description
 #' See sections __Usage__ and __Examples__.
-#' 
+#'
 #' @details
 #' `autoplot_by_species(sp_elev(DATA-WITH-VARIABLE-sp)` (without elevation data)
 #' is equivalent to `autoplot_by_species(sp(DATA-WITH-VARIABLE-sp))`.
-#' 
+#'
 #' @template compare_ggplot2
-#' 
+#'
 #' @param object An object created with [sp()] or [sp_elev()].
 #' @param species A character vector giving values in the column `sp`. The
 #'   output will be a list with as many plots as elements in this vector.
@@ -36,11 +36,11 @@
 #' @inheritParams autoplot.elev
 #' @inheritParams autoplot_by_species.sp
 #' @template autoplot_unused_dots
-#' 
+#'
 #' @seealso [autoplot()], [sp()], [sp_elev()].
-#' 
+#'
 #' @template return_a_list_of_ggplots
-#' 
+#'
 #' @examples
 #' # Species ---------------------------------------------------------------
 #' # Small dataset with a few species for quick examples
@@ -48,7 +48,6 @@
 #' 
 #' # Showing only two species for speed
 #' autoplot_by_species(sp(census))[1:2]
-#' 
 #' \dontrun{
 #' # Print all plots in the list
 #' pdf("map.pdf", paper = "letter", height = 10.5, width = 8)
@@ -63,13 +62,12 @@
 #' # Species and elevation
 #' elevation <- fgeo.x::elevation
 #' autoplot_by_species(sp_elev(census, elevation))
-#' 
 #' @family plot functions
 #' @family functions to list plots from different ForestGEO classes
 #' @family functions to plot elevation
 #' @family functions to plot species
 #' @export
-autoplot_by_species.sp_elev <- function(object, 
+autoplot_by_species.sp_elev <- function(object,
                                         species = "all",
                                         fill = "black",
                                         shape = 21,
@@ -89,8 +87,8 @@ autoplot_by_species.sp_elev <- function(object,
                                         custom_theme = NULL,
                                         ...) {
   plot_each_species(
-    census = object[[1]], 
-    elevation = object[[2]], 
+    census = object[[1]],
+    elevation = object[[2]],
     species = species,
     fill = fill,
     shape = shape,
@@ -113,7 +111,7 @@ autoplot_by_species.sp_elev <- function(object,
 
 #' @rdname autoplot_by_species.sp_elev
 #' @export
-autoplot_by_species.sp <- function(object, 
+autoplot_by_species.sp <- function(object,
                                    species = "all",
                                    fill = "black",
                                    shape = 21,
@@ -121,10 +119,10 @@ autoplot_by_species.sp <- function(object,
                                    hide_color_legend = FALSE,
                                    xlim = NULL,
                                    ylim = NULL,
-                                   custom_theme = NULL, 
+                                   custom_theme = NULL,
                                    ...) {
   plot_each_species(
-    census = object, 
+    census = object,
     elevation = NULL,
     species = species,
     fill = fill,
@@ -138,18 +136,18 @@ autoplot_by_species.sp <- function(object,
 }
 
 #' Generic function to create a list of autoplots by species.
-#' 
-#' `autoplot_by_species` uses __ggplot2__ to create a list of plots by species 
-#' for an object of a particular class in a single command. It extends the 
+#'
+#' `autoplot_by_species` uses __ggplot2__ to create a list of plots by species
+#' for an object of a particular class in a single command. It extends the
 #' S3 generic defined by [ggplot2::autoplot()].
 #'
 #' @param object An object of supported S3 class.
 #' @param ... Other arguments passed to specific methods.
-#' 
+#'
 #' @seealso [ggplot2::autoplot()].
 #'
 #' @template return_a_list_of_ggplots
-#'  
+#'
 #' @family generics for ForestGEO classes
 #' @keywords internal
 #' @export
@@ -163,4 +161,3 @@ autoplot_by_species.default <- function(object, ...) {
     Do you forget to use `sp()` or `sp_elev()`?
   "))
 }
-

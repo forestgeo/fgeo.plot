@@ -15,7 +15,7 @@ test_that("output expected ggplot", {
   expect_is(autoplot_by_species(sp(census)), "list")
   expect_is(autoplot_by_species(sp_elev(census, elevation_lst)), "list")
   expect_is(autoplot_by_species(sp_elev(census, elevation_df)), "list")
-  
+
   expect_is(autoplot_by_species(sp(census))[[1]], "ggplot")
   expect_is(autoplot_by_species(sp_elev(census, elevation_lst))[[1]], "ggplot")
   expect_is(autoplot_by_species(sp_elev(census, elevation_df))[[1]], "ggplot")
