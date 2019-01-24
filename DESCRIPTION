@@ -19,7 +19,7 @@ Depends:
     R (>= 3.3)
 Imports: 
     dplyr,
-    fgeo.tool (>= 1.0.2),
+    fgeo.tool (>= 1.0.1),
     fgeo.x (>= 1.0.1),
     ggplot2,
     ggrepel,
