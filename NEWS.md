@@ -2,8 +2,9 @@
 
 * Work in progress.
 
-# fgeo.plot 1.0.1 (GitHub release)
+# fgeo.plot 1.0.2 (GitHub release)
 
+* Style.
 * Review documentation.
 
 # fgeo.plot 1.0.0 (GitHub release)
