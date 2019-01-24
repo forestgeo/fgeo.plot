@@ -1,6 +1,6 @@
 Package: fgeo.plot
 Title: Plot 'ForestGEO' Data
-Version: 1.0.2
+Version: 1.0.3
 Authors@R: 
     c(person(given = "Mauro",
              family = "Lepore",
@@ -19,8 +19,8 @@ Depends:
     R (>= 3.3)
 Imports: 
     dplyr,
-    fgeo.tool,
-    fgeo.x,
+    fgeo.tool (>= 1.0.2),
+    fgeo.x (>= 1.0.1),
     ggplot2,
     ggrepel,
     glue,
@@ -28,21 +28,20 @@ Imports:
     magrittr,
     rlang,
     stats,
-    stringr
+    stringr,
+    purrr
 Suggests: 
     covr,
     gridExtra,
     knitr,
-    purrr,
     rmarkdown,
-    testthat,
-    tibble,
-    spelling
+    spelling,
+    testthat
 Remotes: 
-    forestgeo/fgeo.tool@*release,
-    forestgeo/fgeo.x@*release
+    forestgeo/fgeo.tool,
+    forestgeo/fgeo.x
 Encoding: UTF-8
+Language: en-US
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.1.1
-Language: en-US
