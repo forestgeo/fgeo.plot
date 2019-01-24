@@ -7,9 +7,9 @@
 #' @importFrom rlang abort warn inform enquo
 #' @importFrom stats setNames
 #' @importFrom utils head tail
-#' @import ggplot2
 NULL
 
+#' @import ggplot2
 #' @export
 ggplot2::autoplot
 
