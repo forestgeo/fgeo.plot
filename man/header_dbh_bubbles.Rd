@@ -14,7 +14,6 @@ Pre-made headers.
 }
 \examples{
 cat(header_dbh_bubbles())
-
 }
 \seealso{
 Other functions to plot dbh bubbles: \code{\link{plot_dbh_bubbles_by_quadrat}},

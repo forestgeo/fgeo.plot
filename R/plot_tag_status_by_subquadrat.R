@@ -6,7 +6,7 @@
 #' each stem. Although you should likely provide data of only one or two
 #' censuses, `plot_tag_status_by_subquadrat()` will summarize the data to reduce
 #' overplotting. The data on the plot summarizes the history of each stem across
-#' all censuses provided. Each tag will appear in the plot only once or twice: 
+#' all censuses provided. Each tag will appear in the plot only once or twice:
 #' * A tag will appear once if it belongs to a tree which status was unique
 #' across all censuses provided -- either "alive" or "dead".
 #' * A tag will appear twice if it belongs to a tree which status was "alive" in
@@ -42,7 +42,7 @@
 #' @template header
 #' @template theme
 #' @template move_edge
-#' 
+#'
 #' @seealso [graphics::points()], [ggplot2::geom_point()], [ggplot2::theme()]
 #'   [header_tag_status()], [theme_tag_status()], [fgeo.tool::add_subquad()],
 #'   [ggrepel::geom_text_repel].
@@ -110,32 +110,31 @@
 #' small_tweak <- theme_tag_status(legend.position = "bottom")
 #' p <- plot_tag_status_by_subquadrat(small_vft, theme = small_tweak)
 #' p[[1]]
-#' 
 #' @family plot functions
 #' @family functions to list plots from ForestGEO ViewFullTable
 #' @family functions to plot tag status
 #' @export
 plot_tag_status_by_subquadrat <- function(vft,
-                      x_q = 20,
-                      x_sq = 5,
-                      y_q = 20,
-                      y_sq = 5,
-                      subquad_offset = NULL,
-                      bl = 1,
-                      br = 2,
-                      tr = 3,
-                      tl = 4,
-                      title_quad = "Site Name, YYYY. Quadrat:",
-                      show_page = TRUE,
-                      show_subquad = TRUE,
-                      point_shape = c(19, 4),
-                      point_size = 1.5,
-                      tag_size = 3,
-                      header = header_tag_status(),
-                      theme = theme_tag_status(),
-                      move_edge = 0) {
+                                          x_q = 20,
+                                          x_sq = 5,
+                                          y_q = 20,
+                                          y_sq = 5,
+                                          subquad_offset = NULL,
+                                          bl = 1,
+                                          br = 2,
+                                          tr = 3,
+                                          tl = 4,
+                                          title_quad = "Site Name, YYYY. Quadrat:",
+                                          show_page = TRUE,
+                                          show_subquad = TRUE,
+                                          point_shape = c(19, 4),
+                                          point_size = 1.5,
+                                          tag_size = 3,
+                                          header = header_tag_status(),
+                                          theme = theme_tag_status(),
+                                          move_edge = 0) {
   .vft <- setNames(vft, tolower(names(vft)))
-  
+
   crucial <- c(
     "tag", "treeid", "status", "quadratname", "qx", "qy", "censusid", "plotid"
   )
@@ -163,10 +162,11 @@ plot_tag_status_by_subquadrat <- function(vft,
   )
 
   # Prepare
-  sbst <- .vft[ , crucial]
+  sbst <- .vft[, crucial]
   prepared <- prep_plot_tag_status_by_subquadrat(
-    sbst, x_q = x_q, x_sq = x_sq, y_q = y_q, y_sq = y_sq, subquad_offset =
-    subquad_offset, bl = bl, br = br, tr = tr, tl = tl, move_edge = move_edge
+    sbst,
+    x_q = x_q, x_sq = x_sq, y_q = y_q, y_sq = y_sq, subquad_offset =
+      subquad_offset, bl = bl, br = br, tr = tr, tl = tl, move_edge = move_edge
   )
 
   # Plot
@@ -176,9 +176,9 @@ plot_tag_status_by_subquadrat <- function(vft,
     X = df_list,
     FUN = map_tag_each,
     x_q = x_q, x_sq = x_sq, y_q = y_q, y_sq = y_sq, subquad_offset =
-    subquad_offset, title_quad = title_quad, show_page = show_page,
+      subquad_offset, title_quad = title_quad, show_page = show_page,
     show_subquad = show_subquad, point_shape = point_shape, point_size =
-    point_size, tag_size = tag_size, header = header, theme = theme
+      point_size, tag_size = tag_size, header = header, theme = theme
   )
   setNames(p, nms)
 }
@@ -204,7 +204,9 @@ check_plot_tag_status_by_subquadrat <- function(.vft,
                                                 theme,
                                                 move_edge) {
   stopifnot(is.data.frame(.vft))
-  if (dim(.vft)[1] == 0) {stop("Data can't have cero rows")}
+  if (dim(.vft)[1] == 0) {
+    stop("Data can't have cero rows")
+  }
   check_crucial_names(.vft, crucial)
   stopifnot(is.numeric(x_q))
   stopifnot(is.numeric(x_sq))
@@ -229,37 +231,36 @@ check_plot_tag_status_by_subquadrat <- function(.vft,
   stopifnot(arg_theme_is_of_class_theme)
   stopifnot(is.numeric(move_edge))
   warn_multiple_plotid(.vft)
-  
+
   msg_cnsid <- paste0(
     "* Likely you want only the last 2 censuses\n",
     "* Detected censuses: ", commas(unique(.vft$censusid)),
     collapse = ""
   )
   flag_if(.vft, "censusid", is_multiple, warn, msg_cnsid)
-  
+
   check_max_print(.vft, "quadratname", times = 4)
 
   invisible(.vft)
 }
 
 prep_plot_tag_status_by_subquadrat <- function(sbst,
-                         x_q,
-                         x_sq,
-                         y_q,
-                         y_sq,
-                         subquad_offset,
-                         bl,
-                         br,
-                         tr,
-                         tl,
-                         move_edge
-                         ) {
+                                               x_q,
+                                               x_sq,
+                                               y_q,
+                                               y_sq,
+                                               subquad_offset,
+                                               bl,
+                                               br,
+                                               tr,
+                                               tl,
+                                               move_edge) {
   # `type_ensure()` fails to pad with 0. This is a special kind of coersion
   if (!is.character(sbst$quadratname)) {
     sbst$quadratname <- stringr::str_pad(sbst$quadratname, width = 4, pad = 0)
     rlang::warn("`quadratname` is not of class character. Pading with '0'.")
   }
-  
+
   # Ensure type
   chr_var <- c("tag", "status", "quadratname")
   sbst <- fgeo.tool::type_ensure(sbst, chr_var, "character")
@@ -267,12 +268,12 @@ prep_plot_tag_status_by_subquadrat <- function(sbst,
   sbst <- fgeo.tool::type_ensure(sbst, dbl_var, "double")
   int_var <- c("censusid", "plotid")
   sbst <- fgeo.tool::type_ensure(sbst, int_var, "integer")
-  
+
   # Using the pipe (%>%) to avoid meaningless temporary-variables
   sbst %>%
     fgeo.tool::add_status_tree(status_a = "alive", status_d = "dead") %>%
-    select(-.data$status) %>% 
-    collapse_censusid() %>% 
+    select(-.data$status) %>%
+    collapse_censusid() %>%
     fgeo.tool::add_subquad(
       x_q = x_q, x_sq = x_sq, y_q = y_q, y_sq = y_sq,
       subquad_offset = subquad_offset
@@ -331,7 +332,7 @@ prep_plot_tag_status_by_subquadrat <- function(sbst,
 #'    6.1, 17.3
 #' )
 #' with_subquad <- fgeo.tool::add_subquad(viewfulltable, 20, 20, 5, 5)
-#'
+#' 
 #' # Warning: Internal function
 #' paginate(with_subquad)
 #' paginate(with_subquad, "a", "b", "c", "d")
@@ -349,27 +350,27 @@ paginate <- function(x, bl = 1, br = 2, tr = 3, tl = 4, subquad_offset = NULL) {
   w_page <- mutate(
     x,
     page = dplyr::case_when(
-        subquadrat == 11 ~ bl,
-        subquadrat == 12 ~ bl,
-        subquadrat == 21 ~ bl,
-        subquadrat == 22 ~ bl,
+      subquadrat == 11 ~ bl,
+      subquadrat == 12 ~ bl,
+      subquadrat == 21 ~ bl,
+      subquadrat == 22 ~ bl,
 
-        subquadrat == 31 ~ br,
-        subquadrat == 32 ~ br,
-        subquadrat == 41 ~ br,
-        subquadrat == 42 ~ br,
+      subquadrat == 31 ~ br,
+      subquadrat == 32 ~ br,
+      subquadrat == 41 ~ br,
+      subquadrat == 42 ~ br,
 
-        subquadrat == 34 ~ tr,
-        subquadrat == 33 ~ tr,
-        subquadrat == 44 ~ tr,
-        subquadrat == 43 ~ tr,
+      subquadrat == 34 ~ tr,
+      subquadrat == 33 ~ tr,
+      subquadrat == 44 ~ tr,
+      subquadrat == 43 ~ tr,
 
-        subquadrat == 14 ~ tl,
-        subquadrat == 13 ~ tl,
-        subquadrat == 24 ~ tl,
-        subquadrat == 23 ~ tl,
-      )
+      subquadrat == 14 ~ tl,
+      subquadrat == 13 ~ tl,
+      subquadrat == 24 ~ tl,
+      subquadrat == 23 ~ tl,
     )
+  )
 
   if (!is.null(subquad_offset)) {
     w_page <- fgeo.tool::recode_subquad(w_page, offset = -1)
@@ -378,13 +379,13 @@ paginate <- function(x, bl = 1, br = 2, tr = 3, tl = 4, subquad_offset = NULL) {
 }
 
 #' Add plot limits to a dataframe with the variable `subquadrat`.
-#' 
+#'
 #' @param paged A dataframe with the variable `page`.
 #' @param x_q Integer; the size in meters of a (squared) quadrat.
-#' @param bl,br,tr,tl #' @param bl,br,tr,tl See 
+#' @param bl,br,tr,tl #' @param bl,br,tr,tl See
 #'   [plot_tag_status_by_subquadrat()].
 #' @param move_edge A positive or negative number to move the edge lines of each map.
-#' 
+#'
 #' @noRd
 add_subquad_lims <- function(paged, x_q = 20, bl, br, tr, tl, move_edge = 0) {
   # ggplots come with a default extention
@@ -413,7 +414,7 @@ add_subquad_lims <- function(paged, x_q = 20, bl, br, tr, tl, move_edge = 0) {
     y2 = dplyr::case_when(
       page == bl ~ (x_q / 2) - mv_edge,
       page == br ~ (x_q / 2) - mv_edge,
-      page == tr ~ x_q  - mv_edge,
+      page == tr ~ x_q - mv_edge,
       page == tl ~ x_q - mv_edge
     )
   )
@@ -481,9 +482,9 @@ map_tag_each <- function(prep_df,
 }
 
 curate_point_shape <- function(x,
-  point_shape,
-  status_a = "alive",
-  status_d = "dead") {
+                               point_shape,
+                               status_a = "alive",
+                               status_d = "dead") {
   if (identical(sort(unique(x$status_tree)), sort(c(status_a, status_d)))) {
     return(point_shape)
   }
@@ -499,39 +500,44 @@ entitle_map <- function(x, chr, show_page = TRUE) {
   quad <- stringr::str_pad(unique(x$quadratname), width = 4, pad = 0)
   chr_quad <- paste0(chr, " ", quad)
   page <- paste0(" (", unique(x$page), ")")
-  if (show_page) {paste0(chr_quad, page)} else {chr_quad}
+  if (show_page) {
+    paste0(chr_quad, page)
+  } else {
+    chr_quad
+  }
 }
 
 #' Create data to plot labels in each subquadrat.
-#' 
+#'
 #' @examples
 #' library(ggplot2)
 #' library(tibble)
-#'
+#' 
 #' tags <- tibble(
 #'   tag = sample(1:10000, 100),
 #'   qx = sample(1:20, 100, replace = TRUE),
 #'   qy = sample(1:20, 100, replace = TRUE)
 #' )
-#'
+#' 
 #' df_labs <- df_subquad_labs(x_q = 20, y_q = 20, x_sq = 5, y_sq = 5)
-#'
+#' 
 #' ggplot(data = tags, aes(qx, qy)) +
-#'   geom_label(data = df_labs, aes(qx, qy, label = subquadrat),
-#'     colour = "white", fill = "grey", fontface = "bold") +
+#'   geom_label(
+#'     data = df_labs, aes(qx, qy, label = subquadrat),
+#'     colour = "white", fill = "grey", fontface = "bold"
+#'   ) +
 #'   ggrepel::geom_text_repel(aes(label = tag))
-#'   
 #' @noRd
 df_subquad_labs <- function(x_q, x_sq, y_q, y_sq, subquad_offset, ...) {
   # Center labels in each subquadrat
   # x
   xoffset <- x_sq / 2
   xcentered <- seq(0, x_q, x_sq) + xoffset
-  xtrimed <- xcentered[xcentered < x_q]  # remove tags beyond the range
+  xtrimed <- xcentered[xcentered < x_q] # remove tags beyond the range
   # y
   yoffset <- y_sq / 2
   ycentered <- seq(0, y_q, y_sq) + yoffset
-  ytrimed <- ycentered[ycentered < y_q]  # remove tags beyond the range
+  ytrimed <- ycentered[ycentered < y_q] # remove tags beyond the range
 
   pos <- expand.grid(qx = xtrimed, qy = ytrimed, stringsAsFactors = FALSE)
 
@@ -541,4 +547,3 @@ df_subquad_labs <- function(x_q, x_sq, y_q, y_sq, subquad_offset, ...) {
     subquad_offset = subquad_offset
   )
 }
-

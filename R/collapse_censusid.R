@@ -16,7 +16,6 @@
 #' )
 #' x
 #' collapse_censusid(x)
-#' 
 #' @family functions to edit ForestGEO data in place
 #' @noRd
 collapse_censusid <- function(x) {

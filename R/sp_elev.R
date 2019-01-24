@@ -1,14 +1,13 @@
 #' Allow autoplotting the column `sp`.
-#' 
+#'
 #' @param sp A ForestGEO-like dataframe with the column `sp`.
-#' 
+#'
 #' @seealso [autoplot.sp()].
-#' 
+#'
 #' @return An S3 object of class 'sp'.
-#' 
+#'
 #' @examples
 #' inherits(sp(fgeo.x::stem5), "sp")
-#' 
 #' @family plot functions
 #' @family autoplots
 #' @family functions to construct fgeo classes
@@ -20,19 +19,18 @@ sp <- function(sp) {
 }
 
 #' Allow autoplotting the column `elev`.
-#' 
+#'
 #' @param elev A ForestGEO-like elevation list or its `col` dataframe (with
 #'   the column `elev`).
-#'   
+#'
 #' @seealso [autoplot.elev()].
-#' 
+#'
 #' @return An S3 object of class 'elev'.
-#' 
+#'
 #' @examples
 #' inherits(elev(fgeo.x::elevation), "elev")
 #' 
 #' inherits(elev(fgeo.x::elevation$col), "elev")
-#' 
 #' @family plot functions
 #' @family autoplots
 #' @family functions to construct fgeo classes
@@ -44,19 +42,18 @@ elev <- function(elev) {
 }
 
 #' Allow autoplotting the columns `sp` and `elev`.
-#' 
+#'
 #' @param sp A ForestGEO-like dataframe with the column `sp`.
 #' @param elev A ForestGEO-like elevation list or its `col` dataframe -- with
 #'   the column `elev`.
-#' 
+#'
 #' @seealso [autoplot.sp_elev()].
-#' 
+#'
 #' @return An S3 object of class 'sp_elev'.
-#' 
+#'
 #' @examples
 #' species_elevation <- sp_elev(fgeo.x::stem5, fgeo.x::elevation)
 #' inherits(species_elevation, "sp_elev")
-#' 
 #' @family plot functions
 #' @family autoplots
 #' @family functions to construct fgeo classes
@@ -73,7 +70,7 @@ validate_sp_elev <- function(sp, elev) {
   if (!is.null(elev)) {
     stopifnot(is.data.frame(fgeo.tool::fgeo_elevation(elev)))
   }
-  
+
   stopifnot(is.data.frame(sp))
   check_crucial_names(sp, c("gx", "gy", "sp"))
 }

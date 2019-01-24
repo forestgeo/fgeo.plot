@@ -6,7 +6,7 @@
 #' @param suffix A suffix to add at the end of each element of `string`.
 #'
 #' @return A modified version of `x`.
-#' 
+#'
 #' @family general functions to edit data in place
 #' @family functions for internal use in other fgeo packages
 #' @keywords internal
@@ -19,14 +19,14 @@
 #'   .match = "number",
 #'   suffix = "_num"
 #' )
-#'
+#' 
 #' suffix_match(
 #'   string = c("tag1", "tag2"),
 #'   to_match = c("dead", "not-dead"),
 #'   .match = "dead",
 #'   suffix = ".d"
 #' )
-#'
+#' 
 #' vft <- data.frame(
 #'   Tag = c("01", "02"),
 #'   Status = c("dead", "alive"),

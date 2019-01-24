@@ -26,7 +26,6 @@ Default plot theme.
 }
 \examples{
 class(theme_default(ggplot2::ggplot(iris)))
-
 }
 \concept{functions to create or modify plot layers}
 \keyword{internal}

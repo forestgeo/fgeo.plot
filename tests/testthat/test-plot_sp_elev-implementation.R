@@ -10,10 +10,10 @@ test_that("works with species parameters", {
 
   expect_silent(
     plot_each_species(
-      cns, elev, species = spp, fill = "white", shape = 21, point_size = 5
+      cns, elev,
+      species = spp, fill = "white", shape = 21, point_size = 5
     )[[1]]
   )
-  
 })
 
 test_that("works with elevation parameters", {
@@ -23,17 +23,19 @@ test_that("works with elevation parameters", {
 
   expect_silent(
     plot_each_species(
-      cns, elev, species = spp, fill = "white", shape = 21, point_size = 5,
+      cns, elev,
+      species = spp, fill = "white", shape = 21, point_size = 5,
       contour_size = 1, low = "grey", high = "black", hide_color_legend =
-      TRUE, bins = 7, add_elevation_labels = FALSE
+        TRUE, bins = 7, add_elevation_labels = FALSE
     )[[1]]
   )
-  
+
   expect_silent(
     plot_each_species(
-      cns, elev, species = spp, fill = "white", shape = 21, point_size = 5,
+      cns, elev,
+      species = spp, fill = "white", shape = 21, point_size = 5,
       contour_size = 1, low = "grey", high = "black", hide_color_legend =
-      TRUE, bins = NULL, add_elevation_labels = TRUE, label_color = "black",
+        TRUE, bins = NULL, add_elevation_labels = TRUE, label_color = "black",
       xyjust = 1, fontface = "bold", xlim = c(0, 500), ylim = c(0, 400),
       custom_theme = ggplot2::theme_bw()
     )[[1]]

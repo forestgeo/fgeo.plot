@@ -23,10 +23,10 @@ Plot habitats.
 fgeo_analyze_is_installed <- requireNamespace("fgeo_analyze", quietly = TRUE)
 if (fgeo_analyze_is_installed) {
   library(fgeo.analyze)
-  
+
   habitats <- fgeo_habitat(fgeo.x::elevation, gridsize = 20, n = 4)
   autoplot(habitats)
-} 
+}
 }
 }
 \seealso{

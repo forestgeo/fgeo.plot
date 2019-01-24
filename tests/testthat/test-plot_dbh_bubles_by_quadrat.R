@@ -4,8 +4,8 @@ context("plot_dbh_bubbles_by_quadrat")
 
 is_first <- function(x) x %in% sort(unique(x))[1]
 
-vft_1quad_sub <- fgeo.x::vft_4quad %>% 
-  filter(is_first(CensusID), is_first(QuadratID)) %>% 
+vft_1quad_sub <- fgeo.x::vft_4quad %>%
+  filter(is_first(CensusID), is_first(QuadratID)) %>%
   sample_n(5)
 
 test_that("passes with default arguments", {
@@ -20,7 +20,7 @@ test_that("passes with default arguments", {
       subquadrat_side = 5,
       tag_size = 2,
       move_edge = 0
-    ), 
+    ),
     NA
   )
 })
@@ -53,4 +53,3 @@ test_that("returns a valid ggplot2 theme", {
   expect_s3_class(theme_dbh_bubbles(), c("theme"))
   expect_s3_class(theme_dbh_bubbles(), "gg")
 })
-

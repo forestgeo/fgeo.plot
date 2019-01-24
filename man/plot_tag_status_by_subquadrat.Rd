@@ -139,7 +139,6 @@ p[[1]]
 small_tweak <- theme_tag_status(legend.position = "bottom")
 p <- plot_tag_status_by_subquadrat(small_vft, theme = small_tweak)
 p[[1]]
-
 }
 \seealso{
 \code{\link[graphics:points]{graphics::points()}}, \code{\link[ggplot2:geom_point]{ggplot2::geom_point()}}, \code{\link[ggplot2:theme]{ggplot2::theme()}}

@@ -2,7 +2,7 @@ pick_top <- function(.data, var, n = 1) {
   var <- enquo(var)
   pulled <- dplyr::pull(.data, !!var)
   sorted <- sort(unique(pulled))
-  if (n > 0 ) {
+  if (n > 0) {
     to_match <- head(sorted, n)
   } else {
     to_match <- tail(sorted, abs(n))
@@ -30,7 +30,7 @@ check_max_print <- function(x, var, times = NULL) {
   if (!max_n >= nn) {
     msg <- paste0(
       "Option max.print is low: ", max_n, ". Number of unique values of `",
-        var, "`: ", nn, ".\n",
+      var, "`: ", nn, ".\n",
       "* Consider using `options(max.print = HIGHER-NUMBER)`."
     )
     warn(msg)

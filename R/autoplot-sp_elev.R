@@ -1,35 +1,35 @@
 #' Plot species distribution and/or topography.
-#' 
+#'
 #' @description
 #' Plot the columns `sp` and/or `elev` of ForestGEO-like datasets of class 'sp'
 #' and/or 'sp_elev'.
-#' 
+#'
 #' * You can create a 'sp' `object` with:
 #' @description
-#' ``` 
+#' ```
 #'     object <- sp(DATA-WITH-VARIABLE-sp)
 #' ```
 #' * You can create an 'elev' `object` with:
 #' @description
-#' ``` 
+#' ```
 #'     object <- elev(DATA-WITH-VARIABLE-elev)
 #' ```
 #' @description
 #' * You can create a 'sp_elev' `object` with:
 #' @description
-#' ``` 
+#' ```
 #'     object <- sp_elev(DATA-WITH-VARIABLE-sp, DATA-WITH-VARIABLE-elev)
 #' ```
-#' 
+#'
 #' @description
 #' See __Examples__ below.
-#' 
+#'
 #' @details
 #' `autoplot(sp_elev(DATA-WITH-VARIABLE-sp)` (without elevation data) is
 #' equivalent to `autoplot(sp(DATA-WITH-VARIABLE-sp))`.
-#' 
+#'
 #' @template compare_ggplot2
-#' 
+#'
 #' @inheritParams autoplot.elev
 #' @param object An object created with [sp()], [elev()], or [sp_elev()].
 #' @param fill Character; either a color or "sp", which maps each species to a
@@ -48,7 +48,7 @@
 #' @param add_elevation_labels Logical; `FALSE` hides elevation labels.
 #' @param hide_color_legend Logical; `TRUE` hides the color legend.
 #' @template label_size_label_color_fontface
-#' @param xyjust A number to adjust the position of the text labels of the 
+#' @param xyjust A number to adjust the position of the text labels of the
 #'   elevation lines.
 #' @template xlim_ylim
 #' @param custom_theme A valid [ggplot2::theme()]. `NULL` uses the default
@@ -57,7 +57,7 @@
 #'
 #' @return A "ggplot".
 #'
-#' @examples 
+#' @examples
 #' # Species ---------------------------------------------------------------
 #' 
 #' # Small dataset with a few species for quick examples
@@ -73,7 +73,6 @@
 #' 
 #' elevation <- fgeo.x::elevation
 #' autoplot(elev(elevation))
-#' 
 #' \dontrun{
 #' # Same: Works both with the elevation list and dataframe
 #' autoplot(elev(elevation$col))
@@ -85,13 +84,12 @@
 #' # Species and elevation -------------------------------------------------
 #' 
 #' autoplot(sp_elev(census, elevation), facet = FALSE, point_size = 1)
-#' 
 #' @family plot functions
 #' @family autoplots
 #' @family functions to plot elevation
 #' @family functions to plot species
 #' @export
-autoplot.sp_elev <- function(object, 
+autoplot.sp_elev <- function(object,
                              fill = "sp",
                              hide_fill_legend = FALSE,
                              shape = 21,
@@ -112,8 +110,8 @@ autoplot.sp_elev <- function(object,
                              custom_theme = NULL,
                              ...) {
   plot_sp_elev(
-    census = object[[1]], 
-    elevation = object[[2]], 
+    census = object[[1]],
+    elevation = object[[2]],
     fill = fill,
     hide_fill_legend = hide_fill_legend,
     shape = shape,
@@ -137,7 +135,7 @@ autoplot.sp_elev <- function(object,
 
 #' @rdname autoplot.sp_elev
 #' @export
-autoplot.sp <- function(object, 
+autoplot.sp <- function(object,
                         fill = "sp",
                         hide_fill_legend = FALSE,
                         shape = 21,
@@ -148,7 +146,7 @@ autoplot.sp <- function(object,
                         custom_theme = NULL,
                         ...) {
   autoplot(
-    sp_elev(sp = object, elev = NULL), 
+    sp_elev(sp = object, elev = NULL),
     fill = fill,
     hide_fill_legend = hide_fill_legend,
     shape = shape,
@@ -162,7 +160,7 @@ autoplot.sp <- function(object,
 
 #' @rdname autoplot.sp_elev
 #' @export
-autoplot.elev <- function(object, 
+autoplot.elev <- function(object,
                           contour_size = 0.5,
                           low = "blue",
                           high = "red",
