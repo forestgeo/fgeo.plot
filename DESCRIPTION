@@ -1,6 +1,6 @@
 Package: fgeo.plot
 Title: Plot 'ForestGEO' Data
-Version: 1.0.4
+Version: 1.0.4.9000
 Authors@R: 
     c(person(given = "Mauro",
              family = "Lepore",
@@ -38,8 +38,8 @@ Suggests:
     spelling,
     testthat
 Remotes: 
-    forestgeo/fgeo.x@*release,
-    forestgeo/fgeo.tool@*release
+    forestgeo/fgeo.x,
+    forestgeo/fgeo.tool
 Encoding: UTF-8
 Language: en-US
 LazyData: true
