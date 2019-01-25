@@ -2,6 +2,10 @@
 
 * Work in progress.
 
+# fgeo.plot 1.0.4 (GitHub release)
+
+* Use release version recrsively via @*release.
+
 # fgeo.plot 1.0.3 (GitHub release)
 
 * Prune dependencies.
