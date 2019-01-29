@@ -2,9 +2,13 @@
 
 * Work in progress.
 
-# fgeo.plot 1.0.4 (GitHub release)
+# fgeo.plot 1.1.0 (GitHub release)
 
-* Use release version recrsively via @*release.
+* Import fgeo packages via `Additional_repositories` served at https://forestgeo.github.io/drat/
+
+# fgeo.plot 1.0.4 (GitHub and drat release)
+
+* Use release version recursively via @*release.
 
 # fgeo.plot 1.0.3 (GitHub release)
 
