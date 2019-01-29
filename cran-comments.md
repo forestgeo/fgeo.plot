@@ -15,4 +15,7 @@ Strong dependencies not in mainstream repositories:
 
 ## Downstream dependencies
 
-There are currently no downstrem dependencies on CRAN for this package.
+I checked 1 reverse dependencies (0 from CRAN + 1 from <https://forestgeo.github.io/drat/>; summary at <https://github.com/forestgeo/fgeo.plot/tree/master/revdep>):
+
+ * I saw 0 new problems
+ * I failed to check 0 packages
