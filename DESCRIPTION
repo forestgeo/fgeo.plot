@@ -20,11 +20,9 @@ Depends:
 Imports: 
     dplyr,
     fgeo.tool,
-    fgeo.x,
     ggplot2,
     ggrepel,
     glue,
-    grDevices,
     magrittr,
     purrr,
     rlang,
@@ -32,6 +30,7 @@ Imports:
     stringr
 Suggests: 
     covr,
+    fgeo.x,
     gridExtra,
     knitr,
     rmarkdown,
