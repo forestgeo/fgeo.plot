@@ -8,10 +8,11 @@
 
 WARNING
 New submission
-Unknown, possibly mis-spelled, fields in DESCRIPTION:
-  'Remotes'
 Strong dependencies not in mainstream repositories:
-  fgeo.tool, fgeo.x
+ fgeo.x, fgeo.tool
+Availability using Additional_repositories specification:
+ fgeo.x      yes   https://forestgeo.github.io/drat/
+ fgeo.tool   yes   https://forestgeo.github.io/drat/
 
 ## Downstream dependencies
 
