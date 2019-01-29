@@ -34,8 +34,8 @@ __fgeo.plot__ helps you to plot [ForestGEO](<http://www.forestgeo.si.edu/>) data
 Install the latest stable version of **fgeo.plot** with:
 
 ```R
-# install.packages("devtools")
-install_github("forestgeo/fgeo.plot@*release")
+these_repos <- c(getOption("repos"), "https://forestgeo.github.io/drat")
+install.packages("fgeo.plot", repos = these_repos)
 ```
 
 Install the development version of **fgeo.plot**:
