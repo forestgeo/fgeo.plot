@@ -6,6 +6,8 @@
 
 * Import fgeo packages via `Additional_repositories` served at https://forestgeo.github.io/drat/
 
+* First argument of most visible functions now follow tidyverse principles.
+
 # fgeo.plot 1.0.4 (GitHub and drat release)
 
 * Use release version recursively via @*release.
