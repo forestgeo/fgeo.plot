@@ -6,13 +6,14 @@
 
 ## R CMD check results
 
-'fgeo.plot' version '1.1.0'
-1 WARNING
+fgeo.plot' version '1.1.0'
 
 WARNING
 New submission
 Strong dependencies not in mainstream repositories:
-  fgeo.tool, fgeo.x
+  fgeo.tool
+Suggests or Enhances not in mainstream repositories:
+  fgeo.x
 Availability using Additional_repositories specification:
   fgeo.tool   yes   https://forestgeo.github.io/drat/
   fgeo.x      yes   https://forestgeo.github.io/drat/
