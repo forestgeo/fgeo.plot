@@ -2,6 +2,8 @@
 
 * Work in progress.
 
+* Reset and rerun revdepcheck.
+
 # fgeo.plot 1.1.0 (GitHub and drat release)
 
 * fgeo.x no longer is imported but instead is suggested.
