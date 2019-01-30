@@ -6,10 +6,11 @@
 
 ## R CMD check results
 
-fgeo.plot' version '1.1.0'
+1.1.0.9000
 
 WARNING
 New submission
+Version contains large components (1.1.0.9000)
 Strong dependencies not in mainstream repositories:
   fgeo.tool
 Suggests or Enhances not in mainstream repositories:
@@ -17,6 +18,11 @@ Suggests or Enhances not in mainstream repositories:
 Availability using Additional_repositories specification:
   fgeo.tool   yes   https://forestgeo.github.io/drat/
   fgeo.x      yes   https://forestgeo.github.io/drat/
+  
+NOTE
+Examples with CPU or elapsed time > 5s
+                 user system elapsed
+autoplot.sp_elev 2.27    0.1   15.62
 
 ## Downstream dependencies
 
