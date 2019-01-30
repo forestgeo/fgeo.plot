@@ -2,7 +2,7 @@
 
 * Work in progress.
 
-# fgeo.plot 1.1.0 (GitHub release)
+# fgeo.plot 1.1.0 (GitHub and drat release)
 
 * fgeo.x no longer is imported but instead is suggested.
 
