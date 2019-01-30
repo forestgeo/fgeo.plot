@@ -4,7 +4,9 @@
 
 # fgeo.plot 1.1.0 (GitHub release)
 
-* Import fgeo packages via `Additional_repositories` served at <https://forestgeo.github.io/drat/>
+* fgeo.x no longer is imported but instead is suggested.
+
+* Import fgeo packages via `Additional_repositories` served at <https://forestgeo.github.io/drat/>.
 
 * First argument of most visible functions now follow tidyverse principles (<http://bit.ly/2TfDcfX>).
 
