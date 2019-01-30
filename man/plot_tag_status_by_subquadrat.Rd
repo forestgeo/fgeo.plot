@@ -84,6 +84,8 @@ the algorithm to calculate subquadrats.
 }
 
 \examples{
+assert_is_installed("fgeo.x")
+
 # Create a small VieFullTable
 first <- function(x) x \%in\% sort(unique(x))[1]
 small_vft <- subset(fgeo.x::vft_4quad, first(CensusID) & first(QuadratID))

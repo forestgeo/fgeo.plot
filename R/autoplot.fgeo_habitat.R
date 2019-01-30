@@ -8,13 +8,12 @@
 #'
 #' @examples
 #' \dontrun{
-#' fgeo_analyze_is_installed <- requireNamespace("fgeo_analyze", quietly = TRUE)
-#' if (fgeo_analyze_is_installed) {
-#'   library(fgeo.analyze)
+#' assert_is_installed("fgeo.x")
+#' assert_is_installed("fgeo.analyze")
+#' library(fgeo.analyze)
 #' 
-#'   habitats <- fgeo_habitat(fgeo.x::elevation, gridsize = 20, n = 4)
-#'   autoplot(habitats)
-#' }
+#' habitats <- fgeo_habitat(fgeo.x::elevation, gridsize = 20, n = 4)
+#' autoplot(habitats)
 #' }
 #' @family plot functions
 #' @family autoplots

@@ -7,6 +7,8 @@
 #' @return An S3 object of class 'sp'.
 #'
 #' @examples
+#' assert_is_installed("fgeo.x")
+#' 
 #' inherits(sp(fgeo.x::stem5), "sp")
 #' @family plot functions
 #' @family autoplots
@@ -28,8 +30,9 @@ sp <- function(sp) {
 #' @return An S3 object of class 'elev'.
 #'
 #' @examples
-#' inherits(elev(fgeo.x::elevation), "elev")
+#' assert_is_installed("fgeo.x")
 #' 
+#' inherits(elev(fgeo.x::elevation), "elev")
 #' inherits(elev(fgeo.x::elevation$col), "elev")
 #' @family plot functions
 #' @family autoplots
@@ -52,6 +55,8 @@ elev <- function(elev) {
 #' @return An S3 object of class 'sp_elev'.
 #'
 #' @examples
+#' assert_is_installed("fgeo.x")
+#' 
 #' species_elevation <- sp_elev(fgeo.x::stem5, fgeo.x::elevation)
 #' inherits(species_elevation, "sp_elev")
 #' @family plot functions

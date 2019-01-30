@@ -9,6 +9,11 @@
 #' @importFrom utils head tail
 NULL
 
+#' @importFrom fgeo.tool assert_is_installed
+#' @export
+#' @keywords internal
+fgeo.tool::assert_is_installed
+
 #' @import ggplot2
 #' @export
 ggplot2::autoplot

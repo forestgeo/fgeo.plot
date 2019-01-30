@@ -104,6 +104,8 @@ equivalent to \code{autoplot(sp(DATA-WITH-VARIABLE-sp))}.
 For more control you can use \strong{ggplot2} directly.
 }
 \examples{
+assert_is_installed("fgeo.x")
+
 # Species ---------------------------------------------------------------
 
 # Small dataset with a few species for quick examples

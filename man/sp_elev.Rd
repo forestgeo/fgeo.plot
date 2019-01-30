@@ -19,6 +19,8 @@ An S3 object of class 'sp_elev'.
 Allow autoplotting the columns \code{sp} and \code{elev}.
 }
 \examples{
+assert_is_installed("fgeo.x")
+
 species_elevation <- sp_elev(fgeo.x::stem5, fgeo.x::elevation)
 inherits(species_elevation, "sp_elev")
 }
