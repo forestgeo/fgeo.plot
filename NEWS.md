@@ -2,7 +2,9 @@
 
 * Work in progress.
 
-# fgeo.plot 1.1.0 (GitHub release)
+* Reset and rerun revdepcheck.
+
+# fgeo.plot 1.1.0 (GitHub and drat release)
 
 * fgeo.x no longer is imported but instead is suggested.
 
@@ -25,5 +27,4 @@
 
 # fgeo.plot 1.0.0 (GitHub release)
 
-* Initial GitHub release. For CRAN, fgeo.tool and fgeo.x must be released first.
-
+* Initial GitHub release.

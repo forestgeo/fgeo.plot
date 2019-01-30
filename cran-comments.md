@@ -6,16 +6,26 @@
 
 ## R CMD check results
 
-'fgeo.plot' version '1.1.0'
-1 WARNING
+1.1.0.9000
 
 WARNING
 New submission
+Version contains large components (1.1.0.9000)
 Strong dependencies not in mainstream repositories:
-  fgeo.tool, fgeo.x
+  fgeo.tool
+Suggests or Enhances not in mainstream repositories:
+  fgeo.x
 Availability using Additional_repositories specification:
   fgeo.tool   yes   https://forestgeo.github.io/drat/
   fgeo.x      yes   https://forestgeo.github.io/drat/
+
+NOTE
+Examples with CPU or elapsed time > 5s
+                               user system elapsed
+plot_tag_status_by_subquadrat 3.872  0.060  10.835
+plot_dbh_bubbles_by_quadrat   2.856  0.020   7.676
+autoplot_by_species.sp_elev   2.732  0.016   8.140
+autoplot.sp_elev              2.004  0.052   6.973
 
 ## Downstream dependencies
 

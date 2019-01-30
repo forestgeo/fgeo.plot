@@ -3,20 +3,20 @@
 |field    |value                        |
 |:--------|:----------------------------|
 |version  |R version 3.5.2 (2018-12-20) |
-|os       |Windows 10 x64               |
+|os       |Windows >= 8 x64             |
 |system   |x86_64, mingw32              |
-|ui       |RTerm                        |
+|ui       |RStudio                      |
 |language |(EN)                         |
 |collate  |English_United States.1252   |
 |ctype    |English_United States.1252   |
 |tz       |America/New_York             |
-|date     |2019-01-27                   |
+|date     |2019-01-30                   |
 
 # Dependencies
 
 |package      |old      |new        |<U+0394>  |
 |:------------|:--------|:----------|:--|
-|fgeo.plot    |1.0.4    |1.0.4.9000 |*  |
+|fgeo.plot    |1.1.0    |1.1.0.9000 |*  |
 |assertthat   |0.2.0    |0.2.0      |   |
 |BH           |1.69.0-1 |1.69.0-1   |   |
 |bindr        |0.1.1    |0.1.1      |   |
@@ -28,8 +28,7 @@
 |digest       |0.6.18   |0.6.18     |   |
 |dplyr        |0.7.8    |0.7.8      |   |
 |fansi        |0.4.0    |0.4.0      |   |
-|fgeo.tool    |1.0.3    |1.0.3.9000 |*  |
-|fgeo.x       |1.0.1    |1.0.1.9000 |*  |
+|fgeo.tool    |1.2.0    |1.2.0      |   |
 |ggplot2      |3.1.0    |3.1.0      |   |
 |ggrepel      |0.8.0    |0.8.0      |   |
 |glue         |1.3.0    |1.3.0      |   |
@@ -65,5 +64,5 @@
 
 |package                  |version |error |warning |note |
 |:------------------------|:-------|:-----|:-------|:----|
-|[fgeo](problems.md#fgeo) |1.0.1   |      |        |1    |
+|[fgeo](problems.md#fgeo) |1.0.1   |1     |1       |1    |
 
