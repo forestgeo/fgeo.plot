@@ -8,7 +8,6 @@
 
 1.1.0.9000
 
-WARNINGS:
 WARNING
 New submission
 Version contains large components (1.1.0.9000)
