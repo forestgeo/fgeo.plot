@@ -8,6 +8,7 @@
 
 1.1.0.9000
 
+WARNINGS:
 WARNING
 New submission
 Version contains large components (1.1.0.9000)
@@ -18,11 +19,14 @@ Suggests or Enhances not in mainstream repositories:
 Availability using Additional_repositories specification:
   fgeo.tool   yes   https://forestgeo.github.io/drat/
   fgeo.x      yes   https://forestgeo.github.io/drat/
-  
+
 NOTE
 Examples with CPU or elapsed time > 5s
-                 user system elapsed
-autoplot.sp_elev 2.27    0.1   15.62
+                               user system elapsed
+plot_tag_status_by_subquadrat 3.872  0.060  10.835
+plot_dbh_bubbles_by_quadrat   2.856  0.020   7.676
+autoplot_by_species.sp_elev   2.732  0.016   8.140
+autoplot.sp_elev              2.004  0.052   6.973
 
 ## Downstream dependencies
 
