@@ -42,6 +42,8 @@
 #' @template return_a_list_of_ggplots
 #'
 #' @examples
+#' assert_is_installed("fgeo.x")
+#' 
 #' # Species ---------------------------------------------------------------
 #' # Small dataset with a few species for quick examples
 #' census <- fgeo.x::tree6_3species

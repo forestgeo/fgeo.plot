@@ -16,6 +16,8 @@ An S3 object of class 'sp'.
 Allow autoplotting the column \code{sp}.
 }
 \examples{
+assert_is_installed("fgeo.x")
+
 inherits(sp(fgeo.x::stem5), "sp")
 }
 \seealso{

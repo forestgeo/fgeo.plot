@@ -58,6 +58,8 @@
 #' @return A "ggplot".
 #'
 #' @examples
+#' assert_is_installed("fgeo.x")
+#' 
 #' # Species ---------------------------------------------------------------
 #' 
 #' # Small dataset with a few species for quick examples

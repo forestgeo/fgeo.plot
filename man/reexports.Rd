@@ -3,6 +3,7 @@
 \docType{import}
 \name{reexports}
 \alias{reexports}
+\alias{assert_is_installed}
 \alias{autoplot}
 \title{Objects exported from other packages}
 \keyword{internal}
@@ -11,6 +12,8 @@ These objects are imported from other packages. Follow the links
 below to see their documentation.
 
 \describe{
+  \item{fgeo.tool}{\code{\link[fgeo.tool]{assert_is_installed}}}
+
   \item{ggplot2}{\code{\link[ggplot2]{autoplot}}}
 }}
 

@@ -6,13 +6,20 @@
 
 ## R CMD check results
 
+'fgeo.plot' version '1.1.0'
+1 WARNING
+
 WARNING
 New submission
-Unknown, possibly mis-spelled, fields in DESCRIPTION:
-  'Remotes'
 Strong dependencies not in mainstream repositories:
   fgeo.tool, fgeo.x
+Availability using Additional_repositories specification:
+  fgeo.tool   yes   https://forestgeo.github.io/drat/
+  fgeo.x      yes   https://forestgeo.github.io/drat/
 
 ## Downstream dependencies
 
-There are currently no downstrem dependencies on CRAN for this package.
+I checked 1 reverse dependencies (0 from CRAN + 1 from <https://forestgeo.github.io/drat/>; summary at <https://github.com/forestgeo/fgeo.plot/tree/master/revdep>):
+
+ * I saw 0 new problems
+ * I failed to check 0 packages

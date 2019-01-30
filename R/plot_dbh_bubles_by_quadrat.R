@@ -14,6 +14,8 @@
 #' @return A list which each element is a plot of class ggplot.
 #'
 #' @examples
+#' assert_is_installed("fgeo.x")
+#' 
 #' # Create a small VieFullTable
 #' first_n <- function(x, n) x %in% sort(unique(x))[1:n]
 #' small_vft <- fgeo.x::vft_4quad %>%

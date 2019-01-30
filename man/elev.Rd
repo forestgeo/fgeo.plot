@@ -17,8 +17,9 @@ An S3 object of class 'elev'.
 Allow autoplotting the column \code{elev}.
 }
 \examples{
-inherits(elev(fgeo.x::elevation), "elev")
+assert_is_installed("fgeo.x")
 
+inherits(elev(fgeo.x::elevation), "elev")
 inherits(elev(fgeo.x::elevation$col), "elev")
 }
 \seealso{

@@ -92,6 +92,8 @@ is equivalent to \code{autoplot_by_species(sp(DATA-WITH-VARIABLE-sp))}.
 For more control you can use \strong{ggplot2} directly.
 }
 \examples{
+assert_is_installed("fgeo.x")
+
 # Species ---------------------------------------------------------------
 # Small dataset with a few species for quick examples
 census <- fgeo.x::tree6_3species
