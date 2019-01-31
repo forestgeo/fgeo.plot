@@ -6,11 +6,10 @@
 
 ## R CMD check results
 
-1.1.0.9000
+1.1.1
 
 WARNING
 New submission
-Version contains large components (1.1.0.9000)
 Strong dependencies not in mainstream repositories:
   fgeo.tool
 Suggests or Enhances not in mainstream repositories:
