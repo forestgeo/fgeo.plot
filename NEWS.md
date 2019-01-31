@@ -2,6 +2,7 @@
 
 * Work in progress.
 
+* Use tidy versions.
 * Reset and rerun revdepcheck.
 
 # fgeo.plot 1.1.0 (GitHub and drat release)
