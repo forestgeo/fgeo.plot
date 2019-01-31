@@ -18,24 +18,24 @@ BugReports: https://github.com/forestgeo/fgeo.plot/issues
 Depends: 
     R (>= 3.3)
 Imports: 
-    dplyr,
-    fgeo.tool,
-    ggplot2,
-    ggrepel,
-    glue,
-    magrittr,
-    purrr,
-    rlang,
+    dplyr (>= 0.7.8),
+    fgeo.tool (>= 1.2.0),
+    ggplot2 (>= 3.1.0),
+    ggrepel (>= 0.8.0),
+    glue (>= 1.3.0),
+    magrittr (>= 1.5),
+    purrr (>= 0.3.0),
+    rlang (>= 0.3.1),
     stats,
-    stringr
+    stringr (>= 1.3.1)
 Suggests: 
-    covr,
-    fgeo.x,
-    gridExtra,
-    knitr,
-    rmarkdown,
-    spelling,
-    testthat
+    covr (>= 3.2.1),
+    fgeo.x (>= 1.1.0),
+    gridExtra (>= 2.3),
+    knitr (>= 1.21),
+    rmarkdown (>= 1.11),
+    spelling (>= 2.0),
+    testthat (>= 2.0.1)
 Additional_repositories: https://forestgeo.github.io/drat/
 Encoding: UTF-8
 Language: en-US
