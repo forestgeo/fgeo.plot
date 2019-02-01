@@ -58,8 +58,6 @@
 #' }
 #' 
 #' # Species and elevation (optional) ---------------------------------------
-#' # Species only: Same as autoplot_by_species(sp(census))
-#' autoplot_by_species(sp_elev(census))
 #' 
 #' # Species and elevation
 #' elevation <- fgeo.x::elevation
