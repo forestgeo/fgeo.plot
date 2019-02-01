@@ -70,7 +70,6 @@
 #' pdf("map.pdf", paper = "letter", height = 10.5, width = 8)
 #' plot_tag_status_by_subquadrat(small_vft)
 #' dev.off()
-#' }
 #' 
 #' # Be careful if filtering by DBH: You may unintentionally remove dead trees.
 #' # * If you filter by `DBH`, you loose the dead trees becaue their `DBH = NA`
@@ -79,16 +78,10 @@
 #' p <- plot_tag_status_by_subquadrat(include_missing_dbh)
 #' # Showing only the first plot to keep the output short
 #' p[[1]]
+#' }
 #' 
 #' # Customizing the maps ----------------------------------------------------
 #' # Common tweaks
-#' p <- plot_tag_status_by_subquadrat(
-#'   small_vft,
-#'   show_page = FALSE,
-#'   show_subquad = FALSE
-#' )
-#' p[[1]]
-#' 
 #' p <- plot_tag_status_by_subquadrat(
 #'   small_vft,
 #'   title_quad = "BCI 2012. Quadrat: ",
@@ -98,6 +91,14 @@
 #'   point_size = 3, point_shape = c(17, 6),
 #'   tag_size = 2,
 #'   move_edge = 0.5
+#' )
+#' p[[1]]
+#' 
+#' \dontrun{
+#' p <- plot_tag_status_by_subquadrat(
+#'   small_vft,
+#'   show_page = FALSE,
+#'   show_subquad = FALSE
 #' )
 #' p[[1]]
 #' 
@@ -112,6 +113,7 @@
 #' small_tweak <- theme_tag_status(legend.position = "bottom")
 #' p <- plot_tag_status_by_subquadrat(small_vft, theme = small_tweak)
 #' p[[1]]
+#' }
 #' @family plot functions
 #' @family functions to list plots from ForestGEO ViewFullTable
 #' @family functions to plot tag status

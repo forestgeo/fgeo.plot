@@ -63,20 +63,23 @@
 #' # Species ---------------------------------------------------------------
 #' 
 #' # Small dataset with a few species for quick examples
-#' census <- fgeo.x::download_data("luquillo_tree5_random") %>%
+#' census <- fgeo.x::tree5 %>%
 #'   subset(sp %in% c("PREMON", "CASARB"))
 #' 
 #' autoplot(sp(census))
 #' 
+#' \dontrun{
 #' # Customize
 #' autoplot(sp(census), point_size = 1)
+#' }
 #' 
 #' # Elevation -------------------------------------------------------------
 #' 
 #' elevation <- fgeo.x::elevation
-#' autoplot(elev(elevation))
+#' autoplot(elev(elevation))  
+#' 
 #' \dontrun{
-#' # Same: Works both with the elevation list and dataframe
+#' # Same as `autoplot(elev(elevation))`
 #' autoplot(elev(elevation$col))
 #' 
 #' # Customize

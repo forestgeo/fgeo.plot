@@ -54,12 +54,12 @@ plot_dbh_bubbles_by_quadrat(small_vft)
 pdf("map.pdf", paper = "letter", height = 10.5, width = 8)
 plot_dbh_bubbles_by_quadrat(small_vft)
 dev.off()
-}
 
 # Be careful if subsetting by DBH: You may unintentionally remove dead trees.
 # You should explicietly inlcude missing `DBH` values with `is.na(DBH)`
 include_missing_dbh <- subset(small_vft, DBH > 20 | is.na(DBH))
 plot_dbh_bubbles_by_quadrat(include_missing_dbh)
+}
 
 # Customizing the maps ----------------------------------------------------
 # A custom title and header
@@ -78,6 +78,7 @@ plot_dbh_bubbles_by_quadrat(
   header = myheader
 )
 
+\dontrun{
 # Tweak the theme with ggplot
 library(ggplot2)
 
@@ -93,6 +94,7 @@ plot_dbh_bubbles_by_quadrat(
     panel.background = element_rect(fill = "grey")
   )
 )
+}
 }
 \seealso{
 Other plot functions: \code{\link{autoplot.fgeo_habitat}},
