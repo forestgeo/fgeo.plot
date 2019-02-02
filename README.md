@@ -23,7 +23,7 @@ these_repos <- c(getOption("repos"), "https://forestgeo.github.io/drat")
 install.packages("fgeo.plot", repos = these_repos)
 ```
 
-Install the development version of **fgeo.plot**:
+Install the development version of **fgeo.plot** with:
 
 ``` r
 # install.packages("devtools")
