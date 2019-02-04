@@ -36,7 +36,8 @@ Suggests:
     rmarkdown (>= 1.11),
     spelling (>= 2.0),
     testthat (>= 2.0.1)
-Additional_repositories: https://forestgeo.github.io/drat/
+Additional_repositories: https://cran.rstudio.com/,
+    https://forestgeo.github.io/drat/
 Encoding: UTF-8
 Language: en-US
 LazyData: true
