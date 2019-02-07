@@ -26,15 +26,15 @@
 
 * Use release version recursively via @*release.
 
-# fgeo.plot 1.0.3 ([GitHub](https://github.com/forestgeo/fgeo.plot/releases) release)
+# fgeo.plot 1.0.3 ([GitHub](https://github.com/forestgeo/fgeo.plot/releases))
 
 * Prune dependencies.
 
-# fgeo.plot 1.0.2 ([GitHub](https://github.com/forestgeo/fgeo.plot/releases) release)
+# fgeo.plot 1.0.2 ([GitHub](https://github.com/forestgeo/fgeo.plot/releases))
 
 * Style.
 * Review documentation.
 
-# fgeo.plot 1.0.0 ([GitHub](https://github.com/forestgeo/fgeo.plot/releases) release)
+# fgeo.plot 1.0.0 ([GitHub](https://github.com/forestgeo/fgeo.plot/releases))
 
 * Initial release.
