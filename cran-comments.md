@@ -8,11 +8,8 @@
 
 ## R CMD check results
 
-* using R Under development (unstable) (2019-01-31 r76038)
-* using platform: x86_64-w64-mingw32 (64-bit)
-* this is package 'fgeo.plot' version '1.1.2'
+0 errors v | 1 warnings | 0 notes
 
-Status: 1 WARNING
 * This warning is safe to ignore.
 
 WARNING
