@@ -2,20 +2,9 @@
 
 * Work in progress.
 
-# fgeo.plot 1.1.2.9000 ([GitHub](https://github.com/forestgeo/fgeo.plot/releases) and [drat](https://forestgeo.github.io/drat/))
+# fgeo.plot 1.1.3 ([GitHub](https://github.com/forestgeo/fgeo.plot/releases) and [drat](https://forestgeo.github.io/drat/))
 
 * Require R >= 3.2.
-
-Developer facing:
-* Test on Travis CI on R >= 3.2.
-* Fix error `Error: 'hasName' is not an exported object from 'namespace:utils'`.
-
-
-
-* TODO: Build site automatically and move it to gh-pages.
-
-
-
 
 # fgeo.plot 1.1.2 ([GitHub](https://github.com/forestgeo/fgeo.plot/releases) and [drat](https://forestgeo.github.io/drat/))
 
