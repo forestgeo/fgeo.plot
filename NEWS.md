@@ -2,6 +2,10 @@
 
 * Work in progress.
 
+# fgeo.plot 1.1.2.9000 (GitHub and drat release)
+
+* Require R >= 3.2.
+
 # fgeo.plot 1.1.2 (GitHub and drat release)
 
 * Meet CRAN standards.
