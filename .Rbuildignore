@@ -1,3 +1,5 @@
+^cm\.sh$
+^ca\.sh$
 ^revdep$
 ^cran-comments\.md$
 ^fgeo\.plot\.Rproj$
