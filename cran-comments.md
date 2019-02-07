@@ -8,11 +8,8 @@
 
 ## R CMD check results
 
-0 errors v | 1 warnings | 0 notes
+0 errors v | 1 warnings (safe to ignore) | 0 notes
 
-* This warning is safe to ignore.
-
-WARNING
 * New submission
 * Strong dependencies not in mainstream repositories:
   fgeo.tool
