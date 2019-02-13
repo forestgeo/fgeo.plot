@@ -3,7 +3,7 @@
 
 # <img src="https://i.imgur.com/vTLlhbp.png" align="right" height=88 /> Plot ForestGEO data
 
-[![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+[![lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
 [![Build
 Status](https://travis-ci.org/forestgeo/fgeo.plot.svg?branch=master)](https://travis-ci.org/forestgeo/fgeo.plot)
 [![Coverage
