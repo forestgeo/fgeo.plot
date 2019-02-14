@@ -6,15 +6,15 @@
 
 * Require R >= 3.2.
 
-# fgeo.plot 1.1.2 ([GitHub](https://github.com/forestgeo/fgeo.plot/releases) and [drat](https://forestgeo.github.io/drat/))
+# fgeo.plot 1.1.2 ([GitHub](https://github.com/forestgeo/fgeo.plot/releases))
 
 * Meet CRAN standards.
 
-# fgeo.plot 1.1.1 ([GitHub](https://github.com/forestgeo/fgeo.plot/releases) and [drat](https://forestgeo.github.io/drat/))
+# fgeo.plot 1.1.1 ([GitHub](https://github.com/forestgeo/fgeo.plot/releases))
 
 * Use tidy versions.
 
-# fgeo.plot 1.1.0 ([GitHub](https://github.com/forestgeo/fgeo.plot/releases) and [drat](https://forestgeo.github.io/drat/))
+# fgeo.plot 1.1.0 ([GitHub](https://github.com/forestgeo/fgeo.plot/releases))
 
 * fgeo.x no longer is imported but instead is suggested.
 
@@ -22,7 +22,7 @@
 
 * First argument of most visible functions now follow tidyverse principles (<http://bit.ly/2TfDcfX>).
 
-# fgeo.plot 1.0.4 ([GitHub](https://github.com/forestgeo/fgeo.plot/releases) and [drat](https://forestgeo.github.io/drat/))
+# fgeo.plot 1.0.4 ([GitHub](https://github.com/forestgeo/fgeo.plot/releases))
 
 * Use release version recursively via @*release.
 
