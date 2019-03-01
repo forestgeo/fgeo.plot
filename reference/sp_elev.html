@@ -134,7 +134,9 @@
     <tr>
       <th>elev</th>
       <td><p>A ForestGEO-like elevation list or its <code>col</code> dataframe -- with
-the column <code>elev</code>.</p></td>
+the column <code>elev</code>. The datasets you pass to <code>sp</code> and <code>elev</code> should come
+from the same forest plot. This is not compulsory but not doing so is most
+likely a mistake.</p></td>
     </tr>
     </table>
     
@@ -168,7 +170,10 @@ the column <code>elev</code>.</p></td>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/fgeo.tool/topics/assert_is_installed'>assert_is_installed</a></span>(<span class='st'>"fgeo.x"</span>)
 
-<span class='no'>species_elevation</span> <span class='kw'>&lt;-</span> <span class='fu'>sp_elev</span>(<span class='kw pkg'>fgeo.x</span><span class='kw ns'>::</span><span class='no'><a href='https://www.rdocumentation.org/packages/fgeo.x/topics/datasets'>stem5</a></span>, <span class='kw pkg'>fgeo.x</span><span class='kw ns'>::</span><span class='no'><a href='https://www.rdocumentation.org/packages/fgeo.x/topics/datasets'>elevation</a></span>)
+<span class='no'>species_from_luquillo</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>fgeo.x</span><span class='kw ns'>::</span><span class='no'><a href='https://www.rdocumentation.org/packages/fgeo.x/topics/datasets'>stem5</a></span>
+<span class='no'>elevation_from_luquillo</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>fgeo.x</span><span class='kw ns'>::</span><span class='no'><a href='https://www.rdocumentation.org/packages/fgeo.x/topics/datasets'>elevation</a></span>
+
+<span class='no'>species_elevation</span> <span class='kw'>&lt;-</span> <span class='fu'>sp_elev</span>(<span class='no'>species_from_luquillo</span>, <span class='no'>elevation_from_luquillo</span>)
 <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/class'>inherits</a></span>(<span class='no'>species_elevation</span>, <span class='st'>"sp_elev"</span>)</div><div class='output co'>#&gt; [1] TRUE</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
