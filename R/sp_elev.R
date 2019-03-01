@@ -97,7 +97,7 @@ warn_if_plotdim_are_different <- function(sp, elev) {
   if (identical_plotdim) {
     warn(glue("
       The datasets passed to `sp` and `elev` seem to have different dimensions.
-      Are you sure they come from the same forest plot?
+      Are you sure they come from the same forest plot? (see `?sp_elev()`)
       * `sp` {rm_brake(plotdim_sp$messages)}
       * `elev` {rm_brake(plotdim_elev$messages)}
     "))
