@@ -1,5 +1,7 @@
 # fgeo.plot (development version)
 
+* `sp_elev()` now warns if `sp` and `elev` have different plot dimensions (#49; thanks @mcgregorian1 and @alyssaterrell).
+
 * Work in progress.
 
 # fgeo.plot 1.1.3 ([GitHub](https://github.com/forestgeo/fgeo.plot/releases) and [drat](https://forestgeo.github.io/drat/))
