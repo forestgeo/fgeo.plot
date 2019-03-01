@@ -10,7 +10,9 @@ sp_elev(sp, elev = NULL)
 \item{sp}{A ForestGEO-like dataframe with the column \code{sp}.}
 
 \item{elev}{A ForestGEO-like elevation list or its \code{col} dataframe -- with
-the column \code{elev}.}
+the column \code{elev}. The datasets you pass to \code{sp} and \code{elev} should come
+from the same forest plot. This is not compulsory but not doing so is most
+likely a mistake.}
 }
 \value{
 An S3 object of class 'sp_elev'.
@@ -21,7 +23,10 @@ Allow autoplotting the columns \code{sp} and \code{elev}.
 \examples{
 assert_is_installed("fgeo.x")
 
-species_elevation <- sp_elev(fgeo.x::stem5, fgeo.x::elevation)
+species_from_luquillo <- fgeo.x::stem5
+elevation_from_luquillo <- fgeo.x::elevation
+
+species_elevation <- sp_elev(species_from_luquillo, elevation_from_luquillo)
 inherits(species_elevation, "sp_elev")
 }
 \seealso{
