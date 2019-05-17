@@ -3,6 +3,8 @@
 This is a re-submission. In this version I have:
 
 * Incremented the version number to reduce confusion.
+* Replaced \dontrun{} by \donttest{}.
+* Ensured my functions do not write by default or in the user's home filespace.
 
 ## Test environments
 
