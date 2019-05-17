@@ -2,7 +2,7 @@
 
 * Work in progress.
 
-# fgeo.plot 1.1.5 ([GitHub](https://github.com/forestgeo/fgeo.plot/releases))
+# fgeo.plot 1.1.6 ([GitHub](https://github.com/forestgeo/fgeo.plot/releases))
 
 * First CRAN release.
 * `sp_elev()` now warns if `sp` and `elev` have different plot dimensions (#49; thanks @mcgregorian1 and @alyssaterrell).

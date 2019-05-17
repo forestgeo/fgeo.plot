@@ -3,9 +3,6 @@
 This is a re-submission. In this version I have:
 
 * Incremented the version number to reduce confusion.
-* Confirmed that all CRAN dependencies of this package are now available.
-* Explained to Uwe Ligges the modular design of the fgeo packages. Uwe answered: 
-"OK, then let us go ahead." (on 2019-05-14 7:06 PM, Re: [CRAN-pretest-archived] CRAN submission fgeo.plot 1.1.4).
 
 ## Test environments
 
