@@ -19,14 +19,9 @@ An object of class "ggplot".
 Plot habitats.
 }
 \examples{
-\dontrun{
 assert_is_installed("fgeo.x")
-assert_is_installed("fgeo.analyze")
-library(fgeo.analyze)
-
-habitats <- fgeo_habitat(fgeo.x::elevation, gridsize = 20, n = 4)
+habitats <- fgeo.x::habitat
 autoplot(habitats)
-}
 }
 \seealso{
 Other plot functions: \code{\link{autoplot.sp_elev}},

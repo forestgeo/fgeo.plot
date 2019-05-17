@@ -68,27 +68,26 @@
 #' 
 #' autoplot(sp(census))
 #' 
-#' \dontrun{
+#' # Skip R CMD check for speed
+#' \donttest{
 #' # Customize
 #' autoplot(sp(census), point_size = 1)
-#' }
 #' 
 #' # Elevation -------------------------------------------------------------
 #' 
 #' elevation <- fgeo.x::elevation
 #' autoplot(elev(elevation))  
 #' 
-#' \dontrun{
+#' # Skip R CMD check for speed
 #' # Same as `autoplot(elev(elevation))`
 #' autoplot(elev(elevation$col))
 #' 
 #' # Customize
 #' autoplot(elev(elevation), contour_size = 1)
-#' }
 #' 
 #' # Species and elevation -------------------------------------------------
-#' 
 #' autoplot(sp_elev(census, elevation), facet = FALSE, point_size = 1)
+#' }
 #' @family plot functions
 #' @family autoplots
 #' @family functions to plot elevation

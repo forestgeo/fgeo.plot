@@ -94,11 +94,8 @@ p <- plot_tag_status_by_subquadrat(small_vft)
 # Showing only two sub-quadtrats
 p[1:2]
 
-# Print all plots to .pdf, with parameters optimized for size letter
-\dontrun{
-pdf("map.pdf", paper = "letter", height = 10.5, width = 8)
+# To print all plots into a .pdf file see `?pdf()`
 plot_tag_status_by_subquadrat(small_vft)
-dev.off()
 
 # Be careful if filtering by DBH: You may unintentionally remove dead trees.
 # * If you filter by `DBH`, you loose the dead trees becaue their `DBH = NA`
@@ -107,7 +104,6 @@ include_missing_dbh <- subset(small_vft, DBH > 20 | is.na(DBH))
 p <- plot_tag_status_by_subquadrat(include_missing_dbh)
 # Showing only the first plot to keep the output short
 p[[1]]
-}
 
 # Customizing the maps ----------------------------------------------------
 # Common tweaks
@@ -123,7 +119,8 @@ p <- plot_tag_status_by_subquadrat(
 )
 p[[1]]
 
-\dontrun{
+# Skip R CMD check for speed
+\donttest{
 p <- plot_tag_status_by_subquadrat(
   small_vft,
   show_page = FALSE,

@@ -65,11 +65,8 @@
 #' # Showing only two sub-quadtrats
 #' p[1:2]
 #' 
-#' # Print all plots to .pdf, with parameters optimized for size letter
-#' \dontrun{
-#' pdf("map.pdf", paper = "letter", height = 10.5, width = 8)
+#' # To print all plots into a .pdf file see `?pdf()`
 #' plot_tag_status_by_subquadrat(small_vft)
-#' dev.off()
 #' 
 #' # Be careful if filtering by DBH: You may unintentionally remove dead trees.
 #' # * If you filter by `DBH`, you loose the dead trees becaue their `DBH = NA`
@@ -78,7 +75,6 @@
 #' p <- plot_tag_status_by_subquadrat(include_missing_dbh)
 #' # Showing only the first plot to keep the output short
 #' p[[1]]
-#' }
 #' 
 #' # Customizing the maps ----------------------------------------------------
 #' # Common tweaks
@@ -94,7 +90,8 @@
 #' )
 #' p[[1]]
 #' 
-#' \dontrun{
+#' # Skip R CMD check for speed
+#' \donttest{
 #' p <- plot_tag_status_by_subquadrat(
 #'   small_vft,
 #'   show_page = FALSE,
@@ -326,21 +323,6 @@ prep_plot_tag_status_by_subquadrat <- function(sbst,
 #' ```
 #' @return A modified version of the input with the additional variable `page`.
 #' @seealso [fgeo.tool::add_subquad()].
-#' @examples
-#' \dontrun{
-#' library(dplyr)
-#' viewfulltable <- tribble(
-#'    ~QX,  ~QY,
-#'   17.9,    0,
-#'    4.1,   15,
-#'    6.1, 17.3
-#' )
-#' with_subquad <- fgeo.tool::add_subquad(viewfulltable, 20, 20, 5, 5)
-#' 
-#' # Warning: Internal function
-#' paginate(with_subquad)
-#' paginate(with_subquad, "a", "b", "c", "d")
-#' }
 #' @noRd
 paginate <- function(x, bl = 1, br = 2, tr = 3, tl = 4, subquad_offset = NULL) {
   stopifnot(is.data.frame(x))

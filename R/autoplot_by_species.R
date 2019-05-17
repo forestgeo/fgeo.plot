@@ -50,12 +50,9 @@
 #' 
 #' # Showing only two species for speed
 #' autoplot_by_species(sp(census))[1:2]
-#' \dontrun{
-#' # Print all plots in the list
-#' pdf("map.pdf", paper = "letter", height = 10.5, width = 8)
+#' 
+#' # To print all plots in a .pdf see `?pdf()`
 #' autoplot_by_species(sp(census))
-#' dev.off()
-#' }
 #' 
 #' # Species and elevation (optional) ---------------------------------------
 #' 

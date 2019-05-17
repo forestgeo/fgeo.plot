@@ -7,14 +7,9 @@
 #' @return An object of class "ggplot".
 #'
 #' @examples
-#' \dontrun{
 #' assert_is_installed("fgeo.x")
-#' assert_is_installed("fgeo.analyze")
-#' library(fgeo.analyze)
-#' 
-#' habitats <- fgeo_habitat(fgeo.x::elevation, gridsize = 20, n = 4)
+#' habitats <- fgeo.x::habitat
 #' autoplot(habitats)
-#' }
 #' @family plot functions
 #' @family autoplots
 #' @export

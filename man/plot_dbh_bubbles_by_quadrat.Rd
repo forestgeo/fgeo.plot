@@ -49,17 +49,13 @@ small_vft <- fgeo.x::vft_4quad \%>\%
 
 plot_dbh_bubbles_by_quadrat(small_vft)
 
-# Printing all plots to .pdf, with parameters optimized for size letter
-\dontrun{
-pdf("map.pdf", paper = "letter", height = 10.5, width = 8)
+# To print all plots into a .pdf file see `?pdf()`
 plot_dbh_bubbles_by_quadrat(small_vft)
-dev.off()
 
 # Be careful if subsetting by DBH: You may unintentionally remove dead trees.
 # You should explicietly inlcude missing `DBH` values with `is.na(DBH)`
 include_missing_dbh <- subset(small_vft, DBH > 20 | is.na(DBH))
 plot_dbh_bubbles_by_quadrat(include_missing_dbh)
-}
 
 # Customizing the maps ----------------------------------------------------
 # A custom title and header
@@ -78,7 +74,8 @@ plot_dbh_bubbles_by_quadrat(
   header = myheader
 )
 
-\dontrun{
+# Skip R CMD check for speed
+\donttest{
 # Tweak the theme with ggplot
 library(ggplot2)
 
