@@ -84,7 +84,7 @@ You can create a 'sp_elev' object with:
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">fgeo.plot</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.3.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.6</span>
       </span>
     </div>
 
@@ -303,24 +303,20 @@ For more control you can use <strong>ggplot2</strong> directly.</p>
   <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/subset'>subset</a></span>(<span class='no'>sp</span> <span class='kw'>%in%</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"PREMON"</span>, <span class='st'>"CASARB"</span>))
 
 <span class='fu'><a href='https://www.rdocumentation.org/packages/ggplot2/topics/autoplot'>autoplot</a></span>(<span class='fu'><a href='sp.html'>sp</a></span>(<span class='no'>census</span>))</div><div class='img'><img src='autoplot.sp_elev-1.png' alt='' width='700' height='433' /></div><div class='input'>
-</div><span class='co'># NOT RUN {</span>
-<span class='co'># Customize</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/ggplot2/topics/autoplot'>autoplot</a></span>(<span class='fu'><a href='sp.html'>sp</a></span>(<span class='no'>census</span>), <span class='kw'>point_size</span> <span class='kw'>=</span> <span class='fl'>1</span>)
-<span class='co'># }</span><div class='input'>
+# Skip R CMD check for speed
+</div><div class='input'><span class='co'># Customize</span>
+<span class='fu'><a href='https://www.rdocumentation.org/packages/ggplot2/topics/autoplot'>autoplot</a></span>(<span class='fu'><a href='sp.html'>sp</a></span>(<span class='no'>census</span>), <span class='kw'>point_size</span> <span class='kw'>=</span> <span class='fl'>1</span>)</div><div class='img'><img src='autoplot.sp_elev-2.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># Elevation -------------------------------------------------------------</span>
 
 <span class='no'>elevation</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>fgeo.x</span><span class='kw ns'>::</span><span class='no'><a href='https://www.rdocumentation.org/packages/fgeo.x/topics/datasets'>elevation</a></span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/ggplot2/topics/autoplot'>autoplot</a></span>(<span class='fu'><a href='elev.html'>elev</a></span>(<span class='no'>elevation</span>))</div><div class='img'><img src='autoplot.sp_elev-2.png' alt='' width='700' height='433' /></div><div class='input'>
-</div><span class='co'># NOT RUN {</span>
+<span class='fu'><a href='https://www.rdocumentation.org/packages/ggplot2/topics/autoplot'>autoplot</a></span>(<span class='fu'><a href='elev.html'>elev</a></span>(<span class='no'>elevation</span>))</div><div class='img'><img src='autoplot.sp_elev-3.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='co'># Skip R CMD check for speed</span>
 <span class='co'># Same as `autoplot(elev(elevation))`</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/ggplot2/topics/autoplot'>autoplot</a></span>(<span class='fu'><a href='elev.html'>elev</a></span>(<span class='no'>elevation</span>$<span class='no'>col</span>))
-
+<span class='fu'><a href='https://www.rdocumentation.org/packages/ggplot2/topics/autoplot'>autoplot</a></span>(<span class='fu'><a href='elev.html'>elev</a></span>(<span class='no'>elevation</span>$<span class='no'>col</span>))</div><div class='img'><img src='autoplot.sp_elev-4.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># Customize</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/ggplot2/topics/autoplot'>autoplot</a></span>(<span class='fu'><a href='elev.html'>elev</a></span>(<span class='no'>elevation</span>), <span class='kw'>contour_size</span> <span class='kw'>=</span> <span class='fl'>1</span>)
-<span class='co'># }</span><div class='input'>
+<span class='fu'><a href='https://www.rdocumentation.org/packages/ggplot2/topics/autoplot'>autoplot</a></span>(<span class='fu'><a href='elev.html'>elev</a></span>(<span class='no'>elevation</span>), <span class='kw'>contour_size</span> <span class='kw'>=</span> <span class='fl'>1</span>)</div><div class='img'><img src='autoplot.sp_elev-5.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># Species and elevation -------------------------------------------------</span>
-
-<span class='fu'><a href='https://www.rdocumentation.org/packages/ggplot2/topics/autoplot'>autoplot</a></span>(<span class='fu'><a href='sp_elev.html'>sp_elev</a></span>(<span class='no'>census</span>, <span class='no'>elevation</span>), <span class='kw'>facet</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>point_size</span> <span class='kw'>=</span> <span class='fl'>1</span>)</div><div class='img'><img src='autoplot.sp_elev-3.png' alt='' width='700' height='433' /></div></pre>
+<span class='fu'><a href='https://www.rdocumentation.org/packages/ggplot2/topics/autoplot'>autoplot</a></span>(<span class='fu'><a href='sp_elev.html'>sp_elev</a></span>(<span class='no'>census</span>, <span class='no'>elevation</span>), <span class='kw'>facet</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>point_size</span> <span class='kw'>=</span> <span class='fl'>1</span>)</div><div class='img'><img src='autoplot.sp_elev-6.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

@@ -63,7 +63,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">fgeo.plot</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.3.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.6</span>
       </span>
     </div>
 
@@ -200,17 +200,14 @@ status that corresponds to dead stems.</p></td>
 
 <span class='fu'>plot_dbh_bubbles_by_quadrat</span>(<span class='no'>small_vft</span>)</div><div class='output co'>#&gt; <span class='message'>* Appending tags of dead trees with the suffix '.d'</span></div><div class='output co'>#&gt; <span class='message'>* Standarizing `dbh` by the count of `dbh` measurements</span></div><div class='output co'>#&gt; $`621`</div><div class='output co'>#&gt; <span class='warning'>Warning: Removed 12 rows containing missing values (geom_point).</span></div><div class='img'><img src='plot_dbh_bubbles_by_quadrat-1.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; 
 #&gt; $`721`</div><div class='output co'>#&gt; <span class='warning'>Warning: Removed 15 rows containing missing values (geom_point).</span></div><div class='img'><img src='plot_dbh_bubbles_by_quadrat-2.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; </div><div class='input'>
-# Printing all plots to .pdf, with parameters optimized for size letter
-</div><span class='co'># NOT RUN {</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/grDevices/topics/pdf'>pdf</a></span>(<span class='st'>"map.pdf"</span>, <span class='kw'>paper</span> <span class='kw'>=</span> <span class='st'>"letter"</span>, <span class='kw'>height</span> <span class='kw'>=</span> <span class='fl'>10.5</span>, <span class='kw'>width</span> <span class='kw'>=</span> <span class='fl'>8</span>)
-<span class='fu'>plot_dbh_bubbles_by_quadrat</span>(<span class='no'>small_vft</span>)
-<span class='fu'><a href='https://www.rdocumentation.org/packages/grDevices/topics/dev'>dev.off</a></span>()
-
+<span class='co'># To print all plots into a .pdf file see `?pdf()`</span>
+<span class='fu'>plot_dbh_bubbles_by_quadrat</span>(<span class='no'>small_vft</span>)</div><div class='output co'>#&gt; <span class='message'>* Appending tags of dead trees with the suffix '.d'</span></div><div class='output co'>#&gt; <span class='message'>* Standarizing `dbh` by the count of `dbh` measurements</span></div><div class='output co'>#&gt; $`621`</div><div class='output co'>#&gt; <span class='warning'>Warning: Removed 12 rows containing missing values (geom_point).</span></div><div class='img'><img src='plot_dbh_bubbles_by_quadrat-3.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; 
+#&gt; $`721`</div><div class='output co'>#&gt; <span class='warning'>Warning: Removed 15 rows containing missing values (geom_point).</span></div><div class='img'><img src='plot_dbh_bubbles_by_quadrat-4.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; </div><div class='input'>
 <span class='co'># Be careful if subsetting by DBH: You may unintentionally remove dead trees.</span>
 <span class='co'># You should explicietly inlcude missing `DBH` values with `is.na(DBH)`</span>
 <span class='no'>include_missing_dbh</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/subset'>subset</a></span>(<span class='no'>small_vft</span>, <span class='no'>DBH</span> <span class='kw'>&gt;</span> <span class='fl'>20</span> <span class='kw'>|</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/NA'>is.na</a></span>(<span class='no'>DBH</span>))
-<span class='fu'>plot_dbh_bubbles_by_quadrat</span>(<span class='no'>include_missing_dbh</span>)
-<span class='co'># }</span><div class='input'>
+<span class='fu'>plot_dbh_bubbles_by_quadrat</span>(<span class='no'>include_missing_dbh</span>)</div><div class='output co'>#&gt; <span class='message'>* Appending tags of dead trees with the suffix '.d'</span></div><div class='output co'>#&gt; <span class='message'>* Standarizing `dbh` by the count of `dbh` measurements</span></div><div class='output co'>#&gt; $`621`</div><div class='output co'>#&gt; <span class='warning'>Warning: Removed 12 rows containing missing values (geom_point).</span></div><div class='img'><img src='plot_dbh_bubbles_by_quadrat-5.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; 
+#&gt; $`721`</div><div class='output co'>#&gt; <span class='warning'>Warning: Removed 15 rows containing missing values (geom_point).</span></div><div class='img'><img src='plot_dbh_bubbles_by_quadrat-6.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; </div><div class='input'>
 <span class='co'># Customizing the maps ----------------------------------------------------</span>
 <span class='co'># A custom title and header</span>
 <span class='no'>myheader</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/paste'>paste</a></span>(
@@ -226,10 +223,10 @@ status that corresponds to dead stems.</p></td>
   <span class='no'>small_vft</span>,
   <span class='kw'>title_quad</span> <span class='kw'>=</span> <span class='st'>"My Site, 2018. Quad:"</span>,
   <span class='kw'>header</span> <span class='kw'>=</span> <span class='no'>myheader</span>
-)</div><div class='output co'>#&gt; <span class='message'>* Appending tags of dead trees with the suffix '.d'</span></div><div class='output co'>#&gt; <span class='message'>* Standarizing `dbh` by the count of `dbh` measurements</span></div><div class='output co'>#&gt; $`621`</div><div class='output co'>#&gt; <span class='warning'>Warning: Removed 12 rows containing missing values (geom_point).</span></div><div class='img'><img src='plot_dbh_bubbles_by_quadrat-3.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; 
-#&gt; $`721`</div><div class='output co'>#&gt; <span class='warning'>Warning: Removed 15 rows containing missing values (geom_point).</span></div><div class='img'><img src='plot_dbh_bubbles_by_quadrat-4.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; </div><div class='input'>
-</div><span class='co'># NOT RUN {</span>
-<span class='co'># Tweak the theme with ggplot</span>
+)</div><div class='output co'>#&gt; <span class='message'>* Appending tags of dead trees with the suffix '.d'</span></div><div class='output co'>#&gt; <span class='message'>* Standarizing `dbh` by the count of `dbh` measurements</span></div><div class='output co'>#&gt; $`621`</div><div class='output co'>#&gt; <span class='warning'>Warning: Removed 12 rows containing missing values (geom_point).</span></div><div class='img'><img src='plot_dbh_bubbles_by_quadrat-7.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; 
+#&gt; $`721`</div><div class='output co'>#&gt; <span class='warning'>Warning: Removed 15 rows containing missing values (geom_point).</span></div><div class='img'><img src='plot_dbh_bubbles_by_quadrat-8.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; </div><div class='input'>
+# Skip R CMD check for speed
+</div><div class='input'><span class='co'># Tweak the theme with ggplot</span>
 <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/library'>library</a></span>(<span class='no'>ggplot2</span>)
 
 <span class='fu'>plot_dbh_bubbles_by_quadrat</span>(
@@ -243,8 +240,8 @@ status that corresponds to dead stems.</p></td>
     <span class='kw'>plot.subtitle</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/ggplot2/topics/element'>element_text</a></span>(<span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>5</span>),
     <span class='kw'>panel.background</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/ggplot2/topics/element'>element_rect</a></span>(<span class='kw'>fill</span> <span class='kw'>=</span> <span class='st'>"grey"</span>)
   )
-)
-<span class='co'># }</span></pre>
+)</div><div class='output co'>#&gt; <span class='message'>* Appending tags of dead trees with the suffix '.d'</span></div><div class='output co'>#&gt; <span class='message'>* Standarizing `dbh` by the count of `dbh` measurements</span></div><div class='output co'>#&gt; $`621`</div><div class='output co'>#&gt; <span class='warning'>Warning: Removed 12 rows containing missing values (geom_point).</span></div><div class='img'><img src='plot_dbh_bubbles_by_quadrat-9.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; 
+#&gt; $`721`</div><div class='output co'>#&gt; <span class='warning'>Warning: Removed 15 rows containing missing values (geom_point).</span></div><div class='img'><img src='plot_dbh_bubbles_by_quadrat-10.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
