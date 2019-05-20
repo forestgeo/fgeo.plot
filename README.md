@@ -19,14 +19,13 @@ status](https://www.r-pkg.org/badges/version/fgeo.plot)](https://cran.r-project.
 
 ## Installation
 
-Install the latest stable version of **fgeo.plot** with:
+Install the latest stable version of **fgeo.plot** from CRAN with:
 
 ``` r
-these_repos <- c(getOption("repos"), "https://forestgeo.github.io/drat")
 install.packages("fgeo.plot", repos = these_repos)
 ```
 
-Install the development version of **fgeo.plot** with:
+Or install the development version of **fgeo.plot** with:
 
 ``` r
 # install.packages("devtools")

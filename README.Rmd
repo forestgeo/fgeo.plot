@@ -33,14 +33,13 @@ __fgeo.plot__ helps you to plot [ForestGEO](<http://www.forestgeo.si.edu/>) data
 
 ## Installation
 
-Install the latest stable version of **fgeo.plot** with:
+Install the latest stable version of **fgeo.plot** from CRAN with:
 
 ```R
-these_repos <- c(getOption("repos"), "https://forestgeo.github.io/drat")
 install.packages("fgeo.plot", repos = these_repos)
 ```
 
-Install the development version of **fgeo.plot** with:
+Or install the development version of **fgeo.plot** with:
 
 ```R
 # install.packages("devtools")
