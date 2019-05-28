@@ -5,13 +5,6 @@
 
 <!-- badges: start -->
 
-[![lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
-[![Build
-Status](https://travis-ci.org/forestgeo/fgeo.plot.svg?branch=master)](https://travis-ci.org/forestgeo/fgeo.plot)
-[![Coverage
-status](https://codecov.io/gh/forestgeo/fgeo.plot/branch/master/graph/badge.svg)](https://codecov.io/github/forestgeo/fgeo.plot?branch=master)
-[![CRAN
-status](https://www.r-pkg.org/badges/version/fgeo.plot)](https://cran.r-project.org/package=fgeo.plot)
 <!-- badges: end -->
 
 **fgeo.plot** helps you to plot
