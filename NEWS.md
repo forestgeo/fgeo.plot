@@ -2,6 +2,10 @@
 
 * Work in progress.
 
+# fgeo.plot 1.1.7
+
+* Maintenance release.
+
 # fgeo.plot 1.1.6
 
 * First CRAN release.
