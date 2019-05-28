@@ -1,11 +1,3 @@
-## Re-submission
-
-This is a re-submission. In this version I have:
-
-* Incremented the version number to reduce confusion.
-* Replaced \dontrun{} by \donttest{}.
-* Ensured my functions do not write by default or in the user's home filespace.
-
 ## Test environments
 
 * local: windows 10 x64 (R 3.6.0)
@@ -15,10 +7,8 @@ This is a re-submission. In this version I have:
 
 ## R CMD check results
 
-0 errors | 0 warnings | 1 notes
-
-* New submission
+0 errors | 0 warnings | 0 notes
 
 ## Downstream dependencies
 
-There are currently no downstream dependencies for this package.
+FIXME
