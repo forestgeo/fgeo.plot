@@ -61,6 +61,6 @@ autoplot(
 
 ## Information
 
-  - [Getting help](SUPPORT.md).
-  - [Contributing](CONTRIBUTING.md).
-  - [Contributor Code of Conduct](CODE_OF_CONDUCT.md).
+  - [Getting help](.github/SUPPORT.md).
+  - [Contributing](.github/CONTRIBUTING.md).
+  - [Contributor Code of Conduct](.github/CODE_OF_CONDUCT.md).
