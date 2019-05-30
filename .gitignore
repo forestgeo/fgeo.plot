@@ -4,3 +4,6 @@
 inst/doc
 Rplots.pdf
 map.pdf
+fgeo.plot.Rcheck/
+fgeo.plot*.tar.gz
+fgeo.plot*.tgz

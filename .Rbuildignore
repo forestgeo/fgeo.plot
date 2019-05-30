@@ -19,3 +19,6 @@
 ^README\.Rmd$
 ^man-roxygen$
 ^\.github$
+^fgeo.plot\.Rcheck$
+^fgeo.plot.*\.tar\.gz$
+^fgeo.plot.*\.tgz$
