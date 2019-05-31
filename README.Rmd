@@ -68,7 +68,7 @@ autoplot(
 
 ## Information
 
-* [Getting help](.github/SUPPORT.md).
-* [Contributing](.github/CONTRIBUTING.md).
-* [Contributor Code of Conduct](.github/CODE_OF_CONDUCT.md).
+* [Getting help](https://forestgeo.github.io/fgeo.plot/SUPPORT.html).
+* [Contributing](https://forestgeo.github.io/fgeo.plot/CONTRIBUTING.html).
+* [Contributor Code of Conduct](https://forestgeo.github.io/fgeo.plot/CODE_OF_CONDUCT.html).
 
