@@ -1,3 +1,10 @@
+## Re-submission
+
+This is a re-submission. In this version I have:
+
+* Incremented the version number to reduce confusion.
+* Previously broken URLs are now correct and given in full.
+
 ## Test environments
 
 * local: windows 10 x64 (R 3.6.0)
@@ -11,7 +18,8 @@
 
 ## revdepcheck results
 
-We checked 1 reverse dependencies, comparing R CMD check results across CRAN and dev versions of this package.
+We checked 1 reverse dependencies, comparing R CMD check results across CRAN
+and dev versions of this package.
 
  * We saw 0 new problems
  * We failed to check 0 packages
