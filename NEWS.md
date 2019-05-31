@@ -2,7 +2,7 @@
 
 * Work in progress.
 
-# fgeo.plot 1.1.8.9000
+# fgeo.plot 1.1.8
 
 * Maintenance release.
 
