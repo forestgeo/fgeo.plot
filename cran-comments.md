@@ -1,10 +1,3 @@
-## Re-submission
-
-This is a re-submission. In this version I have:
-
-* Incremented the version number to reduce confusion.
-* Previously broken URLs are now correct and given in full.
-
 ## Test environments
 
 * local: windows 10 x64 (R 3.6.0)
@@ -14,12 +7,18 @@ This is a re-submission. In this version I have:
 
 ## R CMD check results
 
-0 errors | 0 warnings | 0 notes
+0 errors | 0 warnings | 1 notes
 
-## revdepcheck results
+New maintainer:  
+  Mauro Lepore <maurolepore@gmail.com>  
+Old maintainer(s):  
+  Mauro Lepore <leporem@si.edu>  
 
-We checked 1 reverse dependencies, comparing R CMD check results across CRAN
-and dev versions of this package.
+* I have changed my email address. I'll soon do this for all "fgeo" packages.
 
-* We saw 0 new problems
-* We failed to check 0 packages
+## Downstream dependencies
+
+We checked 1 reverse dependencies from CRAN, comparing R CMD check results across CRAN and dev versions of this package:
+
+* We saw 0 new problems.  
+* We failed to check 0 packages.  
