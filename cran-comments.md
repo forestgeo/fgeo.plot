@@ -14,13 +14,6 @@ New maintainer:
 Old maintainer(s):  
   Mauro Lepore <leporem@si.edu>  
 
-
-
-FIXME: Version contains large components (1.1.8.9000)
-
-
-
-
 ## Downstream dependencies
 
 We checked 1 reverse dependencies from CRAN, comparing R CMD check results across CRAN and dev versions of this package:
