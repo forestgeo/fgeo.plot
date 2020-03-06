@@ -272,20 +272,20 @@ the algorithm to calculate subquadrats.</p>
 
 <span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'>plot_tag_status_by_subquadrat</span>(<span class='no'>small_vft</span>)
 <span class='co'># Showing only two sub-quadtrats</span>
-<span class='no'>p</span>[<span class='fl'>1</span>:<span class='fl'>2</span>]</div><div class='output co'>#&gt; $`621_1`</div><div class='img'><img src='plot_tag_status_by_subquadrat-1.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; 
-#&gt; $`621_2`</div><div class='img'><img src='plot_tag_status_by_subquadrat-2.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; </div><div class='input'>
+<span class='no'>p</span>[<span class='fl'>1</span>:<span class='fl'>2</span>]</div><div class='output co'>#&gt; $`621_1`</div><div class='output co'>#&gt; <span class='warning'>Warning: Use of `prep_df$tag` is discouraged. Use `tag` instead.</span></div><div class='img'><img src='plot_tag_status_by_subquadrat-1.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; 
+#&gt; $`621_2`</div><div class='output co'>#&gt; <span class='warning'>Warning: Use of `prep_df$tag` is discouraged. Use `tag` instead.</span></div><div class='img'><img src='plot_tag_status_by_subquadrat-2.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; </div><div class='input'>
 <span class='co'># To print all plots into a .pdf file see `?pdf()`</span>
-<span class='fu'>plot_tag_status_by_subquadrat</span>(<span class='no'>small_vft</span>)</div><div class='output co'>#&gt; $`621_1`</div><div class='img'><img src='plot_tag_status_by_subquadrat-3.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; 
-#&gt; $`621_2`</div><div class='img'><img src='plot_tag_status_by_subquadrat-4.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; 
-#&gt; $`621_3`</div><div class='img'><img src='plot_tag_status_by_subquadrat-5.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; 
-#&gt; $`621_4`</div><div class='img'><img src='plot_tag_status_by_subquadrat-6.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; </div><div class='input'>
+<span class='fu'>plot_tag_status_by_subquadrat</span>(<span class='no'>small_vft</span>)</div><div class='output co'>#&gt; $`621_1`</div><div class='output co'>#&gt; <span class='warning'>Warning: Use of `prep_df$tag` is discouraged. Use `tag` instead.</span></div><div class='img'><img src='plot_tag_status_by_subquadrat-3.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; 
+#&gt; $`621_2`</div><div class='output co'>#&gt; <span class='warning'>Warning: Use of `prep_df$tag` is discouraged. Use `tag` instead.</span></div><div class='img'><img src='plot_tag_status_by_subquadrat-4.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; 
+#&gt; $`621_3`</div><div class='output co'>#&gt; <span class='warning'>Warning: Use of `prep_df$tag` is discouraged. Use `tag` instead.</span></div><div class='img'><img src='plot_tag_status_by_subquadrat-5.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; 
+#&gt; $`621_4`</div><div class='output co'>#&gt; <span class='warning'>Warning: Use of `prep_df$tag` is discouraged. Use `tag` instead.</span></div><div class='img'><img src='plot_tag_status_by_subquadrat-6.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; </div><div class='input'>
 <span class='co'># Be careful if filtering by DBH: You may unintentionally remove dead trees.</span>
 <span class='co'># * If you filter by `DBH`, you loose the dead trees becaue their `DBH = NA`</span>
 <span class='co'># * You should explicietly inlcude missing DBH values with `is.na(DBH)`</span>
 <span class='no'>include_missing_dbh</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/subset.html'>subset</a></span>(<span class='no'>small_vft</span>, <span class='no'>DBH</span> <span class='kw'>&gt;</span> <span class='fl'>20</span> <span class='kw'>|</span> <span class='fu'><a href='https://rdrr.io/r/base/NA.html'>is.na</a></span>(<span class='no'>DBH</span>))
 <span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'>plot_tag_status_by_subquadrat</span>(<span class='no'>include_missing_dbh</span>)
 <span class='co'># Showing only the first plot to keep the output short</span>
-<span class='no'>p</span><span class='kw'>[[</span><span class='fl'>1</span>]]</div><div class='img'><img src='plot_tag_status_by_subquadrat-7.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='no'>p</span><span class='kw'>[[</span><span class='fl'>1</span>]]</div><div class='output co'>#&gt; <span class='warning'>Warning: Use of `prep_df$tag` is discouraged. Use `tag` instead.</span></div><div class='img'><img src='plot_tag_status_by_subquadrat-7.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># Customizing the maps ----------------------------------------------------</span>
 <span class='co'># Common tweaks</span>
 <span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'>plot_tag_status_by_subquadrat</span>(
@@ -298,7 +298,7 @@ the algorithm to calculate subquadrats.</p>
   <span class='kw'>tag_size</span> <span class='kw'>=</span> <span class='fl'>2</span>,
   <span class='kw'>move_edge</span> <span class='kw'>=</span> <span class='fl'>0.5</span>
 )
-<span class='no'>p</span><span class='kw'>[[</span><span class='fl'>1</span>]]</div><div class='img'><img src='plot_tag_status_by_subquadrat-8.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='no'>p</span><span class='kw'>[[</span><span class='fl'>1</span>]]</div><div class='output co'>#&gt; <span class='warning'>Warning: Use of `prep_df$tag` is discouraged. Use `tag` instead.</span></div><div class='img'><img src='plot_tag_status_by_subquadrat-8.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># Skip R CMD check for speed</span>
 <span class='co'># \donttest{</span>
 <span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'>plot_tag_status_by_subquadrat</span>(
@@ -306,17 +306,17 @@ the algorithm to calculate subquadrats.</p>
   <span class='kw'>show_page</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
   <span class='kw'>show_subquad</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
 )
-<span class='no'>p</span><span class='kw'>[[</span><span class='fl'>1</span>]]</div><div class='img'><img src='plot_tag_status_by_subquadrat-9.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='no'>p</span><span class='kw'>[[</span><span class='fl'>1</span>]]</div><div class='output co'>#&gt; <span class='warning'>Warning: Use of `prep_df$tag` is discouraged. Use `tag` instead.</span></div><div class='img'><img src='plot_tag_status_by_subquadrat-9.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># Themes</span>
 <span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>ggplot2</span>)
 
 <span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'>plot_tag_status_by_subquadrat</span>(<span class='no'>small_vft</span>, <span class='kw'>theme</span> <span class='kw'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggtheme.html'>theme_gray</a></span>())
-<span class='no'>p</span><span class='kw'>[[</span><span class='fl'>1</span>]]</div><div class='img'><img src='plot_tag_status_by_subquadrat-10.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='no'>p</span><span class='kw'>[[</span><span class='fl'>1</span>]]</div><div class='output co'>#&gt; <span class='warning'>Warning: Use of `prep_df$tag` is discouraged. Use `tag` instead.</span></div><div class='img'><img src='plot_tag_status_by_subquadrat-10.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># Tweaking the default theme of plot_tag_status_by_subquadrat()</span>
 <span class='co'># For many more options see ?ggplot2::theme</span>
 <span class='no'>small_tweak</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='theme_tag_status.html'>theme_tag_status</a></span>(<span class='kw'>legend.position</span> <span class='kw'>=</span> <span class='st'>"bottom"</span>)
 <span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'>plot_tag_status_by_subquadrat</span>(<span class='no'>small_vft</span>, <span class='kw'>theme</span> <span class='kw'>=</span> <span class='no'>small_tweak</span>)
-<span class='no'>p</span><span class='kw'>[[</span><span class='fl'>1</span>]]</div><div class='img'><img src='plot_tag_status_by_subquadrat-11.png' alt='' width='700' height='433' /></div><div class='input'># }
+<span class='no'>p</span><span class='kw'>[[</span><span class='fl'>1</span>]]</div><div class='output co'>#&gt; <span class='warning'>Warning: Use of `prep_df$tag` is discouraged. Use `tag` instead.</span></div><div class='img'><img src='plot_tag_status_by_subquadrat-11.png' alt='' width='700' height='433' /></div><div class='input'># }
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
