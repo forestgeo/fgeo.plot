@@ -10,7 +10,7 @@ To help you access, transform, analyze, and
     visualize ForestGEO data, we developed a collection of R packages
     (<https://forestgeo.github.io/fgeo/>). This package, in particular,
     helps you to plot ForestGEO data. To learn more about ForestGEO visit
-    <http://www.forestgeo.si.edu/>.
+    <https://forestgeo.si.edu/>.
 }
 \seealso{
 Useful links:
