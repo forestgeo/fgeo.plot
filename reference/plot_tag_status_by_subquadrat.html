@@ -10,23 +10,27 @@
 
 
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/united/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/united/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
 <!-- headroom.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -51,7 +55,6 @@ feature avoids unintentional overplotting and makes interpreting the plot
 easier.
 
 " />
-<meta name="twitter:card" content="summary" />
 
 
 
@@ -69,7 +72,7 @@ easier.
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -154,12 +157,12 @@ easier.</p></li>
 
     </div>
 
-    <pre class="usage"><span class='fu'>plot_tag_status_by_subquadrat</span>(<span class='no'>vft</span>, <span class='kw'>x_q</span> <span class='kw'>=</span> <span class='fl'>20</span>, <span class='kw'>x_sq</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>y_q</span> <span class='kw'>=</span> <span class='fl'>20</span>,
-  <span class='kw'>y_sq</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>subquad_offset</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>bl</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>br</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>tr</span> <span class='kw'>=</span> <span class='fl'>3</span>,
-  <span class='kw'>tl</span> <span class='kw'>=</span> <span class='fl'>4</span>, <span class='kw'>title_quad</span> <span class='kw'>=</span> <span class='st'>"Site Name, YYYY. Quadrat:"</span>, <span class='kw'>show_page</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>show_subquad</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>point_shape</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>19</span>, <span class='fl'>4</span>), <span class='kw'>point_size</span> <span class='kw'>=</span> <span class='fl'>1.5</span>,
-  <span class='kw'>tag_size</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>header</span> <span class='kw'>=</span> <span class='fu'><a href='header_tag_status.html'>header_tag_status</a></span>(),
-  <span class='kw'>theme</span> <span class='kw'>=</span> <span class='fu'><a href='theme_tag_status.html'>theme_tag_status</a></span>(), <span class='kw'>move_edge</span> <span class='kw'>=</span> <span class='fl'>0</span>)</pre>
+    <pre class="usage"><span class='fu'>plot_tag_status_by_subquadrat</span><span class='op'>(</span><span class='va'>vft</span>, x_q <span class='op'>=</span> <span class='fl'>20</span>, x_sq <span class='op'>=</span> <span class='fl'>5</span>, y_q <span class='op'>=</span> <span class='fl'>20</span>,
+  y_sq <span class='op'>=</span> <span class='fl'>5</span>, subquad_offset <span class='op'>=</span> <span class='cn'>NULL</span>, bl <span class='op'>=</span> <span class='fl'>1</span>, br <span class='op'>=</span> <span class='fl'>2</span>, tr <span class='op'>=</span> <span class='fl'>3</span>,
+  tl <span class='op'>=</span> <span class='fl'>4</span>, title_quad <span class='op'>=</span> <span class='st'>"Site Name, YYYY. Quadrat:"</span>, show_page <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  show_subquad <span class='op'>=</span> <span class='cn'>TRUE</span>, point_shape <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>19</span>, <span class='fl'>4</span><span class='op'>)</span>, point_size <span class='op'>=</span> <span class='fl'>1.5</span>,
+  tag_size <span class='op'>=</span> <span class='fl'>3</span>, header <span class='op'>=</span> <span class='fu'><a href='header_tag_status.html'>header_tag_status</a></span><span class='op'>(</span><span class='op'>)</span>,
+  theme <span class='op'>=</span> <span class='fu'><a href='theme_tag_status.html'>theme_tag_status</a></span><span class='op'>(</span><span class='op'>)</span>, move_edge <span class='op'>=</span> <span class='fl'>0</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -264,71 +267,72 @@ the algorithm to calculate subquadrats.</p>
   <code><a href='theme_tag_status.html'>theme_tag_status</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/fgeo.tool/man/assert_is_installed.html'>assert_is_installed</a></span>(<span class='st'>"fgeo.x"</span>)
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/fgeo.tool/man/assert_is_installed.html'>assert_is_installed</a></span><span class='op'>(</span><span class='st'>"fgeo.x"</span><span class='op'>)</span>
 
 <span class='co'># Create a small VieFullTable</span>
-<span class='no'>first</span> <span class='kw'>&lt;-</span> <span class='kw'>function</span>(<span class='no'>x</span>) <span class='no'>x</span> <span class='kw'>%in%</span> <span class='fu'><a href='https://rdrr.io/r/base/sort.html'>sort</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/unique.html'>unique</a></span>(<span class='no'>x</span>))[<span class='fl'>1</span>]
-<span class='no'>small_vft</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/subset.html'>subset</a></span>(<span class='kw pkg'>fgeo.x</span><span class='kw ns'>::</span><span class='no'><a href='https://rdrr.io/pkg/fgeo.x/man/datasets.html'>vft_4quad</a></span>, <span class='fu'>first</span>(<span class='no'>CensusID</span>) <span class='kw'>&amp;</span> <span class='fu'>first</span>(<span class='no'>QuadratID</span>))
+<span class='va'>first</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span> <span class='va'>x</span> <span class='op'>%in%</span> <span class='fu'><a href='https://rdrr.io/r/base/sort.html'>sort</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/unique.html'>unique</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span><span class='op'>)</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>]</span>
+<span class='va'>small_vft</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/subset.html'>subset</a></span><span class='op'>(</span><span class='fu'>fgeo.x</span><span class='fu'>::</span><span class='va'><a href='https://rdrr.io/pkg/fgeo.x/man/datasets.html'>vft_4quad</a></span>, <span class='fu'>first</span><span class='op'>(</span><span class='va'>CensusID</span><span class='op'>)</span> <span class='op'>&amp;</span> <span class='fu'>first</span><span class='op'>(</span><span class='va'>QuadratID</span><span class='op'>)</span><span class='op'>)</span>
 
-<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'>plot_tag_status_by_subquadrat</span>(<span class='no'>small_vft</span>)
+<span class='va'>p</span> <span class='op'>&lt;-</span> <span class='fu'>plot_tag_status_by_subquadrat</span><span class='op'>(</span><span class='va'>small_vft</span><span class='op'>)</span>
 <span class='co'># Showing only two sub-quadtrats</span>
-<span class='no'>p</span>[<span class='fl'>1</span>:<span class='fl'>2</span>]</div><div class='output co'>#&gt; $`621_1`</div><div class='output co'>#&gt; <span class='warning'>Warning: Use of `prep_df$tag` is discouraged. Use `tag` instead.</span></div><div class='img'><img src='plot_tag_status_by_subquadrat-1.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; 
+<span class='va'>p</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>2</span><span class='op'>]</span>
+</div><div class='output co'>#&gt; $`621_1`</div><div class='output co'>#&gt; <span class='warning'>Warning: Use of `prep_df$tag` is discouraged. Use `tag` instead.</span></div><div class='img'><img src='plot_tag_status_by_subquadrat-1.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; 
 #&gt; $`621_2`</div><div class='output co'>#&gt; <span class='warning'>Warning: Use of `prep_df$tag` is discouraged. Use `tag` instead.</span></div><div class='img'><img src='plot_tag_status_by_subquadrat-2.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; </div><div class='input'>
 <span class='co'># To print all plots into a .pdf file see `?pdf()`</span>
-<span class='fu'>plot_tag_status_by_subquadrat</span>(<span class='no'>small_vft</span>)</div><div class='output co'>#&gt; $`621_1`</div><div class='output co'>#&gt; <span class='warning'>Warning: Use of `prep_df$tag` is discouraged. Use `tag` instead.</span></div><div class='img'><img src='plot_tag_status_by_subquadrat-3.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; 
+<span class='fu'>plot_tag_status_by_subquadrat</span><span class='op'>(</span><span class='va'>small_vft</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; $`621_1`</div><div class='output co'>#&gt; <span class='warning'>Warning: Use of `prep_df$tag` is discouraged. Use `tag` instead.</span></div><div class='img'><img src='plot_tag_status_by_subquadrat-3.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; 
 #&gt; $`621_2`</div><div class='output co'>#&gt; <span class='warning'>Warning: Use of `prep_df$tag` is discouraged. Use `tag` instead.</span></div><div class='img'><img src='plot_tag_status_by_subquadrat-4.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; 
 #&gt; $`621_3`</div><div class='output co'>#&gt; <span class='warning'>Warning: Use of `prep_df$tag` is discouraged. Use `tag` instead.</span></div><div class='img'><img src='plot_tag_status_by_subquadrat-5.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; 
 #&gt; $`621_4`</div><div class='output co'>#&gt; <span class='warning'>Warning: Use of `prep_df$tag` is discouraged. Use `tag` instead.</span></div><div class='img'><img src='plot_tag_status_by_subquadrat-6.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; </div><div class='input'>
 <span class='co'># Be careful if filtering by DBH: You may unintentionally remove dead trees.</span>
 <span class='co'># * If you filter by `DBH`, you loose the dead trees becaue their `DBH = NA`</span>
 <span class='co'># * You should explicietly inlcude missing DBH values with `is.na(DBH)`</span>
-<span class='no'>include_missing_dbh</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/subset.html'>subset</a></span>(<span class='no'>small_vft</span>, <span class='no'>DBH</span> <span class='kw'>&gt;</span> <span class='fl'>20</span> <span class='kw'>|</span> <span class='fu'><a href='https://rdrr.io/r/base/NA.html'>is.na</a></span>(<span class='no'>DBH</span>))
-<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'>plot_tag_status_by_subquadrat</span>(<span class='no'>include_missing_dbh</span>)
+<span class='va'>include_missing_dbh</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/subset.html'>subset</a></span><span class='op'>(</span><span class='va'>small_vft</span>, <span class='va'>DBH</span> <span class='op'>&gt;</span> <span class='fl'>20</span> <span class='op'>|</span> <span class='fu'><a href='https://rdrr.io/r/base/NA.html'>is.na</a></span><span class='op'>(</span><span class='va'>DBH</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>p</span> <span class='op'>&lt;-</span> <span class='fu'>plot_tag_status_by_subquadrat</span><span class='op'>(</span><span class='va'>include_missing_dbh</span><span class='op'>)</span>
 <span class='co'># Showing only the first plot to keep the output short</span>
-<span class='no'>p</span><span class='kw'>[[</span><span class='fl'>1</span>]]</div><div class='output co'>#&gt; <span class='warning'>Warning: Use of `prep_df$tag` is discouraged. Use `tag` instead.</span></div><div class='img'><img src='plot_tag_status_by_subquadrat-7.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='va'>p</span><span class='op'>[[</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>]</span>
+</div><div class='output co'>#&gt; <span class='warning'>Warning: Use of `prep_df$tag` is discouraged. Use `tag` instead.</span></div><div class='img'><img src='plot_tag_status_by_subquadrat-7.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># Customizing the maps ----------------------------------------------------</span>
 <span class='co'># Common tweaks</span>
-<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'>plot_tag_status_by_subquadrat</span>(
-  <span class='no'>small_vft</span>,
-  <span class='kw'>title_quad</span> <span class='kw'>=</span> <span class='st'>"BCI 2012. Quadrat: "</span>,
-  <span class='kw'>bl</span> <span class='kw'>=</span> <span class='st'>"bottom-left"</span>, <span class='kw'>br</span> <span class='kw'>=</span> <span class='st'>"bottom-right"</span>, <span class='kw'>tr</span> <span class='kw'>=</span> <span class='st'>"top-right"</span>, <span class='kw'>tl</span> <span class='kw'>=</span> <span class='st'>"top-left"</span>,
-  <span class='kw'>header</span> <span class='kw'>=</span> <span class='st'>"Line 1: _________\nLine 2:\nLine 3:....................."</span>,
-  <span class='kw'>subquad_offset</span> <span class='kw'>=</span> -<span class='fl'>1</span>,
-  <span class='kw'>point_size</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>point_shape</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>17</span>, <span class='fl'>6</span>),
-  <span class='kw'>tag_size</span> <span class='kw'>=</span> <span class='fl'>2</span>,
-  <span class='kw'>move_edge</span> <span class='kw'>=</span> <span class='fl'>0.5</span>
-)
-<span class='no'>p</span><span class='kw'>[[</span><span class='fl'>1</span>]]</div><div class='output co'>#&gt; <span class='warning'>Warning: Use of `prep_df$tag` is discouraged. Use `tag` instead.</span></div><div class='img'><img src='plot_tag_status_by_subquadrat-8.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='va'>p</span> <span class='op'>&lt;-</span> <span class='fu'>plot_tag_status_by_subquadrat</span><span class='op'>(</span>
+  <span class='va'>small_vft</span>,
+  title_quad <span class='op'>=</span> <span class='st'>"BCI 2012. Quadrat: "</span>,
+  bl <span class='op'>=</span> <span class='st'>"bottom-left"</span>, br <span class='op'>=</span> <span class='st'>"bottom-right"</span>, tr <span class='op'>=</span> <span class='st'>"top-right"</span>, tl <span class='op'>=</span> <span class='st'>"top-left"</span>,
+  header <span class='op'>=</span> <span class='st'>"Line 1: _________\nLine 2:\nLine 3:....................."</span>,
+  subquad_offset <span class='op'>=</span> <span class='op'>-</span><span class='fl'>1</span>,
+  point_size <span class='op'>=</span> <span class='fl'>3</span>, point_shape <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>17</span>, <span class='fl'>6</span><span class='op'>)</span>,
+  tag_size <span class='op'>=</span> <span class='fl'>2</span>,
+  move_edge <span class='op'>=</span> <span class='fl'>0.5</span>
+<span class='op'>)</span>
+<span class='va'>p</span><span class='op'>[[</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>]</span>
+</div><div class='output co'>#&gt; <span class='warning'>Warning: Use of `prep_df$tag` is discouraged. Use `tag` instead.</span></div><div class='img'><img src='plot_tag_status_by_subquadrat-8.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># Skip R CMD check for speed</span>
 <span class='co'># \donttest{</span>
-<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'>plot_tag_status_by_subquadrat</span>(
-  <span class='no'>small_vft</span>,
-  <span class='kw'>show_page</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>show_subquad</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
-)
-<span class='no'>p</span><span class='kw'>[[</span><span class='fl'>1</span>]]</div><div class='output co'>#&gt; <span class='warning'>Warning: Use of `prep_df$tag` is discouraged. Use `tag` instead.</span></div><div class='img'><img src='plot_tag_status_by_subquadrat-9.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='va'>p</span> <span class='op'>&lt;-</span> <span class='fu'>plot_tag_status_by_subquadrat</span><span class='op'>(</span>
+  <span class='va'>small_vft</span>,
+  show_page <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  show_subquad <span class='op'>=</span> <span class='cn'>FALSE</span>
+<span class='op'>)</span>
+<span class='va'>p</span><span class='op'>[[</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>]</span>
+</div><div class='output co'>#&gt; <span class='warning'>Warning: Use of `prep_df$tag` is discouraged. Use `tag` instead.</span></div><div class='img'><img src='plot_tag_status_by_subquadrat-9.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># Themes</span>
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>ggplot2</span>)
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='http://ggplot2.tidyverse.org'>ggplot2</a></span><span class='op'>)</span>
 
-<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'>plot_tag_status_by_subquadrat</span>(<span class='no'>small_vft</span>, <span class='kw'>theme</span> <span class='kw'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggtheme.html'>theme_gray</a></span>())
-<span class='no'>p</span><span class='kw'>[[</span><span class='fl'>1</span>]]</div><div class='output co'>#&gt; <span class='warning'>Warning: Use of `prep_df$tag` is discouraged. Use `tag` instead.</span></div><div class='img'><img src='plot_tag_status_by_subquadrat-10.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='va'>p</span> <span class='op'>&lt;-</span> <span class='fu'>plot_tag_status_by_subquadrat</span><span class='op'>(</span><span class='va'>small_vft</span>, theme <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggtheme.html'>theme_gray</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>p</span><span class='op'>[[</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>]</span>
+</div><div class='output co'>#&gt; <span class='warning'>Warning: Use of `prep_df$tag` is discouraged. Use `tag` instead.</span></div><div class='img'><img src='plot_tag_status_by_subquadrat-10.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># Tweaking the default theme of plot_tag_status_by_subquadrat()</span>
 <span class='co'># For many more options see ?ggplot2::theme</span>
-<span class='no'>small_tweak</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='theme_tag_status.html'>theme_tag_status</a></span>(<span class='kw'>legend.position</span> <span class='kw'>=</span> <span class='st'>"bottom"</span>)
-<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'>plot_tag_status_by_subquadrat</span>(<span class='no'>small_vft</span>, <span class='kw'>theme</span> <span class='kw'>=</span> <span class='no'>small_tweak</span>)
-<span class='no'>p</span><span class='kw'>[[</span><span class='fl'>1</span>]]</div><div class='output co'>#&gt; <span class='warning'>Warning: Use of `prep_df$tag` is discouraged. Use `tag` instead.</span></div><div class='img'><img src='plot_tag_status_by_subquadrat-11.png' alt='' width='700' height='433' /></div><div class='input'># }
+<span class='va'>small_tweak</span> <span class='op'>&lt;-</span> <span class='fu'><a href='theme_tag_status.html'>theme_tag_status</a></span><span class='op'>(</span>legend.position <span class='op'>=</span> <span class='st'>"bottom"</span><span class='op'>)</span>
+<span class='va'>p</span> <span class='op'>&lt;-</span> <span class='fu'>plot_tag_status_by_subquadrat</span><span class='op'>(</span><span class='va'>small_vft</span>, theme <span class='op'>=</span> <span class='va'>small_tweak</span><span class='op'>)</span>
+<span class='va'>p</span><span class='op'>[[</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>]</span>
+</div><div class='output co'>#&gt; <span class='warning'>Warning: Use of `prep_df$tag` is discouraged. Use `tag` instead.</span></div><div class='img'><img src='plot_tag_status_by_subquadrat-11.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># }</span>
 </div></pre>
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#value">Value</a></li>
-      <li><a href="#acknowledgment">Acknowledgment</a></li>
-      <li><a href="#see-also">See also</a></li>
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 
@@ -339,7 +343,7 @@ the algorithm to calculate subquadrats.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>
