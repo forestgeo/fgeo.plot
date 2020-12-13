@@ -84,7 +84,8 @@ test_that("handles wrong type", {
     select(matches(crucial_nms))
 
   x <- map_df(x, as.character)
-  expect_warning(plot_tag_status_by_subquadrat(x))
+  # Stop bubbling other uninteresting warnings
+  suppressWarnings(expect_warning(plot_tag_status_by_subquadrat(x)))
 })
 
 test_that("wrong inputs get noticed", {
