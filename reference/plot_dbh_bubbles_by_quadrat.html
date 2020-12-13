@@ -129,11 +129,18 @@
     <p>List dbh bubble-plots by quadrat (good for .pdf output).</p>
     </div>
 
-    <pre class="usage"><span class='fu'>plot_dbh_bubbles_by_quadrat</span><span class='op'>(</span><span class='va'>vft</span>,
+    <pre class="usage"><span class='fu'>plot_dbh_bubbles_by_quadrat</span><span class='op'>(</span>
+  <span class='va'>vft</span>,
   title_quad <span class='op'>=</span> <span class='st'>"Site Name, YYYY, Quadrat:"</span>,
-  header <span class='op'>=</span> <span class='fu'><a href='header_dbh_bubbles.html'>header_dbh_bubbles</a></span><span class='op'>(</span><span class='op'>)</span>, theme <span class='op'>=</span> <span class='fu'><a href='theme_dbh_bubbles.html'>theme_dbh_bubbles</a></span><span class='op'>(</span><span class='op'>)</span>,
-  lim_min <span class='op'>=</span> <span class='fl'>0</span>, lim_max <span class='op'>=</span> <span class='fl'>20</span>, subquadrat_side <span class='op'>=</span> <span class='fl'>5</span>, tag_size <span class='op'>=</span> <span class='fl'>2</span>,
-  move_edge <span class='op'>=</span> <span class='fl'>0</span>, status_d <span class='op'>=</span> <span class='st'>"dead"</span><span class='op'>)</span></pre>
+  header <span class='op'>=</span> <span class='fu'><a href='header_dbh_bubbles.html'>header_dbh_bubbles</a></span><span class='op'>(</span><span class='op'>)</span>,
+  theme <span class='op'>=</span> <span class='fu'><a href='theme_dbh_bubbles.html'>theme_dbh_bubbles</a></span><span class='op'>(</span><span class='op'>)</span>,
+  lim_min <span class='op'>=</span> <span class='fl'>0</span>,
+  lim_max <span class='op'>=</span> <span class='fl'>20</span>,
+  subquadrat_side <span class='op'>=</span> <span class='fl'>5</span>,
+  tag_size <span class='op'>=</span> <span class='fl'>2</span>,
+  move_edge <span class='op'>=</span> <span class='fl'>0</span>,
+  status_d <span class='op'>=</span> <span class='st'>"dead"</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -184,15 +191,19 @@ status that corresponds to dead stems.</p></td>
     <p>A list which each element is a plot of class ggplot.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>Other plot functions: <code><a href='autoplot.fgeo_habitat.html'>autoplot.fgeo_habitat</a></code>,
-  <code><a href='autoplot.sp_elev.html'>autoplot.sp_elev</a></code>,
-  <code><a href='autoplot_by_species.sp_elev.html'>autoplot_by_species.sp_elev</a></code>,
-  <code><a href='elev.html'>elev</a></code>,
-  <code><a href='plot_tag_status_by_subquadrat.html'>plot_tag_status_by_subquadrat</a></code>,
-  <code><a href='sp_elev.html'>sp_elev</a></code>, <code><a href='sp.html'>sp</a></code></p>
-<p>Other functions to list plots from ForestGEO ViewFullTable: <code><a href='plot_tag_status_by_subquadrat.html'>plot_tag_status_by_subquadrat</a></code></p>
-<p>Other functions to plot dbh bubbles: <code><a href='header_dbh_bubbles.html'>header_dbh_bubbles</a></code>,
-  <code><a href='theme_dbh_bubbles.html'>theme_dbh_bubbles</a></code></p></div>
+    <div class='dont-index'><p>Other plot functions: 
+<code><a href='autoplot.fgeo_habitat.html'>autoplot.fgeo_habitat</a>()</code>,
+<code><a href='autoplot.sp_elev.html'>autoplot.sp_elev</a>()</code>,
+<code><a href='autoplot_by_species.sp_elev.html'>autoplot_by_species.sp_elev</a>()</code>,
+<code><a href='elev.html'>elev</a>()</code>,
+<code><a href='plot_tag_status_by_subquadrat.html'>plot_tag_status_by_subquadrat</a>()</code>,
+<code><a href='sp_elev.html'>sp_elev</a>()</code>,
+<code><a href='sp.html'>sp</a>()</code></p>
+<p>Other functions to list plots from ForestGEO ViewFullTable: 
+<code><a href='plot_tag_status_by_subquadrat.html'>plot_tag_status_by_subquadrat</a>()</code></p>
+<p>Other functions to plot dbh bubbles: 
+<code><a href='header_dbh_bubbles.html'>header_dbh_bubbles</a>()</code>,
+<code><a href='theme_dbh_bubbles.html'>theme_dbh_bubbles</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/fgeo.tool/man/assert_is_installed.html'>assert_is_installed</a></span><span class='op'>(</span><span class='st'>"fgeo.x"</span><span class='op'>)</span>
@@ -265,7 +276,7 @@ status that corresponds to dead stems.</p></td>
 
       <footer>
       <div class="copyright">
-  <p>Developed by <a href='https://github.com/maurolepore'>Mauro Lepore</a>, <a href='http://www.forestgeo.si.edu/'>CTFS-ForestGEO</a>.</p>
+  <p>Developed by <a href='https://github.com/maurolepore'>Mauro Lepore</a>, <a href='https://forestgeo.si.edu/'>CTFS-ForestGEO</a>.</p>
 </div>
 
 <div class="pkgdown">
