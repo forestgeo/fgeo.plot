@@ -1,4 +1,4 @@
-context("autoplot-sp_elev")
+# autoplot-sp_elev
 
 # Small dataset with a few species for quick examples
 some_sp <- c("PREMON", "CASARB")
@@ -13,15 +13,15 @@ test_that("fails with informative message", {
 })
 
 test_that("returns a ggplot", {
-  expect_is(autoplot(sp_elev(census, elevation_lst)), "gg")
-  expect_is(autoplot(sp_elev(census, elevation_df)), "gg")
+  expect_s3_class(autoplot(sp_elev(census, elevation_lst)), "gg")
+  expect_s3_class(autoplot(sp_elev(census, elevation_df)), "gg")
 
-  expect_is(autoplot(sp_elev(census, NULL)), "gg")
-  expect_is(autoplot(sp_elev(census)), "gg")
+  expect_s3_class(autoplot(sp_elev(census, NULL)), "gg")
+  expect_s3_class(autoplot(sp_elev(census)), "gg")
 
-  expect_is(autoplot(sp(census)), "gg")
-  expect_is(autoplot(elev(elevation_lst)), "gg")
-  expect_is(autoplot(elev(elevation_df)), "gg")
+  expect_s3_class(autoplot(sp(census)), "gg")
+  expect_s3_class(autoplot(elev(elevation_lst)), "gg")
+  expect_s3_class(autoplot(elev(elevation_df)), "gg")
 })
 
 test_that("is sensitive to argument `hide_fill_legend`", {
@@ -36,16 +36,16 @@ test_that("is sensitive to argument `hide_fill_legend`", {
 
 
 
-context("sp_elev")
+# sp_elev
 
 test_that("sp_elev()) and friends return expected class", {
-  expect_is(sp(census), "data.frame")
-  expect_is(sp(census), "sp")
+  expect_s3_class(sp(census), "data.frame")
+  expect_s3_class(sp(census), "sp")
 
-  expect_is(elev(elevation_lst), "list")
-  expect_is(elev(elevation_df), "data.frame")
-  expect_is(elev(elevation_df), "elev")
-  expect_is(elev(elevation_lst), "elev")
+  expect_s3_class(elev(elevation_lst), "list")
+  expect_s3_class(elev(elevation_df), "data.frame")
+  expect_s3_class(elev(elevation_df), "elev")
+  expect_s3_class(elev(elevation_lst), "elev")
 })
 
 test_that("with elev = NULL doesn't throw error", {

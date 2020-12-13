@@ -1,7 +1,7 @@
 set.seed(123)
 
-library(dplyr)
-library(purrr)
+suppressPackageStartupMessages(library(dplyr))
+suppressPackageStartupMessages(library(purrr))
 
 is_first <- function(x) x %in% sort(unique(x))[1]
 
@@ -10,7 +10,7 @@ small_vft <- fgeo.x::vft_4quad %>%
 
 
 
-context("plot_tag_status_by_subquadrat")
+# plot_tag_status_by_subquadrat
 
 # Outputs -----------------------------------------------------------------
 
@@ -22,12 +22,7 @@ test_that("output is correct", {
 
   # Underlying output-data didn't change
   reference <- map_list[[1]][["data"]]
-  expect_known_output(
-    head(as.data.frame(reference)),
-    "ref-plot_tag_status_by_subquadrat.csv",
-    print = TRUE,
-    overwrite = FALSE
-  )
+  expect_snapshot_output(head(as.data.frame(reference)))
 
   # Plots all unique tags in data
   unique_tags_in_plot_n <- map_list %>%
@@ -89,7 +84,8 @@ test_that("handles wrong type", {
     select(matches(crucial_nms))
 
   x <- map_df(x, as.character)
-  expect_warning(plot_tag_status_by_subquadrat(x))
+  # Stop bubbling other uninteresting warnings
+  suppressWarnings(expect_warning(plot_tag_status_by_subquadrat(x)))
 })
 
 test_that("wrong inputs get noticed", {
@@ -286,11 +282,12 @@ test_that("outputs quadrats in order, even if QuadratName is numeric (#33)", {
 
   expect_equal(names(good), expect_nms)
 
-  not_chr <- expect_warning(
+  # Stop bubbling other uninteresting warnings
+  not_chr <- suppressWarnings(expect_warning(
     plot_tag_status_by_subquadrat(
       mutate(vft_toy, QuadratName = as.numeric(QuadratName))
     )
-  )
+  ))
   expect_equal(names(not_chr), expect_nms)
 })
 
@@ -312,7 +309,7 @@ test_that("warns if option max.print is not high enough", {
 
 
 
-context("curate_point_shape")
+# curate_point_shape
 
 test_that("outputs the correct element(s) of point_shape", {
   ps <- c(1, 2)

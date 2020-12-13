@@ -1,5 +1,3 @@
-context("test-plot-fgeo_habitat")
-
 describe("outputs an object of class ggplot", {
   skip_if_not_installed("fgeo.x")
   skip_if_not_installed("fgeo.analyze")
@@ -9,6 +7,6 @@ describe("outputs an object of class ggplot", {
   p <- autoplot(habitats)
 
   it("does something I want it to do", {
-    expect_is(p, "ggplot")
+    expect_s3_class(p, "ggplot")
   })
 })
