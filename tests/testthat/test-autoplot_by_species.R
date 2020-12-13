@@ -1,4 +1,4 @@
-context("autoplot_by_species")
+# context("autoplot_by_species")
 
 # Small dataset with a few species for quick examples
 some_sp <- c("PREMON", "CASARB")

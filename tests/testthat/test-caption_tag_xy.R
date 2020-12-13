@@ -1,4 +1,4 @@
-context("caption_tag_xy.R")
+# context("caption_tag_xy.R")
 
 test_that("returns expected string", {
   expected <- "1:(1, 1); 2:(2, 2); 3:(3, 3)"

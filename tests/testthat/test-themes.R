@@ -1,4 +1,4 @@
-context("themes")
+# context("themes")
 
 test_that("outputs an object of class equal to that of a ggplot2 theme", {
   tag <- theme_tag_status()

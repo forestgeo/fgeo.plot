@@ -1,4 +1,4 @@
-context("suffix_match")
+# context("suffix_match")
 
 test_that("tags a vector", {
   actual <- suffix_match(
