@@ -8,7 +8,7 @@
 }
 \arguments{
 \item{object}{An object of class "fgeo_habitat" (see \code{fgeo_habitat} at
-\link{https://forestgeo.github.io/fgeo/articles/siteonly/reference.html}).}
+\url{https://forestgeo.github.io/fgeo/articles/siteonly/reference.html}).}
 
 \item{...}{Not used (included for compatibility across methods).}
 }
