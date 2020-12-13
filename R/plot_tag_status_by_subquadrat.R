@@ -56,18 +56,18 @@
 #'
 #' @examples
 #' assert_is_installed("fgeo.x")
-#' 
+#'
 #' # Create a small VieFullTable
 #' first <- function(x) x %in% sort(unique(x))[1]
 #' small_vft <- subset(fgeo.x::vft_4quad, first(CensusID) & first(QuadratID))
-#' 
+#'
 #' p <- plot_tag_status_by_subquadrat(small_vft)
 #' # Showing only two sub-quadtrats
 #' p[1:2]
-#' 
+#'
 #' # To print all plots into a .pdf file see `?pdf()`
 #' plot_tag_status_by_subquadrat(small_vft)
-#' 
+#'
 #' # Be careful if filtering by DBH: You may unintentionally remove dead trees.
 #' # * If you filter by `DBH`, you loose the dead trees becaue their `DBH = NA`
 #' # * You should explicietly inlcude missing DBH values with `is.na(DBH)`
@@ -75,7 +75,7 @@
 #' p <- plot_tag_status_by_subquadrat(include_missing_dbh)
 #' # Showing only the first plot to keep the output short
 #' p[[1]]
-#' 
+#'
 #' # Customizing the maps ----------------------------------------------------
 #' # Common tweaks
 #' p <- plot_tag_status_by_subquadrat(
@@ -89,7 +89,7 @@
 #'   move_edge = 0.5
 #' )
 #' p[[1]]
-#' 
+#'
 #' # Skip R CMD check for speed
 #' \donttest{
 #' p <- plot_tag_status_by_subquadrat(
@@ -98,13 +98,13 @@
 #'   show_subquad = FALSE
 #' )
 #' p[[1]]
-#' 
+#'
 #' # Themes
 #' library(ggplot2)
-#' 
+#'
 #' p <- plot_tag_status_by_subquadrat(small_vft, theme = theme_gray())
 #' p[[1]]
-#' 
+#'
 #' # Tweaking the default theme of plot_tag_status_by_subquadrat()
 #' # For many more options see ?ggplot2::theme
 #' small_tweak <- theme_tag_status(legend.position = "bottom")
@@ -497,15 +497,15 @@ entitle_map <- function(x, chr, show_page = TRUE) {
 #'
 #' @examples
 #' library(ggplot2)
-#' 
+#'
 #' tags <- dplyr::tibble(
 #'   tag = sample(1:10000, 100),
 #'   qx = sample(1:20, 100, replace = TRUE),
 #'   qy = sample(1:20, 100, replace = TRUE)
 #' )
-#' 
+#'
 #' df_labs <- df_subquad_labs(x_q = 20, y_q = 20, x_sq = 5, y_sq = 5)
-#' 
+#'
 #' ggplot(data = tags, aes(qx, qy)) +
 #'   geom_label(
 #'     data = df_labs, aes(qx, qy, label = subquadrat),
