@@ -5,17 +5,40 @@
 \alias{autoplot_by_species.sp}
 \title{List plots of species distribution and topography (good for pdf output).}
 \usage{
-\method{autoplot_by_species}{sp_elev}(object, species = "all",
-  fill = "black", shape = 21, point_size = 3, contour_size = 0.5,
-  low = "blue", high = "red", hide_color_legend = FALSE,
-  bins = NULL, add_elevation_labels = TRUE, label_size = 3,
-  label_color = "grey", xyjust = 1, fontface = "italic",
-  xlim = NULL, ylim = NULL, custom_theme = NULL, ...)
+\method{autoplot_by_species}{sp_elev}(
+  object,
+  species = "all",
+  fill = "black",
+  shape = 21,
+  point_size = 3,
+  contour_size = 0.5,
+  low = "blue",
+  high = "red",
+  hide_color_legend = FALSE,
+  bins = NULL,
+  add_elevation_labels = TRUE,
+  label_size = 3,
+  label_color = "grey",
+  xyjust = 1,
+  fontface = "italic",
+  xlim = NULL,
+  ylim = NULL,
+  custom_theme = NULL,
+  ...
+)
 
-\method{autoplot_by_species}{sp}(object, species = "all",
-  fill = "black", shape = 21, point_size = 3,
-  hide_color_legend = FALSE, xlim = NULL, ylim = NULL,
-  custom_theme = NULL, ...)
+\method{autoplot_by_species}{sp}(
+  object,
+  species = "all",
+  fill = "black",
+  shape = 21,
+  point_size = 3,
+  hide_color_legend = FALSE,
+  xlim = NULL,
+  ylim = NULL,
+  custom_theme = NULL,
+  ...
+)
 }
 \arguments{
 \item{object}{An object created with \code{\link[=sp]{sp()}} or \code{\link[=sp_elev]{sp_elev()}}.}
@@ -85,7 +108,7 @@ variables \code{sp} and \code{elev} of a ForestGEO-like dataset of class 'sp' or
 See sections \strong{Usage} and \strong{Examples}.
 }
 \details{
-\code{autoplot_by_species(sp_elev(DATA-WITH-VARIABLE-sp)} (without elevation data)
+\verb{autoplot_by_species(sp_elev(DATA-WITH-VARIABLE-sp)} (without elevation data)
 is equivalent to \code{autoplot_by_species(sp(DATA-WITH-VARIABLE-sp))}.
 
 \strong{fgeo.plot} wraps some functions from the \strong{ggplot2} package.
@@ -113,17 +136,24 @@ autoplot_by_species(sp_elev(census, elevation))
 \seealso{
 \code{\link[=autoplot]{autoplot()}}, \code{\link[=sp]{sp()}}, \code{\link[=sp_elev]{sp_elev()}}.
 
-Other plot functions: \code{\link{autoplot.fgeo_habitat}},
-  \code{\link{autoplot.sp_elev}}, \code{\link{elev}},
-  \code{\link{plot_dbh_bubbles_by_quadrat}},
-  \code{\link{plot_tag_status_by_subquadrat}},
-  \code{\link{sp_elev}}, \code{\link{sp}}
+Other plot functions: 
+\code{\link{autoplot.fgeo_habitat}()},
+\code{\link{autoplot.sp_elev}()},
+\code{\link{elev}()},
+\code{\link{plot_dbh_bubbles_by_quadrat}()},
+\code{\link{plot_tag_status_by_subquadrat}()},
+\code{\link{sp_elev}()},
+\code{\link{sp}()}
 
-Other functions to plot elevation: \code{\link{autoplot.sp_elev}},
-  \code{\link{elev}}, \code{\link{sp_elev}}
+Other functions to plot elevation: 
+\code{\link{autoplot.sp_elev}()},
+\code{\link{elev}()},
+\code{\link{sp_elev}()}
 
-Other functions to plot species: \code{\link{autoplot.sp_elev}},
-  \code{\link{sp_elev}}, \code{\link{sp}}
+Other functions to plot species: 
+\code{\link{autoplot.sp_elev}()},
+\code{\link{sp_elev}()},
+\code{\link{sp}()}
 }
 \concept{functions to list plots from different ForestGEO classes}
 \concept{functions to plot elevation}

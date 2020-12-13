@@ -4,22 +4,21 @@
 \alias{theme_default}
 \title{Default plot theme.}
 \usage{
-theme_default(p, panel.grid.minor = element_line(linetype = "dashed"),
-  ...)
+theme_default(p, panel.grid.minor = element_line(linetype = "dashed"), ...)
 }
 \arguments{
 \item{p}{A ggplot.}
 
-\item{panel.grid.minor}{grid lines (\code{\link[=element_line]{element_line()}}). Specify major grid lines,
+\item{panel.grid.minor}{grid lines (\code{\link[ggplot2:element]{element_line()}}). Specify major grid lines,
 or minor grid lines separately (using \code{panel.grid.major} or \code{panel.grid.minor})
 or individually for each axis (using \code{panel.grid.major.x}, \code{panel.grid.minor.x},
 \code{panel.grid.major.y}, \code{panel.grid.minor.y}).  Y axis grid lines are horizontal
-and x axis grid lines are vertical. \code{panel.grid.*.*} inherits from
-\code{panel.grid.*} which inherits from \code{panel.grid}, which in turn inherits
+and x axis grid lines are vertical. \verb{panel.grid.*.*} inherits from
+\verb{panel.grid.*} which inherits from \code{panel.grid}, which in turn inherits
 from \code{line}}
 
-\item{...}{additional element specifications not part of base ggplot2. If
-supplied \code{validate} needs to be set to \code{FALSE}.}
+\item{...}{additional element specifications not part of base ggplot2. In general,
+these should also be defined in the \verb{element tree} argument.}
 }
 \description{
 Default plot theme.

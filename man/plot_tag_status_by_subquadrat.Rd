@@ -4,12 +4,27 @@
 \alias{plot_tag_status_by_subquadrat}
 \title{List plots of tree-tag status by subquadrat (good for .pdf output).}
 \usage{
-plot_tag_status_by_subquadrat(vft, x_q = 20, x_sq = 5, y_q = 20,
-  y_sq = 5, subquad_offset = NULL, bl = 1, br = 2, tr = 3,
-  tl = 4, title_quad = "Site Name, YYYY. Quadrat:", show_page = TRUE,
-  show_subquad = TRUE, point_shape = c(19, 4), point_size = 1.5,
-  tag_size = 3, header = header_tag_status(),
-  theme = theme_tag_status(), move_edge = 0)
+plot_tag_status_by_subquadrat(
+  vft,
+  x_q = 20,
+  x_sq = 5,
+  y_q = 20,
+  y_sq = 5,
+  subquad_offset = NULL,
+  bl = 1,
+  br = 2,
+  tr = 3,
+  tl = 4,
+  title_quad = "Site Name, YYYY. Quadrat:",
+  show_page = TRUE,
+  show_subquad = TRUE,
+  point_shape = c(19, 4),
+  point_size = 1.5,
+  tag_size = 3,
+  header = header_tag_status(),
+  theme = theme_tag_status(),
+  move_edge = 0
+)
 }
 \arguments{
 \item{vft}{A ForestGEO ViewFullTable (dataframe).}
@@ -21,13 +36,13 @@ common value is 20.}
 sites, a common value is 5.}
 
 \item{subquad_offset}{\code{NULL} or \code{-1}. \code{NULL} defines the first column of
-subquadrats as 1.  \code{-1} defines the first column of subquadrats as 0.\preformatted{subquad_offset = NULL    subquad_offset = -1
+subquadrats as 1.  \code{-1} defines the first column of subquadrats as 0.\if{html}{\out{<div class="R">}}\preformatted{subquad_offset = NULL    subquad_offset = -1
 ---------------------    -------------------
      14 24 34 44             04 14 24 34
      13 23 33 43             03 13 23 33
      12 22 32 42             02 12 22 32
      11 21 31 41             01 11 21 31
-}}
+}\if{html}{\out{</div>}}}
 
 \item{bl, br, tr, tl}{Number or character giving the label of the four
 subquadrats on each or the four divisions of a quadrat: bottom left (bl),
@@ -111,7 +126,7 @@ p <- plot_tag_status_by_subquadrat(
   small_vft,
   title_quad = "BCI 2012. Quadrat: ",
   bl = "bottom-left", br = "bottom-right", tr = "top-right", tl = "top-left",
-  header = "Line 1: _________\\nLine 2:\\nLine 3:.....................",
+  header = "Line 1: _________\nLine 2:\nLine 3:.....................",
   subquad_offset = -1,
   point_size = 3, point_shape = c(17, 6),
   tag_size = 2,
@@ -146,17 +161,21 @@ p[[1]]
 \code{\link[=header_tag_status]{header_tag_status()}}, \code{\link[=theme_tag_status]{theme_tag_status()}}, \code{\link[fgeo.tool:add_subquad]{fgeo.tool::add_subquad()}},
 \link[ggrepel:geom_text_repel]{ggrepel::geom_text_repel}.
 
-Other plot functions: \code{\link{autoplot.fgeo_habitat}},
-  \code{\link{autoplot.sp_elev}},
-  \code{\link{autoplot_by_species.sp_elev}},
-  \code{\link{elev}},
-  \code{\link{plot_dbh_bubbles_by_quadrat}},
-  \code{\link{sp_elev}}, \code{\link{sp}}
+Other plot functions: 
+\code{\link{autoplot.fgeo_habitat}()},
+\code{\link{autoplot.sp_elev}()},
+\code{\link{autoplot_by_species.sp_elev}()},
+\code{\link{elev}()},
+\code{\link{plot_dbh_bubbles_by_quadrat}()},
+\code{\link{sp_elev}()},
+\code{\link{sp}()}
 
-Other functions to list plots from ForestGEO ViewFullTable: \code{\link{plot_dbh_bubbles_by_quadrat}}
+Other functions to list plots from ForestGEO ViewFullTable: 
+\code{\link{plot_dbh_bubbles_by_quadrat}()}
 
-Other functions to plot tag status: \code{\link{header_tag_status}},
-  \code{\link{theme_tag_status}}
+Other functions to plot tag status: 
+\code{\link{header_tag_status}()},
+\code{\link{theme_tag_status}()}
 }
 \concept{functions to list plots from ForestGEO ViewFullTable}
 \concept{functions to plot tag status}
