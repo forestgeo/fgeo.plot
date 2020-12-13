@@ -25,7 +25,7 @@ knitr::opts_chunk$set(
 <!-- badges: start -->
 <!-- badges: end -->
 
-__fgeo.plot__ helps you to plot [ForestGEO](<http://www.forestgeo.si.edu/>) data.
+__fgeo.plot__ helps you to plot [ForestGEO](<https://forestgeo.si.edu/>) data.
 
 ## Installation
 
@@ -42,7 +42,7 @@ Or install the development version of **fgeo.plot** with:
 devtools::install_github("forestgeo/fgeo.plot")
 ```
 
-Or [install all **fgeo** packages in one step](https://forestgeo.github.io/fgeo/index.html#installation).
+Or [install all **fgeo** packages in one step](https://forestgeo.github.io/fgeo/index.html#installation/).
 
 ## Example
 
@@ -64,7 +64,7 @@ autoplot(
 )
 ```
 
-[Get started with __fgeo__](https://forestgeo.github.io/fgeo)
+[Get started with __fgeo__](https://forestgeo.github.io/fgeo/)
 
 ## Information
 
