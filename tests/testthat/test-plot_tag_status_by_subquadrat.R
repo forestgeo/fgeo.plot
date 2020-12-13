@@ -281,12 +281,13 @@ test_that("outputs quadrats in order, even if QuadratName is numeric (#33)", {
   })
 
   expect_equal(names(good), expect_nms)
-
-  not_chr <- expect_warning(
+  
+  # Stop bubbling other uninteresting warnings
+  not_chr <- suppressWarnings(expect_warning(
     plot_tag_status_by_subquadrat(
       mutate(vft_toy, QuadratName = as.numeric(QuadratName))
     )
-  )
+  ))
   expect_equal(names(not_chr), expect_nms)
 })
 
