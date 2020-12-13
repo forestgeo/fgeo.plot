@@ -4,7 +4,7 @@ authors:
   Mauro Lepore:
     href: https://github.com/maurolepore
   CTFS-ForestGEO:
-    href: http://www.forestgeo.si.edu/
+    href: https://forestgeo.si.edu/
 
 template:
   params:
@@ -13,7 +13,7 @@ template:
 home:
   links:
   - text: Learn more about ForestGEO
-    href: http://www.forestgeo.si.edu/
+    href: https://forestgeo.si.edu/
 
 
 
