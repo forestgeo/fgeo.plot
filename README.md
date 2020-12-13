@@ -18,7 +18,7 @@ data.
 Install the latest stable version of **fgeo.plot** from CRAN with:
 
 ``` r
-install.packages("fgeo.plot", repos = these_repos)
+install.packages("fgeo.plot")
 ```
 
 Or install the development version of **fgeo.plot** with:
