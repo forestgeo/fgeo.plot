@@ -23,7 +23,10 @@ test_that("output expected ggplot", {
 })
 
 test_that("isn't sensitive to argument `hide_fill_legend`", {
+  # testthat v3 does not pass check.environment = FALSE to all.equal
+  testthat::local_edition(2)
+  
   p <- autoplot_by_species(sp(census), hide_fill_legend = TRUE)
   q <- autoplot_by_species(sp(census), hide_fill_legend = FALSE)
-  expect_equal(p, q)
+  expect_equal(p, q, check.environment = FALSE)
 })
