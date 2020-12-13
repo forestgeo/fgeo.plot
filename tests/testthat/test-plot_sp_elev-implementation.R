@@ -45,7 +45,7 @@ test_that("works with elevation parameters", {
 test_that("outputs a list of ggplots", {
   p <- plot_each_species(census)
   expect_type(p, "list")
-  expect_is(p[[1]], "gg")
+  expect_s3_class(p[[1]], "gg")
 })
 
 test_that("errs with wrong inputs", {
@@ -60,7 +60,7 @@ test_that("errs with wrong inputs", {
 # plot_sp_elev
 
 test_that("outputs a ggplot", {
-  expect_is(plot_sp_elev(census), "gg")
+  expect_s3_class(plot_sp_elev(census), "gg")
 })
 
 test_that("errs with wrong inputs", {
@@ -75,7 +75,7 @@ test_that("errs with wrong inputs", {
 
 test_that("outputs a ggplot", {
   p <- plot_elev(elevation)
-  expect_is(p, "gg")
+  expect_s3_class(p, "gg")
 })
 
 test_that("errs with wrong inputs", {

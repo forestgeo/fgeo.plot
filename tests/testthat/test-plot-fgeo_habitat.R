@@ -7,6 +7,6 @@ describe("outputs an object of class ggplot", {
   p <- autoplot(habitats)
 
   it("does something I want it to do", {
-    expect_is(p, "ggplot")
+    expect_s3_class(p, "ggplot")
   })
 })
