@@ -1,6 +1,6 @@
 library(dplyr)
 
-# context("plot_dbh_bubbles_by_quadrat")
+# plot_dbh_bubbles_by_quadrat
 
 is_first <- function(x) x %in% sort(unique(x))[1]
 
@@ -47,7 +47,7 @@ test_that("returns a list of ggplots", {
 
 
 
-# context("theme_dbh_bubbles")
+# theme_dbh_bubbles
 
 test_that("returns a valid ggplot2 theme", {
   expect_s3_class(theme_dbh_bubbles(), c("theme"))

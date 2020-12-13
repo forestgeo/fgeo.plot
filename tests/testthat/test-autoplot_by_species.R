@@ -1,5 +1,3 @@
-# context("autoplot_by_species")
-
 # Small dataset with a few species for quick examples
 some_sp <- c("PREMON", "CASARB")
 census <- subset(fgeo.x::tree5, sp %in% some_sp)

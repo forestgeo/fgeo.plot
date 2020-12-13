@@ -10,7 +10,7 @@ small_vft <- fgeo.x::vft_4quad %>%
 
 
 
-# context("plot_tag_status_by_subquadrat")
+# plot_tag_status_by_subquadrat
 
 # Outputs -----------------------------------------------------------------
 
@@ -312,7 +312,7 @@ test_that("warns if option max.print is not high enough", {
 
 
 
-# context("curate_point_shape")
+# curate_point_shape
 
 test_that("outputs the correct element(s) of point_shape", {
   ps <- c(1, 2)

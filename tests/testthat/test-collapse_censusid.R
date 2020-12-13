@@ -1,5 +1,3 @@
-# context("collapse_censusid")
-
 test_that("outputs object of expected status and status_tree", {
   skip_if_not_installed("fgeo.tool")
 

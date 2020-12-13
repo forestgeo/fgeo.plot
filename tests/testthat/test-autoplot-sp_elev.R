@@ -1,4 +1,4 @@
-# context("autoplot-sp_elev")
+# autoplot-sp_elev
 
 # Small dataset with a few species for quick examples
 some_sp <- c("PREMON", "CASARB")
@@ -36,7 +36,7 @@ test_that("is sensitive to argument `hide_fill_legend`", {
 
 
 
-# context("sp_elev")
+# sp_elev
 
 test_that("sp_elev()) and friends return expected class", {
   expect_is(sp(census), "data.frame")

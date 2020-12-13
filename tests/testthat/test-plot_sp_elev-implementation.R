@@ -1,7 +1,7 @@
 census <- pick_top(fgeo.x::stem5, sp, 2)
 elevation <- fgeo.x::elevation$col
 
-# context("plot_each_species"
+# plot_each_species
 
 test_that("works with species parameters", {
   spp <- unique(census$sp)
@@ -57,7 +57,7 @@ test_that("errs with wrong inputs", {
 
 
 
-# context("plot_sp_elev"
+# plot_sp_elev
 
 test_that("outputs a ggplot", {
   expect_is(plot_sp_elev(census), "gg")
@@ -71,7 +71,7 @@ test_that("errs with wrong inputs", {
 
 
 
-# context("plot_elev"
+# plot_elev
 
 test_that("outputs a ggplot", {
   p <- plot_elev(elevation)
@@ -87,7 +87,7 @@ test_that("errs with wrong inputs", {
 
 
 
-# context("plot_base_elevation"
+# plot_base_elevation
 
 test_that("works with raw elevation data", {
   elevation_ls <- fgeo.x::elevation

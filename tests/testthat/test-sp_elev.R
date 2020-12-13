@@ -1,5 +1,3 @@
-# context("sp_elev")
-
 library(dplyr)
 
 test_that("sp_elev() is silent if `sp` and `elev` share plot dimensions", {

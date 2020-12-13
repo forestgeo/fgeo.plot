@@ -1,5 +1,3 @@
-# context("test-plot-fgeo_habitat")
-
 describe("outputs an object of class ggplot", {
   skip_if_not_installed("fgeo.x")
   skip_if_not_installed("fgeo.analyze")
