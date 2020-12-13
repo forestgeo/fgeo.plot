@@ -1,4 +1,4 @@
-library(dplyr)
+suppressPackageStartupMessages(library(dplyr))
 
 test_that("sp_elev() is silent if `sp` and `elev` share plot dimensions", {
   species_from_luquillo <- fgeo.x::stem5
@@ -11,9 +11,9 @@ test_that("sp_elev() is silent if `sp` and `elev` share plot dimensions", {
 test_that("sp_elev() warns if `sp` and `elev` have different plot dimensions", {
   species_from_luquillo <- fgeo.x::stem5
   elevation_from_luquillo <- fgeo.tool::fgeo_elevation(fgeo.x::elevation)
-  
+
   shrink_gx <- round(max(elevation_from_luquillo$gx, na.rm = TRUE) / 2)
-  smaller_elev <- elevation_from_luquillo %>% 
+  smaller_elev <- elevation_from_luquillo %>%
     filter(gx < shrink_gx)
 
   expect_warning(

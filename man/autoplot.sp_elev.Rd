@@ -158,7 +158,7 @@ autoplot(sp(census), point_size = 1)
 # Elevation -------------------------------------------------------------
 
 elevation <- fgeo.x::elevation
-autoplot(elev(elevation))  
+autoplot(elev(elevation))
 
 # Skip R CMD check for speed
 # Same as `autoplot(elev(elevation))`

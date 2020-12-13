@@ -1,7 +1,7 @@
 set.seed(123)
 
-library(dplyr)
-library(purrr)
+suppressPackageStartupMessages(library(dplyr))
+suppressPackageStartupMessages(library(purrr))
 
 is_first <- function(x) x %in% sort(unique(x))[1]
 
@@ -281,7 +281,7 @@ test_that("outputs quadrats in order, even if QuadratName is numeric (#33)", {
   })
 
   expect_equal(names(good), expect_nms)
-  
+
   # Stop bubbling other uninteresting warnings
   not_chr <- suppressWarnings(expect_warning(
     plot_tag_status_by_subquadrat(

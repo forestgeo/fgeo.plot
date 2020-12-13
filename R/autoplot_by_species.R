@@ -43,19 +43,19 @@
 #'
 #' @examples
 #' assert_is_installed("fgeo.x")
-#' 
+#'
 #' # Species ---------------------------------------------------------------
 #' # Small dataset with a few species for quick examples
 #' census <- fgeo.x::tree6_3species
-#' 
+#'
 #' # Showing only two species for speed
 #' autoplot_by_species(sp(census))[1:2]
-#' 
+#'
 #' # To print all plots in a .pdf see `?pdf()`
 #' autoplot_by_species(sp(census))
-#' 
+#'
 #' # Species and elevation (optional) ---------------------------------------
-#' 
+#'
 #' # Species and elevation
 #' elevation <- fgeo.x::elevation
 #' autoplot_by_species(sp_elev(census, elevation))

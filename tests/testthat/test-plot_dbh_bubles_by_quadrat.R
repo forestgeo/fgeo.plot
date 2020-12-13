@@ -1,4 +1,4 @@
-library(dplyr)
+suppressPackageStartupMessages(library(dplyr))
 
 # plot_dbh_bubbles_by_quadrat
 
