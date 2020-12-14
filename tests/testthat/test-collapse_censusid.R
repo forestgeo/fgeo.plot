@@ -10,7 +10,9 @@ test_that("outputs object of expected status and status_tree", {
   )
 
   expect_equal(collapse_censusid(x)$Status, c("alive", rep("dead", 2), "alive"))
-  x <- fgeo.tool::add_status_tree(x, "alive", "dead")
+  # Suppress: The `value` argument of ``names<-`()` can't be NULL as of tibble 3.0.0
+  # https://github.com/tidyverse/tibble/issues/767
+  x <- suppressWarnings(fgeo.tool::add_status_tree(x, "alive", "dead"))
   x$Status <- NULL
   collapsed <- collapse_censusid(unique(x))
   expected_status_tree <- c("alive", "dead", "alive")
