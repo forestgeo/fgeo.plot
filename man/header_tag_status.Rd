@@ -13,8 +13,9 @@ Pre-made headers.
 cat(header_tag_status())
 }
 \seealso{
-Other functions to plot tag status: \code{\link{plot_tag_status_by_subquadrat}},
-  \code{\link{theme_tag_status}}
+Other functions to plot tag status: 
+\code{\link{plot_tag_status_by_subquadrat}()},
+\code{\link{theme_tag_status}()}
 }
 \concept{functions to plot tag status}
 \keyword{internal}

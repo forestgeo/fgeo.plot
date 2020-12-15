@@ -24,16 +24,20 @@ habitats <- fgeo.x::habitat
 autoplot(habitats)
 }
 \seealso{
-Other plot functions: \code{\link{autoplot.sp_elev}},
-  \code{\link{autoplot_by_species.sp_elev}},
-  \code{\link{elev}},
-  \code{\link{plot_dbh_bubbles_by_quadrat}},
-  \code{\link{plot_tag_status_by_subquadrat}},
-  \code{\link{sp_elev}}, \code{\link{sp}}
+Other plot functions: 
+\code{\link{autoplot.sp_elev}()},
+\code{\link{autoplot_by_species.sp_elev}()},
+\code{\link{elev}()},
+\code{\link{plot_dbh_bubbles_by_quadrat}()},
+\code{\link{plot_tag_status_by_subquadrat}()},
+\code{\link{sp_elev}()},
+\code{\link{sp}()}
 
-Other autoplots: \code{\link{autoplot.sp_elev}},
-  \code{\link{elev}}, \code{\link{sp_elev}},
-  \code{\link{sp}}
+Other autoplots: 
+\code{\link{autoplot.sp_elev}()},
+\code{\link{elev}()},
+\code{\link{sp_elev}()},
+\code{\link{sp}()}
 }
 \concept{autoplots}
 \concept{plot functions}

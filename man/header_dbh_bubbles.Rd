@@ -16,8 +16,9 @@ Pre-made headers.
 cat(header_dbh_bubbles())
 }
 \seealso{
-Other functions to plot dbh bubbles: \code{\link{plot_dbh_bubbles_by_quadrat}},
-  \code{\link{theme_dbh_bubbles}}
+Other functions to plot dbh bubbles: 
+\code{\link{plot_dbh_bubbles_by_quadrat}()},
+\code{\link{theme_dbh_bubbles}()}
 }
 \concept{functions to plot dbh bubbles}
 \keyword{internal}

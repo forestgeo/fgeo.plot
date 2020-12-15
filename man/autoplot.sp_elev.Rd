@@ -6,23 +6,59 @@
 \alias{autoplot.elev}
 \title{Plot species distribution and/or topography.}
 \usage{
-\method{autoplot}{sp_elev}(object, fill = "sp",
-  hide_fill_legend = FALSE, shape = 21, point_size = 3,
-  facet = TRUE, contour_size = 0.5, low = "blue", high = "red",
-  hide_color_legend = FALSE, bins = NULL,
-  add_elevation_labels = TRUE, label_size = 3, label_color = "grey",
-  xyjust = 1, fontface = "italic", xlim = NULL, ylim = NULL,
-  custom_theme = NULL, ...)
+\method{autoplot}{sp_elev}(
+  object,
+  fill = "sp",
+  hide_fill_legend = FALSE,
+  shape = 21,
+  point_size = 3,
+  facet = TRUE,
+  contour_size = 0.5,
+  low = "blue",
+  high = "red",
+  hide_color_legend = FALSE,
+  bins = NULL,
+  add_elevation_labels = TRUE,
+  label_size = 3,
+  label_color = "grey",
+  xyjust = 1,
+  fontface = "italic",
+  xlim = NULL,
+  ylim = NULL,
+  custom_theme = NULL,
+  ...
+)
 
-\method{autoplot}{sp}(object, fill = "sp", hide_fill_legend = FALSE,
-  shape = 21, point_size = 3, facet = TRUE, xlim = NULL,
-  ylim = NULL, custom_theme = NULL, ...)
+\method{autoplot}{sp}(
+  object,
+  fill = "sp",
+  hide_fill_legend = FALSE,
+  shape = 21,
+  point_size = 3,
+  facet = TRUE,
+  xlim = NULL,
+  ylim = NULL,
+  custom_theme = NULL,
+  ...
+)
 
-\method{autoplot}{elev}(object, contour_size = 0.5, low = "blue",
-  high = "red", hide_color_legend = FALSE, bins = NULL,
-  add_elevation_labels = TRUE, label_size = 3, label_color = "grey",
-  xyjust = 1, fontface = "italic", xlim = NULL, ylim = NULL,
-  custom_theme = NULL, ...)
+\method{autoplot}{elev}(
+  object,
+  contour_size = 0.5,
+  low = "blue",
+  high = "red",
+  hide_color_legend = FALSE,
+  bins = NULL,
+  add_elevation_labels = TRUE,
+  label_size = 3,
+  label_color = "grey",
+  xyjust = 1,
+  fontface = "italic",
+  xlim = NULL,
+  ylim = NULL,
+  custom_theme = NULL,
+  ...
+)
 }
 \arguments{
 \item{object}{An object created with \code{\link[=sp]{sp()}}, \code{\link[=elev]{elev()}}, or \code{\link[=sp_elev]{sp_elev()}}.}
@@ -97,7 +133,7 @@ and/or 'sp_elev'.
 See \strong{Examples} below.
 }
 \details{
-\code{autoplot(sp_elev(DATA-WITH-VARIABLE-sp)} (without elevation data) is
+\verb{autoplot(sp_elev(DATA-WITH-VARIABLE-sp)} (without elevation data) is
 equivalent to \code{autoplot(sp(DATA-WITH-VARIABLE-sp))}.
 
 \strong{fgeo.plot} wraps some functions from the \strong{ggplot2} package.
@@ -122,7 +158,7 @@ autoplot(sp(census), point_size = 1)
 # Elevation -------------------------------------------------------------
 
 elevation <- fgeo.x::elevation
-autoplot(elev(elevation))  
+autoplot(elev(elevation))
 
 # Skip R CMD check for speed
 # Same as `autoplot(elev(elevation))`
@@ -136,22 +172,30 @@ autoplot(sp_elev(census, elevation), facet = FALSE, point_size = 1)
 }
 }
 \seealso{
-Other plot functions: \code{\link{autoplot.fgeo_habitat}},
-  \code{\link{autoplot_by_species.sp_elev}},
-  \code{\link{elev}},
-  \code{\link{plot_dbh_bubbles_by_quadrat}},
-  \code{\link{plot_tag_status_by_subquadrat}},
-  \code{\link{sp_elev}}, \code{\link{sp}}
+Other plot functions: 
+\code{\link{autoplot.fgeo_habitat}()},
+\code{\link{autoplot_by_species.sp_elev}()},
+\code{\link{elev}()},
+\code{\link{plot_dbh_bubbles_by_quadrat}()},
+\code{\link{plot_tag_status_by_subquadrat}()},
+\code{\link{sp_elev}()},
+\code{\link{sp}()}
 
-Other autoplots: \code{\link{autoplot.fgeo_habitat}},
-  \code{\link{elev}}, \code{\link{sp_elev}},
-  \code{\link{sp}}
+Other autoplots: 
+\code{\link{autoplot.fgeo_habitat}()},
+\code{\link{elev}()},
+\code{\link{sp_elev}()},
+\code{\link{sp}()}
 
-Other functions to plot elevation: \code{\link{autoplot_by_species.sp_elev}},
-  \code{\link{elev}}, \code{\link{sp_elev}}
+Other functions to plot elevation: 
+\code{\link{autoplot_by_species.sp_elev}()},
+\code{\link{elev}()},
+\code{\link{sp_elev}()}
 
-Other functions to plot species: \code{\link{autoplot_by_species.sp_elev}},
-  \code{\link{sp_elev}}, \code{\link{sp}}
+Other functions to plot species: 
+\code{\link{autoplot_by_species.sp_elev}()},
+\code{\link{sp_elev}()},
+\code{\link{sp}()}
 }
 \concept{autoplots}
 \concept{functions to plot elevation}

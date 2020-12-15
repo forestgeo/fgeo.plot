@@ -4,11 +4,18 @@
 \alias{plot_dbh_bubbles_by_quadrat}
 \title{List dbh bubble-plots by quadrat (good for .pdf output).}
 \usage{
-plot_dbh_bubbles_by_quadrat(vft,
+plot_dbh_bubbles_by_quadrat(
+  vft,
   title_quad = "Site Name, YYYY, Quadrat:",
-  header = header_dbh_bubbles(), theme = theme_dbh_bubbles(),
-  lim_min = 0, lim_max = 20, subquadrat_side = 5, tag_size = 2,
-  move_edge = 0, status_d = "dead")
+  header = header_dbh_bubbles(),
+  theme = theme_dbh_bubbles(),
+  lim_min = 0,
+  lim_max = 20,
+  subquadrat_side = 5,
+  tag_size = 2,
+  move_edge = 0,
+  status_d = "dead"
+)
 }
 \arguments{
 \item{vft}{A ForestGEO ViewFullTable (dataframe).}
@@ -65,7 +72,7 @@ myheader <- paste(
   " ",
   " ........................................................................",
   " ........................................................................",
-  sep = "\\n"
+  sep = "\n"
 )
 
 plot_dbh_bubbles_by_quadrat(
@@ -94,17 +101,21 @@ plot_dbh_bubbles_by_quadrat(
 }
 }
 \seealso{
-Other plot functions: \code{\link{autoplot.fgeo_habitat}},
-  \code{\link{autoplot.sp_elev}},
-  \code{\link{autoplot_by_species.sp_elev}},
-  \code{\link{elev}},
-  \code{\link{plot_tag_status_by_subquadrat}},
-  \code{\link{sp_elev}}, \code{\link{sp}}
+Other plot functions: 
+\code{\link{autoplot.fgeo_habitat}()},
+\code{\link{autoplot.sp_elev}()},
+\code{\link{autoplot_by_species.sp_elev}()},
+\code{\link{elev}()},
+\code{\link{plot_tag_status_by_subquadrat}()},
+\code{\link{sp_elev}()},
+\code{\link{sp}()}
 
-Other functions to list plots from ForestGEO ViewFullTable: \code{\link{plot_tag_status_by_subquadrat}}
+Other functions to list plots from ForestGEO ViewFullTable: 
+\code{\link{plot_tag_status_by_subquadrat}()}
 
-Other functions to plot dbh bubbles: \code{\link{header_dbh_bubbles}},
-  \code{\link{theme_dbh_bubbles}}
+Other functions to plot dbh bubbles: 
+\code{\link{header_dbh_bubbles}()},
+\code{\link{theme_dbh_bubbles}()}
 }
 \concept{functions to list plots from ForestGEO ViewFullTable}
 \concept{functions to plot dbh bubbles}
