@@ -19,14 +19,14 @@
 #'   .match = "number",
 #'   suffix = "_num"
 #' )
-#' 
+#'
 #' suffix_match(
 #'   string = c("tag1", "tag2"),
 #'   to_match = c("dead", "not-dead"),
 #'   .match = "dead",
 #'   suffix = ".d"
 #' )
-#' 
+#'
 #' vft <- data.frame(
 #'   Tag = c("01", "02"),
 #'   Status = c("dead", "alive"),

@@ -15,23 +15,23 @@
 #'
 #' @examples
 #' assert_is_installed("fgeo.x")
-#' 
+#'
 #' # Create a small VieFullTable
 #' first_n <- function(x, n) x %in% sort(unique(x))[1:n]
 #' small_vft <- fgeo.x::vft_4quad %>%
 #'   dplyr::filter(first_n(CensusID, 1) & first_n(QuadratID, 2)) %>%
 #'   dplyr::sample_n(50)
-#' 
+#'
 #' plot_dbh_bubbles_by_quadrat(small_vft)
-#' 
+#'
 #' # To print all plots into a .pdf file see `?pdf()`
 #' plot_dbh_bubbles_by_quadrat(small_vft)
-#' 
+#'
 #' # Be careful if subsetting by DBH: You may unintentionally remove dead trees.
 #' # You should explicietly inlcude missing `DBH` values with `is.na(DBH)`
 #' include_missing_dbh <- subset(small_vft, DBH > 20 | is.na(DBH))
 #' plot_dbh_bubbles_by_quadrat(include_missing_dbh)
-#' 
+#'
 #' # Customizing the maps ----------------------------------------------------
 #' # A custom title and header
 #' myheader <- paste(
@@ -42,18 +42,18 @@
 #'   " ........................................................................",
 #'   sep = "\n"
 #' )
-#' 
+#'
 #' plot_dbh_bubbles_by_quadrat(
 #'   small_vft,
 #'   title_quad = "My Site, 2018. Quad:",
 #'   header = myheader
 #' )
-#' 
+#'
 #' # Skip R CMD check for speed
 #' \donttest{
 #' # Tweak the theme with ggplot
 #' library(ggplot2)
-#' 
+#'
 #' plot_dbh_bubbles_by_quadrat(
 #'   small_vft,
 #'   title_quad = "My Site, 2018. Quad:",
