@@ -1,7 +1,7 @@
 #' Plot habitats.
 #'
 #' @param object An object of class "fgeo_habitat" (see `fgeo_habitat` at
-#'   \url{http://bit.ly/fgeo-reference}).
+#'   \url{https://forestgeo.github.io/fgeo/articles/siteonly/reference.html}).
 #' @template autoplot_unused_dots
 #'
 #' @return An object of class "ggplot".
