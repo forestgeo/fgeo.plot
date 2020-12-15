@@ -1,6 +1,6 @@
-suppressPackageStartupMessages(library(dplyr))
+library(dplyr)
 
-# plot_dbh_bubbles_by_quadrat
+context("plot_dbh_bubbles_by_quadrat")
 
 is_first <- function(x) x %in% sort(unique(x))[1]
 
@@ -9,8 +9,7 @@ vft_1quad_sub <- fgeo.x::vft_4quad %>%
   sample_n(5)
 
 test_that("passes with default arguments", {
-  # Conditions other than "error" are irrelevant in this test
-  suppressMessages(expect_error(
+  expect_error(
     plot_dbh_bubbles_by_quadrat(
       vft_1quad_sub,
       title_quad = "Site Name, YYYY, Quadrat:",
@@ -23,7 +22,7 @@ test_that("passes with default arguments", {
       move_edge = 0
     ),
     NA
-  ))
+  )
 })
 
 test_that("wrong inputs to are rejected", {
@@ -40,14 +39,15 @@ test_that("wrong inputs to are rejected", {
 })
 
 test_that("returns a list of ggplots", {
-  one_map <- suppressMessages(plot_dbh_bubbles_by_quadrat(vft_1quad_sub))
+  # Warns because dataset has no dead trees
+  one_map <- plot_dbh_bubbles_by_quadrat(vft_1quad_sub)
   expect_type(one_map, "list")
   expect_s3_class(one_map[[1]], "ggplot")
 })
 
 
 
-# theme_dbh_bubbles
+context("theme_dbh_bubbles")
 
 test_that("returns a valid ggplot2 theme", {
   expect_s3_class(theme_dbh_bubbles(), c("theme"))

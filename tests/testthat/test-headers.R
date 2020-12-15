@@ -1,3 +1,5 @@
+context("headers")
+
 test_that("header_tag_status outputs the expected string", {
   x <- header_tag_status()
   expect_type(x, "character")
