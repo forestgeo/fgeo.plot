@@ -23,9 +23,11 @@ knitr::opts_chunk$set(
 # <img src="https://i.imgur.com/vTLlhbp.png" align="right" height=88 /> Plot ForestGEO data
 
 <!-- badges: start -->
+[![R-CMD-check](https://github.com/forestgeo/fgeo.plot/workflows/R-CMD-check/badge.svg)](https://github.com/forestgeo/fgeo.plot/actions)
+[![Codecov test coverage](https://codecov.io/gh/forestgeo/fgeo.plot/branch/master/graph/badge.svg)](https://codecov.io/gh/forestgeo/fgeo.plot?branch=master)
 <!-- badges: end -->
 
-__fgeo.plot__ helps you to plot [ForestGEO](<http://www.forestgeo.si.edu/>) data.
+__fgeo.plot__ helps you to plot [ForestGEO](<https://forestgeo.si.edu/>) data.
 
 ## Installation
 
@@ -64,7 +66,7 @@ autoplot(
 )
 ```
 
-[Get started with __fgeo__](https://forestgeo.github.io/fgeo)
+[Get started with __fgeo__](https://forestgeo.github.io/fgeo/)
 
 ## Information
 
