@@ -1,6 +1,6 @@
 # fgeo.plot (development version)
 
-* Work in progress.
+* Maintenance release.
 
 # fgeo.plot 1.1.9
 
