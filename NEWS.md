@@ -1,4 +1,4 @@
-# fgeo.plot (development version)
+# fgeo.plot 1.1.10
 
 * Maintenance release.
 
