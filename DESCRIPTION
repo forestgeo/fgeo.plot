@@ -1,6 +1,6 @@
 Package: fgeo.plot
 Title: Plot ForestGEO Data
-Version: 1.1.10
+Version: 1.1.10.9000
 Authors@R: 
     c(person(given = "Mauro",
              family = "Lepore",
