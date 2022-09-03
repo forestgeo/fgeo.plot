@@ -2,7 +2,7 @@ pandoc: 2.14.2
 pkgdown: 2.0.6
 pkgdown_sha: ~
 articles: {}
-last_built: 2022-09-03T16:14Z
+last_built: 2022-09-03T16:50Z
 urls:
   reference: https://forestgeo.github.io/fgeo.plot/reference
   article: https://forestgeo.github.io/fgeo.plot/articles
