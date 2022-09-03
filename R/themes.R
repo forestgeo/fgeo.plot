@@ -4,7 +4,6 @@
 #' theme by changing the default arguments and also by passing more arguments to
 #' [ggplot2::theme()] (via `...`).
 #'
-#' @inheritParams ggplot2::theme
 #' @param ... Additional arguments passed to  [ggplot2::theme()].
 #'
 #' @seealso [ggplot2::theme()].
