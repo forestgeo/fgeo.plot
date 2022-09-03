@@ -6,7 +6,7 @@
 #' @keywords internal
 NULL
 
-#' @inherit headers
+#' header_tag_status
 #'
 #' @examples
 #' cat(header_tag_status())

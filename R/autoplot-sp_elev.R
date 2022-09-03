@@ -30,7 +30,6 @@
 #'
 #' @template compare_ggplot2
 #'
-#' @inheritParams autoplot.elev
 #' @param object An object created with [sp()], [elev()], or [sp_elev()].
 #' @param fill Character; either a color or "sp", which maps each species to a
 #'   different color.
