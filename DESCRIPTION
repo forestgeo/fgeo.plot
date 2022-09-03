@@ -1,17 +1,13 @@
 Package: fgeo.plot
 Title: Plot ForestGEO Data
 Version: 1.1.10.9000
-Authors@R: 
-    c(person(given = "Mauro",
-             family = "Lepore",
-             role = c("aut", "ctr", "cre"),
-             email = "maurolepore@gmail.com",
-             comment = c(ORCID = "0000-0002-1986-7988")),
-      person(given = "CTFS-ForestGEO",
-             role = c("cph", "fnd"),
-             email = "ForestGEO@si.edu"))
-Description: To help you access, transform, analyze, and
-    visualize ForestGEO data, we developed a collection of R packages
+Authors@R: c(
+    person("Mauro", "Lepore", , "maurolepore@gmail.com", role = c("aut", "ctr", "cre"),
+           comment = c(ORCID = "0000-0002-1986-7988")),
+    person("CTFS-ForestGEO", , , "ForestGEO@si.edu", role = c("cph", "fnd"))
+  )
+Description: To help you access, transform, analyze, and visualize
+    ForestGEO data, we developed a collection of R packages
     (<https://forestgeo.github.io/fgeo/>). This package, in particular,
     helps you to plot ForestGEO data. To learn more about ForestGEO visit
     <https://forestgeo.si.edu/>.
@@ -45,4 +41,4 @@ Encoding: UTF-8
 Language: en-US
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.1
+RoxygenNote: 7.2.1
