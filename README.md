@@ -7,7 +7,7 @@
 
 [![R-CMD-check](https://github.com/forestgeo/fgeo.plot/workflows/R-CMD-check/badge.svg)](https://github.com/forestgeo/fgeo.plot/actions)
 [![Codecov test
-coverage](https://codecov.io/gh/forestgeo/fgeo.plot/branch/main/graph/badge.svg)](https://codecov.io/gh/forestgeo/fgeo.plot?branch=main)
+coverage](https://codecov.io/gh/forestgeo/fgeo.plot/branch/main/graph/badge.svg)](https://app.codecov.io/gh/forestgeo/fgeo.plot?branch=main)
 [![R-CMD-check](https://github.com/forestgeo/fgeo.plot/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/forestgeo/fgeo.plot/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
