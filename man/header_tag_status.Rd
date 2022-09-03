@@ -2,12 +2,12 @@
 % Please edit documentation in R/headers.R
 \name{header_tag_status}
 \alias{header_tag_status}
-\title{Pre-made headers.}
+\title{header_tag_status}
 \usage{
 header_tag_status()
 }
 \description{
-Pre-made headers.
+header_tag_status
 }
 \examples{
 cat(header_tag_status())
