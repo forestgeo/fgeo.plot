@@ -333,6 +333,7 @@ paginate <- function(x, bl = 1, br = 2, tr = 3, tl = 4, subquad_offset = NULL) {
     # If first column of subquadrats is not 1 (but 0): recode; run; recode back
     x <- fgeo.tool::recode_subquad(x, offset = 1)
   }
+  # styler: off
   w_page <- mutate(
     x,
     page = dplyr::case_when(
@@ -357,6 +358,7 @@ paginate <- function(x, bl = 1, br = 2, tr = 3, tl = 4, subquad_offset = NULL) {
       subquadrat == 23 ~ tl,
     )
   )
+  # styler: on
 
   if (!is.null(subquad_offset)) {
     w_page <- fgeo.tool::recode_subquad(w_page, offset = -1)
