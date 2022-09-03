@@ -96,14 +96,14 @@ variables \code{sp} and \code{elev} of a ForestGEO-like dataset of class 'sp' or
 \item Create a 'sp' \code{object} with:
 }
 
-\preformatted{    object <- sp(DATA-WITH-VARIABLE-sp)
-}
+\if{html}{\out{<div class="sourceCode">}}\preformatted{    object <- sp(DATA-WITH-VARIABLE-sp)
+}\if{html}{\out{</div>}}
 \itemize{
 \item Create a 'sp_elev' \code{object} with:
 }
 
-\preformatted{    object <- sp_elev(DATA-WITH-VARIABLE-sp, DATA-WITH-VARIABLE-elev)
-}
+\if{html}{\out{<div class="sourceCode">}}\preformatted{    object <- sp_elev(DATA-WITH-VARIABLE-sp, DATA-WITH-VARIABLE-elev)
+}\if{html}{\out{</div>}}
 
 See sections \strong{Usage} and \strong{Examples}.
 }

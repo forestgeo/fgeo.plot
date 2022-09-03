@@ -36,7 +36,9 @@ common value is 20.}
 sites, a common value is 5.}
 
 \item{subquad_offset}{\code{NULL} or \code{-1}. \code{NULL} defines the first column of
-subquadrats as 1.  \code{-1} defines the first column of subquadrats as 0.\if{html}{\out{<div class="R">}}\preformatted{subquad_offset = NULL    subquad_offset = -1
+subquadrats as 1.  \code{-1} defines the first column of subquadrats as 0.
+
+\if{html}{\out{<div class="sourceCode R">}}\preformatted{subquad_offset = NULL    subquad_offset = -1
 ---------------------    -------------------
      14 24 34 44             04 14 24 34
      13 23 33 43             03 13 23 33

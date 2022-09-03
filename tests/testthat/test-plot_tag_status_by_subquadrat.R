@@ -26,7 +26,7 @@ test_that("output is correct", {
     head(as.data.frame(reference)),
     "ref-plot_tag_status_by_subquadrat.csv",
     print = TRUE,
-    overwrite = FALSE
+    update = FALSE
   )
 
   # Plots all unique tags in data
