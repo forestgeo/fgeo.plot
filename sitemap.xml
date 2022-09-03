@@ -1,66 +1,93 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://forestgeo.github.io/fgeo.plot//index.html</loc>
+    <loc>https://forestgeo.github.io/fgeo.plot/404.html</loc>
   </url>
   <url>
-    <loc>https://forestgeo.github.io/fgeo.plot//reference/autoplot.fgeo_habitat.html</loc>
+    <loc>https://forestgeo.github.io/fgeo.plot/CODE_OF_CONDUCT.html</loc>
   </url>
   <url>
-    <loc>https://forestgeo.github.io/fgeo.plot//reference/autoplot.sp_elev.html</loc>
+    <loc>https://forestgeo.github.io/fgeo.plot/CONTRIBUTING.html</loc>
   </url>
   <url>
-    <loc>https://forestgeo.github.io/fgeo.plot//reference/autoplot_by_species.html</loc>
+    <loc>https://forestgeo.github.io/fgeo.plot/ISSUE_TEMPLATE.html</loc>
   </url>
   <url>
-    <loc>https://forestgeo.github.io/fgeo.plot//reference/autoplot_by_species.sp_elev.html</loc>
+    <loc>https://forestgeo.github.io/fgeo.plot/LICENSE.html</loc>
   </url>
   <url>
-    <loc>https://forestgeo.github.io/fgeo.plot//reference/elev.html</loc>
+    <loc>https://forestgeo.github.io/fgeo.plot/SUPPORT.html</loc>
   </url>
   <url>
-    <loc>https://forestgeo.github.io/fgeo.plot//reference/fgeo.plot-package.html</loc>
+    <loc>https://forestgeo.github.io/fgeo.plot/authors.html</loc>
   </url>
   <url>
-    <loc>https://forestgeo.github.io/fgeo.plot//reference/header_dbh_bubbles.html</loc>
+    <loc>https://forestgeo.github.io/fgeo.plot/index.html</loc>
   </url>
   <url>
-    <loc>https://forestgeo.github.io/fgeo.plot//reference/header_tag_status.html</loc>
+    <loc>https://forestgeo.github.io/fgeo.plot/news/index.html</loc>
   </url>
   <url>
-    <loc>https://forestgeo.github.io/fgeo.plot//reference/headers.html</loc>
+    <loc>https://forestgeo.github.io/fgeo.plot/reference/autoplot.fgeo_habitat.html</loc>
   </url>
   <url>
-    <loc>https://forestgeo.github.io/fgeo.plot//reference/pipe.html</loc>
+    <loc>https://forestgeo.github.io/fgeo.plot/reference/autoplot.sp_elev.html</loc>
   </url>
   <url>
-    <loc>https://forestgeo.github.io/fgeo.plot//reference/plot_dbh_bubbles_by_quadrat.html</loc>
+    <loc>https://forestgeo.github.io/fgeo.plot/reference/autoplot_by_species.html</loc>
   </url>
   <url>
-    <loc>https://forestgeo.github.io/fgeo.plot//reference/plot_tag_status_by_subquadrat.html</loc>
+    <loc>https://forestgeo.github.io/fgeo.plot/reference/autoplot_by_species.sp_elev.html</loc>
   </url>
   <url>
-    <loc>https://forestgeo.github.io/fgeo.plot//reference/reexports.html</loc>
+    <loc>https://forestgeo.github.io/fgeo.plot/reference/elev.html</loc>
   </url>
   <url>
-    <loc>https://forestgeo.github.io/fgeo.plot//reference/sp.html</loc>
+    <loc>https://forestgeo.github.io/fgeo.plot/reference/fgeo.plot-package.html</loc>
   </url>
   <url>
-    <loc>https://forestgeo.github.io/fgeo.plot//reference/sp_elev.html</loc>
+    <loc>https://forestgeo.github.io/fgeo.plot/reference/header_dbh_bubbles.html</loc>
   </url>
   <url>
-    <loc>https://forestgeo.github.io/fgeo.plot//reference/suffix_match.html</loc>
+    <loc>https://forestgeo.github.io/fgeo.plot/reference/header_tag_status.html</loc>
   </url>
   <url>
-    <loc>https://forestgeo.github.io/fgeo.plot//reference/theme_dbh_bubbles.html</loc>
+    <loc>https://forestgeo.github.io/fgeo.plot/reference/headers.html</loc>
   </url>
   <url>
-    <loc>https://forestgeo.github.io/fgeo.plot//reference/theme_default.html</loc>
+    <loc>https://forestgeo.github.io/fgeo.plot/reference/index.html</loc>
   </url>
   <url>
-    <loc>https://forestgeo.github.io/fgeo.plot//reference/theme_tag_status.html</loc>
+    <loc>https://forestgeo.github.io/fgeo.plot/reference/pipe.html</loc>
   </url>
   <url>
-    <loc>https://forestgeo.github.io/fgeo.plot//reference/themes.html</loc>
+    <loc>https://forestgeo.github.io/fgeo.plot/reference/plot_dbh_bubbles_by_quadrat.html</loc>
+  </url>
+  <url>
+    <loc>https://forestgeo.github.io/fgeo.plot/reference/plot_tag_status_by_subquadrat.html</loc>
+  </url>
+  <url>
+    <loc>https://forestgeo.github.io/fgeo.plot/reference/reexports.html</loc>
+  </url>
+  <url>
+    <loc>https://forestgeo.github.io/fgeo.plot/reference/sp.html</loc>
+  </url>
+  <url>
+    <loc>https://forestgeo.github.io/fgeo.plot/reference/sp_elev.html</loc>
+  </url>
+  <url>
+    <loc>https://forestgeo.github.io/fgeo.plot/reference/suffix_match.html</loc>
+  </url>
+  <url>
+    <loc>https://forestgeo.github.io/fgeo.plot/reference/theme_dbh_bubbles.html</loc>
+  </url>
+  <url>
+    <loc>https://forestgeo.github.io/fgeo.plot/reference/theme_default.html</loc>
+  </url>
+  <url>
+    <loc>https://forestgeo.github.io/fgeo.plot/reference/theme_tag_status.html</loc>
+  </url>
+  <url>
+    <loc>https://forestgeo.github.io/fgeo.plot/reference/themes.html</loc>
   </url>
 </urlset>
