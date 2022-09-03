@@ -18,47 +18,22 @@ theme_dbh_bubbles(
 )
 }
 \arguments{
-\item{axis.text}{tick labels along axes (\code{\link[ggplot2:element]{element_text()}}). Specify all axis tick labels (\code{axis.text}),
-tick labels by plane (using \code{axis.text.x} or \code{axis.text.y}), or individually
-for each axis (using \code{axis.text.x.bottom}, \code{axis.text.x.top},
-\code{axis.text.y.left}, \code{axis.text.y.right}). \verb{axis.text.*.*} inherits from
-\verb{axis.text.*} which inherits from \code{axis.text}, which in turn inherits
-from \code{text}}
-
 \item{panel.background}{background of plotting area, drawn underneath plot
-(\code{\link[ggplot2:element]{element_rect()}}; inherits from \code{rect})}
-
-\item{panel.grid.minor}{grid lines (\code{\link[ggplot2:element]{element_line()}}). Specify major grid lines,
-or minor grid lines separately (using \code{panel.grid.major} or \code{panel.grid.minor})
-or individually for each axis (using \code{panel.grid.major.x}, \code{panel.grid.minor.x},
-\code{panel.grid.major.y}, \code{panel.grid.minor.y}).  Y axis grid lines are horizontal
-and x axis grid lines are vertical. \verb{panel.grid.*.*} inherits from
-\verb{panel.grid.*} which inherits from \code{panel.grid}, which in turn inherits
-from \code{line}}
-
-\item{panel.grid.major}{grid lines (\code{\link[ggplot2:element]{element_line()}}). Specify major grid lines,
-or minor grid lines separately (using \code{panel.grid.major} or \code{panel.grid.minor})
-or individually for each axis (using \code{panel.grid.major.x}, \code{panel.grid.minor.x},
-\code{panel.grid.major.y}, \code{panel.grid.minor.y}).  Y axis grid lines are horizontal
-and x axis grid lines are vertical. \verb{panel.grid.*.*} inherits from
-\verb{panel.grid.*} which inherits from \code{panel.grid}, which in turn inherits
-from \code{line}}
+(\code{\link[ggplot2:element_rect]{element_rect()}}; inherits from \code{rect})}
 
 \item{legend.position}{the position of legends ("none", "left", "right",
 "bottom", "top", or two-element numeric vector)}
 
-\item{plot.title}{plot title (text appearance) (\code{\link[ggplot2:element]{element_text()}}; inherits
+\item{plot.title}{plot title (text appearance) (\code{\link[ggplot2:element_text]{element_text()}}; inherits
 from \code{title}) left-aligned by default}
 
-\item{plot.subtitle}{plot subtitle (text appearance) (\code{\link[ggplot2:element]{element_text()}};
+\item{plot.subtitle}{plot subtitle (text appearance) (\code{\link[ggplot2:element_text]{element_text()}};
 inherits from \code{title}) left-aligned by default}
 
 \item{panel.border}{border around plotting area, drawn on top of plot so that
 it covers tick marks and grid lines. This should be used with
 \code{fill = NA}
-(\code{\link[ggplot2:element]{element_rect()}}; inherits from \code{rect})}
-
-\item{axis.ticks.length}{length of tick marks (\code{unit})}
+(\code{\link[ggplot2:element_rect]{element_rect()}}; inherits from \code{rect})}
 
 \item{...}{additional element specifications not part of base ggplot2. In general,
 these should also be defined in the \verb{element tree} argument.}

@@ -114,21 +114,21 @@ and/or 'sp_elev'.
 \item You can create a 'sp' \code{object} with:
 }
 
-\preformatted{    object <- sp(DATA-WITH-VARIABLE-sp)
-}
+\if{html}{\out{<div class="sourceCode">}}\preformatted{    object <- sp(DATA-WITH-VARIABLE-sp)
+}\if{html}{\out{</div>}}
 \itemize{
 \item You can create an 'elev' \code{object} with:
 }
 
-\preformatted{    object <- elev(DATA-WITH-VARIABLE-elev)
-}
+\if{html}{\out{<div class="sourceCode">}}\preformatted{    object <- elev(DATA-WITH-VARIABLE-elev)
+}\if{html}{\out{</div>}}
 
 \itemize{
 \item You can create a 'sp_elev' \code{object} with:
 }
 
-\preformatted{    object <- sp_elev(DATA-WITH-VARIABLE-sp, DATA-WITH-VARIABLE-elev)
-}
+\if{html}{\out{<div class="sourceCode">}}\preformatted{    object <- sp_elev(DATA-WITH-VARIABLE-sp, DATA-WITH-VARIABLE-elev)
+}\if{html}{\out{</div>}}
 
 See \strong{Examples} below.
 }

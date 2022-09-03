@@ -6,11 +6,7 @@
 \alias{fgeo.plot-package}
 \title{fgeo.plot: Plot ForestGEO Data}
 \description{
-To help you access, transform, analyze, and
-    visualize ForestGEO data, we developed a collection of R packages
-    (<https://forestgeo.github.io/fgeo/>). This package, in particular,
-    helps you to plot ForestGEO data. To learn more about ForestGEO visit
-    <https://forestgeo.si.edu/>.
+To help you access, transform, analyze, and visualize ForestGEO data, we developed a collection of R packages (\url{https://forestgeo.github.io/fgeo/}). This package, in particular, helps you to plot ForestGEO data. To learn more about ForestGEO visit \url{https://forestgeo.si.edu/}.
 }
 \seealso{
 Useful links:
