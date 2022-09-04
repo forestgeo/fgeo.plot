@@ -1,6 +1,6 @@
 Package: fgeo.plot
 Title: Plot ForestGEO Data
-Version: 1.1.11
+Version: 1.1.11.9000
 Authors@R: c(
     person("Mauro", "Lepore", , "maurolepore@gmail.com", role = c("aut", "ctr", "cre"),
            comment = c(ORCID = "0000-0002-1986-7988")),
